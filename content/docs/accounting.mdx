@@ -1,0 +1,25 @@
+---
+title: Accounting Reports
+description: General Ledger, Trial Balance, Cash Position, P&L, AR aging, overdue invoices and customer profitability, computed live from source transactions.
+status: stub
+---
+
+Every report in this module is computed on demand from the invoices, payments, notes, vendor costs and expenses recorded elsewhere in Routel. There are no manual journal entries and nothing to "close" before a report is correct.
+
+## Reports
+
+| Report | What it answers |
+| --- | --- |
+| General Ledger | Every posting, by account, with the source document it came from. |
+| Trial Balance | Account balances at a date; debits equal credits by construction. |
+| Cash Position | Bank and cash balances now, with receivables due and payables owed. |
+| Profit & Loss | Revenue, cost of sales and **gross profit**, then operating expenses and **net income**. |
+| AR Aging | Open receivables in current, 30, 60, 90+ day buckets, by customer. |
+| Overdue invoices | Invoices past their due date, with days overdue. |
+| Customer profitability | Revenue, cost and margin per customer over a period. |
+
+Reports can be run for a period and, where relevant, filtered by customer. Management and Accounting can also ask the [AI Assistant](/docs/ai-assistant) for any of them conversationally.
+
+<Callout kind="permission">
+  **Accounting**, **Management** and **Admin** can run all reports.
+</Callout>

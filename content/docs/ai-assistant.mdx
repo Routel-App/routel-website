@@ -1,0 +1,73 @@
+---
+title: AI Assistant
+description: A chat assistant inside Routel that performs real actions, in Arabic or English, with a human confirmation before anything is saved.
+status: complete
+---
+
+The assistant lives inside Routel as a chat panel. You describe what you want in Arabic or English, and it does the work through the same actions the interface uses: creating a job, drafting an invoice, recording an expense, running a report or fetching a document.
+
+Two rules make it safe to use on real data:
+
+1. **It has your permissions, not its own.** The assistant acts as the signed-in user and is subject to the same [role-based access](/docs/roles) as every screen.
+2. **It never saves without you.** Any action that writes data is shown as a proposal. You review it and confirm, edit or cancel. Reads (reports, searches, downloads) run immediately.
+
+## What it can do
+
+| Area | Examples of what to ask |
+| --- | --- |
+| Jobs and bookings | "Create a job for Al Noor Trading, Port Klang to Jebel Ali, 2 × 40HC, ETD 12 October." "Update the ETA on JOB-2026-0412 to 28 October." "Record the booking on MSC Isabella voyage 2638W." |
+| Quotations and rates | "Quote Al Noor for a 40HC Port Klang to Jeddah using the Maersk rate." "Add a route rate: Port Klang to Jebel Ali, 40HC, USD 1,450, valid to end of December." |
+| Invoices | "Create an invoice for JOB-2026-0412 in MYR." |
+| Expenses | "Record September office rent, MYR 6,500." |
+| Vendor costs | Upload a vendor invoice PDF and ask: "Propose the vendor cost for this on JOB-2026-0412." The assistant extracts the line items. |
+| Statements | "Download Al Noor's statement of account as PDF." "Vendor statement for Maersk for August." |
+| Reports | "Which invoices are overdue?" "Show AR aging." "Customer profitability for Q3." "What's our cash position?" |
+| Documents | "Find the packing list for the Al Noor shipment." "Send me the House B/L for JOB-2026-0412." |
+
+## The confirmation flow
+
+<Steps>
+  <Step title="You ask">
+    In Arabic, English or a mix. The assistant asks for anything it is missing rather than guessing.
+  </Step>
+  <Step title="It proposes">
+    A card shows exactly what will be created or changed: every field, every line, every amount.
+  </Step>
+  <Step title="You decide">
+    **Confirm** saves it and records your name in the audit log. **Edit** lets you adjust before saving. **Cancel**
+    discards it. Nothing happens until one of these is pressed.
+  </Step>
+</Steps>
+
+<Callout kind="note" title="No silent execution">
+  There is no setting that lets the assistant skip confirmation. This is deliberate. A freight job, an invoice or a
+  ledger entry should never be created because a sentence was misread.
+</Callout>
+
+## Reading vendor invoices
+
+Upload a vendor's PDF invoice in the chat and ask the assistant to propose the vendor cost for a job. It reads the document, extracts the line items, currency and totals, and shows them as a proposed vendor cost against the job. Check the lines against the paper, confirm, and the cost posts with the job's exchange rate.
+
+## Languages
+
+The assistant understands and replies in **Arabic** and **English**. You can switch mid-conversation or mix both in one sentence. Proposals and generated documents remain in the language of your Routel data; the conversation is in yours.
+
+## Permissions in practice
+
+| You are | You ask | Result |
+| --- | --- | --- |
+| Operations | "Create an invoice for this job" | Refused with an explanation: invoicing belongs to Accounting. |
+| Sales | "Show me all overdue invoices" | Shows overdue invoices for your customers only. |
+| Accounting | "Record rent for September" | Proposal card, then confirm. |
+| Management | "Customer profitability for Q3" | Report runs immediately. |
+
+## What it does not do
+
+- It does not act on its own schedule. It only does something when someone asks.
+- It does not send email or messages to customers or vendors.
+- It does not change users, roles or settings.
+- It does not remember conversations across users; each person's chat is their own.
+
+## Audit
+
+Actions confirmed through the assistant are logged against the person who confirmed them, with the same detail as a manual change. See the audit log on the job or record.

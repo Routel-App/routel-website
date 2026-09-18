@@ -1,0 +1,80 @@
+---
+title: Shipments & Jobs
+description: The job is the central record in Routel. This guide covers creating one, tracking it, and what lives on it.
+status: complete
+---
+
+A **job** is one shipment for one customer. Everything else in Routel hangs off it: the booking, the containers, the Bill of Lading, the invoice, the vendor costs and the documents. When someone asks "where is the Al Noor shipment?", the job is the page they open.
+
+## What a job holds
+
+<Fields
+  rows={[
+    ["Job number", "Assigned automatically when the job is created. Used on the B/L, invoice and statements."],
+    ["Customer", "The customer record the job belongs to. Sales users only see jobs for their own customers."],
+    ["POL / POD", "Port of loading and port of discharge, by name and UN/LOCODE."],
+    ["Vessel / voyage", "Carrier vessel name and voyage number, usually filled from the booking."],
+    ["ETD / ETA", "Estimated departure and arrival. Updated as the carrier updates you."],
+    ["Containers", "One row per container: number, type (20GP, 40GP, 40HC and so on), seal number, package count."],
+    ["Bill of Lading numbers", "House B/L number, and the carrier's Master B/L number once issued."],
+    ["Status", "Where the shipment is in its lifecycle. Shown as a timeline."],
+    ["Pricing", "Selling price to the customer and vendor buying costs, with exchange rates for non-MYR amounts."],
+    ["Documents", "Files attached to this job. See Document Management."],
+    ["Audit log", "Who changed what, and when."],
+  ]}
+/>
+
+## Creating a job
+
+There are three ways a job comes into existence:
+
+1. **From a quotation.** The normal path. Open an accepted quotation and convert it; route, equipment and pricing carry across. See [Quotations & Route Rates](/docs/quotations).
+2. **Directly.** Operations can create a job from scratch when there was no formal quotation.
+3. **Through the assistant.** Describe the shipment in a sentence; the assistant proposes the job and waits for confirmation. See [AI Assistant](/docs/ai-assistant).
+
+<Steps>
+  <Step title="Open Shipments and choose New job">
+    Pick the customer. If the customer has a credit limit, the current exposure is shown so you can see it before you commit.
+  </Step>
+  <Step title="Enter the route">
+    Port of loading, port of discharge, and the mode (sea FCL today).
+  </Step>
+  <Step title="Add containers">
+    One row per container. Container numbers and seals can be filled in later, when the carrier confirms them.
+  </Step>
+  <Step title="Save">
+    The job number is assigned and the status timeline starts at its first step.
+  </Step>
+</Steps>
+
+## Status timeline
+
+Each job moves through a fixed set of statuses. The timeline on the job page shows the current step, the steps already passed, and the date each one was reached. Typical flow:
+
+Booked → Loaded → In transit → Arrived → Delivered → Closed
+
+Changing status is a deliberate action, recorded in the audit log with the user's name. Closing a job locks its operational fields; financial entries against a closed job are still visible in reports.
+
+## Containers and B/L numbers
+
+Container rows are the source of truth for the [Bill of Lading](/docs/bill-of-lading) annexure. Keep them accurate: container number, ISO type, seal, package count and description are all printed on the container sheet exactly as entered here.
+
+The House B/L number is assigned by Routel. The Master B/L number is entered by Operations when the carrier issues it.
+
+## Vendor costs on the job
+
+Costs from carriers, haulers, customs brokers and other vendors are recorded against the job in their original currency with an exchange rate. The job page shows revenue, converted cost, gross profit and margin side by side. Detail is in [Vendors & Customers](/docs/partners).
+
+<Callout kind="tip" title="Let the assistant read the vendor bill">
+  Upload the vendor's invoice PDF in the assistant and ask it to propose the cost. It extracts the line items into a
+  proposed vendor cost for you to review and confirm.
+</Callout>
+
+## Audit log
+
+Every change to a job is logged: field edits, status changes, document uploads, and anything created through the assistant. The log shows the person, the time and the before/after values. It cannot be edited.
+
+<Callout kind="permission">
+  **Operations** and **Admin** create and edit jobs. **Sales** can open jobs for their customers. **Accounting** and
+  **Management** can open any job but do not edit operational fields.
+</Callout>

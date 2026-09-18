@@ -1,0 +1,74 @@
+---
+title: Introduction
+description: What Routel is, who it is for, and how the modules fit together.
+status: complete
+---
+
+Routel is a freight forwarding platform. It runs the full life of a shipment, from the first quotation to the last payment, and keeps your books current from the same data. It grew out of the internal system that Flamingo Global, a freight forwarder in Malaysia, uses every day, and it is now offered to other forwarders as a hosted service.
+
+## Why Routel
+
+Most forwarders run on a patchwork: a spreadsheet of rates, a template for quotations, another for the Bill of Lading, an accounting package that someone updates at month end, and a shared drive of PDFs. Every hand-off between those tools is a place where a number gets re-typed or a document gets lost.
+
+Routel keeps one record of the job and lets every department work on it:
+
+- **Sales** stores route rates and turns them into quotations.
+- **Operations** converts the quotation into a job, books the vessel, tracks containers and generates the House Bill of Lading.
+- **Accounting** invoices the customer, records vendor costs and overheads, and reads reports that are computed live from those entries.
+- **Management** sees profitability per job, per customer and for the company.
+
+Because everything posts to one General Ledger as it happens, there are no manual journal entries and no second set of numbers to reconcile.
+
+## The modules
+
+| Module | What it does | Guide |
+| --- | --- | --- |
+| Shipments & Jobs | The core record: POL/POD, vessel and voyage, containers, B/L numbers, ETD/ETA, status timeline, audit log | [Read](/docs/shipments) |
+| Quotations & Route Rates | Vendor buying rates by route and container type with validity windows; quotations that convert to jobs | [Read](/docs/quotations) |
+| Bookings | Vessel bookings tied to a job | [Read](/docs/bookings) |
+| Invoicing & Finance | Multi-currency invoicing (MYR/USD), payments, credit and debit notes, credit limits, Receivables & Payables hub | [Read](/docs/invoicing) |
+| Accounting Reports | General Ledger, Trial Balance, Cash Position, P&L, AR aging, overdue invoices, customer profitability | [Read](/docs/accounting) |
+| Bill of Lading | Carrier-style House B/L with annexure and container sheet, generated from the job | [Read](/docs/bill-of-lading) |
+| Expenses & Payroll | Company overheads that post to operating-expense accounts; salary lines linked to staff | [Read](/docs/expenses) |
+| Vendors & Customers | Partner records, statements of account as PDF, vendor cost per job with FX conversion | [Read](/docs/partners) |
+| Document Management | Files attached per shipment | [Read](/docs/documents) |
+| Role-based Access | Admin, Management, Accounting, Operations and Sales roles, enforced everywhere | [Read](/docs/roles) |
+| AI Assistant | Chat in Arabic or English to do real work, with confirmation before anything is saved | [Read](/docs/ai-assistant) |
+
+## How a job flows
+
+<Steps>
+  <Step title="Quote">
+    Sales picks a buying rate for the route and container type and issues a quotation to the customer.
+  </Step>
+  <Step title="Job">
+    The accepted quotation is converted into a job. The route, equipment and pricing carry over.
+  </Step>
+  <Step title="Book and ship">
+    Operations records the vessel booking, containers and seal numbers, and attaches documents as they arrive.
+  </Step>
+  <Step title="Bill of Lading">
+    The House B/L and its container annexure are generated from the job data.
+  </Step>
+  <Step title="Invoice and cost">
+    Accounting invoices the customer in MYR or USD and records vendor costs against the job, converted at the recorded exchange rate.
+  </Step>
+  <Step title="Report">
+    Gross profit, net income, aging and cash position update themselves from the entries above.
+  </Step>
+</Steps>
+
+## Currencies
+
+Invoices and books run in **MYR** and **USD**. Vendor costs recorded in a different currency are converted with the exchange rate captured on the job, so job profitability compares like with like.
+
+## Where to start
+
+- If you run operations, start with [Shipments & Jobs](/docs/shipments).
+- If you run the books, start with [Invoicing & Finance](/docs/invoicing).
+- If you want to know what the assistant can and cannot do, read [AI Assistant](/docs/ai-assistant).
+
+<Callout kind="tip" title="These docs are growing">
+  Pages marked "soon" in the sidebar describe a module that is built and working, but whose detailed guide is still being
+  written.
+</Callout>

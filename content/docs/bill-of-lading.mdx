@@ -1,0 +1,54 @@
+---
+title: Bill of Lading
+description: Generate a carrier-style House Bill of Lading, with container annexure, directly from a job.
+status: complete
+---
+
+Routel generates a **House Bill of Lading** (HBL) from the job. The document is laid out like a carrier's B/L, not like a company letterhead: the boxes, numbering and terms are where a consignee, bank or customs officer expects them to be.
+
+## What is generated
+
+- **The B/L itself.** Shipper, consignee, notify party, vessel and voyage, port of loading, port of discharge, place of receipt and delivery, marks and numbers, description of goods, gross weight and measurement, freight terms, number of originals, place and date of issue.
+- **The annexure / container sheet.** One row per container with container number, type, seal number, package count and description, printed as a continuation sheet referencing the B/L number.
+
+Both are produced as a single PDF and attached to the job's documents.
+
+## Before you generate
+
+The B/L is only as good as the job data. Check:
+
+<Steps>
+  <Step title="Parties">
+    Shipper, consignee and notify party names and addresses as they should appear on the document.
+  </Step>
+  <Step title="Route and vessel">
+    POL, POD, vessel and voyage on the job match the carrier's booking confirmation.
+  </Step>
+  <Step title="Containers">
+    Every container row has a number, ISO type, seal and package count. These print on the annexure exactly as entered.
+  </Step>
+  <Step title="Cargo description">
+    Marks, description of goods, gross weight and measurement.
+  </Step>
+</Steps>
+
+## Generating
+
+Open the job and choose **Generate House B/L**. Routel assigns the HBL number if the job does not have one yet, renders the PDF, and attaches it to the job. Regenerating after a correction replaces the draft; issued originals are kept for the record.
+
+<Callout kind="warning" title="Regenerate after edits">
+  The PDF is a snapshot. If you change a container or party after generating, generate again so the document matches
+  the job.
+</Callout>
+
+## Numbering
+
+The House B/L number is assigned by Routel from your prefix and sequence. The carrier's Master B/L number is entered by Operations on the job when the carrier issues it, and is shown on the job for reference.
+
+## Through the assistant
+
+"Generate the House B/L for JOB-2026-0412" produces the same PDF, subject to the same role check, and attaches it to the job. "Send me the B/L for the Al Noor shipment" finds and returns the attached document. See [AI Assistant](/docs/ai-assistant).
+
+<Callout kind="permission">
+  **Operations** and **Admin** generate the B/L. Everyone who can open the job can download it.
+</Callout>

@@ -1,0 +1,19 @@
+---
+title: Expenses & Payroll
+description: Record company overheads that post straight to operating-expense accounts, with salary lines linked to staff.
+status: stub
+---
+
+The expenses module records costs that are not tied to a shipment: rent, salaries, utilities, commissions, currency exchange differences, and any **custom category** an Admin adds. Each entry posts to a proper operating-expense account in the General Ledger, which is what lets the P&L show **net income** after overheads, not just gross profit on jobs.
+
+## Payroll (lightweight)
+
+Salary entries can be linked to registered staff so payroll cost is recorded per person. This is a cost record, not a payroll engine: it does not compute statutory deductions or generate payslips.
+
+## Categories
+
+Admins can add categories beyond the defaults. Each category maps to an expense account, so reporting stays consistent.
+
+<Callout kind="permission">
+  **Accounting** and **Admin** record expenses. Only **Admin** adds categories.
+</Callout>

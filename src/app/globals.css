@@ -1,0 +1,143 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+/* Routel design tokens
+   ------------------------------------------------------------------
+   Palette: deep "ink" navy for dark surfaces, a teal signal color for
+   primary actions, and an amber spark reserved for the AI assistant.
+   Neutrals are slightly cool so the teal reads clean against them. */
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Manrope Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-ink-950: #060b16;
+  --color-ink-900: #0b1426;
+  --color-ink-800: #12203a;
+  --color-ink-700: #1c2d4d;
+  --color-ink-600: #2a3f66;
+
+  --color-teal-50: #effbf9;
+  --color-teal-100: #d5f4ee;
+  --color-teal-200: #ade8dd;
+  --color-teal-300: #7cd6c7;
+  --color-teal-400: #47bcac;
+  --color-teal-500: #1fa192;
+  --color-teal-600: #158377;
+  --color-teal-700: #146961;
+  --color-teal-800: #13544f;
+  --color-teal-900: #124642;
+
+  --color-spark-50: #fff8eb;
+  --color-spark-100: #feefc7;
+  --color-spark-200: #fddb8a;
+  --color-spark-300: #fcc14d;
+  --color-spark-400: #fba524;
+  --color-spark-500: #f5850b;
+  --color-spark-600: #d96206;
+
+  --color-fog-50: #f7f9fb;
+  --color-fog-100: #eef2f6;
+  --color-fog-200: #dde4ec;
+  --color-fog-300: #c3cdd9;
+  --color-fog-400: #97a5b8;
+  --color-fog-500: #6b7b92;
+  --color-fog-600: #4f5d72;
+  --color-fog-700: #3b475a;
+  --color-fog-800: #27303f;
+
+  --radius-xl: 0.875rem;
+  --radius-2xl: 1.125rem;
+  --radius-3xl: 1.5rem;
+
+  --shadow-card: 0 1px 2px rgb(11 20 38 / 0.04), 0 8px 24px -12px rgb(11 20 38 / 0.12);
+  --shadow-float: 0 2px 4px rgb(11 20 38 / 0.06), 0 24px 48px -20px rgb(11 20 38 / 0.25);
+
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.55; }
+  }
+}
+
+:root {
+  --background: var(--color-white);
+  --foreground: var(--color-ink-900);
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-feature-settings: "cv11", "ss01", "ss03";
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--color-teal-200);
+  color: var(--color-ink-900);
+}
+
+/* Utilities that are easier to express once than repeat as class soup */
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility text-pretty {
+  text-wrap: pretty;
+}
+
+@utility font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+@utility grid-fade {
+  background-image:
+    linear-gradient(to right, rgb(11 20 38 / 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(11 20 38 / 0.045) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 30%, transparent 100%);
+}
+
+@utility grid-fade-dark {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 20%, transparent 100%);
+}
+
+@utility ring-hairline {
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
+}
+
+/* Focus rings for keyboard users only */
+:focus-visible {
+  outline: 2px solid var(--color-teal-500);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

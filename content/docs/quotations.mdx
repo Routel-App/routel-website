@@ -1,0 +1,21 @@
+---
+title: Quotations & Route Rates
+description: Store vendor buying rates by route and container type, issue quotations, and convert accepted quotes into jobs.
+status: stub
+---
+
+## Route rates
+
+A **route rate** is a vendor's buying price for a lane: origin port, destination port, container type, currency and amount, with a **validity window**. Rates that have expired are hidden from quotation by default so nobody quotes on a dead price.
+
+## Quotations
+
+A quotation is issued to a customer for a specific route and equipment, priced on top of a selected route rate. It is rendered as a PDF and tracked until it is accepted, declined or expires.
+
+## Converting to a job
+
+An accepted quotation converts into a job with one action. Customer, route, equipment and pricing carry across, so Operations starts from a complete record. See [Shipments & Jobs](/docs/shipments).
+
+<Callout kind="permission">
+  **Sales** and **Admin** manage route rates and quotations. **Operations** converts accepted quotations into jobs.
+</Callout>
