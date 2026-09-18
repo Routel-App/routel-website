@@ -1,21 +1,79 @@
 ---
 title: Quotations & Route Rates
-description: Store vendor buying rates by route and container type, issue quotations, and convert accepted quotes into jobs.
-status: stub
+description: Store vendor buying rates by route and container type, issue quotations on top of them, and convert accepted quotes into jobs.
+status: complete
 ---
+
+Sales work in Routel starts with two records: the **route rate**, which is what a vendor charges you for a lane, and the **quotation**, which is what you charge the customer for it. Keeping both in the system means a quote is never built on an expired price, and an accepted quote turns into a job without anyone re-typing it.
 
 ## Route rates
 
-A **route rate** is a vendor's buying price for a lane: origin port, destination port, container type, currency and amount, with a **validity window**. Rates that have expired are hidden from quotation by default so nobody quotes on a dead price.
+A route rate is one vendor's buying price for one lane and one equipment type, valid for a period.
+
+<Fields
+  rows={[
+    ["Vendor", "The carrier, NVOCC or co-loader offering the rate."],
+    ["Origin / destination", "Port of loading and port of discharge."],
+    ["Container type", "20GP, 40GP, 40HC and so on. One rate per type."],
+    ["Currency and amount", "The buying price in the vendor's currency, usually USD for ocean freight."],
+    ["Valid from / valid to", "The validity window. Expired rates are hidden from quotation by default."],
+    ["Notes", "Free-text: surcharges included, transit time, routing, anything Sales should know before quoting."],
+  ]}
+/>
+
+### Keeping rates current
+
+Rates change often. Routel does not delete expired rates; it keeps them for history and stops offering them when you build a quotation. When a vendor sends a new rate sheet, add the new rates with their new validity window. Old and new can coexist, and the quotation screen only shows what is valid on the day.
+
+<Callout kind="tip" title="Ask the assistant to add rates">
+  "Add a route rate: Maersk, Port Klang to Jebel Ali, 40HC, USD 1,450, valid to 31 December." The assistant proposes
+  the rate with every field filled; you confirm it. See [AI Assistant](/docs/ai-assistant).
+</Callout>
 
 ## Quotations
 
-A quotation is issued to a customer for a specific route and equipment, priced on top of a selected route rate. It is rendered as a PDF and tracked until it is accepted, declined or expires.
+A quotation is issued to a customer for a route and equipment, priced on top of a selected buying rate.
 
-## Converting to a job
+<Steps>
+  <Step title="Choose the customer">
+    Customer details, payment terms and credit limit come from the customer record. See [Vendors & Customers](/docs/partners).
+  </Step>
+  <Step title="Pick the lane and equipment">
+    Origin, destination and container type. Routel lists the route rates that are valid for that combination.
+  </Step>
+  <Step title="Select a buying rate and set the selling price">
+    Pick the vendor rate you intend to use. Enter the selling price per container or as a total; the expected margin is
+    shown as you type.
+  </Step>
+  <Step title="Add other charges">
+    Terminal handling, documentation, haulage, customs or any line the customer will be billed for.
+  </Step>
+  <Step title="Set the quote validity and send">
+    The quotation is numbered and rendered as a PDF for the customer.
+  </Step>
+</Steps>
 
-An accepted quotation converts into a job with one action. Customer, route, equipment and pricing carry across, so Operations starts from a complete record. See [Shipments & Jobs](/docs/shipments).
+### Quotation status
+
+| Status | Meaning |
+| --- | --- |
+| Draft | Being prepared. Not yet sent. |
+| Sent | Issued to the customer. |
+| Accepted | Customer agreed. Ready to convert. |
+| Declined | Customer said no. Kept for the record. |
+| Expired | Validity date passed without acceptance. |
+
+## Converting a quotation into a job
+
+Open an accepted quotation and choose **Convert to job**. Routel creates the job with the customer, route, equipment, selling lines and the vendor rate carried across as the expected vendor cost. Operations then completes the booking, containers and B/L. See [Shipments & Jobs](/docs/shipments).
+
+The quotation stays linked to the job, so anyone can see what was promised against what was billed.
+
+## Through the assistant
+
+"Quote Al Noor Trading for a 40HC Port Klang to Jeddah using the Maersk rate" produces a proposed quotation with the valid rate selected and the customer's usual charges added. Confirm to issue it.
 
 <Callout kind="permission">
   **Sales** and **Admin** manage route rates and quotations. **Operations** converts accepted quotations into jobs.
+  **Management** can view all quotations and the margin on each.
 </Callout>

@@ -1,25 +1,83 @@
 ---
 title: Accounting Reports
 description: General Ledger, Trial Balance, Cash Position, P&L, AR aging, overdue invoices and customer profitability, computed live from source transactions.
-status: stub
+status: complete
 ---
 
-Every report in this module is computed on demand from the invoices, payments, notes, vendor costs and expenses recorded elsewhere in Routel. There are no manual journal entries and nothing to "close" before a report is correct.
+Every report in this module is computed on demand from the invoices, payments, credit and debit notes, vendor costs and expenses recorded elsewhere in Routel. There are no manual journal entries to make and nothing to "close" before a report is right. If a transaction is saved, the reports already include it.
 
-## Reports
+## The reports
 
-| Report | What it answers |
-| --- | --- |
-| General Ledger | Every posting, by account, with the source document it came from. |
-| Trial Balance | Account balances at a date; debits equal credits by construction. |
-| Cash Position | Bank and cash balances now, with receivables due and payables owed. |
-| Profit & Loss | Revenue, cost of sales and **gross profit**, then operating expenses and **net income**. |
-| AR Aging | Open receivables in current, 30, 60, 90+ day buckets, by customer. |
-| Overdue invoices | Invoices past their due date, with days overdue. |
-| Customer profitability | Revenue, cost and margin per customer over a period. |
+| Report | What it answers | Typical reader |
+| --- | --- | --- |
+| **General Ledger** | Every posting, by account, with the document it came from. | Accounting |
+| **Trial Balance** | Account balances at a date. Debits equal credits by construction. | Accounting |
+| **Cash Position** | Bank and cash balances now, with receivables due and payables owed over the coming period. | Management, Accounting |
+| **Profit & Loss** | Revenue, cost of sales and gross profit, then operating expenses and net income. | Management |
+| **AR Aging** | Open receivables by customer in current, 1–30, 31–60 and 60+ day buckets. | Accounting |
+| **Overdue invoices** | Invoices past their due date, with days overdue and contact details. | Accounting, Sales |
+| **Customer profitability** | Revenue, cost and margin per customer over a period. | Management, Sales |
 
-Reports can be run for a period and, where relevant, filtered by customer. Management and Accounting can also ask the [AI Assistant](/docs/ai-assistant) for any of them conversationally.
+## General Ledger
+
+The ledger lists postings by account and date. Each line links back to its source: an invoice, a payment, a note, a vendor cost or an expense. Filter by account, by period, or by partner. Because nothing is posted by hand, the ledger is an audit trail as much as a report.
+
+## Trial Balance
+
+Balances for every account at a chosen date. Use it to check the books tie out before sharing statements with your accountant. It always balances, because every posting in Routel is a matched debit and credit.
+
+## Cash Position
+
+What you have and what is coming:
+
+- **Bank and cash** balances from recorded payments and expenses.
+- **Receivable** in the next 30 days, from open invoices by due date.
+- **Payable** in the next 30 days, from unpaid vendor costs and outstanding expenses.
+
+This is the report most owners ask the assistant for on a Monday morning.
+
+## Profit & Loss
+
+Two levels of profit, on one page:
+
+1. **Gross profit**: revenue from customer invoices minus cost of sales, which is the vendor costs recorded against jobs, converted at the job's exchange rate.
+2. **Net income**: gross profit minus operating expenses recorded in [Expenses & Payroll](/docs/expenses): salaries, rent, utilities, commissions, currency exchange differences and your own categories.
+
+Run it for any period. Compare months side by side to see whether margin or overheads moved.
+
+## AR Aging and overdue invoices
+
+**AR Aging** groups open receivables by how long they have been outstanding, per customer, so you know where collection effort goes. **Overdue invoices** is the working list: each invoice past due, days late, amount and the customer contact. Both link straight to the invoice and to the customer's statement of account.
+
+## Customer profitability
+
+Revenue, vendor cost and margin per customer for a period, sorted by margin. Use it to see which accounts are worth the effort and which need a price review at renewal.
+
+## Running a report
+
+<Steps>
+  <Step title="Open Reports and choose the report">
+    Reports are listed with a short description of each.
+  </Step>
+  <Step title="Set the period and filters">
+    A date or a date range, and where relevant a customer, vendor or account.
+  </Step>
+  <Step title="Read, drill in, or export">
+    Figures link to their source documents. Reports can be exported for your external accountant.
+  </Step>
+</Steps>
+
+## Through the assistant
+
+Any report can be requested conversationally: "Show AR aging", "P&L for August", "Customer profitability for Q3", "What's our cash position?". Reports are read-only, so they run immediately without a confirmation step. See [AI Assistant](/docs/ai-assistant).
+
+<Callout kind="note" title="Currencies">
+  Reports are presented in MYR. USD invoices and costs are included at the exchange rate recorded on the transaction,
+  and exchange differences at settlement appear as a currency exchange expense or gain. See
+  [Invoicing & Finance](/docs/invoicing).
+</Callout>
 
 <Callout kind="permission">
-  **Accounting**, **Management** and **Admin** can run all reports.
+  **Accounting**, **Management** and **Admin** can run all reports. **Sales** can see overdue invoices and
+  profitability for their own customers.
 </Callout>

@@ -1,13 +1,52 @@
 ---
 title: Bookings
-description: Record and manage vessel bookings against a job.
-status: stub
+description: Record the carrier's booking against a job so vessel, voyage and dates flow to the shipment and the Bill of Lading.
+status: complete
 ---
 
-A **booking** records the carrier's confirmation for a job: vessel, voyage, booking reference, cut-offs and the equipment confirmed. It is created from the job page and its vessel and voyage details flow to the job and to the [Bill of Lading](/docs/bill-of-lading).
+A **booking** is the carrier's confirmation that space and equipment are reserved for a job. In Routel it is recorded on the job, and its details feed the job's vessel, voyage and dates and, later, the House Bill of Lading. Operations never types the vessel name in three places.
 
-Attach the carrier's booking confirmation to the job so it travels with the shipment. See [Document Management](/docs/documents).
+## What a booking holds
+
+<Fields
+  rows={[
+    ["Job", "The job this booking belongs to. One job usually has one booking."],
+    ["Carrier / vendor", "Who confirmed the space. Linked to the vendor record."],
+    ["Booking reference", "The carrier's booking number, as printed on the confirmation."],
+    ["Vessel and voyage", "As confirmed by the carrier. These populate the job and the B/L."],
+    ["ETD / ETA", "Departure and arrival dates from the confirmation. Update them when the carrier does."],
+    ["Equipment", "Number and type of containers confirmed."],
+    ["Cut-off dates", "The dates the carrier gives you for cargo, documents and any other deadline you need to track."],
+    ["Confirmation document", "The carrier's booking confirmation, attached to the job."],
+  ]}
+/>
+
+## Recording a booking
+
+<Steps>
+  <Step title="Open the job and choose Add booking">
+    The job's route and equipment are shown so you can check them against the confirmation.
+  </Step>
+  <Step title="Enter the carrier's details">
+    Booking reference, vessel, voyage, dates and confirmed equipment.
+  </Step>
+  <Step title="Attach the confirmation">
+    Upload the carrier's PDF so it travels with the shipment. See [Document Management](/docs/documents).
+  </Step>
+  <Step title="Save">
+    The job's vessel, voyage, ETD and ETA are updated from the booking, and the job status can move to <em>Booked</em>.
+  </Step>
+</Steps>
+
+## When the carrier changes something
+
+Rollovers and schedule changes happen. Edit the booking with the new vessel, voyage or dates; the job updates with it and the change is recorded in the job's audit log with your name. If the House B/L was already generated, regenerate it so the document matches. See [Bill of Lading](/docs/bill-of-lading).
+
+## Through the assistant
+
+"Record the booking for JOB-2026-0412: MSC Isabella voyage 2638W, booking ref MSCUKL4471, ETD 12 October" produces a proposed booking for you to confirm. See [AI Assistant](/docs/ai-assistant).
 
 <Callout kind="permission">
-  **Operations** and **Admin** create and edit bookings.
+  **Operations** and **Admin** create and edit bookings. Everyone who can open the job can see the booking and download
+  the confirmation.
 </Callout>

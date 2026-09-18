@@ -1,21 +1,76 @@
 ---
 title: Vendors & Customers
 description: Partner records, statements of account as PDF, and vendor cost tracking per job with exchange-rate conversion.
-status: stub
+status: complete
 ---
+
+Routel keeps a record for every company you work with. **Customers** are who you invoice. **Vendors** are carriers, co-loaders, haulers, customs brokers and anyone else whose costs land on your jobs. The records are deliberately light: enough to run operations and finance, without turning into a CRM project.
 
 ## Customers
 
-A customer record holds contact details, payment terms and credit limit, and lists the customer's quotations, jobs and invoices. A **statement of account** for any period can be generated as a PDF from the record, from the Receivables & Payables hub, or by asking the assistant.
+<Fields
+  rows={[
+    ["Name and registration", "Legal name as it should appear on quotations, invoices and the B/L."],
+    ["Contacts", "People and email addresses for operations and accounts."],
+    ["Payment terms", "Days from invoice date to due date. Drives aging and overdue reports."],
+    ["Credit limit", "Optional. Exposure against it is shown on new jobs and invoices."],
+    ["Currency preference", "MYR or USD by default when invoicing this customer."],
+    ["Sales owner", "The Sales user responsible. Sales users see only their own customers."],
+  ]}
+/>
+
+The customer page lists everything about the relationship: quotations, jobs, invoices, payments, notes and the running balance. From here you can raise a quotation, open any job, or generate a statement.
+
+### Credit limits and applications
+
+Give a customer a limit and Routel shows the current exposure, open invoices plus jobs in progress, whenever someone creates a job or an invoice for them. A **credit application** records a request to set or raise the limit; Accounting reviews and approves it, and the new limit takes effect on the record. See [Invoicing & Finance](/docs/invoicing).
 
 ## Vendors
 
-Vendor records hold contact details and the costs recorded against them across jobs. A vendor statement shows what has been recorded and what has been paid.
+<Fields
+  rows={[
+    ["Name and contacts", "Who they are and who to talk to."],
+    ["Services", "What they provide: ocean freight, haulage, customs, documentation."],
+    ["Default currency", "The currency they usually bill in, typically USD for carriers."],
+    ["Payment terms", "Used for the payables view in the Receivables & Payables hub."],
+  ]}
+/>
+
+The vendor page lists route rates from that vendor, costs recorded against jobs, and what has been paid.
 
 ## Vendor costs per job
 
-A vendor cost is recorded on a job in the vendor's currency with an exchange rate. Routel converts it so gross profit on the job is computed in one currency. Upload the vendor's invoice to the [assistant](/docs/ai-assistant) to have the line items extracted into a proposed cost.
+A vendor cost is a line on a job for something a vendor charged you for that shipment.
+
+<Fields
+  rows={[
+    ["Vendor", "Who charged it."],
+    ["Description", "Ocean freight, THC, haulage, customs clearance and so on."],
+    ["Currency and amount", "In the vendor's currency."],
+    ["Exchange rate", "The rate used to convert to MYR. Defaults from the job; can be overridden per line."],
+    ["MYR equivalent", "Computed. This is what feeds gross profit."],
+    ["Vendor invoice reference", "The vendor's invoice number, and the PDF attached."],
+    ["Status", "Unpaid or paid, with the payment date."],
+  ]}
+/>
+
+Recording costs promptly is what makes the job P&L trustworthy. The job page shows revenue, converted cost, gross profit and margin the moment a cost is saved.
+
+<Callout kind="tip" title="Let the assistant read the vendor invoice">
+  Upload the vendor's PDF in the chat and ask: "Propose the vendor cost for this on JOB-2026-0412." The assistant
+  extracts the line items, currency and total into a proposed cost. Check it against the paper and confirm. See
+  [AI Assistant](/docs/ai-assistant).
+</Callout>
+
+## Statements of account
+
+A **statement of account** (SOA) summarises the relationship for a period: opening balance, invoices, payments, notes and closing balance for a customer; costs and payments for a vendor. Statements are generated as PDF from the partner record, from the Receivables & Payables hub, or by asking the assistant: "Download Al Noor's statement for August."
+
+## Through the assistant
+
+"Create a customer called Al Noor Trading LLC, 30-day terms, USD" or "Which vendors do we owe more than USD 5,000?" both work, the first as a proposal to confirm, the second as an immediate answer.
 
 <Callout kind="permission">
-  **Accounting** and **Admin** manage partner records and statements. **Operations** records vendor costs on jobs.
+  **Accounting** and **Admin** manage partner records, credit limits and statements. **Sales** manages their own
+  customers' contact details. **Operations** records vendor costs on jobs.
 </Callout>

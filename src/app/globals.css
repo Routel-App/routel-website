@@ -28,13 +28,14 @@
   --color-teal-800: #13544f;
   --color-teal-900: #124642;
 
-  --color-spark-50: #fff8eb;
-  --color-spark-100: #feefc7;
-  --color-spark-200: #fddb8a;
-  --color-spark-300: #fcc14d;
-  --color-spark-400: #fba524;
-  --color-spark-500: #f5850b;
-  --color-spark-600: #d96206;
+  /* "spark" is the logo's orange (#F7941D at 400) and its tints/shades. */
+  --color-spark-50: #fff7ec;
+  --color-spark-100: #feeccf;
+  --color-spark-200: #fdd59e;
+  --color-spark-300: #fab660;
+  --color-spark-400: #f7941d;
+  --color-spark-500: #e07f0f;
+  --color-spark-600: #b8640a;
 
   --color-fog-50: #f7f9fb;
   --color-fog-100: #eef2f6;
@@ -125,7 +126,7 @@ body {
 
 /* Gradient keyword in headlines (teal → amber), used sparingly. */
 @utility text-gradient-brand {
-  background-image: linear-gradient(92deg, var(--color-teal-300) 0%, var(--color-teal-400) 45%, var(--color-spark-300) 100%);
+  background-image: linear-gradient(92deg, var(--color-teal-300) 0%, var(--color-teal-400) 45%, var(--color-spark-400) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;

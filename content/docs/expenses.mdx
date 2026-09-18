@@ -1,19 +1,70 @@
 ---
 title: Expenses & Payroll
-description: Record company overheads that post straight to operating-expense accounts, with salary lines linked to staff.
-status: stub
+description: Record company overheads that post straight to operating-expense accounts, with salary lines linked to staff, so the P&L shows real net income.
+status: complete
 ---
 
-The expenses module records costs that are not tied to a shipment: rent, salaries, utilities, commissions, currency exchange differences, and any **custom category** an Admin adds. Each entry posts to a proper operating-expense account in the General Ledger, which is what lets the P&L show **net income** after overheads, not just gross profit on jobs.
+Job costs tell you the margin on shipments. Overheads tell you whether the company made money. The expenses module records the second kind: rent, salaries, utilities, commissions, currency exchange differences and anything else that is not tied to one job. Each entry posts to a proper operating-expense account in the General Ledger the moment it is saved, which is what lets the [P&L](/docs/accounting) show **net income**, not just gross profit.
 
-## Payroll (lightweight)
+## Recording an expense
 
-Salary entries can be linked to registered staff so payroll cost is recorded per person. This is a cost record, not a payroll engine: it does not compute statutory deductions or generate payslips.
+<Fields
+  rows={[
+    ["Date", "When the cost was incurred. Drives which period it appears in."],
+    ["Category", "Rent, Salaries, Utilities, Commissions, Currency exchange, or a custom category. Each maps to an expense account."],
+    ["Amount and currency", "MYR or USD. Non-MYR amounts are converted at the rate you enter."],
+    ["Paid from", "The bank or cash account, if paid; or leave unpaid to track it as a payable."],
+    ["Payee", "Optional link to a vendor record, for example the landlord or the utility company."],
+    ["Staff member", "For salary lines: the registered staff member the salary belongs to."],
+    ["Notes and attachment", "Reference numbers and the receipt or bill, kept with the entry."],
+  ]}
+/>
+
+<Steps>
+  <Step title="Open Expenses and choose New expense">
+    Or, in the assistant: "Record September office rent, MYR 6,500."
+  </Step>
+  <Step title="Pick the category">
+    The account it posts to is shown next to the category so there are no surprises in the ledger.
+  </Step>
+  <Step title="Enter amount, date and payment details">
+    Mark it paid from a bank or cash account, or leave it unpaid.
+  </Step>
+  <Step title="Save">
+    The entry posts to the expense account and, if paid, to the bank or cash account.
+  </Step>
+</Steps>
 
 ## Categories
 
-Admins can add categories beyond the defaults. Each category maps to an expense account, so reporting stays consistent.
+Routel ships with the categories most forwarders need. **Admin** can add custom categories, each mapped to an operating-expense account, so reporting stays consistent no matter who records the cost.
+
+| Category | Posts to |
+| --- | --- |
+| Rent | Rent & utilities expense |
+| Salaries | Salaries expense |
+| Utilities | Rent & utilities expense |
+| Commissions | Commissions expense |
+| Currency exchange | Currency exchange expense |
+| Custom | The account chosen when the category was created |
+
+## Payroll (lightweight)
+
+Salary entries can be linked to a **registered staff member**, so payroll cost is recorded per person and per month. This is a cost record, not a payroll engine: Routel does not compute statutory deductions or produce payslips. Use it to get salaries into the P&L accurately with a few clicks a month.
+
+## Currency exchange differences
+
+When a USD invoice or vendor cost is settled at a rate different from the one recorded, the difference is recorded as a currency exchange expense or gain. See [Invoicing & Finance](/docs/invoicing).
+
+## What posts where
+
+| Action | Debit | Credit |
+| --- | --- | --- |
+| Record expense, paid | Expense account | Bank / Cash |
+| Record expense, unpaid | Expense account | Accounts Payable |
+| Pay an unpaid expense later | Accounts Payable | Bank / Cash |
 
 <Callout kind="permission">
-  **Accounting** and **Admin** record expenses. Only **Admin** adds categories.
+  **Accounting** and **Admin** record expenses and salaries. Only **Admin** adds categories or registers staff.
+  **Management** sees the totals in the P&L.
 </Callout>
