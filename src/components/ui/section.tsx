@@ -3,30 +3,63 @@ import { cn } from "@/lib/utils";
 import { Container } from "./container";
 import { Reveal } from "@/components/motion/reveal";
 
+type Tone = "light" | "muted" | "cream" | "teal" | "dark";
+
 type SectionProps = ComponentProps<"section"> & {
-  /** Dark "ink" surface. */
-  tone?: "light" | "muted" | "dark";
+  tone?: Tone;
   bleed?: boolean;
+};
+
+const toneBg: Record<Tone, string> = {
+  light: "bg-white",
+  muted: "bg-fog-50",
+  cream: "bg-spark-50",
+  teal: "bg-teal-50",
+  dark: "bg-ink-950 text-white",
 };
 
 export function Section({ tone = "light", bleed = false, className, children, ...props }: SectionProps) {
   return (
-    <section
-      className={cn(
-        "relative py-20 sm:py-28",
-        tone === "muted" && "bg-fog-50",
-        tone === "dark" && "bg-ink-950 text-white",
-        className,
-      )}
-      {...props}
-    >
+    <section className={cn("relative py-20 sm:py-28", toneBg[tone], className)} {...props}>
       {bleed ? children : <Container>{children}</Container>}
     </section>
   );
 }
 
+type EyebrowTone = "teal" | "spark" | "ink" | "dark";
+
+const eyebrowTone: Record<EyebrowTone, string> = {
+  teal: "bg-teal-100 text-teal-800",
+  spark: "bg-spark-100 text-spark-600",
+  ink: "bg-fog-100 text-fog-700",
+  dark: "bg-white/10 text-teal-200 ring-1 ring-inset ring-white/10",
+};
+
+export function Eyebrow({
+  children,
+  tone = "teal",
+  className,
+}: {
+  children: ReactNode;
+  tone?: EyebrowTone;
+  className?: string;
+}) {
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[12.5px] font-semibold",
+        eyebrowTone[tone],
+        className,
+      )}
+    >
+      {children}
+    </span>
+  );
+}
+
 type HeadingProps = {
   eyebrow?: string;
+  eyebrowTone?: EyebrowTone;
   title: ReactNode;
   description?: ReactNode;
   align?: "left" | "center";
@@ -34,19 +67,22 @@ type HeadingProps = {
   className?: string;
 };
 
-export function SectionHeading({ eyebrow, title, description, align = "center", tone = "light", className }: HeadingProps) {
+export function SectionHeading({
+  eyebrow,
+  eyebrowTone: et,
+  title,
+  description,
+  align = "center",
+  tone = "light",
+  className,
+}: HeadingProps) {
   const dark = tone === "dark";
   return (
     <Reveal className={cn("max-w-2xl", align === "center" && "mx-auto text-center", className)}>
       {eyebrow ? (
-        <p
-          className={cn(
-            "mb-3 text-[13px] font-semibold uppercase tracking-[0.14em]",
-            dark ? "text-teal-300" : "text-teal-600",
-          )}
-        >
+        <Eyebrow tone={et ?? (dark ? "dark" : "teal")} className="mb-4">
           {eyebrow}
-        </p>
+        </Eyebrow>
       ) : null}
       <h2
         className={cn(
@@ -62,18 +98,5 @@ export function SectionHeading({ eyebrow, title, description, align = "center", 
         </p>
       ) : null}
     </Reveal>
-  );
-}
-
-export function Eyebrow({ children, className }: { children: ReactNode; className?: string }) {
-  return (
-    <span
-      className={cn(
-        "inline-flex items-center gap-2 rounded-full border border-fog-200 bg-white px-3 py-1 text-xs font-medium text-fog-700 shadow-card",
-        className,
-      )}
-    >
-      {children}
-    </span>
   );
 }

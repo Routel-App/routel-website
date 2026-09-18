@@ -1,5 +1,6 @@
 import { Hero } from "@/components/home/hero";
 import { ProofStrip } from "@/components/home/proof-strip";
+import { Outcomes } from "@/components/home/outcomes";
 import { Modules } from "@/components/home/modules";
 import { AiSpotlight } from "@/components/home/ai-spotlight";
 import { Finance } from "@/components/home/finance";
@@ -14,6 +15,7 @@ export default function HomePage() {
     <>
       <Hero />
       <ProofStrip />
+      <Outcomes />
       <Modules />
       <AiSpotlight />
       <Finance />

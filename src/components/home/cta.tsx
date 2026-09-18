@@ -1,35 +1,42 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
 
+const points = ["Your routes and rates", "A real job, end to end", "Live in twenty minutes"];
+
+/**
+ * White card that straddles the boundary into the dark footer. The lower
+ * half of this section is painted in the footer colour so the card appears
+ * to sit across the seam.
+ */
 export function Cta() {
   return (
-    <section className="pb-24 pt-6">
-      <Container>
-        <Reveal className="relative overflow-hidden rounded-3xl bg-ink-950 px-6 py-16 text-center text-white sm:px-12 sm:py-20">
-          <div aria-hidden className="grid-fade-dark absolute inset-0" />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute left-1/2 top-0 h-[360px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgb(71_188_172/0.35),transparent)]"
-          />
-          <div className="relative mx-auto max-w-2xl">
-            <h2 className="font-display text-balance text-3xl font-bold leading-[1.08] sm:text-4xl lg:text-5xl">
-              See a real job go from quote to ledger in twenty minutes.
+    <section className="relative pt-6">
+      <div aria-hidden className="absolute inset-x-0 bottom-0 h-1/2 bg-ink-950" />
+      <Container className="relative">
+        <Reveal className="grid items-center gap-8 rounded-3xl border border-fog-200 bg-white p-8 shadow-float sm:p-10 lg:grid-cols-[1.4fr_auto] lg:p-12">
+          <div>
+            <h2 className="font-display text-balance text-2xl font-bold leading-[1.1] text-ink-900 sm:text-3xl lg:text-[2.35rem]">
+              See a real job go from quote to ledger, on your numbers.
             </h2>
-            <p className="mt-5 text-pretty text-lg text-white/70">
-              We’ll walk you through Routel on your own routes and rates, and show the assistant proposing its first
-              invoice.
-            </p>
-            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-              <Button href="/demo" variant="inverse" size="lg">
-                Request a demo
-                <ArrowRight className="h-4 w-4" />
-              </Button>
-              <Button href="/docs" variant="inverse-ghost" size="lg">
-                Browse the documentation
-              </Button>
-            </div>
+            <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-2">
+              {points.map((p) => (
+                <li key={p} className="flex items-center gap-2 text-sm text-fog-600">
+                  <Check className="h-4 w-4 text-teal-600" strokeWidth={2.5} />
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
+            <Button href="/demo" size="lg">
+              Request a demo
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+            <Button href="/docs" size="lg" variant="secondary">
+              Browse the docs
+            </Button>
           </div>
         </Reveal>
       </Container>

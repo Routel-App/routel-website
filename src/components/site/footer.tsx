@@ -37,25 +37,27 @@ const columns = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-fog-200 bg-fog-50">
-      <Container className="py-14">
+    <footer className="bg-ink-950 pt-16 text-white/70">
+      <Container className="pb-12">
         <div className="grid gap-10 md:grid-cols-[1.4fr_repeat(3,1fr)]">
           <div className="max-w-xs">
-            <Logo />
-            <p className="mt-4 text-sm leading-relaxed text-fog-600">{site.tagline}. Built from the system that runs a working freight forwarder every day.</p>
-            <p className="mt-6 font-mono text-xs text-fog-500">
-              <a href={`mailto:${site.contactEmail}`} className="hover:text-ink-900">
+            <Logo inverse />
+            <p className="mt-4 text-sm leading-relaxed text-white/60">
+              {site.tagline}. Built from the system that runs a working freight forwarder every day.
+            </p>
+            <p className="mt-6 font-mono text-xs text-white/50">
+              <a href={`mailto:${site.contactEmail}`} className="transition-colors hover:text-white">
                 {site.contactEmail}
               </a>
             </p>
           </div>
           {columns.map((col) => (
             <div key={col.heading}>
-              <h3 className="text-sm font-semibold text-ink-900">{col.heading}</h3>
+              <h3 className="text-sm font-semibold text-white">{col.heading}</h3>
               <ul className="mt-4 space-y-2.5">
                 {col.links.map((l) => (
                   <li key={l.href + l.label}>
-                    <Link href={l.href} className="text-sm text-fog-600 transition-colors hover:text-ink-900">
+                    <Link href={l.href} className="text-sm text-white/60 transition-colors hover:text-white">
                       {l.label}
                     </Link>
                   </li>
@@ -64,7 +66,7 @@ export function Footer() {
             </div>
           ))}
         </div>
-        <div className="mt-12 flex flex-col gap-3 border-t border-fog-200 pt-6 text-xs text-fog-500 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {site.company}. All rights reserved.
           </p>

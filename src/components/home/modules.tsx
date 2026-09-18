@@ -14,19 +14,20 @@ export function Modules() {
         description="Each one is built and working today. A quotation becomes a job, a job produces a B/L and an invoice, and the invoice lands in your ledger. Nothing is re-keyed."
       />
       <RevealGroup className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
-        {modules.map((m) => {
+        {modules.map((m, i) => {
           const Icon = m.icon;
+          const tint =
+            m.slug === "ai-assistant"
+              ? "bg-spark-50 text-spark-600 ring-spark-200/70"
+              : i % 3 === 0
+                ? "bg-teal-50 text-teal-700 ring-teal-100"
+                : i % 3 === 1
+                  ? "bg-fog-100 text-ink-800 ring-fog-200"
+                  : "bg-ink-900 text-teal-300 ring-ink-800";
           const inner = (
             <>
               <div className="flex items-start justify-between">
-                <span
-                  className={cn(
-                    "flex h-11 w-11 items-center justify-center rounded-xl ring-1 ring-inset",
-                    m.slug === "ai-assistant"
-                      ? "bg-spark-50 text-spark-600 ring-spark-200/70"
-                      : "bg-teal-50 text-teal-700 ring-teal-100",
-                  )}
-                >
+                <span className={cn("flex h-11 w-11 items-center justify-center rounded-xl ring-1 ring-inset", tint)}>
                   <Icon className="h-5 w-5" strokeWidth={1.75} />
                 </span>
                 {m.docs ? (

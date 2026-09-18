@@ -8,7 +8,6 @@ export const site = {
   companyShort: "Flamingo Global",
   contactEmail: "hello@routel.io",
   nav: [
-    { label: "Product", href: "/#modules" },
     { label: "AI Assistant", href: "/#assistant" },
     { label: "Pricing", href: "/pricing" },
     { label: "Docs", href: "/docs" },

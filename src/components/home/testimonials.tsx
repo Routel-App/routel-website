@@ -31,16 +31,17 @@ const testimonials = [
 
 export function Testimonials() {
   return (
-    <Section tone="muted">
+    <Section tone="cream">
       <SectionHeading
+        eyebrowTone="spark"
         eyebrow="From the floor"
         title="What forwarders say after the first month"
         description="Early-access customers are onboarding now. Quotes below are placeholders until we can share their words."
       />
       <RevealGroup className="mt-12 grid gap-4 md:grid-cols-3" stagger={0.08}>
         {testimonials.map((t, i) => (
-          <RevealItem key={i} className="flex h-full flex-col rounded-2xl border border-fog-200 bg-white p-6 shadow-card">
-            <Quote className="h-5 w-5 text-teal-500" />
+          <RevealItem key={i} className="flex h-full flex-col rounded-2xl border border-spark-100 bg-white p-6 shadow-card">
+            <Quote className="h-5 w-5 text-spark-400" />
             <p className="mt-4 flex-1 text-[15px] leading-relaxed text-fog-700">{t.quote}</p>
             <div className="mt-6 flex items-center gap-3">
               <span className="h-9 w-9 rounded-full bg-[linear-gradient(135deg,var(--color-teal-300),var(--color-ink-700))]" />

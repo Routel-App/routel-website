@@ -123,6 +123,27 @@ body {
   box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
 }
 
+/* Gradient keyword in headlines (teal → amber), used sparingly. */
+@utility text-gradient-brand {
+  background-image: linear-gradient(92deg, var(--color-teal-300) 0%, var(--color-teal-400) 45%, var(--color-spark-300) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Aurora backdrop for the dark hero: two soft glows + faint grid. */
+@utility hero-aurora {
+  background-color: var(--color-ink-950);
+  background-image:
+    radial-gradient(55% 45% at 20% 10%, rgb(31 161 146 / 0.32), transparent 70%),
+    radial-gradient(45% 40% at 85% 0%, rgb(245 133 11 / 0.14), transparent 70%),
+    radial-gradient(70% 60% at 50% 110%, rgb(28 45 77 / 0.9), transparent 70%);
+}
+
+@utility marquee-mask {
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
 /* Focus rings for keyboard users only */
 :focus-visible {
   outline: 2px solid var(--color-teal-500);
