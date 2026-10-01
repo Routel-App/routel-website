@@ -6,7 +6,7 @@ import { Cta } from "@/components/home/cta";
 
 export const metadata: Metadata = {
   title: "Pricing",
-  description: "Routel plans for freight forwarders: Free, Growth ($79/mo), Pro ($149/mo) and Enterprise ($300/mo).",
+  description: "Routel plans for freight forwarders: Free, Starter ($79/mo), Growth ($149/mo) and Enterprise (let's talk).",
 };
 
 const faqs = [
@@ -20,7 +20,7 @@ const faqs = [
   },
   {
     q: "Is the AI assistant an add-on?",
-    a: "No — it's included in Pro and Enterprise. It uses the same permissions as your users' roles and never saves anything without a confirmation.",
+    a: "No — it's included in Growth and Enterprise. It uses the same permissions as your users' roles and never saves anything without a confirmation.",
   },
   {
     q: "Which currencies are supported?",
@@ -32,11 +32,11 @@ const faqs = [
   },
   {
     q: "Where is Routel hosted?",
-    a: "Free, Growth and Pro run on a shared Routel server with your own isolated database. Enterprise gets a fully dedicated server. Ask us about regional hosting requirements when you request a demo.",
+    a: "Free, Starter and Growth run on a shared Routel server with your own isolated database. Enterprise gets a fully dedicated server. Ask us about regional hosting requirements when you request a demo.",
   },
   {
     q: "What does 'user' mean?",
-    a: "A named login with one of six roles — Admin, Management, Accounting, Operations, Sales or Pricing — that decides what they see and do. Free is single-admin only; Growth and up add staff accounts with role-based permissions.",
+    a: "A named login with one of six roles — Admin, Management, Accounting, Operations, Sales or Pricing — that decides what they see and do. Free is single-admin only; Starter and up add staff accounts with role-based permissions.",
   },
 ];
 
