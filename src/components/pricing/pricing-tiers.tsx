@@ -4,53 +4,66 @@ import { RevealGroup, RevealItem } from "@/components/motion/reveal";
 import { cn } from "@/lib/utils";
 
 /**
- * PLACEHOLDER TIERS. Prices are intentionally not shown until they are
- * decided. Structure and feature lists are real; edit freely.
+ * Real tiers and limits, mirrored from the product's plan source of truth
+ * (artifacts/api-server/src/lib/plan.ts). If the two ever disagree, the code wins —
+ * update this file to match it, not the other way around.
  */
 export const tiers = [
   {
-    name: "Starter",
-    blurb: "For a small forwarding team getting off spreadsheets.",
-    price: "Early access",
-    period: "pricing announced at launch",
+    name: "Free",
+    blurb: "Try Routel on a few real jobs before you commit.",
+    price: "$0",
+    period: "forever",
     features: [
-      "Shipments, quotations, bookings",
-      "Invoicing in MYR and USD",
-      "Bill of Lading generation",
-      "Document management",
-      "Up to 5 users",
+      "3 jobs, lifetime (not monthly)",
+      "Up to 2 invoices per job",
+      "Dashboard, Jobs, Invoices, Customers",
+      "Single admin user",
+      "Every other page is visible, locked until you upgrade",
     ],
-    cta: "Join the waitlist",
-    href: "/demo?plan=starter",
+    cta: "Get started free",
+    href: "/demo?plan=free",
   },
   {
     name: "Growth",
-    blurb: "For forwarders who want live accounting and the assistant.",
-    price: "Early access",
-    period: "pricing announced at launch",
+    blurb: "For a team ready to run day-to-day operations without limits.",
+    price: "$79",
+    period: "per month",
     features: [
-      "Everything in Starter",
-      "Live GL, Trial Balance, P&L, aging",
-      "Expenses & payroll into the ledger",
-      "AI assistant (Arabic & English)",
-      "Role-based access, 5 roles",
-      "Up to 20 users",
+      "Unlimited jobs and invoices",
+      "Staff accounts with role-based access",
+      "10 GB document storage",
     ],
     cta: "Request a demo",
     href: "/demo?plan=growth",
+  },
+  {
+    name: "Pro",
+    blurb: "Everything in Growth, plus the AI assistant and your own branding.",
+    price: "$149",
+    period: "per month",
+    features: [
+      "Everything in Growth",
+      "AI assistant — chat & document extraction (Arabic & English)",
+      "Email sync (Zoho, Microsoft, Google)",
+      "100 GB document storage",
+      "Custom domain and branded documents",
+      "Website visitor tracking",
+    ],
+    cta: "Request a demo",
+    href: "/demo?plan=pro",
     highlighted: true,
   },
   {
     name: "Enterprise",
-    blurb: "For multi-branch operations with their own requirements.",
-    price: "Let's talk",
-    period: "custom agreement",
+    blurb: "For operations that want their own dedicated infrastructure.",
+    price: "$300",
+    period: "per month",
     features: [
-      "Everything in Growth",
-      "Unlimited users",
-      "Dedicated onboarding and data migration",
-      "Custom document templates",
-      "Priority support",
+      "Everything in Pro",
+      "Dedicated server (own VPS)",
+      "Unlimited document storage",
+      "Own database on your own server",
     ],
     cta: "Contact sales",
     href: "/demo?plan=enterprise",
@@ -59,19 +72,19 @@ export const tiers = [
 
 export function PricingTiers() {
   return (
-    <RevealGroup className="grid gap-5 lg:grid-cols-3" stagger={0.08}>
+    <RevealGroup className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.08}>
       {tiers.map((t) => (
         <RevealItem
           key={t.name}
           className={cn(
-            "relative flex h-full flex-col rounded-2xl border p-7",
+            "relative flex h-full flex-col rounded-2xl border p-6",
             t.highlighted
               ? "border-ink-900 bg-ink-900 text-white shadow-float"
               : "border-fog-200 bg-white text-ink-900 shadow-card",
           )}
         >
           {t.highlighted ? (
-            <span className="absolute -top-3 left-7 rounded-full bg-teal-400 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-ink-950">
+            <span className="absolute -top-3 left-6 rounded-full bg-teal-400 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-ink-950">
               Most popular
             </span>
           ) : null}

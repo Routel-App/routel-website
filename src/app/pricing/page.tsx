@@ -6,17 +6,21 @@ import { Cta } from "@/components/home/cta";
 
 export const metadata: Metadata = {
   title: "Pricing",
-  description: "Routel plans for freight forwarders: Starter, Growth and Enterprise. Early-access pricing announced at launch.",
+  description: "Routel plans for freight forwarders: Free, Growth ($79/mo), Pro ($149/mo) and Enterprise ($300/mo).",
 };
 
 const faqs = [
   {
-    q: "When will prices be published?",
-    a: "At general availability. Early-access customers are onboarded on an agreed rate and keep it after launch.",
+    q: "What do I get on the Free plan?",
+    a: "A single admin user, up to 3 jobs total (a lifetime cap, not monthly) with up to 2 invoices per job — enough to try Routel on real shipments before you commit.",
+  },
+  {
+    q: "What happens when I outgrow a plan?",
+    a: "Nothing is hidden. Every page in the product is visible on every plan — anything beyond your tier shows a lock icon and an upgrade prompt instead of the real page, so you always see the whole product.",
   },
   {
     q: "Is the AI assistant an add-on?",
-    a: "No. It's included in Growth and Enterprise. It uses the same permissions as your users' roles and never saves anything without a confirmation.",
+    a: "No — it's included in Pro and Enterprise. It uses the same permissions as your users' roles and never saves anything without a confirmation.",
   },
   {
     q: "Which currencies are supported?",
@@ -24,15 +28,15 @@ const faqs = [
   },
   {
     q: "Can we migrate from spreadsheets or another system?",
-    a: "Yes. Enterprise includes data migration; on Growth we provide import templates for customers, vendors and route rates.",
+    a: "Talk to us when you request a demo — our team can help bring over your customers, vendors and route rates.",
   },
   {
     q: "Where is Routel hosted?",
-    a: "Routel is a hosted service run by Flamingo Global. Ask us about regional hosting requirements when you request a demo.",
+    a: "Free, Growth and Pro run on a shared Routel server with your own isolated database. Enterprise gets a fully dedicated server. Ask us about regional hosting requirements when you request a demo.",
   },
   {
     q: "What does 'user' mean?",
-    a: "A named login with a role (Admin, Management, Accounting, Operations or Sales). Roles decide what each user sees and can do.",
+    a: "A named login with a role suited to their job, such as Accounting or Operations. Free is single-admin only; Growth and up add staff accounts with role-based permissions.",
   },
 ];
 
