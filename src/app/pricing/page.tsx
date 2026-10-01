@@ -36,7 +36,7 @@ const faqs = [
   },
   {
     q: "What does 'user' mean?",
-    a: "A named login with a role suited to their job, such as Accounting or Operations. Free is single-admin only; Growth and up add staff accounts with role-based permissions.",
+    a: "A named login with one of six roles — Admin, Management, Accounting, Operations, Sales or Pricing — that decides what they see and do. Free is single-admin only; Growth and up add staff accounts with role-based permissions.",
   },
 ];
 

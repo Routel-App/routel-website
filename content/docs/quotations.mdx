@@ -4,7 +4,7 @@ description: Store vendor buying rates by route and container type, issue quotat
 status: complete
 ---
 
-Sales work in Routel starts with two records: the **route rate**, which is what a vendor charges you for a lane, and the **quotation**, which is what you charge the customer for it. Keeping both in the system means a quote is never built on an expired price, and an accepted quote turns into a job without anyone re-typing it.
+Routel keeps two records apart: the **route rate**, what a vendor charges you for a lane, maintained by **Pricing**, and the **quotation**, what you charge the customer for it, built by **Sales** on top of a current rate. Keeping both in the system means a quote is never built on an expired price, and an accepted quote turns into a job without anyone re-typing it.
 
 ## Route rates
 
@@ -74,6 +74,6 @@ The quotation stays linked to the job, so anyone can see what was promised again
 "Quote Al Noor Trading for a 40HC Port Klang to Jeddah using the Maersk rate" produces a proposed quotation with the valid rate selected and the customer's usual charges added. Confirm to issue it.
 
 <Callout kind="permission">
-  **Sales** and **Admin** manage route rates and quotations. **Operations** converts accepted quotations into jobs.
-  **Management** can view all quotations and the margin on each.
+  **Pricing** and **Admin** manage route rates. **Sales** and **Admin** build quotations from them. **Operations**
+  converts accepted quotations into jobs. **Management** can view all quotations and the margin on each.
 </Callout>

@@ -3,9 +3,9 @@ import { Reveal } from "@/components/motion/reveal";
 import { site } from "@/lib/site";
 
 const facts = [
-  "12 modules, one login",
+  "14 modules, one login",
   "MYR and USD books",
-  "5 roles, enforced everywhere",
+  "6 roles, enforced everywhere",
   "Sea freight FCL, end to end",
   "Live P&L with net income",
   "Carrier-style House B/L",

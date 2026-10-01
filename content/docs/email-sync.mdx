@@ -1,0 +1,37 @@
+---
+title: Email Sync
+description: Connect a Zoho, Microsoft or Google mailbox so incoming mail links itself to the right job.
+status: complete
+---
+
+Freight correspondence lives in email: booking confirmations, carrier arrival notices, vendor invoices, a customer asking where their container is. Email Sync connects a mailbox to Routel so that traffic lands against the job it belongs to, instead of sitting in an inbox that only one person can search.
+
+## Connecting a mailbox
+
+<Steps>
+  <Step title="Choose a provider">
+    Zoho Mail, Microsoft 365 (Outlook) or Google Workspace (Gmail) are supported.
+  </Step>
+  <Step title="Authorize access">
+    Sign in with the mailbox's own credentials through the provider's standard authorization screen. Routel never
+    asks for or stores the password directly.
+  </Step>
+  <Step title="Let it sync">
+    Once connected, new mail is scanned for references it recognizes — a job number, a B/L number, a known
+    customer or vendor — and linked automatically.
+  </Step>
+</Steps>
+
+## What gets linked
+
+- **Correspondence** that mentions a job, booking or B/L number is attached to that job's record, so the history of an email thread travels with the shipment.
+- **Tracking updates** from carriers (an arrival notice, a delay notice) update the job's status timeline instead of only existing as an email a person has to notice and act on.
+
+## Through the assistant
+
+Once a mailbox is connected, "Has the carrier sent an arrival notice for JOB-2026-0412?" or "Show me the last email from this vendor" can be answered from the assistant instead of searching the mailbox directly.
+
+<Callout kind="permission">
+  **Admin** connects and manages mailbox sync. Linked mail is visible to whoever can already open the job it is
+  attached to.
+</Callout>

@@ -12,7 +12,8 @@ Most forwarders run on a patchwork: a spreadsheet of rates, a template for quota
 
 Routel keeps one record of the job and lets every department work on it:
 
-- **Sales** stores route rates and turns them into quotations.
+- **Pricing** maintains vendor buying rates by route and container type, so quotes are never built on an expired price.
+- **Sales** turns a current rate into a quotation for the customer.
 - **Operations** converts the quotation into a job, books the vessel, tracks containers and generates the House Bill of Lading.
 - **Accounting** invoices the customer, records vendor costs and overheads, and reads reports that are computed live from those entries.
 - **Management** sees profitability per job, per customer and for the company.
@@ -32,8 +33,10 @@ Because everything posts to one General Ledger as it happens, there are no manua
 | Expenses & Payroll | Company overheads that post to operating-expense accounts; salary lines linked to staff | [Read](/docs/expenses) |
 | Vendors & Customers | Partner records, statements of account as PDF, vendor cost per job with FX conversion | [Read](/docs/partners) |
 | Document Management | Files attached per shipment | [Read](/docs/documents) |
-| Role-based Access | Admin, Management, Accounting, Operations and Sales roles, enforced everywhere | [Read](/docs/roles) |
+| Role-based Access | Admin, Management, Accounting, Operations, Sales and Pricing roles, enforced everywhere | [Read](/docs/roles) |
 | AI Assistant | Chat in Arabic or English to do real work, with confirmation before anything is saved | [Read](/docs/ai-assistant) |
+| Email Sync | Connect a Zoho, Microsoft or Google mailbox; mail auto-links to the job it belongs to | [Read](/docs/email-sync) |
+| Website Visitor Tracking | Visitor activity on your custom domain, tracked automatically | [Read](/docs/visitor-tracking) |
 
 ## How a job flows
 

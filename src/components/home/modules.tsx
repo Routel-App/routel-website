@@ -10,7 +10,7 @@ export function Modules() {
     <Section id="modules" tone="muted">
       <SectionHeading
         eyebrow="Everything in one system"
-        title="Twelve modules that already talk to each other"
+        title="Fourteen modules that already talk to each other"
         description="Each one is built and working today. A quotation becomes a job, a job produces a B/L and an invoice, and the invoice lands in your ledger. Nothing is re-keyed."
       />
       <RevealGroup className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>

@@ -37,6 +37,8 @@ const groups: Array<{ title: string; slugs: string[] }> = [
       "expenses",
       "partners",
       "documents",
+      "email-sync",
+      "visitor-tracking",
     ],
   },
   { title: "AI Assistant", slugs: ["ai-assistant"] },

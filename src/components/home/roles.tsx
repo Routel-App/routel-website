@@ -6,7 +6,8 @@ const roles = [
   { name: "Management", sees: "All jobs and every report: P&L, cash position, profitability." },
   { name: "Accounting", sees: "Invoices, payments, notes, statements, the ledger and reports." },
   { name: "Operations", sees: "Jobs, bookings, containers, B/Ls and shipment documents." },
-  { name: "Sales", sees: "Quotations, route rates and their customers' jobs." },
+  { name: "Sales", sees: "Quotations, built on current rates, and their customers' jobs." },
+  { name: "Pricing", sees: "Vendor buying rates by route, container type and validity window." },
 ];
 
 export function Roles() {
@@ -17,7 +18,7 @@ export function Roles() {
           align="left"
           eyebrow="Role-based access"
           title="Everyone sees their job. Nobody sees more."
-          description="Five named roles, enforced the same way in every module and in the assistant. Permissions aren't a setting on a screen; they're a rule the whole system follows."
+          description="Six named roles, enforced the same way in every module and in the assistant. Permissions aren't a setting on a screen; they're a rule the whole system follows."
         />
         <RevealGroup className="grid gap-3 sm:grid-cols-2" stagger={0.06}>
           {roles.map((r) => (

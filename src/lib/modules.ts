@@ -6,6 +6,8 @@ import {
   ChartColumn,
   FileCheck,
   FolderOpen,
+  Globe,
+  Mail,
   Receipt,
   Route,
   ShieldCheck,
@@ -128,12 +130,32 @@ export const modules: Module[] = [
   {
     slug: "roles",
     name: "Role-based Access",
-    short: "Admin, Management, Accounting, Operations, Sales",
+    short: "Admin, Management, Accounting, Operations, Sales, Pricing",
     description:
       "Named roles see and do only what is relevant to their job. Permissions are enforced consistently across every module, including the AI assistant.",
     icon: ShieldCheck,
-    bullets: ["Five named roles", "Enforced in every module", "Same rules for the assistant"],
+    bullets: ["Six named roles", "Enforced in every module", "Same rules for the assistant"],
     docs: "/docs/roles",
+  },
+  {
+    slug: "email-sync",
+    name: "Email Sync",
+    short: "Connect your inbox, auto-link to jobs",
+    description:
+      "Connect a Zoho, Microsoft or Google mailbox and Routel links incoming mail to the job or customer it belongs to automatically, so correspondence and tracking updates stay with the shipment instead of buried in an inbox.",
+    icon: Mail,
+    bullets: ["Zoho, Microsoft, Google", "Auto-links mail to jobs", "Tracking updates from the inbox"],
+    docs: "/docs/email-sync",
+  },
+  {
+    slug: "visitor-tracking",
+    name: "Website Visitor Tracking",
+    short: "See who visits your branded site",
+    description:
+      "When Routel runs on your own custom domain, visitor activity on that site is tracked automatically, so you can see who is looking without wiring up separate analytics.",
+    icon: Globe,
+    bullets: ["Built into your custom domain", "No separate analytics setup", "Visitor activity at a glance"],
+    docs: "/docs/visitor-tracking",
   },
   {
     slug: "ai-assistant",

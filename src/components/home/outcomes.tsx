@@ -73,7 +73,7 @@ function BalancedIllustration() {
 function RolesIllustration() {
   return (
     <div className="flex flex-wrap gap-1.5">
-      {["Admin", "Management", "Accounting", "Operations", "Sales"].map((r, i) => (
+      {["Admin", "Management", "Accounting", "Operations", "Sales", "Pricing"].map((r, i) => (
         <span
           key={r}
           className={cn(
@@ -124,7 +124,7 @@ const outcomes = [
   },
   {
     title: "Everyone sees their part",
-    text: "Five roles decide who sees what, in every screen and in the assistant.",
+    text: "Six roles decide who sees what, in every screen and in the assistant.",
     tint: "bg-white border-fog-200",
     illustration: <RolesIllustration />,
   },
