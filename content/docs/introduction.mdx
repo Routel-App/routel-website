@@ -24,18 +24,23 @@ Because everything posts to one General Ledger as it happens, there are no manua
 
 | Module | What it does | Guide |
 | --- | --- | --- |
-| Shipments & Jobs | The core record: POL/POD, vessel and voyage, containers, B/L numbers, ETD/ETA, status timeline, audit log | [Read](/docs/shipments) |
+| Shipments & Jobs | The core record: POL/POD, vessel and voyage, containers, B/L numbers, an 11-stage status lifecycle, audit log | [Read](/docs/shipments) |
+| Bookings | Vessel bookings tied to a job, AI-read from the confirmation PDF | [Read](/docs/bookings) |
+| Business Partners | One record for a customer or vendor, combined AR+AP ledger, statement of account | [Read](/docs/business-partners) |
 | Quotations & Route Rates | Vendor buying rates by route and container type with validity windows; quotations that convert to jobs | [Read](/docs/quotations) |
-| Bookings | Vessel bookings tied to a job | [Read](/docs/bookings) |
-| Invoicing & Finance | Multi-currency invoicing (MYR/USD), payments, credit and debit notes, credit limits, Receivables & Payables hub | [Read](/docs/invoicing) |
-| Accounting Reports | General Ledger, Trial Balance, Cash Position, P&L, AR aging, overdue invoices, customer profitability | [Read](/docs/accounting) |
+| Invoicing | Multi-currency invoicing (MYR/USD), draft → final → paid, locked once finalized | [Read](/docs/invoicing) |
+| Finance (Receivables & Payables) | A dedicated mailbox, auto-scanned, with AI-proposed payment matches | [Read](/docs/finance-receivables) |
+| Credit & Debit Notes | Formal adjustments against a finalized invoice | [Read](/docs/credit-notes) |
+| Credit Applications | Public trade-credit application, staff approval, active agreement | [Read](/docs/credit-applications) |
+| Accounting Reports | General Ledger, Trial Balance, Cash Position, P&L, AR/AP aging, SST summary, customer profitability | [Read](/docs/accounting) |
 | Bill of Lading | Carrier-style House B/L with annexure and container sheet, generated from the job | [Read](/docs/bill-of-lading) |
 | Expenses & Payroll | Company overheads that post to operating-expense accounts; salary lines linked to staff | [Read](/docs/expenses) |
-| Vendors & Customers | Partner records, statements of account as PDF, vendor cost per job with FX conversion | [Read](/docs/partners) |
-| Document Management | Files attached per shipment | [Read](/docs/documents) |
+| Document Management | Files attached per shipment, plus an AI review queue for incoming attachments | [Read](/docs/documents) |
+| Public Shipment Tracking | A no-login status page for your own customers, status timeline only | [Read](/docs/tracking) |
+| Labeling Center | Tag any record with a note, follow-up date and assignee | [Read](/docs/labeling-center) |
 | Role-based Access | Admin, Management, Accounting, Operations, Sales and Pricing roles, enforced everywhere | [Read](/docs/roles) |
 | AI Assistant | Chat in Arabic or English to do real work, with confirmation before anything is saved | [Read](/docs/ai-assistant) |
-| Email Sync | Connect a Zoho, Microsoft or Google mailbox; mail auto-links to the job it belongs to | [Read](/docs/email-sync) |
+| Email Sync | Connect a Zoho or Microsoft mailbox; mail auto-links to the job it belongs to | [Read](/docs/email-sync) |
 | Website Visitor Tracking | Visitor activity on your custom domain, tracked automatically | [Read](/docs/visitor-tracking) |
 
 ## How a job flows
@@ -68,7 +73,7 @@ Invoices and books run in **MYR** and **USD**. Vendor costs recorded in a differ
 ## Where to start
 
 - If you run operations, start with [Shipments & Jobs](/docs/shipments).
-- If you run the books, start with [Invoicing & Finance](/docs/invoicing).
+- If you run the books, start with [Invoicing](/docs/invoicing).
 - If you want to know what the assistant can and cannot do, read [AI Assistant](/docs/ai-assistant).
 
 <Callout kind="tip" title="These docs are growing">

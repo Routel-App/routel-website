@@ -1,0 +1,44 @@
+---
+title: Credit Applications
+description: The trade-credit onboarding flow — a public form, staff approval, and an active credit agreement.
+status: complete
+---
+
+Extending trade credit to a customer — letting them pay on terms instead of upfront — goes through a formal application rather than someone quietly raising a limit on their record.
+
+## The flow
+
+<Steps>
+  <Step title="Business applies">
+    A public form captures the business's details and the credit amount they're requesting. No login needed to
+    apply.
+  </Step>
+  <Step title="Staff review">
+    The application lands with staff to review — who the business is, what they're asking for, and against what
+    existing relationship if any.
+  </Step>
+  <Step title="Approve or reject">
+    Approving or rejecting is a deliberate decision, not a default. There's no silent auto-approval.
+  </Step>
+  <Step title="Agreement takes effect">
+    An approved application becomes an active credit agreement tied to that customer's [Business Partner](/docs/business-partners)
+    record: a limit, a currency, a term, and an expiry date.
+  </Step>
+</Steps>
+
+<Callout kind="note">
+  Approving a new application for a customer automatically retires whatever credit agreement they had before — a
+  customer only ever has one active agreement at a time.
+</Callout>
+
+## What the agreement controls
+
+Once active, the agreement's limit and currency are what [Business Partners](/docs/business-partners) and job/invoice creation check against when they show exposure — the same limit mechanics described there, just sourced from an approved application instead of a free-text field.
+
+## Through the assistant
+
+"Show me pending credit applications" or "What's Al Noor's current credit limit and when does it expire?" both work as immediate answers.
+
+<Callout kind="permission">
+  **Accounting** and **Admin** review, approve and reject credit applications.
+</Callout>

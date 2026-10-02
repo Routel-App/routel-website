@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Section, SectionHeading } from "@/components/ui/section";
-import { Reveal } from "@/components/motion/reveal";
+import { Faq } from "@/components/ui/faq";
 import { PricingTiers } from "@/components/pricing/pricing-tiers";
 import { Cta } from "@/components/home/cta";
 
@@ -56,14 +56,7 @@ export default function PricingPage() {
 
       <Section tone="muted" className="py-16 sm:py-20">
         <SectionHeading title="Questions we get asked" />
-        <Reveal className="mx-auto mt-10 grid max-w-4xl gap-x-10 gap-y-8 sm:grid-cols-2">
-          {faqs.map((f) => (
-            <div key={f.q}>
-              <h3 className="font-display text-[16px] font-semibold text-ink-900">{f.q}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-fog-600">{f.a}</p>
-            </div>
-          ))}
-        </Reveal>
+        <Faq items={faqs} className="mt-10" />
       </Section>
       <div className="pt-16">
         <Cta />

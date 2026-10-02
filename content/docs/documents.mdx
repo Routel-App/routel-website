@@ -4,7 +4,7 @@ description: Upload, attach, find and download the documents that belong to each
 status: complete
 ---
 
-A freight file is a pile of paper: booking confirmation, commercial invoice, packing list, certificate of origin, House and Master B/L, arrival notice, delivery order, vendor invoices. Routel keeps that pile with the job it belongs to, so "where is the packing list for the Al Noor shipment?" has a one-click answer.
+A freight file is a pile of paper: booking confirmation, commercial invoice, packing list, certificate of origin, House and Master B/L, arrival notice, delivery order, vendor invoices. Routel keeps that pile with the job it belongs to, so "where is the packing list for the Al Noor shipment?" has a one-click answer. File type is verified from the actual file content when it's uploaded — not just trusted from the filename or extension.
 
 ## Where documents live
 
@@ -42,7 +42,16 @@ Uploading a corrected document does not overwrite the old one. Both are kept, th
 
 Documents stay with the job after it is closed and remain downloadable for as long as the job exists. Nothing is purged automatically.
 
+## Incoming attachments, reviewed automatically
+
+A second layer sits in front of the manual upload flow: when mail arrives through [Email Sync](/docs/email-sync), its attachments are automatically classified — is this a B/L? a booking confirmation? a vendor invoice? — with a suggested job to file it against.
+
+<Callout kind="warning" title="Suggested, never automatic">
+  Nothing from this queue is filed on its own. A person reviews each suggestion and approves or rejects it before the
+  document is attached anywhere.
+</Callout>
+
 <Callout kind="permission">
-  Anyone who can open a job can view and download its documents. **Operations** and **Admin** upload, label and
-  replace them.
+  Any signed-in staff member can view and download a job's documents, and upload or label new ones. Clearing the
+  AI review queue is part of normal day-to-day use, not a separate restricted role.
 </Callout>

@@ -4,33 +4,33 @@ import { modules } from "@/lib/modules";
 import { Container } from "@/components/ui/container";
 import { Logo } from "./logo";
 
+const platformSlugs = ["shipments", "business-partners", "quotations", "invoicing", "accounting", "bill-of-lading", "ai-assistant"];
+
 const columns = [
   {
-    heading: "Product",
+    heading: "Platform",
     links: [
-      { label: "Modules", href: "/#modules" },
-      { label: "AI Assistant", href: "/#assistant" },
-      { label: "Finance & accounting", href: "/#finance" },
-      { label: "Pricing", href: "/pricing" },
-      { label: "Request a demo", href: "/demo" },
+      ...platformSlugs
+        .map((slug) => modules.find((m) => m.slug === slug))
+        .filter((m): m is NonNullable<typeof m> => Boolean(m))
+        .map((m) => ({ label: m.name, href: `/platform/${m.slug}` })),
+      { label: "All modules", href: "/platform" },
     ],
   },
   {
-    heading: "Documentation",
+    heading: "Resources",
     links: [
       { label: "Introduction", href: "/docs" },
-      ...modules
-        .filter((m) => m.docs)
-        .slice(0, 6)
-        .map((m) => ({ label: m.name, href: m.docs as string })),
+      { label: "Glossary", href: "/glossary" },
+      { label: "Case studies", href: "/case-studies" },
     ],
   },
   {
     heading: "Company",
     links: [
-      { label: "About Routel", href: "/docs#why-routel" },
-      { label: "Contact", href: "/demo" },
+      { label: "About Routel", href: "/about" },
       { label: "Pricing", href: "/pricing" },
+      { label: "Request a demo", href: "/demo" },
     ],
   },
 ];

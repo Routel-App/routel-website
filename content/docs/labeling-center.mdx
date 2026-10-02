@@ -1,0 +1,44 @@
+---
+title: Labeling Center
+description: A lightweight way to flag any record that needs attention, without a separate task-tracking tool.
+status: complete
+---
+
+Not every follow-up deserves a full task-management system — sometimes you just need to flag a record and come back to it. The Labeling Center is that flag, built into the records themselves.
+
+## What you can tag
+
+<Fields
+  rows={[
+    ["Job", "A shipment that needs a second look."],
+    ["Invoice", "Something to chase or double-check before it's sent."],
+    ["Customer / Vendor", "A relationship that needs attention — a renewal, a conversation, a dispute."],
+    ["Quotation", "A quote worth following up on before it expires."],
+    ["Booking", "A booking with an open question against the carrier."],
+  ]}
+/>
+
+## A tag carries three things
+
+<Steps>
+  <Step title="A note">
+    Free text: what needs attention and why.
+  </Step>
+  <Step title="A follow-up date">
+    When to come back to it. Overdue tags are easy to spot.
+  </Step>
+  <Step title="An assignee">
+    Who owns following up — doesn't have to be the person who created the tag.
+  </Step>
+</Steps>
+
+Tags show up directly on the record they're attached to, so whoever opens that job or invoice sees the flag in context — no separate list to remember to check, though an assignee can also see everything tagged to them in one place.
+
+## Through the assistant
+
+"Tag JOB-2026-0412 for follow-up Friday, ask the customer for the signed SI" proposes a tag with the note, date and assignee filled in for you to confirm.
+
+<Callout kind="permission">
+  Any signed-in staff member can tag a record they can already open, and assign it to anyone with access to that
+  record.
+</Callout>

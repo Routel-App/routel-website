@@ -109,11 +109,11 @@ export function Navbar() {
               <p className="px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-fog-500">Product</p>
               <div className="grid grid-cols-2 gap-1">
                 {modules
-                  .filter((m) => m.docs && m.slug !== "ai-assistant")
+                  .filter((m) => m.slug !== "ai-assistant")
                   .map((m) => (
                     <Link
                       key={m.slug}
-                      href={m.docs as string}
+                      href={`/platform/${m.slug}`}
                       className="rounded-xl px-3 py-2 text-[13.5px] font-medium text-ink-900 hover:bg-fog-100"
                       onClick={() => setOpen(false)}
                     >

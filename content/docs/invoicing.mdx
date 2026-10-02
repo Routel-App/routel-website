@@ -1,72 +1,66 @@
 ---
-title: Invoicing & Finance
-description: Customer invoicing in MYR and USD, payments, credit and debit notes, credit limits, and the Receivables & Payables hub.
+title: Invoicing
+description: Customer invoices in MYR and USD, properly drafted, locked on finalizing, and never issued without a Bill of Lading number.
 status: complete
 ---
 
-Routel's finance module is built around one idea: **an invoice, a payment or a note is a transaction, and transactions post to the ledger the moment they are saved.** There is no separate "post to accounts" step and no month-end batch. Everything you read in [Accounting Reports](/docs/accounting) is derived live from the entries described on this page.
+An invoice is raised against a job. Line items usually come from the job's selling price (ocean freight, terminal handling, documentation and so on), but any line can be added or edited before the invoice is finalized.
 
-## Customer invoices
-
-An invoice is raised against a job. Line items usually come from the job's selling price (ocean freight, terminal handling, documentation and so on), but any line can be added or edited before the invoice is issued.
+## Draft, then final
 
 <Fields
   rows={[
     ["Currency", "MYR or USD. The invoice is presented and paid in that currency; the ledger keeps both the original and the MYR-equivalent."],
     ["Lines", "Description, quantity, unit price, amount. Tax handling follows your configured rate."],
     ["Due date", "Set from the customer's payment terms. Drives the aging and overdue reports."],
-    ["Status", "Draft → Issued → Partially paid → Paid, or Cancelled."],
-    ["PDF", "Issued invoices are rendered as a PDF for sending to the customer."],
+    ["Status", "Draft → Final → Paid."],
+    ["PDF", "Rendered for sending to the customer at every stage."],
   ]}
 />
+
+A new invoice starts as a **draft** — line items can still be edited, and the PDF prints clearly watermarked **"DRAFT TAX INVOICE — NOT OFFICIAL"** so it's never mistaken for a billable document.
+
+<Callout kind="warning" title="Finalizing requires the job's B/L number">
+  An invoice can only be finalized once the job's Bill of Lading number is set. This is deliberate: it stops an
+  invoice going out for a shipment that, on paper, hasn't actually moved yet.
+</Callout>
 
 <Steps>
   <Step title="Open the job and choose Create invoice">
     The customer and currency default from the job. Lines are prefilled from the selling price.
   </Step>
-  <Step title="Review the lines">
-    Adjust descriptions, quantities and prices. Add lines for extras that were agreed after quotation.
+  <Step title="Review the draft">
+    Adjust descriptions, quantities and prices. Add lines for extras agreed after quotation. It's still a draft.
   </Step>
-  <Step title="Issue">
-    The invoice is numbered, posted to Accounts Receivable and revenue, and the PDF is generated.
+  <Step title="Finalize">
+    Once the job has its B/L number, finalizing assigns the real invoice number, posts to Accounts Receivable and
+    revenue, and **locks the line items** — no further edits. The watermark comes off the PDF.
   </Step>
 </Steps>
 
 <Callout kind="tip" title="Through the assistant">
-  "Create an invoice for JOB-2026-0412 in MYR" produces a proposed invoice with the same prefilled lines. Nothing is
-  issued until you confirm. See [AI Assistant](/docs/ai-assistant).
+  "Create an invoice for JOB-2026-0412 in MYR" produces a proposed draft invoice with the same prefilled lines.
+  Nothing is finalized until you confirm. Uploading a vendor's own cost invoice works the same way in reverse: the
+  assistant reads it and extracts line items to prefill a vendor cost or your own invoice. See
+  [AI Assistant](/docs/ai-assistant).
 </Callout>
 
 ## Payments
 
-Record a payment against one or more invoices. Partial payments are supported; the invoice moves to *Partially paid* and the balance stays in aging. Payments post to the bank or cash account you select and clear the receivable.
+Record a payment against one or more finalized invoices. Partial payments are supported; the invoice stays in aging until it's fully paid. Payments post to the bank or cash account you select and clear the receivable. Routel can also propose payment matches automatically from a dedicated mailbox — see [Finance (Receivables & Payables)](/docs/finance-receivables).
 
-## Credit notes and debit notes
+## Adjusting an issued invoice
 
-- A **credit note** reduces what a customer owes: a pricing correction, a waived charge, a returned deposit. It can be applied to an open invoice or left on account.
-- A **debit note** increases what a customer owes for charges that arose after invoicing, such as demurrage or a documentation amendment.
+A finalized invoice is never edited directly. If the amount needs to change after the fact, that goes through a formally numbered [Credit or Debit Note](/docs/credit-notes) applied against it instead.
 
-Both are numbered, rendered as PDF, and post to the ledger like an invoice.
+## Trade credit
 
-## Credit limits and credit applications
-
-Customers can be given a **credit limit**. The job page and the invoice screen show current exposure against the limit, so Operations sees the situation before accepting a new shipment.
-
-A **credit application** is the record of a customer requesting or increasing a limit. Accounting reviews it, and the approved limit takes effect on the customer record.
+Letting a customer pay on terms, and how much credit they're extended, is handled by [Credit Applications](/docs/credit-applications) — a public application, staff approval, and an active agreement tied to the customer's [Business Partner](/docs/business-partners) record.
 
 <Callout kind="permission">
-  **Accounting** and **Admin** issue invoices, record payments and notes, and approve credit applications.
-  **Management** can view everything on this page. **Sales** can see invoice status for their customers.
+  **Accounting** and **Admin** draft, finalize and record payments against invoices. **Management** can view
+  everything on this page. **Sales** can see invoice status for their customers.
 </Callout>
-
-## Receivables & Payables hub
-
-One screen for what is owed to you and what you owe:
-
-- **Receivables**: open customer invoices, sorted by due date, with aging buckets and quick actions to record a payment or issue a note.
-- **Payables**: vendor costs recorded on jobs that are not yet paid, grouped by vendor.
-
-From here you can also generate a customer's or vendor's **statement of account** as a PDF. See [Vendors & Customers](/docs/partners).
 
 ## Multi-currency behaviour
 
@@ -80,7 +74,7 @@ From here you can also generate a customer's or vendor's **statement of account*
 
 | Action | Debit | Credit |
 | --- | --- | --- |
-| Issue invoice | Accounts Receivable | Revenue |
+| Finalize invoice | Accounts Receivable | Revenue |
 | Record payment | Bank / Cash | Accounts Receivable |
 | Credit note | Revenue | Accounts Receivable |
 | Debit note | Accounts Receivable | Revenue |

@@ -1,6 +1,6 @@
 ---
 title: Email Sync
-description: Connect a Zoho, Microsoft or Google mailbox so incoming mail links itself to the right job.
+description: Connect a Zoho or Microsoft mailbox so incoming mail links itself to the right job.
 status: complete
 ---
 
@@ -10,7 +10,7 @@ Freight correspondence lives in email: booking confirmations, carrier arrival no
 
 <Steps>
   <Step title="Choose a provider">
-    Zoho Mail, Microsoft 365 (Outlook) or Google Workspace (Gmail) are supported.
+    Zoho Mail or Microsoft 365 (Outlook) are supported.
   </Step>
   <Step title="Authorize access">
     Sign in with the mailbox's own credentials through the provider's standard authorization screen. Routel never
@@ -25,7 +25,10 @@ Freight correspondence lives in email: booking confirmations, carrier arrival no
 ## What gets linked
 
 - **Correspondence** that mentions a job, booking or B/L number is attached to that job's record, so the history of an email thread travels with the shipment.
-- **Tracking updates** from carriers (an arrival notice, a delay notice) update the job's status timeline instead of only existing as an email a person has to notice and act on.
+- **Carrier updates** — an arrival notice, a delay notice — are linked to the job they're about, so they sit with the shipment instead of only existing as an email someone has to remember to check.
+- **Attachments** on linked mail feed the [document review queue](/docs/documents): incoming files get classified and matched to a job for a person to approve.
+
+This is distinct from the dedicated finance mailbox used for payment matching — see [Finance (Receivables & Payables)](/docs/finance-receivables).
 
 ## Through the assistant
 

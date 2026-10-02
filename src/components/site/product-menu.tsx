@@ -9,8 +9,9 @@ import { Eyebrow } from "@/components/ui/section";
 import { cn } from "@/lib/utils";
 
 const groups: Array<{ label: string; tone: "teal" | "ink"; slugs: string[] }> = [
-  { label: "Operations", tone: "teal", slugs: ["shipments", "quotations", "bookings", "bill-of-lading", "documents"] },
-  { label: "Finance & control", tone: "ink", slugs: ["invoicing", "accounting", "expenses", "partners", "roles"] },
+  { label: "Operations", tone: "teal", slugs: ["shipments", "bookings", "quotations", "bill-of-lading", "documents", "tracking"] },
+  { label: "Finance & accounting", tone: "ink", slugs: ["invoicing", "finance-receivables", "credit-notes", "credit-applications", "expenses", "accounting"] },
+  { label: "Sales, partners & access", tone: "teal", slugs: ["business-partners", "labeling-center", "roles", "email-sync", "visitor-tracking", "compliance"] },
 ];
 
 /**
@@ -69,9 +70,9 @@ export function ProductMenu({ inverse, onNavigate }: { inverse: boolean; onNavig
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={reduce ? undefined : { opacity: 0, y: 6, scale: 0.98 }}
             transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute left-1/2 top-full z-50 w-[820px] -translate-x-1/2 pt-3"
+            className="absolute left-1/2 top-full z-50 w-[min(92vw,1040px)] -translate-x-1/2 pt-3"
           >
-            <div className="grid grid-cols-[1fr_1fr_0.9fr] gap-6 rounded-2xl border border-fog-200 bg-white p-6 text-left shadow-float">
+            <div className="grid grid-cols-[1fr_1fr_1fr_0.85fr] gap-6 rounded-2xl border border-fog-200 bg-white p-6 text-left shadow-float">
               {groups.map((g) => (
                 <div key={g.label}>
                   <Eyebrow tone={g.tone} className="mb-3">
@@ -85,7 +86,7 @@ export function ProductMenu({ inverse, onNavigate }: { inverse: boolean; onNavig
                       return (
                         <li key={slug}>
                           <Link
-                            href={m.docs ?? "/#modules"}
+                            href={`/platform/${m.slug}`}
                             onClick={close}
                             className="group flex items-start gap-3 rounded-xl px-2.5 py-2 transition-colors hover:bg-fog-50"
                           >
@@ -106,7 +107,7 @@ export function ProductMenu({ inverse, onNavigate }: { inverse: boolean; onNavig
 
               <div className="flex flex-col gap-3">
                 <Link
-                  href="/#assistant"
+                  href="/platform/ai-assistant"
                   onClick={close}
                   className="group relative flex flex-1 flex-col overflow-hidden rounded-xl bg-ink-950 p-5 text-white transition-transform hover:-translate-y-0.5"
                 >
@@ -125,9 +126,25 @@ export function ProductMenu({ inverse, onNavigate }: { inverse: boolean; onNavig
                 <Link
                   href="/docs"
                   onClick={close}
-                  className="flex items-center justify-between rounded-xl border border-fog-200 px-4 py-3 text-[13px] font-medium text-ink-900 transition-colors hover:bg-fog-50"
+                  className="flex items-center justify-between rounded-xl border border-fog-200 px-4 py-2.5 text-[13px] font-medium text-ink-900 transition-colors hover:bg-fog-50"
                 >
-                  Read the documentation
+                  Documentation
+                  <ArrowRight className="h-4 w-4 text-fog-400" />
+                </Link>
+                <Link
+                  href="/glossary"
+                  onClick={close}
+                  className="flex items-center justify-between rounded-xl border border-fog-200 px-4 py-2.5 text-[13px] font-medium text-ink-900 transition-colors hover:bg-fog-50"
+                >
+                  Glossary
+                  <ArrowRight className="h-4 w-4 text-fog-400" />
+                </Link>
+                <Link
+                  href="/case-studies"
+                  onClick={close}
+                  className="flex items-center justify-between rounded-xl border border-fog-200 px-4 py-2.5 text-[13px] font-medium text-ink-900 transition-colors hover:bg-fog-50"
+                >
+                  Case studies
                   <ArrowRight className="h-4 w-4 text-fog-400" />
                 </Link>
               </div>

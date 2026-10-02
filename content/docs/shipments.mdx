@@ -11,13 +11,16 @@ A **job** is one shipment for one customer. Everything else in Routel hangs off 
 <Fields
   rows={[
     ["Job number", "Assigned automatically when the job is created. Used on the B/L, invoice and statements."],
-    ["Customer", "The customer record the job belongs to. Sales users only see jobs for their own customers."],
+    ["Customer", "The business partner the job belongs to. See Business Partners."],
     ["POL / POD", "Port of loading and port of discharge, by name and UN/LOCODE."],
+    ["Shipper / consignee", "Who is sending and receiving the cargo, as they'll appear on the B/L."],
     ["Vessel / voyage", "Carrier vessel name and voyage number, usually filled from the booking."],
-    ["ETD / ETA", "Estimated departure and arrival. Updated as the carrier updates you."],
+    ["Weight / volume and cargo description", "Gross weight, measurement and a description of the goods."],
+    ["Incoterms", "The trade term the shipment is quoted and billed under — FOB, CIF and so on."],
+    ["Operational dates", "Cutting date, SI cut-off, SOB (shipped on board), ETD/ATD and ETA/ATA — the full chain, updated as the carrier updates you."],
     ["Containers", "One row per container: number, type (20GP, 40GP, 40HC and so on), seal number, package count."],
     ["Bill of Lading numbers", "House B/L number, and the carrier's Master B/L number once issued."],
-    ["Status", "Where the shipment is in its lifecycle. Shown as a timeline."],
+    ["Status", "Where the shipment is in its 11-stage lifecycle. Shown as a timeline."],
     ["Pricing", "Selling price to the customer and vendor buying costs, with exchange rates for non-MYR amounts."],
     ["Documents", "Files attached to this job. See Document Management."],
     ["Audit log", "Who changed what, and when."],
@@ -49,11 +52,13 @@ There are three ways a job comes into existence:
 
 ## Status timeline
 
-Each job moves through a fixed set of statuses. The timeline on the job page shows the current step, the steps already passed, and the date each one was reached. Typical flow:
+Each job moves through a fixed, 11-stage lifecycle. The timeline on the job page shows the current stage, the stages already passed, and the date each one was reached:
 
-Booked → Loaded → In transit → Arrived → Delivered → Closed
+**Booking pending → Booking confirmed → Cargo received → SI submitted → Vessel loaded → Departed → In transit → Arrived → Customs clearance → Delivered** (or **Cancelled** at any point).
 
-Changing status is a deliberate action, recorded in the audit log with the user's name. Closing a job locks its operational fields; financial entries against a closed job are still visible in reports.
+The same status badge appears everywhere the job shows up — the Jobs list, the Dashboard, customer and vendor views, and on the [public tracking page](/docs/tracking) your own customers can check without logging in.
+
+Changing status is a deliberate action, recorded in the audit log with the user's name. Financial entries against a delivered job are still visible in reports.
 
 ## Containers and B/L numbers
 
@@ -63,7 +68,7 @@ The House B/L number is assigned by Routel. The Master B/L number is entered by 
 
 ## Vendor costs on the job
 
-Costs from carriers, haulers, customs brokers and other vendors are recorded against the job in their original currency with an exchange rate. The job page shows revenue, converted cost, gross profit and margin side by side. Detail is in [Vendors & Customers](/docs/partners).
+Costs from carriers, haulers, customs brokers and other vendors are recorded against the job in their original currency with an exchange rate. The job page shows revenue, converted cost, gross profit and margin side by side. Detail is in [Business Partners](/docs/business-partners).
 
 <Callout kind="tip" title="Let the assistant read the vendor bill">
   Upload the vendor's invoice PDF in the assistant and ask it to propose the cost. It extracts the line items into a
@@ -75,6 +80,7 @@ Costs from carriers, haulers, customs brokers and other vendors are recorded aga
 Every change to a job is logged: field edits, status changes, document uploads, and anything created through the assistant. The log shows the person, the time and the before/after values. It cannot be edited.
 
 <Callout kind="permission">
-  **Operations** and **Admin** create and edit jobs. **Sales** can open jobs for their customers. **Accounting** and
-  **Management** can open any job but do not edit operational fields.
+  Jobs are open to any signed-in member of staff — there's no department wall around the core record. The roles
+  gated to specific modules (Pricing on rates, Operations on the Bill of Lading, Accounting on finance) apply once
+  work on the job touches those modules. See [Roles & permissions](/docs/roles).
 </Callout>

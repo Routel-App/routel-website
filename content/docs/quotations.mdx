@@ -16,14 +16,14 @@ A route rate is one vendor's buying price for one lane and one equipment type, v
     ["Origin / destination", "Port of loading and port of discharge."],
     ["Container type", "20GP, 40GP, 40HC and so on. One rate per type."],
     ["Currency and amount", "The buying price in the vendor's currency, usually USD for ocean freight."],
-    ["Valid from / valid to", "The validity window. Expired rates are hidden from quotation by default."],
+    ["Valid from / valid to", "The validity window: active, flagged as expiring within 14 days, or expired. Expired rates are hidden from quotation by default."],
     ["Notes", "Free-text: surcharges included, transit time, routing, anything Sales should know before quoting."],
   ]}
 />
 
 ### Keeping rates current
 
-Rates change often. Routel does not delete expired rates; it keeps them for history and stops offering them when you build a quotation. When a vendor sends a new rate sheet, add the new rates with their new validity window. Old and new can coexist, and the quotation screen only shows what is valid on the day.
+Rates change often. Routel does not delete expired rates; it keeps them for history and stops offering them when you build a quotation. Rates expiring within 14 days are flagged so Pricing can chase a refreshed rate before it lapses, not after a quotation fails. When a vendor sends a new rate sheet, either add the rates one by one or **bulk-import the whole sheet from Excel** in one go. Old and new can coexist, and the quotation screen only shows what is valid on the day.
 
 <Callout kind="tip" title="Ask the assistant to add rates">
   "Add a route rate: Maersk, Port Klang to Jebel Ali, 40HC, USD 1,450, valid to 31 December." The assistant proposes
@@ -36,7 +36,7 @@ A quotation is issued to a customer for a route and equipment, priced on top of 
 
 <Steps>
   <Step title="Choose the customer">
-    Customer details, payment terms and credit limit come from the customer record. See [Vendors & Customers](/docs/partners).
+    Customer details, payment terms and credit limit come from the partner record. See [Business Partners](/docs/business-partners).
   </Step>
   <Step title="Pick the lane and equipment">
     Origin, destination and container type. Routel lists the route rates that are valid for that combination.

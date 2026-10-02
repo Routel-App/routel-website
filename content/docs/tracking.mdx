@@ -1,0 +1,37 @@
+---
+title: Public Shipment Tracking
+description: A no-login status page for your own customers, deliberately limited to a status timeline.
+status: complete
+---
+
+Your customers ask "where is my shipment" more than any other question. The public tracking page answers it without giving them a login, and without handing over anything commercially sensitive.
+
+## Looking something up
+
+No account is required, but a lookup needs **two** pieces of information together:
+
+<Fields
+  rows={[
+    ["An exact reference", "The job number, B/L number or a container number — no partial matches and no search-by-keyword."],
+    ["Proof of relationship", "Their company name or account number, matched against who the shipment actually belongs to."],
+  ]}
+/>
+
+Requiring both prevents the page from being used to fish for other customers' shipments by guessing numbers.
+
+## What it shows — and what it doesn't
+
+The page shows the same status timeline used internally on the [Shipments & Jobs](/docs/shipments) module — booking confirmed, cargo received, vessel loaded, departed, arrived, and so on.
+
+<Callout kind="warning" title="Deliberately limited">
+  It never shows the master Bill of Lading, container numbers, vessel name, or exact operational dates — only the
+  status stage. Those details stay inside the product for your own team and the customer's named contacts.
+</Callout>
+
+## Sharing the link
+
+The tracking link is the same for every shipment — customers plug in their own reference and account number rather than you generating a unique link per job.
+
+<Callout kind="permission">
+  No login or role applies here — it's a public page, scoped entirely by the two-piece lookup above.
+</Callout>

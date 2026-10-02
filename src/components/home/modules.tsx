@@ -2,7 +2,8 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { modules } from "@/lib/modules";
 import { Section, SectionHeading } from "@/components/ui/section";
-import { RevealGroup, RevealItem } from "@/components/motion/reveal";
+import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 export function Modules() {
@@ -10,7 +11,7 @@ export function Modules() {
     <Section id="modules" tone="muted">
       <SectionHeading
         eyebrow="Everything in one system"
-        title="Fourteen modules that already talk to each other"
+        title="A full platform's worth of modules that already talk to each other"
         description="Each one is built and working today. A quotation becomes a job, a job produces a B/L and an invoice, and the invoice lands in your ledger. Nothing is re-keyed."
       />
       <RevealGroup className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
@@ -50,17 +51,18 @@ export function Modules() {
             "group flex h-full flex-col rounded-2xl border border-fog-200 bg-white p-6 shadow-card transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-0.5 hover:border-fog-300 hover:shadow-float";
           return (
             <RevealItem key={m.slug} className="h-full">
-              {m.docs ? (
-                <Link href={m.docs} className={cls}>
-                  {inner}
-                </Link>
-              ) : (
-                <div className={cls}>{inner}</div>
-              )}
+              <Link href={`/platform/${m.slug}`} className={cls}>
+                {inner}
+              </Link>
             </RevealItem>
           );
         })}
       </RevealGroup>
+      <Reveal className="mt-10 text-center">
+        <Button href="/platform" variant="secondary">
+          View the full platform
+        </Button>
+      </Reveal>
     </Section>
   );
 }

@@ -15,8 +15,10 @@ Every report in this module is computed on demand from the invoices, payments, c
 | **Cash Position** | Bank and cash balances now, with receivables due and payables owed over the coming period. | Management, Accounting |
 | **Profit & Loss** | Revenue, cost of sales and gross profit, then operating expenses and net income. | Management |
 | **AR Aging** | Open receivables by customer in current, 1–30, 31–60 and 60+ day buckets. | Accounting |
+| **AP Aging** | Unpaid vendor costs by vendor, in the same aging buckets. | Accounting |
 | **Overdue invoices** | Invoices past their due date, with days overdue and contact details. | Accounting, Sales |
 | **Customer profitability** | Revenue, cost and margin per customer over a period. | Management, Sales |
+| **SST summary** | Sales and Service Tax collected and payable for a period, for your filing. | Accounting |
 
 ## General Ledger
 
@@ -45,9 +47,13 @@ Two levels of profit, on one page:
 
 Run it for any period. Compare months side by side to see whether margin or overheads moved.
 
-## AR Aging and overdue invoices
+## AR and AP Aging, and overdue invoices
 
-**AR Aging** groups open receivables by how long they have been outstanding, per customer, so you know where collection effort goes. **Overdue invoices** is the working list: each invoice past due, days late, amount and the customer contact. Both link straight to the invoice and to the customer's statement of account.
+**AR Aging** groups open receivables by how long they have been outstanding, per customer, so you know where collection effort goes. **AP Aging** does the same for unpaid vendor costs, by vendor, so you can see what you owe and for how long. **Overdue invoices** is the working list: each invoice past due, days late, amount and the customer contact. All three link straight to the invoice, vendor cost or partner statement of account.
+
+## SST summary
+
+A period summary of Sales and Service Tax collected on invoices and payable on costs, laid out for your filing — not a substitute for your tax advisor, but it saves rebuilding the numbers from the ledger by hand.
 
 ## Customer profitability
 
@@ -74,10 +80,10 @@ Any report can be requested conversationally: "Show AR aging", "P&L for August",
 <Callout kind="note" title="Currencies">
   Reports are presented in MYR. USD invoices and costs are included at the exchange rate recorded on the transaction,
   and exchange differences at settlement appear as a currency exchange expense or gain. See
-  [Invoicing & Finance](/docs/invoicing).
+  [Invoicing](/docs/invoicing).
 </Callout>
 
 <Callout kind="permission">
-  **Accounting**, **Management** and **Admin** can run all reports. **Sales** can see overdue invoices and
-  profitability for their own customers.
+  **Accounting**, **Management** and **Admin** can run all reports. Reports are Finance territory — **Sales** and
+  **Pricing** are gated to Quotations, not this module.
 </Callout>

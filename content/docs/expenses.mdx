@@ -11,7 +11,7 @@ Job costs tell you the margin on shipments. Overheads tell you whether the compa
 <Fields
   rows={[
     ["Date", "When the cost was incurred. Drives which period it appears in."],
-    ["Category", "Rent, Salaries, Utilities, Commissions, Currency exchange, or a custom category. Each maps to an expense account."],
+    ["Category", "Rent, Salaries, Utilities, Petty cash, Commissions, Currency exchange, or a custom category. Each maps to an expense account."],
     ["Amount and currency", "MYR or USD. Non-MYR amounts are converted at the rate you enter."],
     ["Paid from", "The bank or cash account, if paid; or leave unpaid to track it as a payable."],
     ["Payee", "Optional link to a vendor record, for example the landlord or the utility company."],
@@ -44,6 +44,7 @@ Routel ships with the categories most forwarders need. **Admin** can add custom 
 | Rent | Rent & utilities expense |
 | Salaries | Salaries expense |
 | Utilities | Rent & utilities expense |
+| Petty cash | Petty cash expense |
 | Commissions | Commissions expense |
 | Currency exchange | Currency exchange expense |
 | Custom | The account chosen when the category was created |
@@ -54,7 +55,7 @@ Salary entries can be linked to a **registered staff member**, so payroll cost i
 
 ## Currency exchange differences
 
-When a USD invoice or vendor cost is settled at a rate different from the one recorded, the difference is recorded as a currency exchange expense or gain. See [Invoicing & Finance](/docs/invoicing).
+When a USD invoice or vendor cost is settled at a rate different from the one recorded, the difference is recorded as a currency exchange expense or gain. See [Invoicing](/docs/invoicing).
 
 ## What posts where
 

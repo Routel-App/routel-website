@@ -1,0 +1,46 @@
+---
+title: Finance (Receivables & Payables)
+description: A dedicated, auto-scanned finance mailbox that proposes payment matches for a human to confirm.
+status: complete
+---
+
+Chasing payments usually means someone reading a shared inbox and manually matching a remittance email to an invoice. Routel's finance mailbox automates the matching, not the decision.
+
+## The finance mailbox
+
+A second mailbox — separate from the mailbox [Email Sync](/docs/email-sync) connects for day-to-day job correspondence — is dedicated to finance and scanned automatically as mail arrives.
+
+<Steps>
+  <Step title="Connect the mailbox">
+    Admin connects the finance inbox the same way as the main one, via Zoho or Microsoft.
+  </Step>
+  <Step title="Routel scans incoming mail">
+    Every message is checked against open customer invoices and outstanding vendor bills for anything that looks
+    like a payment reference, amount or remittance advice.
+  </Step>
+  <Step title="A matching suggestion is proposed">
+    When something looks like a match, it shows up as a suggested pairing between the email and the invoice or
+    vendor bill it probably settles.
+  </Step>
+  <Step title="A person confirms or rejects it">
+    Confirming creates the actual payment record against that invoice or bill. Rejecting discards the suggestion.
+    Nothing is settled automatically — every match needs a person to say yes.
+  </Step>
+</Steps>
+
+## Receivables and payables in one place
+
+The hub lists what customers owe you (receivables) and what you owe vendors (payables) side by side, pulled from the same invoices and vendor costs recorded elsewhere in the system — not a separate set of numbers to reconcile.
+
+<Callout kind="note">
+  This is about matching and recording payments, not moving money — Routel doesn't initiate bank transfers or
+  payment runs.
+</Callout>
+
+## Through the assistant
+
+"Show me unmatched payments from this week" or "Which invoices are still unpaid past terms?" both work as immediate answers — the assistant reads the same matching suggestions and open-item data as the hub.
+
+<Callout kind="permission">
+  **Accounting** and **Admin** connect the finance mailbox and confirm or reject matching suggestions.
+</Callout>

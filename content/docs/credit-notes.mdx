@@ -1,0 +1,45 @@
+---
+title: Credit & Debit Notes
+description: Adjust what a customer owes after an invoice is issued — drafted, numbered, then applied.
+status: complete
+---
+
+Sometimes the amount on an issued invoice needs to change — a short shipment, a billing error, an extra charge discovered after the fact. Credit and debit notes make that adjustment formal instead of editing the original invoice.
+
+## Credit vs. debit
+
+<Fields
+  rows={[
+    ["Credit note", "Reduces what the customer owes — a refund, a discount, a correction in their favor."],
+    ["Debit note", "Increases what the customer owes — an extra charge discovered after the invoice was issued."],
+  ]}
+/>
+
+## Lifecycle
+
+<Steps>
+  <Step title="Draft">
+    Choose the invoice it relates to, the amount, and a reason. The currency must match the invoice's currency.
+  </Step>
+  <Step title="Numbered">
+    Finalizing assigns the note a real, sequential number — same discipline as finalizing an invoice.
+  </Step>
+  <Step title="Applied">
+    The note is applied against that specific invoice, adjusting the balance owed. A note can only be applied to an
+    invoice that is already **finalized** — not a draft.
+  </Step>
+</Steps>
+
+The original invoice itself is never edited after the fact; the note sits alongside it so the audit trail shows exactly what changed and why.
+
+## Where it shows up
+
+Applied notes appear on the customer's statement of account and in AR aging, netted against the invoice they adjust — see [Business Partners](/docs/business-partners) and [Accounting Reports](/docs/accounting).
+
+## Through the assistant
+
+"Issue a credit note on INV-2026-0183 for USD 150, short-shipped one carton" proposes a drafted note against that invoice for you to review and confirm.
+
+<Callout kind="permission">
+  **Accounting** and **Admin** draft, finalize and apply credit and debit notes.
+</Callout>

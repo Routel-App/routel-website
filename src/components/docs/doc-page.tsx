@@ -1,18 +1,11 @@
 import Link from "next/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { compileMDX } from "next-mdx-remote/rsc";
-import remarkGfm from "remark-gfm";
 import { adjacentDocs, type DocFrontmatter } from "@/lib/docs";
-import { mdxComponents, Callout } from "./mdx-components";
+import { compileContentMdx } from "@/lib/mdx";
+import { Callout } from "./mdx-components";
 
 export async function DocPage({ slug, source, frontmatter }: { slug: string; source: string; frontmatter: DocFrontmatter }) {
-  const { content } = await compileMDX({
-    source,
-    components: mdxComponents,
-    // Docs are authored in this repo, so JSX expressions in props (e.g. <Fields rows={[...]} />)
-    // are trusted. next-mdx-remote strips them by default for untrusted content.
-    options: { blockJS: false, mdxOptions: { remarkPlugins: [remarkGfm] } },
-  });
+  const content = await compileContentMdx(source);
   const { prev, next } = adjacentDocs(slug);
 
   return (

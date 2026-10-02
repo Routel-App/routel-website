@@ -10,7 +10,7 @@ export const site = {
   nav: [
     { label: "AI Assistant", href: "/#assistant" },
     { label: "Pricing", href: "/pricing" },
-    { label: "Docs", href: "/docs" },
+    { label: "About", href: "/about" },
   ],
   cta: { label: "Request a demo", href: "/demo" },
 } as const;

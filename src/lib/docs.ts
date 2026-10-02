@@ -26,22 +26,21 @@ export const INDEX_SLUG = "introduction";
 const groups: Array<{ title: string; slugs: string[] }> = [
   { title: "Getting started", slugs: ["introduction", "roles"] },
   {
-    title: "Modules",
-    slugs: [
-      "shipments",
-      "quotations",
-      "bookings",
-      "invoicing",
-      "accounting",
-      "bill-of-lading",
-      "expenses",
-      "partners",
-      "documents",
-      "email-sync",
-      "visitor-tracking",
-    ],
+    title: "Operations",
+    slugs: ["shipments", "bookings", "quotations", "bill-of-lading", "documents", "tracking"],
   },
-  { title: "AI Assistant", slugs: ["ai-assistant"] },
+  {
+    title: "Finance & accounting",
+    slugs: ["invoicing", "finance-receivables", "credit-notes", "credit-applications", "expenses", "accounting"],
+  },
+  {
+    title: "Sales & partners",
+    slugs: ["business-partners", "labeling-center"],
+  },
+  {
+    title: "Trust, access & AI",
+    slugs: ["email-sync", "visitor-tracking", "ai-assistant"],
+  },
 ];
 
 export function docPath(slug: string) {

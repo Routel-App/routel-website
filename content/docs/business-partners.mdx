@@ -1,0 +1,66 @@
+---
+title: Business Partners
+description: One record for a customer or a vendor, a combined AR+AP ledger, and a printable statement of account.
+status: complete
+---
+
+Routel keeps **one record** for every company you work with — there's no separate "add a customer" step and "add a vendor" step. Which side of a deal a partner plays is decided per transaction: the same company can be invoiced on one job and billed as a vendor on another, without two separate records drifting out of sync.
+
+## The partner record
+
+<Fields
+  rows={[
+    ["Name and registration", "Legal name as it should appear on quotations, invoices and the B/L."],
+    ["Contacts", "People and email addresses for operations and accounts."],
+    ["Payment terms", "Days from invoice date to due date. Drives aging and overdue reports."],
+    ["Credit limit and currency", "Optional. Exposure against it is shown on new jobs and invoices. See Credit Applications below."],
+    ["Services (as a vendor)", "What they provide when they're billing you: ocean freight, haulage, customs, documentation."],
+  ]}
+/>
+
+The partner page lists everything about the relationship from both directions: quotations and invoices where they're the customer, route rates and costs where they're the vendor, jobs either way, and a combined running balance.
+
+## Combined AR + AP ledger
+
+Because a partner can sit on both sides of your books, Routel keeps one ledger per partner that nets what they owe you (AR, from invoices) against what you owe them (AP, from vendor costs) — instead of two disconnected balances you'd have to add up by hand.
+
+## Statements of account
+
+A **statement of account** (SOA) summarises the relationship for a period — opening balance, invoices, payments, costs, notes and closing balance — generated as a PDF from the partner record, from the [Finance hub](/docs/finance-receivables), or by asking the assistant: "Download Al Noor's statement for August."
+
+## Vendor costs per job
+
+A vendor cost is a line on a job for something a partner charged you for that shipment, acting as a vendor.
+
+<Fields
+  rows={[
+    ["Vendor", "Which partner charged it."],
+    ["Description", "Ocean freight, THC, haulage, customs clearance and so on."],
+    ["Currency and amount", "In the vendor's currency."],
+    ["Exchange rate", "The rate used to convert to MYR. Defaults from the job; can be overridden per line."],
+    ["MYR equivalent", "Computed. This is what feeds gross profit."],
+    ["Vendor invoice reference", "The vendor's invoice number, and the PDF attached."],
+    ["Status", "Unpaid or paid, with the payment date."],
+  ]}
+/>
+
+Recording costs promptly is what makes the job P&L trustworthy. The job page shows revenue, converted cost, gross profit and margin the moment a cost is saved.
+
+<Callout kind="tip" title="Let the assistant read the vendor invoice">
+  Upload the vendor's PDF in the chat and ask: "Propose the vendor cost for this on JOB-2026-0412." The assistant
+  extracts the line items, currency and total into a proposed cost. Check it against the paper and confirm. See
+  [AI Assistant](/docs/ai-assistant).
+</Callout>
+
+## Credit limits
+
+Give a partner a limit and Routel shows current exposure — open invoices plus jobs in progress — whenever someone creates a job or an invoice for them. Setting or raising a limit goes through [Credit Applications](/docs/credit-applications), not a direct edit.
+
+## Through the assistant
+
+"Create a business partner called Al Noor Trading LLC, 30-day terms, USD" or "Which partners do we owe more than USD 5,000?" both work, the first as a proposal to confirm, the second as an immediate answer.
+
+<Callout kind="permission">
+  Any signed-in staff member can view a partner record. **Accounting** and **Admin** manage payment terms, credit
+  limits and statements. **Operations** records vendor costs on jobs.
+</Callout>
