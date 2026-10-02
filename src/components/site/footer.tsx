@@ -67,10 +67,8 @@ export function Footer() {
           ))}
         </div>
         <div className="mt-12 flex flex-col gap-3 border-t border-white/10 pt-6 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between">
-          <p>
-            © {new Date().getFullYear()} {site.company}. All rights reserved.
-          </p>
-          <p>Routel is a product of {site.companyShort}, Malaysia.</p>
+          <p>© {new Date().getFullYear()} {site.name}. All rights reserved.</p>
+          <p>Built and run from Malaysia.</p>
         </div>
       </Container>
     </footer>

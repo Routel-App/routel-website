@@ -8,7 +8,7 @@ import { Cta } from "@/components/home/cta";
 
 export const metadata: Metadata = {
   title: "About",
-  description: `${site.name} started as ${site.companyShort}'s own internal system for running freight forwarding operations, before it was offered to other forwarders as a hosted service.`,
+  description: `${site.name} started as a working freight forwarder's own internal system for running its operations, before it was offered to other forwarders as a hosted service.`,
 };
 
 const principles = [
@@ -40,9 +40,9 @@ export default function AboutPage() {
               Built inside a working freight forwarder, not a product lab
             </h1>
             <p className="mt-5 max-w-2xl text-pretty text-lg leading-relaxed text-fog-600">
-              {site.name} grew out of the internal system {site.companyShort}, a freight forwarder in Malaysia, uses
-              to run its own shipments every day. It was running on real jobs before it had a name — now it&rsquo;s
-              offered to other forwarders as a hosted service.
+              {site.name} grew out of the internal system a working freight forwarder in Malaysia built to run its
+              own shipments every day. It was running on real jobs before it had a name — now it&rsquo;s offered to
+              other forwarders as a hosted service.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button href="/demo" size="lg">Request a demo</Button>
@@ -56,7 +56,7 @@ export default function AboutPage() {
         <SectionHeading
           eyebrow="Where it came from"
           title="A system that had to work before it could be sold"
-          description={`Most software gets built for a market first and a real customer second. ${site.name} ran the other way: ${site.companyShort} built it to run its own operations, used it on real shipments, and only then opened it up to other forwarders.`}
+          description={`Most software gets built for a market first and a real customer second. ${site.name} ran the other way: a working freight forwarder built it to run its own operations, used it on real shipments, and only then opened it up to other forwarders.`}
         />
         <Reveal className="mx-auto mt-10 max-w-3xl text-pretty text-base leading-relaxed text-fog-600">
           That order matters. A feature only made it into the product because a real job needed it — not because it
@@ -81,7 +81,7 @@ export default function AboutPage() {
         <SectionHeading
           eyebrow="Where we are now"
           title="Running on real shipments, offered as a hosted service"
-          description={`${site.name} is a hosted service run by ${site.company}. See what that looks like on real customer data in our case studies.`}
+          description={`${site.name} is a hosted service, run by the same team that built it for its own operations first. See what that looks like on real customer data in our case studies.`}
         />
         <Reveal className="mx-auto mt-6 max-w-2xl text-center">
           <Button href="/case-studies" variant="secondary">Read our case studies</Button>

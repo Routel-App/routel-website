@@ -1,6 +1,5 @@
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
-import { site } from "@/lib/site";
 
 const facts = [
   "19 modules, one login",
@@ -23,7 +22,7 @@ export function ProofStrip() {
       <Container>
         <Reveal className="text-center">
           <p className="text-sm text-fog-600">
-            Built inside <span className="font-semibold text-ink-900">{site.company}</span>, a freight forwarder in Malaysia,
+            Built inside <span className="font-semibold text-ink-900">a working freight forwarder in Malaysia</span>,
             and used on real shipments before it had a name.
           </p>
         </Reveal>

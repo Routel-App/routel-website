@@ -4,8 +4,6 @@ export const site = {
   description:
     "Routel is a freight forwarding platform that runs shipments, quotations, bookings, invoicing and live accounting in one place, with an AI assistant that does the paperwork with you.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://routel.io",
-  company: "Flamingo Global Sdn Bhd",
-  companyShort: "Flamingo Global",
   contactEmail: "hello@routel.io",
   nav: [
     { label: "AI Assistant", href: "/#assistant" },
