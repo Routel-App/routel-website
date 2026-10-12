@@ -1,4 +1,6 @@
 import type { LucideIcon } from "lucide-react";
+import type { Locale } from "./i18n";
+import { modulesAr } from "./modules.ar";
 import {
   Anchor,
   Banknote,
@@ -236,3 +238,16 @@ export const modules: Module[] = [
 ];
 
 export const featuredModules = modules.filter((m) => m.featured);
+
+/** The translatable part of a module. Translations live in modules.<locale>.ts keyed by slug. */
+export type ModuleCopy = Pick<Module, "name" | "short" | "description" | "bullets">;
+
+/** Modules with copy in the given locale; untranslated modules fall back to English. */
+export function getModules(locale: Locale): Module[] {
+  if (locale === "en") return modules;
+  return modules.map((m) => ({ ...m, ...modulesAr[m.slug] }));
+}
+
+export function getFeaturedModules(locale: Locale): Module[] {
+  return getModules(locale).filter((m) => m.featured);
+}

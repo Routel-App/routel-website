@@ -1,11 +1,14 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
+import { defaultLocale, type Locale } from "./i18n";
 
 /**
  * Docs live in /content/docs/<slug>.mdx. Adding a page:
  *   1. create content/docs/<slug>.mdx with frontmatter (title, description, status)
  *   2. add { slug } to a group below so it appears in the sidebar
+ *   3. add the Arabic translation at content/ar/docs/<slug>.mdx (same slug);
+ *      until it exists, the Arabic site falls back to the English page.
  */
 export type DocStatus = "complete" | "stub";
 
@@ -18,42 +21,49 @@ export type DocFrontmatter = {
 export type DocNavItem = { slug: string; title: string; href: string; status: DocStatus };
 export type DocNavGroup = { title: string; items: DocNavItem[] };
 
-const CONTENT_DIR = path.join(process.cwd(), "content", "docs");
+function contentDir(locale: Locale) {
+  return locale === defaultLocale
+    ? path.join(process.cwd(), "content", "docs")
+    : path.join(process.cwd(), "content", locale, "docs");
+}
 
 /** Slug of the page rendered at /docs itself. */
 export const INDEX_SLUG = "introduction";
 
-const groups: Array<{ title: string; slugs: string[] }> = [
-  { title: "Getting started", slugs: ["introduction", "roles"] },
+const groups: Array<{ title: Record<Locale, string>; slugs: string[] }> = [
+  { title: { en: "Getting started", ar: "البداية" }, slugs: ["introduction", "roles"] },
   {
-    title: "Operations",
+    title: { en: "Operations", ar: "العمليات" },
     slugs: ["shipments", "bookings", "quotations", "bill-of-lading", "documents", "tracking"],
   },
   {
-    title: "Finance & accounting",
+    title: { en: "Finance & accounting", ar: "المالية والمحاسبة" },
     slugs: ["invoicing", "finance-receivables", "credit-notes", "credit-applications", "expenses", "accounting"],
   },
   {
-    title: "Sales & partners",
+    title: { en: "Sales & partners", ar: "المبيعات والشركاء" },
     slugs: ["business-partners", "labeling-center"],
   },
   {
-    title: "Trust, access & AI",
+    title: { en: "Trust, access & AI", ar: "الثقة والصلاحيات والذكاء الاصطناعي" },
     slugs: ["email-sync", "visitor-tracking", "ai-assistant"],
   },
 ];
 
-export function docPath(slug: string) {
-  return path.join(CONTENT_DIR, `${slug}.mdx`);
+export function docPath(slug: string, locale: Locale = defaultLocale) {
+  return path.join(contentDir(locale), `${slug}.mdx`);
 }
 
 export function docExists(slug: string) {
   return /^[a-z0-9-]+$/.test(slug) && fs.existsSync(docPath(slug));
 }
 
-export function readDoc(slug: string): { source: string; frontmatter: DocFrontmatter } | null {
+/** Reads the page in the requested locale, falling back to English if it hasn't been translated yet. */
+export function readDoc(slug: string, locale: Locale = defaultLocale): { source: string; frontmatter: DocFrontmatter } | null {
   if (!docExists(slug)) return null;
-  const raw = fs.readFileSync(docPath(slug), "utf8");
+  const localized = docPath(slug, locale);
+  const file = fs.existsSync(localized) ? localized : docPath(slug);
+  const raw = fs.readFileSync(file, "utf8");
   const { content, data } = matter(raw);
   return { source: content, frontmatter: data as DocFrontmatter };
 }
@@ -62,15 +72,16 @@ export function hrefFor(slug: string) {
   return slug === INDEX_SLUG ? "/docs" : `/docs/${slug}`;
 }
 
-let navCache: DocNavGroup[] | null = null;
+const navCache = new Map<Locale, DocNavGroup[]>();
 
-export function docsNav(): DocNavGroup[] {
-  if (navCache && process.env.NODE_ENV === "production") return navCache;
-  navCache = groups.map((g) => ({
-    title: g.title,
+export function docsNav(locale: Locale = defaultLocale): DocNavGroup[] {
+  const cached = navCache.get(locale);
+  if (cached && process.env.NODE_ENV === "production") return cached;
+  const nav = groups.map((g) => ({
+    title: g.title[locale],
     items: g.slugs
       .map((slug) => {
-        const doc = readDoc(slug);
+        const doc = readDoc(slug, locale);
         if (!doc) return null;
         return {
           slug,
@@ -81,15 +92,16 @@ export function docsNav(): DocNavGroup[] {
       })
       .filter((x): x is DocNavItem => x !== null),
   }));
-  return navCache;
+  navCache.set(locale, nav);
+  return nav;
 }
 
-export function allDocPages(): DocNavItem[] {
-  return docsNav().flatMap((g) => g.items);
+export function allDocPages(locale: Locale = defaultLocale): DocNavItem[] {
+  return docsNav(locale).flatMap((g) => g.items);
 }
 
-export function adjacentDocs(slug: string): { prev: DocNavItem | null; next: DocNavItem | null } {
-  const all = allDocPages();
+export function adjacentDocs(slug: string, locale: Locale = defaultLocale): { prev: DocNavItem | null; next: DocNavItem | null } {
+  const all = allDocPages(locale);
   const i = all.findIndex((d) => d.slug === slug);
   return { prev: i > 0 ? all[i - 1] : null, next: i >= 0 && i < all.length - 1 ? all[i + 1] : null };
 }

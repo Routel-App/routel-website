@@ -2,27 +2,137 @@ import { ArrowRight, Banknote, ChartColumn, Download, FileText, Receipt, Wallet 
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
+import { getLocale } from "@/lib/locale-server";
+import type { Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 
-const pnl: Array<[string, string, "row" | "sub" | "total"]> = [
-  ["Revenue", "412,860", "row"],
-  ["Cost of sales", "(268,915)", "row"],
-  ["Gross profit", "143,945", "sub"],
-  ["Salaries", "(48,000)", "row"],
-  ["Rent & utilities", "(11,350)", "row"],
-  ["Commissions", "(6,420)", "row"],
-  ["Currency exchange", "(1,184)", "row"],
-  ["Net income", "76,991", "total"],
+const pnlValues: Array<[string, "row" | "sub" | "total"]> = [
+  ["412,860", "row"],
+  ["(268,915)", "row"],
+  ["143,945", "sub"],
+  ["(48,000)", "row"],
+  ["(11,350)", "row"],
+  ["(6,420)", "row"],
+  ["(1,184)", "row"],
+  ["76,991", "total"],
 ];
 
-const aging = [
-  { label: "Current", pct: 46, amt: "84,120", cls: "bg-teal-500" },
-  { label: "1–30 days", pct: 29, amt: "53,900", cls: "bg-teal-400" },
-  { label: "31–60 days", pct: 17, amt: "31,240", cls: "bg-spark-400" },
-  { label: "60+ days", pct: 8, amt: "14,610", cls: "bg-spark-500" },
+const agingValues = [
+  { pct: 46, amt: "84,120", cls: "bg-teal-500" },
+  { pct: 29, amt: "53,900", cls: "bg-teal-400" },
+  { pct: 17, amt: "31,240", cls: "bg-spark-400" },
+  { pct: 8, amt: "14,610", cls: "bg-spark-500" },
 ];
 
-const reports = ["General Ledger", "Trial Balance", "Cash Position", "P&L", "AR Aging", "Overdue invoices", "Customer profitability"];
+type FinanceCopy = {
+  eyebrow: string;
+  title: string;
+  description: string;
+  reports: string[];
+  pnlTitle: string;
+  pnlLabels: string[];
+  pnlNote: string;
+  agingTitle: string;
+  agingLabels: string[];
+  invoiceTitle: string;
+  invoiceNote: string;
+  statementTitle: string;
+  statementMeta: string;
+  statementBalance: string;
+  download: string;
+  cashTitle: string;
+  bankCash: string;
+  receivable: string;
+  payable: string;
+  cashNote: string;
+  expensesTitle: string;
+  expenseCategories: string[];
+  expensesNote: string;
+  cta: string;
+};
+
+const copy = {
+  en: {
+    eyebrow: "Finance & accounting",
+    title: "Books that write themselves from the work you already do.",
+    description:
+      "Invoices, vendor costs and overheads post to a real General Ledger the moment they're recorded. Every report is computed live from those entries.",
+    reports: ["General Ledger", "Trial Balance", "Cash Position", "P&L", "AR Aging", "Overdue invoices", "Customer profitability"],
+    pnlTitle: "Profit & Loss · Aug 2026",
+    pnlLabels: [
+      "Revenue",
+      "Cost of sales",
+      "Gross profit",
+      "Salaries",
+      "Rent & utilities",
+      "Commissions",
+      "Currency exchange",
+      "Net income",
+    ],
+    pnlNote: "Gross profit on shipments, then net income after overheads. Computed from source transactions.",
+    agingTitle: "AR aging",
+    agingLabels: ["Current", "1–30 days", "31–60 days", "60+ days"],
+    invoiceTitle: "Multi-currency invoice",
+    invoiceNote: "Presented and paid in USD. The ledger keeps both.",
+    statementTitle: "Statement of account",
+    statementMeta: "01–31 Aug 2026 · 7 invoices · 2 payments",
+    statementBalance: "Balance",
+    download: "Download PDF",
+    cashTitle: "Cash position",
+    bankCash: "Bank & cash",
+    receivable: "Receivable, 30 days",
+    payable: "Payable, 30 days",
+    cashNote: "Ask the assistant “what’s our cash position?” and get this, live.",
+    expensesTitle: "Expenses & payroll",
+    expenseCategories: ["Rent", "Salaries", "Utilities", "Commissions", "Currency exchange", "+ your own"],
+    expensesNote: "Each category maps to an operating-expense account. Salary lines link to registered staff.",
+    cta: "Explore invoicing & finance",
+  },
+  ar: {
+    eyebrow: "المالية والمحاسبة",
+    title: "دفاتر تكتب نفسها من العمل الذي تقوم به أصلاً.",
+    description:
+      "تُرحَّل الفواتير وتكاليف المورّدين والمصاريف العامة إلى دفتر أستاذ عام حقيقي لحظة تسجيلها. وكل تقرير يُحتسب مباشرة من تلك القيود.",
+    reports: [
+      "دفتر الأستاذ العام",
+      "ميزان المراجعة",
+      "الوضع النقدي",
+      "P&L",
+      "أعمار الذمم المدينة",
+      "الفواتير المتأخرة",
+      "ربحية العملاء",
+    ],
+    pnlTitle: "الأرباح والخسائر · أغسطس 2026",
+    pnlLabels: [
+      "الإيرادات",
+      "تكلفة المبيعات",
+      "إجمالي الربح",
+      "الرواتب",
+      "الإيجار والمرافق",
+      "العمولات",
+      "فروق صرف العملات",
+      "صافي الدخل",
+    ],
+    pnlNote: "إجمالي الربح على الشحنات، ثم صافي الدخل بعد المصاريف العامة. محسوب من المعاملات الأصلية.",
+    agingTitle: "أعمار الذمم المدينة",
+    agingLabels: ["الحالية", "1–30 يوماً", "31–60 يوماً", "فوق 60 يوماً"],
+    invoiceTitle: "فاتورة متعددة العملات",
+    invoiceNote: "تُصدر وتُسدَّد بالـ USD. ودفتر الأستاذ يحتفظ بالعملتين.",
+    statementTitle: "كشف حساب",
+    statementMeta: "01–31 أغسطس 2026 · 7 فواتير · 2 دفعات",
+    statementBalance: "الرصيد",
+    download: "تنزيل PDF",
+    cashTitle: "الوضع النقدي",
+    bankCash: "النقد والبنوك",
+    receivable: "مستحق القبض خلال 30 يوماً",
+    payable: "مستحق الدفع خلال 30 يوماً",
+    cashNote: "اسأل المساعد «ما وضعنا النقدي؟» واحصل على هذا مباشرة.",
+    expensesTitle: "المصروفات والرواتب",
+    expenseCategories: ["الإيجار", "الرواتب", "المرافق", "العمولات", "فروق صرف العملات", "+ فئاتك الخاصة"],
+    expensesNote: "كل فئة مرتبطة بحساب مصروفات تشغيلية. وبنود الرواتب مرتبطة بالموظفين المسجّلين.",
+    cta: "استكشف الفوترة والمالية",
+  },
+} satisfies Record<Locale, FinanceCopy>;
 
 function Card({ title, icon: Icon, className, children, dark = false }: { title: string; icon: typeof Receipt; className?: string; children: React.ReactNode; dark?: boolean }) {
   return (
@@ -42,18 +152,17 @@ function Card({ title, icon: Icon, className, children, dark = false }: { title:
   );
 }
 
-export function Finance() {
+export async function Finance() {
+  const locale = await getLocale();
+  const t = copy[locale];
+  const pnl = pnlValues.map(([v, kind], i) => [t.pnlLabels[i], v, kind] as const);
+  const aging = agingValues.map((a, i) => ({ ...a, label: t.agingLabels[i] }));
   return (
     <Section id="finance" tone="teal">
       <div className="grid items-end gap-8 lg:grid-cols-[1.1fr_1fr]">
-        <SectionHeading
-          align="left"
-          eyebrow="Finance & accounting"
-          title="Books that write themselves from the work you already do."
-          description="Invoices, vendor costs and overheads post to a real General Ledger the moment they're recorded. Every report is computed live from those entries."
-        />
+        <SectionHeading align="left" eyebrow={t.eyebrow} title={t.title} description={t.description} />
         <Reveal delay={0.1} className="flex flex-wrap gap-2 lg:justify-end">
-          {reports.map((r) => (
+          {t.reports.map((r) => (
             <span key={r} className="rounded-full border border-teal-200/70 bg-white px-3 py-1.5 text-[12.5px] font-medium text-teal-900">
               {r}
             </span>
@@ -63,7 +172,7 @@ export function Finance() {
 
       <RevealGroup className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
         {/* P&L */}
-        <Card title="Profit & Loss · Aug 2026" icon={ChartColumn} className="md:row-span-2 lg:col-span-2 lg:row-span-2">
+        <Card title={t.pnlTitle} icon={ChartColumn} className="md:row-span-2 lg:col-span-2 lg:row-span-2">
           <dl className="font-mono text-[12.5px]">
             {pnl.map(([k, v, kind]) => (
               <div
@@ -76,18 +185,18 @@ export function Finance() {
                 )}
               >
                 <dt className="font-sans">{k}</dt>
-                <dd className={kind === "total" ? "text-teal-700" : undefined}>
+                <dd dir="ltr" className={kind === "total" ? "text-teal-700" : undefined}>
                   {kind !== "row" ? "MYR " : ""}
                   {v}
                 </dd>
               </div>
             ))}
           </dl>
-          <p className="mt-3 text-[11.5px] text-fog-500">Gross profit on shipments, then net income after overheads. Computed from source transactions.</p>
+          <p className="mt-3 text-[11.5px] text-fog-500">{t.pnlNote}</p>
         </Card>
 
         {/* Aging */}
-        <Card title="AR aging" icon={Receipt} className="lg:col-span-2">
+        <Card title={t.agingTitle} icon={Receipt} className="lg:col-span-2">
           <div className="space-y-2.5">
             {aging.map((a) => (
               <div key={a.label} className="grid grid-cols-[76px_1fr_64px] items-center gap-3 text-[12px]">
@@ -95,55 +204,69 @@ export function Finance() {
                 <div className="h-2.5 rounded-full bg-fog-100">
                   <div className={cn("h-full rounded-full", a.cls)} style={{ width: `${a.pct}%` }} />
                 </div>
-                <span className="text-right font-mono text-ink-900">{a.amt}</span>
+                <span className="text-end font-mono text-ink-900">{a.amt}</span>
               </div>
             ))}
           </div>
         </Card>
 
         {/* Multi-currency */}
-        <Card title="Multi-currency invoice" icon={Banknote}>
-          <p className="font-mono text-[11px] text-fog-500">INV-2026-0918 · Al Noor Trading</p>
-          <p className="font-display mt-2 text-2xl font-bold text-ink-900">USD 4,200.00</p>
-          <p className="mt-1 font-mono text-[11.5px] text-fog-600">≈ MYR 17,934.00 @ 4.2700</p>
-          <p className="mt-3 text-[11.5px] text-fog-500">Presented and paid in USD. The ledger keeps both.</p>
+        <Card title={t.invoiceTitle} icon={Banknote}>
+          <p dir="ltr" className="font-mono text-[11px] text-fog-500 rtl:text-end">
+            INV-2026-0918 · Al Noor Trading
+          </p>
+          <p dir="ltr" className="font-display mt-2 text-2xl font-bold text-ink-900 rtl:text-end">
+            USD 4,200.00
+          </p>
+          <p dir="ltr" className="mt-1 font-mono text-[11.5px] text-fog-600 rtl:text-end">
+            ≈ MYR 17,934.00 @ 4.2700
+          </p>
+          <p className="mt-3 text-[11.5px] text-fog-500">{t.invoiceNote}</p>
         </Card>
 
         {/* Statement */}
-        <Card title="Statement of account" icon={FileText}>
+        <Card title={t.statementTitle} icon={FileText}>
           <div className="rounded-lg border border-fog-200 bg-fog-50 p-3">
             <p className="text-[12px] font-semibold text-ink-900">Al Noor Trading LLC</p>
-            <p className="font-mono text-[11px] text-fog-500">01–31 Aug 2026 · 7 invoices · 2 payments</p>
-            <p className="mt-2 font-mono text-[12px] text-ink-900">Balance MYR 52,180.00</p>
+            <p className="font-mono text-[11px] text-fog-500">{t.statementMeta}</p>
+            <p className="mt-2 font-mono text-[12px] text-ink-900">
+              {t.statementBalance} <span dir="ltr">MYR 52,180.00</span>
+            </p>
           </div>
           <span className="mt-3 inline-flex items-center gap-1.5 text-[12px] font-medium text-teal-700">
-            <Download className="h-3.5 w-3.5" /> Download PDF
+            <Download className="h-3.5 w-3.5" /> {t.download}
           </span>
         </Card>
 
         {/* Cash position */}
-        <Card title="Cash position" icon={Wallet} dark className="lg:col-span-2">
+        <Card title={t.cashTitle} icon={Wallet} dark className="lg:col-span-2">
           <div className="grid grid-cols-3 gap-4 text-[11.5px]">
             <div>
-              <p className="text-white/50">Bank &amp; cash</p>
-              <p className="font-display mt-1 text-lg font-bold text-white">MYR 212,400</p>
+              <p className="text-white/50">{t.bankCash}</p>
+              <p dir="ltr" className="font-display mt-1 text-lg font-bold text-white rtl:text-end">
+                MYR 212,400
+              </p>
             </div>
             <div>
-              <p className="text-white/50">Receivable, 30 days</p>
-              <p className="font-display mt-1 text-lg font-bold text-teal-300">+138,020</p>
+              <p className="text-white/50">{t.receivable}</p>
+              <p dir="ltr" className="font-display mt-1 text-lg font-bold text-teal-300 rtl:text-end">
+                +138,020
+              </p>
             </div>
             <div>
-              <p className="text-white/50">Payable, 30 days</p>
-              <p className="font-display mt-1 text-lg font-bold text-spark-300">−96,410</p>
+              <p className="text-white/50">{t.payable}</p>
+              <p dir="ltr" className="font-display mt-1 text-lg font-bold text-spark-300 rtl:text-end">
+                −96,410
+              </p>
             </div>
           </div>
-          <p className="mt-3 text-[11.5px] text-white/45">Ask the assistant &ldquo;what&rsquo;s our cash position?&rdquo; and get this, live.</p>
+          <p className="mt-3 text-[11.5px] text-white/45">{t.cashNote}</p>
         </Card>
 
         {/* Expenses */}
-        <Card title="Expenses & payroll" icon={Wallet} className="lg:col-span-2">
+        <Card title={t.expensesTitle} icon={Wallet} className="lg:col-span-2">
           <div className="flex flex-wrap gap-1.5">
-            {["Rent", "Salaries", "Utilities", "Commissions", "Currency exchange", "+ your own"].map((c, i) => (
+            {t.expenseCategories.map((c, i) => (
               <span
                 key={c}
                 className={cn(
@@ -155,13 +278,13 @@ export function Finance() {
               </span>
             ))}
           </div>
-          <p className="mt-3 text-[11.5px] text-fog-500">Each category maps to an operating-expense account. Salary lines link to registered staff.</p>
+          <p className="mt-3 text-[11.5px] text-fog-500">{t.expensesNote}</p>
         </Card>
       </RevealGroup>
 
       <Reveal delay={0.1} className="mt-10">
         <Button href="/docs/invoicing" variant="secondary">
-          Explore invoicing &amp; finance
+          {t.cta}
           <ArrowRight className="h-4 w-4" />
         </Button>
       </Reveal>

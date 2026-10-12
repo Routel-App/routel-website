@@ -53,6 +53,7 @@ export function ChatMockup({ className }: { className?: string }) {
   return (
     <div
       ref={ref}
+      dir="ltr"
       className={cn(
         "overflow-hidden rounded-2xl border border-fog-200 bg-white shadow-float",
         className,

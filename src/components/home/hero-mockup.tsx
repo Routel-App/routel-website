@@ -73,7 +73,7 @@ export function HeroMockup() {
   const reduce = useReducedMotion();
 
   return (
-    <div className="relative mx-auto w-full max-w-6xl">
+    <div dir="ltr" className="relative mx-auto w-full max-w-6xl">
       <div
         aria-hidden
         className="pointer-events-none absolute -inset-x-16 -top-10 bottom-10 -z-10 rounded-[48px] bg-[radial-gradient(60%_50%_at_50%_0%,rgb(71_188_172/0.28),transparent_70%)] blur-3xl"
@@ -90,7 +90,7 @@ export function HeroMockup() {
           <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
           <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
           <div className="ml-3 flex h-6 max-w-sm flex-1 items-center rounded-md bg-white/[0.05] px-3 font-mono text-[11px] text-white/45">
-            app.routel.io/jobs/JOB-2026-0412
+            app.routel.app/jobs/JOB-2026-0412
           </div>
           <span className="ml-auto hidden rounded-full bg-teal-400/15 px-2 py-0.5 text-[10px] font-semibold text-teal-300 sm:inline">
             Sara · Operations

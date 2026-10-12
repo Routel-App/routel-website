@@ -1,24 +1,65 @@
 "use client";
 
-import Link from "next/link";
+import Link from "@/components/i18n/link";
 import { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Bot, ChevronDown } from "lucide-react";
-import { modules } from "@/lib/modules";
+import { getModules } from "@/lib/modules";
 import { Eyebrow } from "@/components/ui/section";
 import { cn } from "@/lib/utils";
+import { useLocale } from "@/components/i18n/locale-provider";
+import type { Locale } from "@/lib/i18n";
 
-const groups: Array<{ label: string; tone: "teal" | "ink"; slugs: string[] }> = [
-  { label: "Operations", tone: "teal", slugs: ["shipments", "bookings", "quotations", "bill-of-lading", "documents", "tracking"] },
-  { label: "Finance & accounting", tone: "ink", slugs: ["invoicing", "finance-receivables", "credit-notes", "credit-applications", "expenses", "accounting"] },
-  { label: "Sales, partners & access", tone: "teal", slugs: ["business-partners", "labeling-center", "roles", "email-sync", "visitor-tracking", "compliance"] },
+const groups: Array<{ label: Record<Locale, string>; tone: "teal" | "ink"; slugs: string[] }> = [
+  {
+    label: { en: "Operations", ar: "العمليات" },
+    tone: "teal",
+    slugs: ["shipments", "bookings", "quotations", "bill-of-lading", "documents", "tracking"],
+  },
+  {
+    label: { en: "Finance & accounting", ar: "المالية والمحاسبة" },
+    tone: "ink",
+    slugs: ["invoicing", "finance-receivables", "credit-notes", "credit-applications", "expenses", "accounting"],
+  },
+  {
+    label: { en: "Sales, partners & access", ar: "المبيعات والشركاء والصلاحيات" },
+    tone: "teal",
+    slugs: ["business-partners", "labeling-center", "roles", "email-sync", "visitor-tracking", "compliance"],
+  },
 ];
+
+const copy = {
+  en: {
+    product: "Product",
+    aiTitle: "AI Assistant",
+    aiBody: "Create jobs, invoices and reports by chatting in Arabic or English. Every write needs your confirmation.",
+    aiLink: "See it work",
+    docs: "Documentation",
+    glossary: "Glossary",
+    caseStudies: "Case studies",
+  },
+  ar: {
+    product: "المنتج",
+    aiTitle: "المساعد الذكي",
+    aiBody: "أنشئ ملفات الشحن والفواتير والتقارير بالمحادثة بالعربية أو الإنجليزية. كل عملية كتابة تحتاج إلى تأكيدك.",
+    aiLink: "شاهده يعمل",
+    docs: "التوثيق",
+    glossary: "المصطلحات",
+    caseStudies: "قصص العملاء",
+  },
+} satisfies Record<
+  Locale,
+  { product: string; aiTitle: string; aiBody: string; aiLink: string; docs: string; glossary: string; caseStudies: string }
+>;
 
 /**
  * "Product" mega menu. Opens on hover or click on desktop; the mobile nav
  * lists the same links inline instead.
  */
 export function ProductMenu({ inverse, onNavigate }: { inverse: boolean; onNavigate?: () => void }) {
+  const locale = useLocale();
+  const t = copy[locale];
+  const modules = getModules(locale);
   const [open, setOpen] = useState(false);
   const closeTimer = useRef<number | null>(null);
   const reduce = useReducedMotion();
@@ -58,7 +99,7 @@ export function ProductMenu({ inverse, onNavigate }: { inverse: boolean; onNavig
             : cn("text-fog-700 hover:bg-fog-100 hover:text-ink-900", open && "bg-fog-100 text-ink-900"),
         )}
       >
-        Product
+        {t.product}
         <ChevronDown className={cn("h-3.5 w-3.5 transition-transform", open && "rotate-180")} />
       </button>
 
@@ -72,11 +113,11 @@ export function ProductMenu({ inverse, onNavigate }: { inverse: boolean; onNavig
             transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
             className="absolute left-1/2 top-full z-50 w-[min(92vw,1040px)] -translate-x-1/2 pt-3"
           >
-            <div className="grid grid-cols-[1fr_1fr_1fr_0.85fr] gap-6 rounded-2xl border border-fog-200 bg-white p-6 text-left shadow-float">
+            <div className="grid grid-cols-[1fr_1fr_1fr_0.85fr] gap-6 rounded-2xl border border-fog-200 bg-white p-6 text-start shadow-float">
               {groups.map((g) => (
-                <div key={g.label}>
+                <div key={g.label.en}>
                   <Eyebrow tone={g.tone} className="mb-3">
-                    {g.label}
+                    {g.label[locale]}
                   </Eyebrow>
                   <ul className="space-y-0.5">
                     {g.slugs.map((slug) => {
@@ -115,12 +156,13 @@ export function ProductMenu({ inverse, onNavigate }: { inverse: boolean; onNavig
                   <span className="relative flex h-9 w-9 items-center justify-center rounded-lg bg-spark-400/20 text-spark-300">
                     <Bot className="h-5 w-5" />
                   </span>
-                  <span className="font-display relative mt-4 text-[16px] font-semibold">AI Assistant</span>
+                  <span className="font-display relative mt-4 text-[16px] font-semibold">{t.aiTitle}</span>
                   <span className="relative mt-1 text-[12.5px] leading-relaxed text-white/65">
-                    Create jobs, invoices and reports by chatting in Arabic or English. Every write needs your confirmation.
+                    {t.aiBody}
                   </span>
                   <span className="relative mt-4 inline-flex items-center gap-1 text-[12.5px] font-medium text-teal-300">
-                    See it work <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                    {t.aiLink}{" "}
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform ltr:group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
                   </span>
                 </Link>
                 <Link
@@ -128,7 +170,7 @@ export function ProductMenu({ inverse, onNavigate }: { inverse: boolean; onNavig
                   onClick={close}
                   className="flex items-center justify-between rounded-xl border border-fog-200 px-4 py-2.5 text-[13px] font-medium text-ink-900 transition-colors hover:bg-fog-50"
                 >
-                  Documentation
+                  {t.docs}
                   <ArrowRight className="h-4 w-4 text-fog-400" />
                 </Link>
                 <Link
@@ -136,7 +178,7 @@ export function ProductMenu({ inverse, onNavigate }: { inverse: boolean; onNavig
                   onClick={close}
                   className="flex items-center justify-between rounded-xl border border-fog-200 px-4 py-2.5 text-[13px] font-medium text-ink-900 transition-colors hover:bg-fog-50"
                 >
-                  Glossary
+                  {t.glossary}
                   <ArrowRight className="h-4 w-4 text-fog-400" />
                 </Link>
                 <Link
@@ -144,7 +186,7 @@ export function ProductMenu({ inverse, onNavigate }: { inverse: boolean; onNavig
                   onClick={close}
                   className="flex items-center justify-between rounded-xl border border-fog-200 px-4 py-2.5 text-[13px] font-medium text-ink-900 transition-colors hover:bg-fog-50"
                 >
-                  Case studies
+                  {t.caseStudies}
                   <ArrowRight className="h-4 w-4 text-fog-400" />
                 </Link>
               </div>

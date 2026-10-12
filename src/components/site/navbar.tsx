@@ -1,25 +1,64 @@
 "use client";
 
-import Link from "next/link";
+import NextLink from "next/link";
+import Link from "@/components/i18n/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Menu, X } from "lucide-react";
-import { site } from "@/lib/site";
+import { Languages, Menu, X } from "lucide-react";
+import { site, siteCopy } from "@/lib/site";
+import { localeNames, localizeHref, stripLocale, type Locale } from "@/lib/i18n";
+import { useLocale } from "@/components/i18n/locale-provider";
 import { cn } from "@/lib/utils";
 import { Logo } from "./logo";
 import { ProductMenu } from "./product-menu";
-import { modules } from "@/lib/modules";
+import { getModules } from "@/lib/modules";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 
 /** Routes whose top section is dark; the navbar starts in its inverse (light-on-dark) look there. */
 const DARK_HERO_ROUTES = new Set(["/"]);
 
+const copy = {
+  en: { home: "Routel home", docs: "Documentation", product: "Product", more: "More", open: "Open menu", close: "Close menu", switchTo: "Switch to Arabic" },
+  ar: { home: "الصفحة الرئيسية لـ Routel", docs: "التوثيق", product: "المنتج", more: "المزيد", open: "فتح القائمة", close: "إغلاق القائمة", switchTo: "التبديل إلى الإنجليزية" },
+} satisfies Record<Locale, Record<string, string>>;
+
+/**
+ * Links to the current page in the other language. Uses next/link directly:
+ * the localized Link would re-prefix the target with the current locale.
+ */
+function LanguageSwitch({ path, inverse, className }: { path: string; inverse: boolean; className?: string }) {
+  const locale = useLocale();
+  const target: Locale = locale === "ar" ? "en" : "ar";
+  return (
+    <NextLink
+      href={localizeHref(path, target)}
+      hrefLang={target}
+      lang={target}
+      aria-label={copy[locale].switchTo}
+      className={cn(
+        "inline-flex h-9 items-center gap-1.5 rounded-full px-3 text-sm font-medium transition-colors",
+        inverse ? "text-white/85 ring-1 ring-white/15 hover:bg-white/10 hover:text-white" : "text-ink-900 ring-1 ring-fog-200 hover:bg-fog-100",
+        className,
+      )}
+    >
+      <Languages className="h-4 w-4" aria-hidden />
+      {localeNames[target]}
+    </NextLink>
+  );
+}
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
-  const pathname = usePathname();
+  const locale = useLocale();
+  const t = copy[locale];
+  const nav = siteCopy[locale].nav;
+  const ctaLabel = siteCopy[locale].ctaLabel;
+  const modules = getModules(locale);
+  // The browser URL carries the locale prefix on Arabic pages; compare against the bare path.
+  const pathname = stripLocale(usePathname());
   const reduce = useReducedMotion();
 
   useEffect(() => {
@@ -47,13 +86,13 @@ export function Navbar() {
       )}
     >
       <Container className="flex h-16 items-center justify-between">
-        <Link href="/" aria-label="Routel home" className="shrink-0">
+        <Link href="/" aria-label={t.home} className="shrink-0">
           <Logo inverse={inverse} />
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">
           <ProductMenu inverse={inverse} />
-          {site.nav.map((item) => (
+          {nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}
@@ -72,27 +111,31 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
+          <LanguageSwitch path={pathname} inverse={inverse} />
           <Button href="/docs" variant={inverse ? "inverse-ghost" : "ghost"} size="sm">
-            Documentation
+            {t.docs}
           </Button>
           <Button href={site.cta.href} variant={inverse ? "inverse" : "primary"} size="sm">
-            {site.cta.label}
+            {ctaLabel}
           </Button>
         </div>
 
-        <button
-          type="button"
-          className={cn(
-            "inline-flex h-10 w-10 items-center justify-center rounded-full md:hidden",
-            inverse ? "text-white hover:bg-white/10" : "text-ink-900 hover:bg-fog-100",
-          )}
-          aria-expanded={open}
-          aria-controls="mobile-nav"
-          aria-label={open ? "Close menu" : "Open menu"}
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        <div className="flex items-center gap-1 md:hidden">
+          <LanguageSwitch path={pathname} inverse={inverse} className="h-10" />
+          <button
+            type="button"
+            className={cn(
+              "inline-flex h-10 w-10 items-center justify-center rounded-full md:hidden",
+              inverse ? "text-white hover:bg-white/10" : "text-ink-900 hover:bg-fog-100",
+            )}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            aria-label={open ? t.close : t.open}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </Container>
 
       <AnimatePresence>
@@ -106,7 +149,7 @@ export function Navbar() {
             className="border-t border-fog-200 bg-white md:hidden"
           >
             <Container className="flex flex-col gap-1 py-4">
-              <p className="px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-fog-500">Product</p>
+              <p className="px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-fog-500">{t.product}</p>
               <div className="grid grid-cols-2 gap-1">
                 {modules
                   .filter((m) => m.slug !== "ai-assistant")
@@ -121,8 +164,8 @@ export function Navbar() {
                     </Link>
                   ))}
               </div>
-              <p className="px-3 pb-1 pt-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-fog-500">More</p>
-              {site.nav.map((item) => (
+              <p className="px-3 pb-1 pt-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-fog-500">{t.more}</p>
+              {nav.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
@@ -134,9 +177,9 @@ export function Navbar() {
               ))}
               <div className="mt-3 flex flex-col gap-2">
                 <Button href="/docs" variant="secondary">
-                  Documentation
+                  {t.docs}
                 </Button>
-                <Button href={site.cta.href}>{site.cta.label}</Button>
+                <Button href={site.cta.href}>{ctaLabel}</Button>
               </div>
             </Container>
           </motion.div>

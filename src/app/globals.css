@@ -7,9 +7,9 @@
    primary actions, and an amber spark reserved for the AI assistant.
    Neutrals are slightly cool so the teal reads clean against them. */
 @theme {
-  --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Manrope Variable", "Inter Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: "Inter Variable", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Manrope Variable", "Inter Variable", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", "IBM Plex Sans Arabic", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --color-ink-950: #060b16;
   --color-ink-900: #0b1426;
@@ -145,6 +145,25 @@ body {
   mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
 
+/* Arabic (RTL) pages
+   ------------------------------------------------------------------
+   Letter-spacing breaks the joins between Arabic letters, so tracking
+   utilities and the display font's negative tracking are neutralised.
+   Directional arrow icons are mirrored so they point "forward". */
+[dir="rtl"] {
+  line-height: 1.7;
+}
+[dir="rtl"] *,
+[dir="rtl"] *::before,
+[dir="rtl"] *::after {
+  letter-spacing: 0 !important;
+}
+[dir="rtl"] :is(h1, h2, h3, h4) {
+  line-height: 1.3;
+}
+[dir="rtl"] :is(.lucide-arrow-right, .lucide-arrow-left, .lucide-chevron-right, .lucide-chevron-left, .lucide-arrow-up-right, .lucide-move-right) {
+  transform: scaleX(-1);
+}
 /* Focus rings for keyboard users only */
 :focus-visible {
   outline: 2px solid var(--color-teal-500);
