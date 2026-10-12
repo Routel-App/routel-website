@@ -1,6 +1,6 @@
 # Routel website
 
-Marketing site and documentation for **Routel**, the freight forwarding platform by Flamingo Global.
+Marketing site and documentation for **Routel**, the freight forwarding platform.
 Live app work happens in the separate FreightOS repository; this repo is only the public website.
 
 ## Stack

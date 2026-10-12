@@ -2,7 +2,7 @@
 
 # Routel website
 
-Public marketing + docs site for Routel (SaaS version of Flamingo Global's FreightOS). See README.md for layout.
+Public marketing + docs site for Routel, the freight forwarding SaaS platform. See README.md for layout.
 
 - Only describe product capabilities that exist in the module list in `src/lib/modules.ts`. Do not invent features.
 - Site copy is English; the AI assistant supports Arabic and English, and that is a selling point worth showing.
