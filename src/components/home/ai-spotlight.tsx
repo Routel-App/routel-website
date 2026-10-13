@@ -4,30 +4,30 @@ import { Section } from "@/components/ui/section";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
 import { getLocale } from "@/lib/locale-server";
 import type { Locale } from "@/lib/i18n";
-import { ChatMockup } from "./chat-mockup";
+import { AssistantChatShot } from "@/components/shots/ai-shots";
 
 const guaranteeIcons = [ShieldCheck, Lock, Languages, FileSearch];
 
 const copy = {
   en: {
     eyebrow: "AI Assistant",
-    title: "An assistant that does the work, not just the talking.",
-    lead: "Most “AI features” summarise. Routel’s assistant is wired into the same actions your team performs by hand: it drafts the job, the invoice, the vendor cost or the report, shows you exactly what it will save, and waits for your confirmation.",
-    cta: "How the assistant works",
+    title: "An AI assistant that calls tools and runs operations automatically.",
+    lead: "Most “AI features” summarise. Routel’s assistant is wired into the same actions as the screens: ask for the outcome and it opens the booking, reads the attached document, adds the cost, drafts the invoice and runs the report, then waits for your click before anything is saved.",
+    cta: "See the assistant at work",
     capabilities: [
-      "Create and update jobs and bookings",
-      "Generate quotations and route rates",
-      "Create customer invoices",
-      "Record expenses",
-      "Read an uploaded vendor invoice and propose the cost lines",
-      "Generate customer and vendor statements as PDF",
-      "Run overdue, aging, profitability and cash-position reports",
-      "Search and download shipment documents",
+      "Quotations, bookings and booking charges",
+      "Draft and finalize invoices, receipts and vendor payments",
+      "Credit notes, House B/Ls, tasks and follow-ups",
+      "Reads B/Ls, booking confirmations and vendor invoices",
+      "Turns a registration certificate into a business partner",
+      "Imports a whole rate sheet as route rates",
+      "P&L, aging, tax summary and cash position, as an answer or a file",
+      "A daily brief of what needs you, by role",
     ],
     guarantees: [
       {
-        title: "Propose, review, confirm",
-        text: "Every write goes through a proposal card. Nothing is saved until a person confirms it. There is no silent auto-execution.",
+        title: "Runs on its own, you decide",
+        text: "Searches and reports run straight away. Anything that creates or changes a record appears as a card and is saved only when you confirm.",
       },
       {
         title: "Same permissions as the UI",
@@ -45,23 +45,23 @@ const copy = {
   },
   ar: {
     eyebrow: "المساعد الذكي",
-    title: "مساعد ينجز العمل، لا يكتفي بالكلام.",
-    lead: "معظم «ميزات الذكاء الاصطناعي» تكتفي بالتلخيص. أما مساعد Routel فمرتبط بالإجراءات نفسها التي ينفذها فريقك يدوياً: يُعدّ مسودة ملف الشحن أو الفاتورة أو تكلفة المورّد أو التقرير، ويعرض لك بالضبط ما سيحفظه، ثم ينتظر تأكيدك.",
-    cta: "كيف يعمل المساعد",
+    title: "مساعد ذكي يستدعي أدوات وينفّذ عمليات تلقائيًا.",
+    lead: "معظم «ميزات الذكاء الاصطناعي» تكتفي بالتلخيص. أما مساعد Routel فمربوط بالإجراءات نفسها الموجودة في الشاشات: اطلب النتيجة، فيفتح الحجز، ويقرأ المستند المرفق، ويضيف التكلفة، ويجهّز الفاتورة، ويستخرج التقرير، ثم ينتظر ضغطتك قبل حفظ أي شيء.",
+    cta: "شاهد المساعد وهو يعمل",
     capabilities: [
-      "إنشاء ملفات الشحن والحجوزات وتحديثها",
-      "إعداد عروض الأسعار وأسعار المسارات",
-      "إنشاء فواتير العملاء",
-      "تسجيل المصروفات",
-      "قراءة فاتورة مورّد مرفوعة واقتراح بنود التكلفة",
-      "إصدار كشوف حساب العملاء والمورّدين بصيغة PDF",
-      "تشغيل تقارير المتأخرات وأعمار الديون والربحية والوضع النقدي",
-      "البحث عن مستندات الشحن وتنزيلها",
+      "عروض الأسعار والحجوزات وبنود الحجز",
+      "مسودات الفواتير واعتمادها، وسندات القبض، ودفعات الموردين",
+      "الإشعارات الدائنة، وبوالص الشحن الفرعية، والمهام، والمتابعات",
+      "يقرأ البوالص وتأكيدات الحجز وفواتير الموردين",
+      "يحوّل السجل التجاري إلى شريك أعمال جديد",
+      "يستورد جدول أسعار كاملاً كأسعار مسارات",
+      "الأرباح والخسائر، وأعمار الديون، والملخص الضريبي، والوضع النقدي، كإجابة أو كملف",
+      "ملخص يومي لما يحتاج اهتمامك، حسب دورك",
     ],
     guarantees: [
       {
-        title: "اقتراح، ثم مراجعة، ثم تأكيد",
-        text: "كل عملية حفظ تمر عبر بطاقة اقتراح. لا يُحفظ شيء حتى يؤكده شخص. لا يوجد تنفيذ تلقائي صامت.",
+        title: "ينفّذ تلقائياً، والقرار لك",
+        text: "البحث والتقارير تُنفَّذ فوراً. وأي إنشاء أو تعديل لسجل يظهر كبطاقة، ولا يُحفظ إلا بعد تأكيدك.",
       },
       {
         title: "الصلاحيات نفسها كما في الواجهة",
@@ -112,7 +112,7 @@ export async function AiSpotlight() {
           </RevealGroup>
 
           <Reveal delay={0.1} className="mt-8">
-            <Button href="/docs/ai-assistant" variant="inverse">
+            <Button href="/platform/ai-assistant" variant="inverse">
               {t.cta}
               <ArrowRight className="h-4 w-4" />
             </Button>
@@ -120,7 +120,7 @@ export async function AiSpotlight() {
         </div>
 
         <Reveal amount={0.15} className="relative">
-          <ChatMockup />
+          <AssistantChatShot locale={locale} tone="dark" className="mx-auto max-w-[500px]" />
         </Reveal>
       </div>
 

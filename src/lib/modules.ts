@@ -208,11 +208,11 @@ export const modules: Module[] = [
   {
     slug: "ai-assistant",
     name: "AI Assistant",
-    short: "Talk to your operations in Arabic or English",
+    short: "Calls tools and runs operations automatically",
     description:
       "Search jobs, customers and vendors, pull up details, list invoices, generate reports and read documents by chatting — in Arabic or English. Propose a new job, booking, invoice, business partner, expense or route rate (including importing a whole rate sheet from an attachment), or update a job. Every write stops as a proposal a person has to confirm, then it's created through the exact same code path and role permissions as the manual interface.",
     icon: Bot,
-    bullets: ["Arabic and English", "Imports a rate sheet from an attachment", "Propose → review → confirm, same permissions as the UI"],
+    bullets: ["Calls the system's own tools", "Reads PDFs, images and rate sheets", "You confirm before anything is saved"],
     docs: "/docs/ai-assistant",
     featured: true,
   },

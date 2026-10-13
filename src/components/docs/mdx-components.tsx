@@ -5,6 +5,7 @@ import type { MDXComponents } from "mdx/types";
 import { cn } from "@/lib/utils";
 import { getLocale } from "@/lib/locale-server";
 import type { Locale } from "@/lib/i18n";
+import { Shot } from "@/components/shots/shot";
 
 function textOf(node: ReactNode): string {
   if (typeof node === "string" || typeof node === "number") return String(node);
@@ -101,6 +102,7 @@ export function Fields({ rows }: { rows: Array<[string, string]> }) {
 }
 
 export const mdxComponents: MDXComponents = {
+  Shot,
   h2: (p) => <Heading as="h2" {...p} />,
   h3: (p) => <Heading as="h3" {...p} />,
   h4: (p) => <Heading as="h4" {...p} />,

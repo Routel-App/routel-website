@@ -26,7 +26,7 @@ Node 20.9+ is required.
 
 ```
 content/docs/           MDX documentation pages (one file per page)
-content/features/       The /features page (en.mdx, ar.mdx): the product's own feature write-up, update it when the product ships
+content/features/       The /features page (en.mdx, ar.mdx): the product's own feature write-up plus <Shot name="…" /> images
 src/app/[lang]/         Routes per locale: /, /pricing, /demo, /docs, /platform, /glossary, ...
 src/components/home/    Landing page sections
 src/components/docs/    Docs sidebar, MDX components, page shell
