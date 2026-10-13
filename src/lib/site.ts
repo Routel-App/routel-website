@@ -19,6 +19,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     description:
       "Routel is a freight forwarding platform that runs shipments, quotations, bookings, invoicing and live accounting in one place, with an AI assistant that does the paperwork with you.",
     nav: [
+      { label: "Features", href: "/features" },
       { label: "AI Assistant", href: "/#assistant" },
       { label: "Pricing", href: "/pricing" },
       { label: "About", href: "/about" },
@@ -30,6 +31,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     description:
       "Routel منصة لشركات الشحن تدير الشحنات وعروض الأسعار والحجوزات والفواتير والمحاسبة الفورية في مكان واحد، مع مساعد ذكي ينجز الأعمال الورقية معك.",
     nav: [
+      { label: "الميزات", href: "/features" },
       { label: "المساعد الذكي", href: "/#assistant" },
       { label: "الأسعار", href: "/pricing" },
       { label: "من نحن", href: "/about" },

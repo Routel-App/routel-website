@@ -12,6 +12,7 @@ const copy = {
   en: {
     platform: "Platform",
     allModules: "All modules",
+    allFeatures: "All features",
     resources: "Resources",
     introduction: "Introduction",
     glossary: "Glossary",
@@ -27,6 +28,7 @@ const copy = {
   ar: {
     platform: "المنصة",
     allModules: "جميع الوحدات",
+    allFeatures: "جميع الميزات",
     resources: "الموارد",
     introduction: "مقدمة",
     glossary: "المصطلحات",
@@ -55,6 +57,7 @@ export async function Footer() {
           .filter((m): m is NonNullable<typeof m> => Boolean(m))
           .map((m) => ({ label: m.name, href: `/platform/${m.slug}` })),
         { label: t.allModules, href: "/platform" },
+        { label: t.allFeatures, href: "/features" },
       ],
     },
     {
