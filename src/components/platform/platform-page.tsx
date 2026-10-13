@@ -1,14 +1,75 @@
-import Link from "next/link";
+import Link from "@/components/i18n/link";
 import { ArrowUpRight, Check } from "lucide-react";
 import { Section, SectionHeading, Eyebrow } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { Faq } from "@/components/ui/faq";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
-import { modules, type Module } from "@/lib/modules";
+import { getModules, type Module } from "@/lib/modules";
 import type { PlatformContent } from "@/lib/platform-content";
+import { getLocale } from "@/lib/locale-server";
+import type { Locale } from "@/lib/i18n";
 
-export function PlatformPageTemplate({ module: mod, content }: { module: Module; content: PlatformContent }) {
+const copy = {
+  en: {
+    demo: "Request a demo",
+    docs: "Read the docs",
+    problemEyebrow: "Without it",
+    problemTitle: "What this usually looks like",
+    featuresEyebrow: "What's built in",
+    featuresTitle: "Everything this module does",
+    workflowEyebrow: "How it works",
+    workflowTitle: "From first step to done",
+    personasEyebrow: "Who uses this",
+    personasTitle: "Built around real roles, not generic permissions",
+    faqTitle: "Questions we get asked",
+    relatedEyebrow: "Keep going",
+    relatedTitle: (name: string) => `Connect ${name} with the rest of Routel`,
+    ctaTitle: (name: string) => `See ${name} running on a real job`,
+    ctaBody: "A 30-minute walkthrough on your own routes and workflow, not a generic slide deck.",
+  },
+  ar: {
+    demo: "اطلب عرضاً تجريبياً",
+    docs: "اقرأ التوثيق",
+    problemEyebrow: "من دونها",
+    problemTitle: "كيف يبدو الوضع عادةً",
+    featuresEyebrow: "ما تتضمنه",
+    featuresTitle: "كل ما تقوم به هذه الوحدة",
+    workflowEyebrow: "كيف تعمل",
+    workflowTitle: "من الخطوة الأولى حتى الإنجاز",
+    personasEyebrow: "من يستخدمها",
+    personasTitle: "مصممة حول أدوار حقيقية، لا صلاحيات عامة",
+    faqTitle: "أسئلة تصلنا كثيراً",
+    relatedEyebrow: "تابع الاستكشاف",
+    relatedTitle: (name: string) => `اربط ${name} ببقية Routel`,
+    ctaTitle: (name: string) => `شاهد ${name} يعمل على ملف شحن حقيقي`,
+    ctaBody: "جولة مدتها 30 دقيقة على مساراتك وطريقة عملك الفعلية، لا عرض شرائح عام.",
+  },
+} satisfies Record<
+  Locale,
+  {
+    demo: string;
+    docs: string;
+    problemEyebrow: string;
+    problemTitle: string;
+    featuresEyebrow: string;
+    featuresTitle: string;
+    workflowEyebrow: string;
+    workflowTitle: string;
+    personasEyebrow: string;
+    personasTitle: string;
+    faqTitle: string;
+    relatedEyebrow: string;
+    relatedTitle: (name: string) => string;
+    ctaTitle: (name: string) => string;
+    ctaBody: string;
+  }
+>;
+
+export async function PlatformPageTemplate({ module: mod, content }: { module: Module; content: PlatformContent }) {
+  const locale = await getLocale();
+  const t = copy[locale];
+  const modules = getModules(locale);
   const related = content.related
     .map((slug) => modules.find((m) => m.slug === slug))
     .filter((m): m is Module => Boolean(m));
@@ -26,11 +87,11 @@ export function PlatformPageTemplate({ module: mod, content }: { module: Module;
             <p className="mt-5 max-w-2xl text-pretty text-lg leading-relaxed text-fog-600">{content.description}</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button href={`/demo?plan=${mod.slug}`} size="lg">
-                Request a demo
+                {t.demo}
               </Button>
               {mod.docs ? (
                 <Button href={mod.docs} variant="secondary" size="lg">
-                  Read the docs
+                  {t.docs}
                 </Button>
               ) : null}
             </div>
@@ -51,10 +112,10 @@ export function PlatformPageTemplate({ module: mod, content }: { module: Module;
       {/* Problem */}
       <Section className="py-16 sm:py-20">
         <SectionHeading
-          eyebrow="Without it"
+          eyebrow={t.problemEyebrow}
           eyebrowTone="ink"
           align="left"
-          title="What this usually looks like"
+          title={t.problemTitle}
         />
         <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-3" stagger={0.06}>
           {content.painPoints.map((p) => (
@@ -68,7 +129,7 @@ export function PlatformPageTemplate({ module: mod, content }: { module: Module;
 
       {/* Features */}
       <Section tone="muted" className="py-16 sm:py-20">
-        <SectionHeading eyebrow="What's built in" title="Everything this module does" />
+        <SectionHeading eyebrow={t.featuresEyebrow} title={t.featuresTitle} />
         <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2" stagger={0.06}>
           {content.features.map((f) => (
             <RevealItem key={f.title} className="rounded-2xl border border-fog-200 bg-white p-6 shadow-card">
@@ -88,7 +149,7 @@ export function PlatformPageTemplate({ module: mod, content }: { module: Module;
 
       {/* Workflow */}
       <Section className="py-16 sm:py-20">
-        <SectionHeading eyebrow="How it works" title="From first step to done" />
+        <SectionHeading eyebrow={t.workflowEyebrow} title={t.workflowTitle} />
         <RevealGroup className="mx-auto mt-10 grid max-w-4xl gap-6 sm:grid-cols-2 lg:grid-cols-4" stagger={0.07}>
           {content.workflow.map((step, i) => (
             <RevealItem key={step.title} className="relative rounded-2xl border border-fog-200 bg-white p-5 shadow-card">
@@ -102,7 +163,7 @@ export function PlatformPageTemplate({ module: mod, content }: { module: Module;
 
       {/* Personas */}
       <Section tone="muted" className="py-16 sm:py-20">
-        <SectionHeading eyebrow="Who uses this" title="Built around real roles, not generic permissions" />
+        <SectionHeading eyebrow={t.personasEyebrow} title={t.personasTitle} />
         <RevealGroup className="mx-auto mt-10 grid max-w-4xl gap-3 sm:grid-cols-2" stagger={0.06}>
           {content.personas.map((p) => (
             <RevealItem key={p.role} className="rounded-xl border border-fog-200 bg-white p-5 shadow-card">
@@ -115,14 +176,14 @@ export function PlatformPageTemplate({ module: mod, content }: { module: Module;
 
       {/* FAQ */}
       <Section className="py-16 sm:py-20">
-        <SectionHeading title="Questions we get asked" />
+        <SectionHeading title={t.faqTitle} />
         <Faq items={content.faqs} className="mt-10" />
       </Section>
 
       {/* Related modules */}
       {related.length ? (
         <Section tone="muted" className="py-16 sm:py-20">
-          <SectionHeading eyebrow="Keep going" title={`Connect ${mod.name} with the rest of Routel`} />
+          <SectionHeading eyebrow={t.relatedEyebrow} title={t.relatedTitle(mod.name)} />
           <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-3" stagger={0.06}>
             {related.map((m) => {
               const Icon = m.icon;
@@ -151,12 +212,12 @@ export function PlatformPageTemplate({ module: mod, content }: { module: Module;
       {/* CTA */}
       <Section className="py-16 sm:py-20">
         <Reveal className="mx-auto flex max-w-3xl flex-col items-center gap-6 rounded-3xl bg-ink-950 px-8 py-14 text-center text-white sm:px-14">
-          <h2 className="font-display text-balance text-2xl font-bold sm:text-3xl">See {mod.name} running on a real job</h2>
+          <h2 className="font-display text-balance text-2xl font-bold sm:text-3xl">{t.ctaTitle(mod.name)}</h2>
           <p className="max-w-xl text-pretty text-white/70">
-            A 30-minute walkthrough on your own routes and workflow, not a generic slide deck.
+            {t.ctaBody}
           </p>
           <Button href={`/demo?plan=${mod.slug}`} variant="inverse" size="lg">
-            Request a demo
+            {t.demo}
           </Button>
         </Reveal>
       </Section>

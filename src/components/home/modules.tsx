@@ -1,19 +1,37 @@
-import Link from "next/link";
+import Link from "@/components/i18n/link";
 import { ArrowUpRight } from "lucide-react";
-import { modules } from "@/lib/modules";
+import { getModules } from "@/lib/modules";
+import { getLocale } from "@/lib/locale-server";
+import type { Locale } from "@/lib/i18n";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-export function Modules() {
+const copy = {
+  en: {
+    eyebrow: "Everything in one system",
+    title: "A full platform's worth of modules that already talk to each other",
+    description:
+      "Each one is built and working today. A quotation becomes a job, a job produces a B/L and an invoice, and the invoice lands in your ledger. Nothing is re-keyed.",
+    cta: "View the full platform",
+  },
+  ar: {
+    eyebrow: "كل شيء في نظام واحد",
+    title: "وحدات بحجم منصة كاملة، مترابطة فيما بينها بالفعل",
+    description:
+      "كل وحدة منها مبنية وتعمل اليوم. عرض السعر يتحول إلى ملف شحن، وملف الشحن يُصدر بوليصة الشحن (B/L) والفاتورة، والفاتورة تصل إلى دفتر الأستاذ. لا شيء يُعاد إدخاله.",
+    cta: "استعرض المنصة كاملة",
+  },
+} satisfies Record<Locale, { eyebrow: string; title: string; description: string; cta: string }>;
+
+export async function Modules() {
+  const locale = await getLocale();
+  const t = copy[locale];
+  const modules = getModules(locale);
   return (
     <Section id="modules" tone="muted">
-      <SectionHeading
-        eyebrow="Everything in one system"
-        title="A full platform's worth of modules that already talk to each other"
-        description="Each one is built and working today. A quotation becomes a job, a job produces a B/L and an invoice, and the invoice lands in your ledger. Nothing is re-keyed."
-      />
+      <SectionHeading eyebrow={t.eyebrow} title={t.title} description={t.description} />
       <RevealGroup className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3" stagger={0.06}>
         {modules.map((m, i) => {
           const Icon = m.icon;
@@ -60,7 +78,7 @@ export function Modules() {
       </RevealGroup>
       <Reveal className="mt-10 text-center">
         <Button href="/platform" variant="secondary">
-          View the full platform
+          {t.cta}
         </Button>
       </Reveal>
     </Section>

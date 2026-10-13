@@ -1,12 +1,34 @@
-import Link from "next/link";
+import Link from "@/components/i18n/link";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { adjacentDocs, type DocFrontmatter } from "@/lib/docs";
 import { compileContentMdx } from "@/lib/mdx";
 import { Callout } from "./mdx-components";
+import { getLocale } from "@/lib/locale-server";
+import type { Locale } from "@/lib/i18n";
+
+const copy = {
+  en: {
+    stubTitle: "This page is a stub",
+    stubBody:
+      "The module is built and working in Routel; the detailed guide is still being written. The summary below is accurate, just short.",
+    previous: "Previous",
+    next: "Next",
+    pagination: "Pagination",
+  },
+  ar: {
+    stubTitle: "هذه الصفحة مختصرة",
+    stubBody: "الوحدة مبنية وتعمل في Routel، والدليل المفصّل قيد الكتابة. الملخص أدناه دقيق، لكنه قصير.",
+    previous: "السابق",
+    next: "التالي",
+    pagination: "التنقل بين الصفحات",
+  },
+} satisfies Record<Locale, { stubTitle: string; stubBody: string; previous: string; next: string; pagination: string }>;
 
 export async function DocPage({ slug, source, frontmatter }: { slug: string; source: string; frontmatter: DocFrontmatter }) {
+  const locale = await getLocale();
+  const t = copy[locale];
   const content = await compileContentMdx(source);
-  const { prev, next } = adjacentDocs(slug);
+  const { prev, next } = adjacentDocs(slug, locale);
 
   return (
     <article className="min-w-0">
@@ -16,9 +38,8 @@ export async function DocPage({ slug, source, frontmatter }: { slug: string; sou
       </header>
 
       {frontmatter.status === "stub" ? (
-        <Callout kind="note" title="This page is a stub">
-          The module is built and working in Routel; the detailed guide is still being written. The summary below is
-          accurate, just short.
+        <Callout kind="note" title={t.stubTitle}>
+          {t.stubBody}
         </Callout>
       ) : null}
 
@@ -26,11 +47,11 @@ export async function DocPage({ slug, source, frontmatter }: { slug: string; sou
         {content}
       </div>
 
-      <nav aria-label="Pagination" className="mt-16 grid gap-3 border-t border-fog-200 pt-6 sm:grid-cols-2">
+      <nav aria-label={t.pagination} className="mt-16 grid gap-3 border-t border-fog-200 pt-6 sm:grid-cols-2">
         {prev ? (
           <Link href={prev.href} className="group rounded-xl border border-fog-200 p-4 transition-colors hover:border-fog-300 hover:bg-fog-50">
             <span className="flex items-center gap-1 text-xs text-fog-500">
-              <ArrowLeft className="h-3.5 w-3.5" /> Previous
+              <ArrowLeft className="h-3.5 w-3.5" /> {t.previous}
             </span>
             <span className="mt-1 block text-sm font-medium text-ink-900">{prev.title}</span>
           </Link>
@@ -38,9 +59,9 @@ export async function DocPage({ slug, source, frontmatter }: { slug: string; sou
           <span />
         )}
         {next ? (
-          <Link href={next.href} className="group rounded-xl border border-fog-200 p-4 text-right transition-colors hover:border-fog-300 hover:bg-fog-50">
+          <Link href={next.href} className="group rounded-xl border border-fog-200 p-4 text-end transition-colors hover:border-fog-300 hover:bg-fog-50">
             <span className="flex items-center justify-end gap-1 text-xs text-fog-500">
-              Next <ArrowRight className="h-3.5 w-3.5" />
+              {t.next} <ArrowRight className="h-3.5 w-3.5" />
             </span>
             <span className="mt-1 block text-sm font-medium text-ink-900">{next.title}</span>
           </Link>

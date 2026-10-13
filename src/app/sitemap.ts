@@ -3,27 +3,46 @@ import { site } from "@/lib/site";
 import { allDocPages } from "@/lib/docs";
 import { glossaryNav } from "@/lib/glossary";
 import { platformContent } from "@/lib/platform-content";
+import { localizeHref, locales } from "@/lib/i18n";
 
+type Entry = { path: string; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"]; priority: number };
+
+/** Every page is listed once per locale, with hreflang alternates pointing at its translations. */
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
-  const pages: MetadataRoute.Sitemap = [
-    { url: site.url, lastModified: now, changeFrequency: "weekly", priority: 1 },
-    { url: `${site.url}/platform`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${site.url}/pricing`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${site.url}/demo`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    { url: `${site.url}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${site.url}/case-studies`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-    { url: `${site.url}/docs`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${site.url}/glossary`, lastModified: now, changeFrequency: "weekly", priority: 0.6 },
+  const entries: Entry[] = [
+    { path: "/", changeFrequency: "weekly", priority: 1 },
+    { path: "/platform", changeFrequency: "weekly", priority: 0.9 },
+    { path: "/features", changeFrequency: "weekly", priority: 0.9 },
+    { path: "/pricing", changeFrequency: "monthly", priority: 0.8 },
+    { path: "/demo", changeFrequency: "monthly", priority: 0.8 },
+    { path: "/about", changeFrequency: "monthly", priority: 0.6 },
+    { path: "/case-studies", changeFrequency: "monthly", priority: 0.6 },
+    { path: "/docs", changeFrequency: "weekly", priority: 0.7 },
+    { path: "/glossary", changeFrequency: "weekly", priority: 0.6 },
   ];
   for (const page of allDocPages()) {
-    pages.push({ url: `${site.url}${page.href}`, lastModified: now, changeFrequency: "weekly", priority: 0.6 });
+    if (page.href !== "/docs") entries.push({ path: page.href, changeFrequency: "weekly", priority: 0.6 });
   }
   for (const slug of Object.keys(platformContent)) {
-    pages.push({ url: `${site.url}/platform/${slug}`, lastModified: now, changeFrequency: "weekly", priority: 0.8 });
+    entries.push({ path: `/platform/${slug}`, changeFrequency: "weekly", priority: 0.8 });
   }
   for (const term of glossaryNav()) {
-    pages.push({ url: `${site.url}${term.href}`, lastModified: now, changeFrequency: "monthly", priority: 0.5 });
+    entries.push({ path: term.href, changeFrequency: "monthly", priority: 0.5 });
   }
-  return pages;
+
+  const url = (path: string, locale: (typeof locales)[number]) => {
+    const href = localizeHref(path, locale);
+    return href === "/" ? site.url : `${site.url}${href}`;
+  };
+
+  return entries.flatMap((e) =>
+    locales.map((locale) => ({
+      url: url(e.path, locale),
+      lastModified: now,
+      changeFrequency: e.changeFrequency,
+      priority: e.priority,
+      alternates: { languages: Object.fromEntries(locales.map((l) => [l, url(e.path, l)])) },
+    })),
+  );
 }

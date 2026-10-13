@@ -1,3 +1,6 @@
+import type { Locale } from "./i18n";
+import { platformContentAr } from "./platform-content.ar";
+
 export type PlatformFeature = { title: string; description: string };
 export type PlatformStep = { title: string; description: string };
 export type PlatformPersona = { role: string; detail: string };
@@ -772,3 +775,11 @@ export const platformContent: Record<string, PlatformContent> = {
     related: ["shipments", "ai-assistant", "roles"],
   },
 };
+
+/** Platform pages in the given locale; untranslated pages fall back to English. */
+export function getPlatformContent(locale: Locale): Record<string, PlatformContent> {
+  if (locale === "en") return platformContent;
+  return Object.fromEntries(
+    Object.entries(platformContent).map(([slug, en]) => [slug, platformContentAr[slug] ?? en]),
+  );
+}
