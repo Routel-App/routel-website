@@ -9,6 +9,7 @@ import { getModules, type Module } from "@/lib/modules";
 import type { PlatformContent } from "@/lib/platform-content";
 import { getLocale } from "@/lib/locale-server";
 import { AiShowcase } from "./ai-showcase";
+import { AiTrust } from "./ai-trust";
 import type { Locale } from "@/lib/i18n";
 
 const copy = {
@@ -111,6 +112,7 @@ export async function PlatformPageTemplate({ module: mod, content }: { module: M
       </section>
 
       {mod.slug === "ai-assistant" ? <AiShowcase locale={locale} /> : null}
+      {mod.slug === "ai-assistant" ? <AiTrust locale={locale} /> : null}
 
       {/* Problem */}
       <Section className="py-16 sm:py-20">

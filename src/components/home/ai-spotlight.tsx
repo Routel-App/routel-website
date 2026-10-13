@@ -1,4 +1,4 @@
-import { ArrowRight, FileSearch, Languages, Lock, ShieldCheck } from "lucide-react";
+import { ArrowRight, CloudOff, ListChecks, Lock, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/ui/section";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
@@ -6,74 +6,74 @@ import { getLocale } from "@/lib/locale-server";
 import type { Locale } from "@/lib/i18n";
 import { AssistantChatShot } from "@/components/shots/ai-shots";
 
-const guaranteeIcons = [ShieldCheck, Lock, Languages, FileSearch];
+const guaranteeIcons = [ShieldCheck, Lock, CloudOff, ListChecks];
 
 const copy = {
   en: {
-    eyebrow: "AI Assistant",
-    title: "A freight system that works with you: its built-in AI assistant calls tools and runs your operations automatically.",
-    lead: "Most “AI features” summarise. Routel’s assistant is wired into the same actions as the screens: ask for the outcome and it opens the booking, reads the attached document, adds the cost, drafts the invoice and runs the report, then waits for your click before anything is saved.",
+    eyebrow: "AI Assistant · built into Routel",
+    title: "Meet your AI operations co-worker.",
+    lead: "Routel's assistant sets up your company in a ten-minute chat, then works alongside your team: it creates quotations, bookings and invoices, records payments and answers “who owes us most?” from live data, in English or Arabic. It proposes every change on a card and you confirm it before anything is saved.",
     cta: "See the assistant at work",
     capabilities: [
-      "Quotations, bookings and booking charges",
-      "Draft and finalize invoices, receipts and vendor payments",
-      "Credit notes, House B/Ls, tasks and follow-ups",
-      "Reads B/Ls, booking confirmations and vendor invoices",
-      "Turns a registration certificate into a business partner",
-      "Imports a whole rate sheet as route rates",
-      "P&L, aging, tax summary and cash position, as an answer or a file",
+      "Sets your company up in a ten-minute chat",
+      "Quotations, bookings and invoices from booking charges",
+      "Receipts, AP payments and credit notes",
+      "House B/Ls, notes, tasks and follow-ups",
+      "Answers from live data: aging, P&L, cash, lane margins",
+      "Reads PDFs and photos: confirmations, invoices, certificates",
       "A daily brief of what needs you, by role",
+      "Undo for 10 minutes, and a full audit log",
     ],
     guarantees: [
       {
-        title: "Runs on its own, you decide",
-        text: "Searches and reports run straight away. Anything that creates or changes a record appears as a card and is saved only when you confirm.",
+        title: "Propose, then confirm",
+        text: "The model never writes on its own. Every change shows on a card with the exact fields and amounts, and only the Confirm button saves.",
       },
       {
-        title: "Same permissions as the UI",
-        text: "The assistant is gated by the same role-based access as every screen. Sales can't post to the ledger by asking nicely.",
+        title: "Same rules as the screens",
+        text: "It has exactly the permissions of the signed-in user and calls the same functions as the screens: validation, credit limits, numbering.",
       },
       {
-        title: "Arabic and English",
-        text: "Staff talk to it in whichever language they think in. Mixed sentences work too.",
+        title: "Nothing stored at the AI provider",
+        text: "Requests are sent with storage turned off, and uploaded files are treated as untrusted.",
       },
       {
-        title: "Reads your paperwork",
-        text: "Upload a vendor invoice and it extracts the line items into a proposed vendor cost, ready to check.",
+        title: "Full audit trail",
+        text: "Every confirmed action is logged: who did what, and the outcome. Safe actions can be undone for 10 minutes.",
       },
     ],
   },
   ar: {
-    eyebrow: "المساعد الذكي",
-    title: "نظام شحن يعمل معك: مساعده الذكي المدمج يستدعي الأدوات وينفّذ عملياتك تلقائيًا.",
-    lead: "معظم «ميزات الذكاء الاصطناعي» تكتفي بالتلخيص. أما مساعد Routel فمربوط بالإجراءات نفسها الموجودة في الشاشات: اطلب النتيجة، فيفتح الحجز، ويقرأ المستند المرفق، ويضيف التكلفة، ويجهّز الفاتورة، ويستخرج التقرير، ثم ينتظر ضغطتك قبل حفظ أي شيء.",
+    eyebrow: "المساعد الذكي · مدمج في Routel",
+    title: "مساعدك الذكي في العمليات.",
+    lead: "مساعد Routel يجهّز شركتك في محادثة مدتها عشر دقائق، ثم يعمل مع فريقك: ينشئ عروض الأسعار والحجوزات والفواتير، ويسجّل الدفعات، ويجيب على «مين أكثر عميل يطلبنا فلوس؟» من بياناتك الحية، بالعربي أو الإنجليزي. وكل تغيير يعرضه عليك في بطاقة، ولا يُحفظ شيء قبل تأكيدك.",
     cta: "شاهد المساعد وهو يعمل",
     capabilities: [
-      "عروض الأسعار والحجوزات وبنود الحجز",
-      "مسودات الفواتير واعتمادها، وسندات القبض، ودفعات الموردين",
-      "الإشعارات الدائنة، وبوالص الشحن الفرعية، والمهام، والمتابعات",
-      "يقرأ البوالص وتأكيدات الحجز وفواتير الموردين",
-      "يحوّل السجل التجاري إلى شريك أعمال جديد",
-      "يستورد جدول أسعار كاملاً كأسعار مسارات",
-      "الأرباح والخسائر، وأعمار الديون، والملخص الضريبي، والوضع النقدي، كإجابة أو كملف",
+      "يجهّز شركتك في محادثة مدتها عشر دقائق",
+      "عروض الأسعار والحجوزات والفواتير من بنود الحجز",
+      "سندات القبض ودفعات الموردين والإشعارات الدائنة",
+      "بوالص الشحن الفرعية والملاحظات والمهام والمتابعات",
+      "يجيب من بياناتك الحية: أعمار الديون، الأرباح والخسائر، النقد، هوامش المسارات",
+      "يقرأ ملفات PDF والصور: تأكيدات الحجز والفواتير والشهادات",
       "ملخص يومي لما يحتاج اهتمامك، حسب دورك",
+      "تراجع خلال 10 دقائق، وسجل تدقيق كامل",
     ],
     guarantees: [
       {
-        title: "ينفّذ تلقائياً، والقرار لك",
-        text: "البحث والتقارير تُنفَّذ فوراً. وأي إنشاء أو تعديل لسجل يظهر كبطاقة، ولا يُحفظ إلا بعد تأكيدك.",
+        title: "يقترح، ثم تؤكد",
+        text: "النموذج لا يكتب من تلقاء نفسه أبداً. كل تغيير يظهر في بطاقة بالحقول والمبالغ بالضبط، وزر التأكيد وحده يحفظ.",
       },
       {
-        title: "الصلاحيات نفسها كما في الواجهة",
-        text: "يخضع المساعد للصلاحيات نفسها المبنية على الأدوار في كل شاشة. لا يستطيع فريق المبيعات الترحيل إلى دفتر الأستاذ بمجرد أن يطلب ذلك بلطف.",
+        title: "نفس قواعد الشاشات",
+        text: "له صلاحيات المستخدم المسجّل نفسها بالضبط، ويستدعي نفس وظائف الشاشات: التحقق وحدود الائتمان والترقيم.",
       },
       {
-        title: "العربية والإنجليزية",
-        text: "يتحدث إليه الموظفون باللغة التي يفكرون بها. والجمل التي تمزج اللغتين تعمل أيضاً.",
+        title: "لا شيء يُحفظ لدى مزوّد الذكاء الاصطناعي",
+        text: "تُرسل الطلبات مع إيقاف التخزين، وتُعامل الملفات المرفوعة على أنها غير موثوقة.",
       },
       {
-        title: "يقرأ مستنداتك",
-        text: "ارفع فاتورة مورّد وسيستخرج بنودها في تكلفة مورّد مقترحة، جاهزة للمراجعة.",
+        title: "سجل تدقيق كامل",
+        text: "كل عملية مؤكدة مسجلة: من فعل ماذا، وما النتيجة. والعمليات الآمنة يمكن التراجع عنها خلال 10 دقائق.",
       },
     ],
   },

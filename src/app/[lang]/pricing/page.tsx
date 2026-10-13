@@ -26,7 +26,7 @@ const copy = {
       },
       {
         q: "Is the AI assistant an add-on?",
-        a: "No — it's included in Growth and Enterprise. It uses the same permissions as your users' roles and never saves anything without a confirmation.",
+        a: "No — the full assistant is included in Growth and Enterprise. On Free and Starter it helps the admin set the company up for the first 30 days. It uses the same permissions as your users' roles and never saves anything without a confirmation.",
       },
       {
         q: "Which currencies are supported?",
@@ -65,7 +65,7 @@ const copy = {
       },
       {
         q: "هل المساعد الذكي إضافة منفصلة؟",
-        a: "لا — فهو مشمول في باقتي النمو والمؤسسات. يعمل بنفس صلاحيات أدوار مستخدميك، ولا يحفظ أي شيء دون تأكيد.",
+        a: "لا — المساعد الكامل مشمول في باقتي النمو والمؤسسات، وفي الباقتين المجانية والانطلاق يساعد المدير في تجهيز الشركة خلال أول 30 يوماً. يعمل بنفس صلاحيات أدوار مستخدميك، ولا يحفظ أي شيء دون تأكيد.",
       },
       {
         q: "ما العملات المدعومة؟",
