@@ -1,6 +1,6 @@
 import { getLocale } from "@/lib/locale-server";
 import { DashboardShot } from "./dashboard-shot";
-import { AssistantChatShot, DocumentReadShot, TodayBriefShot } from "./ai-shots";
+import { AssistantChatShot, DocumentReadShot, SetupShot, TodayBriefShot } from "./ai-shots";
 import { AlertsShot, ShipmentShot, TaxInvoiceShot } from "./product-shots";
 import { ShotScaler } from "./scaler";
 
@@ -12,6 +12,7 @@ const shots = {
   assistant: { Component: AssistantChatShot, wide: false, max: "max-w-[480px]" },
   documents: { Component: DocumentReadShot, wide: false, max: "max-w-[640px]" },
   invoice: { Component: TaxInvoiceShot, wide: false, max: "max-w-[560px]" },
+  setup: { Component: SetupShot, wide: false, max: "max-w-[520px]" },
 } as const;
 
 export type ShotName = keyof typeof shots;

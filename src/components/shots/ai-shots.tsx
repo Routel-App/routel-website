@@ -307,3 +307,92 @@ export function TodayBriefShot({ locale, className }: { locale: Locale; classNam
     </ShotFrame>
   );
 }
+
+/* ─── 4. Guided company setup: an ordered checklist with a progress bar ─── */
+
+const setupCopy = {
+  en: {
+    title: "Let's set up Nexus Freight",
+    progress: "6 of 10 done",
+    steps: [
+      ["Company name (English & Arabic)", true],
+      ["Registration no.", true],
+      ["Document numbering", true],
+      ["Logo", true],
+      ["Address", true],
+      ["Contact details", true],
+      ["Tax no. (SST)", false],
+      ["Bank details", false],
+      ["Team & roles", false],
+      ["Charge types", false],
+    ] as const,
+    ask: "Next: your SST number. It prints on every invoice. Paste your registration certificate and I'll fill it in.",
+    choices: ["Paste a certificate", "Type it", "Skip for now"],
+  },
+  ar: {
+    title: "لنجهّز شركة نكسس للشحن",
+    progress: "6 من 10 مكتملة",
+    steps: [
+      ["اسم الشركة (عربي وإنجليزي)", true],
+      ["رقم السجل التجاري", true],
+      ["ترقيم المستندات", true],
+      ["الشعار", true],
+      ["العنوان", true],
+      ["بيانات التواصل", true],
+      ["الرقم الضريبي", false],
+      ["البيانات البنكية", false],
+      ["الفريق والأدوار", false],
+      ["أنواع الرسوم", false],
+    ] as const,
+    ask: "التالي: الرقم الضريبي. يُطبع على كل فاتورة. ألصق شهادة التسجيل في ضريبة القيمة المضافة وأعبّئه عنك.",
+    choices: ["ألصق الشهادة", "أكتبه بنفسي", "لاحقاً"],
+  },
+};
+
+export function SetupShot({ locale, className }: { locale: Locale; className?: string }) {
+  const t = setupCopy[locale];
+  return (
+    <ShotFrame locale={locale} className={className}>
+      <div className="p-4 sm:p-5">
+        <div className="flex items-center justify-between gap-3">
+          <p className="font-display text-[15px] font-bold">{t.title}</p>
+          <span className="text-[10.5px] font-medium text-teal-700">{t.progress}</span>
+        </div>
+        <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-fog-100">
+          <div className="h-full w-[60%] rounded-full bg-teal-500" />
+        </div>
+        <ul className="mt-3 grid grid-cols-2 gap-x-3 gap-y-1.5">
+          {t.steps.map(([label, done]) => (
+            <li key={label} className={cn("flex items-center gap-1.5 text-[10.5px]", done ? "text-fog-500" : "font-medium text-ink-900")}>
+              {done ? (
+                <Check className="h-3 w-3 shrink-0 text-teal-500" strokeWidth={3} />
+              ) : (
+                <CircleDashed className="h-3 w-3 shrink-0 text-spark-500" />
+              )}
+              {label}
+            </li>
+          ))}
+        </ul>
+        <div className="mt-3 flex gap-2.5 rounded-xl bg-fog-50 p-3 ring-1 ring-fog-200">
+          <Bot className="mt-0.5 h-4 w-4 shrink-0 text-spark-500" />
+          <div>
+            <p className="text-[11px] leading-relaxed">{t.ask}</p>
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {t.choices.map((c, i) => (
+                <span
+                  key={c}
+                  className={cn(
+                    "rounded-full px-2.5 py-1 text-[10px] font-medium",
+                    i === 0 ? "bg-ink-900 text-white" : "bg-white text-fog-600 ring-1 ring-fog-200",
+                  )}
+                >
+                  {c}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </ShotFrame>
+  );
+}
