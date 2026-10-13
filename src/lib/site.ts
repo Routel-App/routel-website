@@ -20,27 +20,27 @@ export const siteCopy: Record<Locale, SiteCopy> = {
   en: {
     tagline: "The operating system for freight forwarders",
     description:
-      "Routel is a freight forwarding platform that runs shipments, quotations, bookings, invoicing and live accounting in one place, with an AI assistant that does the paperwork with you.",
+      "Routel is the freight forwarding system with a built-in AI assistant that calls tools and runs your operations automatically: shipments, quotations, bookings, invoicing and live accounting in one place.",
     nav: [
       { label: "Features", href: "/features" },
-      { label: "AI Assistant", href: "/platform/ai-assistant", hint: "An AI assistant that calls tools and runs operations automatically" },
+      { label: "AI Assistant", href: "/platform/ai-assistant", hint: "Built into Routel: calls tools and runs your operations automatically" },
       { label: "Pricing", href: "/pricing" },
       { label: "About", href: "/about" },
     ],
     ctaLabel: "Request a demo",
-    aiTagline: "An AI assistant that calls tools and runs operations automatically",
+    aiTagline: "Routel's built-in AI assistant calls tools and runs your operations automatically",
   },
   ar: {
     tagline: "نظام التشغيل لشركات الشحن والتخليص",
     description:
-      "Routel منصة لشركات الشحن تدير الشحنات وعروض الأسعار والحجوزات والفواتير والمحاسبة الفورية في مكان واحد، مع مساعد ذكي ينجز الأعمال الورقية معك.",
+      "Routel نظام شحن متكامل بمساعد ذكي مدمج يستدعي الأدوات وينفّذ عملياتك تلقائيًا: الشحنات وعروض الأسعار والحجوزات والفواتير والمحاسبة الفورية في مكان واحد.",
     nav: [
       { label: "الميزات", href: "/features" },
-      { label: "المساعد الذكي", href: "/platform/ai-assistant", hint: "مساعد ذكي يستدعي أدوات وينفّذ عمليات تلقائيًا" },
+      { label: "المساعد الذكي", href: "/platform/ai-assistant", hint: "مدمج داخل Routel: يستدعي الأدوات وينفّذ عملياتك تلقائيًا" },
       { label: "الأسعار", href: "/pricing" },
       { label: "من نحن", href: "/about" },
     ],
     ctaLabel: "اطلب عرضاً تجريبياً",
-    aiTagline: "مساعد ذكي يستدعي أدوات وينفّذ عمليات تلقائيًا",
+    aiTagline: "مساعد ذكي مدمج في Routel يستدعي الأدوات وينفّذ عملياتك تلقائيًا",
   },
 };

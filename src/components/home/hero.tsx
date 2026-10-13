@@ -11,22 +11,22 @@ import { ShotScaler } from "@/components/shots/scaler";
 
 const copy = {
   en: {
-    eyebrow: "An AI assistant that calls tools and runs operations automatically",
+    eyebrow: "Routel's built-in AI assistant calls tools and runs your operations automatically",
     eyebrowBadge: "New",
     titleBefore: "Run your ",
     titleHighlight: "freight forwarding",
     titleAfter: " business from one place.",
-    lead: "Quotation to booking, Bill of Lading, invoice and live P&L, with every number flowing into books that stay current on their own. No journal entries, no spreadsheets on the side.",
+    lead: "Quotation to booking, Bill of Lading, invoice and live P&L, with every number flowing into books that stay current on their own. No journal entries, no spreadsheets on the side, and an AI assistant inside the system that does the work when you ask.",
     demo: "Request a demo",
     docs: "Read the docs",
   },
   ar: {
-    eyebrow: "مساعد ذكي يستدعي أدوات وينفّذ عمليات تلقائيًا",
+    eyebrow: "مساعد ذكي مدمج في Routel يستدعي الأدوات وينفّذ عملياتك تلقائيًا",
     eyebrowBadge: "جديد",
     titleBefore: "أدِر شركة ",
     titleHighlight: "الشحن",
     titleAfter: " الخاصة بك من مكان واحد.",
-    lead: "من عرض السعر إلى الحجز وبوليصة الشحن والفاتورة وقائمة الأرباح والخسائر (P&L) المباشرة، وكل رقم يتدفق إلى دفاتر تبقى محدّثة من تلقاء نفسها. لا قيود محاسبية يدوية، ولا جداول بيانات جانبية.",
+    lead: "من عرض السعر إلى الحجز وبوليصة الشحن والفاتورة وقائمة الأرباح والخسائر (P&L) المباشرة، وكل رقم يتدفق إلى دفاتر تبقى محدّثة من تلقاء نفسها. لا قيود محاسبية يدوية، ولا جداول بيانات جانبية، ومعك داخل النظام مساعد ذكي ينجز العمل بطلب منك.",
     demo: "اطلب عرضاً تجريبياً",
     docs: "اقرأ التوثيق",
   },

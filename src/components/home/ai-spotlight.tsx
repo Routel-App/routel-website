@@ -11,7 +11,7 @@ const guaranteeIcons = [ShieldCheck, Lock, Languages, FileSearch];
 const copy = {
   en: {
     eyebrow: "AI Assistant",
-    title: "An AI assistant that calls tools and runs operations automatically.",
+    title: "A freight system that works with you: its built-in AI assistant calls tools and runs your operations automatically.",
     lead: "Most “AI features” summarise. Routel’s assistant is wired into the same actions as the screens: ask for the outcome and it opens the booking, reads the attached document, adds the cost, drafts the invoice and runs the report, then waits for your click before anything is saved.",
     cta: "See the assistant at work",
     capabilities: [
@@ -45,7 +45,7 @@ const copy = {
   },
   ar: {
     eyebrow: "المساعد الذكي",
-    title: "مساعد ذكي يستدعي أدوات وينفّذ عمليات تلقائيًا.",
+    title: "نظام شحن يعمل معك: مساعده الذكي المدمج يستدعي الأدوات وينفّذ عملياتك تلقائيًا.",
     lead: "معظم «ميزات الذكاء الاصطناعي» تكتفي بالتلخيص. أما مساعد Routel فمربوط بالإجراءات نفسها الموجودة في الشاشات: اطلب النتيجة، فيفتح الحجز، ويقرأ المستند المرفق، ويضيف التكلفة، ويجهّز الفاتورة، ويستخرج التقرير، ثم ينتظر ضغطتك قبل حفظ أي شيء.",
     cta: "شاهد المساعد وهو يعمل",
     capabilities: [
