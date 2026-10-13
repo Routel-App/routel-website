@@ -32,7 +32,7 @@ const copy = {
   en: {
     product: "Product",
     aiTitle: "AI Assistant",
-    aiBody: "Create jobs, invoices and reports by chatting in Arabic or English. Every write needs your confirmation.",
+    aiBody: "An AI assistant that calls tools and runs operations automatically, in Arabic or English, with your confirmation before anything is saved.",
     aiLink: "See it work",
     docs: "Documentation",
     glossary: "Glossary",
@@ -41,7 +41,7 @@ const copy = {
   ar: {
     product: "المنتج",
     aiTitle: "المساعد الذكي",
-    aiBody: "أنشئ ملفات الشحن والفواتير والتقارير بالمحادثة بالعربية أو الإنجليزية. كل عملية كتابة تحتاج إلى تأكيدك.",
+    aiBody: "مساعد ذكي يستدعي أدوات وينفّذ عمليات تلقائيًا، بالعربية أو الإنجليزية، وبتأكيدك قبل حفظ أي شيء.",
     aiLink: "شاهده يعمل",
     docs: "التوثيق",
     glossary: "المصطلحات",

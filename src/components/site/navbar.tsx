@@ -5,7 +5,7 @@ import Link from "@/components/i18n/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { Languages, Menu, X } from "lucide-react";
+import { Languages, Menu, Sparkles, X } from "lucide-react";
 import { site, siteCopy } from "@/lib/site";
 import { localeNames, localizeHref, stripLocale, type Locale } from "@/lib/i18n";
 import { useLocale } from "@/components/i18n/locale-provider";
@@ -93,20 +93,30 @@ export function Navbar() {
         <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">
           <ProductMenu inverse={inverse} />
           {nav.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                "rounded-full px-3.5 py-2 text-sm font-medium transition-colors",
-                inverse
-                  ? "text-white/80 hover:bg-white/10 hover:text-white"
-                  : isActive(item.href)
-                    ? "bg-fog-100 text-ink-900"
-                    : "text-fog-700 hover:bg-fog-100 hover:text-ink-900",
-              )}
-            >
-              {item.label}
-            </Link>
+            <div key={item.href} className="group/nav relative">
+              <Link
+                href={item.href}
+                className={cn(
+                  "inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-3.5 py-2 text-sm font-medium transition-colors",
+                  inverse
+                    ? "text-white/80 hover:bg-white/10 hover:text-white"
+                    : isActive(item.href)
+                      ? "bg-fog-100 text-ink-900"
+                      : "text-fog-700 hover:bg-fog-100 hover:text-ink-900",
+                )}
+              >
+                {item.hint ? <Sparkles className="h-3.5 w-3.5 text-spark-400" aria-hidden /> : null}
+                {item.label}
+              </Link>
+              {item.hint ? (
+                // The assistant's pitch, shown under the link on hover / keyboard focus.
+                <div className="pointer-events-none absolute start-1/2 top-full z-50 w-64 pt-2 opacity-0 transition-opacity duration-150 ltr:-translate-x-1/2 rtl:translate-x-1/2 group-focus-within/nav:opacity-100 group-hover/nav:opacity-100">
+                  <p className="rounded-xl bg-ink-950 px-3.5 py-2.5 text-center text-[12.5px] leading-relaxed text-white shadow-float ring-1 ring-white/10">
+                    {item.hint}
+                  </p>
+                </div>
+              ) : null}
+            </div>
           ))}
         </nav>
 
@@ -172,7 +182,11 @@ export function Navbar() {
                   className="rounded-xl px-3 py-3 text-base font-medium text-ink-900 hover:bg-fog-100"
                   onClick={() => setOpen(false)}
                 >
-                  {item.label}
+                  <span className="flex items-center gap-1.5">
+                    {item.hint ? <Sparkles className="h-4 w-4 text-spark-400" aria-hidden /> : null}
+                    {item.label}
+                  </span>
+                  {item.hint ? <span className="mt-0.5 block text-[13px] font-normal text-fog-500">{item.hint}</span> : null}
                 </Link>
               ))}
               <div className="mt-3 flex flex-col gap-2">
