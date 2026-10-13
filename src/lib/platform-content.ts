@@ -666,7 +666,7 @@ export const platformContent: Record<string, PlatformContent> = {
 
   "ai-assistant": {
     eyebrow: "AI Assistant",
-    title: "An AI assistant that calls tools and runs operations automatically",
+    title: "An AI assistant inside Routel that calls tools and runs your operations automatically",
     description:
       "Ask in Arabic or English and the assistant calls Routel's own tools to do the work: it opens the booking, reads the attached document, adds the cost, drafts the invoice and runs the report. Searches and reports run straight away; anything it saves waits for one click from you.",
     stats: [
