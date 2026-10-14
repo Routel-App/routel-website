@@ -4,7 +4,7 @@ description: Record company overheads that post straight to operating-expense ac
 status: complete
 ---
 
-Job costs tell you the margin on shipments. Overheads tell you whether the company made money. The expenses module records the second kind: rent, salaries, utilities, commissions, currency exchange differences and anything else that is not tied to one job. Each entry posts to a proper operating-expense account in the General Ledger the moment it is saved, which is what lets the [P&L](/docs/accounting) show **net income**, not just gross profit.
+Cost lines on a booking tell you the margin on that shipment. Overheads tell you whether the company made money. The expenses module records the second kind — operating costs outside bookings: rent, salaries, utilities, commissions, currency exchange differences and anything else that is not tied to one shipment. Each entry posts to a proper operating-expense account in the General Ledger the moment it is saved, which is what lets the [P&L](/docs/accounting) show **net income**, not just gross profit.
 
 ## Recording an expense
 
@@ -12,7 +12,7 @@ Job costs tell you the margin on shipments. Overheads tell you whether the compa
   rows={[
     ["Date", "When the cost was incurred. Drives which period it appears in."],
     ["Category", "Rent, Salaries, Utilities, Petty cash, Commissions, Currency exchange, or a custom category. Each maps to an expense account."],
-    ["Amount and currency", "MYR or USD. Non-MYR amounts are converted at the rate you enter."],
+    ["Amount and currency", "Your base currency (e.g. MYR) or USD. USD amounts are converted at the rate you enter."],
     ["Paid from", "The bank or cash account, if paid; or leave unpaid to track it as a payable."],
     ["Payee", "Optional link to a vendor record, for example the landlord or the utility company."],
     ["Staff member", "For salary lines: the registered staff member the salary belongs to."],
@@ -37,7 +37,7 @@ Job costs tell you the margin on shipments. Overheads tell you whether the compa
 
 ## Categories
 
-Routel ships with the categories most forwarders need. **Admin** can add custom categories, each mapped to an operating-expense account, so reporting stays consistent no matter who records the cost.
+Routel ships with the categories most forwarders need. **Admin** and **Management** can add custom categories, each mapped to an operating-expense account, so reporting stays consistent no matter who records the cost.
 
 | Category | Posts to |
 | --- | --- |
@@ -66,6 +66,6 @@ When a USD invoice or vendor cost is settled at a rate different from the one re
 | Pay an unpaid expense later | Accounts Payable | Bank / Cash |
 
 <Callout kind="permission">
-  **Accounting** and **Admin** record expenses and salaries. Only **Admin** adds categories or registers staff.
-  **Management** sees the totals in the P&L.
+  **Admin**, **Management** and **Accounting** record expenses and salaries. **Admin** and **Management** add
+  categories; only **Admin** registers staff.
 </Callout>

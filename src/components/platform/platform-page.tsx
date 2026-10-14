@@ -27,7 +27,7 @@ const copy = {
     faqTitle: "Questions we get asked",
     relatedEyebrow: "Keep going",
     relatedTitle: (name: string) => `Connect ${name} with the rest of Routel`,
-    ctaTitle: (name: string) => `See ${name} running on a real job`,
+    ctaTitle: (name: string) => `See ${name} running on a real booking`,
     ctaBody: "A 30-minute walkthrough on your own routes and workflow, not a generic slide deck.",
   },
   ar: {
@@ -44,7 +44,7 @@ const copy = {
     faqTitle: "أسئلة تصلنا كثيراً",
     relatedEyebrow: "تابع الاستكشاف",
     relatedTitle: (name: string) => `اربط ${name} ببقية Routel`,
-    ctaTitle: (name: string) => `شاهد ${name} يعمل على ملف شحن حقيقي`,
+    ctaTitle: (name: string) => `شاهد ${name} يعمل على حجز حقيقي`,
     ctaBody: "جولة مدتها 30 دقيقة على مساراتك وطريقة عملك الفعلية، لا عرض شرائح عام.",
   },
 } satisfies Record<

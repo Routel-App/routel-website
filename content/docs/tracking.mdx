@@ -12,8 +12,8 @@ No account is required, but a lookup needs **two** pieces of information togethe
 
 <Fields
   rows={[
-    ["An exact reference", "The job number, B/L number or a container number — no partial matches and no search-by-keyword."],
-    ["Proof of relationship", "Their company name or account number, matched against who the shipment actually belongs to."],
+    ["An exact reference", "The booking number, the B/L number or one full container number — no partial matches and no search-by-keyword."],
+    ["Proof of relationship", "Their company name or account ID, matched against who the booking actually belongs to."],
   ]}
 />
 
@@ -21,7 +21,7 @@ Requiring both prevents the page from being used to fish for other customers' sh
 
 ## What it shows — and what it doesn't
 
-The page shows the same status timeline used internally on the [Shipments & Jobs](/docs/shipments) module — booking confirmed, cargo received, vessel loaded, departed, arrived, and so on.
+The page shows the same status timeline used internally on the [booking](/docs/bookings) — booking confirmed, gate in, vessel loaded, departed, in transit, arrived, and so on.
 
 <Callout kind="warning" title="Deliberately limited">
   It never shows the master Bill of Lading, container numbers, vessel name, or exact operational dates — only the
@@ -30,7 +30,7 @@ The page shows the same status timeline used internally on the [Shipments & Jobs
 
 ## Sharing the link
 
-The tracking link is the same for every shipment — customers plug in their own reference and account number rather than you generating a unique link per job.
+The tracking link is the same for every shipment — customers plug in their own reference and account ID rather than you generating a unique link per booking.
 
 <Callout kind="permission">
   No login or role applies here — it's a public page, scoped entirely by the two-piece lookup above.

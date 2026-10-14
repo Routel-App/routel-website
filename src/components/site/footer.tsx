@@ -6,7 +6,7 @@ import { getLocale } from "@/lib/locale-server";
 import { Container } from "@/components/ui/container";
 import { Logo } from "./logo";
 
-const platformSlugs = ["shipments", "business-partners", "quotations", "invoicing", "accounting", "bill-of-lading", "ai-assistant"];
+const platformSlugs = ["bookings", "business-partners", "quotations", "invoicing", "accounting", "bill-of-lading", "ai-assistant"];
 
 const copy = {
   en: {

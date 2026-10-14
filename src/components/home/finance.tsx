@@ -49,6 +49,9 @@ type FinanceCopy = {
   expenseCategories: string[];
   expensesNote: string;
   cta: string;
+  /** Base currency shown in the mock figures. */
+  currency: string;
+  fxLine: string;
 };
 
 const copy = {
@@ -69,7 +72,7 @@ const copy = {
       "Currency exchange",
       "Net income",
     ],
-    pnlNote: "Gross profit on shipments, then net income after overheads. Computed from source transactions.",
+    pnlNote: "Gross profit on bookings, then net income after overheads. Computed from source transactions.",
     agingTitle: "AR aging",
     agingLabels: ["Current", "1–30 days", "31–60 days", "60+ days"],
     invoiceTitle: "Multi-currency invoice",
@@ -87,6 +90,8 @@ const copy = {
     expenseCategories: ["Rent", "Salaries", "Utilities", "Commissions", "Currency exchange", "+ your own"],
     expensesNote: "Each category maps to an operating-expense account. Salary lines link to registered staff.",
     cta: "Explore invoicing & finance",
+    currency: "MYR",
+    fxLine: "≈ MYR 17,934.00 @ 4.2700",
   },
   ar: {
     eyebrow: "المالية والمحاسبة",
@@ -113,11 +118,11 @@ const copy = {
       "فروق صرف العملات",
       "صافي الدخل",
     ],
-    pnlNote: "إجمالي الربح على الشحنات، ثم صافي الدخل بعد المصاريف العامة. محسوب من المعاملات الأصلية.",
+    pnlNote: "إجمالي الربح على الحجوزات، ثم صافي الدخل بعد المصاريف العامة. محسوب من المعاملات الأصلية.",
     agingTitle: "أعمار الذمم المدينة",
     agingLabels: ["الحالية", "1–30 يوماً", "31–60 يوماً", "فوق 60 يوماً"],
-    invoiceTitle: "فاتورة متعددة العملات",
-    invoiceNote: "تُصدر وتُسدَّد بالـ USD. ودفتر الأستاذ يحتفظ بالعملتين.",
+    invoiceTitle: "فاتورة بعملتين",
+    invoiceNote: "تُصدر وتُسدَّد بالدولار الأمريكي، ودفتر الأستاذ يحتفظ بالريال والدولار معاً.",
     statementTitle: "كشف حساب",
     statementMeta: "01–31 أغسطس 2026 · 7 فواتير · 2 دفعات",
     statementBalance: "الرصيد",
@@ -131,6 +136,8 @@ const copy = {
     expenseCategories: ["الإيجار", "الرواتب", "المرافق", "العمولات", "فروق صرف العملات", "+ فئاتك الخاصة"],
     expensesNote: "كل فئة مرتبطة بحساب مصروفات تشغيلية. وبنود الرواتب مرتبطة بالموظفين المسجّلين.",
     cta: "استكشف الفوترة والمالية",
+    currency: "SAR",
+    fxLine: "≈ SAR 15,750.00 @ 3.7500",
   },
 } satisfies Record<Locale, FinanceCopy>;
 
@@ -186,7 +193,7 @@ export async function Finance() {
               >
                 <dt className="font-sans">{k}</dt>
                 <dd dir="ltr" className={kind === "total" ? "text-teal-700" : undefined}>
-                  {kind !== "row" ? "MYR " : ""}
+                  {kind !== "row" ? `${t.currency} ` : ""}
                   {v}
                 </dd>
               </div>
@@ -219,7 +226,7 @@ export async function Finance() {
             USD 4,200.00
           </p>
           <p dir="ltr" className="mt-1 font-mono text-[11.5px] text-fog-600 rtl:text-end">
-            ≈ MYR 17,934.00 @ 4.2700
+            {t.fxLine}
           </p>
           <p className="mt-3 text-[11.5px] text-fog-500">{t.invoiceNote}</p>
         </Card>
@@ -230,7 +237,7 @@ export async function Finance() {
             <p className="text-[12px] font-semibold text-ink-900">Al Noor Trading LLC</p>
             <p className="font-mono text-[11px] text-fog-500">{t.statementMeta}</p>
             <p className="mt-2 font-mono text-[12px] text-ink-900">
-              {t.statementBalance} <span dir="ltr">MYR 52,180.00</span>
+              {t.statementBalance} <span dir="ltr">{t.currency} 52,180.00</span>
             </p>
           </div>
           <span className="mt-3 inline-flex items-center gap-1.5 text-[12px] font-medium text-teal-700">
@@ -244,7 +251,7 @@ export async function Finance() {
             <div>
               <p className="text-white/50">{t.bankCash}</p>
               <p dir="ltr" className="font-display mt-1 text-lg font-bold text-white rtl:text-end">
-                MYR 212,400
+                {t.currency} 212,400
               </p>
             </div>
             <div>

@@ -13,7 +13,7 @@ const shipmentCopy = {
     from: "Port Klang",
     to: "Shanghai",
     meta: "MSC ISABELLA 412E · 2 × 40HC · FOB",
-    steps: ["Booked", "SI sent", "Loaded", "In transit", "Arrived", "Delivered"],
+    steps: ["Confirmed", "SI submitted", "Loaded", "In transit", "Arrived", "Closed"],
     current: 3,
     sell: "Sell",
     cost: "Cost",
@@ -32,7 +32,7 @@ const shipmentCopy = {
     from: "جدة",
     to: "شنغهاي",
     meta: "MSC ISABELLA 412E · 2 × 40HC · FOB",
-    steps: ["تم الحجز", "تعليمات الشحن", "التحميل", "قيد النقل", "الوصول", "التسليم"],
+    steps: ["تأكيد الحجز", "تعليمات الشحن", "التحميل", "قيد النقل", "الوصول", "الإغلاق"],
     current: 3,
     sell: "البيع",
     cost: "التكلفة",
@@ -147,7 +147,7 @@ const invoiceCopy = {
       ["تخليص جمركي", "1", "750.00", "15%"],
     ],
     totals: [["الإجمالي غير شامل الضريبة", "SAR 10,850.00"], ["ضريبة القيمة المضافة 15%", "SAR 277.50"], ["الإجمالي شامل الضريبة", "SAR 11,127.50"]],
-    note: "رمز QR للمرحلة الأولى من الفوترة الإلكترونية (ZATCA)",
+    note: "رمز QR وفق متطلبات هيئة الزكاة والضريبة والجمارك (ZATCA)",
   },
 } as const;
 

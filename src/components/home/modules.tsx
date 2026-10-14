@@ -13,14 +13,14 @@ const copy = {
     eyebrow: "Everything in one system",
     title: "A full platform's worth of modules that already talk to each other",
     description:
-      "Each one is built and working today. A quotation becomes a job, a job produces a B/L and an invoice, and the invoice lands in your ledger. Nothing is re-keyed.",
+      "Each one is built and working today. A quotation becomes a booking, the booking produces a B/L and an invoice, and the invoice lands in your ledger. Nothing is re-keyed.",
     cta: "View the full platform",
   },
   ar: {
     eyebrow: "كل شيء في نظام واحد",
     title: "وحدات بحجم منصة كاملة، مترابطة فيما بينها بالفعل",
     description:
-      "كل وحدة منها مبنية وتعمل اليوم. عرض السعر يتحول إلى ملف شحن، وملف الشحن يُصدر بوليصة الشحن (B/L) والفاتورة، والفاتورة تصل إلى دفتر الأستاذ. لا شيء يُعاد إدخاله.",
+      "كل وحدة منها مبنية وتعمل اليوم. عرض السعر يتحول إلى حجز، والحجز يُصدر بوليصة الشحن (B/L) والفاتورة، والفاتورة تصل إلى دفتر الأستاذ. لا شيء يُعاد إدخاله.",
     cta: "استعرض المنصة كاملة",
   },
 } satisfies Record<Locale, { eyebrow: string; title: string; description: string; cta: string }>;

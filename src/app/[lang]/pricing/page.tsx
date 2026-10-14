@@ -18,7 +18,7 @@ const copy = {
     faqs: [
       {
         q: "What do I get on the Free plan?",
-        a: "A single admin user, up to 3 jobs total (a lifetime cap, not monthly) with up to 2 invoices per job — enough to try Routel on real shipments before you commit.",
+        a: "A single admin user, up to 3 bookings total (a lifetime cap, not monthly) with up to 2 invoices per booking — enough to try Routel on real shipments before you commit.",
       },
       {
         q: "What happens when I outgrow a plan?",
@@ -30,7 +30,7 @@ const copy = {
       },
       {
         q: "Which currencies are supported?",
-        a: "Invoicing and books run in MYR and USD today, with vendor costs converted at the exchange rate you record on the job.",
+        a: "Two per company: your base currency (for example MYR or IDR) and USD. Every invoice and document is issued in one of the two, and the books keep both.",
       },
       {
         q: "Can we migrate from spreadsheets or another system?",
@@ -57,7 +57,7 @@ const copy = {
     faqs: [
       {
         q: "ماذا أحصل عليه في الباقة المجانية؟",
-        a: "مستخدم واحد بصلاحية المدير، وحتى 3 ملفات شحن إجمالاً (حد طوال مدة الاستخدام، وليس شهرياً)، مع حتى فاتورتين لكل ملف شحن — وهذا يكفي لتجربة Routel على شحنات حقيقية قبل أن تلتزم.",
+        a: "مستخدم واحد بصلاحية المدير، وحتى 3 حجوزات إجمالاً (حد طوال مدة الاستخدام، وليس شهرياً)، مع حتى فاتورتين لكل حجز — وهذا يكفي لتجربة Routel على شحنات حقيقية قبل أن تلتزم.",
       },
       {
         q: "ماذا يحدث عندما أتجاوز حدود باقتي؟",
@@ -69,7 +69,7 @@ const copy = {
       },
       {
         q: "ما العملات المدعومة؟",
-        a: "تعمل الفوترة والدفاتر المحاسبية حالياً بعملتي MYR وUSD، مع تحويل تكاليف المورّدين بسعر الصرف الذي تسجّله في ملف الشحن.",
+        a: "عملتان: الريال السعودي والدولار الأمريكي. تصدر كل فاتورة ومستند بإحداهما، وتحتفظ الدفاتر المحاسبية بالعملتين معاً، مع ضريبة القيمة المضافة 15% على الفواتير الضريبية.",
       },
       {
         q: "هل يمكننا الانتقال من جداول البيانات أو من نظام آخر؟",

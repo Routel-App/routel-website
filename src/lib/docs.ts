@@ -34,7 +34,7 @@ const groups: Array<{ title: Record<Locale, string>; slugs: string[] }> = [
   { title: { en: "Getting started", ar: "البداية" }, slugs: ["introduction", "roles"] },
   {
     title: { en: "Operations", ar: "العمليات" },
-    slugs: ["shipments", "bookings", "quotations", "bill-of-lading", "documents", "tracking"],
+    slugs: ["bookings", "quotations", "bill-of-lading", "documents", "tracking"],
   },
   {
     title: { en: "Finance & accounting", ar: "المالية والمحاسبة" },

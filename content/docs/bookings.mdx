@@ -1,59 +1,124 @@
 ---
 title: Bookings
-description: Record the carrier's booking against a job so vessel, voyage and dates flow to the shipment and the Bill of Lading.
+description: The booking is the central record in Routel. This guide covers creating one, confirming it with the carrier, and everything that lives on it.
 status: complete
 ---
 
-A **booking** is the carrier's confirmation that space and equipment are reserved for a job. In Routel it is recorded on the job, and its details feed the job's vessel, voyage and dates and, later, the House Bill of Lading. Operations never types the vessel name in three places.
+A **booking** is one shipment for one customer, and it is the one core record in Routel. Everything else hangs off it: the carrier's space confirmation, the containers, the Bill of Lading, the charges, the invoices and the documents. Its number is the booking number, and it is the number printed on the B/L, the invoice and statements. When someone asks "where is the Al Noor shipment?", the booking is the page they open.
 
-## What a booking holds
+## Creating a booking
 
-<Fields
-  rows={[
-    ["Job", "The job this booking belongs to. One job usually has one booking."],
-    ["Carrier / vendor", "Who confirmed the space. Linked to the vendor record."],
-    ["Booking reference", "The carrier's booking number, as printed on the confirmation."],
-    ["Vessel and voyage", "As confirmed by the carrier. These populate the job and the B/L."],
-    ["ETD / ETA", "Departure and arrival dates from the confirmation. Update them when the carrier does."],
-    ["Equipment", "Number and type of containers confirmed."],
-    ["Shipper / consignee / notify party", "As they should appear on the booking and, later, the B/L."],
-    ["Cut-off dates", "The dates the carrier gives you for cargo, documents and any other deadline you need to track."],
-    ["Confirmation document", "The carrier's booking confirmation, attached to the job."],
-  ]}
-/>
+There are three ways a booking comes into existence:
 
-## Recording a booking
+1. **From a quotation.** The normal path. Open an accepted quotation and choose **Convert to Booking**. If the quotation offered several routes, you pick one and only that route's charges are copied across. The quotation then becomes read-only, with a "Converted" badge and a link to the booking. See [Quotations & Routes](/docs/quotations).
+2. **Directly.** Choose **New Booking** from the Bookings list when there was no formal quotation.
+3. **Through the assistant.** Describe the shipment in a sentence; the assistant proposes the booking and waits for confirmation. See [AI Assistant](/docs/ai-assistant).
 
 <Steps>
-  <Step title="Open the job and choose Add booking">
-    The job's route and equipment are shown so you can check them against the confirmation.
+  <Step title="Open Bookings and choose New Booking">
+    Pick the customer. If the customer has a credit limit, the current exposure is shown so you can see it before you commit.
   </Step>
-  <Step title="Enter the carrier's details">
-    Booking reference, vessel, voyage, dates and confirmed equipment.
-  </Step>
-  <Step title="Attach the confirmation">
-    Upload the carrier's PDF so it travels with the shipment. See [Document Management](/docs/documents).
+  <Step title="Enter the route and cargo">
+    Port of loading, port of discharge, containers and container type, incoterms and a cargo description.
   </Step>
   <Step title="Save">
-    The job's vessel, voyage, ETD and ETA are updated from the booking, and the job status can move to <em>Booked</em>.
+    The booking number is assigned and the status starts at <em>Booking Pending</em>.
   </Step>
 </Steps>
 
-## When the carrier changes something
+## Shipment details
 
-Rollovers and schedule changes happen. Edit the booking with the new vessel, voyage or dates; the job updates with it and the change is recorded in the job's audit log with your name. If the House B/L was already generated, regenerate it so the document matches. See [Bill of Lading](/docs/bill-of-lading).
+The first card on the booking page holds the shipment itself:
 
-## Through the assistant
+<Fields
+  rows={[
+    ["POL / POD", "Port of loading and port of discharge."],
+    ["Shipper / consignee", "Who is sending and receiving the cargo, as they'll appear on the B/L."],
+    ["Vessel / voyage", "Carrier vessel name and voyage number."],
+    ["Containers and container type", "How many boxes, and of what type: 20GP, 40GP, 40HC and so on."],
+    ["Incoterms", "The trade term the shipment is quoted and billed under: FOB, CIF and so on."],
+    ["Weight, chargeable weight and volume", "Gross weight, the weight freight is priced on, and measurement."],
+    ["Cargo description", "A description of the goods, as it should print on the B/L."],
+    ["HBL and MBL numbers", "Your House B/L number, and the carrier's Master B/L number once issued."],
+    ["Operations staff and sales person", "Who runs the shipment and who owns the customer."],
+  ]}
+/>
 
-"Record the booking for JOB-2026-0412: MSC Isabella voyage 2638W, booking ref MSCUKL4471, ETD 12 October" produces a proposed booking for you to confirm. See [AI Assistant](/docs/ai-assistant).
-
-<Callout kind="tip" title="Or just upload the confirmation PDF">
-  Attach the carrier's booking confirmation in the chat instead of typing it out. The assistant reads the document —
-  vessel, voyage, dates, equipment, booking reference — and proposes the booking with every field already filled in
-  for you to check against the paper and confirm.
+<Callout kind="tip" title="Upload the B/L instead of typing it">
+  Use **Upload BL** on the shipment details card and the AI reads the Bill of Lading and proposes the fields it found,
+  for you to check before anything is saved.
 </Callout>
 
+## Shipping timeline
+
+The **Shipping timeline** card keeps the carrier's dates in one place: **Gate-in cut-off, SI cut-off, ETD, SOB, ATD, ETA and ATA**. Update them as the carrier updates you; every change is recorded in the activity log.
+
+## Carrier booking
+
+The **Carrier Booking** card records the carrier's side of the deal: the **shipping line**, the **Carrier Booking No.**, the containers confirmed, the **notify party** and any booking notes.
+
+<Callout kind="tip" title="Read Carrier Confirmation">
+  Choose **Read Carrier Confirmation** and point it at the carrier's confirmation PDF or a linked e-mail. The AI reads
+  it and shows what it found next to what the booking already holds; you tick the values to save. Nothing is written
+  until you do.
+</Callout>
+
+## Booking Confirmation and revisions
+
+**Booking Confirmation** in the page header issues your confirmation to the customer. The first one issued is the original. If anything changes on the booking afterwards, the next one issued is a **Revised Booking Confirmation — Revision N**, numbered in sequence, so the customer always knows which version is current. Every issue is recorded in the activity log.
+
+## Statuses
+
+Each booking moves through an 11-status lifecycle, from booking pending to shipment closed. The status timeline on the booking page shows the current status, the ones already passed and when each was reached.
+
+| Status | Meaning |
+| --- | --- |
+| Booking Pending | Created, waiting for the carrier to confirm space. |
+| Booking Confirmed | The carrier has confirmed the booking. |
+| Gate In | The container has been gated in at the terminal. |
+| SI Submitted | Shipping instructions sent to the carrier. |
+| Vessel Loaded | The container is on board. |
+| Departed | The vessel has sailed. |
+| In Transit | On the way to the port of discharge. |
+| Arrived | The vessel has arrived at the port of discharge. |
+| Telex Status | Release of the cargo is being handled (telex release). |
+| Shipment Closed | The shipment is complete. |
+| Cancelled | The booking was cancelled. Possible at any point. |
+
+The same status badge appears wherever the booking shows up: the Bookings list, the Dashboard, partner views, and the [public tracking page](/docs/tracking) your own customers can check without logging in.
+
+## Charges and profit summary
+
+**Booking Charges** holds two kinds of line: **cost (AP)** lines for what carriers, haulers, customs brokers and other vendors charge you, and **sale (AR)** lines for what you bill the customer. Each line keeps its own currency and exchange rate.
+
+<Callout kind="tip" title="Let the AI read the vendor invoice">
+  Upload a vendor's invoice and the AI reads it into proposed cost lines on the booking, for you to review and confirm.
+</Callout>
+
+The **Profit Summary** card shows **AP · AR · Net** for the booking. It is visible to finance roles only.
+
+## Create invoice
+
+**Create Invoice** in the header creates draft invoices from the booking's sale (AR) charge lines. The invoices then appear on the booking's **Invoices** card. Drafting, finalizing and payment are covered in [Invoicing](/docs/invoicing).
+
+## Generate the Bill of Lading
+
+**Generate Bill of Lading** in the header produces the House B/L and container annexure from the booking's own data. Keep the shipment details accurate: parties, vessel, containers and cargo description all print exactly as entered. See [Bill of Lading](/docs/bill-of-lading).
+
+## Activity log
+
+Every field change and every confirmation issue is recorded in the **Activity log**: the person, the time and the before/after values, including anything confirmed through the assistant. It cannot be edited.
+
+## Labels, tasks and follow-ups
+
+The booking page carries its own **Labels**, **Tasks** and **Follow-ups**, so an open question with the carrier or a reminder to chase the signed SI sits on the record it is about. See [Labeling Center](/docs/labeling-center).
+
+## Documents
+
+The **Documents** card holds every file on the booking: what your team uploads, what Routel generates (the B/L, invoices, confirmations), and incoming e-mail attachments approved from the review queue. See [Document Management](/docs/documents).
+
 <Callout kind="permission">
-  **Operations** and **Admin** create and edit bookings. Everyone who can open the job can see the booking and download
-  the confirmation.
+  Every signed-in member of staff can read bookings. **Admin**, **Management**, **Operations** and **Sales** can create
+  and edit them. The Profit Summary is limited to finance roles, and the Bill of Lading to Admin, Management and
+  Operations. See [Roles & permissions](/docs/roles).
 </Callout>

@@ -1,47 +1,47 @@
 ---
 title: Invoicing
-description: Customer invoices in MYR and USD, properly drafted, locked on finalizing, and never issued without a Bill of Lading number.
+description: Customer invoices in your base currency and USD, created from the booking, locked on finalizing, and never issued without a Bill of Lading number.
 status: complete
 ---
 
-An invoice is raised against a job. Line items usually come from the job's selling price (ocean freight, terminal handling, documentation and so on), but any line can be added or edited before the invoice is finalized.
+An invoice is raised against a booking. Line items come from the booking's sale (AR) charge lines (ocean freight, terminal handling, documentation and so on), and any line can be added or edited while the invoice is still a draft.
 
 ## Draft, then final
 
 <Fields
   rows={[
-    ["Currency", "MYR or USD. The invoice is presented and paid in that currency; the ledger keeps both the original and the MYR-equivalent."],
-    ["Lines", "Description, quantity, unit price, amount. Tax handling follows your configured rate."],
+    ["Currency", "Your base currency (for example MYR, or IDR in Indonesia) or USD — exactly those two. The invoice is presented and paid in that currency; the ledger keeps both the original and the base-currency equivalent."],
+    ["Lines", "Description, quantity, unit price, amount. Tax follows your country's rates: SST in Malaysia (0%, 6% or 8%), PPN 11% in Indonesia."],
     ["Due date", "Set from the customer's payment terms. Drives the aging and overdue reports."],
-    ["Status", "Draft → Final → Paid."],
+    ["Status", "Draft → Final → Paid, with Unpaid shown for final invoices still awaiting payment."],
     ["PDF", "Rendered for sending to the customer at every stage."],
   ]}
 />
 
-A new invoice starts as a **draft** — line items can still be edited, and the PDF prints clearly watermarked **"DRAFT TAX INVOICE — NOT OFFICIAL"** so it's never mistaken for a billable document.
+A new invoice starts as a **draft** — line items can still be edited, and the PDF prints clearly watermarked **"DRAFT TAX INVOICE"** so it's never mistaken for a billable document.
 
-<Callout kind="warning" title="Finalizing requires the job's B/L number">
-  An invoice can only be finalized once the job's Bill of Lading number is set. This is deliberate: it stops an
+<Callout kind="warning" title="Finalizing requires the booking's B/L number">
+  An invoice can only be finalized once the booking has its Bill of Lading number (MBL). This is deliberate: it stops an
   invoice going out for a shipment that, on paper, hasn't actually moved yet.
 </Callout>
 
 <Steps>
-  <Step title="Open the job and choose Create invoice">
-    The customer and currency default from the job. Lines are prefilled from the selling price.
+  <Step title="Open the booking and choose Create Invoice">
+    Draft invoices are created from the booking's sale (AR) charge lines, with the customer taken from the booking.
   </Step>
   <Step title="Review the draft">
     Adjust descriptions, quantities and prices. Add lines for extras agreed after quotation. It's still a draft.
   </Step>
   <Step title="Finalize">
-    Once the job has its B/L number, finalizing assigns the real invoice number, posts to Accounts Receivable and
+    Once the booking has its B/L number, finalizing assigns the real invoice number, posts to Accounts Receivable and
     revenue, and **locks the line items** — no further edits. The watermark comes off the PDF.
   </Step>
 </Steps>
 
 <Callout kind="tip" title="Through the assistant">
-  "Create an invoice for JOB-2026-0412 in MYR" produces a proposed draft invoice with the same prefilled lines.
-  Nothing is finalized until you confirm. Uploading a vendor's own cost invoice works the same way in reverse: the
-  assistant reads it and extracts line items to prefill a vendor cost or your own invoice. See
+  "Create an invoice for booking NXS26000412 in MYR" produces a proposed draft invoice with the same prefilled
+  lines. Nothing is finalized until you confirm. Uploading a vendor's own invoice works the same way in reverse: the
+  AI reads it into proposed cost (AP) lines on the booking. See
   [AI Assistant](/docs/ai-assistant).
 </Callout>
 
@@ -51,23 +51,23 @@ Record a payment against one or more finalized invoices. Partial payments are su
 
 ## Adjusting an issued invoice
 
-A finalized invoice is never edited directly. If the amount needs to change after the fact, that goes through a formally numbered [Credit or Debit Note](/docs/credit-notes) applied against it instead.
+Only drafts are editable. A finalized invoice is never edited directly; if the amount needs to change after the fact, that goes through a formally numbered [Credit or Debit Note](/docs/credit-notes) applied against it instead.
 
 ## Trade credit
 
 Letting a customer pay on terms, and how much credit they're extended, is handled by [Credit Applications](/docs/credit-applications) — a public application, staff approval, and an active agreement tied to the customer's [Business Partner](/docs/business-partners) record.
 
 <Callout kind="permission">
-  **Accounting** and **Admin** draft, finalize and record payments against invoices. **Management** can view
-  everything on this page. **Sales** can see invoice status for their customers.
+  Finance belongs to **Admin**, **Management** and **Accounting**: they draft, finalize and record payments against
+  invoices.
 </Callout>
 
 ## Multi-currency behaviour
 
 | Situation | What Routel does |
 | --- | --- |
-| Invoice in USD | Presented and paid in USD. Ledger records USD amount and MYR equivalent at the invoice date rate. |
-| Vendor cost in USD on an MYR job | Converted at the exchange rate recorded on the job, so gross profit is computed in one currency. |
+| Invoice in USD | Presented and paid in USD. Ledger records the USD amount and its base-currency equivalent at the invoice date rate. |
+| Cost line in USD on a booking billed in MYR | Converted at the exchange rate recorded on the line, so profit is computed in one currency. |
 | Exchange differences | Recorded as a *Currency exchange* expense or gain when the settlement rate differs. See [Expenses & Payroll](/docs/expenses). |
 
 ## What posts where
@@ -78,6 +78,6 @@ Letting a customer pay on terms, and how much credit they're extended, is handle
 | Record payment | Bank / Cash | Accounts Receivable |
 | Credit note | Revenue | Accounts Receivable |
 | Debit note | Accounts Receivable | Revenue |
-| Record vendor cost | Cost of Sales | Accounts Payable |
+| Record a vendor cost (AP) | Cost of Sales | Accounts Payable |
 
 You never enter these journals yourself. They are shown here so you know what the General Ledger will contain.

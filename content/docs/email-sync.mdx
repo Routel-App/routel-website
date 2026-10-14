@@ -1,40 +1,44 @@
 ---
 title: Email Sync
-description: Connect a Zoho or Microsoft mailbox so incoming mail links itself to the right job.
+description: Connect a Zoho or Microsoft 365 mailbox so incoming mail links itself to the right booking.
 status: complete
 ---
 
-Freight correspondence lives in email: booking confirmations, carrier arrival notices, vendor invoices, a customer asking where their container is. Email Sync connects a mailbox to Routel so that traffic lands against the job it belongs to, instead of sitting in an inbox that only one person can search.
+Freight correspondence lives in email: booking confirmations, carrier arrival notices, vendor invoices, a customer asking where their container is. Email Sync connects a mailbox to Routel so that traffic lands against the booking it belongs to, instead of sitting in an inbox that only one person can search.
 
 ## Connecting a mailbox
 
 <Steps>
   <Step title="Choose a provider">
-    Zoho Mail or Microsoft 365 (Outlook) are supported.
+    Zoho Mail or Microsoft 365 (Outlook) are supported. Google mailboxes are not supported yet.
   </Step>
   <Step title="Authorize access">
     Sign in with the mailbox's own credentials through the provider's standard authorization screen. Routel never
     asks for or stores the password directly.
   </Step>
   <Step title="Let it sync">
-    Once connected, new mail is scanned for references it recognizes — a job number, a B/L number, a known
-    customer or vendor — and linked automatically.
+    Once connected, new mail arrives in the **Email Archive** and is linked to a booking automatically when the
+    booking number appears in it.
   </Step>
 </Steps>
 
 ## What gets linked
 
-- **Correspondence** that mentions a job, booking or B/L number is attached to that job's record, so the history of an email thread travels with the shipment.
-- **Carrier updates** — an arrival notice, a delay notice — are linked to the job they're about, so they sit with the shipment instead of only existing as an email someone has to remember to check.
-- **Attachments** on linked mail feed the [document review queue](/docs/documents): incoming files get classified and matched to a job for a person to approve.
+A message is linked to a booking in one of three ways:
+
+- **By booking number.** Mail that mentions the booking number is linked to that booking automatically.
+- **By thread.** Replies and follow-ons in a thread that is already linked join the same booking, so the history of a conversation travels with the shipment.
+- **Manually.** You can link a message to a booking by hand when neither of the above applies.
+
+**Attachments** on incoming mail feed the [document review queue](/docs/documents): files are classified and matched to a booking for a person to approve. A linked e-mail can also be the source for **Read Carrier Confirmation** on the [booking](/docs/bookings).
 
 This is distinct from the dedicated finance mailbox used for payment matching — see [Finance (Receivables & Payables)](/docs/finance-receivables).
 
 ## Through the assistant
 
-Once a mailbox is connected, "Has the carrier sent an arrival notice for JOB-2026-0412?" or "Show me the last email from this vendor" can be answered from the assistant instead of searching the mailbox directly.
+Once a mailbox is connected, "Has the carrier sent an arrival notice for booking NXS26000412?" or "Show me the last email from this vendor" can be answered from the assistant instead of searching the mailbox directly.
 
 <Callout kind="permission">
-  **Admin** connects and manages mailbox sync. Linked mail is visible to whoever can already open the job it is
+  **Admin** connects and manages mailbox sync. Linked mail is visible to whoever can already open the booking it is
   attached to.
 </Callout>

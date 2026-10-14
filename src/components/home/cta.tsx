@@ -7,14 +7,14 @@ import type { Locale } from "@/lib/i18n";
 
 const copy = {
   en: {
-    title: "See a real job go from quote to ledger, on your numbers.",
-    points: ["Your routes and rates", "A real job, end to end", "Live in twenty minutes"],
+    title: "See a real booking go from quote to ledger, on your numbers.",
+    points: ["Your routes and rates", "A real booking, end to end", "Live in twenty minutes"],
     demo: "Request a demo",
     docs: "Browse the docs",
   },
   ar: {
-    title: "شاهد ملف شحنة حقيقياً ينتقل من عرض السعر إلى دفتر الأستاذ، بأرقامك أنت.",
-    points: ["مساراتك وأسعارك", "ملف شحنة حقيقي من البداية إلى النهاية", "جاهز للعمل خلال عشرين دقيقة"],
+    title: "شاهد حجزاً حقيقياً ينتقل من عرض السعر إلى دفتر الأستاذ، بأرقامك أنت.",
+    points: ["مساراتك وأسعارك", "حجز حقيقي من البداية إلى النهاية", "جاهز للعمل خلال عشرين دقيقة"],
     demo: "اطلب عرضاً تجريبياً",
     docs: "تصفّح التوثيق",
   },

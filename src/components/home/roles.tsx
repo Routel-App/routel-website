@@ -15,16 +15,16 @@ type Copy = {
 const copy = {
   en: {
     eyebrow: "Role-based access",
-    title: "Everyone sees their job. Nobody sees more.",
+    title: "Everyone sees their part. Nobody sees more.",
     description:
       "Six named roles, enforced the same way in every module and in the assistant. Permissions aren't a setting on a screen; they're a rule the whole system follows.",
     roles: [
       { name: "Admin", sees: "Everything, plus users, roles and expense categories." },
-      { name: "Management", sees: "All jobs and every report: P&L, cash position, profitability." },
+      { name: "Management", sees: "Every booking and every report: P&L, cash position, profitability." },
       { name: "Accounting", sees: "Invoices, payments, notes, statements, the ledger and reports." },
-      { name: "Operations", sees: "Jobs, bookings, containers, B/Ls and shipment documents." },
-      { name: "Sales", sees: "Quotations, built on current rates, and their customers' jobs." },
-      { name: "Pricing", sees: "Vendor buying rates by route, container type and validity window." },
+      { name: "Operations", sees: "Edits bookings, carrier bookings, containers, B/Ls and shipment documents." },
+      { name: "Sales", sees: "Quotations built on current rates, converted into bookings they can edit." },
+      { name: "Pricing", sees: "Route rates by route, container type and validity window, and quotations." },
     ],
     assistantName: "AI assistant",
     assistantText: "Inherits the role of whoever is chatting. Ask for something outside your role and it says so.",
@@ -36,14 +36,14 @@ const copy = {
       "ستة أدوار محددة، تُطبَّق بالطريقة نفسها في كل وحدة وفي المساعد الذكي. الصلاحيات ليست إعداداً على شاشة، بل قاعدة يلتزم بها النظام كله.",
     roles: [
       { name: "المدير", sees: "كل شيء، إضافة إلى المستخدمين والأدوار وفئات المصروفات." },
-      { name: "الإدارة العليا", sees: "جميع ملفات الشحن وكل التقارير: الأرباح والخسائر (P&L) والوضع النقدي والربحية." },
+      { name: "الإدارة العليا", sees: "جميع الحجوزات وكل التقارير: الأرباح والخسائر (P&L) والوضع النقدي والربحية." },
       {
         name: "المحاسبة",
         sees: "الفواتير والمدفوعات والإشعارات الدائنة والمدينة وكشوف الحساب ودفتر الأستاذ والتقارير.",
       },
-      { name: "العمليات", sees: "ملفات الشحن والحجوزات والحاويات وبوالص الشحن (B/L) ومستندات الشحنات." },
-      { name: "المبيعات", sees: "عروض الأسعار المبنية على الأسعار الحالية، وملفات الشحن الخاصة بعملائهم." },
-      { name: "التسعير", sees: "أسعار الشراء من الموردين حسب المسار ونوع الحاوية وفترة الصلاحية." },
+      { name: "العمليات", sees: "تعديل الحجوزات وحجوزات الناقلين والحاويات وبوالص الشحن (B/L) ومستندات الشحنات." },
+      { name: "المبيعات", sees: "عروض الأسعار المبنية على الأسعار الحالية، وتحويلها إلى حجوزات يمكنهم تعديلها." },
+      { name: "التسعير", sees: "أسعار المسارات حسب المسار ونوع الحاوية وفترة الصلاحية، وعروض الأسعار." },
     ],
     assistantName: "المساعد الذكي",
     assistantText: "يأخذ دور الشخص الذي يحادثه. وإذا طلبت شيئاً خارج صلاحياتك، يخبرك بذلك.",

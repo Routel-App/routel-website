@@ -20,7 +20,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
   en: {
     tagline: "The operating system for freight forwarders",
     description:
-      "Routel is the freight forwarding system with a built-in AI assistant that calls tools and runs your operations automatically: shipments, quotations, bookings, invoicing and live accounting in one place.",
+      "Routel is the freight forwarding system with a built-in AI assistant that calls tools and runs your operations automatically: quotations, bookings, route rates, invoicing and live accounting in one place.",
     nav: [
       { label: "Features", href: "/features" },
       { label: "AI Assistant", href: "/platform/ai-assistant", hint: "Built into Routel: calls tools and runs your operations automatically" },
@@ -33,7 +33,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
   ar: {
     tagline: "نظام التشغيل لشركات الشحن والتخليص",
     description:
-      "Routel نظام شحن متكامل بمساعد ذكي مدمج يستدعي الأدوات وينفّذ عملياتك تلقائيًا: الشحنات وعروض الأسعار والحجوزات والفواتير والمحاسبة الفورية في مكان واحد.",
+      "Routel نظام شحن متكامل بمساعد ذكي مدمج يستدعي الأدوات وينفّذ عملياتك تلقائيًا: عروض الأسعار والحجوزات وأسعار المسارات والفواتير والمحاسبة الفورية في مكان واحد.",
     nav: [
       { label: "الميزات", href: "/features" },
       { label: "المساعد الذكي", href: "/platform/ai-assistant", hint: "مدمج داخل Routel: يستدعي الأدوات وينفّذ عملياتك تلقائيًا" },
