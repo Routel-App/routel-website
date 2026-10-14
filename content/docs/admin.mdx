@@ -1,0 +1,63 @@
+---
+title: Admin
+description: Every setting for your company lives under Admin — profile, numbering, users and roles, currency and tax, credit terms, mailboxes, the assistant, backups and system health.
+status: complete
+---
+
+**Admin** is the link in the sidebar footer, open to the **Admin** role only; its badge is the System Health count. The menu is grouped into **Company**, **People**, **Finance**, **Integrations** and **System**.
+
+## Company
+
+**Company profile** has four cards: **Company Details** (name, address, phone, e-mail, website, registration number, plus the Arabic name and address on Arabic deployments), **Logo & print** (logo under 2 MB; **Print Theme** Classic or Banner), **Bank Details** (bank, accounts, SWIFT, branch address) and **Invoice Terms**.
+
+**Numbering** sets the **Prefix** (taken from the company name until you set one) and an optional **Branch code** infix such as PKG, giving numbers like MIASPKG26000001. Each document type shows its next number and last issued; choose **Sequential** or **Jump ahead** to a starting number above the last issued. Numbers never go back, and each year starts its own series.
+
+<Callout kind="warning" title="Some changes restart the server">
+  A new prefix or branch code, or a new country and currency, applies with **Apply and restart**.
+</Callout>
+
+## People
+
+**Users & roles**: **Add user** asks for a display name, e-mail and role; users can be renamed or removed later. The six roles are **Admin**, **Management**, **Accounting**, **Operations**, **Sales** and **Pricing**, and the **What each role can access** table shows what each opens. **Who can sign in** limits sign-in to **Allowed Email Domains** and **Allowed Specific Emails**. See [Roles & permissions](/docs/roles).
+
+## Finance
+
+<Fields
+  rows={[
+    ["Currency & tax", "Country & currency, changeable until the first booking or invoice. The USD rate must be above 1 and cannot be cleared. Tax Registration Number, Tax Name and the tax rates offered on charge lines."],
+    ["Charge items", "The catalog of charge names used on bookings, quotations and invoices."],
+    ["Credit terms", "The public Credit Application form: the switch Require an approved credit application for credit terms, the amounts offered, the term (1–365 days), a note and the agreement terms. Open Form shows it; Reset to defaults restores the standard text."],
+  ]}
+/>
+
+## Integrations
+
+**Email accounts** connects the operations and finance mailboxes through OAuth (**Continue with** your provider), with **Reconnect** and **Disconnect**. See [Email sync](/docs/email-sync).
+
+**AI Assistant** shows **Usage and limits**: messages and tokens over 30 days, the model, and **Messages per person per day** (0 means no limit). **What the assistant did** logs its actions, each with **Undo**. See [AI Assistant](/docs/ai-assistant).
+
+## System
+
+**Change history** records who changed which setting, when, and the before and after values, including changes made outside the app. **Restore** puts a value back.
+
+**Backups** are automated daily database backups stored in Cloudflare R2, retained indefinitely, running **every 24 hours**; a backup is stale after 30 hours.
+
+**System health** lists the background jobs and when each counts as stale:
+
+| Job | Stale after |
+| --- | --- |
+| db_backup | 30 hours |
+| email_sync | 3 hours |
+| finance_email_sync | 3 hours |
+| zoho_token_cleanup | 192 hours |
+| overdue_alerts | 8 hours |
+| r2_reconciliation | 30 hours |
+
+attachment_backfill is reported only when it fails. **R2 Storage** shows the file count and any orphaned or missing files; **Recent Runs** lists the latest runs.
+
+**Group** appears only when this deployment is part of a group. See [Group](/docs/group).
+
+## Related
+
+- [Getting started](/docs/getting-started)
+- [Roles & permissions](/docs/roles)

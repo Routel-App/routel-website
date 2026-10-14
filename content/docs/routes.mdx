@@ -1,0 +1,70 @@
+---
+title: Routes
+description: Route Rates keeps every buying price you hold per lane, container and shipping line; Route Analytics shows which lanes actually earn.
+status: complete
+---
+
+**Routes** — "Pricing and performance for every shipping route" — has two views: **Route Rates** at `/routes` and **Route Analytics** at `/routes/analytics`. It is locked on plans that exclude it.
+
+## Route Rates
+
+Every signed-in role can add and edit rates. The list shows 50 per page with sortable columns **Route**, **AP**, **Shipping line**, **Container**, **Validity** (start – end), **Status** and **Buying price**. Search covers POL, POD, AP and shipping line; filter by status (**All**, **Active**, **Expiring soon**, **Expired**) or AP.
+
+Status counts the days from today to the end date; a rate is valid through its end date:
+
+| Days left | Status |
+| --- | --- |
+| Fewer than 0 | Expired |
+| 0 to 14 | Expiring |
+| More than 14 | Active |
+
+### New Rate
+
+**New Rate** opens the **New Route Rate** form, which **Edit** reuses:
+
+<Fields
+  rows={[
+    ["POL / POD", "Required. Port of loading and port of discharge."],
+    ["AP, Shipping line", "The vendor you buy from and the carrier."],
+    ["Container type", "20GP, 40GP, 40HC, 45HC, 20RF, 40RF or LCL."],
+    ["Buying price", "Required, in your base currency (e.g. MYR) or USD. Defaults to USD."],
+    ["Validity start / end", "Required. The window the price holds for."],
+    ["Notes", "Free text."],
+  ]}
+/>
+
+### Extend validity and Deactivate
+
+**Extend validity** asks for a **New end date**, saves it and re-activates the rate. **Deactivate** is soft: the rate is marked inactive and its row stays, faded; Extend validity brings it back.
+
+### Import from Excel
+
+<Steps>
+  <Step title="Choose Import from Excel">
+    Accepted files: .xlsx, .xls or .csv. Headers are matched by synonym: POL/Origin/From; POD/Destination/To; Shipping line/Carrier/Line/Vendor; Container/Size/Type; Price/Rate/Cost/Amount/Sea freight; Currency/Ccy; Valid From/Start date/Effective date; Valid To/End date/Expiry/Valid until; Notes/Remarks/Comments.
+  </Step>
+  <Step title="Check the defaults">
+    Each row needs POL, POD, a price and a valid-to date, or it is skipped and reported. Valid-from defaults to today, currency to USD (an unknown currency becomes USD with a warning) and container to 20GP.
+  </Step>
+  <Step title="Review the result">
+    A row matching an existing rate on POL, POD, container and shipping line updates it; otherwise a rate is created; several matches mean the row is skipped. The result lists New rates created, Existing rates updated and the rows needing a look.
+  </Step>
+</Steps>
+
+<Callout kind="note" title="Imports never delete">
+  An import only creates or updates. Rates not in the file are left as they are.
+</Callout>
+
+## Route Analytics
+
+Analytics is part of the Reports module, open to **Admin**, **Management** and **Accounting**. Pick **Last 3, 6, 12 or 24 months** (default 12): bookings created since the same day that many months ago.
+
+- Tiles: **Total Shipments**, **Unique Routes**, **Origins (POL)**, **Destinations (POD)**.
+- **Monthly Shipment Volume**: a bar chart by ETD month (creation month when there is no ETD).
+- **Top Routes by Volume**: the top 20 lanes with Shipments, Revenue (base currency) and **Margin**, coloured green above 25%, blue above 10%, amber above 0%, otherwise red. Click a route for a card with Shipments, Margin, Revenue / Cost / Profit and a **Monthly trend**.
+- **Top Origins (POL)** and **Top Destinations (POD)**: the top 10 of each.
+
+## Related
+
+- [Quotations](/docs/quotations)
+- [Reports](/docs/accounting)

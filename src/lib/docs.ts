@@ -30,24 +30,20 @@ function contentDir(locale: Locale) {
 /** Slug of the page rendered at /docs itself. */
 export const INDEX_SLUG = "introduction";
 
+/** The sidebar mirrors the app's own menu: Dashboard, Daily operations, Partners, Finance, Files, Reports, Admin, then the top bar. */
 const groups: Array<{ title: Record<Locale, string>; slugs: string[] }> = [
-  { title: { en: "Getting started", ar: "البداية" }, slugs: ["introduction", "roles"] },
+  { title: { en: "Getting started", ar: "البداية" }, slugs: ["introduction", "getting-started", "roles"] },
+  { title: { en: "Dashboard & daily operations", ar: "لوحة التحكم والعمليات اليومية" }, slugs: ["dashboard", "bookings", "quotations", "routes"] },
+  { title: { en: "Partners", ar: "الشركاء" }, slugs: ["business-partners"] },
   {
-    title: { en: "Operations", ar: "العمليات" },
-    slugs: ["bookings", "quotations", "bill-of-lading", "documents", "tracking"],
+    title: { en: "Finance", ar: "المالية" },
+    slugs: ["invoicing", "finance-receivables", "credit-notes", "credit-applications", "expenses"],
   },
-  {
-    title: { en: "Finance & accounting", ar: "المالية والمحاسبة" },
-    slugs: ["invoicing", "finance-receivables", "credit-notes", "credit-applications", "expenses", "accounting"],
-  },
-  {
-    title: { en: "Sales & partners", ar: "المبيعات والشركاء" },
-    slugs: ["business-partners", "labeling-center"],
-  },
-  {
-    title: { en: "Trust, access & AI", ar: "الثقة والصلاحيات والذكاء الاصطناعي" },
-    slugs: ["email-sync", "visitor-tracking", "ai-assistant"],
-  },
+  { title: { en: "Files", ar: "الملفات" }, slugs: ["documents", "email-sync"] },
+  { title: { en: "Reports & Group", ar: "التقارير والمجموعة" }, slugs: ["accounting", "group"] },
+  { title: { en: "Admin", ar: "الإدارة" }, slugs: ["admin", "visitor-tracking"] },
+  { title: { en: "Top bar", ar: "الشريط العلوي" }, slugs: ["ai-assistant", "alerts", "labeling-center"] },
+  { title: { en: "For your customers", ar: "لعملائك" }, slugs: ["tracking"] },
 ];
 
 export function docPath(slug: string, locale: Locale = defaultLocale) {

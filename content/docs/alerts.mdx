@@ -1,0 +1,70 @@
+---
+title: Alerts
+description: Five lists of items that need a look right now — arrivals this week, overdue payments, unassigned shipments, missing B/L numbers and follow-ups due.
+status: complete
+---
+
+**Alerts** — "Items requiring immediate attention" — opens from the **Alerts** icon in the top bar. Any signed-in role can use it. On the free plan the top-bar button is hidden.
+
+The side menu, **Needs attention**, lists the five alert types; each has its own URL (`/alerts/arriving-soon` and so on) and a count badge, so you can bookmark the one you check every morning. The lists load when you open the page and again only when you choose **Refresh** — there is no automatic refresh, and the top-bar icon itself carries no count.
+
+## The five lists
+
+An *active* booking here means any status from Booking Pending through Telex Status.
+
+### Arriving Soon
+
+Active bookings whose ETA falls between today and seven days from today. Columns: **Booking #**, **AR**, **Route**, **ETA**, **Status**.
+
+### Payment Overdue
+
+Issued invoices with money still owed and a due date already passed.
+
+| Days overdue | Severity |
+| --- | --- |
+| More than 30 | Critical |
+| More than 7 | High |
+| Otherwise | Moderate |
+
+Columns: **Invoice #**, **AR**, **Due date**, **Days overdue**, **Severity**, **Outstanding**.
+
+### Unassigned
+
+**Unassigned Shipments**: active bookings with no operations staff assigned. Open the booking and set the operations staff to clear it.
+
+### Missing BL
+
+**Missing BL Number**: bookings at SI Submitted, Vessel Loaded, Departed, In Transit, Arrived or Telex Status that still have no B/L number recorded. See [Bill of Lading](/docs/bill-of-lading).
+
+### Follow-ups Due
+
+Pending follow-ups dated today or earlier, oldest first, each marked with how late it is (for example *3d late*). Follow-ups are created on the booking or in the [Labeling Center](/docs/labeling-center).
+
+<Callout kind="tip" title="Alerts versus the Dashboard">
+  The Dashboard's "Needs your attention" block is a summary of counts; Alerts is the working list with the rows
+  themselves. Keep Alerts open while you clear them, then Refresh to see what is left.
+</Callout>
+
+## Badges elsewhere
+
+Some counts live on the menu item they belong to rather than in Alerts:
+
+<Fields
+  rows={[
+    ["Invoices (red)", "Overdue invoices."],
+    ["Receivables & Payables (amber)", "Payment suggestions waiting for review."],
+    ["Documents (amber)", "Incoming documents pending review."],
+    ["Labeling Center icon", "Labels due today or overdue."],
+  ]}
+/>
+
+<Callout kind="permission">
+  Every signed-in role can open Alerts and all five lists. Fixing what they show — assigning staff, recording a B/L number, collecting a payment — follows the usual permissions; see
+  [Roles & permissions](/docs/roles).
+</Callout>
+
+## Related
+
+- [Dashboard](/docs/dashboard)
+- [Invoicing](/docs/invoicing)
+- [Labeling Center](/docs/labeling-center)

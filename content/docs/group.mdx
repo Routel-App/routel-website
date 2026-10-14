@@ -1,0 +1,54 @@
+---
+title: Group
+description: Run several legal entities as one group — each branch on its own deployment, with a shared dashboard in USD and one sign-in across branches.
+status: complete
+---
+
+A **group** is several Routel deployments, one per legal entity. Each branch has its own server, database, base currency and document numbering; nothing is shared at the database level, and branches talk to each other server to server. When every branch uses the same identity app you sign in once for all of them. Roles are set per branch, so you may be Admin in one and have no access to another.
+
+## Joining a group
+
+A branch is joined to a group in its hosting configuration, not from a screen in the app. Ask Routel to add the branch, giving the group name, the branch's short code and its URL.
+
+<Callout kind="note" title="For administrators who host their own deployment">
+  Four settings are set together, all or none: `GROUP_NAME`; `GROUP_BRANCHES`, a JSON list of
+  `{ code, name, url }` where the code is 2–6 letters or digits; `GROUP_SHARED_SECRET`, at least 32 characters, sent
+  between branches as an `x-group-secret` header; and `BRANCH_CODE`, which defaults to the numbering infix and must be
+  one of the codes in the list.
+</Callout>
+
+## Who sees it
+
+**Group** appears in the sidebar only when the deployment is part of a group, and only for the Reports roles: **Admin**, **Management** and **Accounting**. It is plan-locked in the same way as Reports.
+
+## The Group dashboard
+
+The caption reads "As of … — X of N branches reporting; all amounts USD". Each branch has 8 seconds to answer; one that does not is left out.
+
+<Fields
+  rows={[
+    ["Revenue (USD)", "All time to date, with this month's figure."],
+    ["Gross profit (USD)", "With margin and cost."],
+    ["AR outstanding (USD)", "With the overdue amount and count."],
+    ["Open bookings", "With the total number of bookings and pending invoices."],
+  ]}
+/>
+
+The **Branches** table has one row per branch: Branch, **Books in** (its base currency), Revenue, Cost, Profit, Margin, **AR outstanding**, **AP outstanding**, Open bookings, **Your role** (or *no access*) and **Open branch** (or *This branch*), with a Group total row in USD. Below it, a card per branch shows revenue, cost, profit and this month in its own currency, with its rate as "1 USD = …". The chart **Monthly revenue vs cost — whole group (USD)** covers the last 12 months.
+
+<Callout kind="warning" title="Each branch converts at its own rate">
+  Totals are all time to date, and every branch converts to USD at the rate in its own Settings → Currency & tax.
+</Callout>
+
+## Switching branches
+
+The company name at the top of the sidebar is the switcher. In a group it lists every branch by code and name — choose one to **Switch branch** — plus **Group dashboard**. Outside a group it offers **Request a new branch**.
+
+## Settings → Group
+
+In a group, Admin gains a **Group** tab that pings each branch and shows Reachable (in ms) or Not checked, Books in, and Country / time zone. **Check again** repeats the check.
+
+## Related
+
+- [Reports](/docs/accounting)
+- [Admin](/docs/admin)
