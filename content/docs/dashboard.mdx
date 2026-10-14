@@ -1,0 +1,62 @@
+---
+title: Dashboard
+description: The first page after sign-in — what needs a look today, revenue and profit to date, recent bookings, the pipeline and customer balances.
+status: complete
+---
+
+The **Dashboard** is the page you land on after signing in: "A snapshot of bookings, revenue, and what needs a look today." Any signed-in role can open it, and it is included on the free plan. Its sections appear in the order below.
+
+## Needs your attention
+
+This block shows only when something is listed. Each card is a link, and a card whose source your role cannot read is left out.
+
+| Card | Opens | Shows when |
+| --- | --- | --- |
+| *N* Overdue Invoices (red) | Invoices, filtered to overdue | An issued invoice is past its due date with money owed |
+| *N* Pending Invoices | Invoices | Invoices are draft, unpaid or final |
+| *N* Labels Due Today / Overdue | Labeling Center | A label is due today or earlier |
+| *N* Documents Pending Review | Documents | Incoming files wait in the review queue |
+| *N* Payment Suggestions to Review | Receivables & Payables inbox | The finance mailbox produced suggestions |
+| *N* Pending Business Partner Registrations | Business Partners | A partner self-registered and awaits approval |
+| 1 database backup is missing or overdue (red) | Admin → Backups | No backup has completed in the last 30 hours |
+| 1 setting to choose: this branch's country and currency, before the first booking | Admin → Currency & tax | The country is still the default |
+| *N* background jobs are failing or overdue — check System Health (red) | Admin → System health | A job has failed or is stale ("Could not check system health" if the check itself fails) |
+
+## KPI tiles
+
+<Fields
+  rows={[
+    ["{Currency} Revenue", "Revenue in your base currency (e.g. MYR), with Outstanding: the amount still unpaid."],
+    ["USD Revenue", "The same for invoices issued in USD, with its own Outstanding line."],
+    ["Gross Profit", "Base and USD profit, a Total ({currency} eq.) line, and the cost beneath it."],
+    ["Total Bookings", "Every booking to date, with the number of pending invoices."],
+  ]}
+/>
+
+<Callout kind="note" title="How the figures are counted">
+  All four tiles cover all time up to today. Revenue comes from issued invoices by invoice date, excludes sales tax,
+  and is net of credit and debit notes. Outstanding and overdue amounts are as of today.
+</Callout>
+
+## Recent Bookings
+
+The 8 newest bookings by creation date, each with its number, status, customer, POL → POD and ETD/ETA. **View all** opens the full list. See [Bookings](/docs/bookings).
+
+## Booking Pipeline
+
+A count of bookings per status, all time, each with a share bar.
+
+## AR Balances
+
+Shown when there is data: one row per business partner, sorted by name, with **Outstanding** per currency or **All settled**. The **Total** line is invoiced amounts plus debit notes. **View all** opens Business Partners.
+
+<Callout kind="permission">
+  Every signed-in role can open the Dashboard. The attention cards follow your other permissions: if you cannot read
+  Invoices, the invoice cards are not shown. See [Roles & permissions](/docs/roles).
+</Callout>
+
+## Related
+
+- [Alerts](/docs/alerts)
+- [Invoicing](/docs/invoicing)
+- [Getting started](/docs/getting-started)

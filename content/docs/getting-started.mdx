@@ -1,0 +1,76 @@
+---
+title: Getting started
+description: Your first ten minutes in Routel — the guided setup, the country and currency choice, and the first things to add before your first booking.
+status: complete
+---
+
+## Your first ten minutes
+
+When an admin signs in before setup is complete, the assistant opens by itself (once per browser) with **Welcome to Routel — let's set up your company** and a progress bar such as **3 of 11**. Choose **Start setup** and it walks you through the checklist below. Nothing is saved until you confirm each step. A warning dot on the assistant button counts the details still missing.
+
+| # | Step | Required |
+| --- | --- | --- |
+| 1 | Company name | Yes |
+| 2 | Company name in Arabic | On Arabic deployments |
+| 3 | Company registration number | Yes |
+| 4 | Document numbering | No — done once reviewed or a document is issued |
+| 5 | Company logo | No |
+| 6 | Company address | Yes |
+| 7 | Company phone or e-mail | Yes |
+| 8 | Tax registration number | No |
+| 9 | Bank details for invoices | No |
+| 10 | Team members and their roles | No — done with more than one user, or a plan without roles |
+| 11 | Charge types | No |
+
+Setup is complete when every required step is done.
+
+<Callout kind="note" title="Assistant modes">
+  The assistant runs in **full** mode when your plan includes it (Growth or Enterprise, or the add-on). On other plans
+  it runs in **onboarding** mode — setup only, admins only — while setup is incomplete and for 30 days after the first
+  account was created. After that it is **off** until the plan includes it.
+</Callout>
+
+## Country and currency
+
+Currency is not a checklist step. While the country is still the default, the dashboard shows a card: **1 setting to choose: this branch's country and currency, before the first booking**. It opens **Settings → Currency & tax**, where you pick the country and base currency; applying restarts the server. The choice is fixed once the first booking or invoice exists.
+
+## First actions
+
+<Steps>
+  <Step title="Users & roles">
+    In Admin → Users & roles, add each team member with a display name, e-mail and role. See [Roles & permissions](/docs/roles).
+  </Step>
+  <Step title="Business partners">
+    Add your customers and vendors under Business Partners. See [Business Partners](/docs/business-partners).
+  </Step>
+  <Step title="Route rates">
+    Enter buying prices under Routes, or choose Import from Excel to load a rate sheet in one go. See [Routes](/docs/routes).
+  </Step>
+  <Step title="Charge items">
+    Review the catalog of charge names used on quotations, bookings and invoices under Admin → Charge items.
+  </Step>
+</Steps>
+
+<Callout kind="warning" title="Free plan limits">
+  The free plan allows 3 bookings in total, for life, with 2 invoices per booking. It has a single admin and no staff
+  roles, file uploads are blocked, and only a short list of features is open. Labels, Alerts, Search and New Quotation
+  are hidden from the top bar, and every other locked item shows a lock icon.
+</Callout>
+
+## Links for your customers
+
+Two pages work without a sign-in:
+
+<Fields
+  rows={[
+    ["/credit-application", "The public credit application form, governed by Admin → Credit terms."],
+    ["/register/partner?as=ar", "Self-registration for a customer (AR)."],
+    ["/register/partner?as=ap", "Self-registration for a vendor (AP). Registrations wait for your approval under Business Partners."],
+  ]}
+/>
+
+## Related
+
+- [Dashboard](/docs/dashboard)
+- [Admin](/docs/admin)
+- [AI Assistant](/docs/ai-assistant)

@@ -1,6 +1,6 @@
 ---
 title: Introduction
-description: What Routel is, who it is for, and how the modules fit together.
+description: What Routel is, and a map of every screen in the system, in the order of its own menu.
 status: complete
 ---
 
@@ -20,27 +20,69 @@ Routel keeps one record of the shipment, the booking, and lets every department 
 
 Because everything posts to one General Ledger as it happens, there are no manual journal entries and no second set of numbers to reconcile.
 
-## The modules
+## The system, screen by screen
 
-| Module | What it does | Guide |
+This index follows the app's own menu, top to bottom. Every page below is complete.
+
+### Daily operations
+
+| Screen | What it does | Guide |
 | --- | --- | --- |
-| Bookings | The core record: shipment details, shipping timeline, carrier booking (AI-read from the carrier's confirmation), Booking Confirmation with revisions, charges and profit, an 11-status lifecycle, activity log | [Read](/docs/bookings) |
-| Business Partners | One record for a customer or vendor, combined AR+AP ledger, statement of account | [Read](/docs/business-partners) |
-| Quotations & Routes | Vendor buying rates by route and container type with validity status, route analytics, and quotations that convert to bookings | [Read](/docs/quotations) |
-| Invoicing | Invoices in your base currency (e.g. MYR) and USD, created from the booking, draft → final → paid, locked once finalized | [Read](/docs/invoicing) |
-| Finance (Receivables & Payables) | A dedicated mailbox, auto-scanned, with AI-proposed payment matches | [Read](/docs/finance-receivables) |
-| Credit & Debit Notes | Formal adjustments against a finalized invoice | [Read](/docs/credit-notes) |
-| Credit Applications | Public trade-credit application, staff approval, active agreement | [Read](/docs/credit-applications) |
-| Accounting Reports | General Ledger, Trial Balance, Cash Position, P&L, AR/AP aging, customer profitability, the tax report (SST, PPN or VAT, per country) | [Read](/docs/accounting) |
-| Bill of Lading | Carrier-style House B/L with annexure and container sheet, generated from the booking | [Read](/docs/bill-of-lading) |
-| Expenses & Payroll | Operating costs outside bookings (rent, salaries, utilities) posted to expense accounts; salary lines linked to staff | [Read](/docs/expenses) |
-| Document Management | Files on every booking, plus an AI review queue for incoming e-mail attachments | [Read](/docs/documents) |
-| Public Shipment Tracking | A no-login status page for your own customers, status timeline only | [Read](/docs/tracking) |
-| Labeling Center | Tag any record with a note, follow-up date and assignee | [Read](/docs/labeling-center) |
-| Role-based Access | Admin, Management, Accounting, Operations, Sales and Pricing roles, enforced everywhere | [Read](/docs/roles) |
-| AI Assistant | Chat in Arabic or English to do real work, with confirmation before anything is saved | [Read](/docs/ai-assistant) |
-| Email Sync | Connect a Zoho or Microsoft 365 mailbox; mail links itself to the booking it belongs to | [Read](/docs/email-sync) |
-| Website Visitor Tracking | Visitor activity on your custom domain, tracked automatically | [Read](/docs/visitor-tracking) |
+| Dashboard | What needs your attention today, revenue and profit to date, the eight newest bookings, the pipeline by status, and customer balances | [Read](/docs/dashboard) |
+| Bookings | The core record: shipment details, shipping timeline, carrier booking (the AI reads the confirmation), Booking Confirmation with revisions, charges and profit, an 11-status lifecycle, activity log | [Read](/docs/bookings) |
+| Quotations | Quotations built on current buying rates, converted into bookings in one click | [Read](/docs/quotations) |
+| Routes | Buying rates per lane and container with validity and Excel import, and route analytics: volume, revenue and margin per lane | [Read](/docs/routes) |
+
+### Partners
+
+| Screen | What it does | Guide |
+| --- | --- | --- |
+| Business Partners | One record for a customer or vendor, a combined AR+AP ledger, statements of account, and the public registration form | [Read](/docs/business-partners) |
+
+### Finance
+
+| Screen | What it does | Guide |
+| --- | --- | --- |
+| Invoices | Tax invoices in your base currency and USD created from the booking's sale lines; draft → final → paid, locked once final | [Read](/docs/invoicing) |
+| Receivables & Payables | A finance mailbox scanned for payments, with matches proposed by the AI and confirmed by a person; vendor costs and payments | [Read](/docs/finance-receivables) |
+| Credit & Debit Notes | Formal adjustments against a finalised invoice | [Read](/docs/credit-notes) |
+| Credit Applications | The public credit application form, staff approval, and the active agreement | [Read](/docs/credit-applications) |
+| Expenses | Operating costs outside bookings (rent, salaries, utilities) posted to expense accounts, with payroll lines linked to staff | [Read](/docs/expenses) |
+
+### Files
+
+| Screen | What it does | Guide |
+| --- | --- | --- |
+| Documents | Each booking's documents, plus the AI review queue for incoming e-mail attachments | [Read](/docs/documents) |
+| Email Archive | Zoho or Microsoft 365 mail linked to its booking automatically | [Read](/docs/email-sync) |
+
+### Reports and Group
+
+| Screen | What it does | Guide |
+| --- | --- | --- |
+| Reports | General Ledger, Trial Balance, Cash Position, P&L, AR/AP aging, customer profitability, the country's tax report | [Read](/docs/accounting) |
+| Group | Every branch side by side, consolidated in USD at each branch's own rate | [Read](/docs/group) |
+
+### Admin
+
+| Screen | What it does | Guide |
+| --- | --- | --- |
+| Admin | Company profile, numbering, users and roles, currency and tax, charge items, credit terms, email accounts, the assistant's usage and log, change history, backups, system health | [Read](/docs/admin) |
+| Website visitor tracking | Visitor activity on your own domain, tracked automatically | [Read](/docs/visitor-tracking) |
+
+### The top bar
+
+| Screen | What it does | Guide |
+| --- | --- | --- |
+| AI assistant | Does the work by chat, in Arabic or English, and confirms before anything is saved | [Read](/docs/ai-assistant) |
+| Alerts | Five lists refreshed on demand: arriving soon, payment overdue, unassigned, missing B/L, follow-ups due | [Read](/docs/alerts) |
+| Labeling Center | A label on any record, with a note, a follow-up date and an owner | [Read](/docs/labeling-center) |
+
+### For your customers
+
+| Page | What it does | Guide |
+| --- | --- | --- |
+| Public tracking | A status lookup for your customers with no login: booking, B/L or container number plus their company name or account ID | [Read](/docs/tracking) |
 
 ## How a booking flows
 
@@ -71,11 +113,8 @@ Invoices and books run in exactly two currencies: your **base currency** (MYR in
 
 ## Where to start
 
+- Setting up a new company: [Your first ten minutes](/docs/getting-started).
 - If you run operations, start with [Bookings](/docs/bookings).
-- If you run the books, start with [Invoicing](/docs/invoicing).
-- If you want to know what the assistant can and cannot do, read [AI Assistant](/docs/ai-assistant).
-
-<Callout kind="tip" title="These docs are growing">
-  Pages marked "soon" in the sidebar describe a module that is built and working, but whose detailed guide is still being
-  written.
-</Callout>
+- If you run the accounts, start with [Invoices](/docs/invoicing).
+- To see what the assistant can and cannot do, read [AI assistant](/docs/ai-assistant).
+- Who sees what: [Roles and permissions](/docs/roles).
