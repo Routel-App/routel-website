@@ -1,87 +1,134 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "framer-motion";
-import type { ComponentProps, ReactNode } from "react";
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  useEffect,
+  useRef,
+  type CSSProperties,
+  type ReactElement,
+  type ReactNode,
+} from "react";
+import { cn } from "@/lib/utils";
 
-const EASE = [0.22, 1, 0.36, 1] as const;
+/**
+ * Scroll reveals, done in CSS (globals.css, "Reveal").
+ *
+ * The server renders content fully visible. The inline script in the root
+ * layout adds `js` to <html> before first paint, and only then are
+ * [data-reveal] elements held back until an IntersectionObserver marks them
+ * `is-in`. So a page without JavaScript, a crawler or a link preview always
+ * sees the whole page; prefers-reduced-motion skips the motion entirely; and
+ * if the scripts never run, a CSS failsafe shows everything after 3.5s.
+ */
 
-const revealVariants: Variants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: (delay: number = 0) => ({
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: EASE, delay },
-  }),
-};
+const observers = new Map<number, IntersectionObserver>();
 
-type RevealProps = Omit<ComponentProps<typeof motion.div>, "children"> & {
+function observerFor(amount: number) {
+  document.documentElement.classList.add("reveal-ready");
+  let io = observers.get(amount);
+  if (!io) {
+    io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          e.target.classList.add("is-in");
+          io!.unobserve(e.target);
+        }
+      },
+      { threshold: amount, rootMargin: "0px 0px -6% 0px" },
+    );
+    observers.set(amount, io);
+  }
+  return io;
+}
+
+function useRevealRef<T extends HTMLElement>(amount: number) {
+  const ref = useRef<T>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") {
+      el.classList.add("is-in");
+      return;
+    }
+    const io = observerFor(amount);
+    io.observe(el);
+    return () => io.unobserve(el);
+  }, [amount]);
+  return ref;
+}
+
+type RevealProps = {
   children: ReactNode;
+  className?: string;
+  /** Seconds to wait once in view. */
   delay?: number;
-  /** Trigger once the element is this far into view (0..1). */
+  /** Trigger once this share of the element is in view (0..1). */
   amount?: number;
 };
 
-/**
- * Fades and lifts children into view the first time they scroll on screen.
- * Small, quick and respectful of prefers-reduced-motion.
- */
-export function Reveal({ children, delay = 0, amount = 0.25, ...rest }: RevealProps) {
-  const reduce = useReducedMotion();
-  if (reduce) return <div className={rest.className}>{children}</div>;
+/** Fades and lifts children into view the first time they scroll on screen. */
+export function Reveal({ children, className, delay = 0, amount = 0.2 }: RevealProps) {
+  const ref = useRevealRef<HTMLDivElement>(amount);
+  const style = delay ? ({ "--reveal-delay": `${Math.round(delay * 1000)}ms` } as CSSProperties) : undefined;
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount }}
-      variants={revealVariants}
-      custom={delay}
-      {...rest}
-    >
+    <div ref={ref} data-reveal="" className={className} style={style}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
-const groupVariants: Variants = {
-  hidden: {},
-  visible: (stagger: number = 0.08) => ({ transition: { staggerChildren: stagger, delayChildren: 0.05 } }),
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 14 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: EASE } },
-};
-
-type GroupProps = Omit<ComponentProps<typeof motion.div>, "children"> & {
+type GroupProps = {
   children: ReactNode;
+  className?: string;
+  /** Seconds between consecutive <RevealItem> children. */
   stagger?: number;
   amount?: number;
 };
 
 /** Staggers the reveal of each direct <RevealItem> child. */
-export function RevealGroup({ children, stagger = 0.08, amount = 0.2, ...rest }: GroupProps) {
-  const reduce = useReducedMotion();
-  if (reduce) return <div className={rest.className}>{children}</div>;
+export function RevealGroup({ children, className, stagger = 0.08, amount = 0.15 }: GroupProps) {
+  const ref = useRevealRef<HTMLDivElement>(amount);
+  let i = 0;
+  const items = Children.map(children, (child) => {
+    if (!isValidElement(child) || child.type !== RevealItem) return child;
+    const index = i++;
+    return cloneElement(child as ReactElement<ItemProps>, { __delayMs: Math.round(index * stagger * 1000) + 50 });
+  });
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount }}
-      variants={groupVariants}
-      custom={stagger}
-      {...rest}
-    >
-      {children}
-    </motion.div>
+    <div ref={ref} data-reveal-group="" className={className}>
+      {items}
+    </div>
   );
 }
 
-export function RevealItem({ children, ...rest }: Omit<ComponentProps<typeof motion.div>, "children"> & { children: ReactNode }) {
-  const reduce = useReducedMotion();
-  if (reduce) return <div className={rest.className}>{children}</div>;
+type ItemProps = { children: ReactNode; className?: string; __delayMs?: number };
+
+export function RevealItem({ children, className, __delayMs = 0 }: ItemProps) {
   return (
-    <motion.div variants={itemVariants} {...rest}>
+    <div
+      data-reveal-item=""
+      className={cn(className)}
+      style={{ "--reveal-delay": `${__delayMs}ms` } as CSSProperties}
+    >
       {children}
-    </motion.div>
+    </div>
+  );
+}
+
+/**
+ * Plays a shot's [data-step] parts in order (each sets its own --step) the
+ * first time it scrolls into view, e.g. the assistant chat: request, tool
+ * calls, then the proposal. The wrapper itself doesn't move. Same rules as
+ * Reveal: visible without JS, static with prefers-reduced-motion.
+ */
+export function Replay({ children, className, amount = 0.35 }: { children: ReactNode; className?: string; amount?: number }) {
+  const ref = useRevealRef<HTMLDivElement>(amount);
+  return (
+    <div ref={ref} data-replay="" className={className}>
+      {children}
+    </div>
   );
 }

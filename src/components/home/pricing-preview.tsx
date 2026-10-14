@@ -27,7 +27,7 @@ export async function PricingPreview() {
   const locale = await getLocale();
   const t = copy[locale];
   return (
-    <Section id="pricing">
+    <Section id="pricing" tone="muted">
       <SectionHeading eyebrow={t.eyebrow} title={t.title} description={t.description} />
       <div className="mt-14">
         <PricingTiers />

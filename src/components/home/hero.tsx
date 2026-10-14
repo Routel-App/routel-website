@@ -2,7 +2,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import Link from "@/components/i18n/link";
-import { Reveal } from "@/components/motion/reveal";
+import { Replay, Reveal } from "@/components/motion/reveal";
 import { getLocale } from "@/lib/locale-server";
 import type { Locale } from "@/lib/i18n";
 import { DashboardShot } from "@/components/shots/dashboard-shot";
@@ -92,9 +92,9 @@ export async function Hero() {
             <DashboardShot locale={locale} />
           </ShotScaler>
           {/* The assistant at work, floating over the dashboard's corner. */}
-          <div className="absolute end-0 top-20 hidden w-[400px] [zoom:0.72] md:block lg:-end-4 lg:top-24 lg:[zoom:0.82]">
+          <Replay amount={0.2} className="absolute end-0 top-6 hidden w-[400px] [zoom:0.5] md:block lg:-end-4 lg:[zoom:0.64]">
             <AssistantChatShot locale={locale} />
-          </div>
+          </Replay>
         </Reveal>
       </Container>
     </section>
