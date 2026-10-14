@@ -1,29 +1,38 @@
 ---
-title: Quotations & Route Rates
-description: Store vendor buying rates by route and container type, issue quotations on top of them, and convert accepted quotes into jobs.
+title: Quotations & Routes
+description: Store vendor buying rates by route and container type, issue quotations on top of them, convert accepted quotes into bookings, and see how every route performs.
 status: complete
 ---
 
-Routel keeps two records apart: the **route rate**, what a vendor charges you for a lane, maintained by **Pricing**, and the **quotation**, what you charge the customer for it, built by **Sales** on top of a current rate. Keeping both in the system means a quote is never built on an expired price, and an accepted quote turns into a job without anyone re-typing it.
+Routel keeps two records apart: the **route rate**, what a vendor charges you for a lane, maintained by **Pricing**, and the **quotation**, what you charge the customer for it, built by **Sales** on top of a current rate. Keeping both in the system means a quote is never built on an expired price, and an accepted quote turns into a booking without anyone re-typing it.
 
-## Route rates
+## Routes
 
-A route rate is one vendor's buying price for one lane and one equipment type, valid for a period.
+**Routes** in the menu is where pricing and performance for every shipping route live, on two tabs: **Route Rates** and **Route Analytics**.
+
+### Route Rates
+
+A route rate is one vendor's buying price for one lane (POL → POD) and one container type, valid for a period.
 
 <Fields
   rows={[
-    ["Vendor", "The carrier, NVOCC or co-loader offering the rate."],
-    ["Origin / destination", "Port of loading and port of discharge."],
+    ["Vendor (AP)", "The carrier, NVOCC or co-loader you buy from."],
+    ["Shipping line", "The line the cargo actually sails with."],
+    ["POL / POD", "Port of loading and port of discharge."],
     ["Container type", "20GP, 40GP, 40HC and so on. One rate per type."],
     ["Currency and amount", "The buying price in the vendor's currency, usually USD for ocean freight."],
-    ["Valid from / valid to", "The validity window: active, flagged as expiring within 14 days, or expired. Expired rates are hidden from quotation by default."],
+    ["Validity", "The validity window, shown as a status: Active, Expiring or Expired. Expired rates are hidden from quotation by default."],
     ["Notes", "Free-text: surcharges included, transit time, routing, anything Sales should know before quoting."],
   ]}
 />
 
-### Keeping rates current
+#### Keeping rates current
 
-Rates change often. Routel does not delete expired rates; it keeps them for history and stops offering them when you build a quotation. Rates expiring within 14 days are flagged so Pricing can chase a refreshed rate before it lapses, not after a quotation fails. When a vendor sends a new rate sheet, either add the rates one by one or **bulk-import the whole sheet from Excel** in one go. Old and new can coexist, and the quotation screen only shows what is valid on the day.
+Rates change often. Routel does not delete expired rates; it keeps them for history and stops offering them when you build a quotation. Rates about to lapse show as **Expiring**, so Pricing can chase a refreshed rate before it runs out, not after a quotation fails. When a vendor sends a new rate sheet, add rates one by one with **New Rate** or **Import from Excel** to load the whole sheet in one go. If a vendor simply holds a price for longer, **Extend validity** instead of re-entering it. Old and new can coexist, and the quotation screen only shows what is valid on the day.
+
+### Route Analytics
+
+The **Route Analytics** tab shows how your lanes actually perform: total shipments, unique routes, top routes by volume, top origins and destinations, monthly volume, and revenue, cost, profit and margin. Use it to see which lanes are worth pricing more aggressively, and which earn less than they look.
 
 <Callout kind="tip" title="Ask the assistant to add rates">
   "Add a route rate: Maersk, Port Klang to Jebel Ali, 40HC, USD 1,450, valid to 31 December." The assistant proposes
@@ -63,17 +72,18 @@ A quotation is issued to a customer for a route and equipment, priced on top of 
 | Declined | Customer said no. Kept for the record. |
 | Expired | Validity date passed without acceptance. |
 
-## Converting a quotation into a job
+## Converting a quotation into a booking
 
-Open an accepted quotation and choose **Convert to job**. Routel creates the job with the customer, route, equipment, selling lines and the vendor rate carried across as the expected vendor cost. Operations then completes the booking, containers and B/L. See [Shipments & Jobs](/docs/shipments).
+Open an accepted quotation and choose **Convert to Booking**. Routel creates the booking with the customer, route, equipment and the quotation's charges carried across. If the quotation offered several routes, you pick the one the customer accepted, and only that route's charges are copied. Operations then completes the carrier booking, containers and B/L. See [Bookings](/docs/bookings).
 
-The quotation stays linked to the job, so anyone can see what was promised against what was billed.
+The quotation becomes read-only, with a **Converted** badge and a link to the booking, so anyone can see what was promised against what was billed.
 
 ## Through the assistant
 
 "Quote Al Noor Trading for a 40HC Port Klang to Jeddah using the Maersk rate" produces a proposed quotation with the valid rate selected and the customer's usual charges added. Confirm to issue it.
 
 <Callout kind="permission">
-  **Pricing** and **Admin** manage route rates. **Sales** and **Admin** build quotations from them. **Operations**
-  converts accepted quotations into jobs. **Management** can view all quotations and the margin on each.
+  **Pricing** maintains route rates. Quotations are open to **Admin**, **Management**, **Sales** and **Pricing**;
+  converting an accepted quotation creates a booking, which **Admin**, **Management**, **Operations** and **Sales** can
+  edit.
 </Callout>

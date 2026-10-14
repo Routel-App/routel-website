@@ -15,14 +15,14 @@ const copy = {
     metaTitle: "About",
     metaDescription: `${site.name} started as a working freight forwarder's own internal system for running its operations, before it was offered to other forwarders as a hosted service.`,
     heroTitle: "Built inside a working freight forwarder, not a product lab",
-    heroLead: `${site.name} grew out of the internal system a working freight forwarder in Malaysia built to run its own shipments every day. It was running on real jobs before it had a name — now it’s offered to other forwarders as a hosted service.`,
+    heroLead: `${site.name} grew out of the internal system a working freight forwarder in Malaysia built to run its own shipments every day. It was running on real bookings before it had a name — now it’s offered to other forwarders as a hosted service.`,
     demo: "Request a demo",
     platform: "See the platform",
     originEyebrow: "Where it came from",
     originTitle: "A system that had to work before it could be sold",
     originDescription: `Most software gets built for a market first and a real customer second. ${site.name} ran the other way: a working freight forwarder built it to run its own operations, used it on real shipments, and only then opened it up to other forwarders.`,
     originBody:
-      "That order matters. A feature only made it into the product because a real job needed it — not because it would look good on a comparison chart. The result is a platform shaped by how a forwarding office actually works: one job, many hands, and a ledger that has to be right at the end of the month.",
+      "That order matters. A feature only made it into the product because a real shipment needed it — not because it would look good on a comparison chart. The result is a platform shaped by how a forwarding office actually works: one booking, many hands, and a ledger that has to be right at the end of the month.",
     principlesEyebrow: "What we build around",
     principlesTitle: "A few things we don't compromise on",
     principles: [
@@ -32,11 +32,11 @@ const copy = {
       },
       {
         title: "One record, not a patchwork",
-        text: "A spreadsheet of rates, a template for quotations, a separate accounting package and a shared drive of PDFs is how a number gets re-typed or a document gets lost. Routel keeps one job record that every department works from.",
+        text: "A spreadsheet of rates, a template for quotations, a separate accounting package and a shared drive of PDFs is how a number gets re-typed or a document gets lost. Routel keeps one booking record that every department works from.",
       },
       {
         title: "AI that proposes, a person who decides",
-        text: "The assistant can read and report freely, but every write — a job, an invoice, an expense — stops as a proposal until someone confirms it. Nothing gets created on a misread sentence.",
+        text: "The assistant can read and report freely, but every write — a booking, an invoice, an expense — stops as a proposal until someone confirms it. Nothing gets created on a misread sentence.",
       },
       {
         title: "Arabic is not an afterthought",
@@ -52,14 +52,14 @@ const copy = {
     metaTitle: "من نحن",
     metaDescription: `بدأ ${site.name} نظاماً داخلياً لشركة شحن عاملة تدير به عملياتها، قبل أن يُقدَّم لشركات الشحن الأخرى كخدمة مستضافة.`,
     heroTitle: "بُني داخل شركة شحن عاملة، لا في مختبر منتجات",
-    heroLead: `نشأ ${site.name} من النظام الداخلي الذي بنته شركة شحن عاملة في ماليزيا لإدارة شحناتها اليومية. كان يعمل على ملفات شحن حقيقية قبل أن يحمل اسماً — وهو اليوم متاح لشركات الشحن الأخرى كخدمة مستضافة.`,
+    heroLead: `نشأ ${site.name} من النظام الداخلي الذي بنته شركة شحن عاملة في ماليزيا لإدارة شحناتها اليومية. كان يعمل على حجوزات حقيقية قبل أن يحمل اسماً — وهو اليوم متاح لشركات الشحن الأخرى كخدمة مستضافة.`,
     demo: "اطلب عرضاً تجريبياً",
     platform: "تعرّف على المنصة",
     originEyebrow: "من أين جاء",
     originTitle: "نظام كان عليه أن يعمل قبل أن يُباع",
     originDescription: `تُبنى معظم البرمجيات للسوق أولاً ثم لعميل حقيقي لاحقاً. أما ${site.name} فسار في الاتجاه المعاكس: بنته شركة شحن عاملة لإدارة عملياتها، واستخدمته على شحنات حقيقية، ثم فتحته بعد ذلك فقط لشركات الشحن الأخرى.`,
     originBody:
-      "هذا الترتيب مهم. لم تدخل أي ميزة إلى المنتج إلا لأن ملف شحن حقيقياً احتاج إليها — لا لأنها ستبدو جيدة في جدول مقارنة. والنتيجة منصة تشكّلت وفق طريقة عمل مكتب الشحن فعلاً: ملف شحن واحد، وأيادٍ كثيرة، ودفتر أستاذ يجب أن يكون صحيحاً في نهاية الشهر.",
+      "هذا الترتيب مهم. لم تدخل أي ميزة إلى المنتج إلا لأن شحنة حقيقية احتاجت إليها — لا لأنها ستبدو جيدة في جدول مقارنة. والنتيجة منصة تشكّلت وفق طريقة عمل مكتب الشحن فعلاً: حجز واحد، وأيادٍ كثيرة، ودفتر أستاذ يجب أن يكون صحيحاً في نهاية الشهر.",
     principlesEyebrow: "ما نبني حوله",
     principlesTitle: "أمور لا نتهاون فيها",
     principles: [
@@ -69,11 +69,11 @@ const copy = {
       },
       {
         title: "سجل واحد، لا خليط من الأدوات",
-        text: "جدول بيانات للأسعار، وقالب لعروض الأسعار، وبرنامج محاسبة منفصل، ومجلد مشترك مليء بملفات PDF — هكذا يُعاد إدخال رقم يدوياً أو يضيع مستند. أما Routel فيحتفظ بسجل واحد لملف الشحن تعمل منه كل الأقسام.",
+        text: "جدول بيانات للأسعار، وقالب لعروض الأسعار، وبرنامج محاسبة منفصل، ومجلد مشترك مليء بملفات PDF — هكذا يُعاد إدخال رقم يدوياً أو يضيع مستند. أما Routel فيحتفظ بسجل حجز واحد تعمل منه كل الأقسام.",
       },
       {
         title: "ذكاء اصطناعي يقترح، وإنسان يقرر",
-        text: "يستطيع المساعد الذكي القراءة وإعداد التقارير بحرية، لكن كل عملية كتابة — ملف شحن أو فاتورة أو مصروف — تتوقف كاقتراح حتى يؤكدها شخص ما. لا يُنشأ أي شيء بسبب جملة أُسيء فهمها.",
+        text: "يستطيع المساعد الذكي القراءة وإعداد التقارير بحرية، لكن كل عملية كتابة — حجز أو فاتورة أو مصروف — تتوقف كاقتراح حتى يؤكدها شخص ما. لا يُنشأ أي شيء بسبب جملة أُسيء فهمها.",
       },
       {
         title: "العربية ليست فكرة لاحقة",

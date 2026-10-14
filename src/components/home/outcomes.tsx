@@ -29,15 +29,15 @@ const copy = {
     eyebrow: "Why forwarders switch",
     title: "Less chasing, fewer spreadsheets, a margin you can see",
     description:
-      "Routel is built around the way a forwarding office actually works: one job, many hands, and a ledger that has to be right.",
+      "Routel is built around the way a forwarding office actually works: one booking, many hands, and a ledger that has to be right.",
     outcomes: [
       {
         title: "One record, zero re-keying",
-        text: "The quotation becomes the job. The job produces the B/L and the invoice. Nobody types a container number twice.",
+        text: "The quotation becomes the booking. The booking produces the B/L and the invoice. Nobody types a container number twice.",
       },
       {
-        title: "Margin on every job, as it happens",
-        text: "Vendor costs land against the job in their own currency, converted at the rate you recorded. Gross profit is visible before the file closes.",
+        title: "Margin on every booking, as it happens",
+        text: "Vendor costs land on the booking as cost lines next to its sale charges. Profit and margin are visible before the shipment closes.",
       },
       {
         title: "Close the month in minutes",
@@ -53,7 +53,7 @@ const copy = {
       },
     ],
     illustrations: {
-      chain: ["Quote", "Job", "B/L", "Invoice"],
+      chain: ["Quote", "Booking", "B/L", "Invoice"],
       bars: { revenue: "Revenue", cost: "Cost", profit: "Profit" },
       margin: "33.3% margin · updates as costs land",
       trialBalance: "Trial balance",
@@ -72,15 +72,15 @@ const copy = {
     eyebrow: "لماذا تنتقل شركات الشحن إلى Routel",
     title: "متابعة أقل، جداول بيانات أقل، وهامش ربح واضح أمامك",
     description:
-      "صُمّم Routel على طريقة عمل مكتب الشحن الفعلية: ملف شحن واحد، وأيدٍ كثيرة، ودفتر أستاذ يجب أن يكون صحيحاً.",
+      "صُمّم Routel على طريقة عمل مكتب الشحن الفعلية: حجز واحد، وأيدٍ كثيرة، ودفتر أستاذ يجب أن يكون صحيحاً.",
     outcomes: [
       {
         title: "سجل واحد، دون إعادة إدخال",
-        text: "عرض السعر يتحول إلى ملف شحن. وملف الشحن يُصدر بوليصة الشحن (B/L) والفاتورة. لا أحد يكتب رقم الحاوية مرتين.",
+        text: "عرض السعر يتحول إلى حجز. والحجز يُصدر بوليصة الشحن (B/L) والفاتورة. لا أحد يكتب رقم الحاوية مرتين.",
       },
       {
         title: "هامش الربح على كل شحنة، لحظة بلحظة",
-        text: "تُسجَّل تكاليف المورّدين على ملف الشحن بعملتها، وتُحوَّل بسعر الصرف الذي سجّلته. يظهر إجمالي الربح قبل إغلاق الملف.",
+        text: "تُسجَّل تكاليف المورّدين في الحجز بنودَ تكلفة بجانب رسوم البيع. ويظهر الربح والهامش قبل إغلاق الشحنة.",
       },
       {
         title: "أغلق الشهر في دقائق",
@@ -96,7 +96,7 @@ const copy = {
       },
     ],
     illustrations: {
-      chain: ["عرض سعر", "ملف شحن", "B/L", "فاتورة"],
+      chain: ["عرض سعر", "حجز", "B/L", "فاتورة"],
       bars: { revenue: "الإيرادات", cost: "التكلفة", profit: "الربح" },
       margin: "هامش 33.3% · يتحدّث مع وصول التكاليف",
       trialBalance: "ميزان المراجعة",
@@ -105,7 +105,7 @@ const copy = {
       credits: "دائن",
       balanced: "متوازن، دون قيود محاسبية يدوية",
       roles: ["المدير", "الإدارة العليا", "المحاسبة", "العمليات", "المبيعات", "التسعير"],
-      proposed: "مقترح: تسجيل الإيجار، MYR 6,500",
+      proposed: "مقترح: تسجيل الإيجار، SAR 6,500",
       postsTo: "يُرحَّل إلى 6100 · الإيجار والمرافق",
       confirm: "تأكيد",
       edit: "تعديل",

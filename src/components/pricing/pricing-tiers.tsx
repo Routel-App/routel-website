@@ -26,13 +26,13 @@ const tierCopy = {
   en: [
     {
       name: "Free",
-      blurb: "Try Routel on a few real jobs before you commit.",
+      blurb: "Try Routel on a few real bookings before you commit.",
       price: "$0",
       period: "forever",
       features: [
-        "3 jobs, lifetime (not monthly)",
-        "Up to 2 invoices per job",
-        "Dashboard, Jobs, Invoices, Customers",
+        "3 bookings, lifetime (not monthly)",
+        "Up to 2 invoices per booking",
+        "Dashboard, Bookings, Invoices, Customers",
         "Single admin user",
         "AI setup assistant for your first 30 days",
         "Every other page is visible, locked until you upgrade",
@@ -46,7 +46,7 @@ const tierCopy = {
       price: "$79",
       period: "per month",
       features: [
-        "Unlimited jobs and invoices",
+        "Unlimited bookings and invoices",
         "Staff accounts with role-based access",
         "10 GB document storage",
         "AI setup assistant for your first 30 days",
@@ -89,13 +89,13 @@ const tierCopy = {
   ar: [
     {
       name: "المجانية",
-      blurb: "جرّب Routel على عدد من الشحنات الحقيقية قبل أن تلتزم.",
+      blurb: "جرّب Routel على عدد من الحجوزات الحقيقية قبل أن تلتزم.",
       price: "$0",
       period: "مجاناً دائماً",
       features: [
-        "3 ملفات شحن طوال مدة الاستخدام (وليس شهرياً)",
-        "حتى فاتورتين لكل ملف شحن",
-        "لوحة التحكم، والشحنات، والفواتير، والعملاء",
+        "3 حجوزات طوال مدة الاستخدام (وليس شهرياً)",
+        "حتى فاتورتين لكل حجز",
+        "لوحة التحكم، والحجوزات، والفواتير، والعملاء",
         "مستخدم واحد بصلاحية المدير",
         "مساعد الإعداد الذكي لأول 30 يوماً",
         "جميع الصفحات الأخرى ظاهرة، ومقفلة حتى الترقية",
@@ -109,7 +109,7 @@ const tierCopy = {
       price: "$79",
       period: "شهرياً",
       features: [
-        "ملفات شحن وفواتير بلا حدود",
+        "حجوزات وفواتير بلا حدود",
         "حسابات للموظفين مع صلاحيات حسب الدور",
         "مساحة 10 GB لتخزين المستندات",
         "مساعد الإعداد الذكي لأول 30 يوماً",

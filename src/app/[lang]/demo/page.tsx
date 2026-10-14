@@ -10,14 +10,14 @@ import { DemoForm } from "./demo-form";
 const copy = {
   en: {
     metaTitle: "Request a demo",
-    metaDescription: "See Routel run a real freight job from quotation to ledger, on your routes and rates.",
+    metaDescription: "See Routel run a real freight booking from quotation to ledger, on your routes and rates.",
     eyebrow: "Request a demo",
     title: "Twenty minutes, one real shipment, your numbers.",
     lead: "We don’t do slide decks. Bring a route you ship often and we’ll run it through Routel end to end, live.",
     interested: "Interested in:",
     agenda: [
-      "A job created from your own route and container type",
-      "Booking, House B/L and invoice generated from that job",
+      "A quotation on your own route and container type, converted into a booking",
+      "Booking Confirmation, House B/L and invoice generated from that booking",
       "The assistant proposing an invoice and reading a vendor bill",
       "Live P&L, aging and cash position after the invoice posts",
       "Roles: what Operations, Sales and Accounting each see",
@@ -25,14 +25,14 @@ const copy = {
   },
   ar: {
     metaTitle: "اطلب عرضاً تجريبياً",
-    metaDescription: "شاهد Routel يدير ملف شحن حقيقياً من عرض السعر حتى دفتر الأستاذ، على خطوطك وأسعارك.",
+    metaDescription: "شاهد Routel يدير حجزاً حقيقياً من عرض السعر حتى دفتر الأستاذ، على خطوطك وأسعارك.",
     eyebrow: "اطلب عرضاً تجريبياً",
     title: "عشرون دقيقة، شحنة حقيقية واحدة، وأرقامك أنت.",
     lead: "لا نعرض شرائح تقديمية. أحضر خط شحن تتعامل معه كثيراً، وسنمرّره عبر Routel من البداية إلى النهاية، مباشرةً.",
     interested: "الباقة التي تهمك:",
     agenda: [
-      "ملف شحن يُنشأ من خط الشحن ونوع الحاوية الخاصين بك",
-      "الحجز وبوليصة الشحن الفرعية (House B/L) والفاتورة، تُنشأ كلها من ملف الشحن نفسه",
+      "عرض سعر على مسارك ونوع الحاوية الخاص بك، يتحول إلى حجز",
+      "تأكيد الحجز وبوليصة الشحن الفرعية (House B/L) والفاتورة، تُنشأ كلها من الحجز نفسه",
       "المساعد الذكي يقترح فاتورة ويقرأ فاتورة مورّد",
       "الربح والخسارة (P&L) وأعمار الذمم والوضع النقدي مباشرةً بعد ترحيل الفاتورة",
       "الأدوار: ما يراه كل من فريق العمليات والمبيعات والمحاسبة",

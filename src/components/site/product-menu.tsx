@@ -14,7 +14,7 @@ const groups: Array<{ label: Record<Locale, string>; tone: "teal" | "ink"; slugs
   {
     label: { en: "Operations", ar: "العمليات" },
     tone: "teal",
-    slugs: ["shipments", "bookings", "quotations", "bill-of-lading", "documents", "tracking"],
+    slugs: ["bookings", "quotations", "bill-of-lading", "documents", "tracking"],
   },
   {
     label: { en: "Finance & accounting", ar: "المالية والمحاسبة" },

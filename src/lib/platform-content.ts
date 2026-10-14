@@ -29,86 +29,52 @@ export type PlatformContent = {
  * percentages we haven't measured.
  */
 export const platformContent: Record<string, PlatformContent> = {
-  shipments: {
-    eyebrow: "Shipments & Jobs",
-    title: "One job record, from enquiry to delivered",
+  bookings: {
+    eyebrow: "Bookings",
+    title: "One booking, from quotation to shipment closed",
     description:
-      "Every shipment is one record — POL/POD, shipper and consignee, vessel and voyage, containers, weight and cargo description, B/L numbers and incoterms — moving through the same 11-stage lifecycle everywhere it shows up.",
+      "The booking is Routel's core record: shipment details, the shipping timeline, the carrier booking, charges and profit, invoices, the Bill of Lading, documents and every change made along the way — all under one booking number, moving through one 11-status lifecycle.",
     stats: [
-      { value: "11", label: "status stages, booking pending to delivered" },
+      { value: "11", label: "statuses, booking pending to shipment closed" },
       { value: "1", label: "record every other module hangs off" },
-      { value: "0", label: "re-typed container numbers between screens" },
+      { value: "0", label: "times you retype the carrier's confirmation" },
     ],
     painPoints: [
-      "The vessel name lives in the booking email, the container list in a spreadsheet, and the status in whoever you last called.",
-      "Different people's mental model of 'where the shipment is' drifts apart the moment it's not written down the same way everywhere.",
+      "The vessel name lives in the carrier's email, the container list in a spreadsheet, the charges in another file, and the status in whoever you last called.",
+      "A booking confirmation is re-sent after a change, and nobody can say which version the customer is working from.",
       "A customer's 'where's my container' email means re-checking three places before you can answer.",
     ],
     solutionIntro:
-      "Routel gives the shipment one home. Everything — the booking, the containers, the Bill of Lading, the invoice, the vendor costs, the documents — hangs off the same job record, so there's one place to check and one status everyone sees.",
+      "Routel gives every shipment one home: the booking. Shipment details, the carrier booking, charges, invoices, the B/L and the documents all live on the same record, with AI reading the carrier's paperwork so nobody types it twice — one place to check, one status everyone sees.",
     features: [
-      { title: "Every field that matters", description: "POL/POD, shipper/consignee, vessel/voyage, containers, weight and cargo description, B/L numbers, incoterms, and the full chain of operational dates from cutting date to ETA." },
-      { title: "An 11-stage lifecycle", description: "Booking pending → booking confirmed → cargo received → SI submitted → vessel loaded → departed → in transit → arrived → customs clearance → delivered, or cancelled." },
-      { title: "Same badge, everywhere", description: "The Jobs list, the Dashboard, customer and vendor views, and the public tracking page all read the same status off the same record." },
-      { title: "A complete audit log", description: "Every field edit, status change and document upload is logged with who did it and when — never editable after the fact." },
+      { title: "Shipment details", description: "POL/POD, shipper and consignee, vessel/voyage, containers and container type, incoterms, weight, chargeable weight, volume, cargo description, HBL and MBL numbers, operations staff and sales person. Upload a B/L and AI reads it in." },
+      { title: "Shipping timeline", description: "Gate-in cut-off, SI cut-off, ETD, SOB, ATD, ETA and ATA, kept on the booking instead of buried in an inbox." },
+      { title: "Carrier booking, read for you", description: "Shipping line, Carrier Booking No., containers, notify party and booking notes. \"Read Carrier Confirmation\" has AI read the carrier's PDF or a linked e-mail, and you tick what to save." },
+      { title: "Booking Confirmation with revisions", description: "The first one you issue is the original; any change afterwards makes the next one a \"Revised Booking Confirmation — Revision N\", so everyone knows which version is current." },
+      { title: "Charges and profit", description: "Cost (AP) and sale (AR) lines in Booking Charges — AI can read a vendor invoice into cost lines — with a Profit Summary (AP · AR · Net) shown to finance roles only." },
+      { title: "Invoice and B/L from the header", description: "Create Invoice turns the booking's sale (AR) lines into draft invoices; Generate Bill of Lading builds the House B/L from the booking's own data." },
+      { title: "An 11-status lifecycle", description: "Booking Pending → Booking Confirmed → Gate In → SI Submitted → Vessel Loaded → Departed → In Transit → Arrived → Telex Status → Shipment Closed, or Cancelled." },
+      { title: "Activity log, labels, tasks and follow-ups", description: "Every field change and every confirmation issued is logged with who did it and when; labels, tasks, follow-ups and documents sit on the same page." },
     ],
     workflow: [
-      { title: "Created", description: "From an accepted quotation, directly by Operations, or by describing it to the AI assistant." },
-      { title: "Booked and documented", description: "The booking, containers and documents attach to the same job as they come in." },
-      { title: "Tracked", description: "Status moves through its 11 stages as the shipment actually progresses, visible to your team and, within limits, your customer." },
-      { title: "Closed out", description: "Delivered status locks the operational record; invoices, costs and reports stay fully visible." },
+      { title: "Created", description: "From an accepted quotation with \"Convert to Booking\", directly with New Booking, or by describing it to the AI assistant." },
+      { title: "Confirmed with the carrier", description: "Read Carrier Confirmation fills in the carrier booking; issue the Booking Confirmation to your customer, with numbered revisions if anything changes." },
+      { title: "Tracked", description: "Status moves through its stages as the shipment actually progresses, visible to your team and, within limits, your customer." },
+      { title: "Invoiced and closed", description: "Create Invoice from the sale lines, generate the B/L, and move the booking to Shipment Closed — invoices, charges and reports stay fully visible." },
     ],
     personas: [
-      { role: "Operations", detail: "Lives in the job day to day — booking, containers, documents, status." },
-      { role: "Sales", detail: "Opens the jobs that belong to their customers to check on progress." },
-      { role: "Management", detail: "Sees every job, company-wide, without asking anyone for an update." },
+      { role: "Operations", detail: "Runs the booking day to day — carrier booking, timeline, documents, status and the Bill of Lading." },
+      { role: "Sales", detail: "Creates and edits bookings for their customers and follows their progress." },
+      { role: "Accounting", detail: "Invoices from the booking's sale lines and keeps an eye on the Profit Summary." },
+      { role: "Management", detail: "Sees every booking, company-wide, without asking anyone for an update." },
     ],
     faqs: [
-      { q: "Who can open a job?", a: "Any signed-in member of staff — the core record isn't walled off by department. Specific actions, like generating the Bill of Lading, stay gated to the relevant role." },
-      { q: "Can a customer see the job directly?", a: "Not the full record — they see a status timeline on the public tracking page, never commercially sensitive details like the master B/L or vessel name." },
-      { q: "What happens when a shipment is cancelled?", a: "Cancelled is a lifecycle branch, not a deletion — the job and everything recorded against it stays on file." },
+      { q: "Who can open and edit a booking?", a: "Every signed-in member of staff can read a booking. Editing is open to Admin, Management, Operations and Sales; specific actions, like generating the Bill of Lading, stay with the relevant role, and the Profit Summary is shown to finance roles only." },
+      { q: "What happens when the carrier changes something?", a: "Read the new confirmation or edit the booking; the change lands in the activity log, and the next Booking Confirmation you issue goes out as a numbered revision. Regenerate the B/L if it was already issued." },
+      { q: "Can a customer see the booking directly?", a: "Not the full record — they see a status timeline on the public tracking page, never commercially sensitive details like the master B/L or vessel name." },
+      { q: "What happens when a booking is cancelled?", a: "Cancelled is a status, not a deletion — the booking and everything recorded against it stays on file." },
     ],
-    related: ["bookings", "bill-of-lading", "tracking"],
-  },
-
-  bookings: {
-    eyebrow: "Bookings",
-    title: "The carrier's confirmation, read once and used everywhere",
-    description:
-      "Record a vessel booking against its job — carrier, vessel and voyage, equipment, cut-offs, shipper/consignee/notify party — or just upload the confirmation PDF and let the assistant fill it in for you.",
-    stats: [
-      { value: "1", label: "upload instead of a form to fill by hand" },
-      { value: "0", label: "times you retype the vessel name" },
-    ],
-    painPoints: [
-      "A booking confirmation PDF arrives, and the same vessel, voyage and cut-off dates get retyped into a spreadsheet, an email to the customer, and eventually the Bill of Lading.",
-      "Rollovers and schedule changes mean updating the same details in multiple places, and hoping nothing gets missed.",
-      "Cut-off dates buried in a PDF attachment are easy to lose track of until it's too late.",
-    ],
-    solutionIntro:
-      "A booking is recorded once, against its job, and feeds the vessel, voyage and dates straight through to the Bill of Lading — with AI reading the confirmation PDF so nobody has to type it twice.",
-    features: [
-      { title: "AI reads the confirmation", description: "Upload a booking confirmation PDF and GPT-4.1 extracts vessel, voyage, dates, equipment and booking reference to prefill the form." },
-      { title: "Shipper, consignee, notify party", description: "Captured on the booking itself, so they're already correct when the B/L is generated later." },
-      { title: "Every cut-off tracked", description: "Cargo, documentation and any other deadline the carrier gives you, attached to the job instead of buried in an inbox." },
-      { title: "Rollovers handled cleanly", description: "Edit the booking when the carrier changes something — the job updates with it, logged in the audit trail." },
-    ],
-    workflow: [
-      { title: "Confirmation arrives", description: "By email or upload, from the carrier or your own Email Sync inbox." },
-      { title: "Fields extracted", description: "The assistant reads the PDF and proposes a booking with every field filled in." },
-      { title: "Checked and confirmed", description: "A person checks the proposal against the paper confirmation and confirms it." },
-      { title: "Job updated", description: "Vessel, voyage, ETD and ETA populate the job and are ready for the Bill of Lading." },
-    ],
-    personas: [
-      { role: "Operations", detail: "Creates and edits bookings as carriers confirm or change them." },
-      { role: "Any signed-in staff", detail: "Can view the booking and download the confirmation once the job is open." },
-    ],
-    faqs: [
-      { q: "Do I have to type the booking in by hand?", a: "No — upload the confirmation PDF and the assistant extracts the fields for you to check and confirm." },
-      { q: "What happens on a schedule change?", a: "Edit the booking with the new details; the job updates and the change is logged. Regenerate the B/L if it was already issued." },
-      { q: "Does one job ever have more than one booking?", a: "Usually one job has one booking, matching one vessel movement." },
-    ],
-    related: ["shipments", "bill-of-lading", "email-sync"],
+    related: ["quotations", "invoicing", "bill-of-lading"],
   },
 
   "business-partners": {
@@ -121,26 +87,26 @@ export const platformContent: Record<string, PlatformContent> = {
       { value: "AR+AP", label: "netted into one ledger per partner" },
     ],
     painPoints: [
-      "The same company is a customer on one job and a vendor on another, but your system makes you register them twice and keep two records in sync.",
+      "The same company is a customer on one booking and a vendor on another, but your system makes you register them twice and keep two records in sync.",
       "Checking what a partner owes you and what you owe them means pulling two separate reports and adding them up by hand.",
       "A statement of account only tells half the story if it only covers one side of the relationship.",
     ],
     solutionIntro:
-      "One partner record carries payment terms, a credit limit, contacts and a combined AR+AP ledger — whichever side of a deal they're playing on a given job.",
+      "One partner record carries payment terms, a credit limit, contacts and a combined AR+AP ledger — whichever side of a deal they're playing on a given booking.",
     features: [
       { title: "No 'add a customer' vs 'add a vendor' step", description: "One record; an invoice references them as the customer, a vendor cost references them as the vendor." },
       { title: "Combined AR + AP ledger", description: "What they owe you and what you owe them, netted in one place instead of two disconnected balances." },
       { title: "Printable statement of account", description: "Opening balance, invoices, payments, costs and closing balance for a period, generated as PDF." },
-      { title: "Vendor cost tracking per job", description: "Costs recorded in the vendor's own currency, converted at the job's exchange rate, feeding gross profit immediately." },
+      { title: "Vendor costs per booking", description: "Cost (AP) lines recorded in Booking Charges in the vendor's own currency, feeding the booking's Profit Summary immediately." },
     ],
     workflow: [
       { title: "Create the partner once", description: "Name, contacts, payment terms — no need to decide upfront whether they're a customer or a vendor." },
-      { title: "Use them on a job", description: "Reference them as the customer being invoiced, the vendor being billed, or both across different jobs." },
+      { title: "Use them on a booking", description: "Reference them as the customer being invoiced, the vendor being billed, or both across different bookings." },
       { title: "Track the relationship", description: "The combined ledger and statement of account update as invoices, costs and payments are recorded." },
     ],
     personas: [
       { role: "Accounting", detail: "Manages payment terms, credit limits and statements." },
-      { role: "Operations", detail: "Records vendor costs against jobs as they come in." },
+      { role: "Operations", detail: "Records vendor cost lines on bookings as vendor invoices come in." },
       { role: "Any signed-in staff", detail: "Can view a partner record to check the relationship." },
     ],
     faqs: [
@@ -155,50 +121,51 @@ export const platformContent: Record<string, PlatformContent> = {
     eyebrow: "Quotations & Route Rates",
     title: "Quotes built on rates that are never out of date",
     description:
-      "Store vendor buying rates by route and container type with a validity window that flags expiry 14 days out, bulk-import a whole rate sheet from Excel, and convert an accepted quotation straight into a job.",
+      "Keep vendor buying rates per POL→POD, shipping line and container type in Routes, with validity shown as Active, Expiring or Expired, bulk-import a whole rate sheet from Excel, and convert an accepted quotation straight into a booking.",
     stats: [
       { value: "14", label: "days warning before a rate expires" },
-      { value: "1", label: "click from accepted quote to live job" },
+      { value: "1", label: "click from accepted quote to live booking" },
     ],
     painPoints: [
       "A quote goes out built on a rate that quietly expired last week, and nobody notices until the margin doesn't add up.",
       "A new rate sheet from a vendor means re-typing dozens of lane and container-type combinations by hand.",
-      "An accepted quotation becomes a job by re-entering the same route, equipment and pricing that was already captured once.",
+      "An accepted quotation becomes a booking by re-entering the same route, equipment and charges that were already captured once.",
     ],
     solutionIntro:
-      "Keep the rate book current with 14-day expiry warnings and Excel bulk import, then let an accepted quotation carry its route, equipment and pricing straight into a job — nothing re-typed.",
+      "Keep the rate book current with expiry warnings and Excel bulk import, then let an accepted quotation carry its customer, route and charges straight into a booking — nothing re-typed.",
     features: [
-      { title: "Rates by route and container type", description: "One vendor's buying price for one lane and one equipment type, valid for a period." },
-      { title: "14-day expiry warning", description: "Rates flag as expiring before they lapse, so Pricing can chase a refresh ahead of time, not after a quote fails." },
+      { title: "Route Rates", description: "One vendor's buying price for one POL→POD lane, shipping line and container type, valid for a period — add a New Rate or Extend validity in a click." },
+      { title: "Active, Expiring, Expired", description: "Rates flag as Expiring 14 days before they lapse, so Pricing can chase a refresh ahead of time, not after a quote fails." },
       { title: "Bulk import from Excel", description: "Load a whole rate sheet in one go instead of entering lanes one at a time." },
-      { title: "One-click conversion to a job", description: "An accepted quotation carries its customer, route, equipment and vendor rate straight into a new job." },
+      { title: "Convert to Booking", description: "Pick the route the customer accepted and only that route's charges are copied into a new booking; the quotation turns read-only with a \"Converted\" badge and a link to the booking." },
     ],
     workflow: [
       { title: "Rate stored", description: "Pricing records or imports the vendor's buying rate for a lane and container type." },
       { title: "Quotation built", description: "Sales picks a valid rate, sets the selling price, and adds any other charges." },
       { title: "Sent and tracked", description: "Draft → sent → accepted, declined or expired." },
-      { title: "Converted to a job", description: "An accepted quotation becomes a job in one step, the rate carried across as the expected vendor cost." },
+      { title: "Converted to a booking", description: "An accepted quotation becomes a booking in one step, with the chosen route's charges carried across." },
     ],
     personas: [
-      { role: "Pricing", detail: "Owns the rate book — route rates by lane, container type and validity." },
+      { role: "Pricing", detail: "Owns the rate book in Routes — rates by lane, shipping line, container type and validity — and reads Route Analytics for volume and margin per lane." },
       { role: "Sales", detail: "Builds and sends quotations on top of current rates." },
-      { role: "Operations", detail: "Also has Route Rate access, and completes the booking once a quotation converts." },
+      { role: "Operations", detail: "Picks up the booking once a quotation converts and confirms it with the carrier." },
     ],
     faqs: [
       { q: "What happens to an expired rate?", a: "It's kept for history but hidden from new quotations by default — nothing is deleted." },
       { q: "Can I import a whole rate sheet at once?", a: "Yes — bulk import from Excel instead of entering each lane individually." },
-      { q: "Who manages the rate book versus who quotes?", a: "Pricing (and Admin) manage route rates; Sales (and Admin) build quotations from them." },
+      { q: "Who can work on quotations?", a: "Admin, Management, Sales and Pricing. Pricing usually keeps Route Rates current while Sales quotes from them." },
+      { q: "Where did route analytics go?", a: "It sits next to the rates, on the Route Analytics tab in Routes: total shipments, unique routes, top routes and origins/destinations, monthly volume, and revenue, cost, profit and margin." },
     ],
-    related: ["shipments", "invoicing", "business-partners"],
+    related: ["bookings", "invoicing", "business-partners"],
   },
 
   invoicing: {
     eyebrow: "Invoicing",
     title: "Invoices that can't go out ahead of the shipment",
     description:
-      "A draft invoice is clearly watermarked until it's finalized — and finalizing is only possible once the job's Bill of Lading number is set, so nothing bills a shipment that hasn't actually moved.",
+      "Create Invoice on a booking turns its sale (AR) charge lines into draft invoices, clearly watermarked until finalized — and finalizing is only possible once the booking's B/L number (MBL) is set, so nothing bills a shipment that hasn't actually moved.",
     stats: [
-      { value: "2", label: "currencies, MYR and USD" },
+      { value: "2", label: "currencies — your base currency (e.g. MYR) and USD" },
       { value: "1", label: "rule: no B/L number, no finalized invoice" },
     ],
     painPoints: [
@@ -207,18 +174,18 @@ export const platformContent: Record<string, PlatformContent> = {
       "Reading a vendor's cost invoice and re-typing every line into your own system is slow and invites typos.",
     ],
     solutionIntro:
-      "Invoices move from a clearly-watermarked draft to a locked, finalized document only once the job's B/L number exists — with AI reading vendor invoices to save the re-typing.",
+      "Invoices move from Draft to Final to Paid, and only reach Final once the booking's B/L number exists — with AI reading vendor invoices into cost lines to save the re-typing.",
     features: [
-      { title: "Draft, clearly marked", description: "Prints \"DRAFT TAX INVOICE — NOT OFFICIAL\" until it's finalized, so it's never confused for a real bill." },
-      { title: "B/L number required to finalize", description: "An invoice can't be locked in until the shipment's Bill of Lading number is set." },
+      { title: "Draft, clearly marked", description: "Prints with a \"DRAFT TAX INVOICE\" watermark until it's finalized, so it's never confused for a real bill. Only drafts can be edited." },
+      { title: "B/L number required to finalize", description: "An invoice can't be finalized until the booking's B/L number (MBL) is set." },
       { title: "Locked line items", description: "Finalizing assigns the real invoice number and stops further edits — adjustments go through a Credit or Debit Note instead." },
-      { title: "AI reads vendor invoices", description: "Upload a vendor's cost invoice and the assistant extracts the line items to prefill your own." },
+      { title: "AI reads vendor invoices", description: "Upload a vendor's invoice and the assistant extracts its lines into the booking's cost (AP) charges." },
     ],
     workflow: [
-      { title: "Draft created", description: "From the job's selling price, with lines still editable." },
+      { title: "Draft created", description: "Create Invoice on the booking turns its sale (AR) charge lines into a draft, still editable." },
       { title: "Reviewed", description: "Adjust descriptions, quantities and prices; add anything agreed after quotation." },
-      { title: "Finalized", description: "Once the B/L number is set, finalizing locks it, assigns the number, and posts to the ledger." },
-      { title: "Paid", description: "Payments record against it, partial or full, tracked in aging until cleared." },
+      { title: "Final", description: "Once the B/L number is set, finalizing locks it, assigns the number, and posts to the ledger." },
+      { title: "Paid", description: "Payments record against it, partial or full; it shows as Unpaid in aging until cleared." },
     ],
     personas: [
       { role: "Accounting", detail: "Drafts, finalizes and records payments against invoices." },
@@ -250,7 +217,7 @@ export const platformContent: Record<string, PlatformContent> = {
     solutionIntro:
       "A second, dedicated mailbox is scanned automatically, proposing matches between incoming mail and open invoices or vendor bills — with a person confirming every single one before anything settles.",
     features: [
-      { title: "A dedicated finance mailbox", description: "Separate from the mailbox Email Sync connects for day-to-day job correspondence." },
+      { title: "A dedicated finance mailbox", description: "Separate from the mailbox Email Sync connects for day-to-day booking correspondence." },
       { title: "Automatic scanning", description: "Every incoming message is checked against open invoices and outstanding vendor bills." },
       { title: "AI-proposed matching suggestions", description: "A candidate pairing between an email and the invoice or bill it probably settles." },
       { title: "Human confirms or rejects", description: "Nothing is settled automatically — a person reviews every suggestion before a payment record is created." },
@@ -267,7 +234,7 @@ export const platformContent: Record<string, PlatformContent> = {
     ],
     faqs: [
       { q: "Does this move money?", a: "No — it matches and records payments. Routel doesn't initiate bank transfers or payment runs." },
-      { q: "Is this the same mailbox as Email Sync?", a: "No — it's a separate, dedicated finance mailbox, kept apart from day-to-day job correspondence." },
+      { q: "Is this the same mailbox as Email Sync?", a: "No — it's a separate, dedicated finance mailbox, kept apart from day-to-day booking correspondence." },
       { q: "What if a suggested match is wrong?", a: "Reject it. Nothing is settled unless a person confirms the match is correct." },
     ],
     related: ["invoicing", "business-partners", "accounting"],
@@ -354,23 +321,23 @@ export const platformContent: Record<string, PlatformContent> = {
     eyebrow: "Accounting Reports",
     title: "Live books, computed from what's already there",
     description:
-      "General Ledger, Trial Balance, Cash Position, P&L, AR and AP aging, an SST summary and customer profitability — every report computed on demand from invoices, payments, costs and expenses, with nothing to close first.",
+      "Profit & Loss, Cash Position, Trial Balance, General Ledger, AR and AP aging, AP outstanding, customer profitability, your country's tax report (SST, PPN or VAT) and Network Partners — every report computed on demand from invoices, payments, costs and expenses, with nothing to close first.",
     stats: [
-      { value: "7", label: "reports, one shared calculation" },
+      { value: "10", label: "reports, one shared calculation, plus data exports" },
       { value: "0", label: "manual journal entries" },
     ],
     painPoints: [
       "Month-end means waiting on someone to run a batch close before the numbers are trustworthy.",
       "Two different reports — one from ops, one from finance — never quite agree because they're built on different exports.",
-      "Finding out margin was wrong happens weeks after the job closed, not while there's still time to do anything about it.",
+      "Finding out margin was wrong happens weeks after the shipment closed, not while there's still time to do anything about it.",
     ],
     solutionIntro:
       "Every report reads straight from the same transactions as they're saved — an invoice, a payment, a vendor cost, an expense — so there's no separate close step and no second set of numbers to reconcile.",
     features: [
       { title: "General Ledger & Trial Balance", description: "Every posting by account, always balanced by construction." },
       { title: "Cash Position", description: "Bank and cash now, plus what's receivable and payable over the coming period." },
-      { title: "P&L with net income", description: "Gross profit from job margins, then operating expenses, down to net income." },
-      { title: "AR/AP aging and SST summary", description: "Overdue receivables and payables bucketed by age, plus a tax summary ready for filing." },
+      { title: "P&L with net income", description: "Gross profit from booking margins, then operating expenses, down to net income." },
+      { title: "Aging, profitability and tax", description: "AR and AP aging, AP outstanding and customer profitability, plus a tax report (SST, PPN or VAT, per country) ready for filing." },
     ],
     workflow: [
       { title: "A transaction is saved", description: "An invoice, payment, vendor cost or expense, recorded in its own module." },
@@ -384,7 +351,8 @@ export const platformContent: Record<string, PlatformContent> = {
     faqs: [
       { q: "Do I need to close the books before running a report?", a: "No — every report reads live from source transactions, nothing to close first." },
       { q: "Can Sales see reports?", a: "Reports are Finance territory — Sales and Pricing are gated to Quotations instead." },
-      { q: "What currency are reports shown in?", a: "MYR, with USD transactions included at the exchange rate recorded on them." },
+      { q: "What currency are reports shown in?", a: "Your base currency (e.g. MYR), with USD transactions included at the exchange rate recorded on them." },
+      { q: "Where are route margins?", a: "Route analytics moved to Routes, next to the route rates — revenue, cost, profit and margin per lane." },
     ],
     related: ["invoicing", "finance-receivables", "expenses"],
   },
@@ -393,52 +361,52 @@ export const platformContent: Record<string, PlatformContent> = {
     eyebrow: "Bill of Lading",
     title: "A House B/L that looks like a carrier issued it",
     description:
-      "Generate a House Bill of Lading with its container annexure directly from a job's own data — parties, vessel, cargo description, incoterms — laid out the way a carrier's B/L actually looks.",
+      "Generate Bill of Lading on a booking produces a House B/L with its container annexure straight from the booking's own data — parties, vessel, cargo description, incoterms — laid out the way a carrier's B/L actually looks.",
     stats: [
-      { value: "1", label: "click to generate from job data" },
+      { value: "1", label: "click to generate from booking data" },
       { value: "2", label: "documents — the B/L and its container annexure" },
     ],
     painPoints: [
-      "A B/L built in a word processor from scratch means re-typing everything that's already sitting on the job.",
+      "A B/L built in a word processor from scratch means re-typing everything that's already sitting on the booking.",
       "A document that doesn't look like a real carrier B/L raises eyebrows with a bank, a consignee or customs.",
-      "An edit to a container after the B/L was generated means the document and the job quietly disagree.",
+      "An edit to a container after the B/L was generated means the document and the booking quietly disagree.",
     ],
     solutionIntro:
-      "The B/L is generated straight from the job's own parties, route, vessel and container rows — formatted like a carrier's document, not a letterhead — and regenerating after a correction keeps the two in sync.",
+      "The B/L is generated straight from the booking's own parties, route, vessel and container rows — formatted like a carrier's document, not a letterhead — and regenerating after a correction keeps the two in sync.",
     features: [
-      { title: "Generated from job data", description: "Shipper, consignee, notify party, vessel/voyage, ports, cargo description, weight, incoterms and freight terms, all pulled from the job." },
+      { title: "Generated from booking data", description: "Shipper, consignee, notify party, vessel/voyage, ports, cargo description, weight, incoterms and freight terms, all pulled from the booking." },
       { title: "Container annexure included", description: "One row per container — number, type, seal, package count — referencing the B/L number." },
       { title: "Carrier-style layout", description: "Boxes, numbering and terms where a consignee, bank or customs officer expects to find them." },
       { title: "Numbered properly", description: "The House B/L number is assigned by Routel; the carrier's Master B/L number is entered once issued." },
     ],
     workflow: [
-      { title: "Job data checked", description: "Parties, route, vessel and containers confirmed accurate." },
-      { title: "Generated", description: "One action produces the B/L and annexure as a single PDF, attached to the job." },
-      { title: "Corrected if needed", description: "Regenerate after any edit so the document matches the job exactly." },
+      { title: "Booking data checked", description: "Parties, route, vessel and containers confirmed accurate." },
+      { title: "Generated", description: "One action produces the B/L and annexure as a single PDF, attached to the booking." },
+      { title: "Corrected if needed", description: "Regenerate after any edit so the document matches the booking exactly." },
     ],
     personas: [
-      { role: "Operations", detail: "Generates and regenerates the B/L." },
-      { role: "Any signed-in staff", detail: "Can download it once it's on the job." },
+      { role: "Operations", detail: "Generates and regenerates the B/L (as can Admin and Management)." },
+      { role: "Any signed-in staff", detail: "Can download it once it's on the booking." },
     ],
     faqs: [
       { q: "What happens if I edit a container after generating?", a: "Regenerate the document — the PDF is a snapshot, not a live view." },
       { q: "Who assigns the House B/L number?", a: "Routel, from your prefix and sequence, the first time it's generated." },
-      { q: "Can the assistant generate it for me?", a: "Yes — ask it to generate the House B/L for a job, subject to the same role check." },
+      { q: "Can the assistant generate it for me?", a: "Yes — ask it to generate the House B/L for a booking, subject to the same role check." },
     ],
-    related: ["shipments", "bookings", "documents"],
+    related: ["bookings", "documents", "invoicing"],
   },
 
   expenses: {
     eyebrow: "Expenses & Payroll",
     title: "Overheads that make net income actually mean something",
     description:
-      "Rent, salaries, utilities, petty cash, commissions and custom categories post straight to a proper operating-expense account the moment they're saved — the difference between gross profit and real net income.",
+      "Operating costs outside bookings — rent, salaries, utilities, petty cash, commissions and custom categories — post straight to a proper operating-expense account the moment they're saved — the difference between gross profit and real net income.",
     stats: [
       { value: "6+", label: "built-in categories, each mapped to an account" },
       { value: "1", label: "click to see it reflected in net income" },
     ],
     painPoints: [
-      "Job costs tell you the margin on shipments, but nobody's tracking whether the company as a whole is actually profitable.",
+      "Booking charges tell you the margin on each shipment, but nobody's tracking whether the company as a whole is actually profitable.",
       "A spreadsheet of overheads at month-end means net income is always a week behind reality.",
       "Salary costs aren't tied to anyone in particular, so per-person payroll cost is a manual calculation every time.",
     ],
@@ -446,7 +414,7 @@ export const platformContent: Record<string, PlatformContent> = {
       "Every overhead — rent, salaries, petty cash, commissions, currency exchange — posts to its own operating-expense account the moment it's saved, so net income in the P&L is always current.",
     features: [
       { title: "Built-in categories", description: "Rent, Salaries, Utilities, Petty cash, Commissions, Currency exchange, each mapped to an account." },
-      { title: "Custom categories", description: "Admin adds new categories, each mapped to its own account, so reporting stays consistent." },
+      { title: "Custom categories", description: "Admin and Management add new categories, each mapped to its own account, so reporting stays consistent." },
       { title: "Salary lines linked to staff", description: "Payroll cost recorded per person and per month — a cost record, not a full payroll engine." },
       { title: "Posts immediately", description: "Paid from a bank account, or left unpaid and tracked as a payable, either way reflected in the GL right away." },
     ],
@@ -463,7 +431,7 @@ export const platformContent: Record<string, PlatformContent> = {
     faqs: [
       { q: "Is this a full payroll system?", a: "No — it's a cost record, not a payroll engine. Routel doesn't compute statutory deductions or produce payslips." },
       { q: "Can an expense be left unpaid?", a: "Yes — it posts to Accounts Payable until it's paid." },
-      { q: "Who can add a new expense category?", a: "Only Admin, so the chart of accounts stays consistent no matter who records the cost." },
+      { q: "Who can add a new expense category?", a: "Admin and Management, so the chart of accounts stays consistent no matter who records the cost." },
     ],
     related: ["accounting", "invoicing", "business-partners"],
   },
@@ -472,7 +440,7 @@ export const platformContent: Record<string, PlatformContent> = {
     eyebrow: "Document Management",
     title: "Every file where the shipment actually is",
     description:
-      "A permanent per-job document store, with file type verified from the file's actual content, plus an AI queue that classifies incoming email attachments and suggests which job they belong to.",
+      "Documents live on the booking, with file type verified from the file's actual content, plus an AI review queue that classifies incoming email attachments and suggests which booking they belong to.",
     stats: [
       { value: "2", label: "layers — manual upload, and AI-reviewed attachments" },
       { value: "100%", label: "of AI suggestions need a human approval" },
@@ -480,71 +448,72 @@ export const platformContent: Record<string, PlatformContent> = {
     painPoints: [
       "The packing list for a shipment is sitting in one person's inbox, and nobody else can find it without asking them directly.",
       "A mislabeled or disguised file type slips through because nothing actually checks what the file really is.",
-      "Attachments on incoming emails have to be manually pulled out and filed against the right job one by one.",
+      "Attachments on incoming emails have to be manually pulled out and filed against the right booking one by one.",
     ],
     solutionIntro:
-      "Documents live with the job, not in someone's inbox — uploaded manually or picked up automatically from linked email, with every file type verified and every AI suggestion reviewed by a person.",
+      "Documents live with the booking, not in someone's inbox — uploaded manually or picked up automatically from linked email, with every file type verified and every AI suggestion reviewed by a person.",
     features: [
       { title: "Content-verified file types", description: "What a file actually is gets checked from its content, not just trusted from the filename." },
       { title: "Uploaded and generated, together", description: "Manual uploads sit alongside the quotation PDF, B/L, invoices and notes Routel generates automatically." },
-      { title: "AI-classified attachments", description: "Incoming email attachments are classified — B/L? booking confirmation? vendor invoice? — with a suggested job match." },
-      { title: "Versioned, never overwritten", description: "A corrected upload keeps the old version; the audit log shows who replaced what." },
+      { title: "AI-classified attachments", description: "Incoming email attachments are classified — B/L, booking confirmation, booking request, vendor invoice or other — with a suggested booking match by booking number, then B/L, then container." },
+      { title: "One-click actions, human-approved", description: "Approve & Create Booking, Approve & Update Booking, Approve & Create Invoice, or Link to Booking — a person approves every one." },
+      { title: "Versioned, never overwritten", description: "A corrected upload keeps the old version; the activity log shows who replaced what." },
     ],
     workflow: [
       { title: "A file arrives", description: "Uploaded directly, or attached to mail through Email Sync." },
-      { title: "Classified", description: "The AI queue suggests what it is and which job it belongs to." },
-      { title: "Approved", description: "A person confirms the suggestion before it's filed anywhere." },
-      { title: "Findable", description: "Filtered by type on the job, or found instantly by asking the assistant." },
+      { title: "Classified", description: "The AI queue suggests what it is and which booking it belongs to." },
+      { title: "Approved", description: "A person picks the action — create or update a booking, create an invoice, or link it — before anything is filed." },
+      { title: "Findable", description: "Filtered by type on the booking, or found instantly by asking the assistant." },
     ],
     personas: [
       { role: "Any signed-in staff", detail: "Views, downloads, uploads and labels documents, and clears the AI review queue." },
     ],
     faqs: [
       { q: "Does the AI file documents automatically?", a: "No — every suggestion needs a person to approve or reject it first." },
-      { q: "What happens to the old version if I upload a correction?", a: "It's kept, not overwritten — the newest is marked current and the audit log shows the change." },
-      { q: "Can I find a document without opening the job?", a: "Yes — ask the assistant, e.g. \"send me the House B/L for JOB-2026-0412.\"" },
+      { q: "What happens to the old version if I upload a correction?", a: "It's kept, not overwritten — the newest is marked current and the activity log shows the change." },
+      { q: "Can I find a document without opening the booking?", a: "Yes — ask the assistant, e.g. \"send me the House B/L for our latest Port Klang booking.\"" },
     ],
-    related: ["email-sync", "shipments", "bill-of-lading"],
+    related: ["email-sync", "bookings", "bill-of-lading"],
   },
 
   "email-sync": {
     eyebrow: "Email Sync",
-    title: "Correspondence that files itself against the right job",
+    title: "Correspondence that files itself against the right booking",
     description:
-      "Connect a Zoho or Microsoft mailbox and incoming and outgoing mail links to the job it belongs to automatically, by scanning for job numbers and booking references.",
+      "Connect a Zoho or Microsoft 365 mailbox and incoming and outgoing mail lands in the Email Archive, linked to its booking automatically when the booking number appears in it or the thread follows on from linked mail — or linked by hand.",
     stats: [
-      { value: "2", label: "supported providers — Zoho and Microsoft" },
+      { value: "2", label: "supported providers — Zoho and Microsoft 365" },
       { value: "1", label: "inbox, not one per person" },
     ],
     painPoints: [
       "The only record of a carrier's reply to a booking question is in one person's personal inbox.",
       "Finding an old email thread about a shipment means searching a mailbox by vague keywords and hoping.",
-      "Attachments on job-related mail have to be manually downloaded and filed, one by one.",
+      "Attachments on booking-related mail have to be manually downloaded and filed, one by one.",
     ],
     solutionIntro:
-      "Connect the mailbox once, and correspondence that mentions a job, booking or B/L number attaches to that job automatically — travelling with the shipment instead of sitting in someone's inbox.",
+      "Connect the mailbox once, and correspondence that mentions a booking number attaches to that booking automatically — travelling with the shipment instead of sitting in someone's inbox.",
     features: [
-      { title: "Zoho or Microsoft", description: "Connect through the provider's own standard authorization screen — Routel never stores the password directly." },
-      { title: "Automatic linking", description: "New mail is scanned for a job number, B/L number, or a known customer or vendor." },
+      { title: "Zoho or Microsoft 365", description: "Connect through the provider's own standard authorization screen — Routel never stores the password directly." },
+      { title: "Automatic linking", description: "Mail links to a booking when its booking number appears in it, or when it follows on in a thread that's already linked. Anything else can be linked manually." },
       { title: "Attachments feed document review", description: "Linked attachments flow into the AI-classified document queue instead of staying stuck in email." },
       { title: "Separate from the finance mailbox", description: "A distinct, dedicated inbox handles payment matching — see Finance (Receivables & Payables)." },
     ],
     workflow: [
-      { title: "Connected", description: "Admin authorizes the mailbox via Zoho or Microsoft." },
-      { title: "Scanned", description: "New mail is checked for recognizable job, booking or B/L references." },
-      { title: "Linked", description: "Matching mail attaches to the right job automatically." },
+      { title: "Connected", description: "Admin authorizes the mailbox via Zoho or Microsoft 365." },
+      { title: "Scanned", description: "New mail is checked for a booking number and for threads already linked to a booking." },
+      { title: "Linked", description: "Matching mail attaches to the right booking automatically; the rest can be linked by hand." },
       { title: "Findable", description: "Ask the assistant instead of searching the mailbox directly." },
     ],
     personas: [
       { role: "Admin", detail: "Connects and manages mailbox sync." },
-      { role: "Any signed-in staff", detail: "Sees linked mail on any job they can already open." },
+      { role: "Any signed-in staff", detail: "Sees linked mail on any booking they can already open." },
     ],
     faqs: [
-      { q: "Is Gmail supported?", a: "Not currently — Zoho and Microsoft 365 are the supported providers." },
+      { q: "Is Gmail or Google Workspace supported?", a: "Not yet — Zoho and Microsoft 365 are the supported providers." },
       { q: "Does Routel see my password?", a: "No — authorization happens through the provider's own standard screen." },
       { q: "Is this the same inbox used for payment matching?", a: "No — that's a separate, dedicated finance mailbox. See Finance (Receivables & Payables)." },
     ],
-    related: ["documents", "shipments", "finance-receivables"],
+    related: ["documents", "bookings", "finance-receivables"],
   },
 
   tracking: {
@@ -557,43 +526,43 @@ export const platformContent: Record<string, PlatformContent> = {
       { value: "0", label: "sensitive details shown — no B/L, vessel or exact dates" },
     ],
     painPoints: [
-      "\"Where is my shipment\" is the single most common customer email, and answering it means stopping to check the job yourself every time.",
+      "\"Where is my shipment\" is the single most common customer email, and answering it means stopping to check the booking yourself every time.",
       "A tracking page that shows too much — container numbers, vessel names, exact dates — leaks information a competitor could use.",
       "A tracking link that works off a guessable number alone can be used to peek at shipments that aren't even the requester's.",
     ],
     solutionIntro:
       "A public page, no login, answers the status question directly — but only once both an exact reference and proof of relationship are given, and only with a status timeline, never the sensitive details.",
     features: [
-      { title: "Two-piece lookup", description: "An exact job, B/L or container number, plus the company name or account number it belongs to." },
+      { title: "Two-piece lookup", description: "The booking number, the B/L number or one full container number, plus the company name or account ID it belongs to." },
       { title: "No partial matches", description: "No search-by-keyword — guessing numbers can't be used to fish for other customers' shipments." },
-      { title: "Status timeline only", description: "The same 11-stage status used internally, with no master B/L, container numbers, vessel or exact dates shown." },
-      { title: "One link for every shipment", description: "Customers plug in their own reference rather than you generating a unique link per job." },
+      { title: "Status timeline only", description: "The same status lifecycle used internally, with no master B/L, container numbers, vessel or exact dates shown." },
+      { title: "One link for every shipment", description: "Customers plug in their own reference rather than you generating a unique link per booking." },
     ],
     workflow: [
       { title: "Customer visits the page", description: "No account needed." },
-      { title: "Enters two references", description: "An exact shipment reference, plus their company name or account number." },
-      { title: "Sees the status", description: "The current stage in the 11-stage lifecycle — nothing more." },
+      { title: "Enters two references", description: "A booking, B/L or full container number, plus their company name or account ID." },
+      { title: "Sees the status", description: "The status timeline, from Booking Pending to Shipment Closed — nothing more." },
     ],
     personas: [
       { role: "Your customers", detail: "Check status without calling or emailing your team." },
-      { role: "Operations", detail: "Keeps the job's status current, which is all the tracking page reflects." },
+      { role: "Operations", detail: "Keeps the booking's status current, which is all the tracking page reflects." },
     ],
     faqs: [
       { q: "Does a customer need to log in?", a: "No — it's a public page, scoped by the two-piece lookup instead." },
       { q: "Can someone see another customer's shipment by guessing a number?", a: "No — a lookup needs both the exact reference and proof of relationship together." },
       { q: "Can a customer see the vessel name or container numbers?", a: "No — only the status timeline. Sensitive details stay inside the product." },
     ],
-    related: ["shipments", "business-partners"],
+    related: ["bookings", "business-partners"],
   },
 
   "labeling-center": {
     eyebrow: "Labeling Center",
     title: "Flag it, and it won't get lost",
     description:
-      "Tag any job, invoice, customer, vendor, quotation or booking with a note, a follow-up date and an assignee — without standing up a separate task-tracking tool.",
+      "Put a label on any record — a booking, an invoice, a business partner, a quotation — with a note, a follow-up date and an assignee, without standing up a separate task-tracking tool.",
     stats: [
-      { value: "6", label: "record types you can tag" },
-      { value: "3", label: "things a tag carries — note, date, assignee" },
+      { value: "3", label: "things a label carries — note, date, assignee" },
+      { value: "0", label: "separate task tools needed" },
     ],
     painPoints: [
       "A \"come back to this\" moment gets handled with a sticky note, a Slack message, or just hoping you remember.",
@@ -601,34 +570,34 @@ export const platformContent: Record<string, PlatformContent> = {
       "Standing up a whole separate task-tracking tool is overkill for flagging a handful of records that need a second look.",
     ],
     solutionIntro:
-      "A tag lives on the record itself — a note, a follow-up date, an assignee — so whoever opens that job or invoice sees the flag in context, with no separate list to remember to check.",
+      "A label lives on the record itself — a note, a follow-up date, an assignee — so whoever opens that booking or invoice sees it in context, with no separate list to remember to check.",
     features: [
-      { title: "Tag any record", description: "Job, Invoice, Customer, Vendor, Quotation or Booking." },
+      { title: "Label any record", description: "Bookings, invoices, customers and vendors, quotations and more — on a booking, labels sit next to its tasks and follow-ups." },
       { title: "A note", description: "Free text on what needs attention and why." },
-      { title: "A follow-up date", description: "Overdue tags are easy to spot at a glance." },
-      { title: "An assignee", description: "Doesn't have to be the person who created the tag — ownership is explicit." },
+      { title: "A follow-up date", description: "Overdue labels are easy to spot at a glance." },
+      { title: "An assignee", description: "Doesn't have to be the person who created the label — ownership is explicit." },
     ],
     workflow: [
-      { title: "Something needs a second look", description: "On a job, invoice, partner, quotation or booking." },
-      { title: "Tagged", description: "A note, a follow-up date, and whoever owns the follow-up." },
-      { title: "Surfaced in context", description: "Shows directly on the record, and in the assignee's own view of what's tagged to them." },
+      { title: "Something needs a second look", description: "On a booking, invoice, partner or quotation." },
+      { title: "Labeled", description: "A note, a follow-up date, and whoever owns the follow-up." },
+      { title: "Surfaced in context", description: "Shows directly on the record, and in the assignee's own view of what's assigned to them." },
     ],
     personas: [
-      { role: "Any signed-in staff", detail: "Can tag any record they can already open, and assign it to anyone with access." },
+      { role: "Any signed-in staff", detail: "Can label any record they can already open, and assign it to anyone with access." },
     ],
     faqs: [
       { q: "Do I need a separate task tool alongside this?", a: "No — it's built specifically to avoid needing one for this kind of flagging." },
-      { q: "Can I assign a tag to someone else?", a: "Yes — the assignee doesn't have to be whoever created the tag." },
-      { q: "Can the assistant create a tag for me?", a: "Yes — describe what needs following up on and it proposes a tag with the note, date and assignee filled in." },
+      { q: "Can I assign a label to someone else?", a: "Yes — the assignee doesn't have to be whoever created the label." },
+      { q: "Can the assistant create a label for me?", a: "Yes — describe what needs following up on and it proposes a label with the note, date and assignee filled in." },
     ],
-    related: ["shipments", "business-partners", "invoicing"],
+    related: ["bookings", "business-partners", "invoicing"],
   },
 
   roles: {
     eyebrow: "Role-based Access",
     title: "Six roles, enforced the same way everywhere",
     description:
-      "Admin and Management see every module, narrowing only at system configuration. Accounting owns Finance and Reports, Sales and Pricing own Quotations, Operations owns the Bill of Lading and Route Rates — everything else is open to any signed-in staff.",
+      "Admin and Management see every module, narrowing only at system configuration. Accounting owns Finance, Reports and Expenses, Sales and Pricing own Quotations, Operations owns the Bill of Lading, and Operations and Sales edit bookings — which every signed-in member of staff can read.",
     stats: [
       { value: "6", label: "named roles" },
       { value: "1", label: "set of rules, enforced the same in the UI and the AI assistant" },
@@ -636,15 +605,15 @@ export const platformContent: Record<string, PlatformContent> = {
     painPoints: [
       "Permissions configured as checkboxes on a settings screen drift out of sync with what's actually enforced underneath.",
       "The AI assistant quietly has more (or less) access than the person using it, because it was wired up separately from the real permission system.",
-      "Walling off entire modules by department means people constantly asking for exceptions just to do their job.",
+      "Walling off entire modules by department means people constantly asking for exceptions just to get their work done.",
     ],
     solutionIntro:
       "Permissions are checked on the server for every request, by the same rules whether the action came from a screen or from a sentence typed into the assistant — narrowing only the specific sensitive modules, not the whole product.",
     features: [
-      { title: "Six named roles", description: "Admin, Management, Accounting, Operations, Sales, Pricing — each with a clear, specific scope." },
+      { title: "Six named roles", description: "Admin, Management, Accounting, Operations, Sales, Pricing — each with a clear, specific scope — plus general staff." },
       { title: "Admin and Management see everything", description: "The only difference: system configuration (users, roles, settings) stays Admin-only." },
-      { title: "Narrow, specific gates", description: "Accounting → Finance & Reports; Sales/Pricing → Quotations; Operations → Bill of Lading (and Route Rates too)." },
-      { title: "Open by default elsewhere", description: "Jobs, Bookings, Business Partners, Documents and the Labeling Center are open to any signed-in staff." },
+      { title: "Narrow, specific gates", description: "Accounting → Finance, Reports & Expenses; Sales/Pricing → Quotations; Operations → Bill of Lading; Operations/Sales → editing bookings." },
+      { title: "Open by default elsewhere", description: "Any signed-in staff can read bookings, and Business Partners, Documents and the Labeling Center are open to everyone." },
     ],
     workflow: [
       { title: "A user signs in", description: "With exactly one role." },
@@ -661,7 +630,7 @@ export const platformContent: Record<string, PlatformContent> = {
       { q: "Does every module require a specific role?", a: "No — only the ones explicitly gated. Most of the product is open to any signed-in staff member." },
       { q: "Who can create users or change roles?", a: "Only Admin." },
     ],
-    related: ["ai-assistant", "shipments", "quotations"],
+    related: ["ai-assistant", "bookings", "quotations"],
   },
 
   "ai-assistant": {
@@ -744,7 +713,7 @@ export const platformContent: Record<string, PlatformContent> = {
       { role: "Admin / Management", detail: "View visitor activity on the branded site." },
     ],
     faqs: [
-      { q: "Does this track activity inside the Routel app?", a: "No — it's visits to your public-facing branded site, not in-app activity, which already lives in each job's audit log." },
+      { q: "Does this track activity inside the Routel app?", a: "No — it's visits to your public-facing branded site, not in-app activity, which already lives in each booking's activity log." },
       { q: "Do I need to set up Google Analytics separately?", a: "No — it comes with the custom domain." },
     ],
     related: ["ai-assistant", "email-sync"],
@@ -754,20 +723,20 @@ export const platformContent: Record<string, PlatformContent> = {
     eyebrow: "Audit & Compliance",
     title: "A record of who changed what, and when",
     description:
-      "Every job carries an audit log of field edits, status changes and document uploads — including anything created through the AI assistant, attributed to the person who confirmed it.",
+      "Every booking carries an activity log of field changes, status changes and every Booking Confirmation issued — including anything done through the AI assistant, attributed to the person who confirmed it.",
     stats: [
-      { value: "100%", label: "of job changes logged, person and timestamp" },
+      { value: "100%", label: "of booking changes logged, person and timestamp" },
       { value: "0", label: "edits the log itself allows" },
     ],
     painPoints: [
-      "A number changes on a job and nobody can say who changed it or why.",
+      "A number changes on a booking and nobody can say who changed it or why.",
       "Actions taken through an AI tool show up as \"the system\" instead of the person who actually confirmed them.",
       "An audit trail that can itself be edited isn't really an audit trail.",
     ],
     solutionIntro:
-      "Every change to a job — manual or through the assistant — is logged with the person's name, the time, and the before/after values, and the log itself can't be edited.",
+      "Every change to a booking — manual or through the assistant — is logged with the person's name, the time, and the before/after values, and the log itself can't be edited.",
     features: [
-      { title: "Per-job audit log", description: "Field edits, status changes, document uploads — all logged." },
+      { title: "An activity log on every booking", description: "Field changes, status changes and every confirmation issued — all logged." },
       { title: "Assistant actions attributed to a person", description: "Recorded under the name of whoever confirmed them, never as \"the assistant.\"" },
       { title: "Generated documents on file", description: "Kept with the shipment they belong to, not a separate archive." },
       { title: "Role-scoped visibility", description: "Who can see what in the log follows the same role rules as the rest of the product." },
@@ -775,16 +744,16 @@ export const platformContent: Record<string, PlatformContent> = {
     workflow: [
       { title: "A change is made", description: "Manually, or confirmed through the assistant." },
       { title: "Logged immediately", description: "Person, timestamp, before and after values." },
-      { title: "Visible, not editable", description: "The log can be read by anyone with access to the job, but never altered." },
+      { title: "Visible, not editable", description: "The log can be read by anyone with access to the booking, but never altered." },
     ],
     personas: [
-      { role: "Any signed-in staff", detail: "Can see the audit log on any job they can open." },
+      { role: "Any signed-in staff", detail: "Can see the activity log on any booking they can open." },
     ],
     faqs: [
       { q: "Can the audit log be edited or deleted?", a: "No — it's an append-only record." },
       { q: "Does an action through the assistant show up differently?", a: "No — it's logged under the name of the person who confirmed it, with the same detail as a manual change." },
     ],
-    related: ["shipments", "ai-assistant", "roles"],
+    related: ["bookings", "ai-assistant", "roles"],
   },
 };
 

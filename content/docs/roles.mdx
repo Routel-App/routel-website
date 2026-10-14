@@ -1,32 +1,42 @@
 ---
 title: Roles & permissions
-description: The six named roles in Routel and what each can see and do.
+description: The six named roles in Routel, plus general staff, and what each can see and do.
 status: complete
 ---
 
-Every user in Routel has exactly one role. The role decides which modules they see, which records they can open, and which actions they can perform. The same rules apply in the web interface and in the [AI Assistant](/docs/ai-assistant): asking the assistant for something outside your role produces a polite refusal, not a workaround.
+Every user in Routel has exactly one role: one of the six below, or general staff. The role decides which modules they see, which records they can open, and which actions they can perform. The same rules apply in the web interface and in the [AI Assistant](/docs/ai-assistant): asking the assistant for something outside your role produces a polite refusal, not a workaround.
 
 ## The roles
 
 | Role | Typical person | Sees and does |
 | --- | --- | --- |
 | **Admin** | Owner, IT | Every module, plus the things Management can't touch: user management, roles, and system configuration. |
-| **Management** | Directors, GMs | Every module Admin sees, except system configuration — all jobs, all reports, every record, company-wide. |
-| **Accounting** | Finance team | Invoices, payments, credit and debit notes, credit applications, the finance mailbox, expenses and payroll, the General Ledger and all financial reports. |
-| **Operations** | Ops executives | Jobs, bookings, containers, Bills of Lading and shipment documents — and Route Rates, even though Quotations itself is Sales/Pricing territory. |
-| **Sales** | Sales executives | Quotations, built on current rates, and the jobs that belong to their customers. |
-| **Pricing** | Rating / costing team | Vendor buying rates by route and container type, including validity windows — the rate book that Sales quotes from. |
+| **Management** | Directors, GMs | Every module Admin sees, except admin settings — all bookings, all reports, every record, company-wide. |
+| **Accounting** | Finance team | Finance: invoices, receivables and payables, credit and debit notes, credit applications, the finance mailbox, expenses and payroll, the General Ledger and all reports. |
+| **Operations** | Ops executives | Creates and edits bookings — carrier booking, containers, shipping timeline, documents — and generates Bills of Lading. |
+| **Sales** | Sales executives | Quotations built on current rates, and creating and editing bookings. |
+| **Pricing** | Rating / costing team | Quotations and the route rates behind them, by route and container type, including validity — the rate book that Sales quotes from. |
 
-Everything not named above — Jobs, Bookings, Business Partners, Documents, the Labeling Center — is open to any signed-in member of staff. The role system narrows the specific sensitive modules; it doesn't wall off the whole product by department.
+In short:
+
+| Area | Who can use it |
+| --- | --- |
+| Bookings | Everyone can read. **Admin**, **Management**, **Operations** and **Sales** create and edit. |
+| Quotations | **Admin**, **Management**, **Sales** and **Pricing**. |
+| Finance, Reports and Expenses | **Admin**, **Management** and **Accounting**. |
+| Bill of Lading | **Admin**, **Management** and **Operations**. |
+| Admin settings | **Admin** only. |
+
+General staff, and everyone else outside these lists, can still read bookings and work with Business Partners, Documents and the Labeling Center. The role system narrows the specific sensitive modules; it doesn't wall off the whole product by department.
 
 ## Enforcement
 
 Permissions are checked on the server for every request. Hiding a button in the interface is a convenience; the actual rule lives behind it. This matters for the assistant in particular: it calls the same server actions as the interface, so it inherits the same checks.
 
 <Callout kind="permission">
-  Only **Admin** can create users, assign roles, or add expense categories.
+  Only **Admin** can create users or assign roles. **Admin** and **Management** can add expense categories.
 </Callout>
 
-## Audit log
+## Activity log
 
-Every job keeps a log of who changed what and when. Actions taken through the assistant are recorded with the name of the person who confirmed them, not as "the assistant", so the trail stays accountable.
+Every booking keeps an activity log of who changed what and when. Actions taken through the assistant are recorded with the name of the person who confirmed them, not as "the assistant", so the trail stays accountable.

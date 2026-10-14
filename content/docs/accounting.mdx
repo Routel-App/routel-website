@@ -1,10 +1,10 @@
 ---
 title: Accounting Reports
-description: General Ledger, Trial Balance, Cash Position, P&L, AR aging, overdue invoices and customer profitability, computed live from source transactions.
+description: General Ledger, Trial Balance, Cash Position, P&L, AR and AP aging, customer profitability and your country's tax report, computed live from source transactions.
 status: complete
 ---
 
-Every report in this module is computed on demand from the invoices, payments, credit and debit notes, vendor costs and expenses recorded elsewhere in Routel. There are no manual journal entries to make and nothing to "close" before a report is right. If a transaction is saved, the reports already include it.
+Every report in this module is computed on demand from the invoices, payments, credit and debit notes, booking charges and expenses recorded elsewhere in Routel. There are no manual journal entries to make and nothing to "close" before a report is right. If a transaction is saved, the reports already include it.
 
 ## The reports
 
@@ -15,10 +15,14 @@ Every report in this module is computed on demand from the invoices, payments, c
 | **Cash Position** | Bank and cash balances now, with receivables due and payables owed over the coming period. | Management, Accounting |
 | **Profit & Loss** | Revenue, cost of sales and gross profit, then operating expenses and net income. | Management |
 | **AR Aging** | Open receivables by customer in current, 1–30, 31–60 and 60+ day buckets. | Accounting |
+| **AR (customer) profitability** | Revenue, cost and margin per customer over a period. | Management |
 | **AP Aging** | Unpaid vendor costs by vendor, in the same aging buckets. | Accounting |
-| **Overdue invoices** | Invoices past their due date, with days overdue and contact details. | Accounting, Sales |
-| **Customer profitability** | Revenue, cost and margin per customer over a period. | Management, Sales |
-| **SST summary** | Sales and Service Tax collected and payable for a period, for your filing. | Accounting |
+| **AP Outstanding** | What you still owe each vendor, bill by bill. | Accounting |
+| **Tax report** | Tax collected and payable for a period, named for your country: SST in Malaysia, PPN in Indonesia, VAT elsewhere. | Accounting |
+| **Network Partners** | Business done with your partner network over a period. | Management |
+| **Data exports** | The underlying records, exported for your external accountant or your own analysis. | Accounting |
+
+Route performance (volume, revenue, cost and margin per lane) lives with pricing now, on the **Route Analytics** tab of [Routes](/docs/quotations).
 
 ## General Ledger
 
@@ -42,20 +46,20 @@ This is the report most owners ask the assistant for on a Monday morning.
 
 Two levels of profit, on one page:
 
-1. **Gross profit**: revenue from customer invoices minus cost of sales, which is the vendor costs recorded against jobs, converted at the job's exchange rate.
+1. **Gross profit**: revenue from customer invoices minus cost of sales, which is the cost (AP) lines recorded on bookings, converted at each line's exchange rate.
 2. **Net income**: gross profit minus operating expenses recorded in [Expenses & Payroll](/docs/expenses): salaries, rent, utilities, commissions, currency exchange differences and your own categories.
 
 Run it for any period. Compare months side by side to see whether margin or overheads moved.
 
-## AR and AP Aging, and overdue invoices
+## AR and AP Aging, and AP Outstanding
 
-**AR Aging** groups open receivables by how long they have been outstanding, per customer, so you know where collection effort goes. **AP Aging** does the same for unpaid vendor costs, by vendor, so you can see what you owe and for how long. **Overdue invoices** is the working list: each invoice past due, days late, amount and the customer contact. All three link straight to the invoice, vendor cost or partner statement of account.
+**AR Aging** groups open receivables by how long they have been outstanding, per customer, so you know where collection effort goes. **AP Aging** does the same for unpaid vendor costs, by vendor, so you can see what you owe and for how long. **AP Outstanding** is the working list of vendor bills still to pay. All three link straight to the invoice, vendor cost or partner statement of account.
 
-## SST summary
+## Tax report
 
-A period summary of Sales and Service Tax collected on invoices and payable on costs, laid out for your filing — not a substitute for your tax advisor, but it saves rebuilding the numbers from the ledger by hand.
+A period summary of tax collected on invoices and payable on costs, laid out for your filing and named per country: the SST report in Malaysia, the PPN report in Indonesia, the VAT report where VAT applies. It is not a substitute for your tax advisor, but it saves rebuilding the numbers from the ledger by hand.
 
-## Customer profitability
+## AR (customer) profitability
 
 Revenue, vendor cost and margin per customer for a period, sorted by margin. Use it to see which accounts are worth the effort and which need a price review at renewal.
 
@@ -78,12 +82,12 @@ Revenue, vendor cost and margin per customer for a period, sorted by margin. Use
 Any report can be requested conversationally: "Show AR aging", "P&L for August", "Customer profitability for Q3", "What's our cash position?". Reports are read-only, so they run immediately without a confirmation step. See [AI Assistant](/docs/ai-assistant).
 
 <Callout kind="note" title="Currencies">
-  Reports are presented in MYR. USD invoices and costs are included at the exchange rate recorded on the transaction,
-  and exchange differences at settlement appear as a currency exchange expense or gain. See
-  [Invoicing](/docs/invoicing).
+  Reports are presented in your base currency (for example MYR). USD invoices and costs are included at the exchange
+  rate recorded on the transaction, and exchange differences at settlement appear as a currency exchange expense or
+  gain. The **Group** view shows every branch side by side, consolidated in USD. See [Invoicing](/docs/invoicing).
 </Callout>
 
 <Callout kind="permission">
   **Accounting**, **Management** and **Admin** can run all reports. Reports are Finance territory — **Sales** and
-  **Pricing** are gated to Quotations, not this module.
+  **Pricing** work in Quotations, not this module.
 </Callout>

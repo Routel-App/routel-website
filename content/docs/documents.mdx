@@ -1,24 +1,24 @@
 ---
 title: Document Management
-description: Upload, attach, find and download the documents that belong to each shipment.
+description: Upload, find and download the documents on each booking, and review incoming e-mail attachments before they are filed.
 status: complete
 ---
 
-A freight file is a pile of paper: booking confirmation, commercial invoice, packing list, certificate of origin, House and Master B/L, arrival notice, delivery order, vendor invoices. Routel keeps that pile with the job it belongs to, so "where is the packing list for the Al Noor shipment?" has a one-click answer. File type is verified from the actual file content when it's uploaded — not just trusted from the filename or extension.
+A freight file is a pile of paper: booking confirmation, commercial invoice, packing list, certificate of origin, House and Master B/L, arrival notice, delivery order, vendor invoices. Routel keeps that pile with the booking it belongs to, so "where is the packing list for the Al Noor shipment?" has a one-click answer. File type is verified from the actual file content when it's uploaded — not just trusted from the filename or extension.
 
 ## Where documents live
 
-Every job has a **Documents** area. Two kinds of files appear there:
+Every booking has a **Documents** card. Two kinds of files appear there:
 
 - **Uploaded** by your team: anything from the customer, the carrier or a vendor.
-- **Generated** by Routel: the quotation PDF, the House B/L and annexure, customer invoices, credit and debit notes. These are attached automatically when they are produced.
+- **Generated** by Routel: the Booking Confirmation and its revisions, the House B/L and annexure, customer invoices, credit and debit notes. These are attached automatically when they are produced.
 
 Partner records have a documents area too, for company-level files such as agreements and registration documents.
 
 ## Uploading
 
 <Steps>
-  <Step title="Open the job and go to Documents">
+  <Step title="Open the booking and go to Documents">
     Drag files in, or choose them. PDFs, images and office documents are accepted.
   </Step>
   <Step title="Label the document">
@@ -26,32 +26,41 @@ Partner records have a documents area too, for company-level files such as agree
     note if useful.
   </Step>
   <Step title="Save">
-    The upload is recorded in the job's audit log with your name and the time.
+    The upload is recorded with your name and the time.
   </Step>
 </Steps>
 
 ## Finding and downloading
 
-From the job, filter by type or search by name. Across jobs, the assistant is the fastest route: "Find the packing list for the Al Noor shipment" or "Send me the House B/L for JOB-2026-0412" returns the file directly, subject to your role.
+From the booking, filter by type or search by name. Across bookings, the assistant is the fastest route: "Find the packing list for the Al Noor shipment" or "Send me the House B/L for booking NXS26000412" returns the file directly, subject to your role.
 
 ## Versions and corrections
 
-Uploading a corrected document does not overwrite the old one. Both are kept, the newest is marked current, and the audit log shows who replaced what. For generated documents, regenerating produces a new version the same way.
+Uploading a corrected document does not overwrite the old one. Both are kept, the newest is marked current, and you can see who replaced what. For generated documents, regenerating produces a new version the same way.
 
 ## Retention
 
-Documents stay with the job after it is closed and remain downloadable for as long as the job exists. Nothing is purged automatically.
+Documents stay with the booking after the shipment is closed and remain downloadable for as long as the booking exists. Nothing is purged automatically.
 
 ## Incoming attachments, reviewed automatically
 
-A second layer sits in front of the manual upload flow: when mail arrives through [Email Sync](/docs/email-sync), its attachments are automatically classified — is this a B/L? a booking confirmation? a vendor invoice? — with a suggested job to file it against.
+A second layer sits in front of the manual upload flow. When mail arrives through [Email Sync](/docs/email-sync), the AI reads each attachment into the **Documents** review queue and classifies it: B/L, booking confirmation, booking request, vendor invoice, or other. It then suggests the booking it belongs to, matching on the booking number first, then the B/L number, then a container number.
+
+From the queue, the reviewer picks the action that fits:
+
+| Action | What it does |
+| --- | --- |
+| **Approve & Create Booking** | Creates a new booking from the document, for example a customer's booking request. |
+| **Approve & Update Booking** | Updates the matched booking with what the document says, for example a carrier's confirmation or B/L. |
+| **Approve & Create Invoice** | Records the invoice in the document (typically a vendor invoice) against the matched booking. |
+| **Link to Booking** | Simply files the document on a booking you choose. |
 
 <Callout kind="warning" title="Suggested, never automatic">
-  Nothing from this queue is filed on its own. A person reviews each suggestion and approves or rejects it before the
-  document is attached anywhere.
+  Nothing from this queue is filed on its own. A person approves every one, and can reject a suggestion or pick a
+  different booking, before the document is attached anywhere.
 </Callout>
 
 <Callout kind="permission">
-  Any signed-in staff member can view and download a job's documents, and upload or label new ones. Clearing the
+  Any signed-in staff member can view and download a booking's documents, and upload or label new ones. Clearing the
   AI review queue is part of normal day-to-day use, not a separate restricted role.
 </Callout>

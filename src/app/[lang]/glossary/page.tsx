@@ -9,7 +9,7 @@ import type { Locale } from "@/lib/i18n";
 const copy = {
   en: {
     metaTitle: "Freight Glossary",
-    metaDescription: "Plain-English definitions for the shipping and freight-forwarding terms that show up on every job.",
+    metaDescription: "Plain-English definitions for the shipping and freight-forwarding terms that show up on every booking.",
     eyebrow: "Glossary",
     title: "Freight terms, in plain English",
     description:
@@ -17,7 +17,7 @@ const copy = {
   },
   ar: {
     metaTitle: "مصطلحات الشحن",
-    metaDescription: "تعريفات واضحة وبسيطة لمصطلحات الشحن والتخليص التي تظهر في كل ملف شحن.",
+    metaDescription: "تعريفات واضحة وبسيطة لمصطلحات الشحن والتخليص التي تظهر في كل حجز.",
     eyebrow: "المصطلحات",
     title: "مصطلحات الشحن، بلغة واضحة",
     description:

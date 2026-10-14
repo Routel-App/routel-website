@@ -5,7 +5,6 @@ import {
   Anchor,
   Banknote,
   Bot,
-  CalendarCheck,
   ChartColumn,
   FileCheck,
   FileMinus,
@@ -42,25 +41,19 @@ export type Module = {
  */
 export const modules: Module[] = [
   {
-    slug: "shipments",
-    name: "Shipments & Jobs",
-    short: "Full lifecycle of every freight job",
-    description:
-      "The center of the system — one record per shipment carrying POL/POD, shipper and consignee, vessel and voyage, containers, weight and cargo description, BL/HBL numbers and incoterms, plus the full chain of operational dates from cutting date to ETA. An 11-stage status — booking pending through delivered — shows the same way everywhere the job appears.",
-    icon: Ship,
-    bullets: ["11-stage status lifecycle", "Every operational date, cutting to ETA", "Same status badge everywhere"],
-    docs: "/docs/shipments",
-    featured: true,
-  },
-  {
     slug: "bookings",
     name: "Bookings",
-    short: "Vessel bookings tied to the job",
+    short: "One record for every shipment, from booking to close",
     description:
-      "A vessel booking tied to its job — carrier, vessel and voyage, container type and count, cut-off dates, shipper, consignee and notify party, and the carrier's own booking reference. Upload a booking confirmation PDF and the fields are extracted automatically to prefill the form.",
-    icon: CalendarCheck,
-    bullets: ["Carrier, vessel, voyage, cut-offs", "Shipper / consignee / notify party", "AI reads the confirmation PDF for you"],
+      "The center of the system — the booking is the one record for a shipment, numbered by its booking number. It carries the shipment details (POL/POD, shipper and consignee, vessel and voyage, containers, incoterms, weights, volume, HBL and MBL numbers), the shipping timeline from gate-in and SI cut-off through ETD to ATA, the carrier booking, cost and sale charges with a profit summary, invoices, documents, tasks and follow-ups. Issue a Booking Confirmation (any later change produces a numbered revision), generate the Bill of Lading or create invoices from the header, and follow an 11-status lifecycle from booking pending to shipment closed.",
+    icon: Ship,
+    bullets: [
+      "11-status lifecycle, booking pending to shipment closed",
+      "Booking Confirmation with numbered revisions",
+      "AI reads the B/L and the carrier's confirmation",
+    ],
     docs: "/docs/bookings",
+    featured: true,
   },
   {
     slug: "business-partners",
@@ -74,12 +67,12 @@ export const modules: Module[] = [
   },
   {
     slug: "quotations",
-    name: "Quotations & Route Rates",
-    short: "Buying rates by route, quotes in minutes",
+    name: "Quotations & Routes",
+    short: "Route rates, route analytics and quotes in minutes",
     description:
-      "Store vendor buying rates by route and container type, each with a validity window that flags as expiring within 14 days before it lapses — or bulk-import a whole rate sheet from Excel. Build a customer quotation on top of a current rate and convert an accepted one straight into a job.",
+      "Store vendor buying rates per POL→POD, shipping line and container type, each with a validity window marked Active, Expiring or Expired — or import a whole rate sheet from Excel and extend validity in bulk. Route Analytics shows top routes, origins and destinations, monthly volume and revenue, cost, profit and margin. Build a customer quotation on current rates and, once accepted, Convert to Booking: pick the route and only its charges are copied, and the quotation locks with a link to its booking.",
     icon: Route,
-    bullets: ["Rates by route and container type", "14-day expiry warning on validity", "Bulk import from Excel"],
+    bullets: ["Route rates with Active / Expiring / Expired validity", "Route analytics: volume, revenue, margin", "Convert to Booking in one click"],
     docs: "/docs/quotations",
   },
   {
@@ -87,9 +80,9 @@ export const modules: Module[] = [
     name: "Invoicing",
     short: "Multi-currency invoices, properly locked",
     description:
-      "Customer invoices move from draft — clearly watermarked \"DRAFT TAX INVOICE — NOT OFFICIAL\" — to a finalized, numbered invoice once the job's Bill of Lading number is set, after which line items lock. Upload a vendor's cost invoice and the assistant extracts its line items to prefill your own.",
+      "Create draft invoices straight from a booking's sale (AR) charges. Drafts are watermarked \"DRAFT TAX INVOICE\" and are the only invoices you can edit; an invoice becomes final and numbered once the booking's B/L number (MBL) is set, and issued invoices are corrected with credit or debit notes. Every document is in your base currency (e.g. MYR) or USD, and the assistant can read a vendor's invoice into cost lines on the booking.",
     icon: Receipt,
-    bullets: ["Draft → final → paid, BL required to finalize", "MYR / USD invoicing", "AI reads vendor invoices to prefill yours"],
+    bullets: ["Draft → final → paid, B/L required to finalize", "Base currency (e.g. MYR) and USD", "Created from the booking's sale charges"],
     docs: "/docs/invoicing",
     featured: true,
   },
@@ -128,20 +121,20 @@ export const modules: Module[] = [
     name: "Accounting Reports",
     short: "Live books, no journal entries",
     description:
-      "General Ledger, Trial Balance, Cash Position, P&L with gross profit and net income, AR and AP aging, an SST tax summary and customer profitability — all computed live from source transactions, not journal entries.",
+      "General Ledger, Trial Balance, Cash Position, P&L with gross profit and net income, AR and AP aging, the country's tax report (SST, PPN or VAT) and customer profitability — all computed live from source transactions, not journal entries.",
     icon: ChartColumn,
-    bullets: ["GL, Trial Balance, Cash Position", "AR and AP aging", "SST tax summary"],
+    bullets: ["GL, Trial Balance, Cash Position", "AR and AP aging", "Tax report (SST, PPN or VAT, per country)"],
     docs: "/docs/accounting",
     featured: true,
   },
   {
     slug: "bill-of-lading",
     name: "Bill of Lading",
-    short: "Carrier-grade House B/L from the job",
+    short: "Carrier-grade House B/L from the booking",
     description:
-      "Generate a proper maritime House Bill of Lading with an annexure and container sheet directly from a job's own data — including its incoterms — formatted the way a carrier's B/L looks.",
+      "Generate a proper maritime House Bill of Lading with an annexure and container sheet directly from a booking's own data — including its incoterms — formatted the way a carrier's B/L looks.",
     icon: Anchor,
-    bullets: ["House B/L + annexure", "Container sheet", "Generated from job data, incoterms included"],
+    bullets: ["House B/L + annexure", "Container sheet", "Generated from booking data, incoterms included"],
     docs: "/docs/bill-of-lading",
     featured: true,
   },
@@ -150,9 +143,9 @@ export const modules: Module[] = [
     name: "Expenses & Payroll",
     short: "Overheads that flow into the GL",
     description:
-      "Record rent, salaries, utilities, petty cash, commissions, currency exchange and custom categories — company overhead, kept separate from vendor shipment costs sitting in payables. Every entry posts to a proper operating-expense account, with salary lines linked to staff.",
+      "Record rent, salaries, utilities, petty cash, commissions, currency exchange and custom categories — operating costs outside bookings, kept separate from the vendor costs charged to bookings. Every entry posts to a proper operating-expense account, with salary lines linked to staff.",
     icon: Wallet,
-    bullets: ["Petty cash to payroll-linked salaries", "Posts straight to the GL", "Kept separate from vendor shipment costs"],
+    bullets: ["Petty cash to payroll-linked salaries", "Posts straight to the GL", "Kept separate from booking costs"],
     docs: "/docs/expenses",
   },
   {
@@ -160,7 +153,7 @@ export const modules: Module[] = [
     name: "Document Management",
     short: "Every file where the shipment is",
     description:
-      "A permanent per-job document store — file type is verified from the actual file content, not just trusted from the upload — plus an AI review queue that classifies incoming email attachments (a B/L? a booking confirmation? a vendor invoice?) with a suggested job match for a person to approve or reject.",
+      "A permanent document store on every booking — file type is verified from the actual file content, not just trusted from the upload — plus an AI review queue for incoming email attachments. It classifies each one (a B/L, a booking confirmation, a booking request, a vendor invoice) and suggests the matching booking by booking number, B/L or container; a person then approves it to create or update a booking, create an invoice, or link it to a booking.",
     icon: FolderOpen,
     bullets: ["File type verified from content", "AI classifies incoming attachments", "Every suggestion needs a human approval"],
     docs: "/docs/documents",
@@ -168,11 +161,11 @@ export const modules: Module[] = [
   {
     slug: "email-sync",
     name: "Email Sync",
-    short: "Connect your inbox, auto-link to jobs",
+    short: "Connect your inbox, auto-link to bookings",
     description:
-      "Connect a Zoho or Microsoft mailbox and Routel links incoming and outgoing mail to the job it belongs to automatically, by scanning for job numbers and booking references — so correspondence lives next to the shipment instead of buried in an inbox.",
+      "Connect a Zoho or Microsoft 365 mailbox and Routel links incoming and outgoing mail to the booking it belongs to — automatically when the booking number appears in it or the message continues a linked thread, or manually — so correspondence lives next to the shipment instead of buried in an inbox.",
     icon: Mail,
-    bullets: ["Zoho or Microsoft", "Auto-links mail by job or booking number", "Correspondence stays with the shipment"],
+    bullets: ["Zoho or Microsoft 365", "Auto-links mail by booking number and thread", "Correspondence stays on the booking"],
     docs: "/docs/email-sync",
   },
   {
@@ -180,7 +173,7 @@ export const modules: Module[] = [
     name: "Public Shipment Tracking",
     short: "A no-login status page for your customers",
     description:
-      "Your own customers can look up a shipment with no login — but only with two pieces of information (an exact job, B/L or container number, plus their company name or account number), so it can't be used to fish for other customers' shipments. It shows a status timeline only, never the master B/L, container numbers, vessel or exact dates.",
+      "Your own customers can look up a shipment with no login — but only with two pieces of information (the booking number, the B/L number or one full container number, plus their company name or account ID), so it can't be used to fish for other customers' shipments. It shows a status timeline only, never the master B/L, container numbers, vessel or exact dates.",
     icon: MapPin,
     bullets: ["No login, two-piece lookup required", "Status timeline only", "Never shows commercially sensitive details"],
     docs: "/docs/tracking",
@@ -190,7 +183,7 @@ export const modules: Module[] = [
     name: "Labeling Center",
     short: "Flag anything that needs attention",
     description:
-      "Tag any job, invoice, customer, vendor, quotation or booking with a note, a follow-up date and an assignee — so things that need attention don't get lost, without needing a separate task-tracking system.",
+      "Label any record — a booking, invoice, business partner or quotation — with a note, a follow-up date and an assignee — so things that need attention don't get lost, without needing a separate task-tracking system.",
     icon: Tag,
     bullets: ["Tag any record in the system", "Follow-up date and assignee", "No separate task tool needed"],
     docs: "/docs/labeling-center",
@@ -200,7 +193,7 @@ export const modules: Module[] = [
     name: "Role-based Access",
     short: "Admin, Management, Accounting, Operations, Sales, Pricing",
     description:
-      "Six named roles — Admin, Management, Accounting, Operations, Sales and Pricing. Admin and Management see every module, differing only in that system configuration stays Admin-only. Accounting owns Finance and Reports, Sales and Pricing own Quotations, Operations owns the Bill of Lading and also reaches Route Rates — everything else is open to any signed-in member of staff.",
+      "Six named roles — Admin, Management, Accounting, Operations, Sales and Pricing. Admin and Management see every module, differing only in that system settings stay Admin-only. Everyone can read bookings; Operations and Sales edit them. Sales and Pricing own Quotations, Accounting owns Finance, Reports and Expenses, and Operations owns the Bill of Lading.",
     icon: ShieldCheck,
     bullets: ["Six named roles", "Admin and Management see everything", "Narrows only the sensitive modules"],
     docs: "/docs/roles",
@@ -210,7 +203,7 @@ export const modules: Module[] = [
     name: "AI Assistant",
     short: "Built in: calls tools and runs your operations automatically",
     description:
-      "Search jobs, customers and vendors, pull up details, list invoices, generate reports and read documents by chatting — in Arabic or English. Propose a new job, booking, invoice, business partner, expense or route rate (including importing a whole rate sheet from an attachment), or update a job. Every write stops as a proposal a person has to confirm, then it's created through the exact same code path and role permissions as the manual interface.",
+      "Search bookings, customers and vendors, pull up details, list invoices, generate reports and read documents by chatting — in Arabic or English. Propose a new booking, invoice, business partner, expense or route rate (including importing a whole rate sheet from an attachment), or update a booking. Every write stops as a proposal a person has to confirm, then it's created through the exact same code path and role permissions as the manual interface.",
     icon: Bot,
     bullets: ["Calls the system's own tools", "Reads PDFs, images and rate sheets", "You confirm before anything is saved"],
     docs: "/docs/ai-assistant",
@@ -231,9 +224,9 @@ export const modules: Module[] = [
     name: "Audit & Compliance",
     short: "A record of every change",
     description:
-      "Each job carries an audit log of who changed what and when, and generated documents are kept with the shipment they belong to.",
+      "Each booking carries an activity log of who changed which field and when, and of every confirmation issued, and generated documents are kept with the booking they belong to.",
     icon: FileCheck,
-    bullets: ["Per-job audit log", "Generated documents on file", "Role-scoped visibility"],
+    bullets: ["Per-booking activity log", "Generated documents on file", "Role-scoped visibility"],
   },
 ];
 

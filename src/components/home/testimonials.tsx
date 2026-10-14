@@ -34,7 +34,7 @@ const testimonialsEn: Testimonial[] = [
   },
   {
     quote:
-      "Placeholder quote. Replace with a real comment about generating a House B/L directly from the job.",
+      "Placeholder quote. Replace with a real comment about generating a House B/L directly from the booking.",
     name: "Customer name",
     role: "Founder, regional forwarder",
   },
@@ -52,7 +52,7 @@ const testimonialsAr: Testimonial[] = [
     role: "مسؤول المالية، NVOCC",
   },
   {
-    quote: "اقتباس مؤقت. يُستبدل بتعليق حقيقي عن إصدار بوليصة الشحن الفرعية (House B/L) مباشرة من ملف الشحنة.",
+    quote: "اقتباس مؤقت. يُستبدل بتعليق حقيقي عن إصدار بوليصة الشحن الفرعية (House B/L) مباشرة من الحجز.",
     name: "اسم العميل",
     role: "المؤسس، شركة شحن إقليمية",
   },
