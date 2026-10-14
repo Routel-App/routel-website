@@ -10,6 +10,7 @@ import type { PlatformContent } from "@/lib/platform-content";
 import { getLocale } from "@/lib/locale-server";
 import { AiShowcase } from "./ai-showcase";
 import { AiTrust } from "./ai-trust";
+import { moduleVisual } from "./module-visual";
 import type { Locale } from "@/lib/i18n";
 
 const copy = {
@@ -80,7 +81,7 @@ export async function PlatformPageTemplate({ module: mod, content }: { module: M
     <>
       {/* Hero */}
       <section className="border-b border-fog-200 bg-fog-50 pb-14 pt-16 sm:pt-24">
-        <Container>
+        <Container className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)]">
           <Reveal className="max-w-3xl">
             <Eyebrow tone="teal" className="mb-4">
               {content.eyebrow}
@@ -98,8 +99,11 @@ export async function PlatformPageTemplate({ module: mod, content }: { module: M
               ) : null}
             </div>
           </Reveal>
+          <Reveal delay={0.1} amount={0.1} className="min-w-0">
+            {moduleVisual(mod.slug, locale)}
+          </Reveal>
           {content.stats.length ? (
-            <Reveal delay={0.1} className="mt-12 grid grid-cols-2 gap-6 border-t border-fog-200 pt-8 sm:grid-cols-3">
+            <Reveal delay={0.1} className="grid grid-cols-2 gap-6 border-t border-fog-200 pt-8 sm:grid-cols-3 lg:col-span-2">
               {content.stats.map((s) => (
                 <div key={s.label}>
                   <p className="font-display text-2xl font-bold text-ink-900 sm:text-3xl">{s.value}</p>

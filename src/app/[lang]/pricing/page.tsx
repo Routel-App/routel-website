@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Faq, type FaqItem } from "@/components/ui/faq";
 import { PricingTiers } from "@/components/pricing/pricing-tiers";
+import { Compare } from "@/components/home/compare";
 import { Cta } from "@/components/home/cta";
 import type { Locale } from "@/lib/i18n";
 import { getLocale } from "@/lib/locale-server";
@@ -114,7 +115,9 @@ export default async function PricingPage() {
         </div>
       </Section>
 
-      <Section tone="muted" className="py-16 sm:py-20">
+      <Compare />
+
+      <Section className="py-16 sm:py-20">
         <SectionHeading title={t.faqTitle} />
         <Faq items={t.faqs} className="mt-10" />
       </Section>

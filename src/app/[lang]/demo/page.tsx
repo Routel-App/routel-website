@@ -6,6 +6,7 @@ import { planName } from "@/components/pricing/pricing-tiers";
 import type { Locale } from "@/lib/i18n";
 import { getLocale } from "@/lib/locale-server";
 import { DemoForm } from "./demo-form";
+import { Lottie } from "@/components/motion/lottie";
 
 const copy = {
   en: {
@@ -83,6 +84,9 @@ export default async function DemoPage(props: PageProps<"/[lang]/demo">) {
               </li>
             ))}
           </ul>
+          <div className="mt-10 hidden max-w-sm rounded-3xl bg-fog-50 p-4 ring-1 ring-fog-200 lg:block">
+            <Lottie src="/lottie/docs-merge.json" className="aspect-[4/3] w-full" />
+          </div>
         </Reveal>
 
         <Reveal delay={0.1} className="relative rounded-3xl border border-fog-200 bg-white p-6 shadow-float sm:p-8">

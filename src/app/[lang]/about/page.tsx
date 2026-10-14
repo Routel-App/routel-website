@@ -7,6 +7,8 @@ import { site } from "@/lib/site";
 import { Cta } from "@/components/home/cta";
 import type { Locale } from "@/lib/i18n";
 import { getLocale } from "@/lib/locale-server";
+import { Lottie } from "@/components/motion/lottie";
+import { Ocean } from "@/components/home/ocean";
 
 type Principle = { title: string; text: string };
 
@@ -47,6 +49,14 @@ const copy = {
     nowTitle: "Running on real shipments, offered as a hosted service",
     nowDescription: `${site.name} is a hosted service, run by the same team that built it for its own operations first. See what that looks like on real customer data in our case studies.`,
     caseStudies: "Read our case studies",
+    forEyebrow: "Who it's built for",
+    forTitle: "For the forwarding office, from the owner to the accounts desk",
+    forItems: [
+      { title: "Owners and managers", text: "Every booking's margin, the month's P&L, cash and who owes what, live, without waiting for the accountant." },
+      { title: "Operations", text: "Bookings, carrier confirmations, cut-offs, containers and B/Ls on one record, with alerts for what's slipping." },
+      { title: "Sales and pricing", text: "Current buying rates per lane, quotations in minutes, and a click to turn the accepted one into a booking." },
+      { title: "Finance", text: "Invoices from the booking's charges, payments matched from the mailbox, and books that are always up to date." },
+    ],
   },
   ar: {
     metaTitle: "من نحن",
@@ -84,6 +94,14 @@ const copy = {
     nowTitle: "يعمل على شحنات حقيقية، ومتاح كخدمة مستضافة",
     nowDescription: `${site.name} خدمة مستضافة يديرها الفريق نفسه الذي بناها لعملياته الخاصة أولاً. اطّلع على شكل ذلك مع بيانات عملاء حقيقيين في دراسات الحالة لدينا.`,
     caseStudies: "اقرأ دراسات الحالة",
+    forEyebrow: "لمن صُمّم",
+    forTitle: "لمكتب الشحن كله، من المالك حتى المحاسبة",
+    forItems: [
+      { title: "الملاك والمديرون", text: "هامش كل حجز، وأرباح الشهر، والنقد، ومن يدين لكم بماذا، مباشرة ودون انتظار المحاسب." },
+      { title: "العمليات", text: "الحجوزات وتأكيدات الناقلين ومواعيد الإغلاق والحاويات والبوالص في سجل واحد، مع تنبيهات لما يتأخر." },
+      { title: "المبيعات والتسعير", text: "أسعار شراء سارية لكل مسار، وعروض أسعار في دقائق، ونقرة تحوّل العرض المقبول إلى حجز." },
+      { title: "المالية", text: "فواتير من رسوم الحجز، ودفعات تُطابق من البريد، ودفاتر محدّثة دائماً." },
+    ],
   },
 } satisfies Record<
   Locale,
@@ -105,6 +123,9 @@ const copy = {
     nowTitle: string;
     nowDescription: string;
     caseStudies: string;
+    forEyebrow: string;
+    forTitle: string;
+    forItems: Principle[];
   }
 >;
 
@@ -118,7 +139,7 @@ export default async function AboutPage() {
   return (
     <>
       <section className="border-b border-fog-200 bg-fog-50 pb-14 pt-16 sm:pt-24">
-        <Container>
+        <Container className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,0.8fr)]">
           <Reveal className="max-w-3xl">
             <h1 className="font-display text-balance text-4xl font-bold leading-[1.05] text-ink-900 sm:text-5xl">
               {t.heroTitle}
@@ -129,6 +150,9 @@ export default async function AboutPage() {
               <Button href="/platform" variant="secondary" size="lg">{t.platform}</Button>
             </div>
           </Reveal>
+          <Reveal delay={0.1} className="overflow-hidden rounded-3xl bg-ink-950 ring-1 ring-ink-800">
+            <Lottie src="/lottie/ship-wave.json" className="aspect-[4/3] w-full" />
+          </Reveal>
         </Container>
       </section>
 
@@ -137,6 +161,21 @@ export default async function AboutPage() {
         <Reveal className="mx-auto mt-10 max-w-3xl text-pretty text-base leading-relaxed text-fog-600">
           {t.originBody}
         </Reveal>
+      </Section>
+
+      <Ocean />
+
+      <Section className="py-16 sm:py-20">
+        <SectionHeading eyebrow={t.forEyebrow} title={t.forTitle} />
+        <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
+          {t.forItems.map((p, i) => (
+            <RevealItem key={p.title} className="rounded-2xl border border-fog-200 bg-white p-6 shadow-card">
+              <span dir="ltr" className="font-mono text-[12px] font-semibold text-teal-600">0{i + 1}</span>
+              <h3 className="font-display mt-2 text-[16px] font-semibold text-ink-900">{p.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-fog-600">{p.text}</p>
+            </RevealItem>
+          ))}
+        </RevealGroup>
       </Section>
 
       <Section tone="muted" className="py-16 sm:py-20">
