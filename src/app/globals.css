@@ -245,6 +245,67 @@ body {
   animation: tour-in 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* Odyssey (components/home/odyssey.tsx)
+   ------------------------------------------------------------------
+   Static mode (no JS, reduced motion): the stage is a tall still and the
+   chapters are a plain list under it. Scroll mode: the stage fills the
+   viewport (GSAP pins it) and the chapters overlay it, one at a time. */
+.odyssey-stage {
+  height: 100svh;
+  min-height: 560px;
+}
+.odyssey[data-mode="static"] .odyssey-stage {
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+}
+.odyssey[data-mode="static"] .odyssey-panel {
+  position: relative;
+  inset: auto;
+  width: auto;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-block: 2.5rem 4rem;
+}
+.odyssey[data-mode="static"] .odyssey-chapters {
+  display: grid;
+  gap: 1rem;
+}
+@media (min-width: 1024px) {
+  .odyssey[data-mode="static"] .odyssey-chapters {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.odyssey[data-mode="static"] :is(.odyssey-chip, .odyssey-hint, .odyssey-progress) {
+  display: none;
+}
+.odyssey[data-mode="scroll"] .odyssey-chapter {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  opacity: 0;
+}
+@media (min-width: 1024px) {
+  .odyssey[data-mode="scroll"] .odyssey-chapter {
+    bottom: auto;
+    top: 0;
+  }
+  .odyssey[data-mode="scroll"] .odyssey-chapters {
+    min-height: 260px;
+  }
+}
+@media (max-width: 1023px) {
+  .odyssey[data-mode="scroll"] .odyssey-heading {
+    display: none;
+  }
+  .odyssey[data-mode="scroll"] .odyssey-chapters {
+    min-height: 200px;
+  }
+}
+.odyssey-rail.is-on {
+  background: var(--color-teal-400);
+}
+
 /* Focus rings for keyboard users only */
 :focus-visible {
   outline: 2px solid var(--color-teal-500);
