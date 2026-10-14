@@ -1,7 +1,7 @@
 import { ArrowRight, CloudOff, ListChecks, Lock, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Section } from "@/components/ui/section";
-import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
+import { Replay, Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
 import { getLocale } from "@/lib/locale-server";
 import type { Locale } from "@/lib/i18n";
 import { AssistantChatShot } from "@/components/shots/ai-shots";
@@ -120,7 +120,9 @@ export async function AiSpotlight() {
         </div>
 
         <Reveal amount={0.15} className="relative">
-          <AssistantChatShot locale={locale} tone="dark" className="mx-auto max-w-[500px]" />
+          <Replay>
+            <AssistantChatShot locale={locale} tone="dark" className="mx-auto max-w-[500px]" />
+          </Replay>
         </Reveal>
       </div>
 

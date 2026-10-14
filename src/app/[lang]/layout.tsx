@@ -50,7 +50,11 @@ export const viewport: Viewport = {
 export default async function RootLayout({ children }: LayoutProps<"/[lang]">) {
   const locale = await getLocale();
   return (
-    <html lang={locale} dir={dirFor(locale)} className="h-full antialiased">
+    <html lang={locale} dir={dirFor(locale)} className="h-full antialiased" suppressHydrationWarning>
+      <head>
+        {/* Before first paint: lets CSS hold scroll reveals back only when JS will run them (components/motion/reveal.tsx). */}
+        <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
+      </head>
       <body className="flex min-h-full flex-col">
         <LocaleProvider locale={locale}>
           <Navbar />

@@ -12,6 +12,7 @@ import {
   Sun,
   Wand2,
 } from "lucide-react";
+import type { CSSProperties } from "react";
 import type { Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { Ltr, ShotFrame, arrowFor } from "./frame";
@@ -91,8 +92,8 @@ export function AssistantChatShot({
           </div>
         </div>
 
-        {/* The request */}
-        <div className="mt-4 flex justify-end">
+        {/* The request. data-step / --step: the order a <Replay> wrapper plays the chat in (globals.css). */}
+        <div data-step="" style={{ "--step": 0 } as CSSProperties} className="mt-4 flex justify-end">
           <div className={cn("max-w-[85%] rounded-2xl rounded-se-sm px-3.5 py-2.5", dark ? "bg-teal-500/20" : "bg-ink-900 text-white")}>
             <p className="text-[12px] leading-relaxed">{t.user}</p>
             <p className="mt-2 inline-flex max-w-full items-center gap-1.5 break-all rounded-md bg-white/10 px-2 py-1 text-[10.5px]">
@@ -106,7 +107,7 @@ export function AssistantChatShot({
         <div className={cn("mt-3 rounded-xl border p-3", card)}>
           <ul className="space-y-2">
             {t.tools.map(({ icon: Icon, label, detail }, i) => (
-              <li key={label} className="flex items-start gap-2.5">
+              <li key={label} data-step="" style={{ "--step": i + 1 } as CSSProperties} className="flex items-start gap-2.5">
                 <span
                   className={cn(
                     "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md",
@@ -130,7 +131,11 @@ export function AssistantChatShot({
         </div>
 
         {/* The proposal waiting for confirmation */}
-        <div className={cn("mt-3 rounded-xl border-2 p-3", dark ? "border-spark-400/40 bg-spark-400/[0.06]" : "border-spark-200 bg-spark-50/60")}>
+        <div
+          data-step=""
+          style={{ "--step": t.tools.length + 1 } as CSSProperties}
+          className={cn("mt-3 rounded-xl border-2 p-3", dark ? "border-spark-400/40 bg-spark-400/[0.06]" : "border-spark-200 bg-spark-50/60")}
+        >
           <p className="flex items-center gap-1.5 text-[11.5px] font-semibold">
             <Sparkles className="h-3.5 w-3.5 text-spark-500" />
             {t.proposal}
@@ -148,7 +153,9 @@ export function AssistantChatShot({
             <Ltr className="font-mono">{t.total[1]}</Ltr>
           </div>
           <div className="mt-3 flex gap-2">
-            <span className="rounded-full bg-teal-500 px-3.5 py-1 text-[11px] font-semibold text-white">{t.confirm}</span>
+            <span data-confirm="" style={{ "--step": t.tools.length + 2 } as CSSProperties} className="rounded-full bg-teal-500 px-3.5 py-1 text-[11px] font-semibold text-white">
+              {t.confirm}
+            </span>
             <span className={cn("rounded-full px-3.5 py-1 text-[11px] font-medium ring-1", dark ? "ring-white/15" : "ring-fog-300")}>{t.edit}</span>
           </div>
         </div>
