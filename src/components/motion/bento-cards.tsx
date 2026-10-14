@@ -6,6 +6,7 @@ import { useLocale } from "@/components/i18n/locale-provider";
 import type { Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { gsap, useGSAP, MOTION_OK, playWhileVisible } from "./gsap";
+import { ContainerBox, Doc, paint } from "./sprites";
 
 /**
  * Small animated product vignettes ("bento" cards), each showing one real
@@ -69,9 +70,9 @@ export function ContainersCard({ className }: { className?: string }) {
     ar: { title: "كل حاوية في حجزها", text: "أرقام الحاويات وأنواعها في الحجز نفسه، مع حالة يراها الجميع.", steps: ["دخول البوابة", "تم التحميل", "غادرت"] },
   });
   const boxes = [
-    ["MSCU 482113 7", "40HC", "bg-teal-400"],
-    ["MSKU 920114 5", "40HC", "bg-spark-400"],
-    ["TGHU 771020 3", "20GP", "bg-fog-300"],
+    ["MSCU 482113 7", "40HC", "hero"],
+    ["MSKU 920114 5", "40HC", paint.teal],
+    ["TGHU 771020 3", "20GP", paint.fog],
   ];
   const ref = useLoop((el) => {
     const pills = gsap.utils.toArray<HTMLElement>("[data-pill]", el);
@@ -96,7 +97,9 @@ export function ContainersCard({ className }: { className?: string }) {
         {boxes.map(([no, type, color]) => (
           <div key={no} className="rounded-xl bg-white/[0.05] p-3 ring-1 ring-inset ring-white/10">
             <div className="flex items-center gap-3">
-              <span className={cn("h-6 w-9 shrink-0 rounded-[4px] bg-[repeating-linear-gradient(90deg,transparent_0_5px,rgb(0_0_0/0.18)_5px_6px)]", color)} />
+              <svg viewBox="0 0 56 26" className="h-5 w-11 shrink-0" aria-hidden>
+                <ContainerBox x={0} y={0} hero={color === "hero"} color={color} />
+              </svg>
               <span dir="ltr" className="font-mono text-[12.5px] font-semibold">{no}</span>
               <span className="font-mono text-[11px] text-white/50">{type}</span>
               <span data-pill="" className="ms-auto rounded-full bg-teal-400/15 px-2 py-0.5 text-[11px] font-semibold text-teal-300">
@@ -469,4 +472,118 @@ export function BillOfLadingCard({ className }: { className?: string }) {
   );
 }
 
-export const bentoCards = { ContainersCard, CurrencyCard, ReadsPdfCard, RevisionsCard, ApprovalsCard, PaymentMatchCard, LedgerCard, BillOfLadingCard };
+/* ─── 9. The eleven statuses, as a ring the booking moves around ─── */
+
+export function StatusRingCard({ className }: { className?: string }) {
+  const locale = useLocale();
+  const t = L(locale, {
+    en: { title: "Eleven statuses, one lifecycle", text: "Booking Pending to Shipment Closed, shown the same way everywhere the booking appears.", steps: ["Booking Pending", "Booking Confirmed", "Gate In", "SI Submitted", "Vessel Loaded", "Departed", "In Transit", "Arrived", "Telex Status", "Shipment Closed"] },
+    ar: { title: "إحدى عشرة حالة، دورة واحدة", text: "من «الحجز قيد الانتظار» حتى «الشحنة مغلقة»، بالشكل نفسه أينما ظهر الحجز.", steps: ["الحجز قيد الانتظار", "تم تأكيد الحجز", "دخول البوابة", "تم تقديم تعليمات الشحن", "تم التحميل على السفينة", "غادرت", "قيد النقل", "وصلت", "حالة التلكس", "الشحنة مغلقة"] },
+  });
+  const n = t.steps.length;
+  const R = 62;
+  const ref = useLoop((el) => {
+    const dots = gsap.utils.toArray<SVGCircleElement>("[data-dot]", el);
+    const arc = el.querySelector<SVGCircleElement>("[data-arc]");
+    const label = el.querySelector<HTMLElement>("[data-label]");
+    const box = el.querySelector<SVGGElement>("[data-box]");
+    if (!arc || !label || !box) return;
+    const tl = gsap.timeline({ repeat: -1, repeatDelay: 1.2 });
+    tl.set(arc, { strokeDashoffset: 1 }).set(dots, { fill: "rgb(255 255 255 / 0.15)" });
+    t.steps.forEach((step, i) => {
+      const at = i * 0.55;
+      const a = (i / n) * Math.PI * 2 - Math.PI / 2;
+      tl.to(arc, { strokeDashoffset: 1 - (i + 1) / n, duration: 0.5, ease: "power1.inOut" }, at)
+        .to(dots[i], { fill: i === n - 1 ? "var(--color-spark-400)" : "var(--color-teal-400)", duration: 0.2 }, at + 0.3)
+        .to(box, { attr: { transform: `translate(${80 + Math.cos(a) * R - 9} ${80 + Math.sin(a) * R - 4})` }, duration: 0.5, ease: "power1.inOut" }, at)
+        .add(() => {
+          label.textContent = step;
+        }, at + 0.25);
+    });
+    tl.to({}, { duration: 1.4 });
+    return tl;
+  });
+  return (
+    <Card tone="dark" title={t.title} text={t.text} className={className}>
+      <div ref={ref} className="grid w-full grid-cols-[160px_1fr] items-center gap-4">
+        <svg viewBox="0 0 160 160" className="h-40 w-40" aria-hidden>
+          <circle cx="80" cy="80" r={R} fill="none" stroke="rgb(255 255 255 / 0.1)" strokeWidth="3" />
+          <circle data-arc="" cx="80" cy="80" r={R} fill="none" stroke="var(--color-teal-400)" strokeWidth="3" strokeLinecap="round" pathLength={1} strokeDasharray="1" transform="rotate(-90 80 80)" style={{ strokeDashoffset: 1 }} />
+          {t.steps.map((st, i) => {
+            const a = (i / n) * Math.PI * 2 - Math.PI / 2;
+            return <circle key={st} data-dot="" cx={80 + Math.cos(a) * R} cy={80 + Math.sin(a) * R} r="4" fill="rgb(255 255 255 / 0.15)" />;
+          })}
+          <g data-box="" transform={`translate(${80 - 9} ${80 - R - 4})`}>
+            <ContainerBox x={0} y={0} w={18} h={8} hero />
+          </g>
+          <text x="80" y="76" textAnchor="middle" fill="white" fontSize="22" fontWeight="700" fontFamily="var(--font-display)">11</text>
+          <text x="80" y="94" textAnchor="middle" fill="rgb(255 255 255 / 0.55)" fontSize="9" fontFamily="var(--font-sans)">{locale === "ar" ? "حالة" : "statuses"}</text>
+        </svg>
+        <div>
+          <p className="text-[11px] text-white/50">{locale === "ar" ? "الحالة الآن" : "Current status"}</p>
+          <p data-label="" className="mt-1 text-[15px] font-semibold text-teal-300">{t.steps[4]}</p>
+          <ul className="mt-3 space-y-1 text-[11px] text-white/55">
+            {t.steps.slice(0, 4).map((st) => (
+              <li key={st} className="truncate">· {st}</li>
+            ))}
+            <li>…</li>
+          </ul>
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+/* ─── 10. Everything that arrives orbits the booking; the assistant reads it ─── */
+
+export function DocumentOrbitCard({ className }: { className?: string }) {
+  const locale = useLocale();
+  const t = L(locale, {
+    en: { title: "Everything lands on the booking", text: "E-mails, carrier PDFs, vendor invoices and B/Ls are read, classified and filed on the right booking, after a person approves.", items: ["E-mail", "Carrier PDF", "Vendor invoice", "B/L"], center: "Booking" },
+    ar: { title: "كل شيء يصل إلى الحجز", text: "رسائل البريد وملفات الناقل وفواتير الموردين والبوالص تُقرأ وتُصنَّف وتُحفظ في الحجز الصحيح، بعد اعتماد شخص.", items: ["بريد", "PDF الناقل", "فاتورة مورد", "بوليصة"], center: "الحجز" },
+  });
+  const ref = useLoop((el) => {
+    const sats = gsap.utils.toArray<SVGGElement>("[data-sat]", el);
+    const beams = gsap.utils.toArray<SVGLineElement>("[data-beam]", el);
+    const tl = gsap.timeline({ repeat: -1, repeatDelay: 1 });
+    tl.set(beams, { strokeDashoffset: 1 });
+    sats.forEach((sv, i) => {
+      const at = i * 0.8;
+      tl.fromTo(sv, { scale: 0.6, opacity: 0, transformOrigin: "center" }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(2)" }, at)
+        .to(beams[i], { strokeDashoffset: 0, duration: 0.5, ease: "power2.inOut" }, at + 0.35);
+    });
+    tl.to({}, { duration: 1.2 });
+    return tl;
+  });
+  const pos = [
+    [30, 34],
+    [170, 34],
+    [30, 146],
+    [170, 146],
+  ];
+  return (
+    <Card tone="teal" title={t.title} text={t.text} className={className}>
+      <div ref={ref} className="w-full">
+      <svg viewBox="0 0 200 180" className="mx-auto h-44 w-full max-w-[260px]" aria-hidden>
+        <ellipse cx="100" cy="90" rx="82" ry="62" fill="none" stroke="var(--color-teal-200)" strokeWidth="1.5" strokeDasharray="3 6" />
+        {pos.map(([x, y], i) => (
+          <line key={i} data-beam="" x1={x} y1={y} x2="100" y2="90" stroke="var(--color-teal-500)" strokeWidth="2" pathLength={1} strokeDasharray="1" style={{ strokeDashoffset: 1 }} />
+        ))}
+        <g>
+          <rect x="62" y="62" width="76" height="56" rx="10" fill="var(--color-ink-900)" />
+          <ContainerBox x={72} y={70} w={56} h={24} hero />
+          <text x="100" y="110" textAnchor="middle" fill="white" fontSize="9" fontFamily="var(--font-sans)" fontWeight="600">{t.center}</text>
+        </g>
+        {pos.map(([x, y], i) => (
+          <g key={i} data-sat="" transform={`translate(${x} ${y})`}>
+            <Doc x={-16} y={-20} w={32} h={40} stamp={i === 3} />
+            <text x="0" y="34" textAnchor="middle" fill="var(--color-ink-900)" fontSize="8.5" fontFamily="var(--font-sans)" fontWeight="600">{t.items[i]}</text>
+          </g>
+        ))}
+      </svg>
+      </div>
+    </Card>
+  );
+}
+
+export const bentoCards = { ContainersCard, CurrencyCard, ReadsPdfCard, RevisionsCard, ApprovalsCard, PaymentMatchCard, LedgerCard, BillOfLadingCard, StatusRingCard, DocumentOrbitCard };

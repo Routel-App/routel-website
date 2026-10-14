@@ -39,7 +39,6 @@ export function moduleVisual(slug: string, locale: Locale): ReactNode {
     case "finance-receivables":
       return <PaymentMatchCard />;
     case "accounting":
-    case "expenses":
       return <LedgerCard />;
     case "documents":
       return <ApprovalsCard />;
@@ -60,6 +59,8 @@ export function moduleVisual(slug: string, locale: Locale): ReactNode {
     case "visitor-tracking":
     case "compliance":
       return lottie("/lottie/ship-wave.json");
+    case "expenses":
+      return lottie("/lottie/sheet-to-system.json");
     default:
       return lottie("/lottie/docs-merge.json");
   }

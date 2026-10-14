@@ -7,6 +7,8 @@ import {
   ApprovalsCard,
   ContainersCard,
   CurrencyCard,
+  DocumentOrbitCard,
+  StatusRingCard,
   LedgerCard,
   PaymentMatchCard,
   ReadsPdfCard,
@@ -57,8 +59,14 @@ export async function FeatureBento() {
           <RevealItem className="lg:col-span-2">
             <ApprovalsCard />
           </RevealItem>
-          <RevealItem className="md:col-span-2 lg:col-span-1">
+          <RevealItem>
             <LedgerCard />
+          </RevealItem>
+          <RevealItem className="lg:col-span-2">
+            <StatusRingCard />
+          </RevealItem>
+          <RevealItem>
+            <DocumentOrbitCard />
           </RevealItem>
         </RevealGroup>
       </Container>
