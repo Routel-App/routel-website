@@ -9,6 +9,7 @@ import { compileContentMdx } from "@/lib/mdx";
 import { readFeatures } from "@/lib/features";
 import type { Locale } from "@/lib/i18n";
 import { getLocale } from "@/lib/locale-server";
+import { FeatureBento } from "@/components/home/feature-bento";
 
 const copy = {
   en: {
@@ -69,6 +70,8 @@ export default async function FeaturesPage() {
           </Reveal>
         </Container>
       </section>
+
+      <FeatureBento />
 
       <Container className="grid gap-10 py-14 lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-16 lg:py-20">
         <nav aria-label={t.onThisPage} className="hidden lg:block">

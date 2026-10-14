@@ -5,6 +5,7 @@ import { Replay, Reveal, RevealGroup, RevealItem } from "@/components/motion/rev
 import { getLocale } from "@/lib/locale-server";
 import type { Locale } from "@/lib/i18n";
 import { AssistantChatShot } from "@/components/shots/ai-shots";
+import { PromptTyper } from "@/components/motion/prompt-typer";
 
 const guaranteeIcons = [ShieldCheck, Lock, CloudOff, ListChecks];
 
@@ -126,7 +127,11 @@ export async function AiSpotlight() {
         </Reveal>
       </div>
 
-      <RevealGroup className="relative mt-20 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.07}>
+      <Reveal className="relative mt-20">
+        <PromptTyper />
+      </Reveal>
+
+      <RevealGroup className="relative mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.07}>
         {t.guarantees.map((g, i) => {
           const Icon = guaranteeIcons[i];
           return (

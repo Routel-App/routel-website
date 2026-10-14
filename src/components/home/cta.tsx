@@ -2,6 +2,7 @@ import { ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
+import { Lottie } from "@/components/motion/lottie";
 import { getLocale } from "@/lib/locale-server";
 import type { Locale } from "@/lib/i18n";
 
@@ -29,10 +30,11 @@ export async function Cta() {
   const locale = await getLocale();
   const t = copy[locale];
   return (
-    <section className="relative pt-6">
+    <section className="relative pt-6" id="cta">
       <div aria-hidden className="absolute inset-x-0 bottom-0 h-1/2 bg-ink-950" />
       <Container className="relative">
-        <Reveal className="grid items-center gap-8 rounded-3xl border border-fog-200 bg-white p-8 shadow-float sm:p-10 lg:grid-cols-[1.4fr_auto] lg:p-12">
+        <Reveal className="grid items-center gap-8 rounded-3xl border border-fog-200 bg-white p-8 shadow-float sm:p-10 lg:grid-cols-[auto_1.4fr_auto] lg:p-12">
+          <Lottie src="/lottie/containers-stack.json" className="mx-auto hidden h-36 w-48 rounded-2xl bg-fog-50 lg:block" />
           <div>
             <h2 className="font-display text-balance text-2xl font-bold leading-[1.1] text-ink-900 sm:text-3xl lg:text-[2.35rem]">
               {t.title}
