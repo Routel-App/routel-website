@@ -128,7 +128,7 @@ export function TourTabs({ items, label }: { items: TourItem[]; label: string })
                 <span
                   className={cn(
                     "flex h-9 w-9 shrink-0 items-center justify-center rounded-xl transition-colors duration-300 [&_svg]:h-[18px] [&_svg]:w-[18px]",
-                    on ? "bg-ink-900 text-teal-300" : "bg-white text-fog-600 ring-1 ring-fog-200",
+                    on ? "bg-ink-900 text-spark-300" : "bg-white text-fog-600 ring-1 ring-fog-200",
                   )}
                 >
                   {item.icon}
@@ -156,7 +156,7 @@ export function TourTabs({ items, label }: { items: TourItem[]; label: string })
                 <span aria-hidden className="absolute inset-x-0 bottom-0 h-[3px] bg-fog-100">
                   <span
                     key={`${active}-${String(auto)}`}
-                    className="block h-full origin-[left_center] bg-teal-400 rtl:origin-[right_center]"
+                    className="block h-full origin-[left_center] bg-spark-400 rtl:origin-[right_center]"
                     style={{
                       animation: `tour-progress ${DWELL}s linear forwards`,
                       animationPlayState: playing ? "running" : "paused",
@@ -182,7 +182,7 @@ export function TourTabs({ items, label }: { items: TourItem[]; label: string })
           >
             {/* Phones and tablets: the story above the picture. */}
             <p className="mb-5 text-[15px] leading-relaxed text-fog-600 lg:hidden">{item.body}</p>
-            <div className="relative overflow-hidden rounded-3xl bg-[linear-gradient(135deg,var(--color-fog-100),var(--color-teal-50))] p-3 sm:p-6 lg:p-8">
+            <div className="relative overflow-hidden rounded-3xl bg-[linear-gradient(135deg,var(--color-fog-100),var(--color-spark-50))] p-3 sm:p-6 lg:p-8">
               <div aria-hidden className="grid-fade pointer-events-none absolute inset-0" />
               <div className="relative">{item.panel}</div>
             </div>
@@ -190,14 +190,14 @@ export function TourTabs({ items, label }: { items: TourItem[]; label: string })
               <ul className="grid gap-2 sm:grid-cols-3 sm:gap-4">
                 {item.bullets.map((b) => (
                   <li key={b} className="flex items-start gap-2 text-[13.5px] leading-snug text-fog-700">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-teal-500" />
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-spark-500" />
                     {b}
                   </li>
                 ))}
               </ul>
               <Link
                 href={item.href}
-                className="group inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-teal-700 hover:text-teal-800"
+                className="group inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-spark-700 hover:text-spark-800"
               >
                 {item.cta}
                 <ArrowRight className="h-4 w-4 transition-transform ltr:group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />

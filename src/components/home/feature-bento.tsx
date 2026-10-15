@@ -32,7 +32,7 @@ export async function FeatureBento() {
   const locale = await getLocale();
   const t = copy[locale];
   return (
-    <section className="relative overflow-hidden bg-[linear-gradient(180deg,var(--color-teal-900)_0%,var(--color-ink-950)_70%)] py-20 text-white sm:py-28" id="bento">
+    <section className="relative overflow-hidden bg-[linear-gradient(180deg,var(--color-spark-900)_0%,var(--color-ink-950)_70%)] py-20 text-white sm:py-28" id="bento">
       <div aria-hidden className="grid-fade-dark pointer-events-none absolute inset-0" />
       <Container className="relative">
         <Reveal className="mx-auto max-w-3xl text-center">

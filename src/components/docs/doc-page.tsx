@@ -43,7 +43,7 @@ export async function DocPage({ slug, source, frontmatter }: { slug: string; sou
         </Callout>
       ) : null}
 
-      <div className="prose prose-slate mt-8 max-w-none prose-headings:font-display prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-ink-900 prose-h2:mt-12 prose-h2:text-2xl prose-h3:mt-8 prose-h3:text-lg prose-p:text-fog-700 prose-p:leading-relaxed prose-a:font-medium prose-a:text-teal-700 prose-a:decoration-teal-200 prose-a:underline-offset-4 hover:prose-a:decoration-teal-600 prose-strong:text-ink-900 prose-code:rounded prose-code:bg-fog-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono prose-code:text-[0.85em] prose-code:font-normal prose-code:text-ink-900 prose-code:before:content-none prose-code:after:content-none prose-pre:rounded-xl prose-pre:bg-ink-950 prose-li:text-fog-700 prose-li:marker:text-fog-400">
+      <div className="prose prose-slate mt-8 max-w-none prose-headings:font-display prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-ink-900 prose-h2:mt-12 prose-h2:text-2xl prose-h3:mt-8 prose-h3:text-lg prose-p:text-fog-700 prose-p:leading-relaxed prose-a:font-medium prose-a:text-spark-700 prose-a:decoration-spark-200 prose-a:underline-offset-4 hover:prose-a:decoration-spark-600 prose-strong:text-ink-900 prose-code:rounded prose-code:bg-fog-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:font-mono prose-code:text-[0.85em] prose-code:font-normal prose-code:text-ink-900 prose-code:before:content-none prose-code:after:content-none prose-pre:rounded-xl prose-pre:bg-ink-950 prose-li:text-fog-700 prose-li:marker:text-fog-400">
         {content}
       </div>
 

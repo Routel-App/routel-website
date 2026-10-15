@@ -72,7 +72,7 @@ export async function Region() {
               const Icon = icons[i];
               return (
                 <RevealItem key={c.title} className="rounded-2xl bg-white/[0.04] p-5 ring-1 ring-inset ring-white/10">
-                  <Icon className="h-5 w-5 text-teal-300" />
+                  <Icon className="h-5 w-5 text-spark-300" />
                   <p className="mt-3 font-semibold">{c.title}</p>
                   <p className="mt-1.5 text-[14px] leading-relaxed text-white/60">{c.text}</p>
                 </RevealItem>
@@ -85,7 +85,7 @@ export async function Region() {
                 <span key={c.name} className="inline-flex items-center gap-2 rounded-full bg-white/[0.05] px-3.5 py-1.5 text-[13px] ring-1 ring-white/10">
                   <span className="font-semibold">{c.name}</span>
                   <span className="text-white/50">{c.money}</span>
-                  <span className="text-teal-300">{c.tax}</span>
+                  <span className="text-spark-300">{c.tax}</span>
                 </span>
               ))}
             </Reveal>

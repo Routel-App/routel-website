@@ -9,11 +9,11 @@ import type { ComponentProps } from "react";
  */
 
 export const ink = {
-  bg: "#060b16",
-  deep: "#0b1426",
-  hull: "#12203a",
-  steel: "#1c2d4d",
-  line: "#2a3f66",
+  bg: "#09090b",
+  deep: "#121316",
+  hull: "#1c1e23",
+  steel: "#292c33",
+  line: "#3a3e47",
 } as const;
 
 export const paint = {
@@ -23,8 +23,8 @@ export const paint = {
   tealDeep: "#1fa192",
   tealDark: "#146961",
   sea: "#13544f",
-  fog: "#c3cdd9",
-  fogLight: "#e9eef4",
+  fog: "#c9c9c5",
+  fogLight: "#efefed",
   white: "#ffffff",
   amber: "#fab660",
 } as const;

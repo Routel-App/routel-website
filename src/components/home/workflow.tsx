@@ -58,7 +58,7 @@ export async function Workflow() {
           return (
             <RevealItem key={s.title} className="relative">
               <div className="flex items-center gap-3 lg:flex-col lg:items-start">
-                <span className="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-2xl border border-fog-200 bg-white text-teal-700 shadow-card">
+                <span className="relative z-10 flex h-[76px] w-[76px] shrink-0 items-center justify-center rounded-2xl border border-fog-200 bg-white text-spark-700 shadow-card">
                   <Icon className="h-6 w-6" strokeWidth={1.6} />
                   <span className="absolute -end-2 -top-2 flex h-6 w-6 items-center justify-center rounded-full bg-ink-900 font-mono text-[11px] font-semibold text-white">
                     {i + 1}

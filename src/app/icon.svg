@@ -1,8 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="16" fill="#0b1426"/>
-  <g transform="translate(19 14) scale(0.1)">
-    <rect x="0" y="0" width="70" height="70" fill="#F7941D"/>
-    <rect x="0" y="100" width="70" height="260" fill="#ffffff"/>
-    <rect x="0" y="290" width="270" height="70" fill="#ffffff"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 234 274">
+  <rect x="0" y="0" width="69" height="69" fill="#F7941D"/>
+  <rect x="0" y="69" width="69" height="205" fill="#000"/>
+  <rect x="69" y="205" width="165" height="69" fill="#000"/>
 </svg>

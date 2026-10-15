@@ -27,7 +27,7 @@ export async function Shot({ name }: { name: ShotName }) {
   if (!shot) return null;
   const { Component } = shot;
   return (
-    <figure className="not-prose my-10 rounded-3xl bg-[linear-gradient(135deg,var(--color-fog-100),var(--color-teal-50))] p-4 sm:p-8">
+    <figure className="not-prose my-10 rounded-3xl bg-[linear-gradient(135deg,var(--color-fog-100),var(--color-spark-50))] p-4 sm:p-8">
       {shot.wide ? (
         // The features column is ~700px at its widest.
         <ShotScaler zoom="[zoom:0.3] min-[420px]:[zoom:0.33] sm:[zoom:0.52] md:[zoom:0.66] lg:[zoom:0.68]">

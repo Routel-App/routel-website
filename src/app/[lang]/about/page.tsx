@@ -170,7 +170,7 @@ export default async function AboutPage() {
         <RevealGroup className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
           {t.forItems.map((p, i) => (
             <RevealItem key={p.title} className="rounded-2xl border border-fog-200 bg-white p-6 shadow-card">
-              <span dir="ltr" className="font-mono text-[12px] font-semibold text-teal-600">0{i + 1}</span>
+              <span dir="ltr" className="font-mono text-[12px] font-semibold text-spark-600">0{i + 1}</span>
               <h3 className="font-display mt-2 text-[16px] font-semibold text-ink-900">{p.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-fog-600">{p.text}</p>
             </RevealItem>

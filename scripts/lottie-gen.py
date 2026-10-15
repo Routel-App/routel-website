@@ -14,8 +14,8 @@ def hexc(h):
 
 
 # sprites.tsx palette
-INK_BG, INK_DEEP, INK_HULL, INK_STEEL, INK_LINE = map(hexc, ["#060b16", "#0b1426", "#12203a", "#1c2d4d", "#2a3f66"])
-HERO, TEAL, TEAL_DEEP, SEA, FOG, FOG_LIGHT, WHITE, AMBER = map(hexc, ["#f7941d", "#47bcac", "#1fa192", "#13544f", "#c3cdd9", "#e9eef4", "#ffffff", "#fab660"])
+INK_BG, INK_DEEP, INK_HULL, INK_STEEL, INK_LINE = map(hexc, ["#09090b", "#121316", "#1c1e23", "#292c33", "#3a3e47"])
+HERO, TEAL, TEAL_DEEP, SEA, FOG, FOG_LIGHT, WHITE, AMBER = map(hexc, ["#f7941d", "#47bcac", "#1fa192", "#13544f", "#c9c9c5", "#efefed", "#ffffff", "#fab660"])
 BOX_PALETTE = [TEAL, FOG, INK_LINE, TEAL_DEEP, FOG_LIGHT, AMBER]
 def box_color(i): return BOX_PALETTE[i % len(BOX_PALETTE)]
 

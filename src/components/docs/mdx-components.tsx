@@ -43,7 +43,7 @@ type CalloutKind = "note" | "tip" | "warning" | "permission";
 
 const calloutStyles: Record<CalloutKind, { icon: typeof Info; cls: string }> = {
   note: { icon: Info, cls: "border-fog-200 bg-fog-50 text-fog-700" },
-  tip: { icon: Lightbulb, cls: "border-teal-200 bg-teal-50 text-teal-900" },
+  tip: { icon: Lightbulb, cls: "border-spark-200 bg-spark-50 text-spark-900" },
   warning: { icon: TriangleAlert, cls: "border-spark-200 bg-spark-50 text-spark-600" },
   permission: { icon: ShieldCheck, cls: "border-ink-700/20 bg-ink-900 text-white" },
 };

@@ -22,7 +22,7 @@ type Tone = "dark" | "light" | "teal" | "cream";
 const surface: Record<Tone, string> = {
   dark: "bg-ink-900 text-white ring-white/10",
   light: "bg-white text-ink-900 ring-fog-200",
-  teal: "bg-teal-50 text-ink-900 ring-teal-100",
+  teal: "bg-spark-50 text-ink-900 ring-spark-100",
   cream: "bg-spark-50 text-ink-900 ring-spark-100",
 };
 
@@ -102,12 +102,12 @@ export function ContainersCard({ className }: { className?: string }) {
               </svg>
               <span dir="ltr" className="font-mono text-[12.5px] font-semibold">{no}</span>
               <span className="font-mono text-[11px] text-white/50">{type}</span>
-              <span data-pill="" className="ms-auto rounded-full bg-teal-400/15 px-2 py-0.5 text-[11px] font-semibold text-teal-300">
+              <span data-pill="" className="ms-auto rounded-full bg-spark-400/15 px-2 py-0.5 text-[11px] font-semibold text-spark-300">
                 {t.steps[t.steps.length - 1]}
               </span>
             </div>
             <div className="mt-2 h-1 overflow-hidden rounded-full bg-white/10">
-              <span data-bar="" className="block h-full origin-[left_center] rounded-full bg-teal-400 rtl:origin-[right_center]" />
+              <span data-bar="" className="block h-full origin-[left_center] rounded-full bg-spark-400 rtl:origin-[right_center]" />
             </div>
           </div>
         ))}
@@ -145,10 +145,10 @@ export function CurrencyCard({ className }: { className?: string }) {
   return (
     <Card tone="teal" title={t.title} text={t.text} className={className}>
       <div ref={ref} className="w-full">
-        <div className="rounded-2xl bg-white p-4 shadow-card ring-1 ring-teal-100">
+        <div className="rounded-2xl bg-white p-4 shadow-card ring-1 ring-spark-100">
           <p className="text-[11.5px] text-fog-500">{t.label}</p>
           <p dir="ltr" data-num="" className="mt-1 font-mono text-2xl font-semibold tabular-nums rtl:text-end">USD 4,200.00</p>
-          <p dir="ltr" data-conv="" className="mt-1 font-mono text-[12.5px] text-teal-700 rtl:text-end">
+          <p dir="ltr" data-conv="" className="mt-1 font-mono text-[12.5px] text-spark-700 rtl:text-end">
             ≈ {t.base} {(usd * t.rate).toLocaleString("en-US", { minimumFractionDigits: 2 })} @ {t.rate.toFixed(4)}
           </p>
         </div>
@@ -203,13 +203,13 @@ export function ReadsPdfCard({ className }: { className?: string }) {
               <span key={i} className="block h-1.5 rounded-full bg-fog-200" style={{ width: `${w}%` }} />
             ))}
           </div>
-          <span data-beam="" className="absolute inset-x-0 top-[88%] h-6 bg-gradient-to-b from-transparent via-teal-400/35 to-transparent" aria-hidden />
-          <ScanLine className="absolute bottom-2 end-2 h-4 w-4 text-teal-600" />
+          <span data-beam="" className="absolute inset-x-0 top-[88%] h-6 bg-gradient-to-b from-transparent via-spark-400/35 to-transparent" aria-hidden />
+          <ScanLine className="absolute bottom-2 end-2 h-4 w-4 text-spark-600" />
         </div>
         <ul className="space-y-1.5">
           {t.fields.map(([k, v]) => (
             <li key={k} data-field="" className="flex items-center gap-2 rounded-lg bg-fog-50 px-2.5 py-1.5 ring-1 ring-fog-100">
-              <span data-tick="" className="flex h-4 w-4 shrink-0 items-center justify-center rounded bg-teal-500 text-white">
+              <span data-tick="" className="flex h-4 w-4 shrink-0 items-center justify-center rounded bg-spark-500 text-white">
                 <Check className="h-3 w-3" strokeWidth={3} />
               </span>
               <span className="min-w-0">
@@ -300,13 +300,13 @@ export function ApprovalsCard({ className }: { className?: string }) {
       <div ref={ref} className="relative w-full space-y-2">
         {t.rows.map((r) => (
           <div key={r} data-ap="" data-state="ok" className="group/ap flex items-center gap-3 rounded-xl bg-fog-50 px-3 py-2.5 ring-1 ring-fog-100">
-            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber-300 text-amber-950 transition-colors duration-300 group-data-[state=ok]/ap:bg-teal-500 group-data-[state=ok]/ap:text-white">
+            <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber-300 text-amber-950 transition-colors duration-300 group-data-[state=ok]/ap:bg-spark-500 group-data-[state=ok]/ap:text-white">
               <Check className="hidden h-3.5 w-3.5 group-data-[state=ok]/ap:block" strokeWidth={3} />
               <span className="block h-0.5 w-2.5 rounded bg-current group-data-[state=ok]/ap:hidden" />
             </span>
             <span dir="auto" className="min-w-0 flex-1 truncate text-[12.5px] font-medium">{r}</span>
             <span className="text-[11px] font-semibold text-amber-700 group-data-[state=ok]/ap:hidden">{t.pending}</span>
-            <span className="hidden text-[11px] font-semibold text-teal-700 group-data-[state=ok]/ap:inline">{t.ok}</span>
+            <span className="hidden text-[11px] font-semibold text-spark-700 group-data-[state=ok]/ap:inline">{t.ok}</span>
           </div>
         ))}
         <MousePointer2 data-cursor="" className="pointer-events-none absolute end-6 h-5 w-5 -translate-y-1/2 fill-ink-900 text-white opacity-0 drop-shadow" style={{ top: 0 }} aria-hidden />
@@ -343,16 +343,16 @@ export function PaymentMatchCard({ className }: { className?: string }) {
           <span className="truncate text-[12.5px]">{t.mail}</span>
         </div>
         <svg viewBox="0 0 100 40" preserveAspectRatio="none" className="h-10 w-full rtl:-scale-x-100" aria-hidden>
-          <path data-link="" d="M20 0 C 20 22, 80 18, 80 40" fill="none" stroke="var(--color-teal-400)" strokeWidth="1.6" strokeDasharray="1" pathLength={1} />
+          <path data-link="" d="M20 0 C 20 22, 80 18, 80 40" fill="none" stroke="var(--color-spark-400)" strokeWidth="1.6" strokeDasharray="1" pathLength={1} />
         </svg>
         <div className="flex items-center gap-2.5 rounded-xl bg-white p-3 text-ink-900">
-          <Receipt className="h-4 w-4 shrink-0 text-teal-600" />
+          <Receipt className="h-4 w-4 shrink-0 text-spark-600" />
           <span dir="ltr" className="font-mono text-[12px] font-semibold">{t.inv}</span>
           <span dir="ltr" className="ms-auto font-mono text-[12px]">{t.amt}</span>
         </div>
-        <div data-match="" className="mt-3 flex items-center justify-between gap-2 rounded-xl bg-teal-400/15 px-3 py-2 ring-1 ring-teal-400/30">
-          <span className="text-[12px] font-semibold text-teal-200">{t.match}</span>
-          <span className="rounded-full bg-teal-400 px-3 py-0.5 text-[11.5px] font-semibold text-ink-950">{t.confirm}</span>
+        <div data-match="" className="mt-3 flex items-center justify-between gap-2 rounded-xl bg-spark-400/15 px-3 py-2 ring-1 ring-spark-400/30">
+          <span className="text-[12px] font-semibold text-spark-200">{t.match}</span>
+          <span className="rounded-full bg-spark-400 px-3 py-0.5 text-[11.5px] font-semibold text-ink-950">{t.confirm}</span>
         </div>
       </div>
     </Card>
@@ -391,7 +391,7 @@ export function LedgerCard({ className }: { className?: string }) {
       <div ref={ref} className="w-full">
         <div className="flex h-24 items-end gap-1.5" aria-hidden>
           {heights.map((h, i) => (
-            <span key={i} data-lbar="" className="block flex-1 origin-bottom rounded-t bg-teal-400" style={{ height: `${h}%` }} />
+            <span key={i} data-lbar="" className="block flex-1 origin-bottom rounded-t bg-spark-400" style={{ height: `${h}%` }} />
           ))}
         </div>
         <dl className="mt-4 space-y-1.5 text-[12px]">
@@ -465,7 +465,7 @@ export function BillOfLadingCard({ className }: { className?: string }) {
               </div>
             ))}
           </dl>
-          <span data-stamp="" className="absolute bottom-3 end-3 rotate-[-8deg] rounded-md border-2 border-teal-600 px-2 py-0.5 font-mono text-[10px] font-bold text-teal-700">ORIGINAL</span>
+          <span data-stamp="" className="absolute bottom-3 end-3 rotate-[-8deg] rounded-md border-2 border-spark-600 px-2 py-0.5 font-mono text-[10px] font-bold text-spark-700">ORIGINAL</span>
         </div>
       </div>
     </Card>
@@ -494,7 +494,7 @@ export function StatusRingCard({ className }: { className?: string }) {
       const at = i * 0.55;
       const a = (i / n) * Math.PI * 2 - Math.PI / 2;
       tl.to(arc, { strokeDashoffset: 1 - (i + 1) / n, duration: 0.5, ease: "power1.inOut" }, at)
-        .to(dots[i], { fill: i === n - 1 ? "var(--color-spark-400)" : "var(--color-teal-400)", duration: 0.2 }, at + 0.3)
+        .to(dots[i], { fill: i === n - 1 ? "var(--color-spark-400)" : "var(--color-spark-400)", duration: 0.2 }, at + 0.3)
         .to(box, { attr: { transform: `translate(${80 + Math.cos(a) * R - 9} ${80 + Math.sin(a) * R - 4})` }, duration: 0.5, ease: "power1.inOut" }, at)
         .add(() => {
           label.textContent = step;
@@ -508,7 +508,7 @@ export function StatusRingCard({ className }: { className?: string }) {
       <div ref={ref} className="grid w-full grid-cols-[160px_1fr] items-center gap-4">
         <svg viewBox="0 0 160 160" className="h-40 w-40" aria-hidden>
           <circle cx="80" cy="80" r={R} fill="none" stroke="rgb(255 255 255 / 0.1)" strokeWidth="3" />
-          <circle data-arc="" cx="80" cy="80" r={R} fill="none" stroke="var(--color-teal-400)" strokeWidth="3" strokeLinecap="round" pathLength={1} strokeDasharray="1" transform="rotate(-90 80 80)" style={{ strokeDashoffset: 1 }} />
+          <circle data-arc="" cx="80" cy="80" r={R} fill="none" stroke="var(--color-spark-400)" strokeWidth="3" strokeLinecap="round" pathLength={1} strokeDasharray="1" transform="rotate(-90 80 80)" style={{ strokeDashoffset: 1 }} />
           {t.steps.map((st, i) => {
             const a = (i / n) * Math.PI * 2 - Math.PI / 2;
             return <circle key={st} data-dot="" cx={80 + Math.cos(a) * R} cy={80 + Math.sin(a) * R} r="4" fill="rgb(255 255 255 / 0.15)" />;
@@ -521,7 +521,7 @@ export function StatusRingCard({ className }: { className?: string }) {
         </svg>
         <div>
           <p className="text-[11px] text-white/50">{locale === "ar" ? "الحالة الآن" : "Current status"}</p>
-          <p data-label="" className="mt-1 text-[15px] font-semibold text-teal-300">{t.steps[4]}</p>
+          <p data-label="" className="mt-1 text-[15px] font-semibold text-spark-300">{t.steps[4]}</p>
           <ul className="mt-3 space-y-1 text-[11px] text-white/55">
             {t.steps.slice(0, 4).map((st) => (
               <li key={st} className="truncate">· {st}</li>
@@ -565,9 +565,9 @@ export function DocumentOrbitCard({ className }: { className?: string }) {
     <Card tone="teal" title={t.title} text={t.text} className={className}>
       <div ref={ref} className="w-full">
       <svg viewBox="0 0 200 180" className="mx-auto h-44 w-full max-w-[260px]" aria-hidden>
-        <ellipse cx="100" cy="90" rx="82" ry="62" fill="none" stroke="var(--color-teal-200)" strokeWidth="1.5" strokeDasharray="3 6" />
+        <ellipse cx="100" cy="90" rx="82" ry="62" fill="none" stroke="var(--color-spark-200)" strokeWidth="1.5" strokeDasharray="3 6" />
         {pos.map(([x, y], i) => (
-          <line key={i} data-beam="" x1={x} y1={y} x2="100" y2="90" stroke="var(--color-teal-500)" strokeWidth="2" pathLength={1} strokeDasharray="1" style={{ strokeDashoffset: 1 }} />
+          <line key={i} data-beam="" x1={x} y1={y} x2="100" y2="90" stroke="var(--color-spark-500)" strokeWidth="2" pathLength={1} strokeDasharray="1" style={{ strokeDashoffset: 1 }} />
         ))}
         <g>
           <rect x="62" y="62" width="76" height="56" rx="10" fill="var(--color-ink-900)" />

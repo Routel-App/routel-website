@@ -61,7 +61,7 @@ export function ShipmentShot({ locale, className }: { locale: Locale; className?
           </div>
           <div className="text-end">
             <p className="flex items-center justify-end gap-1.5 text-[13px] font-semibold">
-              <Anchor className="h-3.5 w-3.5 text-teal-600" />
+              <Anchor className="h-3.5 w-3.5 text-spark-600" />
               {t.from} {arrowFor(locale)} {t.to}
             </p>
             <Ltr className="mt-1 block font-mono text-[10px] text-fog-500">{t.meta}</Ltr>
@@ -73,15 +73,15 @@ export function ShipmentShot({ locale, className }: { locale: Locale; className?
           {t.steps.map((s, i) => (
             <li key={s} className="relative flex flex-col items-center text-center">
               {i > 0 ? (
-                <span className={cn("absolute end-1/2 top-2.5 h-0.5 w-full", i <= t.current ? "bg-teal-400" : "bg-fog-200")} />
+                <span className={cn("absolute end-1/2 top-2.5 h-0.5 w-full", i <= t.current ? "bg-spark-400" : "bg-fog-200")} />
               ) : null}
               <span
                 className={cn(
                   "relative z-10 flex h-5 w-5 items-center justify-center rounded-full",
-                  i < t.current ? "bg-teal-500 text-white" : i === t.current ? "bg-white ring-4 ring-teal-100" : "bg-fog-100 ring-1 ring-fog-200",
+                  i < t.current ? "bg-spark-500 text-white" : i === t.current ? "bg-white ring-4 ring-spark-100" : "bg-fog-100 ring-1 ring-fog-200",
                 )}
               >
-                {i < t.current ? <Check className="h-3 w-3" strokeWidth={3} /> : i === t.current ? <Ship className="h-3 w-3 text-teal-600" /> : null}
+                {i < t.current ? <Check className="h-3 w-3" strokeWidth={3} /> : i === t.current ? <Ship className="h-3 w-3 text-spark-600" /> : null}
               </span>
               <span className={cn("mt-1.5 text-[9.5px]", i === t.current ? "font-semibold text-ink-900" : "text-fog-500")}>{s}</span>
             </li>
@@ -102,11 +102,11 @@ export function ShipmentShot({ locale, className }: { locale: Locale; className?
               <Ltr className="text-end font-mono text-fog-500">{cost}</Ltr>
             </div>
           ))}
-          <div className="flex items-center justify-between border-t border-fog-200 bg-teal-50/70 px-3 py-2 text-[11px]">
-            <span className="font-semibold text-teal-800">
+          <div className="flex items-center justify-between border-t border-fog-200 bg-spark-50/70 px-3 py-2 text-[11px]">
+            <span className="font-semibold text-spark-800">
               {t.profit} · {t.margin[0]} <Ltr>{t.margin[2]}</Ltr>
             </span>
-            <Ltr className="font-mono font-semibold text-teal-700">{t.margin[1]}</Ltr>
+            <Ltr className="font-mono font-semibold text-spark-700">{t.margin[1]}</Ltr>
           </div>
         </div>
       </div>
@@ -178,7 +178,7 @@ export function TaxInvoiceShot({ locale, className }: { locale: Locale; classNam
               <p className="text-[12px] font-bold">{t.seller}</p>
               <p className="text-[9.5px] text-fog-500">{t.sellerMeta}</p>
             </div>
-            <span className="h-8 w-8 rounded-md bg-teal-500/15 ring-1 ring-teal-200" />
+            <span className="h-8 w-8 rounded-md bg-spark-500/15 ring-1 ring-spark-200" />
           </div>
           <p className="mx-auto mt-3 w-fit rounded border-2 border-ink-900 px-3 py-0.5 text-[11px] font-bold">{t.title}</p>
           <div className="mt-3 grid grid-cols-2 gap-2 text-[9.5px]">
@@ -277,7 +277,7 @@ export function AlertsShot({ locale, className }: { locale: Locale; className?: 
                 key={label}
                 className={cn(
                   "flex items-center gap-2 rounded-lg px-2 py-1.5 text-[11px]",
-                  i === 0 ? "bg-teal-50 font-semibold text-teal-800 ring-1 ring-teal-100" : "text-fog-600",
+                  i === 0 ? "bg-spark-50 font-semibold text-spark-800 ring-1 ring-spark-100" : "text-fog-600",
                 )}
               >
                 <Icon className="h-3.5 w-3.5" />

@@ -127,7 +127,7 @@ export default async function PlatformIndexPage() {
                       className="group flex h-full flex-col rounded-2xl border border-fog-200 bg-white p-6 shadow-card transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-0.5 hover:border-fog-300 hover:shadow-float"
                     >
                       <div className="flex items-start justify-between">
-                        <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-teal-50 text-teal-700 ring-1 ring-inset ring-teal-100">
+                        <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-spark-50 text-spark-700 ring-1 ring-inset ring-spark-100">
                           <Icon className="h-5 w-5" strokeWidth={1.75} />
                         </span>
                         <ArrowUpRight className="h-4 w-4 text-fog-300 transition-colors group-hover:text-ink-900" />

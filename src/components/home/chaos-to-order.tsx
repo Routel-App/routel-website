@@ -171,7 +171,7 @@ export function ChaosToOrder() {
               </p>
             </div>
           </div>
-          <p className="mt-8 max-w-md border-s-2 border-teal-400 ps-4 text-[15px] font-medium leading-relaxed text-ink-900">{t.outro}</p>
+          <p className="mt-8 max-w-md border-s-2 border-spark-400 ps-4 text-[15px] font-medium leading-relaxed text-ink-900">{t.outro}</p>
         </div>
 
         {/* The stage: files around, the booking in the middle */}
@@ -206,12 +206,12 @@ export function ChaosToOrder() {
                 <p className="text-[11px] text-white/50">{t.card}</p>
                 <p dir="ltr" className="font-mono text-[14px] font-semibold rtl:text-end">NXS26000412</p>
               </div>
-              <span className="rounded-full bg-teal-400/15 px-2.5 py-1 text-[11px] font-semibold text-teal-300 ring-1 ring-teal-400/30">Routel</span>
+              <span className="rounded-full bg-spark-400/15 px-2.5 py-1 text-[11px] font-semibold text-spark-300 ring-1 ring-spark-400/30">Routel</span>
             </div>
             <ul className="mt-3 space-y-1.5">
               {t.items.map((it) => (
                 <li key={it.becomes} data-row="" className="flex items-center gap-2.5 rounded-lg bg-white/[0.04] px-2.5 py-1.5 text-[12.5px]">
-                  <span data-check="" className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-teal-400 text-ink-950">
+                  <span data-check="" className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-spark-400 text-ink-950">
                     <Check className="h-3 w-3" strokeWidth={3} />
                   </span>
                   {it.becomes}

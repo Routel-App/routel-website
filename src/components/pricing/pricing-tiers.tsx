@@ -179,7 +179,7 @@ export async function PricingTiers() {
           )}
         >
           {t.highlighted ? (
-            <span className="absolute -top-3 start-6 rounded-full bg-teal-400 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-ink-950">
+            <span className="absolute -top-3 start-6 rounded-full bg-spark-400 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-ink-950">
               {badgeCopy[locale]}
             </span>
           ) : null}
@@ -193,7 +193,7 @@ export async function PricingTiers() {
             {t.features.map((f) => (
               <li key={f} className="flex items-start gap-2.5 text-sm">
                 <Check
-                  className={cn("mt-0.5 h-4 w-4 shrink-0", t.highlighted ? "text-teal-300" : "text-teal-600")}
+                  className={cn("mt-0.5 h-4 w-4 shrink-0", t.highlighted ? "text-spark-300" : "text-spark-600")}
                   strokeWidth={2.5}
                 />
                 <span className={t.highlighted ? "text-white/85" : "text-fog-700"}>{f}</span>

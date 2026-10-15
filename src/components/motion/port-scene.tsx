@@ -123,8 +123,8 @@ export function PortScene({ className, onStage, label }: { className?: string; o
           <stop offset="1" stopColor={ink.bg} />
         </linearGradient>
         <radialGradient id="port-glow" cx="0.75" cy="0.2" r="0.6">
-          <stop offset="0" stopColor="rgb(71 188 172 / 0.25)" />
-          <stop offset="1" stopColor="rgb(71 188 172 / 0)" />
+          <stop offset="0" stopColor="rgb(247 148 29 / 0.18)" />
+          <stop offset="1" stopColor="rgb(247 148 29 / 0)" />
         </radialGradient>
       </defs>
       <rect width={W} height={H} fill="url(#port-sky)" />

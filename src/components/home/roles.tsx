@@ -69,7 +69,7 @@ export async function Roles() {
               key={r.name}
               className="rounded-xl border border-fog-200 bg-white p-5 shadow-card transition-colors hover:border-fog-300"
             >
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-teal-700">{r.name}</p>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-spark-700">{r.name}</p>
               <p className="mt-2 text-sm leading-relaxed text-fog-600">{r.sees}</p>
             </RevealItem>
           ))}

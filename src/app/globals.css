@@ -3,19 +3,20 @@
 
 /* Routel design tokens
    ------------------------------------------------------------------
-   Palette: deep "ink" navy for dark surfaces, a teal signal color for
-   primary actions, and an amber spark reserved for the AI assistant.
-   Neutrals are slightly cool so the teal reads clean against them. */
+   Palette from the logo: "ink", the logo's black, for dark surfaces and
+   primary buttons; "spark", the logo's orange (#F7941D), for every accent;
+   warm neutral "fog" greys. "teal" is kept for the illustrations only: the
+   sea and the other containers in the scenes. */
 @theme {
   --font-sans: "Inter Variable", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Manrope Variable", "Inter Variable", "IBM Plex Sans Arabic", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "JetBrains Mono Variable", "IBM Plex Sans Arabic", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --color-ink-950: #060b16;
-  --color-ink-900: #0b1426;
-  --color-ink-800: #12203a;
-  --color-ink-700: #1c2d4d;
-  --color-ink-600: #2a3f66;
+  --color-ink-950: #09090b;
+  --color-ink-900: #121316;
+  --color-ink-800: #1c1e23;
+  --color-ink-700: #292c33;
+  --color-ink-600: #3a3e47;
 
   --color-teal-50: #effbf9;
   --color-teal-100: #d5f4ee;
@@ -36,23 +37,26 @@
   --color-spark-400: #f7941d;
   --color-spark-500: #e07f0f;
   --color-spark-600: #b8640a;
+  --color-spark-700: #8f4d08;
+  --color-spark-800: #6b3a07;
+  --color-spark-900: #4a2805;
 
-  --color-fog-50: #f7f9fb;
-  --color-fog-100: #eef2f6;
-  --color-fog-200: #dde4ec;
-  --color-fog-300: #c3cdd9;
-  --color-fog-400: #97a5b8;
-  --color-fog-500: #6b7b92;
-  --color-fog-600: #4f5d72;
-  --color-fog-700: #3b475a;
-  --color-fog-800: #27303f;
+  --color-fog-50: #f8f8f7;
+  --color-fog-100: #f0f0ee;
+  --color-fog-200: #e2e2df;
+  --color-fog-300: #c9c9c5;
+  --color-fog-400: #9d9d98;
+  --color-fog-500: #6f6f6a;
+  --color-fog-600: #525350;
+  --color-fog-700: #3d3e3b;
+  --color-fog-800: #28292a;
 
   --radius-xl: 0.875rem;
   --radius-2xl: 1.125rem;
   --radius-3xl: 1.5rem;
 
-  --shadow-card: 0 1px 2px rgb(11 20 38 / 0.04), 0 8px 24px -12px rgb(11 20 38 / 0.12);
-  --shadow-float: 0 2px 4px rgb(11 20 38 / 0.06), 0 24px 48px -20px rgb(11 20 38 / 0.25);
+  --shadow-card: 0 1px 2px rgb(18 19 22 / 0.04), 0 8px 24px -12px rgb(18 19 22 / 0.12);
+  --shadow-float: 0 2px 4px rgb(18 19 22 / 0.06), 0 24px 48px -20px rgb(18 19 22 / 0.25);
 
   --animate-marquee: marquee 40s linear infinite;
   --animate-pulse-soft: pulse-soft 2.4s ease-in-out infinite;
@@ -86,7 +90,7 @@ body {
 }
 
 ::selection {
-  background: var(--color-teal-200);
+  background: var(--color-spark-200);
   color: var(--color-ink-900);
 }
 
@@ -106,8 +110,8 @@ body {
 
 @utility grid-fade {
   background-image:
-    linear-gradient(to right, rgb(11 20 38 / 0.045) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(11 20 38 / 0.045) 1px, transparent 1px);
+    linear-gradient(to right, rgb(18 19 22 / 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(18 19 22 / 0.045) 1px, transparent 1px);
   background-size: 40px 40px;
   mask-image: radial-gradient(ellipse 70% 60% at 50% 0%, black 30%, transparent 100%);
 }
@@ -124,9 +128,9 @@ body {
   box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.08);
 }
 
-/* Gradient keyword in headlines (teal → amber), used sparingly. */
+/* Gradient keyword in headlines (the logo's orange), used sparingly. */
 @utility text-gradient-brand {
-  background-image: linear-gradient(92deg, var(--color-teal-300) 0%, var(--color-teal-400) 45%, var(--color-spark-400) 100%);
+  background-image: linear-gradient(92deg, var(--color-spark-300) 0%, var(--color-spark-400) 45%, var(--color-spark-400) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -136,9 +140,9 @@ body {
 @utility hero-aurora {
   background-color: var(--color-ink-950);
   background-image:
-    radial-gradient(55% 45% at 20% 10%, rgb(31 161 146 / 0.32), transparent 70%),
-    radial-gradient(45% 40% at 85% 0%, rgb(245 133 11 / 0.14), transparent 70%),
-    radial-gradient(70% 60% at 50% 110%, rgb(28 45 77 / 0.9), transparent 70%);
+    radial-gradient(55% 45% at 20% 10%, rgb(247 148 29 / 0.16), transparent 70%),
+    radial-gradient(45% 40% at 85% 0%, rgb(247 148 29 / 0.1), transparent 70%),
+    radial-gradient(70% 60% at 50% 110%, rgb(41 44 51 / 0.9), transparent 70%);
 }
 
 @utility marquee-mask {
@@ -385,10 +389,10 @@ body {
 @keyframes ody-glow {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgb(71 188 172 / 0.45);
+    box-shadow: 0 0 0 0 rgb(247 148 29 / 0.5);
   }
   50% {
-    box-shadow: 0 0 0 6px rgb(71 188 172 / 0);
+    box-shadow: 0 0 0 6px rgb(247 148 29 / 0);
   }
 }
 .odyssey-typing i {
@@ -413,12 +417,12 @@ body {
   }
 }
 .odyssey-rail.is-on {
-  background: var(--color-teal-400);
+  background: var(--color-spark-400);
 }
 
 /* Focus rings for keyboard users only */
 :focus-visible {
-  outline: 2px solid var(--color-teal-500);
+  outline: 2px solid var(--color-spark-500);
   outline-offset: 2px;
 }
 

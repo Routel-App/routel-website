@@ -63,7 +63,7 @@ export async function ProofStrip() {
               dir={locale === "ar" ? "rtl" : undefined}
               className="flex items-center gap-2 whitespace-nowrap rounded-full border border-fog-200 bg-fog-50 px-4 py-2 text-[13px] font-medium text-fog-700"
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-teal-500" />
+              <span className="h-1.5 w-1.5 rounded-full bg-spark-500" />
               {f}
             </li>
           ))}

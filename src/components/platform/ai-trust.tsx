@@ -41,7 +41,7 @@ export function AiTrust({ locale }: { locale: Locale }) {
           const Icon = icons[i];
           return (
             <RevealItem key={item.title} className="rounded-2xl border border-white/[0.08] bg-white/[0.035] p-5">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/[0.06] text-teal-300 ring-1 ring-inset ring-white/10">
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/[0.06] text-spark-300 ring-1 ring-inset ring-white/10">
                 <Icon className="h-4.5 w-4.5" strokeWidth={1.75} />
               </span>
               <h3 className="font-display mt-4 text-[15px] font-semibold text-white">{item.title}</h3>

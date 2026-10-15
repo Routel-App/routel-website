@@ -85,7 +85,7 @@ export function LanguageFlip({ start = "ar", hint }: { start?: Side; hint: strin
               }}
               className={cn(
                 "rounded-full px-3.5 py-1 text-[13px] font-semibold transition-colors duration-300",
-                side === k ? "bg-teal-400 text-ink-950" : "text-white/70 hover:text-white",
+                side === k ? "bg-spark-400 text-ink-950" : "text-white/70 hover:text-white",
               )}
             >
               {sides[k].label}
@@ -107,10 +107,10 @@ export function LanguageFlip({ start = "ar", hint }: { start?: Side; hint: strin
             <p dir="ltr" className="font-mono text-[14px] font-semibold [unicode-bidi:plaintext]">NXS26000412</p>
             <p className="mt-0.5 truncate text-[13px] text-fog-600">{t.customer}</p>
           </div>
-          <span className="shrink-0 rounded-full bg-teal-50 px-2.5 py-1 text-[11.5px] font-semibold text-teal-700 ring-1 ring-teal-200">{t.status}</span>
+          <span className="shrink-0 rounded-full bg-spark-50 px-2.5 py-1 text-[11.5px] font-semibold text-spark-700 ring-1 ring-spark-200">{t.status}</span>
         </div>
         <p className="mt-4 flex items-center gap-2 text-[15px] font-semibold">
-          <Ship className="h-4 w-4 text-teal-600" />
+          <Ship className="h-4 w-4 text-spark-600" />
           {t.route[0]} <span className="text-fog-400">{t.arrow}</span> {t.route[1]}
         </p>
         <dl className="mt-3 grid grid-cols-3 gap-3 border-t border-fog-100 pt-3">

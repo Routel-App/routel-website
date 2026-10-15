@@ -45,17 +45,18 @@ export function Wordmark({ className, title = "Routel" }: { className?: string; 
 }
 
 /**
- * Square mark for favicons and tiles: the L glyph with its orange accent on
- * an ink tile.
+ * The icon: the L glyph with its orange accent, as supplied (234×274). The
+ * glyph is currentColor so it reads on light and dark surfaces; the square
+ * is always brand orange. app/icon.svg and app/apple-icon.png carry the same
+ * drawing for the browser tab.
  */
 export function LogoMark({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 64 64" aria-hidden="true" className={cn("h-8 w-8", className)}>
-      <rect width="64" height="64" rx="16" className="fill-ink-900" />
-      <g transform="translate(19 14) scale(0.1)">
-        <rect x="0" y="0" width="70" height="70" fill={LOGO_ORANGE} />
-        <rect x="0" y="100" width="70" height="260" fill="#fff" />
-        <rect x="0" y="290" width="270" height="70" fill="#fff" />
+    <svg viewBox="0 0 234 274" aria-hidden="true" className={cn("h-8 w-auto", className)}>
+      <rect x="0" y="0" width="69" height="69" fill={LOGO_ORANGE} />
+      <g fill="currentColor">
+        <rect x="0" y="69" width="69" height="205" />
+        <rect x="69" y="205" width="165" height="69" />
       </g>
     </svg>
   );

@@ -131,7 +131,7 @@ export function ProductMenu({ inverse, onNavigate }: { inverse: boolean; onNavig
                             onClick={close}
                             className="group flex items-start gap-3 rounded-xl px-2.5 py-2 transition-colors hover:bg-fog-50"
                           >
-                            <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-teal-50 text-teal-700 ring-1 ring-inset ring-teal-100 transition-colors group-hover:bg-teal-100">
+                            <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-spark-50 text-spark-700 ring-1 ring-inset ring-spark-100 transition-colors group-hover:bg-spark-100">
                               <Icon className="h-4 w-4" strokeWidth={1.75} />
                             </span>
                             <span>
@@ -160,7 +160,7 @@ export function ProductMenu({ inverse, onNavigate }: { inverse: boolean; onNavig
                   <span className="relative mt-1 text-[12.5px] leading-relaxed text-white/65">
                     {t.aiBody}
                   </span>
-                  <span className="relative mt-4 inline-flex items-center gap-1 text-[12.5px] font-medium text-teal-300">
+                  <span className="relative mt-4 inline-flex items-center gap-1 text-[12.5px] font-medium text-spark-300">
                     {t.aiLink}{" "}
                     <ArrowRight className="h-3.5 w-3.5 transition-transform ltr:group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
                   </span>

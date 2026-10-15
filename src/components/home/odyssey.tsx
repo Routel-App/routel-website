@@ -432,7 +432,7 @@ export function Odyssey() {
 
         {/* The heading, in the sky */}
         <div className="odyssey-heading pointer-events-none absolute start-5 top-20 z-10 max-w-md sm:start-8 sm:top-24 lg:start-10">
-          <p className="text-[12px] font-semibold uppercase tracking-[0.14em] text-teal-300 sm:text-[12.5px]">{t.eyebrow}</p>
+          <p className="text-[12px] font-semibold uppercase tracking-[0.14em] text-spark-300 sm:text-[12.5px]">{t.eyebrow}</p>
           <h2 className="font-display mt-2 text-balance text-2xl font-bold leading-[1.1] text-white sm:text-3xl lg:text-[2.4rem]">{t.title}</h2>
           <p className="odyssey-lead mt-3 max-w-sm text-pretty text-[14px] leading-relaxed text-white/65 sm:text-[15px]">{t.lead}</p>
         </div>
@@ -442,7 +442,7 @@ export function Odyssey() {
           {t.scroll} ↓
         </p>
         <div className="odyssey-progress absolute inset-x-0 bottom-0 z-10 h-[3px] bg-white/10" aria-hidden>
-          <span data-progress="" className="block h-full origin-[left_center] bg-teal-400 rtl:origin-[right_center]" style={{ transform: "scaleX(0)" }} />
+          <span data-progress="" className="block h-full origin-[left_center] bg-spark-400 rtl:origin-[right_center]" style={{ transform: "scaleX(0)" }} />
         </div>
       </div>
 
@@ -470,7 +470,7 @@ export function Odyssey() {
                 <p dir="ltr" className="font-mono text-[12.5px] font-semibold rtl:text-end">NXS26000412</p>
               </div>
               <div className="min-w-0 text-end">
-                <p data-status="" className="truncate text-[12px] font-semibold text-teal-300">{t.statuses[4]}</p>
+                <p data-status="" className="truncate text-[12px] font-semibold text-spark-300">{t.statuses[4]}</p>
                 <div className="mt-1.5 flex justify-end gap-[3px]" aria-hidden>
                   {t.statuses.map((st, i) => (
                     <span key={st} data-rail="" className={cn("odyssey-rail h-1 w-3 rounded-full bg-white/10 sm:w-3.5", i <= 4 && "is-on")} />
@@ -501,7 +501,7 @@ export function Odyssey() {
             <div className="flex items-center gap-2 rounded-full bg-fog-50 py-1.5 pe-1.5 ps-3 text-[12px] text-fog-500 ring-1 ring-fog-200">
               <Paperclip className="h-3.5 w-3.5 shrink-0" />
               <span className="flex-1 truncate">{t.input}</span>
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-teal-500 text-white">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-spark-500 text-white">
                 <ArrowUp className="h-3.5 w-3.5" />
               </span>
             </div>
@@ -537,7 +537,7 @@ function Message({ item, t }: { item: Item; t: Copy }) {
     case "user":
       return wrap(
         "flex justify-end",
-        <div className="max-w-[86%] rounded-2xl rounded-se-sm bg-[linear-gradient(135deg,var(--color-teal-500),var(--color-teal-700))] px-3.5 py-2.5 text-white shadow-card">
+        <div className="max-w-[86%] rounded-2xl rounded-se-sm bg-[linear-gradient(135deg,var(--color-spark-500),var(--color-spark-700))] px-3.5 py-2.5 text-white shadow-card">
           <p className="text-[13.5px] font-medium leading-relaxed">{item.text}</p>
           {item.file ? (
             <p className="mt-2 inline-flex max-w-full items-center gap-1.5 break-all rounded-md bg-white/15 px-2 py-1 text-[10.5px]">
@@ -558,14 +558,14 @@ function Message({ item, t }: { item: Item; t: Copy }) {
     case "card":
       return wrap(
         "",
-        <div className={cn("rounded-2xl rounded-ss-sm p-3.5 shadow-card ring-1", item.confirm ? "bg-white ring-spark-300" : "bg-teal-50 ring-teal-200")}>
+        <div className={cn("rounded-2xl rounded-ss-sm p-3.5 shadow-card ring-1", item.confirm ? "bg-white ring-spark-300" : "bg-spark-50 ring-spark-200")}>
           <p className="flex items-center gap-1.5 text-[13px] font-semibold">
-            <Sparkles className={cn("h-3.5 w-3.5", item.confirm ? "text-spark-500" : "text-teal-600")} />
+            <Sparkles className={cn("h-3.5 w-3.5", item.confirm ? "text-spark-500" : "text-spark-600")} />
             {item.title}
           </p>
           <p className="mt-2 flex flex-wrap gap-1.5" aria-label="tools">
             {item.tools.map((tool) => (
-              <span key={tool} dir="ltr" className="inline-flex items-center gap-1 rounded-md bg-teal-50 px-1.5 py-0.5 font-mono text-[10px] text-teal-700 ring-1 ring-teal-100">
+              <span key={tool} dir="ltr" className="inline-flex items-center gap-1 rounded-md bg-spark-50 px-1.5 py-0.5 font-mono text-[10px] text-spark-700 ring-1 ring-spark-100">
                 <Check className="h-2.5 w-2.5" strokeWidth={3} />
                 {tool}
               </span>
@@ -584,8 +584,8 @@ function Message({ item, t }: { item: Item; t: Copy }) {
           ) : null}
           {item.confirm ? (
             <div data-confirm-at={item.confirmedAt} className="odyssey-confirm mt-3 flex items-center gap-2">
-              <span className="odyssey-confirm-pending rounded-full bg-teal-500 px-3.5 py-1.5 text-[11.5px] font-semibold text-white shadow-card">{item.confirm}</span>
-              <span className="odyssey-confirm-done inline-flex items-center gap-1 rounded-full bg-teal-50 px-3 py-1.5 text-[11.5px] font-semibold text-teal-700 ring-1 ring-teal-200">
+              <span className="odyssey-confirm-pending rounded-full bg-spark-500 px-3.5 py-1.5 text-[11.5px] font-semibold text-white shadow-card">{item.confirm}</span>
+              <span className="odyssey-confirm-done inline-flex items-center gap-1 rounded-full bg-spark-50 px-3 py-1.5 text-[11.5px] font-semibold text-spark-700 ring-1 ring-spark-200">
                 <Check className="h-3 w-3" strokeWidth={3} />
                 {t.confirmed}
               </span>
@@ -600,7 +600,7 @@ function Message({ item, t }: { item: Item; t: Copy }) {
         <div className="flex max-w-[90%] items-center gap-2.5 rounded-xl bg-ink-900 px-3 py-2.5 text-white shadow-float ring-1 ring-ink-800">
           <span className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-white text-ink-900">
             <FileText className="h-4.5 w-4.5" />
-            <span className="absolute -end-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-teal-400 text-ink-950 ring-2 ring-ink-900">
+            <span className="absolute -end-1 -top-1 flex h-4 w-4 items-center justify-center rounded-full bg-spark-400 text-ink-950 ring-2 ring-ink-900">
               <Check className="h-2.5 w-2.5" strokeWidth={3} />
             </span>
           </span>
@@ -613,8 +613,8 @@ function Message({ item, t }: { item: Item; t: Copy }) {
     case "status":
       return wrap(
         "flex justify-center",
-        <span dir="auto" className="inline-flex max-w-full items-center gap-2 rounded-full bg-fog-100 py-1 pe-3 ps-2 text-[11.5px] font-semibold text-teal-700">
-          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-teal-500 shadow-[0_0_0_3px_rgb(71_188_172_/_0.25)]" />
+        <span dir="auto" className="inline-flex max-w-full items-center gap-2 rounded-full bg-fog-100 py-1 pe-3 ps-2 text-[11.5px] font-semibold text-spark-700">
+          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-spark-500 shadow-[0_0_0_3px_rgb(247_148_29_/_0.25)]" />
           <span className="truncate">{item.text}</span>
         </span>,
       );

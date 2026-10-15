@@ -20,7 +20,7 @@ import { RoutesShot, TrackingShot } from "@/components/shots/tour-shots";
  */
 export function moduleVisual(slug: string, locale: Locale): ReactNode {
   const lottie = (src: string) => (
-    <div className="flex aspect-[4/3] items-center justify-center rounded-3xl bg-[linear-gradient(135deg,var(--color-fog-100),var(--color-teal-50))] p-6 ring-1 ring-fog-200">
+    <div className="flex aspect-[4/3] items-center justify-center rounded-3xl bg-[linear-gradient(135deg,var(--color-fog-100),var(--color-spark-50))] p-6 ring-1 ring-fog-200">
       <Lottie src={src} className="h-full w-full" />
     </div>
   );
