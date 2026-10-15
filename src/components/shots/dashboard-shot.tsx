@@ -75,7 +75,7 @@ export function DashboardShot({ locale, className }: { locale: Locale; className
         {/* Sidebar */}
         <aside className="border-e border-fog-200 bg-fog-50/60 p-3">
           <div dir="ltr" className="mb-4 px-2 rtl:text-end">
-            <Wordmark className="inline-block !h-auto w-16" />
+            <Wordmark className="inline-block !h-auto w-16 text-black" />
           </div>
           <ul className="space-y-1">
             {t.nav.map((label, i) => {
