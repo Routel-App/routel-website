@@ -1,7 +1,21 @@
 "use client";
 
-import { useRef } from "react";
-import { ArrowRight, Bot, Check } from "lucide-react";
+import { useRef, type ReactNode } from "react";
+import {
+  ArrowRight,
+  ArrowUp,
+  BarChart3,
+  Bot,
+  Check,
+  FilePlus2,
+  FileSearch,
+  FileText,
+  ListChecks,
+  Paperclip,
+  PenLine,
+  Search,
+  Sparkles,
+} from "lucide-react";
 import Link from "@/components/i18n/link";
 import { useLocale } from "@/components/i18n/locale-provider";
 import type { Locale } from "@/lib/i18n";
@@ -10,19 +24,22 @@ import { gsap, useGSAP, MOTION_OK, REDUCED } from "@/components/motion/gsap";
 import { BOX, ContainerBox, Crane, Doc, ShipSide, Truck, boxColor, ink, paint, wavePath } from "@/components/motion/sprites";
 
 /**
- * "One container, one booking": the home page's scroll story. One orange
- * container (booking NXS26000412) arrives on a truck, is lifted by the
- * crane onto the ship, the camera follows the ship across the sea to the
- * destination port, and the view pulls back to the books. At
- * each stage the system's work attaches to the container as chips, and a
- * chapter names the module.
+ * "One container, one booking": the home page's scroll story, told twice at
+ * once. On the stage, one orange container (booking NXS26000412) arrives on
+ * a truck, is lifted by the crane onto the ship, sails to the destination
+ * quay, and the books rise at dusk. Beside it, the Routel Assistant's chat
+ * does the same shipment's work in the system: the quotation, the booking,
+ * the carrier's confirmation read from its PDF, the House B/L, the tax
+ * invoice, the matched payment and the closed booking in the P&L. Every
+ * tool it calls is one the assistant really has, every write waits for a
+ * confirmation, and each message is timed to the ship.
  *
- * One SVG world (1600×900) under a camera group; a scrubbed GSAP timeline
- * tweens a state object and draw() writes it to the DOM each frame (no
- * React re-render per frame). Chips are HTML, positioned from world
- * coordinates through the camera's matrix. Without JS or with
- * prefers-reduced-motion the section is a still (ship loaded) with the
- * chapters as a plain list.
+ * One SVG world under a camera group; a scrubbed GSAP timeline tweens a
+ * state object and draw() writes it to the DOM each frame (no React
+ * re-render per frame). Chat messages are HTML revealed by the same
+ * progress; the transcript scrolls itself so the latest message is in
+ * view. Without JS or with prefers-reduced-motion the section is a still
+ * (ship loaded) with the whole transcript under it.
  */
 
 const W = 1600;
@@ -39,127 +56,243 @@ const TRUCK_X = 150;
 const SAIL = 1700;
 const DEST_X = 3200;
 
-type Stage = "quote" | "carrier" | "loaded" | "sea" | "arrived" | "closed";
+type Step = { tool: string; label: string; detail: string };
+type Item =
+  | { at: number; kind: "module"; module: string; href: string }
+  | { at: number; kind: "user"; text: string; file?: string }
+  | { at: number; kind: "assistant"; text: string }
+  | { at: number; kind: "tools"; steps: Step[] }
+  | { at: number; kind: "card"; title: string; rows: Array<[string, string]>; confirm?: string; confirmedAt?: number }
+  | { at: number; kind: "doc"; name: string; meta: string }
+  | { at: number; kind: "status"; text: string };
 
-type Chapter = { id: Stage; module: string; title: string; text: string; href: string };
 type Copy = {
   eyebrow: string;
   title: string;
   lead: string;
   scroll: string;
-  chapters: Chapter[];
-  chips: Record<string, string>;
-  statuses: string[];
   booking: string;
+  statuses: string[];
+  header: string;
+  sub: string;
+  input: string;
   more: string;
+  confirmed: string;
+  items: Item[];
 };
 
 const copy: Record<Locale, Copy> = {
   en: {
     eyebrow: "One container, one booking",
     title: "Follow a container through Routel",
-    lead: "From the gate to the books, every stage of the shipment is a module, and all of it lands on one record.",
+    lead: "The ship on the left, the system on the right: every stage of the shipment is done in the assistant's chat, and all of it lands on one record.",
     scroll: "Scroll",
-    chapters: [
-      { id: "quote", module: "Quotations & Bookings", title: "A rate becomes a booking", text: "The quotation is built on a current buying rate for the lane. When the customer accepts, one click turns it into booking NXS26000412, charges included.", href: "/platform/quotations" },
-      { id: "carrier", module: "Carrier booking · AI", title: "The assistant reads the carrier", text: "The shipping line's confirmation PDF goes in; the assistant reads vessel, voyage, cut-offs and the carrier reference, and you tick what to save. Then you issue the Booking Confirmation.", href: "/platform/ai-assistant" },
-      { id: "loaded", module: "Bill of Lading · Documents", title: "Loaded, with its papers", text: "Gate In, SI Submitted, Vessel Loaded: the status moves on the booking. The House B/L is generated from the same data, and the master B/L number is recorded.", href: "/platform/bill-of-lading" },
-      { id: "sea", module: "Tracking", title: "Your customer follows it", text: "Departed, In Transit. The customer looks the shipment up by booking, B/L or container number, with no login, and sees the status timeline only.", href: "/platform/tracking" },
-      { id: "arrived", module: "Invoicing · Finance", title: "Invoiced before it lands", text: "Create Invoice turns the booking's sale lines into a tax invoice in your base currency and USD. The payment is matched from the finance mailbox and confirmed by a person.", href: "/platform/invoicing" },
-      { id: "closed", module: "Accounting", title: "Closed, and already in the books", text: "Shipment Closed. The booking's profit is in the P&L, the receivable is cleared, and nobody re-typed a number along the way.", href: "/platform/accounting" },
-    ],
-    chips: {
-      quote: "Quotation accepted",
-      booking: "Booking NXS26000412",
-      read: "Read by the assistant · MSC ISABELLA 412E",
-      confirm: "Booking Confirmation issued",
-      hbl: "House B/L generated",
-      mbl: "MBL MSCUKL4471",
-      track: "Customer tracking · no login",
-      invoice: "Tax invoice · MYR 13,050.00",
-      paid: "Payment matched",
-      profit: "Profit MYR 2,968.50 · 23.1%",
-      closed: "Shipment Closed",
-    },
-    statuses: ["Booking Pending", "Booking Confirmed", "Gate In", "SI Submitted", "Vessel Loaded", "Departed", "In Transit", "Arrived", "Telex Status", "Shipment Closed"],
     booking: "Booking",
+    statuses: ["Booking Pending", "Booking Confirmed", "Gate In", "SI Submitted", "Vessel Loaded", "Departed", "In Transit", "Arrived", "Telex Status", "Shipment Closed"],
+    header: "Routel Assistant",
+    sub: "Calls the system's tools · writes only after you confirm",
+    input: "Ask in English or Arabic…",
     more: "See the module",
+    confirmed: "Confirmed",
+    items: [
+      { at: 0, kind: "module", module: "Quotations & Bookings", href: "/platform/quotations" },
+      { at: 0.004, kind: "user", text: "Quote Straits Electronics for 1 × 40HC, Port Klang to Jebel Ali, shipping next week." },
+      {
+        at: 0.02,
+        kind: "tools",
+        steps: [
+          { tool: "search_route_rates", label: "Searched route rates", detail: "Port Klang → Jebel Ali · 40HC · MSC · buying USD 1,900 · valid to 30 Nov" },
+          { tool: "create_quotation", label: "Prepared the quotation", detail: "Q-26-0412 · Straits Electronics Sdn Bhd" },
+        ],
+      },
+      { at: 0.035, kind: "card", title: "Proposed quotation · Q-26-0412", rows: [["Ocean freight 1 × 40HC", "USD 2,400.00"], ["Local charges & documentation", "MYR 1,770.00"], ["Validity", "14 days"]], confirm: "Confirm & send", confirmedAt: 0.05 },
+      { at: 0.06, kind: "assistant", text: "Sent to Straits Electronics. I'll tell you when they accept." },
+      { at: 0.075, kind: "status", text: "Customer accepted quotation Q-26-0412" },
+      { at: 0.085, kind: "user", text: "Turn it into a booking." },
+      { at: 0.095, kind: "tools", steps: [{ tool: "convert_quotation", label: "Converted the quotation", detail: "Booking NXS26000412 · sale lines carried over" }] },
+      { at: 0.105, kind: "assistant", text: "Booking NXS26000412 is created from the quotation, with the same charges. Status: Booking Pending until the carrier confirms." },
+      { at: 0.12, kind: "module", module: "Carrier booking · AI", href: "/platform/ai-assistant" },
+      { at: 0.125, kind: "user", text: "This is MSC's confirmation. Record its details on the booking.", file: "MSC booking confirmation.pdf" },
+      {
+        at: 0.14,
+        kind: "tools",
+        steps: [
+          { tool: "read_uploaded_document", label: "Read the PDF", detail: "MSC ISABELLA · voyage 412E · cargo cut-off 14 Nov, 12:00" },
+          { tool: "update_job", label: "Prepared the update", detail: "Booking NXS26000412" },
+        ],
+      },
+      { at: 0.15, kind: "card", title: "Update booking · from the carrier's confirmation", rows: [["Carrier booking no.", "MSCUKL4471"], ["Vessel / voyage", "MSC ISABELLA · 412E"], ["Cargo cut-off", "14 Nov 2026, 12:00"], ["Status", "Booking Confirmed"]], confirm: "Confirm", confirmedAt: 0.165 },
+      { at: 0.175, kind: "assistant", text: "Saved. The Booking Confirmation is issued and sent to your customer." },
+      { at: 0.18, kind: "doc", name: "Booking Confirmation · NXS26000412.pdf", meta: "Sent to Straits Electronics" },
+      { at: 0.2, kind: "module", module: "Bookings · statuses", href: "/platform/bookings" },
+      { at: 0.205, kind: "status", text: "Gate In · MSCU 442118-0 · 14 Nov, 09:20" },
+      { at: 0.3, kind: "status", text: "SI Submitted" },
+      { at: 0.33, kind: "user", text: "Where is the booking now?" },
+      { at: 0.345, kind: "assistant", text: "The container is in the terminal and the shipping instructions are submitted. It loads on MSC ISABELLA today and sails tomorrow." },
+      { at: 0.5, kind: "module", module: "Bill of Lading · Documents", href: "/platform/bill-of-lading" },
+      { at: 0.505, kind: "status", text: "Vessel Loaded" },
+      { at: 0.515, kind: "user", text: "Issue the House B/L and record master B/L MSCUKL4471." },
+      { at: 0.53, kind: "tools", steps: [{ tool: "create_bill_of_lading", label: "Prepared the House B/L", detail: "Shipper, consignee, container and goods from the booking" }] },
+      { at: 0.545, kind: "card", title: "Proposed House B/L · HBL-26000412", rows: [["Shipper", "Straits Electronics Sdn Bhd"], ["Consignee", "Gulf Horizon FZE"], ["Container", "MSCU4421180 · 1 × 40HC"], ["Master B/L", "MSCUKL4471"]], confirm: "Confirm & issue", confirmedAt: 0.56 },
+      { at: 0.575, kind: "doc", name: "House B/L · HBL-26000412.pdf", meta: "Ready to sign and send" },
+      { at: 0.6, kind: "module", module: "Tracking", href: "/platform/tracking" },
+      { at: 0.605, kind: "status", text: "Departed · MSC ISABELLA 412E · 15 Nov" },
+      { at: 0.62, kind: "assistant", text: "She has sailed. Your customer can follow the shipment by booking, B/L or container number, with no login, and sees the status timeline only." },
+      { at: 0.68, kind: "status", text: "In Transit · ETA Jebel Ali 22 Nov" },
+      { at: 0.7, kind: "module", module: "Invoicing · Finance", href: "/platform/invoicing" },
+      { at: 0.705, kind: "user", text: "What's the profit on this booking? And issue the invoice." },
+      {
+        at: 0.72,
+        kind: "tools",
+        steps: [
+          { tool: "get_job_charges", label: "Read the booking's charges", detail: "Sale MYR 13,050.00 · cost MYR 10,035.00" },
+          { tool: "create_invoice_from_charges", label: "Prepared the tax invoice", detail: "From the sale lines, in MYR and USD" },
+        ],
+      },
+      { at: 0.735, kind: "card", title: "Proposed invoice · INV-26-0412", rows: [["Ocean freight 1 × 40HC", "USD 2,400.00"], ["Local charges & documentation", "MYR 1,770.00"], ["Tax · international freight", "0%"], ["Total", "MYR 13,050.00"]], confirm: "Confirm & issue", confirmedAt: 0.75 },
+      { at: 0.765, kind: "assistant", text: "Tax invoice INV-26-0412 is issued in MYR and USD and sent. Expected profit on the booking: MYR 3,015.00 (23.1%)." },
+      { at: 0.77, kind: "doc", name: "Tax Invoice · INV-26-0412.pdf", meta: "MYR 13,050.00 · USD 2,776.60" },
+      { at: 0.86, kind: "module", module: "Receivables & Payables", href: "/platform/finance-receivables" },
+      { at: 0.865, kind: "status", text: "Arrived · Jebel Ali · 22 Nov" },
+      { at: 0.875, kind: "tools", steps: [{ tool: "list_payment_suggestions", label: "Matched a payment from the finance mailbox", detail: "Remittance of MYR 13,050.00 matches INV-26-0412" }] },
+      { at: 0.885, kind: "card", title: "Match payment · INV-26-0412", rows: [["Amount", "MYR 13,050.00"], ["Source", "Remittance advice · finance mailbox"], ["Match", "Exact"]], confirm: "Confirm match", confirmedAt: 0.9 },
+      { at: 0.915, kind: "status", text: "Telex Status · cargo released" },
+      { at: 0.93, kind: "module", module: "Accounting", href: "/platform/accounting" },
+      { at: 0.935, kind: "user", text: "Close the shipment." },
+      {
+        at: 0.95,
+        kind: "tools",
+        steps: [
+          { tool: "update_job", label: "Updated the status", detail: "Shipment Closed" },
+          { tool: "run_report", label: "Ran the P&L", detail: "November 2026" },
+        ],
+      },
+      { at: 0.965, kind: "assistant", text: "Closed. The booking's profit is in November's P&L, the receivable is cleared, and nobody re-typed a number along the way." },
+      { at: 0.975, kind: "card", title: "Booking NXS26000412 · in the books", rows: [["Revenue", "MYR 13,050.00"], ["Cost", "MYR 10,035.00"], ["Profit", "MYR 3,015.00 · 23.1%"]] },
+    ],
   },
   ar: {
     eyebrow: "حاوية واحدة، حجز واحد",
     title: "تابع حاوية عبر Routel",
-    lead: "من البوابة حتى الدفاتر، كل مرحلة في الشحنة وحدة في النظام، وكلها تصب في سجل واحد.",
+    lead: "السفينة على جهة، والنظام على الجهة الأخرى: كل مرحلة في الشحنة تُنجز في محادثة المساعد، وكلها تصب في سجل واحد.",
     scroll: "مرّر",
-    chapters: [
-      { id: "quote", module: "عروض الأسعار والحجوزات", title: "السعر يصير حجزاً", text: "يُبنى عرض السعر على سعر شراء ساري للمسار. وحين يقبله العميل، تحوّله نقرة واحدة إلى الحجز NXS26000412 مع رسومه.", href: "/platform/quotations" },
-      { id: "carrier", module: "حجز الناقل · الذكاء الاصطناعي", title: "المساعد يقرأ تأكيد الناقل", text: "يدخل ملف تأكيد الخط الملاحي، فيقرأ المساعد السفينة والرحلة ومواعيد الإغلاق ورقم الناقل، وتختار أنت ما يُحفظ. ثم تُصدر «تأكيد الحجز» لعميلك.", href: "/platform/ai-assistant" },
-      { id: "loaded", module: "بوليصة الشحن · المستندات", title: "على السفينة، بأوراقها", text: "دخول البوابة، تعليمات الشحن، التحميل: الحالة تتقدم في الحجز. وتُنشأ البوليصة الفرعية من البيانات نفسها، ويُسجَّل رقم البوليصة الرئيسية.", href: "/platform/bill-of-lading" },
-      { id: "sea", module: "التتبّع", title: "عميلك يتابعها بنفسه", text: "غادرت، قيد النقل. يبحث العميل عن شحنته برقم الحجز أو البوليصة أو الحاوية، دون تسجيل دخول، ويرى تسلسل الحالة فقط.", href: "/platform/tracking" },
-      { id: "arrived", module: "الفواتير · المالية", title: "الفاتورة جاهزة قبل الوصول", text: "زر «إنشاء فاتورة» يحوّل بنود البيع إلى فاتورة ضريبية بالريال والدولار. وتُطابَق الدفعة من بريد المالية ويؤكدها شخص.", href: "/platform/invoicing" },
-      { id: "closed", module: "المحاسبة", title: "أُغلقت، وهي في الدفاتر", text: "الشحنة مغلقة. ربح الحجز في قائمة الأرباح والخسائر، والذمة مسدّدة، ولم يُعد أحد كتابة رقم واحد في الطريق.", href: "/platform/accounting" },
-    ],
-    chips: {
-      quote: "عرض السعر مقبول",
-      booking: "الحجز NXS26000412",
-      read: "قرأه المساعد · MSC ISABELLA 412E",
-      confirm: "صدر تأكيد الحجز",
-      hbl: "أُنشئت البوليصة الفرعية",
-      mbl: "MBL MSCJED4471",
-      track: "تتبّع العميل · دون تسجيل دخول",
-      invoice: "فاتورة ضريبية · SAR 18,250.00",
-      paid: "الدفعة مطابَقة",
-      profit: "الربح SAR 4,240.00 · 23.2%",
-      closed: "الشحنة مغلقة",
-    },
-    statuses: ["الحجز قيد الانتظار", "تم تأكيد الحجز", "دخول البوابة", "تم تقديم تعليمات الشحن", "تم التحميل على السفينة", "غادرت", "قيد النقل", "وصلت", "حالة التلكس", "الشحنة مغلقة"],
     booking: "الحجز",
+    statuses: ["الحجز قيد الانتظار", "تم تأكيد الحجز", "دخول البوابة", "تم تقديم تعليمات الشحن", "تم التحميل على السفينة", "غادرت", "قيد النقل", "وصلت", "حالة التلكس", "الشحنة مغلقة"],
+    header: "مساعد Routel",
+    sub: "يستدعي أدوات النظام · ولا يحفظ شيئاً قبل تأكيدك",
+    input: "اطلب بالعربي أو الإنجليزي…",
     more: "اعرف الوحدة",
+    confirmed: "تم التأكيد",
+    items: [
+      { at: 0, kind: "module", module: "عروض الأسعار والحجوزات", href: "/platform/quotations" },
+      { at: 0.004, kind: "user", text: "جهّز عرض سعر لشركة النور للتجارة: حاوية 40HC من جدة إلى جبل علي، الشحن الأسبوع القادم." },
+      {
+        at: 0.02,
+        kind: "tools",
+        steps: [
+          { tool: "search_route_rates", label: "بحثت في أسعار المسارات", detail: "جدة ← جبل علي · 40HC · MSC · شراء USD 3,350 · ساري حتى 30 نوفمبر" },
+          { tool: "create_quotation", label: "جهّزت عرض السعر", detail: "عرض السعر Q-26-0412 · شركة النور للتجارة" },
+        ],
+      },
+      { at: 0.035, kind: "card", title: "عرض سعر مقترح · Q-26-0412", rows: [["شحن بحري 1 × 40HC", "USD 4,200.00"], ["رسوم محلية ومستندات", "SAR 2,500.00"], ["الصلاحية", "14 يوماً"]], confirm: "تأكيد وإرسال", confirmedAt: 0.05 },
+      { at: 0.06, kind: "assistant", text: "أُرسل عرض السعر إلى شركة النور. سأخبرك حين يقبلونه." },
+      { at: 0.075, kind: "status", text: "العميل قبل عرض السعر Q-26-0412" },
+      { at: 0.085, kind: "user", text: "حوّله إلى حجز." },
+      { at: 0.095, kind: "tools", steps: [{ tool: "convert_quotation", label: "حوّلت عرض السعر", detail: "الحجز NXS26000412 · بنود البيع منقولة" }] },
+      { at: 0.105, kind: "assistant", text: "أنشأت الحجز NXS26000412 من عرض السعر بالبنود نفسها. الحالة: الحجز قيد الانتظار حتى يصل تأكيد الناقل." },
+      { at: 0.12, kind: "module", module: "حجز الناقل · الذكاء الاصطناعي", href: "/platform/ai-assistant" },
+      { at: 0.125, kind: "user", text: "هذا تأكيد MSC. سجّل بياناته على الحجز.", file: "تأكيد حجز MSC.pdf" },
+      {
+        at: 0.14,
+        kind: "tools",
+        steps: [
+          { tool: "read_uploaded_document", label: "قرأت الملف", detail: "السفينة MSC ISABELLA · الرحلة 412E · إغلاق الحمولة 14 نوفمبر، 12:00" },
+          { tool: "update_job", label: "جهّزت التحديث", detail: "الحجز NXS26000412" },
+        ],
+      },
+      { at: 0.15, kind: "card", title: "تحديث الحجز · من تأكيد الناقل", rows: [["رقم حجز الناقل", "MSCJED4471"], ["السفينة / الرحلة", "MSC ISABELLA · 412E"], ["إغلاق الحمولة", "14 نوفمبر 2026، 12:00"], ["الحالة", "تم تأكيد الحجز"]], confirm: "تأكيد", confirmedAt: 0.165 },
+      { at: 0.175, kind: "assistant", text: "حُفظت البيانات، وصدر «تأكيد الحجز» وأُرسل إلى عميلك." },
+      { at: 0.18, kind: "doc", name: "تأكيد الحجز · NXS26000412.pdf", meta: "أُرسل إلى شركة النور للتجارة" },
+      { at: 0.2, kind: "module", module: "الحجوزات · الحالات", href: "/platform/bookings" },
+      { at: 0.205, kind: "status", text: "دخول البوابة · MSCU 442118-0 · 14 نوفمبر، 09:20" },
+      { at: 0.3, kind: "status", text: "تم تقديم تعليمات الشحن" },
+      { at: 0.33, kind: "user", text: "وين الحجز الآن؟" },
+      { at: 0.345, kind: "assistant", text: "الحاوية داخل الميناء وتعليمات الشحن مقدَّمة. التحميل على MSC ISABELLA اليوم، والإبحار غداً." },
+      { at: 0.5, kind: "module", module: "بوليصة الشحن · المستندات", href: "/platform/bill-of-lading" },
+      { at: 0.505, kind: "status", text: "تم التحميل على السفينة" },
+      { at: 0.515, kind: "user", text: "أصدر البوليصة الفرعية وسجّل رقم البوليصة الرئيسية MSCJED4471." },
+      { at: 0.53, kind: "tools", steps: [{ tool: "create_bill_of_lading", label: "جهّزت البوليصة الفرعية", detail: "الشاحن والمرسل إليه والحاوية والبضاعة من بيانات الحجز" }] },
+      { at: 0.545, kind: "card", title: "بوليصة فرعية مقترحة · HBL-26000412", rows: [["الشاحن", "شركة النور للتجارة"], ["المرسل إليه", "Gulf Horizon FZE"], ["الحاوية", "MSCU4421180 · 1 × 40HC"], ["البوليصة الرئيسية", "MSCJED4471"]], confirm: "تأكيد وإصدار", confirmedAt: 0.56 },
+      { at: 0.575, kind: "doc", name: "البوليصة الفرعية · HBL-26000412.pdf", meta: "جاهزة للتوقيع والإرسال" },
+      { at: 0.6, kind: "module", module: "التتبّع", href: "/platform/tracking" },
+      { at: 0.605, kind: "status", text: "غادرت · MSC ISABELLA 412E · 15 نوفمبر" },
+      { at: 0.62, kind: "assistant", text: "أبحرت السفينة. عميلك يتابع الشحنة بنفسه برقم الحجز أو البوليصة أو الحاوية، دون تسجيل دخول، ويرى تسلسل الحالة فقط." },
+      { at: 0.68, kind: "status", text: "قيد النقل · الوصول المتوقع جبل علي 22 نوفمبر" },
+      { at: 0.7, kind: "module", module: "الفواتير · المالية", href: "/platform/invoicing" },
+      { at: 0.705, kind: "user", text: "كم الربح على هذا الحجز؟ وأصدر الفاتورة." },
+      {
+        at: 0.72,
+        kind: "tools",
+        steps: [
+          { tool: "get_job_charges", label: "قرأت رسوم الحجز", detail: "البيع SAR 18,250.00 · التكلفة SAR 14,010.00" },
+          { tool: "create_invoice_from_charges", label: "جهّزت الفاتورة الضريبية", detail: "من بنود البيع، بالريال والدولار" },
+        ],
+      },
+      { at: 0.735, kind: "card", title: "فاتورة مقترحة · INV-26-0412", rows: [["شحن بحري 1 × 40HC", "USD 4,200.00"], ["رسوم محلية ومستندات", "SAR 2,500.00"], ["ضريبة القيمة المضافة · نقل دولي", "0%"], ["الإجمالي", "SAR 18,250.00"]], confirm: "تأكيد وإصدار", confirmedAt: 0.75 },
+      { at: 0.765, kind: "assistant", text: "صدرت الفاتورة الضريبية INV-26-0412 بالريال والدولار وأُرسلت. الربح المتوقع على الحجز: SAR 4,240.00 (23.2%)." },
+      { at: 0.77, kind: "doc", name: "فاتورة ضريبية · INV-26-0412.pdf", meta: "SAR 18,250.00 · USD 4,866.67" },
+      { at: 0.86, kind: "module", module: "الذمم المدينة والدائنة", href: "/platform/finance-receivables" },
+      { at: 0.865, kind: "status", text: "وصلت · جبل علي · 22 نوفمبر" },
+      { at: 0.875, kind: "tools", steps: [{ tool: "list_payment_suggestions", label: "طابقت دفعة من بريد المالية", detail: "إشعار تحويل بقيمة SAR 18,250.00 يطابق INV-26-0412" }] },
+      { at: 0.885, kind: "card", title: "مطابقة دفعة · INV-26-0412", rows: [["المبلغ", "SAR 18,250.00"], ["المصدر", "إشعار تحويل · بريد المالية"], ["المطابقة", "كاملة"]], confirm: "تأكيد المطابقة", confirmedAt: 0.9 },
+      { at: 0.915, kind: "status", text: "حالة التلكس · أُفرج عن البضاعة" },
+      { at: 0.93, kind: "module", module: "المحاسبة", href: "/platform/accounting" },
+      { at: 0.935, kind: "user", text: "أغلق الشحنة." },
+      {
+        at: 0.95,
+        kind: "tools",
+        steps: [
+          { tool: "update_job", label: "حدّثت الحالة", detail: "الشحنة مغلقة" },
+          { tool: "run_report", label: "شغّلت قائمة الأرباح والخسائر", detail: "نوفمبر 2026" },
+        ],
+      },
+      { at: 0.965, kind: "assistant", text: "أُغلقت الشحنة. ربح الحجز في قائمة الأرباح والخسائر لنوفمبر، والذمة مسدّدة، ولم يُعد أحد كتابة رقم واحد في الطريق." },
+      { at: 0.975, kind: "card", title: "الحجز NXS26000412 · في الدفاتر", rows: [["الإيراد", "SAR 18,250.00"], ["التكلفة", "SAR 14,010.00"], ["الربح", "SAR 4,240.00 · 23.2%"]] },
+    ],
   },
 };
 
-/** Chips: when they show (progress), what they follow (world point or the hero), and their offset. */
-type ChipDef = { id: string; from: number; to: number; anchor: "hero" | "ship" | [number, number]; dx: number; dy: number; tone?: "ai" | "money" | "done" };
-const chipDefs: ChipDef[] = [
-  { id: "quote", from: 0.07, to: 0.12, anchor: "hero", dx: 40, dy: -70 },
-  { id: "booking", from: 0.11, to: 0.5, anchor: "hero", dx: 40, dy: -70 },
-  { id: "read", from: 0.2, to: 0.33, anchor: "hero", dx: 40, dy: -118, tone: "ai" },
-  { id: "confirm", from: 0.3, to: 0.42, anchor: "hero", dx: 40, dy: -166, tone: "done" },
-  { id: "hbl", from: 0.42, to: 0.55, anchor: "hero", dx: 40, dy: -118, tone: "done" },
-  { id: "mbl", from: 0.46, to: 0.55, anchor: "hero", dx: 40, dy: -166 },
-  { id: "track", from: 0.63, to: 0.78, anchor: "ship", dx: 30, dy: -60 },
-  { id: "invoice", from: 0.78, to: 0.9, anchor: "ship", dx: 30, dy: -60, tone: "money" },
-  { id: "paid", from: 0.83, to: 0.93, anchor: "ship", dx: 30, dy: -108, tone: "done" },
-  { id: "profit", from: 0.9, to: 1.01, anchor: "ship", dx: 30, dy: -60, tone: "money" },
-  { id: "closed", from: 0.94, to: 1.01, anchor: "ship", dx: 30, dy: -108, tone: "done" },
-];
-
-const chapterAt: Array<[number, number]> = [
-  [0.02, 0.17],
-  [0.17, 0.4],
-  [0.4, 0.56],
-  [0.56, 0.78],
-  [0.78, 0.9],
-  [0.9, 1.0],
-];
-
+/** The booking's status at a point of the story, in step with the chat. */
 const statusAt = (p: number) => {
-  if (p < 0.11) return 0;
-  if (p < 0.3) return 1;
-  if (p < 0.36) return 2;
-  if (p < 0.4) return 3;
-  if (p < 0.55) return 4;
-  if (p < 0.62) return 5;
-  if (p < 0.78) return 6;
-  if (p < 0.9) return 7;
-  if (p < 0.94) return 8;
+  if (p < 0.165) return 0;
+  if (p < 0.205) return 1;
+  if (p < 0.3) return 2;
+  if (p < 0.505) return 3;
+  if (p < 0.605) return 4;
+  if (p < 0.68) return 5;
+  if (p < 0.865) return 6;
+  if (p < 0.915) return 7;
+  if (p < 0.95) return 8;
   return 9;
 };
+
+/** Which icon a tool call shows, by what the tool does. */
+function toolIcon(tool: string) {
+  if (tool.startsWith("search_")) return Search;
+  if (tool.startsWith("read_")) return FileSearch;
+  if (tool.startsWith("list_") || tool.startsWith("get_")) return ListChecks;
+  if (tool.startsWith("update_")) return PenLine;
+  if (tool.startsWith("run_")) return BarChart3;
+  return FilePlus2;
+}
+
+/** A little before an assistant turn, the typing dots show. */
+const TYPING_LEAD = 0.012;
 
 export function Odyssey() {
   const locale = useLocale();
   const t = copy[locale];
   const root = useRef<HTMLElement>(null);
-  const rtl = locale === "ar";
 
   useGSAP(
     () => {
@@ -178,16 +311,16 @@ export function Odyssey() {
       const bars = Array.from(el.querySelectorAll<SVGRectElement>("[data-bar]"));
       const hbl = q<SVGGElement>("[data-hbl]");
       const waves = Array.from(el.querySelectorAll<SVGPathElement>("[data-wave]"));
-      const chips = Array.from(el.querySelectorAll<HTMLElement>("[data-chip]"));
-      const chapters = Array.from(el.querySelectorAll<HTMLElement>("[data-chapter]"));
+      const msgs = Array.from(el.querySelectorAll<HTMLElement>("[data-at]"));
+      const confirms = Array.from(el.querySelectorAll<HTMLElement>("[data-confirm-at]"));
+      const typing = q<HTMLElement>("[data-dots]");
+      const feed = q<HTMLElement>("[data-feed]");
+      const list = q<HTMLElement>("[data-list]");
       const statusEl = q<HTMLElement>("[data-status]");
       const rail = Array.from(el.querySelectorAll<HTMLElement>("[data-rail]"));
       const progressEl = q<HTMLElement>("[data-progress]");
-      const stage = q<HTMLElement>("[data-stage]");
       const hint = q<HTMLElement>("[data-hint]");
-      if (!svg || !cam) return;
-
-      const pt = svg.createSVGPoint();
+      if (!svg || !cam || !feed || !list) return;
 
       const mm = gsap.matchMedia();
 
@@ -199,9 +332,9 @@ export function Odyssey() {
         el.setAttribute("data-mode", "scroll");
         const s = {
           p: 0,
-          z: 1,
-          fx: 800,
-          fy: 460,
+          z: 0.95,
+          fx: 1000,
+          fy: 520,
           truckX: -420,
           heroX: -408,
           heroY: QUAY_Y - 12 - BOX.h,
@@ -214,6 +347,7 @@ export function Odyssey() {
           hblOut: 0,
         };
         let lastStatus = -1;
+        let lastShown = -1;
 
         const draw = () => {
           // Once the ship sails, the camera's focus travels with it.
@@ -234,83 +368,68 @@ export function Odyssey() {
           hbl.setAttribute("transform", `translate(${s.hblOut * 70} ${-s.hblOut * 40})`);
           hbl.style.opacity = String(Math.min(1, s.hblOut * 2));
           progressEl.style.transform = `scaleX(${s.p})`;
+          hint.style.opacity = String(gsap.utils.clamp(0, 1, 1 - s.p / 0.04));
 
-          // Chips follow their anchors through the camera.
-          const m = cam.getScreenCTM();
-          const box = stage.getBoundingClientRect();
-          if (m) {
-            for (const c of chips) {
-              const def = chipDefs.find((d) => d.id === c.dataset.chip)!;
-              let wx: number;
-              let wy: number;
-              if (def.anchor === "hero") {
-                wx = s.heroX + BOX.w / 2;
-                wy = s.heroY;
-              } else if (def.anchor === "ship") {
-                wx = SHIP_X + s.shipDx + 380;
-                wy = QUAY_Y - 3 * BOX.h - 10;
-              } else {
-                [wx, wy] = def.anchor;
-              }
-              pt.x = wx;
-              pt.y = wy;
-              const sp = pt.matrixTransform(m);
-              const on = s.p >= def.from && s.p < def.to;
-              c.style.opacity = on ? "1" : "0";
-              // Keep the chip inside the stage: it sits beside its anchor, on the reading side.
-              const cw = c.offsetWidth;
-              const raw = sp.x - box.left + (rtl ? -def.dx * s.z - cw : def.dx * s.z);
-              const x = gsap.utils.clamp(8, Math.max(8, box.width - cw - 8), raw);
-              c.style.transform = `translate(${x}px, ${sp.y - box.top + def.dy * s.z}px) scale(${on ? 1 : 0.9})`;
-            }
-          }
+          // The booking's status in the chat header.
           const st = statusAt(s.p);
           if (st !== lastStatus) {
             lastStatus = st;
             statusEl.textContent = t.statuses[st];
             rail.forEach((r, i) => r.classList.toggle("is-on", i <= st));
           }
-          chapters.forEach((ch, i) => {
-            const [a, b] = chapterAt[i];
-            const fadeIn = gsap.utils.clamp(0, 1, (s.p - a) / 0.03);
-            const fadeOut = gsap.utils.clamp(0, 1, (b - s.p) / 0.03);
-            const o = i === chapters.length - 1 ? fadeIn : Math.min(fadeIn, fadeOut);
-            ch.style.opacity = String(o);
-            ch.style.transform = `translateY(${(1 - o) * 14}px)`;
-            ch.style.pointerEvents = o > 0.5 ? "auto" : "none";
+
+          // The transcript: messages up to this point are in, the typing dots
+          // show just before an assistant turn, and the feed keeps the latest
+          // message in view.
+          let shown = -1;
+          let typingOn = false;
+          msgs.forEach((m, i) => {
+            const at = Number(m.dataset.at);
+            if (s.p >= at) shown = i;
+            else if (!typingOn && m.dataset.typing === "1" && s.p >= at - TYPING_LEAD) typingOn = true;
           });
-          hint.style.opacity = String(gsap.utils.clamp(0, 1, 1 - s.p / 0.04));
+          if (shown !== lastShown) {
+            msgs.forEach((m, i) => m.classList.toggle("is-in", i <= shown));
+            lastShown = shown;
+          }
+          typing.classList.toggle("is-in", typingOn);
+          confirms.forEach((c) => c.classList.toggle("is-done", s.p >= Number(c.dataset.confirmAt)));
+          const tail = typingOn ? typing : shown >= 0 ? msgs[shown] : null;
+          const bottom = tail ? tail.offsetTop + tail.offsetHeight : 0;
+          list.style.transform = `translateY(${-Math.max(0, bottom - feed.clientHeight)}px)`;
         };
 
         const tl = gsap.timeline({
           defaults: { ease: "none" },
-          scrollTrigger: { trigger: el, start: "top top", end: "+=720%", scrub: 0.6, pin: true, anticipatePin: 1, invalidateOnRefresh: true },
+          scrollTrigger: { trigger: el, start: "top top", end: "+=760%", scrub: 0.6, pin: true, anticipatePin: 1, invalidateOnRefresh: true },
           onUpdate: draw,
         });
         tl.to(s, { p: 1, duration: 1 }, 0);
-        // 1. The truck brings the container to the quay.
-        tl.to(s, { truckX: TRUCK_X, heroX: TRUCK_X + 12, duration: 0.08, ease: "power2.out" }, 0);
-        tl.to(s, { z: 1.45, fx: TRUCK_X + 60, fy: QUAY_Y - 60, duration: 0.1, ease: "power2.inOut" }, 0.04);
+        // 0. The quotation is made while the port waits; the camera drifts in.
+        tl.to(s, { z: 1.02, fx: 940, fy: 500, duration: 0.12, ease: "power1.inOut" }, 0);
+        // 1. The truck brings the container to the quay (Gate In).
+        tl.to(s, { truckX: TRUCK_X, heroX: TRUCK_X + 12, duration: 0.08, ease: "power2.out" }, 0.1);
+        tl.to(s, { z: 1.45, fx: TRUCK_X + 60, fy: QUAY_Y - 60, duration: 0.1, ease: "power2.inOut" }, 0.13);
         // 2. The crane: trolley over, spreader down, lift, carry, lower into the slot.
-        tl.to(s, { trolleyX: TRUCK_X + 12 + BOX.w / 2, duration: 0.05, ease: "power2.inOut" }, 0.1);
-        tl.to(s, { drop: QUAY_Y - 12 - BOX.h - 6 - (BOOM_Y + TROLLEY_H), duration: 0.05, ease: "power2.inOut" }, 0.15);
-        tl.to(s, { drop: 40, heroY: BOOM_Y + TROLLEY_H + 46, duration: 0.07, ease: "power2.inOut" }, 0.2);
-        tl.to(s, { truckX: -420, duration: 0.08, ease: "power2.in" }, 0.24);
-        tl.to(s, { trolleyX: SLOT_X + BOX.w / 2, heroX: SLOT_X, fx: 620, fy: BOOM_Y + 90, duration: 0.09, ease: "power2.inOut" }, 0.27);
-        tl.to(s, { drop: SLOT_Y - 6 - (BOOM_Y + TROLLEY_H), heroY: SLOT_Y, duration: 0.06, ease: "power2.inOut" }, 0.36);
-        tl.to(s, { drop: 24, duration: 0.04, ease: "power2.inOut" }, 0.42);
+        tl.to(s, { trolleyX: TRUCK_X + 12 + BOX.w / 2, duration: 0.05, ease: "power2.inOut" }, 0.22);
+        tl.to(s, { drop: QUAY_Y - 12 - BOX.h - 6 - (BOOM_Y + TROLLEY_H), duration: 0.05, ease: "power2.inOut" }, 0.26);
+        tl.to(s, { drop: 40, heroY: BOOM_Y + TROLLEY_H + 46, duration: 0.06, ease: "power2.inOut" }, 0.31);
+        tl.to(s, { truckX: -420, duration: 0.08, ease: "power2.in" }, 0.34);
+        tl.to(s, { trolleyX: SLOT_X + BOX.w / 2, heroX: SLOT_X, fx: 620, fy: BOOM_Y + 90, duration: 0.09, ease: "power2.inOut" }, 0.37);
+        tl.to(s, { drop: SLOT_Y - 6 - (BOOM_Y + TROLLEY_H), heroY: SLOT_Y, duration: 0.05, ease: "power2.inOut" }, 0.455);
+        tl.to(s, { drop: 24, duration: 0.03, ease: "power2.inOut" }, 0.505);
         // 3. Pull back to the loaded ship; the B/L slides out of the container.
-        tl.to(s, { z: 0.95, fx: 1000, fy: 520, duration: 0.1, ease: "power2.inOut" }, 0.4);
-        tl.to(s, { hblOut: 1, duration: 0.05, ease: "power2.out" }, 0.43);
+        tl.to(s, { z: 0.95, fx: 1000, fy: 520, duration: 0.08, ease: "power2.inOut" }, 0.5);
+        tl.to(s, { hblOut: 1, duration: 0.04, ease: "power2.out" }, 0.545);
         // 4. The ship leaves; the camera starts to travel with it.
-        tl.to(s, { shipDx: SAIL, heroX: `+=${SAIL}`, duration: 0.36, ease: "power1.inOut" }, 0.5);
-        tl.to(s, { hblOut: 0, duration: 0.04 }, 0.5);
-        tl.to(s, { z: 0.85, fx: SHIP_X + 380, fy: 500, follow: 1, duration: 0.1, ease: "power2.inOut" }, 0.5);
+        tl.to(s, { shipDx: SAIL, heroX: `+=${SAIL}`, duration: 0.3, ease: "power1.inOut" }, 0.59);
+        tl.to(s, { hblOut: 0, duration: 0.03 }, 0.59);
+        tl.to(s, { z: 0.85, fx: SHIP_X + 380, fy: 500, follow: 1, duration: 0.1, ease: "power2.inOut" }, 0.59);
         // 5. At sea: open water, slowly zooming out.
-        tl.to(s, { z: 0.78, fy: 480, duration: 0.26 }, 0.6);
+        tl.to(s, { z: 0.78, fy: 480, duration: 0.2, ease: "none" }, 0.69);
         // 6. Arrived at the destination quay, then dusk and out to the books.
-        tl.to(s, { z: 0.62, fy: 470, dusk: 0.75, duration: 0.14, ease: "power2.inOut" }, 0.86);
-        tl.to(s, { books: 1, duration: 0.1, ease: "power2.out" }, 0.9);
+        tl.to(s, { z: 0.62, fy: 470, dusk: 0.75, duration: 0.12, ease: "power2.inOut" }, 0.88);
+        tl.to(s, { books: 1, duration: 0.08, ease: "power2.out" }, 0.92);
 
         draw();
         const sea = gsap.to(waves, { x: -120, duration: 7, repeat: -1, ease: "none" });
@@ -319,14 +438,6 @@ export function Odyssey() {
       return () => mm.revert();
     },
     { scope: root, dependencies: [locale] },
-  );
-
-  const stageText = (
-    <>
-      <p className="text-[12.5px] font-semibold uppercase tracking-[0.14em] text-teal-300">{t.eyebrow}</p>
-      <h2 className="font-display mt-3 text-balance text-3xl font-bold leading-[1.1] text-white sm:text-4xl lg:text-[2.6rem]">{t.title}</h2>
-      <p className="mt-3 max-w-md text-pretty text-[15px] leading-relaxed text-white/65 sm:text-base">{t.lead}</p>
-    </>
   );
 
   return (
@@ -408,39 +519,14 @@ export function Odyssey() {
                 <path d="M-10 4 H290" stroke={paint.fog} strokeWidth="2" opacity="0.4" />
               </g>
             </g>
-
           </g>
         </svg>
 
-        {/* Chips: the system's work, attached to the container */}
-        {chipDefs.map((c) => (
-          <span
-            key={c.id}
-            data-chip={c.id}
-            className={cn(
-              "odyssey-chip pointer-events-none absolute left-0 top-0 inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5 text-[12px] font-semibold shadow-float ring-1 transition-[opacity,transform] duration-300",
-              c.tone === "ai" && "bg-spark-400 text-ink-950 ring-spark-300",
-              c.tone === "money" && "bg-white text-ink-900 ring-fog-200",
-              c.tone === "done" && "bg-teal-400 text-ink-950 ring-teal-300",
-              !c.tone && "bg-ink-900/95 text-white ring-white/15",
-            )}
-            style={{ opacity: 0 }}
-          >
-            {c.tone === "ai" ? <Bot className="h-3.5 w-3.5" /> : c.tone === "done" ? <Check className="h-3.5 w-3.5" strokeWidth={3} /> : null}
-            <span dir="auto">{t.chips[c.id]}</span>
-          </span>
-        ))}
-
-        {/* The booking's status, top corner */}
-        <div className="absolute end-4 top-20 z-10 rounded-2xl bg-ink-900/90 p-3 text-start ring-1 ring-white/10 backdrop-blur sm:end-8 sm:top-24 sm:p-4">
-          <p className="text-[10.5px] font-medium text-white/50">{t.booking}</p>
-          <p dir="ltr" className="font-mono text-[13px] font-semibold rtl:text-end">NXS26000412</p>
-          <p data-status="" className="mt-1 text-[12.5px] font-semibold text-teal-300">{t.statuses[4]}</p>
-          <div className="mt-2 flex gap-[3px]" aria-hidden>
-            {t.statuses.map((st, i) => (
-              <span key={st} data-rail="" className={cn("odyssey-rail h-1 w-4 rounded-full bg-white/10 sm:w-5", i <= 4 && "is-on")} />
-            ))}
-          </div>
+        {/* The heading, in the sky */}
+        <div className="odyssey-heading pointer-events-none absolute start-5 top-20 z-10 max-w-md sm:start-8 sm:top-24 lg:start-10">
+          <p className="text-[12px] font-semibold uppercase tracking-[0.14em] text-teal-300 sm:text-[12.5px]">{t.eyebrow}</p>
+          <h2 className="font-display mt-2 text-balance text-2xl font-bold leading-[1.1] text-white sm:text-3xl lg:text-[2.4rem]">{t.title}</h2>
+          <p className="odyssey-lead mt-3 max-w-sm text-pretty text-[14px] leading-relaxed text-white/65 sm:text-[15px]">{t.lead}</p>
         </div>
 
         {/* Scroll hint and progress */}
@@ -452,24 +538,186 @@ export function Odyssey() {
         </div>
       </div>
 
-      {/* Heading and chapters (overlay in scroll mode) */}
-      <div className="odyssey-panel absolute inset-x-0 bottom-0 z-10 p-5 sm:p-8 lg:inset-y-0 lg:end-auto lg:flex lg:w-[420px] lg:flex-col lg:justify-center lg:p-12">
-        <div className="odyssey-heading">{stageText}</div>
-        <div className="odyssey-chapters relative mt-6 lg:mt-10">
-          {t.chapters.map((ch) => (
-            <article key={ch.id} data-chapter={ch.id} className="odyssey-chapter rounded-2xl bg-ink-950/70 p-4 ring-1 ring-white/10 backdrop-blur-md sm:p-5">
-              <p className="text-[11.5px] font-semibold uppercase tracking-[0.12em] text-spark-300">{ch.module}</p>
-              <h3 className="font-display mt-1.5 text-xl font-bold text-white sm:text-2xl">{ch.title}</h3>
-              <p className="mt-2 text-[14px] leading-relaxed text-white/70">{ch.text}</p>
-              <Link href={ch.href} className="group mt-3 inline-flex items-center gap-1.5 text-[13px] font-semibold text-teal-300 hover:text-teal-200">
-                {t.more}
-                <ArrowRight className="h-3.5 w-3.5 transition-transform ltr:group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5" />
-              </Link>
-            </article>
-          ))}
+      {/* The assistant's chat: the same shipment, done in the system */}
+      <div className="odyssey-panel z-10 flex flex-col bg-ink-950">
+        <div className="odyssey-chat flex min-h-0 flex-1 flex-col">
+          {/* Header: the assistant, and the booking it is working on */}
+          <div className="odyssey-chat-head shrink-0 border-b border-white/10 px-4 py-3 sm:px-5">
+            <div className="flex items-center gap-2.5">
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-spark-400/15 text-spark-400">
+                <Bot className="h-4.5 w-4.5" />
+              </span>
+              <div className="min-w-0">
+                <p className="text-[13px] font-semibold">{t.header}</p>
+                <p className="truncate text-[10.5px] text-white/50">{t.sub}</p>
+              </div>
+            </div>
+            <div className="mt-3 flex items-center justify-between gap-3 rounded-xl bg-white/[0.04] px-3 py-2 ring-1 ring-white/10">
+              <div className="min-w-0">
+                <p className="text-[10px] font-medium text-white/45">{t.booking}</p>
+                <p dir="ltr" className="font-mono text-[12.5px] font-semibold rtl:text-end">NXS26000412</p>
+              </div>
+              <div className="min-w-0 text-end">
+                <p data-status="" className="truncate text-[12px] font-semibold text-teal-300">{t.statuses[4]}</p>
+                <div className="mt-1.5 flex justify-end gap-[3px]" aria-hidden>
+                  {t.statuses.map((st, i) => (
+                    <span key={st} data-rail="" className={cn("odyssey-rail h-1 w-3 rounded-full bg-white/10 sm:w-3.5", i <= 4 && "is-on")} />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* The transcript */}
+          <div data-feed="" className="odyssey-feed relative min-h-0 flex-1 overflow-hidden px-4 sm:px-5">
+            <div data-list="" className="odyssey-list space-y-2.5 py-4">
+              {t.items.map((it, i) => (
+                <Message key={i} item={it} t={t} />
+              ))}
+              <div data-dots="" className="ody-msg flex justify-start">
+                <span className="odyssey-typing inline-flex items-center gap-1 rounded-2xl rounded-ss-sm bg-white/[0.06] px-3 py-2.5 ring-1 ring-white/10" aria-hidden>
+                  <i className="block h-1.5 w-1.5 rounded-full bg-white/60" />
+                  <i className="block h-1.5 w-1.5 rounded-full bg-white/60" />
+                  <i className="block h-1.5 w-1.5 rounded-full bg-white/60" />
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Composer */}
+          <div className="shrink-0 px-4 pb-4 pt-2 sm:px-5">
+            <div className="flex items-center justify-between rounded-full bg-white/[0.05] px-4 py-2.5 text-[12px] text-white/45 ring-1 ring-white/10">
+              {t.input}
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-teal-500 text-white">
+                <ArrowUp className="h-3.5 w-3.5" />
+              </span>
+            </div>
+          </div>
         </div>
       </div>
-
     </section>
   );
+}
+
+/** One turn of the transcript. `data-at` is the progress it appears at; `data-typing` asks for the dots before it. */
+function Message({ item, t }: { item: Item; t: Copy }) {
+  const base = "ody-msg";
+  const wrap = (cls: string, children: ReactNode, typing = false) => (
+    <div data-at={item.at} data-typing={typing ? "1" : undefined} className={cn(base, cls)}>
+      {children}
+    </div>
+  );
+
+  switch (item.kind) {
+    case "module":
+      return wrap(
+        "flex items-center gap-2 pt-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-spark-300",
+        <>
+          <span className="h-px flex-1 bg-white/10" />
+          <span className="inline-flex items-center gap-1.5">
+            {item.module}
+            <Link href={item.href} className="group inline-flex items-center gap-1 normal-case tracking-normal text-teal-300 hover:text-teal-200" title={t.more}>
+              <span className="sr-only">{t.more}</span>
+              <ArrowRight className="h-3 w-3 transition-transform ltr:group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" />
+            </Link>
+          </span>
+          <span className="h-px flex-1 bg-white/10" />
+        </>,
+      );
+    case "user":
+      return wrap(
+        "flex justify-end",
+        <div className="max-w-[88%] rounded-2xl rounded-se-sm bg-teal-500/20 px-3.5 py-2.5 ring-1 ring-teal-400/20">
+          <p className="text-[13px] leading-relaxed">{item.text}</p>
+          {item.file ? (
+            <p className="mt-2 inline-flex max-w-full items-center gap-1.5 break-all rounded-md bg-white/10 px-2 py-1 text-[10.5px]">
+              <Paperclip className="h-3 w-3 shrink-0" />
+              {item.file}
+            </p>
+          ) : null}
+        </div>,
+      );
+    case "assistant":
+      return wrap(
+        "flex justify-start",
+        <div className="max-w-[92%] rounded-2xl rounded-ss-sm bg-white/[0.06] px-3.5 py-2.5 ring-1 ring-white/10">
+          <p className="text-[13px] leading-relaxed text-white/90">{item.text}</p>
+        </div>,
+        true,
+      );
+    case "tools":
+      return wrap(
+        "",
+        <ul className="space-y-2 rounded-xl bg-white/[0.04] p-3 ring-1 ring-white/10">
+          {item.steps.map((st) => {
+            const Icon = toolIcon(st.tool);
+            return (
+              <li key={st.tool + st.label} className="flex items-start gap-2.5">
+                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-white/[0.07] text-teal-300">
+                  <Icon className="h-3 w-3" />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <p className="flex flex-wrap items-baseline gap-x-2 text-[12px] font-medium">
+                    {st.label}
+                    <code dir="ltr" className="font-mono text-[10px] text-white/40">{st.tool}</code>
+                  </p>
+                  <p dir="auto" className="text-[11px] leading-snug text-white/55">{st.detail}</p>
+                </div>
+                <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-teal-400" strokeWidth={3} />
+              </li>
+            );
+          })}
+        </ul>,
+        true,
+      );
+    case "card":
+      return wrap(
+        "",
+        <div className={cn("rounded-xl p-3 ring-1", item.confirm ? "bg-spark-400/[0.07] ring-spark-400/40" : "bg-teal-500/10 ring-teal-400/30")}>
+          <p className="flex items-center gap-1.5 text-[12px] font-semibold">
+            {item.confirm ? <Sparkles className="h-3.5 w-3.5 text-spark-400" /> : <BarChart3 className="h-3.5 w-3.5 text-teal-300" />}
+            {item.title}
+          </p>
+          <ul className="mt-2 space-y-1">
+            {item.rows.map(([k, v], i) => (
+              <li key={k} className={cn("flex justify-between gap-3 text-[11.5px]", i === item.rows.length - 1 && !item.confirm && "font-semibold")}>
+                <span className="text-white/55">{k}</span>
+                <span dir="auto" className="font-mono text-white/90">{v}</span>
+              </li>
+            ))}
+          </ul>
+          {item.confirm ? (
+            <div data-confirm-at={item.confirmedAt} className="odyssey-confirm mt-3 flex items-center gap-2">
+              <span className="odyssey-confirm-pending rounded-full bg-teal-500 px-3.5 py-1 text-[11px] font-semibold text-white">{item.confirm}</span>
+              <span className="odyssey-confirm-done inline-flex items-center gap-1 rounded-full bg-teal-400/20 px-3 py-1 text-[11px] font-semibold text-teal-300 ring-1 ring-teal-400/30">
+                <Check className="h-3 w-3" strokeWidth={3} />
+                {t.confirmed}
+              </span>
+            </div>
+          ) : null}
+        </div>,
+        true,
+      );
+    case "doc":
+      return wrap(
+        "flex justify-start",
+        <div className="flex max-w-[92%] items-center gap-2.5 rounded-xl bg-white px-3 py-2.5 text-ink-900 shadow-float">
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-teal-50 text-teal-700">
+            <FileText className="h-4 w-4" />
+          </span>
+          <div className="min-w-0">
+            <p dir="auto" className="truncate text-[12px] font-semibold">{item.name}</p>
+            <p dir="auto" className="truncate text-[10.5px] text-fog-500">{item.meta}</p>
+          </div>
+        </div>,
+      );
+    case "status":
+      return wrap(
+        "flex justify-center",
+        <span dir="auto" className="inline-flex max-w-full items-center gap-1.5 rounded-full bg-ink-900 px-3 py-1 text-[11px] font-semibold text-teal-200 ring-1 ring-white/10">
+          <Check className="h-3 w-3 shrink-0 text-teal-400" strokeWidth={3} />
+          <span className="truncate">{item.text}</span>
+        </span>,
+      );
+  }
 }
