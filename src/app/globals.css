@@ -248,10 +248,11 @@ body {
 /* Odyssey (components/home/odyssey.tsx)
    ------------------------------------------------------------------
    Static mode (no JS, reduced motion): the stage is a tall still and the
-   assistant's whole transcript sits under it. Scroll mode: the section
-   fills the viewport (GSAP pins it); on wide screens the chat is a column
-   beside the stage, on small ones it is the lower half. Messages appear
-   with the ship, and the feed keeps the latest one in view. */
+   assistant's window, with its whole transcript, sits under it. Scroll
+   mode: the section fills the viewport (GSAP pins it); on wide screens the
+   window floats in a column beside the stage, on small ones it is the
+   lower half. Messages appear with the ship, and the feed keeps the latest
+   one in view. */
 .odyssey-stage {
   height: 100svh;
   min-height: 560px;
@@ -263,14 +264,9 @@ body {
 }
 .odyssey[data-mode="static"] .odyssey-panel {
   position: relative;
-  max-width: 44rem;
+  max-width: 40rem;
   margin-inline: auto;
   padding: 2.5rem 1rem 4rem;
-}
-.odyssey[data-mode="static"] .odyssey-chat {
-  overflow: hidden;
-  border: 1px solid rgb(255 255 255 / 0.1);
-  border-radius: 1.5rem;
 }
 .odyssey[data-mode="static"] .odyssey-feed {
   overflow: visible;
@@ -286,13 +282,13 @@ body {
 }
 .odyssey[data-mode="scroll"] .odyssey-stage {
   flex: none;
-  height: 52svh;
+  height: 50svh;
   min-height: 0;
 }
 .odyssey[data-mode="scroll"] .odyssey-panel {
   flex: 1;
   min-height: 0;
-  border-top: 1px solid rgb(255 255 255 / 0.08);
+  padding: 0 0.75rem 0.75rem;
 }
 @media (max-width: 1023px) {
   .odyssey[data-mode="scroll"] .odyssey-lead {
@@ -311,19 +307,15 @@ body {
   .odyssey[data-mode="scroll"] .odyssey-stage {
     height: 100svh;
     min-height: 560px;
-    margin-inline-start: 420px;
+    margin-inline-start: 440px;
   }
+  /* the window floats below the sticky navbar (4rem), in its own column */
   .odyssey[data-mode="scroll"] .odyssey-panel {
     position: absolute;
-    inset-block: 0;
-    inset-inline-start: 0;
-    width: 420px;
-    border-top: 0;
-    border-inline-end: 1px solid rgb(255 255 255 / 0.08);
-  }
-  /* the sticky navbar (4rem) sits over the pinned section */
-  .odyssey[data-mode="scroll"] .odyssey-chat-head {
-    padding-top: 5rem;
+    inset-block: 5.5rem 1.5rem;
+    inset-inline-start: 1.5rem;
+    width: 400px;
+    padding: 0;
   }
 }
 /* A turn of the transcript: out of the flow until its moment, then it
@@ -365,6 +357,19 @@ body {
 .odyssey-confirm.is-done .odyssey-confirm-done,
 .odyssey[data-mode="static"] .odyssey-confirm-done {
   display: inline-flex;
+}
+/* a write waiting for its confirmation breathes until it gets one */
+.odyssey[data-mode="scroll"] .odyssey-confirm:not(.is-done) .odyssey-confirm-pending {
+  animation: ody-glow 1.8s ease-in-out infinite;
+}
+@keyframes ody-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(71 188 172 / 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgb(71 188 172 / 0);
+  }
 }
 .odyssey-typing i {
   animation: ody-dot 1.2s ease-in-out infinite;
