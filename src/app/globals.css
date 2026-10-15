@@ -248,8 +248,10 @@ body {
 /* Odyssey (components/home/odyssey.tsx)
    ------------------------------------------------------------------
    Static mode (no JS, reduced motion): the stage is a tall still and the
-   chapters are a plain list under it. Scroll mode: the stage fills the
-   viewport (GSAP pins it) and the chapters overlay it, one at a time. */
+   assistant's whole transcript sits under it. Scroll mode: the section
+   fills the viewport (GSAP pins it); on wide screens the chat is a column
+   beside the stage, on small ones it is the lower half. Messages appear
+   with the ship, and the feed keeps the latest one in view. */
 .odyssey-stage {
   height: 100svh;
   min-height: 560px;
@@ -261,55 +263,128 @@ body {
 }
 .odyssey[data-mode="static"] .odyssey-panel {
   position: relative;
-  inset: auto;
-  width: auto;
-  max-width: 80rem;
+  max-width: 44rem;
   margin-inline: auto;
-  padding-block: 2.5rem 4rem;
+  padding: 2.5rem 1rem 4rem;
 }
-.odyssey[data-mode="static"] .odyssey-chapters {
-  display: grid;
-  gap: 1rem;
+.odyssey[data-mode="static"] .odyssey-chat {
+  overflow: hidden;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-radius: 1.5rem;
 }
-@media (min-width: 1024px) {
-  .odyssey[data-mode="static"] .odyssey-chapters {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
+.odyssey[data-mode="static"] .odyssey-feed {
+  overflow: visible;
 }
-.odyssey[data-mode="static"] :is(.odyssey-chip, .odyssey-hint, .odyssey-progress) {
+.odyssey[data-mode="static"] :is(.odyssey-hint, .odyssey-progress, [data-dots]) {
   display: none;
 }
-/* On wide screens the panel is its own column: the scene never runs under it. */
+.odyssey[data-mode="scroll"] {
+  display: flex;
+  flex-direction: column;
+  height: 100svh;
+  min-height: 560px;
+}
+.odyssey[data-mode="scroll"] .odyssey-stage {
+  flex: none;
+  height: 52svh;
+  min-height: 0;
+}
+.odyssey[data-mode="scroll"] .odyssey-panel {
+  flex: 1;
+  min-height: 0;
+  border-top: 1px solid rgb(255 255 255 / 0.08);
+}
+@media (max-width: 1023px) {
+  .odyssey[data-mode="scroll"] .odyssey-lead {
+    display: none;
+  }
+}
+@media (max-width: 639px) {
+  .odyssey[data-mode="scroll"] .odyssey-heading h2 {
+    font-size: 1.25rem;
+  }
+}
 @media (min-width: 1024px) {
+  .odyssey[data-mode="scroll"] {
+    display: block;
+  }
   .odyssey[data-mode="scroll"] .odyssey-stage {
+    height: 100svh;
+    min-height: 560px;
     margin-inline-start: 420px;
   }
   .odyssey[data-mode="scroll"] .odyssey-panel {
-    background: var(--color-ink-950);
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    width: 420px;
+    border-top: 0;
     border-inline-end: 1px solid rgb(255 255 255 / 0.08);
   }
+  /* the sticky navbar (4rem) sits over the pinned section */
+  .odyssey[data-mode="scroll"] .odyssey-chat-head {
+    padding-top: 5rem;
+  }
 }
-.odyssey[data-mode="scroll"] .odyssey-chapter {
+/* A turn of the transcript: out of the flow until its moment, then it
+   slides in. Static mode shows them all. */
+.ody-msg {
   position: absolute;
   inset-inline: 0;
-  bottom: 0;
+  visibility: hidden;
   opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
 }
-@media (min-width: 1024px) {
-  .odyssey[data-mode="scroll"] .odyssey-chapter {
-    bottom: auto;
-    top: 0;
-  }
-  .odyssey[data-mode="scroll"] .odyssey-chapters {
-    min-height: 260px;
-  }
+.ody-msg.is-in,
+.odyssey[data-mode="static"] .ody-msg {
+  position: static;
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
 }
-@media (max-width: 1023px) {
-  .odyssey[data-mode="scroll"] .odyssey-heading {
-    display: none;
+.odyssey-list {
+  position: relative;
+  transition: transform 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: transform;
+}
+.odyssey[data-mode="static"] .odyssey-list {
+  transform: none !important;
+}
+.odyssey-confirm-done {
+  display: none;
+}
+.odyssey-confirm.is-done .odyssey-confirm-pending,
+.odyssey[data-mode="static"] .odyssey-confirm-pending {
+  display: none;
+}
+.odyssey-confirm.is-done .odyssey-confirm-done,
+.odyssey[data-mode="static"] .odyssey-confirm-done {
+  display: inline-flex;
+}
+.odyssey-typing i {
+  animation: ody-dot 1.2s ease-in-out infinite;
+}
+.odyssey-typing i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.odyssey-typing i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+@keyframes ody-dot {
+  0%,
+  80%,
+  100% {
+    opacity: 0.35;
+    transform: translateY(0);
   }
-  .odyssey[data-mode="scroll"] .odyssey-chapters {
-    min-height: 200px;
+  40% {
+    opacity: 1;
+    transform: translateY(-2px);
   }
 }
 .odyssey-rail.is-on {
