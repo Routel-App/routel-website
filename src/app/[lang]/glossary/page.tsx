@@ -58,11 +58,11 @@ export default async function GlossaryIndexPage() {
       <div className="mx-auto mt-14 max-w-4xl">
         {letters.map((letter) => (
           <div key={letter} className="mb-10">
-            <h2 className="font-mono text-sm font-semibold uppercase tracking-wider text-teal-700">{letter}</h2>
+            <h2 className="font-mono text-sm font-semibold uppercase tracking-wider text-spark-700">{letter}</h2>
             <RevealGroup className="mt-4 grid gap-x-8 gap-y-3 border-t border-fog-200 pt-4 sm:grid-cols-2" stagger={0.03}>
               {groups.get(letter)!.map((t) => (
                 <RevealItem key={t.slug}>
-                  <Link href={t.href} className="text-[15px] font-medium text-ink-900 underline decoration-fog-300 underline-offset-4 hover:decoration-teal-500">
+                  <Link href={t.href} className="text-[15px] font-medium text-ink-900 underline decoration-fog-300 underline-offset-4 hover:decoration-spark-500">
                     {t.term}
                   </Link>
                 </RevealItem>

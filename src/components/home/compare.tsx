@@ -53,7 +53,7 @@ export async function Compare() {
         <div className="hidden grid-cols-[0.8fr_1.1fr_1.3fr] bg-fog-50 px-6 py-3 text-[12.5px] font-semibold text-fog-500 sm:grid">
           <span>{t.cols[0]}</span>
           <span>{t.cols[1]}</span>
-          <span className="text-teal-700">{t.cols[2]}</span>
+          <span className="text-spark-700">{t.cols[2]}</span>
         </div>
         <RevealGroup className="divide-y divide-fog-100" stagger={0.05} amount={0.1}>
           {t.rows.map((r) => (
@@ -64,7 +64,7 @@ export async function Compare() {
                 {r.before}
               </p>
               <p className="flex items-start gap-2 text-[14px] font-medium leading-snug text-ink-900">
-                <Check className="mt-0.5 h-4 w-4 shrink-0 text-teal-500" />
+                <Check className="mt-0.5 h-4 w-4 shrink-0 text-spark-500" />
                 {r.after}
               </p>
             </RevealItem>

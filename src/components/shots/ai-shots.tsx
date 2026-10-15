@@ -94,7 +94,7 @@ export function AssistantChatShot({
 
         {/* The request. data-step / --step: the order a <Replay> wrapper plays the chat in (globals.css). */}
         <div data-step="" style={{ "--step": 0 } as CSSProperties} className="mt-4 flex justify-end">
-          <div className={cn("max-w-[85%] rounded-2xl rounded-se-sm px-3.5 py-2.5", dark ? "bg-teal-500/20" : "bg-ink-900 text-white")}>
+          <div className={cn("max-w-[85%] rounded-2xl rounded-se-sm px-3.5 py-2.5", dark ? "bg-spark-500/20" : "bg-ink-900 text-white")}>
             <p className="text-[12px] leading-relaxed">{t.user}</p>
             <p className="mt-2 inline-flex max-w-full items-center gap-1.5 break-all rounded-md bg-white/10 px-2 py-1 text-[10.5px]">
               <Paperclip className="h-3 w-3" />
@@ -111,7 +111,7 @@ export function AssistantChatShot({
                 <span
                   className={cn(
                     "mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md",
-                    dark ? "bg-white/[0.07] text-teal-300" : "bg-teal-50 text-teal-700",
+                    dark ? "bg-white/[0.07] text-spark-300" : "bg-spark-50 text-spark-700",
                   )}
                 >
                   <Icon className="h-3 w-3" />
@@ -121,7 +121,7 @@ export function AssistantChatShot({
                   <p className={cn("text-[10.5px]", muted)}>{detail}</p>
                 </div>
                 {i < t.tools.length - 1 ? (
-                  <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-teal-500" strokeWidth={3} />
+                  <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-spark-500" strokeWidth={3} />
                 ) : (
                   <CircleDashed className="mt-0.5 h-3.5 w-3.5 shrink-0 text-spark-500" />
                 )}
@@ -153,7 +153,7 @@ export function AssistantChatShot({
             <Ltr className="font-mono">{t.total[1]}</Ltr>
           </div>
           <div className="mt-3 flex gap-2">
-            <span data-confirm="" style={{ "--step": t.tools.length + 2 } as CSSProperties} className="rounded-full bg-teal-500 px-3.5 py-1 text-[11px] font-semibold text-white">
+            <span data-confirm="" style={{ "--step": t.tools.length + 2 } as CSSProperties} className="rounded-full bg-spark-500 px-3.5 py-1 text-[11px] font-semibold text-white">
               {t.confirm}
             </span>
             <span className={cn("rounded-full px-3.5 py-1 text-[11px] font-medium ring-1", dark ? "ring-white/15" : "ring-fog-300")}>{t.edit}</span>
@@ -162,7 +162,7 @@ export function AssistantChatShot({
 
         <div className={cn("mt-3 flex items-center justify-between rounded-full border px-3.5 py-2 text-[11px]", card, muted)}>
           {t.input}
-          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-teal-500 text-white">
+          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-spark-500 text-white">
             <ArrowUp className="h-3 w-3" />
           </span>
         </div>
@@ -215,12 +215,12 @@ export function DocumentReadShot({ locale, className }: { locale: Locale; classN
           </p>
           <div className="mt-3 space-y-1.5">
             {[90, 70, 82, 55, 76, 64, 88, 48].map((w, i) => (
-              <span key={i} className={cn("block h-1.5 rounded-full", i === 2 || i === 5 ? "bg-teal-300" : "bg-fog-200")} style={{ width: `${w}%` }} />
+              <span key={i} className={cn("block h-1.5 rounded-full", i === 2 || i === 5 ? "bg-spark-300" : "bg-fog-200")} style={{ width: `${w}%` }} />
             ))}
           </div>
           <div className="mt-3 grid grid-cols-2 gap-1.5">
             <span className="h-6 rounded bg-fog-200/70" />
-            <span className="h-6 rounded bg-teal-100" />
+            <span className="h-6 rounded bg-spark-100" />
           </div>
         </div>
 
@@ -235,7 +235,7 @@ export function DocumentReadShot({ locale, className }: { locale: Locale; classN
                 <span className="text-[10.5px] text-fog-500">{label}</span>
                 <span className="flex items-center gap-1.5 text-[10.5px] font-medium">
                   {value}
-                  <Check className="h-3 w-3 text-teal-500" strokeWidth={3} />
+                  <Check className="h-3 w-3 text-spark-500" strokeWidth={3} />
                 </span>
               </li>
             ))}
@@ -279,7 +279,7 @@ const briefCopy = {
 const dot: Record<string, string> = {
   red: "bg-red-500",
   amber: "bg-spark-400",
-  teal: "bg-teal-500",
+  teal: "bg-spark-500",
   slate: "bg-fog-400",
 };
 
@@ -363,16 +363,16 @@ export function SetupShot({ locale, className }: { locale: Locale; className?: s
       <div className="p-4 sm:p-5">
         <div className="flex items-center justify-between gap-3">
           <p className="font-display text-[15px] font-bold">{t.title}</p>
-          <span className="text-[10.5px] font-medium text-teal-700">{t.progress}</span>
+          <span className="text-[10.5px] font-medium text-spark-700">{t.progress}</span>
         </div>
         <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-fog-100">
-          <div className="h-full w-[60%] rounded-full bg-teal-500" />
+          <div className="h-full w-[60%] rounded-full bg-spark-500" />
         </div>
         <ul className="mt-3 grid grid-cols-2 gap-x-3 gap-y-1.5">
           {t.steps.map(([label, done]) => (
             <li key={label} className={cn("flex items-center gap-1.5 text-[10.5px]", done ? "text-fog-500" : "font-medium text-ink-900")}>
               {done ? (
-                <Check className="h-3 w-3 shrink-0 text-teal-500" strokeWidth={3} />
+                <Check className="h-3 w-3 shrink-0 text-spark-500" strokeWidth={3} />
               ) : (
                 <CircleDashed className="h-3 w-3 shrink-0 text-spark-500" />
               )}

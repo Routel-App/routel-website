@@ -26,7 +26,7 @@ export async function GlossaryTermPage({
 
   return (
     <article className="min-w-0">
-      <Link href="/glossary" className="inline-flex items-center gap-1.5 text-sm font-medium text-teal-700 hover:text-teal-800">
+      <Link href="/glossary" className="inline-flex items-center gap-1.5 text-sm font-medium text-spark-700 hover:text-spark-800">
         <BookOpen className="h-3.5 w-3.5" /> {t.glossary}
       </Link>
       <header className="mt-4 border-b border-fog-200 pb-6">
@@ -34,7 +34,7 @@ export async function GlossaryTermPage({
         {frontmatter.description ? <p className="mt-3 text-pretty text-lg text-fog-600">{frontmatter.description}</p> : null}
       </header>
 
-      <div className="prose prose-slate mt-8 max-w-none prose-headings:font-display prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-ink-900 prose-h2:mt-12 prose-h2:text-2xl prose-h3:mt-8 prose-h3:text-lg prose-p:text-fog-700 prose-p:leading-relaxed prose-a:font-medium prose-a:text-teal-700 prose-a:decoration-teal-200 prose-a:underline-offset-4 hover:prose-a:decoration-teal-600 prose-strong:text-ink-900 prose-li:text-fog-700 prose-li:marker:text-fog-400">
+      <div className="prose prose-slate mt-8 max-w-none prose-headings:font-display prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-ink-900 prose-h2:mt-12 prose-h2:text-2xl prose-h3:mt-8 prose-h3:text-lg prose-p:text-fog-700 prose-p:leading-relaxed prose-a:font-medium prose-a:text-spark-700 prose-a:decoration-spark-200 prose-a:underline-offset-4 hover:prose-a:decoration-spark-600 prose-strong:text-ink-900 prose-li:text-fog-700 prose-li:marker:text-fog-400">
         {content}
       </div>
 

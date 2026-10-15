@@ -41,7 +41,7 @@ export function DocsSidebar({ nav }: { nav: DocNavGroup[] }) {
                     className={cn(
                       "flex items-center justify-between rounded-lg px-2.5 py-1.5 text-[13.5px] transition-colors",
                       active
-                        ? "bg-teal-50 font-medium text-teal-800"
+                        ? "bg-spark-50 font-medium text-spark-800"
                         : "text-fog-700 hover:bg-fog-100 hover:text-ink-900",
                     )}
                   >

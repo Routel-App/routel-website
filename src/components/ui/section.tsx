@@ -14,7 +14,7 @@ const toneBg: Record<Tone, string> = {
   light: "bg-white",
   muted: "bg-fog-50",
   cream: "bg-spark-50",
-  teal: "bg-teal-50",
+  teal: "bg-spark-50",
   dark: "bg-ink-950 text-white",
 };
 
@@ -29,10 +29,10 @@ export function Section({ tone = "light", bleed = false, className, children, ..
 type EyebrowTone = "teal" | "spark" | "ink" | "dark";
 
 const eyebrowTone: Record<EyebrowTone, string> = {
-  teal: "bg-teal-100 text-teal-800",
+  teal: "bg-spark-100 text-spark-800",
   spark: "bg-spark-100 text-spark-600",
   ink: "bg-fog-100 text-fog-700",
-  dark: "bg-white/10 text-teal-200 ring-1 ring-inset ring-white/10",
+  dark: "bg-white/10 text-spark-200 ring-1 ring-inset ring-white/10",
 };
 
 export function Eyebrow({

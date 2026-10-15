@@ -139,7 +139,7 @@ export async function AiSpotlight() {
               key={g.title}
               className="rounded-2xl border border-white/[0.08] bg-white/[0.035] p-6 backdrop-blur-sm transition-colors hover:bg-white/[0.06]"
             >
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.06] text-teal-300 ring-1 ring-inset ring-white/10">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/[0.06] text-spark-300 ring-1 ring-inset ring-white/10">
                 <Icon className="h-5 w-5" strokeWidth={1.75} />
               </span>
               <h3 className="font-display mt-4 text-[16px] font-semibold text-white">{g.title}</h3>

@@ -13,7 +13,7 @@ type Status = "transit" | "arrived" | "loading" | "customs";
 
 const statusStyle: Record<Status, string> = {
   transit: "bg-sky-50 text-sky-700 ring-sky-200",
-  arrived: "bg-teal-50 text-teal-700 ring-teal-200",
+  arrived: "bg-spark-50 text-spark-700 ring-spark-200",
   loading: "bg-spark-50 text-spark-600 ring-spark-200",
   customs: "bg-violet-50 text-violet-700 ring-violet-200",
 };
@@ -122,7 +122,7 @@ export function DashboardShot({ locale, className }: { locale: Locale; className
                 <p dir="ltr" className="mt-1 font-mono text-[15px] font-semibold tracking-tight [unicode-bidi:plaintext] rtl:text-end">
                   {k.value}
                 </p>
-                <p className={cn("mt-1 text-[10px] font-medium", i === 0 ? "text-teal-600" : "text-fog-500")}>{k.delta}</p>
+                <p className={cn("mt-1 text-[10px] font-medium", i === 0 ? "text-spark-600" : "text-fog-500")}>{k.delta}</p>
               </div>
             ))}
           </div>
@@ -135,7 +135,7 @@ export function DashboardShot({ locale, className }: { locale: Locale; className
                 {bars.map(([rev, cost], i) => (
                   <div key={i} className="flex flex-1 flex-col items-center gap-1.5">
                     <div className="flex h-36 w-full items-end justify-center gap-1">
-                      <span className="w-2.5 rounded-t bg-teal-400" style={{ height: `${rev}%` }} />
+                      <span className="w-2.5 rounded-t bg-spark-400" style={{ height: `${rev}%` }} />
                       <span className="w-2.5 rounded-t bg-ink-700/20" style={{ height: `${cost}%` }} />
                     </div>
                     <span className="text-[9px] text-fog-500">{t.months[i]}</span>

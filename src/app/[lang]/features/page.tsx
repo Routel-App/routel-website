@@ -57,7 +57,7 @@ export default async function FeaturesPage() {
               {headline(frontmatter.title)}
             </h1>
             <p className="mt-5 text-pretty text-lg leading-relaxed text-fog-600">{frontmatter.lead}</p>
-            <p className="mt-3 text-pretty text-base font-medium text-teal-700">{frontmatter.tagline}</p>
+            <p className="mt-3 text-pretty text-base font-medium text-spark-700">{frontmatter.tagline}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button href="/demo" size="lg">
                 {t.demo}
@@ -92,7 +92,7 @@ export default async function FeaturesPage() {
           </div>
         </nav>
 
-        <div className="prose prose-slate min-w-0 max-w-3xl prose-headings:font-display prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-ink-900 prose-h2:mt-16 prose-h2:border-t prose-h2:border-fog-200 prose-h2:pt-10 prose-h2:text-3xl [&>h2:first-child]:mt-0 [&>h2:first-child]:border-0 [&>h2:first-child]:pt-0 prose-h3:mt-8 prose-h3:text-lg prose-p:text-fog-700 prose-p:leading-relaxed prose-a:font-medium prose-a:text-teal-700 prose-a:decoration-teal-200 prose-a:underline-offset-4 hover:prose-a:decoration-teal-600 prose-strong:text-ink-900 prose-li:text-fog-700 prose-li:marker:text-teal-500">
+        <div className="prose prose-slate min-w-0 max-w-3xl prose-headings:font-display prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-ink-900 prose-h2:mt-16 prose-h2:border-t prose-h2:border-fog-200 prose-h2:pt-10 prose-h2:text-3xl [&>h2:first-child]:mt-0 [&>h2:first-child]:border-0 [&>h2:first-child]:pt-0 prose-h3:mt-8 prose-h3:text-lg prose-p:text-fog-700 prose-p:leading-relaxed prose-a:font-medium prose-a:text-spark-700 prose-a:decoration-spark-200 prose-a:underline-offset-4 hover:prose-a:decoration-spark-600 prose-strong:text-ink-900 prose-li:text-fog-700 prose-li:marker:text-spark-500">
           {content}
         </div>
       </Container>

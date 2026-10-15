@@ -69,7 +69,7 @@ export default async function DemoPage(props: PageProps<"/[lang]/demo">) {
       <div aria-hidden className="grid-fade absolute inset-0 -z-10" />
       <Container className="grid gap-14 py-16 sm:py-24 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
         <Reveal>
-          <p className="mb-3 text-[13px] font-semibold uppercase tracking-[0.14em] text-teal-600">{t.eyebrow}</p>
+          <p className="mb-3 text-[13px] font-semibold uppercase tracking-[0.14em] text-spark-600">{t.eyebrow}</p>
           <h1 className="font-display text-balance text-4xl font-extrabold leading-[1.05] text-ink-900 sm:text-5xl">
             {t.title}
           </h1>
@@ -77,7 +77,7 @@ export default async function DemoPage(props: PageProps<"/[lang]/demo">) {
           <ul className="mt-8 space-y-3">
             {t.agenda.map((a) => (
               <li key={a} className="flex items-start gap-3 text-[15px] text-fog-700">
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-teal-100 text-teal-700">
+                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-spark-100 text-spark-700">
                   <Check className="h-3 w-3" strokeWidth={3} />
                 </span>
                 {a}

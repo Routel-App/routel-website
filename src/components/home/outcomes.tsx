@@ -128,12 +128,12 @@ function ChainIllustration({ t }: { t: IllustrationCopy }) {
           <span
             className={cn(
               "rounded-lg border px-2.5 py-1.5 font-mono text-[11px] font-medium",
-              i === chips.length - 1 ? "border-teal-300 bg-teal-100 text-teal-900" : "border-teal-200/70 bg-white text-teal-800",
+              i === chips.length - 1 ? "border-spark-300 bg-spark-100 text-spark-900" : "border-spark-200/70 bg-white text-spark-800",
             )}
           >
             {c}
           </span>
-          {i < chips.length - 1 ? <span className="h-px w-4 bg-teal-300" /> : null}
+          {i < chips.length - 1 ? <span className="h-px w-4 bg-spark-300" /> : null}
         </div>
       ))}
     </div>
@@ -144,7 +144,7 @@ function MarginIllustration({ t }: { t: IllustrationCopy }) {
   const bars = [
     { label: t.bars.revenue, w: "100%", cls: "bg-ink-900" },
     { label: t.bars.cost, w: "66%", cls: "bg-spark-300" },
-    { label: t.bars.profit, w: "34%", cls: "bg-teal-500" },
+    { label: t.bars.profit, w: "34%", cls: "bg-spark-500" },
   ];
   return (
     <div className="space-y-2">
@@ -156,7 +156,7 @@ function MarginIllustration({ t }: { t: IllustrationCopy }) {
           </div>
         </div>
       ))}
-      <p className="pt-1 font-mono text-[11px] text-teal-800">{t.margin}</p>
+      <p className="pt-1 font-mono text-[11px] text-spark-800">{t.margin}</p>
     </div>
   );
 }
@@ -176,7 +176,7 @@ function BalancedIllustration({ t }: { t: IllustrationCopy }) {
         <span>{t.credits}</span>
         <span dir="ltr">1,284,310.00</span>
       </div>
-      <div className="mt-2 flex items-center gap-1.5 border-t border-fog-200 pt-2 text-teal-700">
+      <div className="mt-2 flex items-center gap-1.5 border-t border-fog-200 pt-2 text-spark-700">
         <Check className="h-3 w-3" strokeWidth={3} /> {t.balanced}
       </div>
     </div>
@@ -215,7 +215,7 @@ function ConfirmIllustration({ t }: { t: IllustrationCopy }) {
 }
 
 const layout: Array<{ tint: string; Illustration: (props: { t: IllustrationCopy }) => ReactNode; large?: boolean }> = [
-  { tint: "bg-teal-50 border-teal-100", Illustration: ChainIllustration, large: true },
+  { tint: "bg-spark-50 border-spark-100", Illustration: ChainIllustration, large: true },
   { tint: "bg-spark-50 border-spark-100", Illustration: MarginIllustration, large: true },
   { tint: "bg-fog-50 border-fog-200", Illustration: BalancedIllustration },
   { tint: "bg-white border-fog-200", Illustration: RolesIllustration },

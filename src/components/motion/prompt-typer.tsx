@@ -99,14 +99,14 @@ export function PromptTyper() {
           <Sparkles className="h-4 w-4 shrink-0 text-spark-400" />
           <p className="min-h-[1.5em] flex-1 text-[15px] text-white sm:text-base">
             <span data-ask="" dir="auto">{t.items[0].ask}</span>
-            <span data-caret="" className="ms-0.5 inline-block h-[1.1em] w-[2px] translate-y-[3px] bg-teal-300" aria-hidden />
+            <span data-caret="" className="ms-0.5 inline-block h-[1.1em] w-[2px] translate-y-[3px] bg-spark-300" aria-hidden />
           </p>
-          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-teal-400 text-ink-950">
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-spark-400 text-ink-950">
             <ArrowUp className="h-4 w-4" />
           </span>
         </div>
-        <div data-result="" className="flex items-center gap-2 px-4 py-2.5 text-[13px] text-teal-200">
-          <span className="h-1.5 w-1.5 rounded-full bg-teal-300" />
+        <div data-result="" className="flex items-center gap-2 px-4 py-2.5 text-[13px] text-spark-200">
+          <span className="h-1.5 w-1.5 rounded-full bg-spark-300" />
           <span data-result-text="">{t.items[0].result}</span>
         </div>
       </div>
@@ -117,7 +117,7 @@ export function PromptTyper() {
             data-example=""
             data-on={i === 0 ? "" : undefined}
             dir="auto"
-            className="rounded-full bg-white/[0.04] px-3 py-1 text-[12px] text-white/55 ring-1 ring-white/10 transition-colors duration-300 data-[on]:bg-teal-400/15 data-[on]:text-teal-200 data-[on]:ring-teal-400/30"
+            className="rounded-full bg-white/[0.04] px-3 py-1 text-[12px] text-white/55 ring-1 ring-white/10 transition-colors duration-300 data-[on]:bg-spark-400/15 data-[on]:text-spark-200 data-[on]:ring-spark-400/30"
           >
             {p.ask}
           </li>

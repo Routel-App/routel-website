@@ -86,7 +86,7 @@ export async function Testimonials() {
             <Quote className="h-5 w-5 text-spark-400" />
             <p className="mt-4 flex-1 text-[15px] leading-relaxed text-fog-700">{q.quote}</p>
             <div className="mt-6 flex items-center gap-3">
-              <span className="h-9 w-9 rounded-full bg-[linear-gradient(135deg,var(--color-teal-300),var(--color-ink-700))]" />
+              <span className="h-9 w-9 rounded-full bg-[linear-gradient(135deg,var(--color-spark-300),var(--color-ink-700))]" />
               <div>
                 <p className="text-sm font-semibold text-ink-900">{q.name}</p>
                 <p className="text-xs text-fog-500">{q.role}</p>

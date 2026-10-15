@@ -42,7 +42,7 @@ export async function Cta() {
             <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-2">
               {t.points.map((p) => (
                 <li key={p} className="flex items-center gap-2 text-sm text-fog-600">
-                  <Check className="h-4 w-4 text-teal-600" strokeWidth={2.5} />
+                  <Check className="h-4 w-4 text-spark-600" strokeWidth={2.5} />
                   {p}
                 </li>
               ))}

@@ -18,8 +18,8 @@ const pnlValues: Array<[string, "row" | "sub" | "total"]> = [
 ];
 
 const agingValues = [
-  { pct: 46, amt: "84,120", cls: "bg-teal-500" },
-  { pct: 29, amt: "53,900", cls: "bg-teal-400" },
+  { pct: 46, amt: "84,120", cls: "bg-spark-500" },
+  { pct: 29, amt: "53,900", cls: "bg-spark-400" },
   { pct: 17, amt: "31,240", cls: "bg-spark-400" },
   { pct: 8, amt: "14,610", cls: "bg-spark-500" },
 ];
@@ -151,7 +151,7 @@ function Card({ title, icon: Icon, className, children, dark = false }: { title:
       )}
     >
       <div className="flex items-center gap-2">
-        <Icon className={cn("h-4 w-4", dark ? "text-teal-300" : "text-teal-600")} strokeWidth={1.9} />
+        <Icon className={cn("h-4 w-4", dark ? "text-spark-300" : "text-spark-600")} strokeWidth={1.9} />
         <p className={cn("text-[13px] font-semibold", dark ? "text-white" : "text-ink-900")}>{title}</p>
       </div>
       <div className="mt-4 flex-1">{children}</div>
@@ -170,7 +170,7 @@ export async function Finance() {
         <SectionHeading align="left" eyebrow={t.eyebrow} title={t.title} description={t.description} />
         <Reveal delay={0.1} className="flex flex-wrap gap-2 lg:justify-end">
           {t.reports.map((r) => (
-            <span key={r} className="rounded-full border border-teal-200/70 bg-white px-3 py-1.5 text-[12.5px] font-medium text-teal-900">
+            <span key={r} className="rounded-full border border-spark-200/70 bg-white px-3 py-1.5 text-[12.5px] font-medium text-spark-900">
               {r}
             </span>
           ))}
@@ -192,7 +192,7 @@ export async function Finance() {
                 )}
               >
                 <dt className="font-sans">{k}</dt>
-                <dd dir="ltr" className={kind === "total" ? "text-teal-700" : undefined}>
+                <dd dir="ltr" className={kind === "total" ? "text-spark-700" : undefined}>
                   {kind !== "row" ? `${t.currency} ` : ""}
                   {v}
                 </dd>
@@ -240,7 +240,7 @@ export async function Finance() {
               {t.statementBalance} <span dir="ltr">{t.currency} 52,180.00</span>
             </p>
           </div>
-          <span className="mt-3 inline-flex items-center gap-1.5 text-[12px] font-medium text-teal-700">
+          <span className="mt-3 inline-flex items-center gap-1.5 text-[12px] font-medium text-spark-700">
             <Download className="h-3.5 w-3.5" /> {t.download}
           </span>
         </Card>
@@ -256,7 +256,7 @@ export async function Finance() {
             </div>
             <div>
               <p className="text-white/50">{t.receivable}</p>
-              <p dir="ltr" className="font-display mt-1 text-lg font-bold text-teal-300 rtl:text-end">
+              <p dir="ltr" className="font-display mt-1 text-lg font-bold text-spark-300 rtl:text-end">
                 +138,020
               </p>
             </div>

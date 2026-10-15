@@ -15,7 +15,7 @@ const variants: Record<Variant, string> = {
     "bg-white text-ink-900 ring-1 ring-fog-200 hover:ring-fog-300 hover:bg-fog-50 shadow-card",
   ghost: "text-ink-900 hover:bg-fog-100",
   inverse:
-    "bg-teal-400 text-ink-950 hover:bg-teal-300 shadow-[0_0_0_1px_rgb(255_255_255/0.06),0_12px_32px_-12px_rgb(71_188_172/0.6)]",
+    "bg-spark-400 text-ink-950 hover:bg-spark-300 shadow-[0_0_0_1px_rgb(255_255_255/0.06),0_12px_32px_-12px_rgb(247_148_29/0.6)]",
   "inverse-ghost": "text-white/90 ring-1 ring-white/15 hover:bg-white/10 hover:ring-white/25",
 };
 

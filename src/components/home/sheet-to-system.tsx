@@ -100,7 +100,7 @@ export function SheetToSystem() {
             <div className="mb-3 hidden grid-cols-[1fr_56px_1fr] text-[12px] sm:grid font-semibold uppercase tracking-[0.1em] sm:text-[12.5px]">
               <span className="text-fog-500">{t.left}</span>
               <span />
-              <span className="text-teal-700">{t.right}</span>
+              <span className="text-spark-700">{t.right}</span>
             </div>
             <ol className="space-y-3">
               {t.rows.map((r, i) => (
@@ -112,19 +112,19 @@ export function SheetToSystem() {
                     </p>
                     <p dir="auto" className="mt-1.5 truncate font-mono text-[11px] text-fog-500">{r.painNote}</p>
                   </div>
-                  <span className="mx-auto block h-6 w-0.5 bg-teal-400 sm:hidden" aria-hidden />
+                  <span className="mx-auto block h-6 w-0.5 bg-spark-400 sm:hidden" aria-hidden />
                   <svg viewBox="0 0 56 60" preserveAspectRatio="none" className="hidden h-full w-full rtl:-scale-x-100 sm:block" aria-hidden>
-                    <path data-link="" d="M0 30 C 20 30, 36 30, 56 30" fill="none" stroke="var(--color-teal-400)" strokeWidth="2.5" strokeDasharray="1" pathLength={1} style={{ strokeDashoffset: 0 }} />
-                    <circle cx="28" cy="30" r="5" fill="var(--color-teal-400)" />
+                    <path data-link="" d="M0 30 C 20 30, 36 30, 56 30" fill="none" stroke="var(--color-spark-400)" strokeWidth="2.5" strokeDasharray="1" pathLength={1} style={{ strokeDashoffset: 0 }} />
+                    <circle cx="28" cy="30" r="5" fill="var(--color-spark-400)" />
                   </svg>
-                  <div data-answer="" className={cn("rounded-2xl bg-ink-900 p-4 text-white ring-1 ring-ink-800", i === 3 && "bg-teal-700 ring-teal-600")}>
+                  <div data-answer="" className={cn("rounded-2xl bg-ink-900 p-4 text-white ring-1 ring-ink-800", i === 3 && "bg-spark-700 ring-spark-600")}>
                     <p className="flex items-start gap-2 text-[14px] font-semibold">
-                      <span data-tick="" className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-teal-400 text-ink-950">
+                      <span data-tick="" className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-spark-400 text-ink-950">
                         <Check className="h-3 w-3" strokeWidth={3} />
                       </span>
                       {r.answer}
                     </p>
-                    <p className="mt-1.5 text-[11.5px] font-medium text-teal-200">{r.module}</p>
+                    <p className="mt-1.5 text-[11.5px] font-medium text-spark-200">{r.module}</p>
                   </div>
                 </li>
               ))}

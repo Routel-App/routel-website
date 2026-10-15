@@ -86,7 +86,7 @@ export async function Hero() {
         <Reveal amount={0.1} className="relative mx-auto max-w-6xl">
           <div
             aria-hidden
-            className="pointer-events-none absolute -inset-x-16 -top-10 bottom-10 -z-10 rounded-[48px] bg-[radial-gradient(60%_50%_at_50%_0%,rgb(71_188_172/0.28),transparent_70%)] blur-3xl"
+            className="pointer-events-none absolute -inset-x-16 -top-10 bottom-10 -z-10 rounded-[48px] bg-[radial-gradient(60%_50%_at_50%_0%,rgb(247_148_29/0.28),transparent_70%)] blur-3xl"
           />
           <ShotScaler>
             <DashboardShot locale={locale} />

@@ -11,7 +11,7 @@ import { submitDemoRequest, type DemoFormState } from "./actions";
 const initial: DemoFormState = { status: "idle" };
 
 const inputCls =
-  "h-11 w-full rounded-xl border border-fog-200 bg-white px-3.5 text-[15px] text-ink-900 shadow-[inset_0_1px_2px_rgb(11_20_38/0.03)] placeholder:text-fog-400 transition-[border-color,box-shadow] focus:border-teal-500 focus:outline-none focus:ring-4 focus:ring-teal-100";
+  "h-11 w-full rounded-xl border border-fog-200 bg-white px-3.5 text-[15px] text-ink-900 shadow-[inset_0_1px_2px_rgb(11_20_38/0.03)] placeholder:text-fog-400 transition-[border-color,box-shadow] focus:border-spark-500 focus:outline-none focus:ring-4 focus:ring-spark-100";
 
 const copy = {
   en: {
@@ -89,8 +89,8 @@ export function DemoForm({ plan }: { plan?: string }) {
 
   if (state.status === "success") {
     return (
-      <div className="rounded-2xl border border-teal-200 bg-teal-50 p-8 text-center">
-        <CircleCheck className="mx-auto h-10 w-10 text-teal-600" strokeWidth={1.75} />
+      <div className="rounded-2xl border border-spark-200 bg-spark-50 p-8 text-center">
+        <CircleCheck className="mx-auto h-10 w-10 text-spark-600" strokeWidth={1.75} />
         <h2 className="font-display mt-4 text-xl font-bold text-ink-900">{t.received}</h2>
         <p className="mt-2 text-sm text-fog-600">{state.message}</p>
       </div>

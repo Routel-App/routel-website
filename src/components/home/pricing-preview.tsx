@@ -33,7 +33,7 @@ export async function PricingPreview() {
         <PricingTiers />
       </div>
       <Reveal className="mt-8 text-center text-sm text-fog-500">
-        <Link href="/pricing" className="inline-flex items-center gap-1.5 font-medium text-ink-900 hover:text-teal-700">
+        <Link href="/pricing" className="inline-flex items-center gap-1.5 font-medium text-ink-900 hover:text-spark-700">
           {t.compare}
           <ArrowRight className="h-4 w-4" />
         </Link>

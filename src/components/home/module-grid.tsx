@@ -57,7 +57,7 @@ export function ModuleGrid({ modules, areas, allLabel }: { modules: GridModule[]
                     "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl ring-1 ring-inset transition-colors duration-300 [&_svg]:h-5 [&_svg]:w-5",
                     ai
                       ? "bg-spark-50 text-spark-600 ring-spark-200/70"
-                      : "bg-teal-50 text-teal-700 ring-teal-100 group-hover:bg-ink-900 group-hover:text-teal-300 group-hover:ring-ink-900",
+                      : "bg-spark-50 text-spark-700 ring-spark-100 group-hover:bg-ink-900 group-hover:text-spark-300 group-hover:ring-ink-900",
                   )}
                 >
                   {m.icon}

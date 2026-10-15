@@ -143,7 +143,7 @@ export async function PlatformPageTemplate({ module: mod, content }: { module: M
           {content.features.map((f) => (
             <RevealItem key={f.title} className="rounded-2xl border border-fog-200 bg-white p-6 shadow-card">
               <div className="flex items-start gap-3">
-                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-teal-100 text-teal-700">
+                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-spark-100 text-spark-700">
                   <Check className="h-3.5 w-3.5" strokeWidth={3} />
                 </span>
                 <div>
@@ -162,7 +162,7 @@ export async function PlatformPageTemplate({ module: mod, content }: { module: M
         <RevealGroup className="mx-auto mt-10 grid max-w-4xl gap-6 sm:grid-cols-2 lg:grid-cols-4" stagger={0.07}>
           {content.workflow.map((step, i) => (
             <RevealItem key={step.title} className="relative rounded-2xl border border-fog-200 bg-white p-5 shadow-card">
-              <span className="font-mono text-xs font-semibold text-teal-700">{String(i + 1).padStart(2, "0")}</span>
+              <span className="font-mono text-xs font-semibold text-spark-700">{String(i + 1).padStart(2, "0")}</span>
               <h3 className="font-display mt-2 text-[15px] font-semibold text-ink-900">{step.title}</h3>
               <p className="mt-1.5 text-sm leading-relaxed text-fog-500">{step.description}</p>
             </RevealItem>
@@ -176,7 +176,7 @@ export async function PlatformPageTemplate({ module: mod, content }: { module: M
         <RevealGroup className="mx-auto mt-10 grid max-w-4xl gap-3 sm:grid-cols-2" stagger={0.06}>
           {content.personas.map((p) => (
             <RevealItem key={p.role} className="rounded-xl border border-fog-200 bg-white p-5 shadow-card">
-              <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-teal-700">{p.role}</p>
+              <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-spark-700">{p.role}</p>
               <p className="mt-2 text-sm leading-relaxed text-fog-600">{p.detail}</p>
             </RevealItem>
           ))}
@@ -203,7 +203,7 @@ export async function PlatformPageTemplate({ module: mod, content }: { module: M
                     className="group flex h-full flex-col rounded-2xl border border-fog-200 bg-white p-5 shadow-card transition-colors hover:border-fog-300"
                   >
                     <div className="flex items-start justify-between">
-                      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-teal-700 ring-1 ring-inset ring-teal-100">
+                      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-spark-50 text-spark-700 ring-1 ring-inset ring-spark-100">
                         <Icon className="h-5 w-5" strokeWidth={1.75} />
                       </span>
                       <ArrowUpRight className="h-4 w-4 text-fog-300 transition-colors group-hover:text-ink-900" />

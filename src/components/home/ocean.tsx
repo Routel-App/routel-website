@@ -79,14 +79,14 @@ export function Ocean() {
           <div className="absolute end-3 top-3 max-w-[calc(100%-1.5rem)] rounded-2xl bg-white/95 p-3 text-ink-900 shadow-float backdrop-blur sm:end-5 sm:top-5 sm:p-4">
             <div className="flex items-center gap-3">
               <p dir="ltr" className="font-mono text-[12px] font-semibold sm:text-[13px]">NXS26000412</p>
-              <span key={stage} className="journey-pill rounded-full bg-teal-50 px-2 py-0.5 text-[11px] font-semibold text-teal-700 ring-1 ring-teal-200">
+              <span key={stage} className="journey-pill rounded-full bg-spark-50 px-2 py-0.5 text-[11px] font-semibold text-spark-700 ring-1 ring-spark-200">
                 {t.stages[stage]}
               </span>
             </div>
             <p dir="ltr" className="mt-1 font-mono text-[10.5px] text-fog-500 rtl:text-end sm:text-[11px]">{t.vessel} · 3 × 40HC</p>
             <div className="mt-2 hidden gap-1 sm:flex" aria-hidden>
               {order.map((s) => (
-                <span key={s} className={cn("h-1 w-10 rounded-full transition-colors duration-500", order.indexOf(s) <= order.indexOf(stage) ? "bg-teal-400" : "bg-fog-200")} />
+                <span key={s} className={cn("h-1 w-10 rounded-full transition-colors duration-500", order.indexOf(s) <= order.indexOf(stage) ? "bg-spark-400" : "bg-fog-200")} />
               ))}
             </div>
           </div>
@@ -108,7 +108,7 @@ export function Ocean() {
             const Icon = factIcons[i];
             return (
               <RevealItem key={f.label} className="rounded-2xl bg-white/[0.04] p-5 ring-1 ring-inset ring-white/10">
-                <Icon className="h-5 w-5 text-teal-300" />
+                <Icon className="h-5 w-5 text-spark-300" />
                 <p dir="ltr" className="font-display mt-3 text-3xl font-bold text-white rtl:text-end">{f.value}</p>
                 <p className="mt-1.5 text-[14px] leading-relaxed text-white/60">{f.label}</p>
               </RevealItem>
