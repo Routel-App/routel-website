@@ -7,13 +7,13 @@ import { useLocale } from "@/components/i18n/locale-provider";
 import type { Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { gsap, useGSAP, MOTION_OK, REDUCED } from "@/components/motion/gsap";
-import { BOX, ContainerBox, Crane, Doc, ShipSide, ShipTop, Truck, boxColor, ink, paint, wavePath } from "@/components/motion/sprites";
+import { BOX, ContainerBox, Crane, Doc, ShipSide, Truck, boxColor, ink, paint, wavePath } from "@/components/motion/sprites";
 
 /**
  * "One container, one booking": the home page's scroll story. One orange
  * container (booking NXS26000412) arrives on a truck, is lifted by the
- * crane onto the ship, the camera tilts to a top-down view as the ship
- * sails the route, it arrives, and the view pulls back to the books. At
+ * crane onto the ship, the camera follows the ship across the sea to the
+ * destination port, and the view pulls back to the books. At
  * each stage the system's work attaches to the container as chips, and a
  * chapter names the module.
  *
@@ -35,7 +35,9 @@ const HERO_SLOT = { col: 4, row: 3 };
 const SLOT_X = SHIP_X + 40 + HERO_SLOT.col * 60;
 const SLOT_Y = QUAY_Y - (HERO_SLOT.row + 1) * BOX.h;
 const TRUCK_X = 150;
-const ROUTE = "M300 660 C 560 600, 700 420, 900 380 S 1180 300, 1320 210";
+/** How far the ship sails, and where the destination quay begins. */
+const SAIL = 1700;
+const DEST_X = 3200;
 
 type Stage = "quote" | "carrier" | "loaded" | "sea" | "arrived" | "closed";
 
@@ -116,7 +118,7 @@ const copy: Record<Locale, Copy> = {
 };
 
 /** Chips: when they show (progress), what they follow (world point or the hero), and their offset. */
-type ChipDef = { id: string; from: number; to: number; anchor: "hero" | "shipTop" | [number, number]; dx: number; dy: number; tone?: "ai" | "money" | "done" };
+type ChipDef = { id: string; from: number; to: number; anchor: "hero" | "ship" | [number, number]; dx: number; dy: number; tone?: "ai" | "money" | "done" };
 const chipDefs: ChipDef[] = [
   { id: "quote", from: 0.07, to: 0.12, anchor: "hero", dx: 40, dy: -70 },
   { id: "booking", from: 0.11, to: 0.5, anchor: "hero", dx: 40, dy: -70 },
@@ -124,11 +126,11 @@ const chipDefs: ChipDef[] = [
   { id: "confirm", from: 0.3, to: 0.42, anchor: "hero", dx: 40, dy: -166, tone: "done" },
   { id: "hbl", from: 0.42, to: 0.55, anchor: "hero", dx: 40, dy: -118, tone: "done" },
   { id: "mbl", from: 0.46, to: 0.55, anchor: "hero", dx: 40, dy: -166 },
-  { id: "track", from: 0.63, to: 0.78, anchor: "shipTop", dx: 30, dy: -60 },
-  { id: "invoice", from: 0.78, to: 0.9, anchor: "shipTop", dx: 30, dy: -60, tone: "money" },
-  { id: "paid", from: 0.83, to: 0.93, anchor: "shipTop", dx: 30, dy: -108, tone: "done" },
-  { id: "profit", from: 0.9, to: 1.01, anchor: "shipTop", dx: 30, dy: -60, tone: "money" },
-  { id: "closed", from: 0.94, to: 1.01, anchor: "shipTop", dx: 30, dy: -108, tone: "done" },
+  { id: "track", from: 0.63, to: 0.78, anchor: "ship", dx: 30, dy: -60 },
+  { id: "invoice", from: 0.78, to: 0.9, anchor: "ship", dx: 30, dy: -60, tone: "money" },
+  { id: "paid", from: 0.83, to: 0.93, anchor: "ship", dx: 30, dy: -108, tone: "done" },
+  { id: "profit", from: 0.9, to: 1.01, anchor: "ship", dx: 30, dy: -60, tone: "money" },
+  { id: "closed", from: 0.94, to: 1.01, anchor: "ship", dx: 30, dy: -108, tone: "done" },
 ];
 
 const chapterAt: Array<[number, number]> = [
@@ -166,17 +168,12 @@ export function Odyssey() {
       const q = <T extends Element>(sel: string) => el.querySelector(sel) as T;
       const svg = q<SVGSVGElement>("svg[data-world]");
       const cam = q<SVGGElement>("[data-cam]");
-      const side = q<SVGGElement>("[data-side]");
-      const top = q<SVGGElement>("[data-top]");
       const truck = q<SVGGElement>("[data-truck]");
       const hero = q<SVGGElement>("[data-hero]");
       const trolley = q<SVGRectElement>("[data-trolley]");
       const cable = q<SVGLineElement>("[data-cable]");
       const spreader = q<SVGRectElement>("[data-spreader]");
       const shipSide = q<SVGGElement>("[data-ship-side]");
-      const shipTop = q<SVGGElement>("[data-ship-top]");
-      const route = q<SVGPathElement>("[data-route]");
-      const wake = q<SVGPathElement>("[data-wake]");
       const dusk = q<SVGRectElement>("[data-dusk]");
       const bars = Array.from(el.querySelectorAll<SVGRectElement>("[data-bar]"));
       const hbl = q<SVGGElement>("[data-hbl]");
@@ -188,9 +185,8 @@ export function Odyssey() {
       const progressEl = q<HTMLElement>("[data-progress]");
       const stage = q<HTMLElement>("[data-stage]");
       const hint = q<HTMLElement>("[data-hint]");
-      if (!svg || !cam || !route) return;
+      if (!svg || !cam) return;
 
-      const routeLen = route.getTotalLength();
       const pt = svg.createSVGPoint();
 
       const mm = gsap.matchMedia();
@@ -212,8 +208,7 @@ export function Odyssey() {
           trolleyX: 1008,
           drop: 24,
           shipDx: 0,
-          tilt: 0,
-          along: 0,
+          follow: 0,
           dusk: 0,
           books: 0,
           hblOut: 0,
@@ -221,7 +216,9 @@ export function Odyssey() {
         let lastStatus = -1;
 
         const draw = () => {
-          cam.setAttribute("transform", `translate(${W / 2} ${H / 2}) scale(${s.z}) translate(${-s.fx} ${-s.fy})`);
+          // Once the ship sails, the camera's focus travels with it.
+          const fx = s.fx + s.follow * s.shipDx;
+          cam.setAttribute("transform", `translate(${W / 2} ${H / 2}) scale(${s.z}) translate(${-fx} ${-s.fy})`);
           truck.setAttribute("transform", `translate(${s.truckX} ${QUAY_Y})`);
           hero.setAttribute("transform", `translate(${s.heroX} ${s.heroY})`);
           const top0 = BOOM_Y + TROLLEY_H;
@@ -232,20 +229,6 @@ export function Odyssey() {
           spreader.setAttribute("x", String(s.trolleyX - 32));
           spreader.setAttribute("y", String(top0 + s.drop));
           shipSide.setAttribute("transform", `translate(${SHIP_X + s.shipDx} ${QUAY_Y})`);
-          // Camera tilt: the side view folds down about the horizon, the top view unfolds.
-          side.setAttribute("transform", `translate(0 ${QUAY_Y}) scale(1 ${Math.max(0.001, 1 - s.tilt)}) translate(0 ${-QUAY_Y})`);
-          side.style.opacity = String(1 - Math.min(1, s.tilt * 1.4));
-          top.setAttribute("transform", `translate(0 ${H / 2}) scale(1 ${Math.max(0.001, s.tilt)}) translate(0 ${-H / 2})`);
-          top.style.opacity = String(Math.min(1, s.tilt * 1.6));
-          top.style.visibility = s.tilt > 0.01 ? "visible" : "hidden";
-          side.style.visibility = s.tilt < 0.99 ? "visible" : "hidden";
-          // Ship on the route
-          const p1 = route.getPointAtLength(s.along * routeLen);
-          const p2 = route.getPointAtLength(Math.min(routeLen, s.along * routeLen + 3));
-          const ang = (Math.atan2(p2.y - p1.y, p2.x - p1.x) * 180) / Math.PI;
-          shipTop.setAttribute("transform", `translate(${p1.x} ${p1.y}) rotate(${ang}) translate(-130 0)`);
-          route.style.strokeDashoffset = String(1 - s.along);
-          wake.style.strokeDashoffset = String(1 - s.along);
           dusk.style.opacity = String(s.dusk);
           bars.forEach((b, i) => b.setAttribute("transform", `translate(0 ${(1 - s.books) * (60 + i * 14)}) scale(1 ${Math.max(0.001, s.books)})`));
           hbl.setAttribute("transform", `translate(${s.hblOut * 70} ${-s.hblOut * 40})`);
@@ -263,9 +246,9 @@ export function Odyssey() {
               if (def.anchor === "hero") {
                 wx = s.heroX + BOX.w / 2;
                 wy = s.heroY;
-              } else if (def.anchor === "shipTop") {
-                wx = p1.x;
-                wy = p1.y - 20;
+              } else if (def.anchor === "ship") {
+                wx = SHIP_X + s.shipDx + 380;
+                wy = QUAY_Y - 3 * BOX.h - 10;
               } else {
                 [wx, wy] = def.anchor;
               }
@@ -274,7 +257,11 @@ export function Odyssey() {
               const sp = pt.matrixTransform(m);
               const on = s.p >= def.from && s.p < def.to;
               c.style.opacity = on ? "1" : "0";
-              c.style.transform = `translate(${sp.x - box.left + (rtl ? -def.dx : def.dx) * s.z}px, ${sp.y - box.top + def.dy * s.z}px) ${rtl ? "translateX(-100%)" : ""} scale(${on ? 1 : 0.9})`;
+              // Keep the chip inside the stage: it sits beside its anchor, on the reading side.
+              const cw = c.offsetWidth;
+              const raw = sp.x - box.left + (rtl ? -def.dx * s.z - cw : def.dx * s.z);
+              const x = gsap.utils.clamp(8, Math.max(8, box.width - cw - 8), raw);
+              c.style.transform = `translate(${x}px, ${sp.y - box.top + def.dy * s.z}px) scale(${on ? 1 : 0.9})`;
             }
           }
           const st = statusAt(s.p);
@@ -315,16 +302,14 @@ export function Odyssey() {
         // 3. Pull back to the loaded ship; the B/L slides out of the container.
         tl.to(s, { z: 0.95, fx: 1000, fy: 520, duration: 0.1, ease: "power2.inOut" }, 0.4);
         tl.to(s, { hblOut: 1, duration: 0.05, ease: "power2.out" }, 0.43);
-        // 4. The ship leaves; the camera tilts to the top-down view.
-        tl.to(s, { shipDx: 700, heroX: `+=700`, duration: 0.1, ease: "power1.in" }, 0.5);
+        // 4. The ship leaves; the camera starts to travel with it.
+        tl.to(s, { shipDx: SAIL, heroX: `+=${SAIL}`, duration: 0.36, ease: "power1.inOut" }, 0.5);
         tl.to(s, { hblOut: 0, duration: 0.04 }, 0.5);
-        tl.to(s, { z: 1, fx: 800, fy: 450, duration: 0.1, ease: "power2.inOut" }, 0.5);
-        tl.to(s, { tilt: 1, duration: 0.08, ease: "power2.inOut" }, 0.54);
-        // 5. At sea: along the route, slowly zooming out.
-        tl.to(s, { along: 1, duration: 0.24, ease: "power1.inOut" }, 0.6);
-        tl.to(s, { z: 0.9, fx: 820, fy: 440, duration: 0.24 }, 0.6);
-        // 6. Arrived, then out to the books.
-        tl.to(s, { z: 0.62, fx: 800, fy: 470, dusk: 0.75, duration: 0.14, ease: "power2.inOut" }, 0.86);
+        tl.to(s, { z: 0.85, fx: SHIP_X + 380, fy: 500, follow: 1, duration: 0.1, ease: "power2.inOut" }, 0.5);
+        // 5. At sea: open water, slowly zooming out.
+        tl.to(s, { z: 0.78, fy: 480, duration: 0.26 }, 0.6);
+        // 6. Arrived at the destination quay, then dusk and out to the books.
+        tl.to(s, { z: 0.62, fy: 470, dusk: 0.75, duration: 0.14, ease: "power2.inOut" }, 0.86);
         tl.to(s, { books: 1, duration: 0.1, ease: "power2.out" }, 0.9);
 
         draw();
@@ -358,14 +343,6 @@ export function Odyssey() {
               <stop offset="0" stopColor={paint.sea} />
               <stop offset="1" stopColor={ink.bg} />
             </linearGradient>
-            <radialGradient id="ody-ocean" cx="0.5" cy="0.45" r="0.75">
-              <stop offset="0" stopColor="#176a62" />
-              <stop offset="1" stopColor={ink.bg} />
-            </radialGradient>
-            <linearGradient id="ody-route" x1="0" x2="1" y1="0" y2="0">
-              <stop offset="0" stopColor={paint.teal} />
-              <stop offset="1" stopColor={paint.hero} />
-            </linearGradient>
           </defs>
           <rect width={W} height={H} fill="url(#ody-sky)" />
           <g data-cam="" transform={`translate(${W / 2} ${H / 2}) scale(0.95) translate(-1000 -520)`}>
@@ -373,9 +350,9 @@ export function Odyssey() {
             <g data-side="">
               <rect x={-600} y={QUAY_Y} width={1240} height={400} fill={ink.deep} />
               <rect x={-600} y={QUAY_Y} width={1240} height={6} fill={ink.line} />
-              {/* distant terminal */}
+              {/* the destination port's far cranes */}
               <g opacity="0.14" stroke={paint.fog} strokeWidth="2" fill="none">
-                {[1700, 1790, 1880].map((x) => (
+                {[DEST_X + 420, DEST_X + 510, DEST_X + 600].map((x) => (
                   <path key={x} d={`M${x} ${QUAY_Y + 40} V${QUAY_Y - 140} M${x + 24} ${QUAY_Y + 40} V${QUAY_Y - 140} M${x - 30} ${QUAY_Y - 140} H${x + 70}`} />
                 ))}
               </g>
@@ -402,51 +379,36 @@ export function Odyssey() {
                   <Doc x={BOX.w + 4} y={-30} w={36} h={44} stamp />
                 </g>
               </g>
-              {/* sea */}
-              <rect x={640} y={QUAY_Y + 46} width={1600} height={400} fill="url(#ody-sea)" opacity="0.95" />
+              {/* sea, all the way to the destination */}
+              <rect x={640} y={QUAY_Y + 46} width={DEST_X - 640 + 40} height={400} fill="url(#ody-sea)" opacity="0.95" />
               <g fill="none" stroke="rgb(124 214 199 / 0.3)" strokeWidth="2" strokeLinecap="round">
                 {[QUAY_Y + 60, QUAY_Y + 84, QUAY_Y + 110].map((y, i) => (
-                  <path key={y} data-wave="" opacity={1 - i * 0.25} d={wavePath(520, y, 30, 60, 6 - i)} />
+                  <path key={y} data-wave="" opacity={1 - i * 0.25} d={wavePath(520, y, 48, 60, 6 - i)} />
                 ))}
               </g>
+              {/* the destination quay */}
+              <rect x={DEST_X} y={QUAY_Y} width={1400} height={400} fill={ink.deep} />
+              <rect x={DEST_X} y={QUAY_Y} width={1400} height={6} fill={ink.line} />
+              {[0, 1, 2, 3].map((i) => (
+                <ContainerBox key={i} x={DEST_X + 180 + i * 60} y={QUAY_Y - BOX.h} color={boxColor(i + 1)} opacity={0.85} />
+              ))}
+              {[0, 1].map((i) => (
+                <ContainerBox key={`r${i}`} x={DEST_X + 240 + i * 60} y={QUAY_Y - 2 * BOX.h} color={boxColor(i + 4)} opacity={0.85} />
+              ))}
+              <Crane x={DEST_X + 120} y={QUAY_Y} reach={520} back={140} />
             </g>
 
-            {/* ── Top view: the ocean, the route, the ship from above ── */}
-            <g data-top="" style={{ opacity: 0, visibility: "hidden" }}>
-              <rect x={-400} y={-400} width={2400} height={1700} fill="url(#ody-ocean)" />
-              <g fill="none" stroke="rgb(255 255 255 / 0.05)" strokeWidth="1">
-                {Array.from({ length: 9 }, (_, i) => (
-                  <ellipse key={i} cx={800} cy={450} rx={120 + i * 150} ry={70 + i * 90} />
-                ))}
-              </g>
-              {/* ports */}
-              <g>
-                <rect x={160} y={610} width={150} height={100} rx={6} fill={ink.deep} />
-                <rect x={160} y={610} width={150} height={4} fill={ink.line} />
-                {[0, 1, 2].map((i) => (
-                  <rect key={i} x={176 + i * 42} y={640} width={34} height={14} rx={2} fill={boxColor(i + 1)} opacity="0.8" />
-                ))}
-                <rect x={1300} y={130} width={150} height={100} rx={6} fill={ink.deep} />
-                <rect x={1300} y={226} width={150} height={4} fill={ink.line} />
-                {[0, 1, 2].map((i) => (
-                  <rect key={i} x={1316 + i * 42} y={170} width={34} height={14} rx={2} fill={boxColor(i + 3)} opacity="0.8" />
-                ))}
-              </g>
-              <path d={ROUTE} fill="none" stroke="rgb(255 255 255 / 0.14)" strokeWidth="2" strokeDasharray="2 8" strokeLinecap="round" />
-              <path data-wake="" d={ROUTE} fill="none" stroke="rgb(124 214 199 / 0.25)" strokeWidth="14" strokeLinecap="round" pathLength={1} style={{ strokeDasharray: 1, strokeDashoffset: 1 }} />
-              <path data-route="" d={ROUTE} fill="none" stroke="url(#ody-route)" strokeWidth="3" strokeLinecap="round" pathLength={1} style={{ strokeDasharray: 1, strokeDashoffset: 1 }} />
-              <g data-ship-top="" transform="translate(300 660) translate(-130 0)">
-                <ShipTop x={0} y={0} heroAt={[3, 1]} />
-              </g>
-              <rect data-dusk="" x={-400} y={-400} width={2400} height={1700} fill={ink.bg} style={{ opacity: 0 }} />
-              {/* the books: bars rising at the end */}
-              <g transform="translate(1120 760)">
+            {/* ── The finale: dusk, then the books ── */}
+            <g data-finale="">
+              <rect data-dusk="" x={-800} y={-800} width={6000} height={2600} fill={ink.bg} style={{ opacity: 0 }} />
+              <g transform={`translate(${SHIP_X + 380 + SAIL - 140} 400)`}>
                 {[44, 52, 49, 61, 70, 82].map((h, i) => (
                   <rect key={i} data-bar="" x={i * 46} y={-h * 2.2} width={32} height={h * 2.2} rx={4} fill={i === 5 ? paint.hero : paint.teal} transform="translate(0 60) scale(1 0.001)" opacity="0.9" />
                 ))}
                 <path d="M-10 4 H290" stroke={paint.fog} strokeWidth="2" opacity="0.4" />
               </g>
             </g>
+
           </g>
         </svg>
 
@@ -456,7 +418,7 @@ export function Odyssey() {
             key={c.id}
             data-chip={c.id}
             className={cn(
-              "odyssey-chip pointer-events-none absolute start-0 top-0 inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5 text-[12px] font-semibold shadow-float ring-1 transition-[opacity,transform] duration-300",
+              "odyssey-chip pointer-events-none absolute left-0 top-0 inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-3 py-1.5 text-[12px] font-semibold shadow-float ring-1 transition-[opacity,transform] duration-300",
               c.tone === "ai" && "bg-spark-400 text-ink-950 ring-spark-300",
               c.tone === "money" && "bg-white text-ink-900 ring-fog-200",
               c.tone === "done" && "bg-teal-400 text-ink-950 ring-teal-300",
@@ -491,7 +453,7 @@ export function Odyssey() {
       </div>
 
       {/* Heading and chapters (overlay in scroll mode) */}
-      <div className="odyssey-panel absolute inset-x-0 bottom-0 z-10 p-5 sm:p-8 lg:inset-y-0 lg:end-auto lg:flex lg:w-[460px] lg:flex-col lg:justify-center lg:p-12">
+      <div className="odyssey-panel absolute inset-x-0 bottom-0 z-10 p-5 sm:p-8 lg:inset-y-0 lg:end-auto lg:flex lg:w-[420px] lg:flex-col lg:justify-center lg:p-12">
         <div className="odyssey-heading">{stageText}</div>
         <div className="odyssey-chapters relative mt-6 lg:mt-10">
           {t.chapters.map((ch) => (
