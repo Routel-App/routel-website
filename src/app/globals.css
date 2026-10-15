@@ -279,6 +279,16 @@ body {
 .odyssey[data-mode="static"] :is(.odyssey-chip, .odyssey-hint, .odyssey-progress) {
   display: none;
 }
+/* On wide screens the panel is its own column: the scene never runs under it. */
+@media (min-width: 1024px) {
+  .odyssey[data-mode="scroll"] .odyssey-stage {
+    margin-inline-start: 420px;
+  }
+  .odyssey[data-mode="scroll"] .odyssey-panel {
+    background: var(--color-ink-950);
+    border-inline-end: 1px solid rgb(255 255 255 / 0.08);
+  }
+}
 .odyssey[data-mode="scroll"] .odyssey-chapter {
   position: absolute;
   inset-inline: 0;
