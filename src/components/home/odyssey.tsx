@@ -1,21 +1,7 @@
 "use client";
 
 import { useRef, type ReactNode } from "react";
-import {
-  ArrowRight,
-  ArrowUp,
-  BarChart3,
-  Bot,
-  Check,
-  FilePlus2,
-  FileSearch,
-  FileText,
-  ListChecks,
-  Paperclip,
-  PenLine,
-  Search,
-  Sparkles,
-} from "lucide-react";
+import { ArrowRight, ArrowUp, Check, FileText, Paperclip, RotateCcw, Sparkles, X } from "lucide-react";
 import Link from "@/components/i18n/link";
 import { useLocale } from "@/components/i18n/locale-provider";
 import type { Locale } from "@/lib/i18n";
@@ -56,13 +42,11 @@ const TRUCK_X = 150;
 const SAIL = 1700;
 const DEST_X = 3200;
 
-type Step = { tool: string; label: string; detail: string };
 type Item =
   | { at: number; kind: "module"; module: string; href: string }
   | { at: number; kind: "user"; text: string; file?: string }
   | { at: number; kind: "assistant"; text: string }
-  | { at: number; kind: "tools"; steps: Step[] }
-  | { at: number; kind: "card"; title: string; rows: Array<[string, string]>; confirm?: string; confirmedAt?: number }
+  | { at: number; kind: "card"; title: string; tools: string[]; rows: Array<[string, string]>; big?: string; confirm?: string; confirmedAt?: number }
   | { at: number; kind: "doc"; name: string; meta: string }
   | { at: number; kind: "status"; text: string };
 
@@ -81,11 +65,18 @@ type Copy = {
   items: Item[];
 };
 
+/**
+ * The transcript, timed to the stage (`at` is the scroll progress). Each
+ * turn answers a move on the stage: the truck for Gate In, the crane for
+ * loading, the ship leaving for the B/L, the arrival for the payment. The
+ * tools named are the assistant's real ones; every write is a card that
+ * waits for its confirmation.
+ */
 const copy: Record<Locale, Copy> = {
   en: {
     eyebrow: "One container, one booking",
     title: "Follow a container through Routel",
-    lead: "The ship on the left, the system on the right: every stage of the shipment is done in the assistant's chat, and all of it lands on one record.",
+    lead: "The ship on one side, the system on the other: every stage of the shipment is done in the assistant's chat, and all of it lands on one record.",
     scroll: "Scroll",
     booking: "Booking",
     statuses: ["Booking Pending", "Booking Confirmed", "Gate In", "SI Submitted", "Vessel Loaded", "Departed", "In Transit", "Arrived", "Telex Status", "Shipment Closed"],
@@ -96,79 +87,35 @@ const copy: Record<Locale, Copy> = {
     confirmed: "Confirmed",
     items: [
       { at: 0, kind: "module", module: "Quotations & Bookings", href: "/platform/quotations" },
-      { at: 0.004, kind: "user", text: "Quote Straits Electronics for 1 × 40HC, Port Klang to Jebel Ali, shipping next week." },
-      {
-        at: 0.02,
-        kind: "tools",
-        steps: [
-          { tool: "search_route_rates", label: "Searched route rates", detail: "Port Klang → Jebel Ali · 40HC · MSC · buying USD 1,900 · valid to 30 Nov" },
-          { tool: "create_quotation", label: "Prepared the quotation", detail: "Q-26-0412 · Straits Electronics Sdn Bhd" },
-        ],
-      },
-      { at: 0.035, kind: "card", title: "Proposed quotation · Q-26-0412", rows: [["Ocean freight 1 × 40HC", "USD 2,400.00"], ["Local charges & documentation", "MYR 1,770.00"], ["Validity", "14 days"]], confirm: "Confirm & send", confirmedAt: 0.05 },
-      { at: 0.06, kind: "assistant", text: "Sent to Straits Electronics. I'll tell you when they accept." },
-      { at: 0.075, kind: "status", text: "Customer accepted quotation Q-26-0412" },
-      { at: 0.085, kind: "user", text: "Turn it into a booking." },
-      { at: 0.095, kind: "tools", steps: [{ tool: "convert_quotation", label: "Converted the quotation", detail: "Booking NXS26000412 · sale lines carried over" }] },
-      { at: 0.105, kind: "assistant", text: "Booking NXS26000412 is created from the quotation, with the same charges. Status: Booking Pending until the carrier confirms." },
+      { at: 0.01, kind: "user", text: "Quote Port Klang to Jebel Ali, 1 × 40HC." },
+      { at: 0.03, kind: "card", title: "Quotation · Q-26-0412", tools: ["search_route_rates", "create_quotation"], rows: [["Ocean freight 40HC", "USD 2,400"], ["Local charges", "MYR 1,770"]], confirm: "Confirm & send", confirmedAt: 0.05 },
+      { at: 0.075, kind: "status", text: "Customer accepted · now booking NXS26000412" },
       { at: 0.12, kind: "module", module: "Carrier booking · AI", href: "/platform/ai-assistant" },
-      { at: 0.125, kind: "user", text: "This is MSC's confirmation. Record its details on the booking.", file: "MSC booking confirmation.pdf" },
-      {
-        at: 0.14,
-        kind: "tools",
-        steps: [
-          { tool: "read_uploaded_document", label: "Read the PDF", detail: "MSC ISABELLA · voyage 412E · cargo cut-off 14 Nov, 12:00" },
-          { tool: "update_job", label: "Prepared the update", detail: "Booking NXS26000412" },
-        ],
-      },
-      { at: 0.15, kind: "card", title: "Update booking · from the carrier's confirmation", rows: [["Carrier booking no.", "MSCUKL4471"], ["Vessel / voyage", "MSC ISABELLA · 412E"], ["Cargo cut-off", "14 Nov 2026, 12:00"], ["Status", "Booking Confirmed"]], confirm: "Confirm", confirmedAt: 0.165 },
-      { at: 0.175, kind: "assistant", text: "Saved. The Booking Confirmation is issued and sent to your customer." },
-      { at: 0.18, kind: "doc", name: "Booking Confirmation · NXS26000412.pdf", meta: "Sent to Straits Electronics" },
-      { at: 0.2, kind: "module", module: "Bookings · statuses", href: "/platform/bookings" },
-      { at: 0.205, kind: "status", text: "Gate In · MSCU 442118-0 · 14 Nov, 09:20" },
-      { at: 0.3, kind: "status", text: "SI Submitted" },
-      { at: 0.33, kind: "user", text: "Where is the booking now?" },
-      { at: 0.345, kind: "assistant", text: "The container is in the terminal and the shipping instructions are submitted. It loads on MSC ISABELLA today and sails tomorrow." },
-      { at: 0.5, kind: "module", module: "Bill of Lading · Documents", href: "/platform/bill-of-lading" },
+      { at: 0.125, kind: "user", text: "Record the carrier's confirmation on the booking.", file: "MSC confirmation.pdf" },
+      { at: 0.145, kind: "card", title: "Read from the carrier's file", tools: ["read_uploaded_document", "update_job"], rows: [["Vessel", "MSC ISABELLA · 412E"], ["Cargo cut-off", "14 Nov, 12:00"], ["Carrier ref.", "MSCUKL4471"]], confirm: "Confirm", confirmedAt: 0.165 },
+      { at: 0.18, kind: "doc", name: "Booking Confirmation.pdf", meta: "Sent to the customer" },
+      { at: 0.205, kind: "status", text: "Gate In · MSCU 442118-0" },
+      { at: 0.27, kind: "status", text: "SI Submitted" },
+      { at: 0.37, kind: "assistant", text: "The container is on the crane. Loading onto MSC ISABELLA now." },
       { at: 0.505, kind: "status", text: "Vessel Loaded" },
-      { at: 0.515, kind: "user", text: "Issue the House B/L and record master B/L MSCUKL4471." },
-      { at: 0.53, kind: "tools", steps: [{ tool: "create_bill_of_lading", label: "Prepared the House B/L", detail: "Shipper, consignee, container and goods from the booking" }] },
-      { at: 0.545, kind: "card", title: "Proposed House B/L · HBL-26000412", rows: [["Shipper", "Straits Electronics Sdn Bhd"], ["Consignee", "Gulf Horizon FZE"], ["Container", "MSCU4421180 · 1 × 40HC"], ["Master B/L", "MSCUKL4471"]], confirm: "Confirm & issue", confirmedAt: 0.56 },
-      { at: 0.575, kind: "doc", name: "House B/L · HBL-26000412.pdf", meta: "Ready to sign and send" },
-      { at: 0.6, kind: "module", module: "Tracking", href: "/platform/tracking" },
-      { at: 0.605, kind: "status", text: "Departed · MSC ISABELLA 412E · 15 Nov" },
-      { at: 0.62, kind: "assistant", text: "She has sailed. Your customer can follow the shipment by booking, B/L or container number, with no login, and sees the status timeline only." },
-      { at: 0.68, kind: "status", text: "In Transit · ETA Jebel Ali 22 Nov" },
+      { at: 0.52, kind: "module", module: "Bill of Lading · Documents", href: "/platform/bill-of-lading" },
+      { at: 0.535, kind: "card", title: "House B/L · HBL-26000412", tools: ["create_bill_of_lading"], rows: [["Consignee", "Gulf Horizon FZE"], ["Master B/L", "MSCUKL4471"]], confirm: "Confirm & issue", confirmedAt: 0.555 },
+      { at: 0.575, kind: "doc", name: "House B/L.pdf", meta: "Ready to sign" },
+      { at: 0.605, kind: "status", text: "Departed · 15 Nov" },
+      { at: 0.62, kind: "module", module: "Tracking", href: "/platform/tracking" },
+      { at: 0.635, kind: "assistant", text: "Your customer follows it by booking or container number, with no login." },
+      { at: 0.68, kind: "status", text: "In Transit · arriving 22 Nov" },
       { at: 0.7, kind: "module", module: "Invoicing · Finance", href: "/platform/invoicing" },
-      { at: 0.705, kind: "user", text: "What's the profit on this booking? And issue the invoice." },
-      {
-        at: 0.72,
-        kind: "tools",
-        steps: [
-          { tool: "get_job_charges", label: "Read the booking's charges", detail: "Sale MYR 13,050.00 · cost MYR 10,035.00" },
-          { tool: "create_invoice_from_charges", label: "Prepared the tax invoice", detail: "From the sale lines, in MYR and USD" },
-        ],
-      },
-      { at: 0.735, kind: "card", title: "Proposed invoice · INV-26-0412", rows: [["Ocean freight 1 × 40HC", "USD 2,400.00"], ["Local charges & documentation", "MYR 1,770.00"], ["Tax · international freight", "0%"], ["Total", "MYR 13,050.00"]], confirm: "Confirm & issue", confirmedAt: 0.75 },
-      { at: 0.765, kind: "assistant", text: "Tax invoice INV-26-0412 is issued in MYR and USD and sent. Expected profit on the booking: MYR 3,015.00 (23.1%)." },
-      { at: 0.77, kind: "doc", name: "Tax Invoice · INV-26-0412.pdf", meta: "MYR 13,050.00 · USD 2,776.60" },
-      { at: 0.86, kind: "module", module: "Receivables & Payables", href: "/platform/finance-receivables" },
-      { at: 0.865, kind: "status", text: "Arrived · Jebel Ali · 22 Nov" },
-      { at: 0.875, kind: "tools", steps: [{ tool: "list_payment_suggestions", label: "Matched a payment from the finance mailbox", detail: "Remittance of MYR 13,050.00 matches INV-26-0412" }] },
-      { at: 0.885, kind: "card", title: "Match payment · INV-26-0412", rows: [["Amount", "MYR 13,050.00"], ["Source", "Remittance advice · finance mailbox"], ["Match", "Exact"]], confirm: "Confirm match", confirmedAt: 0.9 },
+      { at: 0.705, kind: "user", text: "Issue the invoice." },
+      { at: 0.725, kind: "card", title: "Tax invoice · INV-26-0412", tools: ["create_invoice_from_charges"], rows: [["Ocean freight 40HC", "USD 2,400"], ["Local charges", "MYR 1,770"]], big: "MYR 13,050.00", confirm: "Confirm & issue", confirmedAt: 0.75 },
+      { at: 0.77, kind: "doc", name: "Tax Invoice.pdf", meta: "MYR 13,050.00 · USD 2,776.60" },
+      { at: 0.865, kind: "status", text: "Arrived · Jebel Ali" },
+      { at: 0.875, kind: "card", title: "Payment from the finance mailbox", tools: ["list_payment_suggestions"], rows: [["Amount", "MYR 13,050.00"], ["Matches", "INV-26-0412"]], confirm: "Confirm match", confirmedAt: 0.9 },
       { at: 0.915, kind: "status", text: "Telex Status · cargo released" },
       { at: 0.93, kind: "module", module: "Accounting", href: "/platform/accounting" },
       { at: 0.935, kind: "user", text: "Close the shipment." },
-      {
-        at: 0.95,
-        kind: "tools",
-        steps: [
-          { tool: "update_job", label: "Updated the status", detail: "Shipment Closed" },
-          { tool: "run_report", label: "Ran the P&L", detail: "November 2026" },
-        ],
-      },
-      { at: 0.965, kind: "assistant", text: "Closed. The booking's profit is in November's P&L, the receivable is cleared, and nobody re-typed a number along the way." },
-      { at: 0.975, kind: "card", title: "Booking NXS26000412 · in the books", rows: [["Revenue", "MYR 13,050.00"], ["Cost", "MYR 10,035.00"], ["Profit", "MYR 3,015.00 · 23.1%"]] },
+      { at: 0.955, kind: "card", title: "The booking, in the books", tools: ["update_job", "run_report"], rows: [["Revenue", "MYR 13,050"], ["Cost", "MYR 10,035"]], big: "Profit MYR 3,015 · 23.1%" },
+      { at: 0.975, kind: "assistant", text: "Shipment Closed. Nobody re-typed a number along the way." },
     ],
   },
   ar: {
@@ -185,79 +132,35 @@ const copy: Record<Locale, Copy> = {
     confirmed: "تم التأكيد",
     items: [
       { at: 0, kind: "module", module: "عروض الأسعار والحجوزات", href: "/platform/quotations" },
-      { at: 0.004, kind: "user", text: "جهّز عرض سعر لشركة النور للتجارة: حاوية 40HC من جدة إلى جبل علي، الشحن الأسبوع القادم." },
-      {
-        at: 0.02,
-        kind: "tools",
-        steps: [
-          { tool: "search_route_rates", label: "بحثت في أسعار المسارات", detail: "جدة ← جبل علي · 40HC · MSC · شراء USD 3,350 · ساري حتى 30 نوفمبر" },
-          { tool: "create_quotation", label: "جهّزت عرض السعر", detail: "عرض السعر Q-26-0412 · شركة النور للتجارة" },
-        ],
-      },
-      { at: 0.035, kind: "card", title: "عرض سعر مقترح · Q-26-0412", rows: [["شحن بحري 1 × 40HC", "USD 4,200.00"], ["رسوم محلية ومستندات", "SAR 2,500.00"], ["الصلاحية", "14 يوماً"]], confirm: "تأكيد وإرسال", confirmedAt: 0.05 },
-      { at: 0.06, kind: "assistant", text: "أُرسل عرض السعر إلى شركة النور. سأخبرك حين يقبلونه." },
-      { at: 0.075, kind: "status", text: "العميل قبل عرض السعر Q-26-0412" },
-      { at: 0.085, kind: "user", text: "حوّله إلى حجز." },
-      { at: 0.095, kind: "tools", steps: [{ tool: "convert_quotation", label: "حوّلت عرض السعر", detail: "الحجز NXS26000412 · بنود البيع منقولة" }] },
-      { at: 0.105, kind: "assistant", text: "أنشأت الحجز NXS26000412 من عرض السعر بالبنود نفسها. الحالة: الحجز قيد الانتظار حتى يصل تأكيد الناقل." },
+      { at: 0.01, kind: "user", text: "جهّز عرض سعر: جدة ← جبل علي، 1 × 40HC." },
+      { at: 0.03, kind: "card", title: "عرض سعر · Q-26-0412", tools: ["search_route_rates", "create_quotation"], rows: [["شحن بحري 40HC", "USD 4,200"], ["رسوم محلية", "SAR 2,500"]], confirm: "تأكيد وإرسال", confirmedAt: 0.05 },
+      { at: 0.075, kind: "status", text: "قبِل العميل العرض · صار الحجز NXS26000412" },
       { at: 0.12, kind: "module", module: "حجز الناقل · الذكاء الاصطناعي", href: "/platform/ai-assistant" },
-      { at: 0.125, kind: "user", text: "هذا تأكيد MSC. سجّل بياناته على الحجز.", file: "تأكيد حجز MSC.pdf" },
-      {
-        at: 0.14,
-        kind: "tools",
-        steps: [
-          { tool: "read_uploaded_document", label: "قرأت الملف", detail: "السفينة MSC ISABELLA · الرحلة 412E · إغلاق الحمولة 14 نوفمبر، 12:00" },
-          { tool: "update_job", label: "جهّزت التحديث", detail: "الحجز NXS26000412" },
-        ],
-      },
-      { at: 0.15, kind: "card", title: "تحديث الحجز · من تأكيد الناقل", rows: [["رقم حجز الناقل", "MSCJED4471"], ["السفينة / الرحلة", "MSC ISABELLA · 412E"], ["إغلاق الحمولة", "14 نوفمبر 2026، 12:00"], ["الحالة", "تم تأكيد الحجز"]], confirm: "تأكيد", confirmedAt: 0.165 },
-      { at: 0.175, kind: "assistant", text: "حُفظت البيانات، وصدر «تأكيد الحجز» وأُرسل إلى عميلك." },
-      { at: 0.18, kind: "doc", name: "تأكيد الحجز · NXS26000412.pdf", meta: "أُرسل إلى شركة النور للتجارة" },
-      { at: 0.2, kind: "module", module: "الحجوزات · الحالات", href: "/platform/bookings" },
-      { at: 0.205, kind: "status", text: "دخول البوابة · MSCU 442118-0 · 14 نوفمبر، 09:20" },
-      { at: 0.3, kind: "status", text: "تم تقديم تعليمات الشحن" },
-      { at: 0.33, kind: "user", text: "وين الحجز الآن؟" },
-      { at: 0.345, kind: "assistant", text: "الحاوية داخل الميناء وتعليمات الشحن مقدَّمة. التحميل على MSC ISABELLA اليوم، والإبحار غداً." },
-      { at: 0.5, kind: "module", module: "بوليصة الشحن · المستندات", href: "/platform/bill-of-lading" },
+      { at: 0.125, kind: "user", text: "سجّل تأكيد الناقل على الحجز.", file: "تأكيد MSC.pdf" },
+      { at: 0.145, kind: "card", title: "قُرئ من ملف الناقل", tools: ["read_uploaded_document", "update_job"], rows: [["السفينة", "MSC ISABELLA · 412E"], ["إغلاق الحمولة", "14 نوفمبر، 12:00"], ["رقم الناقل", "MSCJED4471"]], confirm: "تأكيد", confirmedAt: 0.165 },
+      { at: 0.18, kind: "doc", name: "تأكيد الحجز.pdf", meta: "أُرسل إلى العميل" },
+      { at: 0.205, kind: "status", text: "دخول البوابة · MSCU 442118-0" },
+      { at: 0.27, kind: "status", text: "تم تقديم تعليمات الشحن" },
+      { at: 0.37, kind: "assistant", text: "الحاوية في الرافعة. التحميل على MSC ISABELLA الآن." },
       { at: 0.505, kind: "status", text: "تم التحميل على السفينة" },
-      { at: 0.515, kind: "user", text: "أصدر البوليصة الفرعية وسجّل رقم البوليصة الرئيسية MSCJED4471." },
-      { at: 0.53, kind: "tools", steps: [{ tool: "create_bill_of_lading", label: "جهّزت البوليصة الفرعية", detail: "الشاحن والمرسل إليه والحاوية والبضاعة من بيانات الحجز" }] },
-      { at: 0.545, kind: "card", title: "بوليصة فرعية مقترحة · HBL-26000412", rows: [["الشاحن", "شركة النور للتجارة"], ["المرسل إليه", "Gulf Horizon FZE"], ["الحاوية", "MSCU4421180 · 1 × 40HC"], ["البوليصة الرئيسية", "MSCJED4471"]], confirm: "تأكيد وإصدار", confirmedAt: 0.56 },
-      { at: 0.575, kind: "doc", name: "البوليصة الفرعية · HBL-26000412.pdf", meta: "جاهزة للتوقيع والإرسال" },
-      { at: 0.6, kind: "module", module: "التتبّع", href: "/platform/tracking" },
-      { at: 0.605, kind: "status", text: "غادرت · MSC ISABELLA 412E · 15 نوفمبر" },
-      { at: 0.62, kind: "assistant", text: "أبحرت السفينة. عميلك يتابع الشحنة بنفسه برقم الحجز أو البوليصة أو الحاوية، دون تسجيل دخول، ويرى تسلسل الحالة فقط." },
-      { at: 0.68, kind: "status", text: "قيد النقل · الوصول المتوقع جبل علي 22 نوفمبر" },
+      { at: 0.52, kind: "module", module: "بوليصة الشحن · المستندات", href: "/platform/bill-of-lading" },
+      { at: 0.535, kind: "card", title: "بوليصة فرعية · HBL-26000412", tools: ["create_bill_of_lading"], rows: [["المرسل إليه", "Gulf Horizon FZE"], ["البوليصة الرئيسية", "MSCJED4471"]], confirm: "تأكيد وإصدار", confirmedAt: 0.555 },
+      { at: 0.575, kind: "doc", name: "البوليصة الفرعية.pdf", meta: "جاهزة للتوقيع" },
+      { at: 0.605, kind: "status", text: "غادرت · 15 نوفمبر" },
+      { at: 0.62, kind: "module", module: "التتبّع", href: "/platform/tracking" },
+      { at: 0.635, kind: "assistant", text: "عميلك يتابعها بنفسه، برقم الحجز أو الحاوية، دون تسجيل دخول." },
+      { at: 0.68, kind: "status", text: "قيد النقل · الوصول 22 نوفمبر" },
       { at: 0.7, kind: "module", module: "الفواتير · المالية", href: "/platform/invoicing" },
-      { at: 0.705, kind: "user", text: "كم الربح على هذا الحجز؟ وأصدر الفاتورة." },
-      {
-        at: 0.72,
-        kind: "tools",
-        steps: [
-          { tool: "get_job_charges", label: "قرأت رسوم الحجز", detail: "البيع SAR 18,250.00 · التكلفة SAR 14,010.00" },
-          { tool: "create_invoice_from_charges", label: "جهّزت الفاتورة الضريبية", detail: "من بنود البيع، بالريال والدولار" },
-        ],
-      },
-      { at: 0.735, kind: "card", title: "فاتورة مقترحة · INV-26-0412", rows: [["شحن بحري 1 × 40HC", "USD 4,200.00"], ["رسوم محلية ومستندات", "SAR 2,500.00"], ["ضريبة القيمة المضافة · نقل دولي", "0%"], ["الإجمالي", "SAR 18,250.00"]], confirm: "تأكيد وإصدار", confirmedAt: 0.75 },
-      { at: 0.765, kind: "assistant", text: "صدرت الفاتورة الضريبية INV-26-0412 بالريال والدولار وأُرسلت. الربح المتوقع على الحجز: SAR 4,240.00 (23.2%)." },
-      { at: 0.77, kind: "doc", name: "فاتورة ضريبية · INV-26-0412.pdf", meta: "SAR 18,250.00 · USD 4,866.67" },
-      { at: 0.86, kind: "module", module: "الذمم المدينة والدائنة", href: "/platform/finance-receivables" },
-      { at: 0.865, kind: "status", text: "وصلت · جبل علي · 22 نوفمبر" },
-      { at: 0.875, kind: "tools", steps: [{ tool: "list_payment_suggestions", label: "طابقت دفعة من بريد المالية", detail: "إشعار تحويل بقيمة SAR 18,250.00 يطابق INV-26-0412" }] },
-      { at: 0.885, kind: "card", title: "مطابقة دفعة · INV-26-0412", rows: [["المبلغ", "SAR 18,250.00"], ["المصدر", "إشعار تحويل · بريد المالية"], ["المطابقة", "كاملة"]], confirm: "تأكيد المطابقة", confirmedAt: 0.9 },
+      { at: 0.705, kind: "user", text: "أصدر الفاتورة." },
+      { at: 0.725, kind: "card", title: "فاتورة ضريبية · INV-26-0412", tools: ["create_invoice_from_charges"], rows: [["شحن بحري 40HC", "USD 4,200"], ["رسوم محلية", "SAR 2,500"]], big: "SAR 18,250.00", confirm: "تأكيد وإصدار", confirmedAt: 0.75 },
+      { at: 0.77, kind: "doc", name: "فاتورة ضريبية.pdf", meta: "SAR 18,250.00 · USD 4,866.67" },
+      { at: 0.865, kind: "status", text: "وصلت · جبل علي" },
+      { at: 0.875, kind: "card", title: "دفعة من بريد المالية", tools: ["list_payment_suggestions"], rows: [["المبلغ", "SAR 18,250.00"], ["تطابق", "INV-26-0412"]], confirm: "تأكيد المطابقة", confirmedAt: 0.9 },
       { at: 0.915, kind: "status", text: "حالة التلكس · أُفرج عن البضاعة" },
       { at: 0.93, kind: "module", module: "المحاسبة", href: "/platform/accounting" },
       { at: 0.935, kind: "user", text: "أغلق الشحنة." },
-      {
-        at: 0.95,
-        kind: "tools",
-        steps: [
-          { tool: "update_job", label: "حدّثت الحالة", detail: "الشحنة مغلقة" },
-          { tool: "run_report", label: "شغّلت قائمة الأرباح والخسائر", detail: "نوفمبر 2026" },
-        ],
-      },
-      { at: 0.965, kind: "assistant", text: "أُغلقت الشحنة. ربح الحجز في قائمة الأرباح والخسائر لنوفمبر، والذمة مسدّدة، ولم يُعد أحد كتابة رقم واحد في الطريق." },
-      { at: 0.975, kind: "card", title: "الحجز NXS26000412 · في الدفاتر", rows: [["الإيراد", "SAR 18,250.00"], ["التكلفة", "SAR 14,010.00"], ["الربح", "SAR 4,240.00 · 23.2%"]] },
+      { at: 0.955, kind: "card", title: "الحجز في الدفاتر", tools: ["update_job", "run_report"], rows: [["الإيراد", "SAR 18,250"], ["التكلفة", "SAR 14,010"]], big: "الربح SAR 4,240 · 23.2%" },
+      { at: 0.975, kind: "assistant", text: "أُغلقت الشحنة، ولم يُعد أحد كتابة رقم واحد في الطريق." },
     ],
   },
 };
@@ -275,16 +178,6 @@ const statusAt = (p: number) => {
   if (p < 0.95) return 8;
   return 9;
 };
-
-/** Which icon a tool call shows, by what the tool does. */
-function toolIcon(tool: string) {
-  if (tool.startsWith("search_")) return Search;
-  if (tool.startsWith("read_")) return FileSearch;
-  if (tool.startsWith("list_") || tool.startsWith("get_")) return ListChecks;
-  if (tool.startsWith("update_")) return PenLine;
-  if (tool.startsWith("run_")) return BarChart3;
-  return FilePlus2;
-}
 
 /** A little before an assistant turn, the typing dots show. */
 const TYPING_LEAD = 0.012;
@@ -538,21 +431,25 @@ export function Odyssey() {
         </div>
       </div>
 
-      {/* The assistant's chat: the same shipment, done in the system */}
-      <div className="odyssey-panel z-10 flex flex-col bg-ink-950">
-        <div className="odyssey-chat flex min-h-0 flex-1 flex-col">
-          {/* Header: the assistant, and the booking it is working on */}
-          <div className="odyssey-chat-head shrink-0 border-b border-white/10 px-4 py-3 sm:px-5">
+      {/* The assistant's window: the same shipment, done in the system */}
+      <div className="odyssey-panel z-10 flex flex-col">
+        <div className="odyssey-chat flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl bg-ink-900 shadow-float ring-1 ring-white/10">
+          {/* Window bar: the assistant, and the booking it is working on */}
+          <div className="shrink-0 border-b border-white/10 bg-[linear-gradient(180deg,rgb(255_255_255_/_0.05),transparent)] px-4 pb-3 pt-3.5 sm:px-5">
             <div className="flex items-center gap-2.5">
-              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-spark-400/15 text-spark-400">
-                <Bot className="h-4.5 w-4.5" />
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-spark-400 text-ink-950">
+                <Sparkles className="h-4 w-4" />
               </span>
-              <div className="min-w-0">
-                <p className="text-[13px] font-semibold">{t.header}</p>
+              <div className="min-w-0 flex-1">
+                <p className="text-[13.5px] font-semibold">{t.header}</p>
                 <p className="truncate text-[10.5px] text-white/50">{t.sub}</p>
               </div>
+              <span className="flex items-center gap-1 text-white/35" aria-hidden>
+                <RotateCcw className="h-3.5 w-3.5" />
+                <X className="ms-1.5 h-4 w-4" />
+              </span>
             </div>
-            <div className="mt-3 flex items-center justify-between gap-3 rounded-xl bg-white/[0.04] px-3 py-2 ring-1 ring-white/10">
+            <div className="mt-3 flex items-center justify-between gap-3 rounded-xl bg-ink-950/70 px-3 py-2 ring-1 ring-white/10">
               <div className="min-w-0">
                 <p className="text-[10px] font-medium text-white/45">{t.booking}</p>
                 <p dir="ltr" className="font-mono text-[12.5px] font-semibold rtl:text-end">NXS26000412</p>
@@ -570,7 +467,7 @@ export function Odyssey() {
 
           {/* The transcript */}
           <div data-feed="" className="odyssey-feed relative min-h-0 flex-1 overflow-hidden px-4 sm:px-5">
-            <div data-list="" className="odyssey-list space-y-2.5 py-4">
+            <div data-list="" className="odyssey-list space-y-3 py-4">
               {t.items.map((it, i) => (
                 <Message key={i} item={it} t={t} />
               ))}
@@ -585,10 +482,11 @@ export function Odyssey() {
           </div>
 
           {/* Composer */}
-          <div className="shrink-0 px-4 pb-4 pt-2 sm:px-5">
-            <div className="flex items-center justify-between rounded-full bg-white/[0.05] px-4 py-2.5 text-[12px] text-white/45 ring-1 ring-white/10">
-              {t.input}
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-teal-500 text-white">
+          <div className="shrink-0 border-t border-white/10 px-3 py-3 sm:px-4">
+            <div className="flex items-center gap-2 rounded-full bg-ink-950/70 py-1.5 pe-1.5 ps-3 text-[12px] text-white/45 ring-1 ring-white/10">
+              <Paperclip className="h-3.5 w-3.5 shrink-0" />
+              <span className="flex-1 truncate">{t.input}</span>
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-teal-500 text-white">
                 <ArrowUp className="h-3.5 w-3.5" />
               </span>
             </div>
@@ -601,9 +499,8 @@ export function Odyssey() {
 
 /** One turn of the transcript. `data-at` is the progress it appears at; `data-typing` asks for the dots before it. */
 function Message({ item, t }: { item: Item; t: Copy }) {
-  const base = "ody-msg";
   const wrap = (cls: string, children: ReactNode, typing = false) => (
-    <div data-at={item.at} data-typing={typing ? "1" : undefined} className={cn(base, cls)}>
+    <div data-at={item.at} data-typing={typing ? "1" : undefined} className={cn("ody-msg", cls)}>
       {children}
     </div>
   );
@@ -611,26 +508,24 @@ function Message({ item, t }: { item: Item; t: Copy }) {
   switch (item.kind) {
     case "module":
       return wrap(
-        "flex items-center gap-2 pt-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-spark-300",
+        "flex items-center gap-2.5 pt-1.5",
         <>
           <span className="h-px flex-1 bg-white/10" />
-          <span className="inline-flex items-center gap-1.5">
+          <Link href={item.href} className="group inline-flex items-center gap-1.5 rounded-full bg-spark-400/10 px-2.5 py-1 text-[11px] font-semibold text-spark-300 ring-1 ring-spark-400/25 hover:bg-spark-400/15" title={t.more}>
             {item.module}
-            <Link href={item.href} className="group inline-flex items-center gap-1 normal-case tracking-normal text-teal-300 hover:text-teal-200" title={t.more}>
-              <span className="sr-only">{t.more}</span>
-              <ArrowRight className="h-3 w-3 transition-transform ltr:group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" />
-            </Link>
-          </span>
+            <ArrowRight className="h-3 w-3 transition-transform ltr:group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" />
+            <span className="sr-only">{t.more}</span>
+          </Link>
           <span className="h-px flex-1 bg-white/10" />
         </>,
       );
     case "user":
       return wrap(
         "flex justify-end",
-        <div className="max-w-[88%] rounded-2xl rounded-se-sm bg-teal-500/20 px-3.5 py-2.5 ring-1 ring-teal-400/20">
-          <p className="text-[13px] leading-relaxed">{item.text}</p>
+        <div className="max-w-[86%] rounded-2xl rounded-se-sm bg-[linear-gradient(135deg,var(--color-teal-500),var(--color-teal-700))] px-3.5 py-2.5 text-white shadow-card">
+          <p className="text-[13.5px] font-medium leading-relaxed">{item.text}</p>
           {item.file ? (
-            <p className="mt-2 inline-flex max-w-full items-center gap-1.5 break-all rounded-md bg-white/10 px-2 py-1 text-[10.5px]">
+            <p className="mt-2 inline-flex max-w-full items-center gap-1.5 break-all rounded-md bg-white/15 px-2 py-1 text-[10.5px]">
               <Paperclip className="h-3 w-3 shrink-0" />
               {item.file}
             </p>
@@ -640,56 +535,42 @@ function Message({ item, t }: { item: Item; t: Copy }) {
     case "assistant":
       return wrap(
         "flex justify-start",
-        <div className="max-w-[92%] rounded-2xl rounded-ss-sm bg-white/[0.06] px-3.5 py-2.5 ring-1 ring-white/10">
-          <p className="text-[13px] leading-relaxed text-white/90">{item.text}</p>
+        <div className="max-w-[90%] rounded-2xl rounded-ss-sm bg-white/[0.06] px-3.5 py-2.5 ring-1 ring-white/10">
+          <p className="text-[13.5px] leading-relaxed text-white/90">{item.text}</p>
         </div>,
-        true,
-      );
-    case "tools":
-      return wrap(
-        "",
-        <ul className="space-y-2 rounded-xl bg-white/[0.04] p-3 ring-1 ring-white/10">
-          {item.steps.map((st) => {
-            const Icon = toolIcon(st.tool);
-            return (
-              <li key={st.tool + st.label} className="flex items-start gap-2.5">
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-white/[0.07] text-teal-300">
-                  <Icon className="h-3 w-3" />
-                </span>
-                <div className="min-w-0 flex-1">
-                  <p className="flex flex-wrap items-baseline gap-x-2 text-[12px] font-medium">
-                    {st.label}
-                    <code dir="ltr" className="font-mono text-[10px] text-white/40">{st.tool}</code>
-                  </p>
-                  <p dir="auto" className="text-[11px] leading-snug text-white/55">{st.detail}</p>
-                </div>
-                <Check className="mt-0.5 h-3.5 w-3.5 shrink-0 text-teal-400" strokeWidth={3} />
-              </li>
-            );
-          })}
-        </ul>,
         true,
       );
     case "card":
       return wrap(
         "",
-        <div className={cn("rounded-xl p-3 ring-1", item.confirm ? "bg-spark-400/[0.07] ring-spark-400/40" : "bg-teal-500/10 ring-teal-400/30")}>
-          <p className="flex items-center gap-1.5 text-[12px] font-semibold">
-            {item.confirm ? <Sparkles className="h-3.5 w-3.5 text-spark-400" /> : <BarChart3 className="h-3.5 w-3.5 text-teal-300" />}
+        <div className={cn("rounded-2xl rounded-ss-sm p-3.5 ring-1", item.confirm ? "bg-ink-950/60 ring-spark-400/40" : "bg-teal-500/10 ring-teal-400/30")}>
+          <p className="flex items-center gap-1.5 text-[13px] font-semibold">
+            <Sparkles className={cn("h-3.5 w-3.5", item.confirm ? "text-spark-400" : "text-teal-300")} />
             {item.title}
           </p>
-          <ul className="mt-2 space-y-1">
-            {item.rows.map(([k, v], i) => (
-              <li key={k} className={cn("flex justify-between gap-3 text-[11.5px]", i === item.rows.length - 1 && !item.confirm && "font-semibold")}>
+          <p className="mt-2 flex flex-wrap gap-1.5" aria-label="tools">
+            {item.tools.map((tool) => (
+              <span key={tool} dir="ltr" className="inline-flex items-center gap-1 rounded-md bg-white/[0.06] px-1.5 py-0.5 font-mono text-[10px] text-teal-300 ring-1 ring-white/10">
+                <Check className="h-2.5 w-2.5" strokeWidth={3} />
+                {tool}
+              </span>
+            ))}
+          </p>
+          <ul className="mt-2.5 space-y-1">
+            {item.rows.map(([k, v]) => (
+              <li key={k} className="flex justify-between gap-3 text-[12px]">
                 <span className="text-white/55">{k}</span>
                 <span dir="auto" className="font-mono text-white/90">{v}</span>
               </li>
             ))}
           </ul>
+          {item.big ? (
+            <p dir="auto" className="font-display mt-2.5 border-t border-white/10 pt-2.5 text-[17px] font-bold text-spark-300">{item.big}</p>
+          ) : null}
           {item.confirm ? (
             <div data-confirm-at={item.confirmedAt} className="odyssey-confirm mt-3 flex items-center gap-2">
-              <span className="odyssey-confirm-pending rounded-full bg-teal-500 px-3.5 py-1 text-[11px] font-semibold text-white">{item.confirm}</span>
-              <span className="odyssey-confirm-done inline-flex items-center gap-1 rounded-full bg-teal-400/20 px-3 py-1 text-[11px] font-semibold text-teal-300 ring-1 ring-teal-400/30">
+              <span className="odyssey-confirm-pending rounded-full bg-teal-500 px-3.5 py-1.5 text-[11.5px] font-semibold text-white shadow-card">{item.confirm}</span>
+              <span className="odyssey-confirm-done inline-flex items-center gap-1 rounded-full bg-teal-400/15 px-3 py-1.5 text-[11.5px] font-semibold text-teal-300 ring-1 ring-teal-400/30">
                 <Check className="h-3 w-3" strokeWidth={3} />
                 {t.confirmed}
               </span>
@@ -701,12 +582,12 @@ function Message({ item, t }: { item: Item; t: Copy }) {
     case "doc":
       return wrap(
         "flex justify-start",
-        <div className="flex max-w-[92%] items-center gap-2.5 rounded-xl bg-white px-3 py-2.5 text-ink-900 shadow-float">
+        <div className="flex max-w-[90%] items-center gap-2.5 rounded-xl bg-white px-3 py-2.5 text-ink-900 shadow-float">
           <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-teal-50 text-teal-700">
             <FileText className="h-4 w-4" />
           </span>
           <div className="min-w-0">
-            <p dir="auto" className="truncate text-[12px] font-semibold">{item.name}</p>
+            <p dir="auto" className="truncate text-[12.5px] font-semibold">{item.name}</p>
             <p dir="auto" className="truncate text-[10.5px] text-fog-500">{item.meta}</p>
           </div>
         </div>,
@@ -714,8 +595,8 @@ function Message({ item, t }: { item: Item; t: Copy }) {
     case "status":
       return wrap(
         "flex justify-center",
-        <span dir="auto" className="inline-flex max-w-full items-center gap-1.5 rounded-full bg-ink-900 px-3 py-1 text-[11px] font-semibold text-teal-200 ring-1 ring-white/10">
-          <Check className="h-3 w-3 shrink-0 text-teal-400" strokeWidth={3} />
+        <span dir="auto" className="inline-flex max-w-full items-center gap-2 rounded-full bg-ink-950/80 py-1 pe-3 ps-2 text-[11.5px] font-semibold text-teal-200 ring-1 ring-white/10">
+          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-teal-400 shadow-[0_0_0_3px_rgb(71_188_172_/_0.25)]" />
           <span className="truncate">{item.text}</span>
         </span>,
       );
