@@ -304,17 +304,20 @@ body {
   .odyssey[data-mode="scroll"] {
     display: block;
   }
+  .odyssey[data-mode="scroll"] {
+    --ody-panel: clamp(420px, 31vw, 540px);
+  }
   .odyssey[data-mode="scroll"] .odyssey-stage {
     height: 100svh;
     min-height: 560px;
-    margin-inline-start: 440px;
+    margin-inline-start: calc(var(--ody-panel) + 3rem);
   }
   /* the window floats below the sticky navbar (4rem), in its own column */
   .odyssey[data-mode="scroll"] .odyssey-panel {
     position: absolute;
     inset-block: 5.5rem 1.5rem;
     inset-inline-start: 1.5rem;
-    width: 400px;
+    width: var(--ody-panel);
     padding: 0;
   }
 }
@@ -357,6 +360,23 @@ body {
 .odyssey-confirm.is-done .odyssey-confirm-done,
 .odyssey[data-mode="static"] .odyssey-confirm-done {
   display: inline-flex;
+}
+/* a document lands in the chat with a little pop */
+.odyssey[data-mode="scroll"] .ody-doc.is-in > div {
+  animation: ody-pop 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+@keyframes ody-pop {
+  0% {
+    opacity: 0;
+    transform: translateY(8px) scale(0.85) rotate(-3deg);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.03) rotate(0.5deg);
+  }
+  100% {
+    transform: none;
+  }
 }
 /* a write waiting for its confirmation breathes until it gets one */
 .odyssey[data-mode="scroll"] .odyssey-confirm:not(.is-done) .odyssey-confirm-pending {
