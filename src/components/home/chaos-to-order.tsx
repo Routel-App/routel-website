@@ -15,8 +15,10 @@ import { gsap, useGSAP, MOTION_OK } from "@/components/motion/gsap";
  * invoice, a sticky note) fly into one Routel booking, and each lands as
  * the line of the booking that replaces it.
  *
- * Large screens: the stage is pinned and scrubbed by scroll. Smaller
- * screens: it plays once on entering. The markup is the end state readable
+ * The section is pinned and scrubbed by scroll on every screen. On phones
+ * and tablets the pinned section is compacted to one screen (data-pin, in
+ * globals.css): the lead and the closing line are hidden while it is
+ * pinned, so the heading, the counter and the stage fit. The markup is the end state readable
  * on its own (no JS / reduced motion): the booking, with the files faint
  * around it.
  */
@@ -106,7 +108,9 @@ export function ChaosToOrder() {
         const counter = { n: 7 };
         tl.add(() => (count.textContent = "7"), 0)
           .set(files, { opacity: 1 })
-          .set(card, { opacity: 0, scale: 0.92, y: 24 })
+          // The card is centred in the stage with yPercent here: GSAP owns the
+          // transform, so the CSS translate that centres it without JS is not kept.
+          .set(card, { opacity: 0, scale: 0.92, y: 24, yPercent: -50 })
           .set(rows, { opacity: 0.25 })
           .set(checks, { scale: 0 })
           .to(card, { opacity: 1, scale: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.2);
@@ -144,10 +148,13 @@ export function ChaosToOrder() {
         build(tl);
       });
       mm.add(`${MOTION_OK} and (max-width: 1023px)`, () => {
-        const tl = gsap.timeline({ paused: true });
+        // Compact the section to one screen first, so the flight paths are measured on the pinned layout.
+        el.setAttribute("data-pin", "");
+        const tl = gsap.timeline({
+          scrollTrigger: { trigger: el, start: "top top", end: "+=1100", scrub: 0.6, pin: true, anticipatePin: 1, invalidateOnRefresh: true },
+        });
         build(tl);
-        const st = gsap.timeline({ scrollTrigger: { trigger: stage, start: "top 70%", onEnter: () => tl.play() } });
-        return () => st.kill();
+        return () => el.removeAttribute("data-pin");
       });
       return () => mm.revert();
     },
@@ -155,13 +162,13 @@ export function ChaosToOrder() {
   );
 
   return (
-    <section ref={root} className="relative overflow-hidden bg-white" id="chaos">
-      <Container className="grid min-h-screen items-center gap-12 py-20 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:py-0">
+    <section ref={root} className="chaos relative overflow-hidden bg-white" id="chaos">
+      <Container className="chaos-grid grid min-h-screen items-center gap-12 py-20 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:py-0">
         <div>
           <Eyebrow tone="spark">{t.eyebrow}</Eyebrow>
           <h2 className="font-display mt-4 text-balance text-3xl font-bold leading-[1.1] text-ink-900 sm:text-4xl lg:text-[2.75rem]">{t.title}</h2>
-          <p className="mt-4 max-w-xl text-pretty text-base leading-relaxed text-fog-600 sm:text-lg">{t.lead}</p>
-          <div className="mt-8 flex items-end gap-5">
+          <p className="chaos-lead mt-4 max-w-xl text-pretty text-base leading-relaxed text-fog-600 sm:text-lg">{t.lead}</p>
+          <div className="chaos-count mt-8 flex items-end gap-5">
             <div>
               <p dir="ltr" className="font-display text-6xl font-extrabold leading-none text-ink-900 rtl:text-end">
                 <span data-count="">1</span>
@@ -171,11 +178,11 @@ export function ChaosToOrder() {
               </p>
             </div>
           </div>
-          <p className="mt-8 max-w-md border-s-2 border-spark-400 ps-4 text-[15px] font-medium leading-relaxed text-ink-900">{t.outro}</p>
+          <p className="chaos-outro mt-8 max-w-md border-s-2 border-spark-400 ps-4 text-[15px] font-medium leading-relaxed text-ink-900">{t.outro}</p>
         </div>
 
         {/* The stage: files around, the booking in the middle */}
-        <div data-stage="" className="relative mx-auto aspect-[1/1.05] w-full max-w-[560px] sm:aspect-[1.1/1]">
+        <div data-stage="" className="chaos-stage relative mx-auto aspect-[1/1.05] w-full max-w-[560px] sm:aspect-[1.1/1]">
           {t.items.map((it, i) => {
             const { Icon, tone } = apps[i];
             const p = scatter[i];

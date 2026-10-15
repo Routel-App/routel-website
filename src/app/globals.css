@@ -249,6 +249,50 @@ body {
   animation: tour-in 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* Chaos to order (components/home/chaos-to-order.tsx), phones and tablets
+   ------------------------------------------------------------------
+   While the section is pinned it must fit one screen under the sticky
+   navbar (4rem): the lead and the closing line step aside, the counter
+   shrinks, and the stage is sized by the height that is left. */
+.chaos[data-pin] .chaos-grid {
+  min-height: 100svh;
+  align-content: center;
+  gap: 1rem;
+  padding-block: 4.75rem 0.75rem;
+}
+.chaos[data-pin] :is(.chaos-lead, .chaos-outro) {
+  display: none;
+}
+.chaos[data-pin] h2 {
+  font-size: clamp(1.5rem, 4svh, 1.875rem);
+  margin-top: 0.75rem;
+}
+.chaos[data-pin] .chaos-count {
+  margin-top: 0.75rem;
+}
+.chaos[data-pin] .chaos-count [data-count] {
+  font-size: clamp(2.25rem, 6svh, 2.75rem);
+}
+.chaos[data-pin] .chaos-stage {
+  width: min(100%, calc((100svh - 20rem) / 1.05));
+}
+/* the booking card: wider and tighter, so it stays inside the stage */
+.chaos[data-pin] [data-card] {
+  inset-inline: 3%;
+  padding: 0.875rem;
+}
+.chaos[data-pin] [data-card] ul {
+  margin-top: 0.625rem;
+}
+.chaos[data-pin] [data-card] ul > li + li {
+  margin-top: 0.25rem;
+}
+.chaos[data-pin] [data-row] {
+  padding-block: 0.3rem;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
 /* Odyssey (components/home/odyssey.tsx)
    ------------------------------------------------------------------
    Static mode (no JS, reduced motion): the stage is a tall still and the
