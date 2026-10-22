@@ -203,7 +203,7 @@ export const modules: Module[] = [
     name: "AI Assistant",
     short: "Built in: calls tools and runs your operations automatically",
     description:
-      "Search bookings, customers and vendors, pull up details, list invoices, generate reports and read documents by chatting — in Arabic or English. Propose a new booking, invoice, business partner, expense or route rate (including importing a whole rate sheet from an attachment), or update a booking. Every write stops as a proposal a person has to confirm, then it's created through the exact same code path and role permissions as the manual interface.",
+      "Search bookings, customers and vendors, pull up details, list invoices, generate reports and read documents by chatting, in any language. Propose a new booking, invoice, business partner, expense or route rate (including importing a whole rate sheet from an attachment), or update a booking. Every write stops as a proposal a person has to confirm, then it's created through the exact same code path and role permissions as the manual interface.",
     icon: Bot,
     bullets: ["Calls the system's own tools", "Reads PDFs, images and rate sheets", "You confirm before anything is saved"],
     docs: "/docs/ai-assistant",

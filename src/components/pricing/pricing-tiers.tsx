@@ -61,7 +61,7 @@ const tierCopy = {
       period: "per month",
       features: [
         "Everything in Starter",
-        "Full AI assistant: does the work by chat and reads documents (Arabic & English)",
+        "Full AI assistant: does the work by chat and reads documents, in any language",
         "Email sync (Microsoft 365, Zoho; Google coming soon)",
         "100 GB document storage",
         "Custom domain and branded documents",
@@ -124,7 +124,7 @@ const tierCopy = {
       period: "شهرياً",
       features: [
         "كل ما في باقة الانطلاق",
-        "المساعد الذكي الكامل: ينجز العمل بالمحادثة ويقرأ المستندات (بالعربية والإنجليزية)",
+        "المساعد الذكي الكامل: ينجز العمل بالمحادثة ويقرأ المستندات، بأي لغة",
         "مزامنة البريد الإلكتروني (Microsoft 365 وZoho، وGoogle قريباً)",
         "مساحة 100 GB لتخزين المستندات",
         "نطاق مخصص ومستندات تحمل هويتك التجارية",

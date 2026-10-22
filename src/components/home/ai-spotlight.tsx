@@ -13,7 +13,7 @@ const copy = {
   en: {
     eyebrow: "AI Assistant · built into Routel",
     title: "Meet your AI operations co-worker.",
-    lead: "Routel's assistant sets up your company in a ten-minute chat, then works alongside your team: it creates quotations, bookings and invoices, records payments and answers “who owes us most?” from live data, in English or Arabic. It proposes every change on a card and you confirm it before anything is saved.",
+    lead: "Routel's assistant sets up your company in a ten-minute chat, then works alongside your team: it creates quotations, bookings and invoices, records payments and answers “who owes us most?” from live data, in any language. It proposes every change on a card and you confirm it before anything is saved.",
     cta: "See the assistant at work",
     capabilities: [
       "Sets your company up in a ten-minute chat",
@@ -47,7 +47,7 @@ const copy = {
   ar: {
     eyebrow: "المساعد الذكي · مدمج في Routel",
     title: "مساعدك الذكي في العمليات.",
-    lead: "مساعد Routel يجهّز شركتك في محادثة مدتها عشر دقائق، ثم يعمل مع فريقك: ينشئ عروض الأسعار والحجوزات والفواتير، ويسجّل الدفعات، ويجيب على «مين أكثر عميل يطلبنا فلوس؟» من بياناتك الحية، بالعربي أو الإنجليزي. وكل تغيير يعرضه عليك في بطاقة، ولا يُحفظ شيء قبل تأكيدك.",
+    lead: "مساعد Routel يجهّز شركتك في محادثة مدتها عشر دقائق، ثم يعمل مع فريقك: ينشئ عروض الأسعار والحجوزات والفواتير، ويسجّل الدفعات، ويجيب على «مين أكثر عميل يطلبنا فلوس؟» من بياناتك الحية، وبأي لغة. وكل تغيير يعرضه عليك في بطاقة، ولا يُحفظ شيء قبل تأكيدك.",
     cta: "شاهد المساعد وهو يعمل",
     capabilities: [
       "يجهّز شركتك في محادثة مدتها عشر دقائق",

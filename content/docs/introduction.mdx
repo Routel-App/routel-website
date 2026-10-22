@@ -1,24 +1,44 @@
 ---
 title: Introduction
-description: What Routel is, and a map of every screen in the system, in the order of its own menu.
+description: Routel is a freight forwarding system with an AI assistant at its core. One record per shipment, from the first quotation to the general ledger, and an assistant that operates it under the same rules as the screens.
 status: complete
 ---
 
-Routel is a freight forwarding platform. It runs the full life of a shipment, from the first quotation to the last payment, and keeps your books current from the same data. It grew out of the internal system a working freight forwarder in Malaysia uses every day, and it is now offered to other forwarders as a hosted service.
+Routel runs a freight forwarder's whole business on one record per shipment, the booking: rates, quotations, carrier bookings, the Bill of Lading, invoices, vendor costs, payments and the ledger. It grew out of the internal system a working forwarder uses every day, and it is now offered to other forwarders as a hosted service.
 
-## Why Routel
+At its core is an **AI assistant that operates the system**. It does not just answer questions about your data. It calls the system's own actions to search, report, read documents and prepare real work, and every change it prepares waits for a person to confirm it.
 
-Most forwarders run on a patchwork: a spreadsheet of rates, a template for quotations, another for the Bill of Lading, an accounting package that someone updates at month end, and a shared drive of PDFs. Every hand-off between those tools is a place where a number gets re-typed or a document gets lost.
+<Glance
+  items={[
+    { value: "90", label: "actions the assistant can call: 48 that read, 42 that write" },
+    { value: "0", label: "writes saved without a person's confirmation" },
+    { value: "1", label: "record per shipment, from quotation to ledger" },
+    { value: "Any", label: "language: it replies in the language you write in" },
+  ]}
+/>
 
-Routel keeps one record of the shipment, the booking, and lets every department work on it:
+## How the assistant works
 
-- **Pricing** maintains vendor buying rates by route and container type, so quotes are never built on an expired price.
-- **Sales** turns a current rate into a quotation for the customer.
-- **Operations** works the booking created from that quotation: confirms space with the carrier, tracks containers and dates, and generates the House Bill of Lading.
-- **Accounting** invoices the customer from the booking's charges, records vendor costs and overheads, and reads reports that are computed live from those entries.
-- **Management** sees profitability per booking, per customer, per branch and for the company.
+The assistant is a layer over the same actions the screens use, not a separate system with its own access to the database. That is what makes it safe to use on live operations and live accounts.
 
-Because everything posts to one General Ledger as it happens, there are no manual journal entries and no second set of numbers to reconcile.
+<AssistantFlow />
+
+- **The same actions, the same rules.** Each tool is one of Routel's own operations: create a booking, finalise an invoice, record a payment, run the P&L. On confirmation the server validates the values and checks the user's role again, exactly as it does for a form.
+- **A proposal, never a silent write.** Anything that writes stops as a card showing every field, line and amount. The user confirms, edits or cancels; there is no setting that skips this.
+- **Safe to retry.** Each proposal has its own identity. A second click returns the first result instead of writing twice, and a confirmation sent while the first is still running is refused.
+- **Accountable.** Every confirmed action is logged with the person who confirmed it, their role, the action, its values and the outcome. Notes, tasks, follow-ups, filed e-mails and draft quotations can be undone for ten minutes; anything that moved money is reversed with its own document.
+- **Hard to steer from outside.** It won't store passwords, keys or card numbers in its memory, and it stops saving memory once a conversation has read outside material such as an uploaded file, an e-mail or a public form.
+- **Private by design.** Requests to the AI model are sent with storage turned off at the provider. Conversation history stays in Routel, private to each user.
+
+The full guide, with everything it reads and prepares: [AI Assistant](/docs/ai-assistant).
+
+## Built for real operations
+
+- **One record per shipment.** Pricing keeps buying rates by lane and container with validity, Sales quotes from a current rate, Operations works the booking that quotation became, Accounting invoices from the booking's own charges, and Management sees profit per booking, customer and branch. Nothing is re-typed between departments.
+- **Books that keep themselves.** Invoices, payments, notes, vendor costs and expenses post to one General Ledger as they happen. Debits equal credits by construction, there are no manual journal entries, and a finalised invoice is locked.
+- **Controls where they matter.** An invoice can't be finalised without the carrier's Master B/L number, and a customer's current credit exposure is shown against their limit when a booking is created for them.
+- **Its own server and database per company.** Each company, or each legal entity in a group, runs on its own deployment with its own database, base currency, tax and numbering. A group's branches are consolidated in USD, server to server, without sharing a database.
+- **Operated, not just hosted.** Automated daily database backups, a change history of every setting with before and after values, and a system health page for the background jobs.
 
 ## The system, screen by screen
 
@@ -109,12 +129,12 @@ This index follows the app's own menu, top to bottom. Every page below is comple
 
 ## Currencies
 
-Invoices and books run in exactly two currencies: your **base currency** (MYR in Malaysia, IDR in Indonesia) and **USD**. Costs recorded in a different currency are converted with the exchange rate captured on the line, so booking profitability compares like with like. The **Group** view puts every branch side by side, consolidated in USD.
+Invoices and books run in exactly two currencies: your **base currency** (SAR in Saudi Arabia, MYR in Malaysia, IDR in Indonesia) and **USD**. Costs recorded in a different currency are converted with the exchange rate captured on the line, so booking profitability compares like with like. The **Group** view puts every branch side by side, consolidated in USD.
 
 ## Where to start
 
+- Start with the assistant: [AI Assistant](/docs/ai-assistant). Most of what follows can be done by asking it.
 - Setting up a new company: [Your first ten minutes](/docs/getting-started).
 - If you run operations, start with [Bookings](/docs/bookings).
 - If you run the accounts, start with [Invoices](/docs/invoicing).
-- To see what the assistant can and cannot do, read [AI assistant](/docs/ai-assistant).
 - Who sees what: [Roles and permissions](/docs/roles).

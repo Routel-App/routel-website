@@ -42,7 +42,7 @@ const copy = {
       },
       {
         title: "Arabic is not an afterthought",
-        text: "The assistant works fully in Arabic or English, switchable mid-conversation, because a meaningful part of the freight-forwarding world runs its business in Arabic.",
+        text: "The assistant is multilingual: it works in whatever language your team writes in, Arabic included, switchable mid-conversation, because a meaningful part of the freight-forwarding world runs its business in Arabic.",
       },
     ],
     nowEyebrow: "Where we are now",
@@ -87,7 +87,7 @@ const copy = {
       },
       {
         title: "العربية ليست فكرة لاحقة",
-        text: "يعمل المساعد الذكي بالكامل بالعربية أو الإنجليزية، مع إمكانية التبديل بينهما في منتصف المحادثة، لأن جزءاً مهماً من عالم الشحن يدير أعماله بالعربية.",
+        text: "المساعد الذكي متعدد اللغات: يعمل باللغة التي يكتب بها فريقك، والعربية منها، مع إمكانية التبديل في منتصف المحادثة، لأن جزءاً مهماً من عالم الشحن يدير أعماله بالعربية.",
       },
     ],
     nowEyebrow: "أين نحن اليوم",

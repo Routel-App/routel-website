@@ -86,7 +86,7 @@ const copy: Record<Locale, Copy> = {
     statuses: ["Booking Pending", "Booking Confirmed", "Gate In", "SI Submitted", "Vessel Loaded", "Departed", "In Transit", "Arrived", "Telex Status", "Shipment Closed"],
     header: "Routel Assistant",
     sub: "Calls the system's tools · writes only after you confirm",
-    input: "Ask in English or Arabic…",
+    input: "Ask in any language…",
     more: "See the module",
     confirmed: "Confirmed",
     items: [
@@ -131,7 +131,7 @@ const copy: Record<Locale, Copy> = {
     statuses: ["الحجز قيد الانتظار", "تم تأكيد الحجز", "دخول البوابة", "تم تقديم تعليمات الشحن", "تم التحميل على السفينة", "غادرت", "قيد النقل", "وصلت", "حالة التلكس", "الشحنة مغلقة"],
     header: "مساعد Routel",
     sub: "يستدعي أدوات النظام · ولا يحفظ شيئاً قبل تأكيدك",
-    input: "اطلب بالعربي أو الإنجليزي…",
+    input: "اطلب بأي لغة…",
     more: "اعرف الوحدة",
     confirmed: "تم التأكيد",
     items: [

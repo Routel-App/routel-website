@@ -637,7 +637,7 @@ export const platformContent: Record<string, PlatformContent> = {
     eyebrow: "AI Assistant",
     title: "Meet your AI operations co-worker",
     description:
-      "Routel's assistant sets up your company in a ten-minute chat, then works alongside your team: it creates quotations, bookings and invoices, records payments and answers \"who owes us most?\" from live data, in English or Arabic. It proposes every change on a card and you confirm it before anything is saved.",
+      "Routel's assistant sets up your company in a ten-minute chat, then works alongside your team: it creates quotations, bookings and invoices, records payments and answers \"who owes us most?\" from live data, in any language. It proposes every change on a card and you confirm it before anything is saved.",
     stats: [
       { value: "10 min", label: "to set up your company, by chat" },
       { value: "0", label: "records saved without your confirmation" },
@@ -662,10 +662,10 @@ export const platformContent: Record<string, PlatformContent> = {
       { title: "User guide built in", description: "\"How do I finalize an invoice?\" is answered from Routel's own user guide, not guessed." },
       { title: "Undo and audit log", description: "Every confirmed action is logged: who did what, and the outcome. Notes, tasks, follow-ups, filed e-mails and draft quotations can be undone for 10 minutes; anything that moved money or got a document number is reversed by its own document, as accounting requires." },
       { title: "Cost control", description: "Admins see messages and model usage per day, and set a daily message limit per person." },
-      { title: "Arabic and English", description: "Ask in either language, including Gulf and Malaysian phrasing. The whole interface is translated." },
+      { title: "Multilingual", description: "Ask in any language, or mix languages in one sentence, and it replies in the language you wrote in, including Gulf and Malaysian phrasing." },
     ],
     workflow: [
-      { title: "You ask", description: "In Arabic or English, from any page — and attach a document if you have one." },
+      { title: "You ask", description: "In any language, from any page — and attach a document if you have one." },
       { title: "It works it out", description: "It searches your live data, reads the attachment and calls the same functions the screens use." },
       { title: "It proposes", description: "Every change appears as a card with the exact fields and amounts." },
       { title: "You confirm", description: "Only the Confirm button saves. The action is logged, and safe ones can be undone for 10 minutes." },

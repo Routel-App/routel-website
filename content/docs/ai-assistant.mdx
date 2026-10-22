@@ -1,74 +1,157 @@
 ---
 title: AI Assistant
-description: A chat assistant inside Routel that performs real actions, in Arabic or English, with a human confirmation before anything is saved.
+description: The multilingual assistant at the heart of Routel. It reads, searches and reports on the spot, prepares bookings, invoices, payments and documents for you, and saves nothing until you confirm.
 status: complete
 ---
 
-The assistant lives inside Routel as a chat panel. You describe what you want in Arabic or English, and it does the work through the same actions the interface uses: creating or updating a booking, drafting an invoice, recording an expense, running a report or fetching a document.
+The assistant is the fastest way to work in Routel. Instead of finding the right screen and filling in a form, you say what you need in a sentence: "quote Al Noor for a 40HC to Jebel Ali", "who owes us the most?", "record the carrier's confirmation on this booking". The assistant works it out, calls the same actions the screens use, and puts the result in front of you.
 
-Two rules make it safe to use on real data:
+It does two kinds of work:
 
-1. **It has your permissions, not its own.** The assistant acts as the signed-in user and is subject to the same [role-based access](/docs/roles) as every screen.
-2. **It never saves without you.** Any action that writes data is shown as a proposal. You review it and confirm, edit or cancel. Reads (reports, searches, downloads) run immediately.
+- **Reading** runs immediately: searching, looking up a booking or an invoice, reports, statements, downloads, the alerts, your daily brief.
+- **Writing** is always a proposal: a card that shows exactly what will be created or changed. Nothing is saved until you press **Confirm**.
 
-## What it can do
+<Shot name="assistant" />
 
-| Area | Examples of what to ask |
-| --- | --- |
-| Bookings | "Create a booking for Al Noor Trading, Port Klang to Jebel Ali, 2 × 40HC, ETD 12 October." "Update the ETA on booking NXS26000412 to 28 October." "Record the carrier booking on MSC Isabella voyage 2638W." Upload a carrier confirmation PDF and the assistant extracts the fields. |
-| Quotations and rates | "Quote Al Noor for a 40HC Port Klang to Jeddah using the Maersk rate." "Add a route rate: Port Klang to Jebel Ali, 40HC, USD 1,450, valid to end of December." Attach a whole rate sheet and the assistant proposes every rate in it for you to review. |
-| Business partners | "Create a business partner called Al Noor Trading LLC, 30-day terms, USD." |
-| Invoices | "Create an invoice for booking NXS26000412 in MYR." |
-| Expenses | "Record September office rent, MYR 6,500." |
-| Vendor costs | Upload a vendor invoice PDF and ask: "Propose the vendor cost for this on booking NXS26000412." The assistant extracts the line items. |
-| Statements | "Download Al Noor's statement of account as PDF." "Vendor statement for Maersk for August." |
-| Reports | "Which invoices are overdue?" "Show AR aging." "Customer profitability for Q3." "What's our cash position?" |
-| Documents | "Find the packing list for the Al Noor shipment." "Send me the House B/L for booking NXS26000412." |
+## Opening it
 
-## The confirmation flow
+- From the top bar of any page: **Ask the Routel assistant…** (an icon on phones).
+- From the keyboard: **Ctrl + G** on Windows, **⌘ + G** on Mac, from anywhere in Routel.
+- From the Help Center, which can hand your question straight to the assistant.
+- When an admin signs in to a company that isn't set up yet, it opens by itself, once per browser, to run the [guided setup](/docs/getting-started).
+
+**It knows where you are.** On a booking, a business partner, a quotation, an invoice or a credit note, "this" means that record: "add a follow-up on this for Thursday", "issue the invoice for this booking". It also follows the conversation, so after talking about a partner or a booking you can say "their balance" or "its status" without repeating the name.
+
+## Two rules that make it safe on real data
+
+1. **It has your permissions, not its own.** It acts as you and is subject to the same [role-based access](/docs/roles) as every screen. If your role can't do something on the screen, it can't do it in the chat either, and it tells you why.
+2. **It never saves without you.** Every action that writes data stops as a proposal card. You confirm, edit or cancel. There is no setting that lets it skip this.
+
+## What you can ask it to do
+
+<Capabilities
+ items={[
+    {"area": "Bookings", "reads": "Search bookings, open a booking, its documents and its activity log", "writes": "Create a booking; update any field (carrier booking, vessel, cut-offs, dates, status); file a document on it; add a note, a task or a follow-up and mark them done", "ask": "\"Create a booking for Al Noor Trading, Port Klang to Jebel Ali, 2 × 40HC, ETD 12 October.\""},
+    {"area": "Quotations", "reads": "Search quotations, open one", "writes": "Create a quotation; update its status, validity or notes; convert it into a booking (or a booking and a draft invoice)", "ask": "\"Quote Al Noor for a 40HC Port Klang to Jebel Ali on the Maersk rate, valid 14 days.\""},
+    {"area": "Route rates", "reads": "Search rates and ports, lane margins", "writes": "Add one rate or several in one card; import a whole rate sheet from Excel or CSV; update or retire a rate", "ask": "Attach a rate sheet: \"Load these rates.\""},
+    {"area": "Charges and invoices", "reads": "A booking's charges and profit; list, open and export invoices", "writes": "Add cost and sale lines; create the draft invoice from the sale lines; finalise an invoice", "ask": "\"Invoice booking NXS26000412 from its sale lines.\""},
+    {"area": "Credit and debit notes", "reads": "List notes", "writes": "Create, finalise and apply a credit or debit note", "ask": "\"Credit Al Noor USD 150 against INV-26-0412.\""},
+    {"area": "Receipts and payments", "reads": "Unpaid vendor costs, vouchers, payments waiting in the finance mailbox", "writes": "Record a customer receipt or a vendor payment, with the exact amount for each document; accept or reject a suggested payment match", "ask": "\"Al Noor paid MYR 13,050 today, apply it.\""},
+    {"area": "Costs and expenses", "reads": "Expense categories and expenses", "writes": "Record vendor costs on a booking (read from the vendor's invoice); record an operating expense; add an expense category", "ask": "Attach a vendor bill: \"Put these costs on booking NXS26000412.\""},
+    {"area": "House B/L", "reads": "Open a booking's House B/L", "writes": "Draft the House B/L from the booking's data", "ask": "\"Issue the House B/L for booking NXS26000412.\""},
+    {"area": "Reports", "reads": "Overdue invoices, AR and AP aging, customer profitability, cash position, expense summary, AP outstanding, P&L, trial balance, tax summary, business overview", "ask": "\"Who owes us the most?\" \"What's our cash position?\""},
+    {"area": "Statements and downloads", "reads": "Statement of account (customer or vendor) as PDF, invoice exports as CSV or PDF, a booking's documents", "ask": "\"Download Al Noor's statement for September.\""},
+    {"area": "Mailbox and queues", "reads": "E-mails, documents waiting for review, partner registrations, credit applications, leads", "writes": "Link an e-mail to a booking; reject a document; decide a registration; review a credit application; update a lead", "ask": "\"Which e-mails haven't been filed to a booking?\""},
+    {"area": "Your day", "reads": "The alerts and your daily brief", "ask": "\"What needs me today?\""},
+    {"area": "Company setup (admins)", "reads": "Setup progress, company settings, numbering", "writes": "Update company details, numbering and logo; add users and change their roles; add charge types", "ask": "\"Add Sara as an accountant.\""},
+    {"area": "Search and help", "reads": "Search across everything; answers from the user guide with a link to the right page", "ask": "\"Where do I change the invoice footer?\""},
+  ]}
+/>
+
+Replies are short and in plain words. When there are a few known choices (a role, a container type, which of several matches) it shows them as buttons you can tap. When a guide answer points to a screen, the page name is a link, and some answers carry a **Show me on the screen** button.
+
+## Reading your documents
+
+Attach a file to the message with the paperclip, and the assistant reads it before deciding what to do.
+
+- **What it reads:** PDF, images (PNG, JPEG, WebP, GIF), Excel (.xlsx, .xls), CSV and Word (.docx), up to 20 MB. Scanned PDFs and photos are read too.
+- **A carrier's booking confirmation** becomes an update to the booking: vessel and voyage, cut-offs, the carrier's booking number.
+- **A vendor's invoice** becomes cost lines on the booking, each with its currency.
+- **A rate sheet** in Excel or CSV becomes a single card that says how many rates will be added and how many updated, without duplicates.
+- **A receipt or a bill** for company overhead becomes an expense.
+- **A registration certificate or a letterhead**, during setup, fills in several company details at once.
+- **Any other document** can simply be filed on a booking.
+
+<Shot name="documents" />
+
+## The confirmation card
 
 <Steps>
   <Step title="You ask">
-    In Arabic, English or a mix. The assistant asks for anything it is missing rather than guessing.
+    In a sentence, in any language. If something is missing it asks, rather than guessing.
   </Step>
   <Step title="It proposes">
-    A card shows exactly what will be created or changed: every field, every line, every amount.
+    A card shows every field, line and amount that will be saved, with names instead of internal codes. Lists of
+    lines show as a table.
   </Step>
   <Step title="You decide">
-    **Confirm** saves it and records your name in the activity log. **Edit** lets you adjust before saving. **Cancel**
-    discards it. Nothing happens until one of these is pressed.
+    **Confirm** saves it. **Edit** opens the fields so you can correct them first. **Cancel** discards it. Nothing is
+    written until one of these is pressed.
   </Step>
 </Steps>
 
+A few details that matter on real data:
+
+- **Checked again on save.** When you confirm, Routel validates the values and your role again, exactly as the screen would.
+- **A double click does nothing twice.** The Confirm button locks while it runs, and a second confirm of the same card returns the first result.
+- **Money is allocated exactly.** Before recording a receipt or a payment it looks up what is owed and proposes the amount for each document, never a lump sum.
+- **Data stays in English.** Routel stores its operational data in English, so it writes port names, cargo descriptions and other values in standard English even when you chat in another language. If a value on a card isn't in English, the card highlights it before you confirm.
+- **It knows what you decided.** Confirmed, cancelled or failed, the outcome goes back into the conversation, so it never proposes the same thing twice without being asked.
+
 <Callout kind="note" title="No silent execution">
-  There is no setting that lets the assistant skip confirmation. This is deliberate. A booking, an invoice or a
-  ledger entry should never be created because a sentence was misread.
+  The assistant never tells you something was created before you confirm it. A booking, an invoice or a payment is
+  never saved because a sentence was misread.
 </Callout>
 
-## Reading vendor invoices
+## Undo
 
-Upload a vendor's PDF invoice in the chat and ask the assistant to propose the vendor cost for a booking. It reads the document, extracts the line items, currency and totals, and shows them as proposed cost (AP) lines on the booking. Check the lines against the paper, confirm, and the cost posts with its exchange rate.
+For ten minutes after confirming, a note, a task, a follow-up, an e-mail filed to a booking or a draft quotation can be undone, by the person who confirmed it or by an admin. Anything that moved money or received a document number is reversed the proper way, with its own document, such as a credit note.
 
-## Languages
+## Your daily brief
 
-The assistant understands and replies in **Arabic** and **English**. You can switch mid-conversation or mix both in one sentence. Proposals and generated documents remain in the language of your Routel data; the conversation is in yours.
+When a conversation is empty, the assistant opens with a **Today** card, built straight from your data: your tasks and follow-ups due, arrivals in the next seven days, bookings still missing a Master B/L or an operations owner, overdue invoices, drafts older than a week, vendor bills due, delivered bookings not yet invoiced and quotations about to expire. Each person sees what their role covers. Ask "what needs me today?" to get it at any time.
 
-## Permissions in practice
+<Shot name="today" />
+
+## Multilingual
+
+The assistant is multilingual. Write in the language you work in and it replies in the same language. You can switch languages mid-conversation or mix them in one sentence, and it still understands. Whatever the language of the chat, the data it saves stays in English, so every screen, document and report reads the same for everyone.
+
+## Memory and history
+
+- **Preferences it keeps.** Tell it "remember that our usual trucker is Swift Haulage" or "always show amounts in USD", and it keeps the note across conversations. Ask it to list what it remembers, or to forget one note or all of them. Notes are private to you: up to 50, of 300 characters each.
+- **What it refuses to remember.** Anything that looks like a password, a key, a PIN or a card number. It also won't save a note after reading outside material in the same conversation, such as an uploaded file or an e-mail.
+- **Conversation history.** The panel reopens your last conversation. **Conversation history** lists your last 30, and **New chat** starts a fresh one.
+
+## Who can do what
+
+The assistant follows the same role map as the screens:
+
+| Area | Roles |
+| --- | --- |
+| Bookings | Admin, Management, Operations, Sales |
+| Quotations | Admin, Management, Sales, Pricing |
+| Route rates | Admin, Management, Operations, Sales, Pricing |
+| House B/L | Admin, Management, Operations |
+| Vendor costs on bookings | Admin, Management, Accounting, Operations |
+| Invoices, receipts, payments, credit notes, statements | Admin, Management, Accounting |
+| Reports | Admin, Management, Accounting |
+| Expenses | Admin, Management |
+| Notes, tasks, follow-ups, alerts | Everyone |
+
+A few actions are narrower: granting credit terms or a credit limit and reviewing credit applications are for Admin and Management; company setup, users and roles, registrations and leads are for Admin. Balances, invoice amounts and booking profit are hidden from roles outside finance.
 
 | You are | You ask | Result |
 | --- | --- | --- |
-| Operations | "Create an invoice for this booking" | Refused with an explanation: invoicing belongs to the finance roles. |
-| Sales | "Show me all overdue invoices" | Refused with an explanation: finance is for Admin, Management and Accounting. |
-| Accounting | "Record rent for September" | Proposal card, then confirm. |
-| Management | "Customer profitability for Q3" | Report runs immediately. |
+| Operations | "Create an invoice for this booking" | Refused with the reason: invoicing belongs to the finance roles. |
+| Sales | "Show me all overdue invoices" | Refused with the reason: finance is for Admin, Management and Accounting. |
+| Accounting | "Record the payment from Al Noor" | A card with the exact allocation per invoice, then confirm. |
+| Management | "Customer profitability for Q3" | The report runs immediately. |
+
+## For admins
+
+**Settings → AI Assistant** shows usage for the last 30 days, sets a **daily message limit per person** (200 by default, 0 for no limit), and lists **What the assistant did**: every confirmed action, who confirmed it, the result, and Undo where it applies.
+
+Whether the assistant is fully on depends on your plan. On plans without it, it still helps the admin set the company up during the first 30 days. See [Getting started](/docs/getting-started).
 
 ## What it does not do
 
-- It does not act on its own schedule. It only does something when someone asks.
-- It does not send email or messages to customers or vendors.
-- It does not change users, roles or settings.
-- It does not remember conversations across users; each person's chat is their own.
+- It does not send e-mails or messages to customers or vendors.
+- It does not delete bookings, invoices, partners or users. The only removal is the ten-minute undo above.
+- It does not act on its own. It only does something when someone asks.
+- It does not approve documents from the review queue; that is done on the Documents page.
+- It does not change the country, currency or time zone.
 
-## Audit
+## Privacy and audit
 
-Actions confirmed through the assistant are logged against the person who confirmed them, with the same detail as a manual change. See the activity log on the booking or record.
+Each person's conversations are their own. Requests to the AI model are sent with storage turned off at the provider; your conversation history is kept in Routel. Every action confirmed through the assistant is logged against the person who confirmed it, with the same detail as a change made on the screen. See the activity log on the record.

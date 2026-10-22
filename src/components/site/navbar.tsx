@@ -90,7 +90,7 @@ export function Navbar() {
           <Logo inverse={inverse} />
         </Link>
 
-        <nav aria-label="Primary" className="hidden items-center gap-1 md:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
           <ProductMenu inverse={inverse} />
           {nav.map((item) => (
             <div key={item.href} className="group/nav relative">
@@ -120,7 +120,7 @@ export function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-2 lg:flex">
           <LanguageSwitch path={pathname} inverse={inverse} />
           <Button href="/docs" variant={inverse ? "inverse-ghost" : "ghost"} size="sm">
             {t.docs}
@@ -130,12 +130,12 @@ export function Navbar() {
           </Button>
         </div>
 
-        <div className="flex items-center gap-1 md:hidden">
+        <div className="flex items-center gap-1 lg:hidden">
           <LanguageSwitch path={pathname} inverse={inverse} className="h-10" />
           <button
             type="button"
             className={cn(
-              "inline-flex h-10 w-10 items-center justify-center rounded-full md:hidden",
+              "inline-flex h-10 w-10 items-center justify-center rounded-full lg:hidden",
               inverse ? "text-white hover:bg-white/10" : "text-ink-900 hover:bg-fog-100",
             )}
             aria-expanded={open}
@@ -156,7 +156,7 @@ export function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={reduce ? undefined : { opacity: 0, y: -6 }}
             transition={{ duration: 0.18, ease: "easeOut" }}
-            className="border-t border-fog-200 bg-white md:hidden"
+            className="border-t border-fog-200 bg-white lg:hidden"
           >
             <Container className="flex flex-col gap-1 py-4">
               <p className="px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-fog-500">{t.product}</p>
