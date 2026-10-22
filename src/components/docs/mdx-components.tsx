@@ -1,6 +1,6 @@
 import Link from "@/components/i18n/link";
 import type { ComponentProps, ReactNode } from "react";
-import { Info, Lightbulb, TriangleAlert, ShieldCheck } from "lucide-react";
+import { Info, Lightbulb, TriangleAlert, ShieldCheck, Eye, PenLine, MessageSquareText } from "lucide-react";
 import type { MDXComponents } from "mdx/types";
 import { cn } from "@/lib/utils";
 import { getLocale } from "@/lib/locale-server";
@@ -101,7 +101,58 @@ export function Fields({ rows }: { rows: Array<[string, string]> }) {
   );
 }
 
+/**
+ * What the assistant does in one area, as a card: what it reads straight
+ * away, what it prepares for confirmation, and a sample request. Used
+ * instead of a wide table so it reads on a phone.
+ */
+type Capability = { area: string; reads?: string; writes?: string; ask?: string };
+const capabilityLabels: Record<Locale, { reads: string; writes: string; ask: string }> = {
+  en: { reads: "Reads, immediately", writes: "Prepares, for your confirmation", ask: "Ask it" },
+  ar: { reads: "يقرأ فوراً", writes: "يجهّز لتأكيدك", ask: "اطلب منه" },
+};
+
+export async function Capabilities({ items }: { items: Capability[] }) {
+  const t = capabilityLabels[await getLocale()];
+  return (
+    <div className="not-prose my-8 grid gap-3 sm:grid-cols-2">
+      {items.map((c) => (
+        <div key={c.area} className="flex flex-col rounded-2xl border border-fog-200 bg-white p-4 shadow-card">
+          <p className="font-display text-[15px] font-bold text-ink-900">{c.area}</p>
+          {c.reads ? (
+            <div className="mt-3 flex gap-2.5">
+              <Eye className="mt-0.5 h-4 w-4 shrink-0 text-fog-400" aria-hidden />
+              <p className="text-[13px] leading-relaxed text-fog-700">
+                <span className="block text-[11px] font-semibold uppercase tracking-[0.08em] text-fog-500">{t.reads}</span>
+                {c.reads}
+              </p>
+            </div>
+          ) : null}
+          {c.writes ? (
+            <div className="mt-3 flex gap-2.5">
+              <PenLine className="mt-0.5 h-4 w-4 shrink-0 text-spark-500" aria-hidden />
+              <p className="text-[13px] leading-relaxed text-fog-700">
+                <span className="block text-[11px] font-semibold uppercase tracking-[0.08em] text-spark-700">{t.writes}</span>
+                {c.writes}
+              </p>
+            </div>
+          ) : null}
+          {c.ask ? (
+            <div className="mt-auto pt-3.5">
+              <p className="flex items-start gap-2 rounded-xl rounded-ss-sm bg-ink-900 px-3 py-2 text-[12.5px] leading-relaxed text-white">
+                <MessageSquareText className="mt-0.5 h-3.5 w-3.5 shrink-0 text-spark-300" aria-label={t.ask} />
+                <span dir="auto">{c.ask}</span>
+              </p>
+            </div>
+          ) : null}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export const mdxComponents: MDXComponents = {
+  Capabilities,
   Shot,
   h2: (p) => <Heading as="h2" {...p} />,
   h3: (p) => <Heading as="h3" {...p} />,

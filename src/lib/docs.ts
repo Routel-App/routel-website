@@ -32,7 +32,7 @@ export const INDEX_SLUG = "introduction";
 
 /** The sidebar mirrors the app's own menu: Dashboard, Daily operations, Partners, Finance, Files, Reports, Admin, then the top bar. */
 const groups: Array<{ title: Record<Locale, string>; slugs: string[] }> = [
-  { title: { en: "Getting started", ar: "البداية" }, slugs: ["introduction", "getting-started", "roles"] },
+  { title: { en: "Getting started", ar: "البداية" }, slugs: ["introduction", "ai-assistant", "getting-started", "roles"] },
   { title: { en: "Dashboard & daily operations", ar: "لوحة التحكم والعمليات اليومية" }, slugs: ["dashboard", "bookings", "quotations", "routes"] },
   { title: { en: "Partners", ar: "الشركاء" }, slugs: ["business-partners"] },
   {
@@ -42,7 +42,7 @@ const groups: Array<{ title: Record<Locale, string>; slugs: string[] }> = [
   { title: { en: "Files", ar: "الملفات" }, slugs: ["documents", "email-sync"] },
   { title: { en: "Reports & Group", ar: "التقارير والمجموعة" }, slugs: ["accounting", "group"] },
   { title: { en: "Admin", ar: "الإدارة" }, slugs: ["admin", "visitor-tracking"] },
-  { title: { en: "Top bar", ar: "الشريط العلوي" }, slugs: ["ai-assistant", "alerts", "labeling-center"] },
+  { title: { en: "Top bar", ar: "الشريط العلوي" }, slugs: ["alerts", "labeling-center"] },
   { title: { en: "For your customers", ar: "لعملائك" }, slugs: ["tracking"] },
 ];
 

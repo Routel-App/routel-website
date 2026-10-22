@@ -32,7 +32,7 @@ const copy = {
   en: {
     product: "Product",
     aiTitle: "AI Assistant",
-    aiBody: "Built into Routel: it calls tools and runs your operations automatically, in Arabic or English, with your confirmation before anything is saved.",
+    aiBody: "Built into Routel: it calls tools and runs your operations automatically, in any language, with your confirmation before anything is saved.",
     aiLink: "See it work",
     docs: "Documentation",
     glossary: "Glossary",
@@ -41,7 +41,7 @@ const copy = {
   ar: {
     product: "المنتج",
     aiTitle: "المساعد الذكي",
-    aiBody: "مدمج داخل Routel: يستدعي الأدوات وينفّذ عملياتك تلقائيًا، بالعربية أو الإنجليزية، وبتأكيدك قبل حفظ أي شيء.",
+    aiBody: "مدمج داخل Routel: يستدعي الأدوات وينفّذ عملياتك تلقائيًا، بأي لغة، وبتأكيدك قبل حفظ أي شيء.",
     aiLink: "شاهده يعمل",
     docs: "التوثيق",
     glossary: "المصطلحات",

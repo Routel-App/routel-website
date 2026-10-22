@@ -40,7 +40,7 @@ const chatCopy = {
     total: ["Subtotal before SST (MYR eq.)", "MYR 16,578.00"],
     confirm: "Confirm",
     edit: "Edit",
-    input: "Ask in Arabic or English…",
+    input: "Ask in any language…",
   },
   ar: {
     header: "مساعد Routel",
@@ -62,7 +62,7 @@ const chatCopy = {
     total: ["الإجمالي قبل الضريبة (بالريال)", "SAR 14,850.00"],
     confirm: "تأكيد",
     edit: "تعديل",
-    input: "اسأل بالعربي أو الإنجليزي…",
+    input: "اسأل بأي لغة…",
   },
 } as const;
 

@@ -11,7 +11,7 @@ const copy: Record<Locale, Copy> = {
     eyebrow: "Questions",
     title: "What forwarders ask before they switch",
     items: [
-      { q: "Does Routel work in Arabic?", a: "Yes. The whole interface works in Arabic and English and mirrors right to left, and the AI assistant understands and answers in both." },
+      { q: "Does Routel work in Arabic?", a: "Yes. The whole interface works in Arabic and English and mirrors right to left, and the AI assistant is multilingual: it answers in whatever language you write in." },
       { q: "Which currencies and taxes does it handle?", a: "Each deployment uses its country's base currency plus USD, with that country's tax: SST in Malaysia, PPN in Indonesia and VAT in Saudi Arabia, each with its own tax report. Saudi invoices print as bilingual tax invoices with the ZATCA QR code." },
       { q: "Can we try it before we pay?", a: "Yes. The Free plan covers 3 bookings with up to 2 invoices each, so you can run real shipments end to end before choosing Starter ($79) or Growth ($149)." },
       { q: "Will the AI change our data on its own?", a: "No. The assistant proposes and you confirm: nothing is saved until a person approves it, it works within the user's own permissions, and every action it carries out is logged." },
@@ -23,7 +23,7 @@ const copy: Record<Locale, Copy> = {
     eyebrow: "أسئلة",
     title: "ما تسأله شركات الشحن قبل الانتقال",
     items: [
-      { q: "هل يعمل Routel بالعربية؟", a: "نعم. الواجهة كاملة بالعربية والإنجليزية باتجاه من اليمين إلى اليسار، والمساعد الذكي يفهم اللغتين ويجيب بهما." },
+      { q: "هل يعمل Routel بالعربية؟", a: "نعم. الواجهة كاملة بالعربية والإنجليزية باتجاه من اليمين إلى اليسار، والمساعد الذكي متعدد اللغات: يجيبك باللغة التي تكتب بها." },
       { q: "ما العملات والضرائب التي يدعمها؟", a: "في السعودية يعمل بالريال السعودي والدولار الأمريكي، مع ضريبة القيمة المضافة 15% وتقريرها، وتُطبع الفواتير «فاتورة ضريبية» باللغتين مع رمز QR وفق متطلبات ZATCA." },
       { q: "هل يمكن التجربة قبل الدفع؟", a: "نعم. الباقة المجانية تشمل 3 حجوزات بحد أقصى فاتورتين لكل حجز، فتجرب شحنات حقيقية من البداية إلى النهاية قبل اختيار باقة الانطلاق ($79) أو النمو ($149)." },
       { q: "هل يغيّر المساعد الذكي بياناتنا من تلقاء نفسه؟", a: "لا. المساعد يقترح وأنت تؤكد: لا شيء يُحفظ قبل موافقة شخص، ويعمل ضمن صلاحيات المستخدم نفسه، وكل عملية ينفذها مسجّلة." },

@@ -18,7 +18,7 @@ type P = { ask: string; result: string };
 
 const prompts: Record<Locale, { label: string; examples: string; items: P[] }> = {
   en: {
-    label: "Ask in a sentence, in English or Arabic",
+    label: "Ask in a sentence, in any language",
     examples: "Things teams ask it",
     items: [
       { ask: "Create a booking for Al Noor Trading, Jeddah to Shanghai, 2 × 40HC", result: "Booking proposed · confirm to save" },
@@ -30,7 +30,7 @@ const prompts: Record<Locale, { label: string; examples: string; items: P[] }> =
     ],
   },
   ar: {
-    label: "اطلب بجملة، بالعربي أو الإنجليزي",
+    label: "اطلب بجملة، بأي لغة",
     examples: "أمثلة مما يطلبه الفريق",
     items: [
       { ask: "أنشئ حجزاً لشركة النور للتجارة من جدة إلى شنغهاي، 2 × 40HC", result: "حجز مقترح · أكّد للحفظ" },

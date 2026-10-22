@@ -27,7 +27,7 @@ const copy: Record<Locale, Copy> = {
       { title: "Two currencies, no spreadsheets", text: "Documents use your base currency and USD. Vendor costs in USD convert at the booking's own rate, so profit is right." },
       { title: "Tax by country", text: "SST in Malaysia, PPN in Indonesia, VAT in Saudi Arabia, each with its own rates and its own tax report." },
       { title: "Saudi tax invoices", text: "A bilingual Tax Invoice (or Simplified Tax Invoice) with the ZATCA QR code once it's issued." },
-      { title: "Arabic, right to left", text: "Every screen and the AI assistant work in Arabic as well as English, mirrored right to left." },
+      { title: "Arabic, right to left", text: "Every screen works in Arabic as well as English, mirrored right to left, and the AI assistant answers in any language." },
     ],
     countries: [
       { name: "Malaysia", money: "MYR + USD", tax: "SST 6%" },
@@ -44,7 +44,7 @@ const copy: Record<Locale, Copy> = {
       { title: "الريال والدولار", text: "المستندات بالريال والدولار فقط، وتكاليف الموردين بالدولار تُحوَّل بسعر الحجز نفسه، فيبقى الربح صحيحاً." },
       { title: "ضريبة القيمة المضافة 15%", text: "نسبتا 15% و0% على البنود، مع تقرير ضريبة القيمة المضافة جاهز من الفواتير نفسها." },
       { title: "فاتورة ضريبية برمز QR", text: "«فاتورة ضريبية» أو «فاتورة ضريبية مبسطة» باللغتين، مع رمز QR وفق متطلبات هيئة الزكاة والضريبة والجمارك (ZATCA) بعد إصدارها." },
-      { title: "عربي من اليمين إلى اليسار", text: "كل الشاشات والمساعد الذكي تعمل بالعربية كما تعمل بالإنجليزية، باتجاه من اليمين إلى اليسار." },
+      { title: "عربي من اليمين إلى اليسار", text: "كل الشاشات تعمل بالعربية كما تعمل بالإنجليزية، باتجاه من اليمين إلى اليسار، والمساعد الذكي يجيب بأي لغة." },
     ],
   },
 };
