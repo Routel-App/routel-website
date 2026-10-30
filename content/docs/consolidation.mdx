@@ -1,0 +1,50 @@
+---
+title: Consolidation & LCL
+description: One master shipment carrying several bookings, its cargo manifest, and its costs shared across the bookings to the cent.
+status: complete
+---
+
+A **consolidation** is one master shipment carrying several house bookings. It can be an LCL container under your own MBL, an air consolidation under your own MAWB, or space bought from a co-loader. It is a business activity an admin opens in **Settings → Business activities**.
+
+## Creating a consolidation
+
+<Fields
+  rows={[
+    ["Mode", "Sea or air."],
+    ["Type", "Your own master, or a co-loader's space."],
+    ["Master number", "The MBL, the MAWB or the co-loader's B/L or AWB."],
+    ["Carrier and route", "Carrier, ports or airports, vessel and voyage or flight and date, ETD and ETA."],
+    ["Containers", "Container numbers, for sea."],
+    ["Sharing basis", "How the costs are shared (below)."],
+  ]}
+/>
+
+## Adding bookings
+
+**Suggested bookings** lists bookings with the same mode and route, departing within 14 days, that aren't cancelled, delivered, FCL or already in another consolidation, nearest first. Tick them and choose **Add**. A closed consolidation takes no more bookings.
+
+A booking with no MBL or MAWB takes the master's number, and a later change to the master number reaches it.
+
+## Sharing the costs
+
+Enter the master's costs once, then **Share costs**:
+
+| Mode | Basis |
+| --- | --- |
+| Sea | By CBM (the default), by W/M (the larger of tonnes and CBM), or manual |
+| Air | By chargeable weight (the default), or manual |
+
+The split is exact to the cent: the remainder goes to the largest fractions, so the shares always add up. Each share lands on its booking as an AP cost line. Sharing again moves the same lines. A share whose AP is finalised or paid is locked: it keeps its amount, and that booking can't leave the consolidation until it's unlocked.
+
+An admin sets the default basis in **Settings → Consolidation**; each consolidation can override it.
+
+## Manifest and profit
+
+The **cargo manifest** prints the master's details and, per booking, the house number, shipper, consignee, goods, gross weight and CBM or chargeable weight. The consolidation also shows revenue, cost and profit, for the whole and per booking.
+
+A consolidation can be deleted only when it has no bookings and no costs.
+
+<Callout kind="permission" title="Who can do what">
+  Creating, editing and adding bookings: Admin, Management, Operations and Sales. Master costs and sharing: Admin,
+  Management, Accounting and Operations.
+</Callout>

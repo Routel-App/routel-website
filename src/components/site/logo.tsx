@@ -66,11 +66,19 @@ export function LogoMark({ className }: { className?: string }) {
   );
 }
 
-/** The logo: black letters on light surfaces, the white logo's letters on dark ones. */
-export function Logo({ className, inverse = false }: { className?: string; inverse?: boolean }) {
+/**
+ * The logo: black letters on light surfaces, the white logo's letters on dark
+ * ones. `tagline` sets the product line under the wordmark.
+ */
+export function Logo({ className, inverse = false, tagline, taglineClassName }: { className?: string; inverse?: boolean; tagline?: string; taglineClassName?: string }) {
   return (
-    <span className={cn("inline-flex items-center", className)} style={{ color: inverse ? LOGO_WHITE : LOGO_BLACK }}>
+    <span className={cn("inline-flex flex-col items-start", className)} style={{ color: inverse ? LOGO_WHITE : LOGO_BLACK }}>
       <Wordmark className="h-[22px]" />
+      {tagline ? (
+        <span dir="ltr" className={cn("mt-1 whitespace-nowrap text-[9.5px] font-semibold uppercase leading-none tracking-[0.16em]", inverse ? "text-white/60" : "text-fog-500", taglineClassName)}>
+          {tagline}
+        </span>
+      ) : null}
     </span>
   );
 }

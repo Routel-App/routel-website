@@ -14,7 +14,7 @@ const groups: Array<{ label: Record<Locale, string>; tone: "teal" | "ink"; slugs
   {
     label: { en: "Operations", ar: "العمليات" },
     tone: "teal",
-    slugs: ["bookings", "quotations", "bill-of-lading", "documents", "tracking"],
+    slugs: ["bookings", "air-freight", "consolidation", "arrival-notice", "quotations", "bill-of-lading", "documents", "tracking"],
   },
   {
     label: { en: "Finance & accounting", ar: "المالية والمحاسبة" },
@@ -24,13 +24,13 @@ const groups: Array<{ label: Record<Locale, string>; tone: "teal" | "ink"; slugs
   {
     label: { en: "Sales, partners & access", ar: "المبيعات والشركاء والصلاحيات" },
     tone: "teal",
-    slugs: ["business-partners", "labeling-center", "roles", "email-sync", "visitor-tracking", "compliance"],
+    slugs: ["business-partners", "labeling-center", "roles", "email-sync", "compliance"],
   },
 ];
 
 const copy = {
   en: {
-    product: "Product",
+    product: "Platform",
     aiTitle: "AI Assistant",
     aiBody: "Built into Routel: it calls tools and runs your operations automatically, in any language, with your confirmation before anything is saved.",
     aiLink: "See it work",
@@ -39,7 +39,7 @@ const copy = {
     caseStudies: "Case studies",
   },
   ar: {
-    product: "المنتج",
+    product: "المنصة",
     aiTitle: "المساعد الذكي",
     aiBody: "مدمج داخل Routel: يستدعي الأدوات وينفّذ عملياتك تلقائيًا، بأي لغة، وبتأكيدك قبل حفظ أي شيء.",
     aiLink: "شاهده يعمل",
@@ -86,7 +86,7 @@ export function ProductMenu({ inverse, onNavigate }: { inverse: boolean; onNavig
   };
 
   return (
-    <div className="relative" onMouseEnter={() => (cancelClose(), setOpen(true))} onMouseLeave={scheduleClose}>
+    <div onMouseEnter={() => (cancelClose(), setOpen(true))} onMouseLeave={scheduleClose}>
       <button
         type="button"
         aria-expanded={open}
@@ -111,7 +111,7 @@ export function ProductMenu({ inverse, onNavigate }: { inverse: boolean; onNavig
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={reduce ? undefined : { opacity: 0, y: 6, scale: 0.98 }}
             transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute left-1/2 top-full z-50 w-[min(92vw,1040px)] -translate-x-1/2 pt-3"
+            className="fixed left-1/2 top-[52px] z-50 w-[min(92vw,1040px)] -translate-x-1/2 pt-3"
           >
             <div className="grid grid-cols-[1fr_1fr_1fr_0.85fr] gap-6 rounded-2xl border border-fog-200 bg-white p-6 text-start shadow-float">
               {groups.map((g) => (

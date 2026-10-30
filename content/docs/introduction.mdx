@@ -10,7 +10,7 @@ At its core is an **AI assistant that operates the system**. It does not just an
 
 <Glance
   items={[
-    { value: "90", label: "actions the assistant can call: 48 that read, 42 that write" },
+    { value: "91", label: "actions the assistant can call: 49 that read, 42 that write" },
     { value: "0", label: "writes saved without a person's confirmation" },
     { value: "1", label: "record per shipment, from quotation to ledger" },
     { value: "Any", label: "language: it replies in the language you write in" },
@@ -52,6 +52,16 @@ This index follows the app's own menu, top to bottom. Every page below is comple
 | Bookings | The core record: shipment details, shipping timeline, carrier booking (the AI reads the confirmation), Booking Confirmation with revisions, charges and profit, an 11-status lifecycle, activity log | [Read](/docs/bookings) |
 | Quotations | Quotations built on current buying rates, converted into bookings in one click | [Read](/docs/quotations) |
 | Routes | Buying rates per lane and container with validity and Excel import, and route analytics: volume, revenue and margin per lane | [Read](/docs/routes) |
+
+### Air, LCL and import
+
+These open when an admin turns on their business activity in Settings → Business activities.
+
+| Screen | What it does | Guide |
+| --- | --- | --- |
+| Air freight | Express or airline cargo, a checked MAWB, the House Air Waybill, chargeable weight, and air allocations with weekly alerts | [Read](/docs/air-freight) |
+| Consolidations | One master carrying several bookings, its cargo manifest, and its costs shared by CBM, W/M or chargeable weight | [Read](/docs/consolidation) |
+| Arrival notice and delivery order | The import notice sent on time with its charges, the line's release recorded, and a DO only when released and paid | [Read](/docs/arrival-notice) |
 
 ### Partners
 

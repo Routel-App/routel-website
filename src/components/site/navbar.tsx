@@ -12,16 +12,18 @@ import { useLocale } from "@/components/i18n/locale-provider";
 import { cn } from "@/lib/utils";
 import { Logo } from "./logo";
 import { ProductMenu } from "./product-menu";
+import { SolutionsMenu } from "./solutions-menu";
+import { getServices } from "@/lib/services";
 import { getModules } from "@/lib/modules";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 
 /** Routes whose top section is dark; the navbar starts in its inverse (light-on-dark) look there. */
-const DARK_HERO_ROUTES = new Set(["/"]);
+const DARK_HERO_ROUTES = new Set<string>([]);
 
 const copy = {
-  en: { home: "Routel home", docs: "Documentation", product: "Product", more: "More", open: "Open menu", close: "Close menu", switchTo: "Switch to Arabic" },
-  ar: { home: "الصفحة الرئيسية لـ Routel", docs: "التوثيق", product: "المنتج", more: "المزيد", open: "فتح القائمة", close: "إغلاق القائمة", switchTo: "التبديل إلى الإنجليزية" },
+  en: { home: "Routel home", docs: "Documentation", product: "Platform", solutions: "Solutions", more: "More", open: "Open menu", close: "Close menu", switchTo: "Switch to Arabic" },
+  ar: { home: "الصفحة الرئيسية لـ Routel", docs: "التوثيق", product: "المنصة", solutions: "الحلول", more: "المزيد", open: "فتح القائمة", close: "إغلاق القائمة", switchTo: "التبديل إلى الإنجليزية" },
 } satisfies Record<Locale, Record<string, string>>;
 
 /**
@@ -57,6 +59,7 @@ export function Navbar() {
   const nav = siteCopy[locale].nav;
   const ctaLabel = siteCopy[locale].ctaLabel;
   const modules = getModules(locale);
+  const services = getServices(locale);
   // The browser URL carries the locale prefix on Arabic pages; compare against the bare path.
   const pathname = stripLocale(usePathname());
   const reduce = useReducedMotion();
@@ -87,10 +90,11 @@ export function Navbar() {
     >
       <Container className="flex h-16 items-center justify-between">
         <Link href="/" aria-label={t.home} className="shrink-0">
-          <Logo inverse={inverse} />
+          <Logo inverse={inverse} tagline="Maritime & Logistics OS" taglineClassName="hidden xl:block" />
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
+          <SolutionsMenu inverse={inverse} />
           <ProductMenu inverse={inverse} />
           {nav.map((item) => (
             <div key={item.href} className="group/nav relative">
@@ -158,8 +162,21 @@ export function Navbar() {
             transition={{ duration: 0.18, ease: "easeOut" }}
             className="border-t border-fog-200 bg-white lg:hidden"
           >
-            <Container className="flex flex-col gap-1 py-4">
-              <p className="px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-fog-500">{t.product}</p>
+            <Container className="flex max-h-[calc(100svh-4rem)] flex-col gap-1 overflow-y-auto py-4">
+              <p className="px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-fog-500">{t.solutions}</p>
+              <div className="grid grid-cols-2 gap-1">
+                {services.map((s) => (
+                  <Link
+                    key={s.slug}
+                    href={s.href ?? `/solutions#${s.slug}`}
+                    className={cn("rounded-xl px-3 py-2 text-[13.5px] font-medium hover:bg-fog-100", s.status === "live" ? "text-ink-900" : "text-fog-500")}
+                    onClick={() => setOpen(false)}
+                  >
+                    {s.name}
+                  </Link>
+                ))}
+              </div>
+              <p className="px-3 pb-1 pt-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-fog-500">{t.product}</p>
               <div className="grid grid-cols-2 gap-1">
                 {modules
                   .filter((m) => m.slug !== "ai-assistant")

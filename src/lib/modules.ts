@@ -3,6 +3,9 @@ import type { Locale } from "./i18n";
 import { modulesAr } from "./modules.ar";
 import {
   Anchor,
+  Boxes,
+  FileCheck2,
+  Plane,
   Banknote,
   Bot,
   ChartColumn,
@@ -53,6 +56,39 @@ export const modules: Module[] = [
       "AI reads the B/L and the carrier's confirmation",
     ],
     docs: "/docs/bookings",
+    featured: true,
+  },
+  {
+    slug: "air-freight",
+    name: "Air Freight",
+    short: "Express and airline cargo, MAWB and HAWB, block space",
+    description:
+      "Air bookings in two kinds: express through carriers such as DHL, FedEx, Aramex, UPS and SMSA, with their tracking linked; and airline cargo under a Master Air Waybill checked against IATA's check digit, with your own House Air Waybill printed in IATA layout. Pieces and dimensions give the chargeable weight, and kg-based charges follow it. Air allocations track block space bought from airlines week by week, with alerts, unsold cost and an AI reader for the airline's agreement.",
+    icon: Plane,
+    bullets: ["Express or airline cargo, MAWB checked", "House Air Waybill in IATA layout", "Block space tracked week by week"],
+    docs: "/docs/air-freight",
+    featured: true,
+  },
+  {
+    slug: "consolidation",
+    name: "Consolidation & LCL",
+    short: "Many bookings, one master, costs shared to the cent",
+    description:
+      "A consolidation is one master shipment carrying several house bookings: an LCL container under your own MBL, an air consolidation under your own MAWB, or space bought from a co-loader. Routel suggests bookings on the same route, prints the cargo manifest, and shares the master's costs across the bookings by CBM, W/M or chargeable weight, exact to the cent, so every booking's profit stays right.",
+    icon: Boxes,
+    bullets: ["Sea LCL or air, own master or co-loader", "Cargo manifest", "Costs shared by CBM, W/M or chargeable weight"],
+    docs: "/docs/consolidation",
+    featured: true,
+  },
+  {
+    slug: "arrival-notice",
+    name: "Arrival Notice & Delivery Order",
+    short: "Notify the consignee on time, release only when paid",
+    description:
+      "For import bookings, Routel tells you when the arrival notice is due, prints it or e-mails it as a PDF with the charges due, and records how the line released the cargo. A numbered delivery order is issued only once the cargo is released and paid, or the partner is within an active credit limit; a finance user can override with a recorded reason. The AI reads the line's own arrival or delay notice and proposes the new ETA.",
+    icon: FileCheck2,
+    bullets: ["Arrival notice, due on time", "Delivery order only when released and paid", "AI reads the line's ETA change"],
+    docs: "/docs/arrival-notice",
     featured: true,
   },
   {
