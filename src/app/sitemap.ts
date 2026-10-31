@@ -3,6 +3,7 @@ import { site } from "@/lib/site";
 import { allDocPages } from "@/lib/docs";
 import { glossaryNav } from "@/lib/glossary";
 import { platformContent } from "@/lib/platform-content";
+import { serviceSlugs } from "@/lib/services";
 import { localizeHref, locales } from "@/lib/i18n";
 
 type Entry = { path: string; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"]; priority: number };
@@ -24,6 +25,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
   for (const page of allDocPages()) {
     if (page.href !== "/docs") entries.push({ path: page.href, changeFrequency: "weekly", priority: 0.6 });
+  }
+  for (const slug of serviceSlugs) {
+    entries.push({ path: `/solutions/${slug}`, changeFrequency: "weekly", priority: 0.85 });
   }
   for (const slug of Object.keys(platformContent)) {
     entries.push({ path: `/platform/${slug}`, changeFrequency: "weekly", priority: 0.8 });

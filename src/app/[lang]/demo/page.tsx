@@ -3,6 +3,7 @@ import { Check } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
 import { planName } from "@/components/pricing/pricing-tiers";
+import { getServices } from "@/lib/services";
 import type { Locale } from "@/lib/i18n";
 import { getLocale } from "@/lib/locale-server";
 import { DemoForm } from "./demo-form";
@@ -61,8 +62,9 @@ export default async function DemoPage(props: PageProps<"/[lang]/demo">) {
   const locale = await getLocale();
   const t = copy[locale];
   const search = await props.searchParams;
-  const plan = typeof search.plan === "string" ? search.plan : undefined;
-  const planLabel = plan && locale !== "en" ? (planName(plan, locale) ?? plan) : plan;
+  const service = typeof search.service === "string" ? getServices(locale).find((s) => s.slug === search.service) : undefined;
+  const plan = typeof search.plan === "string" ? search.plan : service?.slug;
+  const planLabel = service ? service.name : plan ? (planName(plan, locale) ?? plan) : undefined;
 
   return (
     <section className="relative overflow-hidden">
@@ -91,7 +93,7 @@ export default async function DemoPage(props: PageProps<"/[lang]/demo">) {
 
         <Reveal delay={0.1} className="relative rounded-3xl border border-fog-200 bg-white p-6 shadow-float sm:p-8">
           {plan ? (
-            <p className="mb-5 inline-flex rounded-full bg-fog-100 px-3 py-1 text-xs font-medium capitalize text-fog-700">
+            <p className="mb-5 inline-flex rounded-full bg-fog-100 px-3 py-1 text-xs font-medium text-fog-700">
               {t.interested} {planLabel}
             </p>
           ) : null}

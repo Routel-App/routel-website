@@ -41,15 +41,6 @@ const copy: Record<Locale, Copy> = {
   en: {
     live: [
       {
-        slug: "free",
-        name: "Free",
-        blurb: "Try Routel on real shipments before you commit.",
-        price: "$0",
-        period: "forever",
-        features: ["3 bookings, lifetime", "Up to 2 invoices per booking", "One admin user", "AI setup assistant for your first 30 days"],
-        cta: "Get started free",
-      },
-      {
         slug: "basic",
         name: "Basic",
         blurb: "One company, one user: everything needed to run the work and invoice it.",
@@ -68,8 +59,8 @@ const copy: Record<Locale, Copy> = {
         cta: "Request a demo",
       },
       {
-        slug: "pro",
-        name: "Freight Forwarder Pro",
+        slug: "growth",
+        name: "Freight Forwarder Growth",
         blurb: "Every mode, run with the AI assistant.",
         price: "$499",
         period: "per month",
@@ -131,15 +122,6 @@ const copy: Record<Locale, Copy> = {
   ar: {
     live: [
       {
-        slug: "free",
-        name: "المجانية",
-        blurb: "جرّب Routel على شحنات حقيقية قبل أن تلتزم.",
-        price: "$0",
-        period: "مجاناً دائماً",
-        features: ["3 حجوزات طوال مدة الاستخدام", "حتى فاتورتين لكل حجز", "مستخدم واحد بصلاحية المدير", "مساعد الإعداد الذكي لأول 30 يوماً"],
-        cta: "ابدأ مجاناً",
-      },
-      {
         slug: "basic",
         name: "الأساسية",
         blurb: "شركة واحدة بمستخدم واحد: كل ما يلزم لتشغيل العمل وإصدار فواتيره.",
@@ -158,8 +140,8 @@ const copy: Record<Locale, Copy> = {
         cta: "اطلب عرضاً تجريبياً",
       },
       {
-        slug: "pro",
-        name: "وكيل الشحن Pro",
+        slug: "growth",
+        name: "وكيل الشحن Growth",
         blurb: "كل أنماط الشحن، يديرها المساعد الذكي معك.",
         price: "$499",
         period: "شهرياً",
@@ -278,7 +260,7 @@ export async function PricingTiers({ withComing = true }: { withComing?: boolean
   const t = copy[locale];
   return (
     <div>
-      <RevealGroup className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5" stagger={0.06}>
+      <RevealGroup className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
         {t.live.map((tier) => (
           <RevealItem key={tier.slug} className="h-full">
             <TierCard t={tier} badge={tier.highlighted ? t.badge : undefined} soonLabel={t.soonLabel} />

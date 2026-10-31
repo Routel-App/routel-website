@@ -682,7 +682,7 @@ const baseContent: Record<string, PlatformContent> = {
       { q: "Does it have more access than I do?", a: "No. It has exactly the permissions of the signed-in user, and calls the same functions as the screens." },
       { q: "Is my data stored by the AI provider?", a: "No. Requests are sent with storage turned off, so nothing is kept at the AI provider." },
       { q: "What if I confirm something by mistake?", a: "Notes, tasks, follow-ups, filed e-mails and draft quotations can be undone for 10 minutes. Anything that moved money or got a document number is reversed by its own document, such as a credit note." },
-      { q: "Which plans include it?", a: "Freight Forwarder Pro and Enterprise include the full assistant. On the other plans, it helps the admin set the company up, for up to 30 days." },
+      { q: "Which plans include it?", a: "Freight Forwarder Growth and Enterprise include the full assistant. On the other plans, it helps the admin set the company up, for up to 30 days." },
     ],
     related: ["bookings", "invoicing", "roles"],
   },
