@@ -90,7 +90,7 @@ export function Navbar() {
     >
       <Container className="flex h-16 items-center justify-between">
         <Link href="/" aria-label={t.home} className="shrink-0">
-          <Logo inverse={inverse} tagline="Maritime & Logistics OS" taglineClassName="hidden xl:block" />
+          <Logo inverse={inverse} tagline="Maritime & Logistics" taglineClassName="hidden xl:block" />
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">

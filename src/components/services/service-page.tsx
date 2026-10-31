@@ -355,14 +355,14 @@ export function ServicePageTemplate({
       <Section tone="muted">
         <SectionHeading eyebrow={t.versusEyebrow} title={t.versusTitle} />
         <Reveal className="mx-auto mt-12 max-w-5xl overflow-hidden rounded-3xl bg-white shadow-card ring-1 ring-fog-200">
-          <div className="hidden grid-cols-[0.8fr_1fr_1fr] border-b border-fog-200 bg-fog-50 text-[12px] font-semibold uppercase tracking-[0.1em] md:grid">
+          <div className="hidden grid-cols-[9.5rem_1fr_1fr] border-b border-fog-200 bg-fog-50 text-[12px] font-semibold uppercase tracking-[0.1em] md:grid">
             <span className="px-6 py-4 text-fog-500">{t.cols[0]}</span>
             <span className="px-6 py-4 text-fog-500">{t.cols[1]}</span>
             <span className="bg-ink-900 px-6 py-4 text-spark-400">{t.cols[2]}</span>
           </div>
           <ul>
             {content.versus.map((r) => (
-              <li key={r.topic} className="grid border-b border-fog-100 last:border-b-0 md:grid-cols-[0.8fr_1fr_1fr]">
+              <li key={r.topic} className="grid border-b border-fog-100 last:border-b-0 md:grid-cols-[9.5rem_1fr_1fr]">
                 <p className="px-6 pb-1 pt-5 font-display text-[15px] font-bold text-ink-900 md:py-5">{r.topic}</p>
                 <p className="flex items-start gap-2.5 px-6 py-2 text-[14px] leading-relaxed text-fog-600 md:py-5">
                   <Minus className="mt-1 h-4 w-4 shrink-0 text-fog-400" aria-hidden />

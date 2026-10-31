@@ -11,27 +11,29 @@ import { Versus } from "@/components/home/versus";
 import { Finance } from "@/components/home/finance";
 import { Region } from "@/components/home/region";
 import { HomeFaq } from "@/components/home/home-faq";
-import { PricingPreview } from "@/components/home/pricing-preview";
 import { Cta } from "@/components/home/cta";
+import { PlatformOverview } from "@/components/home/platform-overview";
+import { WaysToWork } from "@/components/home/ways-to-work";
 
-/* Light hero, then the services, the scroll story and the assistant. */
+/* Light hero and the services, then what ROUTEL is, the scroll story and the assistant; the comparison comes once the system is explained. */
 export default function HomePage() {
   return (
     <>
       <Hero />
       <ServicesStrip />
+      <PlatformOverview />
       <Odyssey />
       <AiSpotlight />
-      <Versus />
       <ChaosToOrder />
       <SheetToSystem />
       <ProductTour />
       <FeatureBento />
       <Modules />
+      <WaysToWork />
       <Finance />
       <Region />
+      <Versus withPrices={false} />
       <HomeFaq />
-      <PricingPreview />
       <Cta />
     </>
   );

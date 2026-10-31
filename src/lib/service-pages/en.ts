@@ -16,8 +16,8 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
     features: [
       {
         title: "Route rates and quotations",
-        text: "Buying prices per route, entered once or imported from an Excel rate sheet. A quotation picks them up, and an accepted quotation converts to a booking with nothing typed twice.",
-        points: ["Import a rate sheet from Excel", "Quotation from the route rate", "Convert to Booking in one action"],
+        text: "Buying prices per route, by shipping line and container type, with the dates they're valid for, entered once or imported from an Excel rate sheet. Compare the lines on a route side by side, quote from the one you choose, and convert the accepted quotation to a booking with nothing typed twice.",
+        points: ["Lines on a route, side by side", "Validity dates on every rate", "Convert to Booking in one action"],
         mock: { title: "Quotation · Q-26-0412", badge: "Accepted", rows: [["Route", "Jeddah → Shanghai"], ["Ocean freight 2 × 40HC", "USD 4,200"], ["Local charges", "SAR 2,500"]], foot: "Convert to Booking" },
       },
       {

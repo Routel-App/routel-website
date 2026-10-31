@@ -83,7 +83,7 @@ export async function Footer() {
       <Container className="pb-12">
         <div className="grid gap-10 md:grid-cols-[1.4fr_repeat(3,1fr)]">
           <div className="max-w-xs">
-            <Logo inverse tagline="Maritime & Logistics Operating System" />
+            <Logo inverse tagline="Maritime & Logistics" />
             <p className="mt-4 text-sm leading-relaxed text-white/60">
               {t.blurb}
             </p>
