@@ -180,3 +180,64 @@ export function wavePath(x0: number, y: number, n: number, step = 60, amp = 6) {
   for (let i = 0; i < n; i++) d += ` q${step / 2} -${amp} ${step} 0`;
   return d;
 }
+
+/**
+ * An air cargo container (ULD) seen from the side: a box with its lower
+ * corner cut away to fit the fuselage's curve. `hero` is the booking's own,
+ * orange, as with the sea containers.
+ */
+export function Uld({ x, y, w = 46, h = 40, color, hero = false, ...rest }: { x: number; y: number; w?: number; h?: number; color?: string; hero?: boolean } & G) {
+  const fill = hero ? paint.hero : (color ?? paint.fog);
+  const cut = Math.round(w * 0.28);
+  return (
+    <g transform={`translate(${x} ${y})`} {...rest}>
+      <path d={`M0 0 H${w} V${h} H${cut} L0 ${h - cut} Z`} fill={fill} />
+      <path d={`M4 ${h * 0.35} H${w - 4} M4 ${h * 0.65} H${w - 4}`} stroke={hero ? paint.heroDark : ink.line} strokeOpacity={hero ? 0.6 : 0.25} strokeWidth="2" />
+      <rect x={w - 9} y={4} width={5} height={h - 8} rx={1.5} fill={hero ? paint.heroDark : ink.line} opacity={hero ? 0.5 : 0.2} />
+    </g>
+  );
+}
+
+/**
+ * A wide-body freighter seen from the side, nose to the right. Origin at the
+ * bottom of the main gear; the fuselage is `length` long. The nose cargo door
+ * is shown raised, as on a nose-loading freighter.
+ */
+export function Aircraft({ x, y, length = 520, ...rest }: { x: number; y: number; length?: number } & G) {
+  const L = length;
+  const top = -150; // fuselage top
+  const bottom = -70; // fuselage bottom
+  const mid = (top + bottom) / 2;
+  return (
+    <g transform={`translate(${x} ${y})`} {...rest}>
+      {/* tail fin and stabiliser */}
+      <path d={`M${L * 0.03} ${top + 8} L${L * 0.0} ${top - 92} H${L * 0.075} L${L * 0.22} ${top + 4} Z`} fill={ink.deep} />
+      <rect x={L * 0.035} y={top - 78} width={L * 0.035} height={L * 0.035} rx={3} fill={paint.hero} />
+      <path d={`M${L * 0.0} ${mid + 4} L${L * 0.16} ${mid - 2} L${L * 0.17} ${mid + 8} Z`} fill={ink.steel} />
+      {/* fuselage */}
+      <path
+        d={`M${L * 0.02} ${top + 10} Q${L * 0.05} ${top} ${L * 0.15} ${top} H${L * 0.8} Q${L * 0.97} ${top} ${L} ${mid + 8} Q${L * 0.98} ${bottom} ${L * 0.86} ${bottom} H${L * 0.2} Q${L * 0.08} ${bottom} ${L * 0.02} ${top + 10} Z`}
+        fill={paint.fogLight}
+      />
+      {/* belly shade and brand stripe */}
+      <path d={`M${L * 0.2} ${bottom} H${L * 0.86} Q${L * 0.95} ${bottom} ${L * 0.98} ${bottom - 14} H${L * 0.16} Q${L * 0.17} ${bottom} ${L * 0.2} ${bottom} Z`} fill={paint.fog} opacity="0.55" />
+      <path d={`M${L * 0.1} ${mid - 6} H${L * 0.93}`} stroke={paint.hero} strokeWidth="5" strokeLinecap="round" />
+      {/* cockpit windows */}
+      <path d={`M${L * 0.9} ${top + 14} H${L * 0.955} L${L * 0.965} ${top + 26} H${L * 0.9} Z`} fill={ink.hull} />
+      {/* side cargo door outline */}
+      <rect x={L * 0.24} y={top + 10} width={L * 0.12} height={bottom - top - 26} rx={4} fill="none" stroke={paint.fog} strokeWidth="2.5" />
+      {/* wing (near side), engines */}
+      <path d={`M${L * 0.44} ${mid + 4} L${L * 0.6} ${mid + 4} L${L * 0.47} ${bottom + 16} L${L * 0.38} ${bottom + 16} Z`} fill={paint.fog} />
+      <rect x={L * 0.4} y={bottom + 12} width={L * 0.12} height={28} rx={14} fill={ink.steel} />
+      <rect x={L * 0.4} y={bottom + 12} width={L * 0.03} height={28} rx={6} fill={ink.line} />
+      {/* landing gear */}
+      <g fill={ink.deep}>
+        <rect x={L * 0.47} y={bottom} width={6} height={-bottom - 16} />
+        <circle cx={L * 0.47 + 3} cy={-10} r={10} />
+        <circle cx={L * 0.47 + 25} cy={-10} r={10} />
+        <rect x={L * 0.86} y={bottom} width={5} height={-bottom - 14} />
+        <circle cx={L * 0.86 + 2.5} cy={-9} r={9} />
+      </g>
+    </g>
+  );
+}
