@@ -7,7 +7,7 @@ import { useLocale } from "@/components/i18n/locale-provider";
 import type { Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import { gsap, useGSAP, MOTION_OK, REDUCED } from "@/components/motion/gsap";
-import { Aircraft, BOX, ContainerBox, Crane, ShipSide, Truck, boxColor, ink, paint, wavePath } from "@/components/motion/sprites";
+import { BOX, ContainerBox, Crane, ShipSide, Truck, boxColor, ink, paint, wavePath } from "@/components/motion/sprites";
 
 /**
  * "One container, one booking": the home page's scroll story, told twice at
@@ -45,9 +45,6 @@ const DEST_X = 3200;
 const DEST_CRANE_X = DEST_X + 100;
 const DEST_TRUCK_X = DEST_X + 220;
 const DEST_SLOT_X = SLOT_X + SAIL;
-/** A freighter that overtakes the ship in the sky: the same desk books air too. */
-const PLANE_Y = 470;
-const PLANE_START = -2000;
 
 type Item =
   | { at: number; kind: "module"; module: string; href: string }
@@ -111,8 +108,6 @@ const copy: Record<Locale, Copy> = {
       { at: 0.545, kind: "status", text: "Departed · 15 Nov" },
       { at: 0.56, kind: "module", module: "Tracking", href: "/platform/tracking" },
       { at: 0.58, kind: "assistant", text: "Your customer follows it by booking or container number, with no login." },
-      { at: 0.592, kind: "module", module: "Air freight", href: "/solutions/air-freight" },
-      { at: 0.598, kind: "card", title: "Meanwhile, by air · NXA26000415", tools: ["search_route_rates", "create_job"], rows: [["MAWB", "065-12345675"], ["Chargeable weight", "412.5 kg"]] },
       { at: 0.62, kind: "status", text: "In Transit · arriving 22 Nov" },
       { at: 0.64, kind: "module", module: "Invoicing · Finance", href: "/platform/invoicing" },
       { at: 0.645, kind: "user", text: "Issue the invoice." },
@@ -158,8 +153,6 @@ const copy: Record<Locale, Copy> = {
       { at: 0.545, kind: "status", text: "غادرت · 15 نوفمبر" },
       { at: 0.56, kind: "module", module: "التتبّع", href: "/platform/tracking" },
       { at: 0.58, kind: "assistant", text: "عميلك يتابعها بنفسه، برقم الحجز أو الحاوية، دون تسجيل دخول." },
-      { at: 0.592, kind: "module", module: "الشحن الجوي", href: "/solutions/air-freight" },
-      { at: 0.598, kind: "card", title: "وفي الجو أيضاً · NXA26000415", tools: ["search_route_rates", "create_job"], rows: [["MAWB", "065-12345675"], ["الوزن المحتسب", "412.5 kg"]] },
       { at: 0.62, kind: "status", text: "قيد النقل · الوصول 22 نوفمبر" },
       { at: 0.64, kind: "module", module: "الفواتير · المالية", href: "/platform/invoicing" },
       { at: 0.645, kind: "user", text: "أصدر الفاتورة." },
@@ -211,7 +204,6 @@ export function Odyssey() {
       const cable = q<SVGLineElement>("[data-cable]");
       const spreader = q<SVGRectElement>("[data-spreader]");
       const shipSide = q<SVGGElement>("[data-ship-side]");
-      const plane = q<SVGGElement>("[data-plane]");
       const dusk = q<SVGRectElement>("[data-dusk]");
       const truck2 = q<SVGGElement>("[data-truck2]");
       const trolley2 = q<SVGRectElement>("[data-trolley2]");
@@ -253,7 +245,6 @@ export function Odyssey() {
           truck2X: 4400,
           trolley2X: DEST_CRANE_X - 360,
           drop2: 24,
-          planeX: PLANE_START,
         };
         let lastStatus = -1;
         let lastShown = -1;
@@ -273,7 +264,6 @@ export function Odyssey() {
           spreader.setAttribute("y", String(top0 + s.drop));
           shipSide.setAttribute("transform", `translate(${SHIP_X + s.shipDx} ${QUAY_Y})`);
           dusk.style.opacity = String(s.dusk);
-          plane.setAttribute("transform", `translate(${s.planeX} ${PLANE_Y}) rotate(-4) scale(0.62)`);
           // The destination crane and truck
           truck2.setAttribute("transform", `translate(${s.truck2X} ${QUAY_Y})`);
           trolley2.setAttribute("x", String(s.trolley2X - 20));
@@ -342,9 +332,6 @@ export function Odyssey() {
         tl.to(s, { shipDx: SAIL, heroX: `+=${SAIL}`, duration: 0.22, ease: "power1.inOut" }, 0.52);
         tl.to(s, { z: 0.85, fx: SHIP_X + 380, fy: 500, follow: 1, duration: 0.08, ease: "power2.inOut" }, 0.52);
         tl.to(s, { z: 0.78, fy: 480, duration: 0.12, ease: "none" }, 0.6);
-        // A freighter overtakes the ship overhead while it sails.
-        tl.set(s, { planeX: -150 }, 0.55);
-        tl.to(s, { planeX: 4100, duration: 0.17, ease: "none" }, 0.55);
         // 5. Docked: the camera closes in on the destination crane.
         tl.to(s, { z: 1.3, fx: DEST_CRANE_X - 300 - SAIL, fy: QUAY_Y - 80, duration: 0.06, ease: "power2.inOut" }, 0.74);
         // 6. Unloading: trolley over, spreader down, lift, the truck arrives, carry, lower, drive away.
@@ -436,11 +423,6 @@ export function Odyssey() {
               <rect data-trolley2="" x={DEST_CRANE_X - 360 - 20} y={BOOM_Y} width={40} height={TROLLEY_H} rx={2} fill={paint.amber} />
               <line data-cable2="" x1={DEST_CRANE_X - 360} x2={DEST_CRANE_X - 360} y1={BOOM_Y + TROLLEY_H} y2={BOOM_Y + TROLLEY_H + 24} stroke={paint.fog} strokeWidth="2" />
               <rect data-spreader2="" x={DEST_CRANE_X - 360 - 32} y={BOOM_Y + TROLLEY_H + 24} width={64} height={6} rx={1} fill={paint.amber} />
-            </g>
-
-            {/* The freighter in the sky (still: above the quay) */}
-            <g data-plane="" transform={`translate(1180 ${PLANE_Y}) rotate(-4) scale(0.62)`}>
-              <Aircraft x={0} y={0} length={520} gear={false} />
             </g>
 
             {/* ── Dusk at the end ── */}
