@@ -10,22 +10,23 @@ import { gsap, useGSAP, MOTION_OK, REDUCED } from "@/components/motion/gsap";
 import { BOX, ContainerBox, Crane, ShipSide, Truck, boxColor, ink, paint, wavePath } from "@/components/motion/sprites";
 
 /**
- * "One container, one booking": the home page's scroll story, told twice at
- * once. On the stage, one orange container (booking NXS26000412) arrives on
- * a truck, is lifted by the crane onto the ship, sails to the destination
- * quay, and is lifted off onto a truck there. Beside it, the Routel Assistant's chat
- * does the same shipment's work in the system: the quotation, the booking,
- * the carrier's confirmation read from its PDF, the House B/L, the tax
- * invoice, the matched payment and the closed booking in the P&L. Every
- * tool it calls is one the assistant really has, every write waits for a
- * confirmation, and each message is timed to the ship.
+ * "From the berth to the shelf": the home page's scroll story. One ship
+ * calls at Jeddah and one orange container (MSCU 442118-0) goes from its
+ * deck to a client's shelf. On the stage the ship comes alongside, the crane
+ * discharges the container to the yard, the gate opens, a truck takes it to
+ * the warehouse, its cartons go onto the racks, and the ship sails. Beside
+ * it, the ROUTEL Assistant's chat shows each desk's work in turn: the
+ * shipping agency, the NVOCC, the customs broker, the forwarder, the
+ * trucker, the warehouse, 3PL inventory, and the port call settled.
+ * Modules still being built carry an "in development" mark; tools are named
+ * only where the assistant really has them.
  *
  * One SVG world under a camera group; a scrubbed GSAP timeline tweens a
  * state object and draw() writes it to the DOM each frame (no React
  * re-render per frame). Chat messages are HTML revealed by the same
  * progress; the transcript scrolls itself so the latest message is in
  * view. Without JS or with prefers-reduced-motion the section is a still
- * (ship loaded) with the whole transcript under it.
+ * (ship alongside) with the whole transcript under it.
  */
 
 const W = 1600;
@@ -33,24 +34,49 @@ const H = 900;
 const QUAY_Y = 620;
 const BOOM_Y = QUAY_Y - 190;
 const TROLLEY_H = 14;
-const SHIP_X = 700;
+/** Sea to the left of the quay edge, the port to its right. */
+const QUAY_X = 1200;
+const SHIP_X = 400;
+const SHIP_LEN = 760;
+/** How far out the ship starts, and where it goes when it leaves. */
+const SEA_RUN = 1900;
 const HERO_SLOT = { col: 4, row: 3 };
 const SLOT_X = SHIP_X + 40 + HERO_SLOT.col * 60;
 const SLOT_Y = QUAY_Y - (HERO_SLOT.row + 1) * BOX.h;
-const TRUCK_X = 150;
-/** How far the ship sails, and where the destination quay begins. */
-const SAIL = 1700;
-const DEST_X = 3200;
-/** The destination crane and the truck that collects the container there. */
-const DEST_CRANE_X = DEST_X + 100;
-const DEST_TRUCK_X = DEST_X + 220;
-const DEST_SLOT_X = SLOT_X + SAIL;
+const CRANE_X = QUAY_X + 100;
+/** The crane's trolley at rest, over the quay. */
+const TROLLEY_REST = CRANE_X + 60;
+/** The yard spot the container is set down on, and the truck lane beside it. */
+const YARD_X = QUAY_X + 160;
+const TRUCK_STOP = YARD_X + 70;
+const TRUCK_PARK = 2500;
+/** Customs house, the gate, the warehouse and its dock. */
+const CUSTOMS_X = 1800;
+const GATE_X = 2200;
+const WH_X = 3150;
+const WH_W = 760;
+const DOCK_X = WH_X - 190;
+const ON_GROUND = QUAY_Y - BOX.h;
+const ON_TRUCK = QUAY_Y - 12 - BOX.h;
+/** The rack slots the cartons go to: level (0 is the floor) and bay. */
+const CARTONS = [
+  { level: 0, bay: 3 },
+  { level: 0, bay: 4 },
+  { level: 1, bay: 3 },
+  { level: 1, bay: 4 },
+  { level: 2, bay: 3 },
+  { level: 2, bay: 4 },
+];
+const RACK_X0 = WH_X + 120;
+const BAY_W = 100;
+const LEVEL_H = 86;
+const cartonHome = (c: (typeof CARTONS)[number]) => ({ x: RACK_X0 + c.bay * BAY_W + 26, y: QUAY_Y - 8 - c.level * LEVEL_H - 34 });
 
 type Item =
-  | { at: number; kind: "module"; module: string; href: string }
+  | { at: number; kind: "module"; module: string; href: string; soon?: boolean }
   | { at: number; kind: "user"; text: string; file?: string }
   | { at: number; kind: "assistant"; text: string }
-  | { at: number; kind: "card"; title: string; tools: string[]; rows: Array<[string, string]>; big?: string; confirm?: string; confirmedAt?: number }
+  | { at: number; kind: "card"; title: string; tools?: string[]; rows: Array<[string, string]>; big?: string; confirm?: string; confirmedAt?: number }
   | { at: number; kind: "doc"; name: string; meta: string }
   | { at: number; kind: "status"; text: string };
 
@@ -59,128 +85,130 @@ type Copy = {
   title: string;
   lead: string;
   scroll: string;
-  booking: string;
-  statuses: string[];
+  container: string;
+  stages: string[];
   header: string;
   sub: string;
   input: string;
   more: string;
+  soon: string;
   confirmed: string;
   items: Item[];
 };
 
 /**
  * The transcript, timed to the stage (`at` is the scroll progress). Each
- * turn answers a move on the stage: the truck for Gate In, the crane for
- * loading, the ship leaving for the B/L, the arrival for the payment. The
- * tools named are the assistant's real ones; every write is a card that
- * waits for its confirmation.
+ * desk takes over when the container reaches it: the agency as the ship
+ * comes in, the NVOCC at discharge, customs in the yard, the forwarder at
+ * the gate, the trucker on the road, the warehouse at the dock, 3PL on the
+ * racks, and the agency again when the ship leaves.
  */
 const copy: Record<Locale, Copy> = {
   en: {
-    eyebrow: "One container, one booking",
-    title: "Follow a container through Routel",
-    lead: "The ship on one side, the system on the other: every stage of the shipment is done in the assistant's chat, and all of it lands on one record.",
+    eyebrow: "One vessel, every desk",
+    title: "From the berth to the shelf",
+    lead: "A ship calls at Jeddah. The agency, the NVOCC, the customs broker, the forwarder, the trucker and the warehouse each do their part, in one system and one chat.",
     scroll: "Scroll",
-    booking: "Booking",
-    statuses: ["Booking Pending", "Booking Confirmed", "Gate In", "SI Submitted", "Vessel Loaded", "Departed", "In Transit", "Arrived", "Telex Status", "Shipment Closed"],
-    header: "Routel Assistant",
+    container: "Container",
+    stages: ["Port call", "Alongside", "Discharged", "Customs", "Released", "On the road", "In the warehouse", "On the shelf", "Settled"],
+    header: "ROUTEL Assistant",
     sub: "Calls the system's tools · writes only after you confirm",
     input: "Ask in any language…",
-    more: "See the module",
+    more: "See the solution",
+    soon: "In development",
     confirmed: "Confirmed",
     items: [
-      { at: 0, kind: "module", module: "Quotations & Bookings", href: "/platform/quotations" },
-      { at: 0.01, kind: "user", text: "Quote Port Klang to Jebel Ali, 1 × 40HC." },
-      { at: 0.025, kind: "card", title: "Quotation · Q-26-0412", tools: ["search_route_rates", "create_quotation"], rows: [["Ocean freight 40HC", "USD 2,400"], ["Local charges", "MYR 1,770"]], confirm: "Confirm & send", confirmedAt: 0.045 },
-      { at: 0.06, kind: "status", text: "Customer accepted · now booking NXS26000412" },
-      { at: 0.09, kind: "module", module: "Carrier booking · AI", href: "/platform/ai-assistant" },
-      { at: 0.095, kind: "user", text: "Record the carrier's confirmation on the booking.", file: "MSC confirmation.pdf" },
-      { at: 0.11, kind: "card", title: "Read from the carrier's file", tools: ["read_uploaded_document", "update_job"], rows: [["Vessel", "MSC ISABELLA · 412E"], ["Cargo cut-off", "14 Nov, 12:00"], ["Carrier ref.", "MSCUKL4471"]], confirm: "Confirm", confirmedAt: 0.13 },
-      { at: 0.14, kind: "doc", name: "Booking Confirmation.pdf", meta: "Sent to the customer" },
-      { at: 0.165, kind: "status", text: "Gate In · MSCU 442118-0" },
-      { at: 0.23, kind: "status", text: "SI Submitted" },
-      { at: 0.33, kind: "assistant", text: "The container is on the crane. Loading onto MSC ISABELLA now." },
-      { at: 0.45, kind: "status", text: "Vessel Loaded" },
-      { at: 0.46, kind: "module", module: "Bill of Lading · Documents", href: "/platform/bill-of-lading" },
-      { at: 0.47, kind: "card", title: "House B/L · HBL-26000412", tools: ["create_bill_of_lading"], rows: [["Consignee", "Gulf Horizon FZE"], ["Master B/L", "MSCUKL4471"]], confirm: "Confirm & issue", confirmedAt: 0.49 },
-      { at: 0.505, kind: "doc", name: "House B/L.pdf", meta: "Ready to sign" },
-      { at: 0.545, kind: "status", text: "Departed · 15 Nov" },
-      { at: 0.56, kind: "module", module: "Tracking", href: "/platform/tracking" },
-      { at: 0.58, kind: "assistant", text: "Your customer follows it by booking or container number, with no login." },
-      { at: 0.62, kind: "status", text: "In Transit · arriving 22 Nov" },
-      { at: 0.64, kind: "module", module: "Invoicing · Finance", href: "/platform/invoicing" },
-      { at: 0.645, kind: "user", text: "Issue the invoice." },
-      { at: 0.66, kind: "card", title: "Tax invoice · INV-26-0412", tools: ["create_invoice_from_charges"], rows: [["Ocean freight 40HC", "USD 2,400"], ["Local charges", "MYR 1,770"]], big: "MYR 13,050.00", confirm: "Confirm & issue", confirmedAt: 0.68 },
-      { at: 0.7, kind: "doc", name: "Tax Invoice.pdf", meta: "MYR 13,050.00 · USD 2,776.60" },
-      { at: 0.755, kind: "status", text: "Arrived · Jebel Ali" },
-      { at: 0.77, kind: "card", title: "Payment from the finance mailbox", tools: ["list_payment_suggestions"], rows: [["Amount", "MYR 13,050.00"], ["Matches", "INV-26-0412"]], confirm: "Confirm match", confirmedAt: 0.8 },
-      { at: 0.84, kind: "status", text: "Telex Status · cargo released" },
-      { at: 0.9, kind: "module", module: "Accounting", href: "/platform/accounting" },
-      { at: 0.905, kind: "user", text: "Close the shipment." },
-      { at: 0.925, kind: "card", title: "The booking, in the books", tools: ["update_job", "get_job_charges"], rows: [["Revenue", "MYR 13,050"], ["Cost", "MYR 10,035"]], big: "Profit MYR 3,015 · 23.1%" },
-      { at: 0.965, kind: "assistant", text: "Shipment Closed. Nobody re-typed a number along the way." },
+      { at: 0, kind: "module", module: "Shipping agency", href: "/solutions/shipping-agency", soon: true },
+      { at: 0.01, kind: "user", text: "Open the port call for MSC ISABELLA, voyage 412E, at Jeddah." },
+      { at: 0.03, kind: "card", title: "Port call · Jeddah · 412E", rows: [["ETA", "21 Nov, 06:00"], ["Berth", "12"]], confirm: "Confirm", confirmedAt: 0.05 },
+      { at: 0.065, kind: "doc", name: "PDA.pdf", meta: "Sent to the principal · USD 48,000" },
+      { at: 0.1, kind: "status", text: "Alongside · berth 12" },
+      { at: 0.115, kind: "user", text: "Read the import manifest.", file: "manifest.pdf" },
+      { at: 0.135, kind: "card", title: "Import manifest · 412E", rows: [["B/Ls", "148"], ["Containers", "312"]], confirm: "Confirm", confirmedAt: 0.155 },
+      { at: 0.2, kind: "module", module: "NVOCC", href: "/solutions/nvocc", soon: true },
+      { at: 0.215, kind: "assistant", text: "MSCU 442118-0 is off the ship. It's on your B/L RTL-JED-26-0102, so the free time starts now." },
+      { at: 0.27, kind: "card", title: "Demurrage & detention · MSCU 442118-0", rows: [["Free days", "4 · until 25 Nov"], ["Then", "USD 25 a day"]] },
+      { at: 0.31, kind: "module", module: "Customs brokerage", href: "/solutions/customs-brokerage", soon: true },
+      { at: 0.32, kind: "user", text: "Prepare the import declaration.", file: "commercial invoice.pdf" },
+      { at: 0.34, kind: "card", title: "Import declaration · CD-26-0077", rows: [["Lines", "8"], ["HS codes", "8 suggested, with reasons"]], confirm: "Broker confirms", confirmedAt: 0.37 },
+      { at: 0.395, kind: "module", module: "Arrival notice & delivery order", href: "/solutions/import-release" },
+      { at: 0.405, kind: "doc", name: "Arrival Notice.pdf", meta: "E-mailed to Al Noor Trading · SAR 3,450.00 due" },
+      { at: 0.43, kind: "card", title: "Payment from the finance mailbox", tools: ["list_payment_suggestions"], rows: [["Amount", "SAR 3,450.00"], ["Matches", "INV-26-0412"]], confirm: "Confirm match", confirmedAt: 0.45 },
+      { at: 0.47, kind: "doc", name: "Delivery Order.pdf", meta: "Released and paid · valid until 28 Nov" },
+      { at: 0.49, kind: "status", text: "Gate open · cargo released" },
+      { at: 0.51, kind: "module", module: "Land transport", href: "/solutions/land-transport", soon: true },
+      { at: 0.52, kind: "card", title: "Transport order · TO-26-0244", rows: [["From → To", "Berth 12 → Al Noor DC"], ["Truck", "4721"]] },
+      { at: 0.64, kind: "doc", name: "Proof of delivery", meta: "Signed on the driver's phone · 10:42" },
+      { at: 0.665, kind: "module", module: "Warehouse receipts & CFS", href: "/solutions/warehousing", soon: true },
+      { at: 0.675, kind: "user", text: "Receive the container. Here's the packing list.", file: "packing list.pdf" },
+      { at: 0.695, kind: "card", title: "Warehouse receipt · WR-26-0519", rows: [["Cartons", "12 · 1.84 CBM"], ["Scanned", "12 / 12"]], confirm: "Confirm", confirmedAt: 0.735 },
+      { at: 0.775, kind: "module", module: "Inventory (3PL)", href: "/solutions/contract-logistics", soon: true },
+      { at: 0.79, kind: "card", title: "AN-SKU-1042 · Al Noor", rows: [["Received", "+600 cartons"], ["On hand", "1,280"], ["Location", "B-03-2"]] },
+      { at: 0.86, kind: "module", module: "Shipping agency · Finance", href: "/solutions/shipping-agency", soon: true },
+      { at: 0.87, kind: "user", text: "The ship has sailed. Settle the port call." },
+      { at: 0.89, kind: "card", title: "FDA · Jeddah · 412E", rows: [["PDA advance", "USD 48,000"], ["Actual costs", "USD 46,320"]], big: "Due to the principal USD 1,680", confirm: "Confirm & send", confirmedAt: 0.92 },
+      { at: 0.95, kind: "assistant", text: "One ship, one container, seven desks. All of it on one system, and nobody typed it twice." },
     ],
   },
   ar: {
-    eyebrow: "حاوية واحدة، حجز واحد",
-    title: "تابع حاوية عبر Routel",
-    lead: "السفينة على جهة، والنظام على الجهة الأخرى: كل مرحلة في الشحنة تُنجز في محادثة المساعد، وكلها تصب في سجل واحد.",
+    eyebrow: "سفينة واحدة، كل المكاتب",
+    title: "من الرصيف إلى الرف",
+    lead: "سفينة ترسو في جدة. الوكالة والـ NVOCC والمخلّص الجمركي ووكيل الشحن والناقل البري والمستودع، كلٌّ يؤدي دوره، في نظام واحد ومحادثة واحدة.",
     scroll: "مرّر",
-    booking: "الحجز",
-    statuses: ["الحجز قيد الانتظار", "تم تأكيد الحجز", "دخول البوابة", "تم تقديم تعليمات الشحن", "تم التحميل على السفينة", "غادرت", "قيد النقل", "وصلت", "حالة التلكس", "الشحنة مغلقة"],
-    header: "مساعد Routel",
+    container: "الحاوية",
+    stages: ["زيارة السفينة", "على الرصيف", "تم التفريغ", "الجمارك", "أُفرج عنها", "على الطريق", "في المستودع", "على الرف", "تمت التسوية"],
+    header: "مساعد ROUTEL",
     sub: "يستدعي أدوات النظام · ولا يحفظ شيئاً قبل تأكيدك",
     input: "اطلب بأي لغة…",
-    more: "اعرف الوحدة",
+    more: "اعرف الحل",
+    soon: "قيد التطوير",
     confirmed: "تم التأكيد",
     items: [
-      { at: 0, kind: "module", module: "عروض الأسعار والحجوزات", href: "/platform/quotations" },
-      { at: 0.01, kind: "user", text: "جهّز عرض سعر: جدة ← جبل علي، 1 × 40HC." },
-      { at: 0.025, kind: "card", title: "عرض سعر · Q-26-0412", tools: ["search_route_rates", "create_quotation"], rows: [["شحن بحري 40HC", "USD 4,200"], ["رسوم محلية", "SAR 2,500"]], confirm: "تأكيد وإرسال", confirmedAt: 0.045 },
-      { at: 0.06, kind: "status", text: "قبِل العميل العرض · صار الحجز NXS26000412" },
-      { at: 0.09, kind: "module", module: "حجز الناقل · الذكاء الاصطناعي", href: "/platform/ai-assistant" },
-      { at: 0.095, kind: "user", text: "سجّل تأكيد الناقل على الحجز.", file: "تأكيد MSC.pdf" },
-      { at: 0.11, kind: "card", title: "قُرئ من ملف الناقل", tools: ["read_uploaded_document", "update_job"], rows: [["السفينة", "MSC ISABELLA · 412E"], ["إغلاق الحمولة", "14 نوفمبر، 12:00"], ["رقم الناقل", "MSCJED4471"]], confirm: "تأكيد", confirmedAt: 0.13 },
-      { at: 0.14, kind: "doc", name: "تأكيد الحجز.pdf", meta: "أُرسل إلى العميل" },
-      { at: 0.165, kind: "status", text: "دخول البوابة · MSCU 442118-0" },
-      { at: 0.23, kind: "status", text: "تم تقديم تعليمات الشحن" },
-      { at: 0.33, kind: "assistant", text: "الحاوية في الرافعة. التحميل على MSC ISABELLA الآن." },
-      { at: 0.45, kind: "status", text: "تم التحميل على السفينة" },
-      { at: 0.46, kind: "module", module: "بوليصة الشحن · المستندات", href: "/platform/bill-of-lading" },
-      { at: 0.47, kind: "card", title: "بوليصة فرعية · HBL-26000412", tools: ["create_bill_of_lading"], rows: [["المرسل إليه", "Gulf Horizon FZE"], ["البوليصة الرئيسية", "MSCJED4471"]], confirm: "تأكيد وإصدار", confirmedAt: 0.49 },
-      { at: 0.505, kind: "doc", name: "البوليصة الفرعية.pdf", meta: "جاهزة للتوقيع" },
-      { at: 0.545, kind: "status", text: "غادرت · 15 نوفمبر" },
-      { at: 0.56, kind: "module", module: "التتبّع", href: "/platform/tracking" },
-      { at: 0.58, kind: "assistant", text: "عميلك يتابعها بنفسه، برقم الحجز أو الحاوية، دون تسجيل دخول." },
-      { at: 0.62, kind: "status", text: "قيد النقل · الوصول 22 نوفمبر" },
-      { at: 0.64, kind: "module", module: "الفواتير · المالية", href: "/platform/invoicing" },
-      { at: 0.645, kind: "user", text: "أصدر الفاتورة." },
-      { at: 0.66, kind: "card", title: "فاتورة ضريبية · INV-26-0412", tools: ["create_invoice_from_charges"], rows: [["شحن بحري 40HC", "USD 4,200"], ["رسوم محلية", "SAR 2,500"]], big: "SAR 18,250.00", confirm: "تأكيد وإصدار", confirmedAt: 0.68 },
-      { at: 0.7, kind: "doc", name: "فاتورة ضريبية.pdf", meta: "SAR 18,250.00 · USD 4,866.67" },
-      { at: 0.755, kind: "status", text: "وصلت · جبل علي" },
-      { at: 0.77, kind: "card", title: "دفعة من بريد المالية", tools: ["list_payment_suggestions"], rows: [["المبلغ", "SAR 18,250.00"], ["تطابق", "INV-26-0412"]], confirm: "تأكيد المطابقة", confirmedAt: 0.8 },
-      { at: 0.84, kind: "status", text: "حالة التلكس · أُفرج عن البضاعة" },
-      { at: 0.9, kind: "module", module: "المحاسبة", href: "/platform/accounting" },
-      { at: 0.905, kind: "user", text: "أغلق الشحنة." },
-      { at: 0.925, kind: "card", title: "الحجز في الدفاتر", tools: ["update_job", "get_job_charges"], rows: [["الإيراد", "SAR 18,250"], ["التكلفة", "SAR 14,010"]], big: "الربح SAR 4,240 · 23.2%" },
-      { at: 0.965, kind: "assistant", text: "أُغلقت الشحنة، ولم يُعد أحد كتابة رقم واحد في الطريق." },
+      { at: 0, kind: "module", module: "الوكالة الملاحية", href: "/solutions/shipping-agency", soon: true },
+      { at: 0.01, kind: "user", text: "افتح زيارة السفينة MSC ISABELLA، الرحلة 412E، في جدة." },
+      { at: 0.03, kind: "card", title: "زيارة سفينة · جدة · 412E", rows: [["الوصول المتوقع", "21 نوفمبر، 06:00"], ["الرصيف", "12"]], confirm: "تأكيد", confirmedAt: 0.05 },
+      { at: 0.065, kind: "doc", name: "PDA.pdf", meta: "أُرسل إلى الخط الأصيل · USD 48,000" },
+      { at: 0.1, kind: "status", text: "على الرصيف · رقم 12" },
+      { at: 0.115, kind: "user", text: "اقرأ مانيفست الاستيراد.", file: "manifest.pdf" },
+      { at: 0.135, kind: "card", title: "مانيفست استيراد · 412E", rows: [["البوالص", "148"], ["الحاويات", "312"]], confirm: "تأكيد", confirmedAt: 0.155 },
+      { at: 0.2, kind: "module", module: "NVOCC", href: "/solutions/nvocc", soon: true },
+      { at: 0.215, kind: "assistant", text: "نزلت MSCU 442118-0 من السفينة. هي على بوليصتك RTL-JED-26-0102، فبدأت أيام السماح الآن." },
+      { at: 0.27, kind: "card", title: "أرضيات وتأخير · MSCU 442118-0", rows: [["أيام السماح", "4 · حتى 25 نوفمبر"], ["بعدها", "USD 25 يومياً"]] },
+      { at: 0.31, kind: "module", module: "التخليص الجمركي", href: "/solutions/customs-brokerage", soon: true },
+      { at: 0.32, kind: "user", text: "جهّز بيان الاستيراد.", file: "الفاتورة التجارية.pdf" },
+      { at: 0.34, kind: "card", title: "بيان استيراد · CD-26-0077", rows: [["البنود", "8"], ["رموز HS", "8 مقترحة مع أسبابها"]], confirm: "يؤكد المخلّص", confirmedAt: 0.37 },
+      { at: 0.395, kind: "module", module: "إشعار الوصول وأمر التسليم", href: "/solutions/import-release" },
+      { at: 0.405, kind: "doc", name: "إشعار الوصول.pdf", meta: "أُرسل بالبريد إلى النور للتجارة · مستحق SAR 3,450.00" },
+      { at: 0.43, kind: "card", title: "دفعة من بريد المالية", tools: ["list_payment_suggestions"], rows: [["المبلغ", "SAR 3,450.00"], ["تطابق", "INV-26-0412"]], confirm: "تأكيد المطابقة", confirmedAt: 0.45 },
+      { at: 0.47, kind: "doc", name: "أمر التسليم.pdf", meta: "أُفرج عنها وسُددت · ساري حتى 28 نوفمبر" },
+      { at: 0.49, kind: "status", text: "البوابة مفتوحة · أُفرج عن البضاعة" },
+      { at: 0.51, kind: "module", module: "النقل البري", href: "/solutions/land-transport", soon: true },
+      { at: 0.52, kind: "card", title: "أمر نقل · TO-26-0244", rows: [["من ← إلى", "الرصيف 12 ← مستودع النور"], ["الشاحنة", "4721"]] },
+      { at: 0.64, kind: "doc", name: "إثبات التسليم", meta: "وُقّع على جوال السائق · 10:42" },
+      { at: 0.665, kind: "module", module: "إيصالات المستودع ومحطة الحاويات", href: "/solutions/warehousing", soon: true },
+      { at: 0.675, kind: "user", text: "استلم الحاوية. هذه قائمة التعبئة.", file: "قائمة التعبئة.pdf" },
+      { at: 0.695, kind: "card", title: "إيصال مستودع · WR-26-0519", rows: [["الكراتين", "12 · 1.84 CBM"], ["الممسوح", "12 / 12"]], confirm: "تأكيد", confirmedAt: 0.735 },
+      { at: 0.775, kind: "module", module: "المخزون لعملائك 3PL", href: "/solutions/contract-logistics", soon: true },
+      { at: 0.79, kind: "card", title: "AN-SKU-1042 · النور", rows: [["المستلم", "+600 كرتون"], ["الرصيد", "1,280"], ["الموقع", "B-03-2"]] },
+      { at: 0.86, kind: "module", module: "الوكالة الملاحية · المالية", href: "/solutions/shipping-agency", soon: true },
+      { at: 0.87, kind: "user", text: "أبحرت السفينة. سوِّ حساب الزيارة." },
+      { at: 0.89, kind: "card", title: "FDA · جدة · 412E", rows: [["دفعة PDA المقدمة", "USD 48,000"], ["المصاريف الفعلية", "USD 46,320"]], big: "مستحق للخط الأصيل USD 1,680", confirm: "تأكيد وإرسال", confirmedAt: 0.92 },
+      { at: 0.95, kind: "assistant", text: "سفينة واحدة، وحاوية واحدة، وسبعة مكاتب. كلها على نظام واحد، ولم يكتب أحد شيئاً مرتين." },
     ],
   },
 };
 
-/** The booking's status at a point of the story, in step with the chat. */
-const statusAt = (p: number) => {
-  if (p < 0.13) return 0;
-  if (p < 0.165) return 1;
-  if (p < 0.23) return 2;
-  if (p < 0.45) return 3;
-  if (p < 0.545) return 4;
-  if (p < 0.62) return 5;
-  if (p < 0.755) return 6;
-  if (p < 0.84) return 7;
-  if (p < 0.925) return 8;
-  return 9;
+/** The container's stage at a point of the story, in step with the chat. */
+const stageAt = (p: number) => {
+  if (p < 0.1) return 0;
+  if (p < 0.2) return 1;
+  if (p < 0.31) return 2;
+  if (p < 0.49) return 3;
+  if (p < 0.58) return 4;
+  if (p < 0.665) return 5;
+  if (p < 0.775) return 6;
+  if (p < 0.86) return 7;
+  return 8;
 };
 
 /** A little before an assistant turn, the typing dots show. */
@@ -204,11 +232,9 @@ export function Odyssey() {
       const cable = q<SVGLineElement>("[data-cable]");
       const spreader = q<SVGRectElement>("[data-spreader]");
       const shipSide = q<SVGGElement>("[data-ship-side]");
+      const gate = q<SVGGElement>("[data-gate]");
       const dusk = q<SVGRectElement>("[data-dusk]");
-      const truck2 = q<SVGGElement>("[data-truck2]");
-      const trolley2 = q<SVGRectElement>("[data-trolley2]");
-      const cable2 = q<SVGLineElement>("[data-cable2]");
-      const spreader2 = q<SVGRectElement>("[data-spreader2]");
+      const cartons = Array.from(el.querySelectorAll<SVGGElement>("[data-carton]"));
       const waves = Array.from(el.querySelectorAll<SVGPathElement>("[data-wave]"));
       const msgs = Array.from(el.querySelectorAll<HTMLElement>("[data-at]"));
       const confirms = Array.from(el.querySelectorAll<HTMLElement>("[data-confirm-at]"));
@@ -231,30 +257,31 @@ export function Odyssey() {
         el.setAttribute("data-mode", "scroll");
         const s = {
           p: 0,
-          z: 0.95,
-          fx: 1000,
-          fy: 520,
-          truckX: -420,
-          heroX: -408,
-          heroY: QUAY_Y - 12 - BOX.h,
-          trolleyX: 1008,
+          z: 0.8,
+          fx: SHIP_X + 420,
+          fy: 470,
+          shipDx: -SEA_RUN,
+          follow: 1,
+          heroX: SLOT_X - SEA_RUN,
+          heroY: SLOT_Y,
+          trolleyX: TROLLEY_REST,
           drop: 24,
-          shipDx: 0,
-          follow: 0,
+          truckX: TRUCK_PARK,
+          gate: 0,
+          unload: 0,
           dusk: 0,
-          truck2X: 4400,
-          trolley2X: DEST_CRANE_X - 360,
-          drop2: 24,
         };
-        let lastStatus = -1;
+        let lastStage = -1;
         let lastShown = -1;
+        const dock = { x: DOCK_X + 12 + BOX.w / 2 - 14, y: ON_TRUCK + 4 };
 
         const draw = () => {
-          // Once the ship sails, the camera's focus travels with it.
+          // While the ship moves, the camera can ride with it.
           const fx = s.fx + s.follow * s.shipDx;
           cam.setAttribute("transform", `translate(${W / 2} ${H / 2}) scale(${s.z}) translate(${-fx} ${-s.fy})`);
-          truck.setAttribute("transform", `translate(${s.truckX} ${QUAY_Y})`);
+          shipSide.setAttribute("transform", `translate(${SHIP_X + s.shipDx} ${QUAY_Y})`);
           hero.setAttribute("transform", `translate(${s.heroX} ${s.heroY})`);
+          truck.setAttribute("transform", `translate(${s.truckX} ${QUAY_Y})`);
           const top0 = BOOM_Y + TROLLEY_H;
           trolley.setAttribute("x", String(s.trolleyX - 20));
           cable.setAttribute("x1", String(s.trolleyX));
@@ -262,24 +289,26 @@ export function Odyssey() {
           cable.setAttribute("y2", String(top0 + s.drop));
           spreader.setAttribute("x", String(s.trolleyX - 32));
           spreader.setAttribute("y", String(top0 + s.drop));
-          shipSide.setAttribute("transform", `translate(${SHIP_X + s.shipDx} ${QUAY_Y})`);
+          gate.setAttribute("transform", `rotate(${-80 * s.gate})`);
           dusk.style.opacity = String(s.dusk);
-          // The destination crane and truck
-          truck2.setAttribute("transform", `translate(${s.truck2X} ${QUAY_Y})`);
-          trolley2.setAttribute("x", String(s.trolley2X - 20));
-          cable2.setAttribute("x1", String(s.trolley2X));
-          cable2.setAttribute("x2", String(s.trolley2X));
-          cable2.setAttribute("y2", String(top0 + s.drop2));
-          spreader2.setAttribute("x", String(s.trolley2X - 32));
-          spreader2.setAttribute("y", String(top0 + s.drop2));
+          // The cartons leave the container one after another for their rack slot.
+          cartons.forEach((c, i) => {
+            const k = gsap.utils.clamp(0, 1, s.unload * CARTONS.length - i * 0.85);
+            const home = cartonHome(CARTONS[i]);
+            const e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+            const x = dock.x + (home.x - dock.x) * e;
+            const y = dock.y + (home.y - dock.y) * e - Math.sin(Math.PI * e) * 60;
+            c.setAttribute("transform", `translate(${x} ${y})`);
+            c.style.opacity = k > 0 ? "1" : "0";
+          });
           progressEl.style.transform = `scaleX(${s.p})`;
           hint.style.opacity = String(gsap.utils.clamp(0, 1, 1 - s.p / 0.04));
 
-          // The booking's status in the chat header.
-          const st = statusAt(s.p);
-          if (st !== lastStatus) {
-            lastStatus = st;
-            statusEl.textContent = t.statuses[st];
+          // The container's stage in the chat header.
+          const st = stageAt(s.p);
+          if (st !== lastStage) {
+            lastStage = st;
+            statusEl.textContent = t.stages[st];
             rail.forEach((r, i) => r.classList.toggle("is-on", i <= st));
           }
 
@@ -310,40 +339,45 @@ export function Odyssey() {
           onUpdate: draw,
         });
         const LIFT = BOOM_Y + TROLLEY_H + 46;
-        const ON_TRUCK = QUAY_Y - 12 - BOX.h;
         const dropTo = (y: number) => y - 6 - (BOOM_Y + TROLLEY_H);
         tl.to(s, { p: 1, duration: 1 }, 0);
-        // 0. The quotation is made while the port waits; the camera drifts in.
-        tl.to(s, { z: 1.02, fx: 940, fy: 500, duration: 0.1, ease: "power1.inOut" }, 0);
-        // 1. The truck brings the container to the quay (Gate In).
-        tl.to(s, { truckX: TRUCK_X, heroX: TRUCK_X + 12, duration: 0.07, ease: "power2.out" }, 0.08);
-        tl.to(s, { z: 1.45, fx: TRUCK_X + 60, fy: QUAY_Y - 60, duration: 0.09, ease: "power2.inOut" }, 0.1);
-        // 2. The crane: trolley over, spreader down, lift, carry, lower into the slot.
-        tl.to(s, { trolleyX: TRUCK_X + 12 + BOX.w / 2, duration: 0.04, ease: "power2.inOut" }, 0.18);
-        tl.to(s, { drop: dropTo(ON_TRUCK), duration: 0.04, ease: "power2.inOut" }, 0.22);
-        tl.to(s, { drop: 40, heroY: LIFT, duration: 0.05, ease: "power2.inOut" }, 0.26);
-        tl.to(s, { truckX: -420, duration: 0.07, ease: "power2.in" }, 0.29);
-        tl.to(s, { trolleyX: SLOT_X + BOX.w / 2, heroX: SLOT_X, fx: 620, fy: BOOM_Y + 90, duration: 0.08, ease: "power2.inOut" }, 0.31);
-        tl.to(s, { drop: dropTo(SLOT_Y), heroY: SLOT_Y, duration: 0.05, ease: "power2.inOut" }, 0.39);
-        tl.to(s, { drop: 24, duration: 0.03, ease: "power2.inOut" }, 0.44);
-        // 3. Pull back to the loaded ship.
-        tl.to(s, { z: 0.95, fx: 1000, fy: 520, duration: 0.08, ease: "power2.inOut" }, 0.44);
-        // 4. The ship leaves; the camera travels with it across open water.
-        tl.to(s, { shipDx: SAIL, heroX: `+=${SAIL}`, duration: 0.22, ease: "power1.inOut" }, 0.52);
-        tl.to(s, { z: 0.85, fx: SHIP_X + 380, fy: 500, follow: 1, duration: 0.08, ease: "power2.inOut" }, 0.52);
-        tl.to(s, { z: 0.78, fy: 480, duration: 0.12, ease: "none" }, 0.6);
-        // 5. Docked: the camera closes in on the destination crane.
-        tl.to(s, { z: 1.3, fx: DEST_CRANE_X - 300 - SAIL, fy: QUAY_Y - 80, duration: 0.06, ease: "power2.inOut" }, 0.74);
-        // 6. Unloading: trolley over, spreader down, lift, the truck arrives, carry, lower, drive away.
-        tl.to(s, { trolley2X: DEST_SLOT_X + BOX.w / 2, duration: 0.04, ease: "power2.inOut" }, 0.78);
-        tl.to(s, { drop2: dropTo(SLOT_Y), duration: 0.04, ease: "power2.inOut" }, 0.82);
-        tl.to(s, { drop2: 40, heroY: LIFT, duration: 0.04, ease: "power2.inOut" }, 0.86);
-        tl.to(s, { truck2X: DEST_TRUCK_X, duration: 0.06, ease: "power2.out" }, 0.86);
-        tl.to(s, { trolley2X: DEST_TRUCK_X + 12 + BOX.w / 2, heroX: DEST_TRUCK_X + 12, fx: DEST_CRANE_X - 120 - SAIL, duration: 0.06, ease: "power2.inOut" }, 0.9);
-        tl.to(s, { drop2: dropTo(ON_TRUCK), heroY: ON_TRUCK, duration: 0.03, ease: "power2.inOut" }, 0.955);
-        tl.to(s, { drop2: 24, duration: 0.02, ease: "power2.inOut" }, 0.965);
-        tl.to(s, { truck2X: 4400, heroX: 4412, duration: 0.03, ease: "power2.in" }, 0.97);
-        tl.to(s, { z: 1.05, fx: DEST_CRANE_X - SAIL, dusk: 0.3, duration: 0.04, ease: "power2.inOut" }, 0.96);
+        // 1. The agency: the ship comes in from the sea and berths; the camera rides with it.
+        tl.to(s, { shipDx: 0, heroX: SLOT_X, duration: 0.1, ease: "power2.out" }, 0);
+        tl.to(s, { z: 0.95, fx: 940, fy: 500, duration: 0.1, ease: "power1.inOut" }, 0.06);
+        // 2. Alongside: close in on the crane over the ship.
+        tl.to(s, { z: 1.15, fx: 980, fy: QUAY_Y - 150, follow: 0, duration: 0.06, ease: "power2.inOut" }, 0.1);
+        // 3. Discharge: trolley over the slot, spreader down, lift, carry to the yard, set down.
+        tl.to(s, { trolleyX: SLOT_X + BOX.w / 2, duration: 0.03, ease: "power2.inOut" }, 0.16);
+        tl.to(s, { drop: dropTo(SLOT_Y), duration: 0.03, ease: "power2.inOut" }, 0.19);
+        tl.to(s, { drop: 40, heroY: LIFT, duration: 0.03, ease: "power2.inOut" }, 0.22);
+        tl.to(s, { trolleyX: YARD_X + BOX.w / 2, heroX: YARD_X, fx: YARD_X - 80, duration: 0.04, ease: "power2.inOut" }, 0.25);
+        tl.to(s, { drop: dropTo(ON_GROUND), heroY: ON_GROUND, duration: 0.025, ease: "power2.inOut" }, 0.29);
+        tl.to(s, { drop: 24, duration: 0.02, ease: "power2.inOut" }, 0.315);
+        // 4. Customs: the camera moves across the yard to the customs house and the gate.
+        tl.to(s, { z: 1.2, fx: CUSTOMS_X + 40, fy: QUAY_Y - 130, duration: 0.07, ease: "power2.inOut" }, 0.32);
+        // 5. The forwarder: the release is recorded and paid, and the gate opens.
+        tl.to(s, { fx: GATE_X - 40, duration: 0.07, ease: "power2.inOut" }, 0.41);
+        tl.to(s, { gate: 1, duration: 0.025, ease: "power2.out" }, 0.47);
+        // 6. The truck backs under the crane, which moves the container onto it.
+        tl.to(s, { z: 1.05, fx: YARD_X + 160, fy: QUAY_Y - 140, duration: 0.03, ease: "power2.inOut" }, 0.5);
+        tl.to(s, { truckX: TRUCK_STOP, duration: 0.025, ease: "power2.out" }, 0.5);
+        tl.to(s, { trolleyX: YARD_X + BOX.w / 2, duration: 0.012, ease: "power2.inOut" }, 0.52);
+        tl.to(s, { drop: dropTo(ON_GROUND), duration: 0.012, ease: "power2.inOut" }, 0.532);
+        tl.to(s, { drop: 40, heroY: LIFT, duration: 0.012, ease: "power2.inOut" }, 0.544);
+        tl.to(s, { trolleyX: TRUCK_STOP + 12 + BOX.w / 2, heroX: TRUCK_STOP + 12, duration: 0.012, ease: "power2.inOut" }, 0.556);
+        tl.to(s, { drop: dropTo(ON_TRUCK), heroY: ON_TRUCK, duration: 0.01, ease: "power2.inOut" }, 0.568);
+        tl.to(s, { drop: 24, duration: 0.008, ease: "power2.inOut" }, 0.578);
+        // 7. On the road: through the gate to the warehouse dock; the camera follows.
+        tl.to(s, { truckX: DOCK_X, heroX: DOCK_X + 12, fx: DOCK_X + 260, z: 0.9, duration: 0.08, ease: "power1.inOut" }, 0.585);
+        // 8. The warehouse: the cartons go from the container to the racks.
+        tl.to(s, { z: 1.12, fx: WH_X + 300, fy: QUAY_Y - 170, duration: 0.04, ease: "power2.inOut" }, 0.665);
+        tl.to(s, { unload: 1, duration: 0.09, ease: "none" }, 0.69);
+        // 9. 3PL: close in on the racks.
+        tl.to(s, { z: 1.45, fx: RACK_X0 + 3.2 * BAY_W, fy: QUAY_Y - 185, duration: 0.05, ease: "power2.inOut" }, 0.78);
+        // 10. Back at the berth: the ship sails, and the port call is settled.
+        tl.to(s, { z: 0.85, fx: 1050, fy: 470, duration: 0.05, ease: "power2.inOut" }, 0.85);
+        tl.to(s, { shipDx: -SEA_RUN * 0.7, duration: 0.11, ease: "power1.in" }, 0.88);
+        tl.to(s, { dusk: 0.3, duration: 0.06 }, 0.93);
 
         draw();
         const sea = gsap.to(waves, { x: -120, duration: 7, repeat: -1, ease: "none" });
@@ -370,63 +404,112 @@ export function Odyssey() {
             </linearGradient>
           </defs>
           <rect width={W} height={H} fill="url(#ody-sky)" />
-          <g data-cam="" transform={`translate(${W / 2} ${H / 2}) scale(0.95) translate(-1000 -520)`}>
-            {/* ── Side view: quay, crane, truck, ship ── */}
-            <g data-side="">
-              <rect x={-600} y={QUAY_Y} width={1240} height={400} fill={ink.deep} />
-              <rect x={-600} y={QUAY_Y} width={1240} height={6} fill={ink.line} />
-              {/* the destination port's far cranes */}
-              <g opacity="0.14" stroke={paint.fog} strokeWidth="2" fill="none">
-                {[DEST_X + 420, DEST_X + 510, DEST_X + 600].map((x) => (
-                  <path key={x} d={`M${x} ${QUAY_Y + 40} V${QUAY_Y - 140} M${x + 24} ${QUAY_Y + 40} V${QUAY_Y - 140} M${x - 30} ${QUAY_Y - 140} H${x + 70}`} />
-                ))}
-              </g>
-              {/* quay stack */}
-              {[-160, -100, -40].map((x, i) => (
-                <ContainerBox key={x} x={x} y={QUAY_Y - BOX.h} color={boxColor(i + 2)} opacity={0.85} />
+          <g data-cam="" transform={`translate(${W / 2} ${H / 2}) scale(0.44) translate(-2050 -470)`}>
+            {/* ── The sea, to the quay edge ── */}
+            <rect x={-2600} y={QUAY_Y + 46} width={QUAY_X + 2600} height={500} fill="url(#ody-sea)" opacity="0.95" />
+            <g fill="none" stroke="rgb(124 214 199 / 0.3)" strokeWidth="2" strokeLinecap="round">
+              {[QUAY_Y + 60, QUAY_Y + 84, QUAY_Y + 110].map((y, i) => (
+                <path key={y} data-wave="" opacity={1 - i * 0.25} d={wavePath(-2600, y, 66, 60, 6 - i)} />
               ))}
-              <Truck data-truck="" x={TRUCK_X} y={QUAY_Y} />
-              <ShipSide
-                data-ship-side=""
-                x={SHIP_X}
-                y={QUAY_Y}
-                length={760}
-                slots={Array.from({ length: 10 }, (_, col) => [0, 1, 2].map((row) => ({ col, row }))).flat()}
-              />
-              <Crane x={560} y={QUAY_Y} />
-              <rect data-trolley="" x={1008 - 20} y={BOOM_Y} width={40} height={TROLLEY_H} rx={2} fill={paint.amber} />
-              <line data-cable="" x1={1008} x2={1008} y1={BOOM_Y + TROLLEY_H} y2={BOOM_Y + TROLLEY_H + 24} stroke={paint.fog} strokeWidth="2" />
-              <rect data-spreader="" x={1008 - 32} y={BOOM_Y + TROLLEY_H + 24} width={64} height={6} rx={1} fill={paint.amber} />
-              {/* The booking's container (still: in its slot on the ship) */}
-              <g data-hero="" transform={`translate(${SLOT_X} ${SLOT_Y})`}>
-                <ContainerBox x={0} y={0} hero />
-              </g>
-              {/* sea, all the way to the destination */}
-              <rect x={640} y={QUAY_Y + 46} width={DEST_X - 640 + 40} height={400} fill="url(#ody-sea)" opacity="0.95" />
-              <g fill="none" stroke="rgb(124 214 199 / 0.3)" strokeWidth="2" strokeLinecap="round">
-                {[QUAY_Y + 60, QUAY_Y + 84, QUAY_Y + 110].map((y, i) => (
-                  <path key={y} data-wave="" opacity={1 - i * 0.25} d={wavePath(520, y, 48, 60, 6 - i)} />
-                ))}
-              </g>
-              {/* the destination quay */}
-              <rect x={DEST_X} y={QUAY_Y} width={1400} height={400} fill={ink.deep} />
-              <rect x={DEST_X} y={QUAY_Y} width={1400} height={6} fill={ink.line} />
-              {[0, 1, 2, 3].map((i) => (
-                <ContainerBox key={i} x={DEST_X + 560 + i * 60} y={QUAY_Y - BOX.h} color={boxColor(i + 1)} opacity={0.85} />
-              ))}
-              {[0, 1].map((i) => (
-                <ContainerBox key={`r${i}`} x={DEST_X + 620 + i * 60} y={QUAY_Y - 2 * BOX.h} color={boxColor(i + 4)} opacity={0.85} />
-              ))}
-              {/* The destination crane reaches back over the ship; its truck waits off-stage. */}
-              <Truck data-truck2="" x={4400} y={QUAY_Y} />
-              <Crane x={DEST_CRANE_X} y={QUAY_Y} reach={220} back={720} />
-              <rect data-trolley2="" x={DEST_CRANE_X - 360 - 20} y={BOOM_Y} width={40} height={TROLLEY_H} rx={2} fill={paint.amber} />
-              <line data-cable2="" x1={DEST_CRANE_X - 360} x2={DEST_CRANE_X - 360} y1={BOOM_Y + TROLLEY_H} y2={BOOM_Y + TROLLEY_H + 24} stroke={paint.fog} strokeWidth="2" />
-              <rect data-spreader2="" x={DEST_CRANE_X - 360 - 32} y={BOOM_Y + TROLLEY_H + 24} width={64} height={6} rx={1} fill={paint.amber} />
             </g>
 
+            {/* ── The port: quay, yard, customs house, gate, road, warehouse ── */}
+            <rect x={QUAY_X} y={QUAY_Y} width={WH_X + WH_W + 1400 - QUAY_X} height={500} fill={ink.deep} />
+            <rect x={QUAY_X} y={QUAY_Y} width={WH_X + WH_W + 1400 - QUAY_X} height={6} fill={ink.line} />
+            {/* the road past the gate */}
+            <path d={`M${GATE_X + 60} ${QUAY_Y + 30} H${WH_X + WH_W + 600}`} stroke={ink.line} strokeWidth="3" strokeDasharray="26 18" />
+
+            {/* yard stacks */}
+            {[0, 1].map((r) => (
+              <ContainerBox key={`a${r}`} x={QUAY_X + 15} y={QUAY_Y - (r + 1) * BOX.h} color={boxColor(r + 2)} opacity={0.85} />
+            ))}
+            {[0, 1, 2].map((r) => (
+              <ContainerBox key={`b${r}`} x={YARD_X + 270} y={QUAY_Y - (r + 1) * BOX.h} color={boxColor(r + 4)} opacity={0.85} />
+            ))}
+            {[0, 1].map((r) => (
+              <ContainerBox key={`c${r}`} x={YARD_X + 330} y={QUAY_Y - (r + 1) * BOX.h} color={boxColor(r + 1)} opacity={0.85} />
+            ))}
+
+            {/* the customs house */}
+            <g transform={`translate(${CUSTOMS_X} ${QUAY_Y})`}>
+              <path d="M-10 -170 L100 -210 L210 -170 Z" fill={ink.line} />
+              <rect x={-10} y={-170} width={220} height={10} fill={paint.fog} opacity="0.5" />
+              {[8, 52, 96, 140, 184].map((x) => (
+                <rect key={x} x={x} y={-160} width={16} height={150} fill={paint.fog} opacity="0.35" />
+              ))}
+              <rect x={-20} y={-10} width={240} height={10} fill={paint.fog} opacity="0.5" />
+              <circle cx={100} cy={-186} r={9} fill={paint.hero} />
+            </g>
+
+            {/* the gate: a booth and its barrier, which lifts on release */}
+            <g transform={`translate(${GATE_X} ${QUAY_Y})`}>
+              <rect x={-46} y={-64} width={40} height={64} rx={3} fill={ink.steel} />
+              <rect x={-40} y={-56} width={28} height={16} rx={2} fill={paint.fogLight} opacity="0.5" />
+              <rect x={-4} y={-40} width={10} height={40} fill={ink.line} />
+              <g transform="translate(1 -36)">
+                <g data-gate="">
+                  <rect x={0} y={-4} width={150} height={8} rx={4} fill={paint.hero} />
+                  {[30, 70, 110].map((x) => (
+                    <rect key={x} x={x} y={-4} width={14} height={8} fill={paint.white} />
+                  ))}
+                </g>
+              </g>
+            </g>
+
+            {/* the warehouse, cut away to show its racks */}
+            <g>
+              <path d={`M${WH_X} ${QUAY_Y} V${QUAY_Y - 330} L${WH_X + WH_W / 2} ${QUAY_Y - 420} L${WH_X + WH_W} ${QUAY_Y - 330} V${QUAY_Y} Z`} fill={ink.hull} />
+              <path d={`M${WH_X} ${QUAY_Y - 330} L${WH_X + WH_W / 2} ${QUAY_Y - 420} L${WH_X + WH_W} ${QUAY_Y - 330}`} fill="none" stroke={ink.line} strokeWidth="10" strokeLinejoin="round" />
+              {/* the dock door */}
+              <rect x={WH_X - 4} y={QUAY_Y - 120} width={14} height={120} fill={ink.bg} />
+              {/* racks: three levels, five bays */}
+              {[0, 1, 2, 3].map((lvl) => (
+                <rect key={lvl} x={RACK_X0} y={QUAY_Y - 8 - lvl * LEVEL_H} width={5 * BAY_W} height={5} fill={paint.fog} opacity="0.55" />
+              ))}
+              {[0, 1, 2, 3, 4, 5].map((b) => (
+                <rect key={b} x={RACK_X0 + b * BAY_W - 2} y={QUAY_Y - 8 - 3 * LEVEL_H} width={5} height={3 * LEVEL_H + 8} fill={paint.fog} opacity="0.55" />
+              ))}
+              {/* the stock already there */}
+              {[0, 1, 2].map((lvl) =>
+                [0, 1, 2].map((b) => (
+                  <g key={`${lvl}-${b}`} opacity="0.85">
+                    <rect x={RACK_X0 + b * BAY_W + 14} y={QUAY_Y - 8 - lvl * LEVEL_H - 40} width={34} height={40} rx={2} fill={boxColor(lvl + b * 2)} />
+                    <rect x={RACK_X0 + b * BAY_W + 52} y={QUAY_Y - 8 - lvl * LEVEL_H - 30} width={34} height={30} rx={2} fill={boxColor(lvl * 2 + b + 1)} />
+                  </g>
+                )),
+              )}
+            </g>
+
+            {/* ── The ship, the crane and the booking's container ── */}
+            <ShipSide
+              data-ship-side=""
+              x={SHIP_X}
+              y={QUAY_Y}
+              length={SHIP_LEN}
+              slots={Array.from({ length: 10 }, (_, col) => [0, 1, 2, 3].map((row) => ({ col, row }))).flat().filter((c) => !(c.col === HERO_SLOT.col && c.row === HERO_SLOT.row))}
+            />
+            <Truck data-truck="" x={TRUCK_PARK} y={QUAY_Y} />
+            <g data-hero="" transform={`translate(${SLOT_X} ${SLOT_Y})`}>
+              <ContainerBox x={0} y={0} hero />
+            </g>
+            <Crane x={CRANE_X} y={QUAY_Y} height={190} reach={260} back={780} />
+            <rect data-trolley="" x={TROLLEY_REST - 20} y={BOOM_Y} width={40} height={TROLLEY_H} rx={2} fill={paint.amber} />
+            <line data-cable="" x1={TROLLEY_REST} x2={TROLLEY_REST} y1={BOOM_Y + TROLLEY_H} y2={BOOM_Y + TROLLEY_H + 24} stroke={paint.fog} strokeWidth="2" />
+            <rect data-spreader="" x={TROLLEY_REST - 32} y={BOOM_Y + TROLLEY_H + 24} width={64} height={6} rx={1} fill={paint.amber} />
+
+            {/* the container's cartons, on their way to the racks (still: already shelved) */}
+            {CARTONS.map((c, i) => {
+              const home = cartonHome(c);
+              return (
+                <g key={i} data-carton="" transform={`translate(${home.x} ${home.y})`}>
+                  <rect width={30} height={34} rx={2} fill={paint.hero} />
+                  <rect x={12} width={6} height={14} fill={paint.heroDark} opacity="0.45" />
+                </g>
+              );
+            })}
+
             {/* ── Dusk at the end ── */}
-            <rect data-dusk="" x={-800} y={-800} width={6000} height={2600} fill={ink.bg} style={{ opacity: 0 }} />
+            <rect data-dusk="" x={-3000} y={-1200} width={9000} height={3200} fill={ink.bg} style={{ opacity: 0 }} />
           </g>
         </svg>
 
@@ -446,10 +529,10 @@ export function Odyssey() {
         </div>
       </div>
 
-      {/* The assistant's window: the same shipment, done in the system */}
+      {/* The assistant's window: every desk's work on the same container */}
       <div className="odyssey-panel z-10 flex flex-col">
         <div className="odyssey-chat flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl bg-white text-ink-900 shadow-float ring-1 ring-black/5">
-          {/* Window bar: the assistant, and the booking it is working on */}
+          {/* Window bar: the assistant, and the container it is following */}
           <div className="shrink-0 border-b border-fog-200 bg-[linear-gradient(180deg,var(--color-fog-50),white)] px-4 pb-3 pt-3.5 sm:px-5">
             <div className="flex items-center gap-2.5">
               <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-spark-400 text-ink-950">
@@ -466,14 +549,14 @@ export function Odyssey() {
             </div>
             <div className="mt-3 flex items-center justify-between gap-3 rounded-xl bg-ink-900 px-3 py-2 text-white ring-1 ring-ink-800">
               <div className="min-w-0">
-                <p className="text-[10px] font-medium text-white/45">{t.booking}</p>
-                <p dir="ltr" className="font-mono text-[12.5px] font-semibold rtl:text-end">NXS26000412</p>
+                <p className="text-[10px] font-medium text-white/45">{t.container}</p>
+                <p dir="ltr" className="font-mono text-[12.5px] font-semibold rtl:text-end">MSCU 442118-0</p>
               </div>
               <div className="min-w-0 text-end">
-                <p data-status="" className="truncate text-[12px] font-semibold text-spark-300">{t.statuses[4]}</p>
+                <p data-status="" className="truncate text-[12px] font-semibold text-spark-300">{t.stages[1]}</p>
                 <div className="mt-1.5 flex justify-end gap-[3px]" aria-hidden>
-                  {t.statuses.map((st, i) => (
-                    <span key={st} data-rail="" className={cn("odyssey-rail h-1 w-3 rounded-full bg-white/10 sm:w-3.5", i <= 4 && "is-on")} />
+                  {t.stages.map((st, i) => (
+                    <span key={st} data-rail="" className={cn("odyssey-rail h-1 w-3 rounded-full bg-white/10 sm:w-3.5", i <= 1 && "is-on")} />
                   ))}
                 </div>
               </div>
@@ -531,6 +614,7 @@ function Message({ item, t }: { item: Item; t: Copy }) {
             <ArrowRight className="h-3 w-3 transition-transform ltr:group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" />
             <span className="sr-only">{t.more}</span>
           </Link>
+          {item.soon ? <span className="rounded-full bg-fog-100 px-2 py-0.5 text-[10px] font-semibold text-fog-500">{t.soon}</span> : null}
           <span className="h-px flex-1 bg-fog-200" />
         </>,
       );
@@ -563,6 +647,7 @@ function Message({ item, t }: { item: Item; t: Copy }) {
             <Sparkles className={cn("h-3.5 w-3.5", item.confirm ? "text-spark-500" : "text-spark-600")} />
             {item.title}
           </p>
+          {item.tools?.length ? (
           <p className="mt-2 flex flex-wrap gap-1.5" aria-label="tools">
             {item.tools.map((tool) => (
               <span key={tool} dir="ltr" className="inline-flex items-center gap-1 rounded-md bg-spark-50 px-1.5 py-0.5 font-mono text-[10px] text-spark-700 ring-1 ring-spark-100">
@@ -571,6 +656,7 @@ function Message({ item, t }: { item: Item; t: Copy }) {
               </span>
             ))}
           </p>
+          ) : null}
           <ul className="mt-2.5 space-y-1">
             {item.rows.map(([k, v]) => (
               <li key={k} className="flex justify-between gap-3 text-[12px]">
