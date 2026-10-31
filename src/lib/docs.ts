@@ -34,6 +34,7 @@ export const INDEX_SLUG = "introduction";
 const groups: Array<{ title: Record<Locale, string>; slugs: string[] }> = [
   { title: { en: "Getting started", ar: "البداية" }, slugs: ["introduction", "ai-assistant", "getting-started", "roles"] },
   { title: { en: "Dashboard & daily operations", ar: "لوحة التحكم والعمليات اليومية" }, slugs: ["dashboard", "bookings", "quotations", "routes"] },
+  { title: { en: "Air, LCL & import", ar: "الجوي والتجميع والاستيراد" }, slugs: ["air-freight", "consolidation", "arrival-notice"] },
   { title: { en: "Partners", ar: "الشركاء" }, slugs: ["business-partners"] },
   {
     title: { en: "Finance", ar: "المالية" },

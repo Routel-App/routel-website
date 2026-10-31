@@ -1,5 +1,5 @@
 import Link from "@/components/i18n/link";
-import { site, siteCopy } from "@/lib/site";
+import { site } from "@/lib/site";
 import { getModules } from "@/lib/modules";
 import type { Locale } from "@/lib/i18n";
 import { getLocale } from "@/lib/locale-server";
@@ -21,7 +21,7 @@ const copy = {
     about: "About Routel",
     pricing: "Pricing",
     demo: "Request a demo",
-    blurb: "Built from the system that runs a working freight forwarder every day.",
+    blurb: "The Maritime & Logistics Operating System, run by AI. Built from the system that runs a working freight forwarder every day.",
     rights: "All rights reserved.",
     origin: "Built and run from Malaysia.",
   },
@@ -37,7 +37,7 @@ const copy = {
     about: "عن Routel",
     pricing: "الأسعار",
     demo: "اطلب عرضاً تجريبياً",
-    blurb: "مبني من النظام الذي يدير شركة شحن حقيقية كل يوم.",
+    blurb: "نظام التشغيل البحري واللوجستي بقيادة الذكاء الاصطناعي. مبني من النظام الذي يدير شركة شحن حقيقية كل يوم.",
     rights: "جميع الحقوق محفوظة.",
     origin: "طُوّر ويُدار من ماليزيا.",
   },
@@ -83,9 +83,9 @@ export async function Footer() {
       <Container className="pb-12">
         <div className="grid gap-10 md:grid-cols-[1.4fr_repeat(3,1fr)]">
           <div className="max-w-xs">
-            <Logo inverse />
+            <Logo inverse tagline="Maritime & Logistics Operating System" />
             <p className="mt-4 text-sm leading-relaxed text-white/60">
-              {siteCopy[locale].tagline}. {t.blurb}
+              {t.blurb}
             </p>
           </div>
           {columns.map((col) => (

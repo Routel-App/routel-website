@@ -1,0 +1,47 @@
+---
+title: Arrival Notice & Delivery Order
+description: For imports, the arrival notice sent on time with its charges, the line's release recorded, and a delivery order issued only when released and paid.
+status: complete
+---
+
+Import release is a business activity an admin opens in **Settings → Business activities**. It works on import bookings; express air shipments are left out, because the carrier delivers them.
+
+## When the notice is due
+
+<Fields
+  rows={[
+    ["By voyage length (default)", "A third of the voyage days, between 3 and 10 days before the ETA. 5 days if there's no ETD, 1 day for air."],
+    ["Fixed", "1 to 60 days before the ETA, set in Settings → Import release."],
+  ]}
+/>
+
+Due notices appear in **Alerts → Arrival notices**. If the ETA moves after the notice was sent, the booking returns to Alerts so you can send an updated one.
+
+## The arrival notice
+
+It shows the consignee and notify party, the carrier, the master and house numbers, the vessel or flight, the route, the ETA, the containers or pieces, and the booking's selling charges with totals.
+
+- **Send by email** sends it from the operations mailbox with the PDF attached. Recipients come from the AR partner's contacts, and the subject and message can be edited. The e-mail is filed under the booking.
+- **Mark as sent** records a notice sent another way.
+
+## The line's release
+
+Record how the line released the cargo: **Original B/L**, **Telex release** or **Sea waybill**, with a note and the carrier's own DO number. Air bookings need no B/L release.
+
+## The delivery order
+
+The delivery order is issued only when two checks pass:
+
+1. **Released by the line.**
+2. **Paid:** every selling charge is invoiced and every issued invoice is settled, or the partner has a credit agreement in force and is within its limit.
+
+A user with finance access can override either check with a reason, which is recorded. Only one delivery order is in force at a time; to issue another, cancel the current one with a reason, and it stays on record. A DO is valid for the days set in Settings (7 by default) or a date you choose. It prints with a signature block and can be e-mailed as a PDF. A booking with a DO can't be deleted.
+
+## When the line changes the ETA
+
+The line's arrival or delay notice is read by AI from the e-mail attachment. **Documents → Pending Actions** proposes the new ETA, and the vessel or containers if they changed. Approving it on an import booking makes the arrival notice due at once.
+
+<Callout kind="permission" title="Who can do what">
+  Recording the release, sending the notice and issuing the DO: Admin, Management, Operations and Sales. Overriding
+  before release or payment: Admin, Management and Accounting.
+</Callout>

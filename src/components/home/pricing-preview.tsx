@@ -9,16 +9,14 @@ import type { Locale } from "@/lib/i18n";
 const copy = {
   en: {
     eyebrow: "Pricing",
-    title: "Simple plans, priced per team",
-    description:
-      "We're onboarding early-access customers now. Final pricing will be published at general availability; early-access teams keep their rate.",
+    title: "Priced by what your company does",
+    description: "No per-shipment fees. The first 20 companies get 30% off, with their price locked for two years.",
     compare: "Compare plans in detail",
   },
   ar: {
     eyebrow: "الأسعار",
-    title: "خطط بسيطة، بسعر لكل فريق",
-    description:
-      "نعمل الآن على تجهيز عملاء الوصول المبكر. ستُنشر الأسعار النهائية عند الإطلاق العام، وتحتفظ فرق الوصول المبكر بأسعارها.",
+    title: "بسعر يناسب نشاط شركتك",
+    description: "لا رسوم على كل شحنة. أول 20 شركة تحصل على خصم 30% مع تثبيت السعر لسنتين.",
     compare: "قارن الخطط بالتفصيل",
   },
 } satisfies Record<Locale, { eyebrow: string; title: string; description: string; compare: string }>;
@@ -30,7 +28,7 @@ export async function PricingPreview() {
     <Section id="pricing" tone="muted">
       <SectionHeading eyebrow={t.eyebrow} title={t.title} description={t.description} />
       <div className="mt-14">
-        <PricingTiers />
+        <PricingTiers withComing={false} />
       </div>
       <Reveal className="mt-8 text-center text-sm text-fog-500">
         <Link href="/pricing" className="inline-flex items-center gap-1.5 font-medium text-ink-900 hover:text-spark-700">

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Faq, type FaqItem } from "@/components/ui/faq";
 import { PricingTiers } from "@/components/pricing/pricing-tiers";
-import { Compare } from "@/components/home/compare";
+import { Versus } from "@/components/home/versus";
 import { Cta } from "@/components/home/cta";
 import type { Locale } from "@/lib/i18n";
 import { getLocale } from "@/lib/locale-server";
@@ -11,62 +11,66 @@ const copy = {
   en: {
     metaTitle: "Pricing",
     metaDescription:
-      "Routel plans for freight forwarders: Free, Starter ($79/mo), Growth ($149/mo) and Enterprise (let's talk).",
+      "Routel plans: Free, Basic ($149/mo), Freight Forwarder ($249/mo), Freight Forwarder Pro ($499/mo) and Enterprise (from $1,499/mo), with 3PL and NVOCC plans coming.",
     eyebrow: "Pricing",
-    title: "Plans that grow with the number of people, not the number of shipments",
-    description: "No per-shipment fees. Pick the plan that matches your team and add users as you grow.",
+    title: "One platform, priced by what your company does",
+    description: "No per-shipment fees. Pick the plan that matches your activities, add users as you grow, and open new modules when you need them.",
     faqTitle: "Questions we get asked",
     faqs: [
       {
         q: "What do I get on the Free plan?",
-        a: "A single admin user, up to 3 bookings total (a lifetime cap, not monthly) with up to 2 invoices per booking — enough to try Routel on real shipments before you commit.",
+        a: "A single admin user, up to 3 bookings in total (a lifetime cap, not monthly) with up to 2 invoices per booking: enough to try Routel on real shipments before you commit.",
       },
       {
-        q: "What happens when I outgrow a plan?",
-        a: "Nothing is hidden. Every page in the product is visible on every plan — anything beyond your tier shows a lock icon and an upgrade prompt instead of the real page, so you always see the whole product.",
+        q: "Which plan includes the AI assistant?",
+        a: "Freight Forwarder Pro and Enterprise. On the other plans it helps the admin set the company up for the first 30 days. It works with the same permissions as your users' roles and never saves anything without a person's confirmation.",
       },
       {
-        q: "Is the AI assistant an add-on?",
-        a: "No — the full assistant is included in Growth and Enterprise. On Free and Starter it helps the admin set the company up for the first 30 days. It uses the same permissions as your users' roles and never saves anything without a confirmation.",
+        q: "What does \"coming soon\" mean for 3PL and NVOCC?",
+        a: "Those plans cover services Routel is rolling out: warehouse receipts, land transport and inventory for 3PL; Bills of Lading in your own name, demurrage and detention, agents, shipping agency and customs brokerage for NVOCC. Their prices are set. Register interest and we'll open them to you first.",
+      },
+      {
+        q: "Is there a discount for founding customers or yearly billing?",
+        a: "Yes. The first 20 companies get 30% off with their price locked for two years, and paying yearly gives you two months free.",
       },
       {
         q: "Which currencies are supported?",
-        a: "Two per company: your base currency (for example MYR or IDR) and USD. Every invoice and document is issued in one of the two, and the books keep both.",
+        a: "Two per company: your base currency (SAR, MYR or IDR) and USD. Every invoice and document is issued in one of the two, and the books keep both.",
       },
       {
         q: "Can we migrate from spreadsheets or another system?",
-        a: "Talk to us when you request a demo — our team can help bring over your customers, vendors and route rates.",
+        a: "Yes. Talk to us when you request a demo, and our team can bring over your business partners and route rates.",
       },
       {
         q: "Where is Routel hosted?",
-        a: "Free, Starter and Growth run on a shared Routel server with your own isolated database. Enterprise gets a fully dedicated server. Ask us about regional hosting requirements when you request a demo.",
-      },
-      {
-        q: "What does 'user' mean?",
-        a: "A named login with one of six roles — Admin, Management, Accounting, Operations, Sales or Pricing — that decides what they see and do. Free is single-admin only; Starter and up add staff accounts with role-based permissions.",
+        a: "Each company runs on its own deployment with its own database. Enterprise gets a fully dedicated server. Ask us about regional hosting requirements when you request a demo.",
       },
     ],
   },
   ar: {
     metaTitle: "الأسعار",
     metaDescription:
-      "باقات Routel لشركات الشحن: المجانية، والانطلاق ($79 شهرياً)، والنمو ($149 شهرياً)، والمؤسسات (لنتحدث).",
+      "باقات Routel: المجانية، والأساسية ($149 شهرياً)، ووكيل الشحن ($249)، ووكيل الشحن Pro ($499)، والمؤسسات (من $1,499)، وباقتا 3PL وNVOCC قريباً.",
     eyebrow: "الأسعار",
-    title: "باقات تنمو مع عدد الأشخاص، لا مع عدد الشحنات",
-    description: "لا رسوم على كل شحنة. اختر الباقة المناسبة لفريقك وأضف المستخدمين مع نموّك.",
+    title: "منصة واحدة، بسعر يناسب نشاط شركتك",
+    description: "لا رسوم على كل شحنة. اختر الباقة التي تناسب أنشطتك، وأضف المستخدمين مع نموّك، وافتح الوحدات الجديدة حين تحتاجها.",
     faqTitle: "أسئلة تصلنا كثيراً",
     faqs: [
       {
         q: "ماذا أحصل عليه في الباقة المجانية؟",
-        a: "مستخدم واحد بصلاحية المدير، وحتى 3 حجوزات إجمالاً (حد طوال مدة الاستخدام، وليس شهرياً)، مع حتى فاتورتين لكل حجز — وهذا يكفي لتجربة Routel على شحنات حقيقية قبل أن تلتزم.",
+        a: "مستخدم واحد بصلاحية المدير، وحتى 3 حجوزات إجمالاً (حد طوال مدة الاستخدام، وليس شهرياً)، مع حتى فاتورتين لكل حجز. وهذا يكفي لتجربة Routel على شحنات حقيقية قبل أن تلتزم.",
       },
       {
-        q: "ماذا يحدث عندما أتجاوز حدود باقتي؟",
-        a: "لا شيء مخفي. كل صفحات المنتج ظاهرة في كل الباقات — وما يتجاوز باقتك يظهر عليه رمز قفل ودعوة للترقية بدلاً من الصفحة الفعلية، لترى المنتج كاملاً دائماً.",
+        q: "أي باقة تشمل المساعد الذكي؟",
+        a: "وكيل الشحن Pro والمؤسسات. وفي الباقات الأخرى يساعد المدير في تجهيز الشركة خلال أول 30 يوماً. يعمل بنفس صلاحيات أدوار مستخدميك، ولا يحفظ أي شيء دون تأكيد شخص.",
       },
       {
-        q: "هل المساعد الذكي إضافة منفصلة؟",
-        a: "لا — المساعد الكامل مشمول في باقتي النمو والمؤسسات، وفي الباقتين المجانية والانطلاق يساعد المدير في تجهيز الشركة خلال أول 30 يوماً. يعمل بنفس صلاحيات أدوار مستخدميك، ولا يحفظ أي شيء دون تأكيد.",
+        q: "ماذا تعني «قريباً» في باقتي 3PL وNVOCC؟",
+        a: "تغطي هاتان الباقتان خدمات يطلقها Routel تباعاً: إيصالات المستودع والنقل البري والمخزون في 3PL، وبوالص الشحن باسم شركتك والأرضيات والتأخير والوكلاء والوكالة الملاحية والتخليص الجمركي في NVOCC. أسعارهما محددة، سجّل اهتمامك وسنفتحهما لك أولاً.",
+      },
+      {
+        q: "هل يوجد خصم للعملاء المؤسسين أو للدفع السنوي؟",
+        a: "نعم. أول 20 شركة تحصل على خصم 30% مع تثبيت السعر لسنتين، والدفع السنوي يمنحك شهرين مجاناً.",
       },
       {
         q: "ما العملات المدعومة؟",
@@ -74,15 +78,11 @@ const copy = {
       },
       {
         q: "هل يمكننا الانتقال من جداول البيانات أو من نظام آخر؟",
-        a: "تحدّث إلينا عندما تطلب عرضاً تجريبياً — يمكن لفريقنا المساعدة في نقل عملائك ومورّديك وأسعار خطوطك.",
+        a: "نعم. تحدّث إلينا حين تطلب عرضاً تجريبياً، ويمكن لفريقنا نقل شركاء أعمالك وأسعار مساراتك.",
       },
       {
         q: "أين تتم استضافة Routel؟",
-        a: "تعمل باقات المجانية والانطلاق والنمو على خادم Routel مشترك مع قاعدة بيانات معزولة خاصة بك. أما باقة المؤسسات فتحصل على خادم مخصص بالكامل. اسألنا عن متطلبات الاستضافة الإقليمية عندما تطلب عرضاً تجريبياً.",
-      },
-      {
-        q: "ماذا نعني بـ«المستخدم»؟",
-        a: "حساب دخول باسم شخص محدد، له أحد ستة أدوار — المدير، أو الإدارة العليا، أو المحاسبة، أو العمليات، أو المبيعات، أو التسعير — يحدد ما يراه وما يمكنه فعله. الباقة المجانية لمستخدم واحد بصلاحية المدير فقط؛ ومن باقة الانطلاق فما فوق تُضاف حسابات للموظفين مع صلاحيات حسب الدور.",
+        a: "تعمل كل شركة على نشر خاص بها بقاعدة بيانات مستقلة، وتحصل باقة المؤسسات على خادم مخصص بالكامل. اسألنا عن متطلبات الاستضافة الإقليمية حين تطلب عرضاً تجريبياً.",
       },
     ],
   },
@@ -115,7 +115,7 @@ export default async function PricingPage() {
         </div>
       </Section>
 
-      <Compare />
+      <Versus />
 
       <Section className="py-16 sm:py-20">
         <SectionHeading title={t.faqTitle} />

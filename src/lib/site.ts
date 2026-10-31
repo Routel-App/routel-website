@@ -1,7 +1,7 @@
 import type { Locale } from "./i18n";
 
 export const site = {
-  name: "Routel",
+  name: "ROUTEL",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://routel.app",
   cta: { href: "/demo" },
 } as const;
@@ -18,27 +18,25 @@ type SiteCopy = {
 
 export const siteCopy: Record<Locale, SiteCopy> = {
   en: {
-    tagline: "The operating system for freight forwarders",
+    tagline: "Maritime & Logistics Operating System",
     description:
-      "Routel is the freight forwarding system with a built-in AI assistant that calls tools and runs your operations automatically: quotations, bookings, route rates, invoicing and live accounting in one place.",
+      "ROUTEL is the Maritime & Logistics Operating System, run by AI: sea and air freight forwarding, consolidation and LCL, documents, finance and accounting on one platform, with an AI assistant that calls the system's tools and runs your operations.",
     nav: [
-      { label: "Features", href: "/features" },
       { label: "AI Assistant", href: "/platform/ai-assistant", hint: "Built into Routel: calls tools and runs your operations automatically" },
       { label: "Pricing", href: "/pricing" },
-      { label: "About", href: "/about" },
+      { label: "Company", href: "/about" },
     ],
     ctaLabel: "Request a demo",
     aiTagline: "Routel's built-in AI assistant calls tools and runs your operations automatically",
   },
   ar: {
-    tagline: "نظام التشغيل لشركات الشحن والتخليص",
+    tagline: "نظام التشغيل البحري واللوجستي",
     description:
-      "Routel نظام شحن متكامل بمساعد ذكي مدمج يستدعي الأدوات وينفّذ عملياتك تلقائيًا: عروض الأسعار والحجوزات وأسعار المسارات والفواتير والمحاسبة الفورية في مكان واحد.",
+      "ROUTEL نظام التشغيل البحري واللوجستي بقيادة الذكاء الاصطناعي: الشحن البحري والجوي، والتجميع وLCL، والمستندات، والمالية والمحاسبة على منصة واحدة، مع مساعد ذكي يستدعي أدوات النظام وينفّذ عملياتك.",
     nav: [
-      { label: "الميزات", href: "/features" },
       { label: "المساعد الذكي", href: "/platform/ai-assistant", hint: "مدمج داخل Routel: يستدعي الأدوات وينفّذ عملياتك تلقائيًا" },
       { label: "الأسعار", href: "/pricing" },
-      { label: "من نحن", href: "/about" },
+      { label: "الشركة", href: "/about" },
     ],
     ctaLabel: "اطلب عرضاً تجريبياً",
     aiTagline: "مساعد ذكي مدمج في Routel يستدعي الأدوات وينفّذ عملياتك تلقائيًا",

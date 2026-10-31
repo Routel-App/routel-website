@@ -1,0 +1,76 @@
+---
+title: Air Freight
+description: Air bookings, express or airline cargo, with a checked MAWB, the House Air Waybill, chargeable weight and air allocations.
+status: complete
+---
+
+Air freight is a business activity an admin opens in **Settings → Business activities**. Once it's open, **New Booking** offers **Sea** or **Air**. The mode is fixed once the booking is created.
+
+## Express or airline cargo
+
+The AP partner on the booking decides which kind of air booking it is:
+
+| Kind | When | Document |
+| --- | --- | --- |
+| **Express** | The AP is marked as an express carrier (DHL, FedEx, Aramex, UPS, SMSA…) | The carrier's own waybill. Routel keeps its tracking number with a link to the carrier's tracking page. |
+| **Airline cargo** | Any other AP | A Master Air Waybill (MAWB) from the airline and your own House Air Waybill (HAWB). |
+
+## The MAWB
+
+Type the 11-digit MAWB. Routel checks the IATA check digit, names the airline from its three-digit prefix (for example 065 Saudia, 157 Qatar Airways, 176 Emirates) and refuses a wrong number. It is stored as `157-12345675`.
+
+The airport and airline lists come pre-filled (64 airports, including RUH, JED and DMM, and 43 airlines). An admin can add more.
+
+## Pieces and chargeable weight
+
+Enter each line of pieces with its dimensions in centimetres and its gross weight.
+
+<Fields
+  rows={[
+    ["Volumetric weight", "Length × width × height in cm, divided by the divisor."],
+    ["Chargeable weight", "The higher of gross and volumetric, rounded up to the next 0.5 kg. Routel shows which one won."],
+    ["Divisor", "6000 for airline cargo and 5000 for express by default. An express carrier can have its own, and an admin sets the defaults in Settings → Air freight."],
+  ]}
+/>
+
+Freight and surcharges are charged per kg, and the AWB fee per AWB. When the pieces change, every per-kg line moves to the new chargeable weight. Lines already on an issued invoice or a paid AP keep their quantity, and Routel tells you which ones it left.
+
+## Statuses
+
+Air bookings use the air list: Booking Pending, Booking Confirmed, Cargo Received, Departed, In Transit, Arrived, Customs Clearance, Delivered, or Cancelled.
+
+## The House Air Waybill
+
+For airline cargo, one HAWB per booking.
+
+<Steps>
+  <Step title="Create">
+    From the booking. Shipper, consignee, notify party, airports, flight and date, handling information and goods come from the booking.
+  </Step>
+  <Step title="Edit the draft">
+    Agent's IATA code, routing, prepaid or collect, declared values, insurance, rate class, rate per kg, other charges and place of issue. The weight charge is chargeable weight × rate per kg.
+  </Step>
+  <Step title="Issue">
+    Needs the shipper, the consignee, both airports and the pieces. An issued HAWB can't be edited; a draft prints with a DRAFT mark.
+  </Step>
+</Steps>
+
+It prints on blank A4 in the IATA air waybill layout, with your logo as issuing agent. Express bookings don't get a HAWB, because the carrier's waybill is their document.
+
+## Air allocations
+
+**Air allocations** tracks block space bought from airlines.
+
+- **An allocation:** the airline, origin and destination, an optional flight, the kilos per week, hard or soft (soft space has release days), the rate per kg and currency, and the validity period.
+- **Bookings count automatically:** an airline-cargo booking with the same airline, route and flight, in the period, counts against its week (Monday to Sunday, by flight date, else ETD), by chargeable weight.
+- **Each week shows** capacity, used, remaining and utilisation. Hard space also shows the unsold cost; soft space shows its release-by date.
+- **Alerts** for this week and next: hard space under 75% sold, soft space to release soon, filling and full. They appear in Alerts and in the assistant's daily brief.
+- **Customers to call:** AR partners who shipped airline cargo on the route in the last 180 days and haven't booked that week.
+- **AI reads the agreement:** upload the airline's allocation agreement as a PDF, scan or photo, and the AI fills in the new allocation. Nothing is saved until you save it.
+
+A quotation on a route with an allocation suggests that space first.
+
+<Callout kind="permission" title="Who can do what">
+  Air bookings and pieces: Admin, Management, Operations and Sales. The House Air Waybill: Admin, Management and
+  Operations. Allocations: Admin, Management, Operations, Sales and Pricing. Airports, airlines and divisors: Admin.
+</Callout>

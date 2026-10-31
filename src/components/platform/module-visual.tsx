@@ -54,6 +54,8 @@ export function moduleVisual(slug: string, locale: Locale): ReactNode {
       );
     case "bill-of-lading":
       return <BillOfLadingCard />;
+    case "consolidation":
+      return lottie("/lottie/containers-stack.json");
     case "labeling-center":
       return lottie("/lottie/containers-stack.json");
     case "visitor-tracking":
