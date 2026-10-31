@@ -487,3 +487,16 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Air freight scene (components/motion/air-scene.tsx): the loader lifts the
+   booking's ULD to the cargo door and lowers it again. Still under reduced motion. */
+@keyframes air-lift {
+  0%, 15% { transform: translateY(70px); }
+  55%, 85% { transform: translateY(0); }
+  100% { transform: translateY(70px); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .air-lift {
+    animation: air-lift 5.5s ease-in-out infinite;
+  }
+}

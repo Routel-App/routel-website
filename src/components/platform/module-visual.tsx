@@ -13,6 +13,7 @@ import {
 import { PromptTyper } from "@/components/motion/prompt-typer";
 import { Lottie } from "@/components/motion/lottie";
 import { RoutesShot, TrackingShot } from "@/components/shots/tour-shots";
+import { AirScene } from "@/components/motion/air-scene";
 
 /**
  * The animated picture in a platform page's hero: the vignette that shows
@@ -54,6 +55,8 @@ export function moduleVisual(slug: string, locale: Locale): ReactNode {
       );
     case "bill-of-lading":
       return <BillOfLadingCard />;
+    case "air-freight":
+      return <AirScene locale={locale} />;
     case "consolidation":
       return lottie("/lottie/containers-stack.json");
     case "labeling-center":
