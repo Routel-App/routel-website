@@ -371,6 +371,34 @@ body {
 }
 /* A turn of the transcript: out of the flow until its moment, then it
    slides in. Static mode shows them all. */
+/* The stage's milestone card: the events are stacked, the current one shows. */
+.odyssey-event {
+  display: grid;
+}
+.ody-event {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.ody-event.is-on {
+  opacity: 1;
+  transform: none;
+}
+.odyssey[data-mode="static"] .odyssey-event {
+  display: none;
+}
+/* On a phone the stage is half the screen: the chat header carries the stage. */
+@media (max-width: 639px) {
+  .odyssey-event {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ody-event {
+    transition: none;
+  }
+}
 .ody-msg {
   position: absolute;
   inset-inline: 0;
