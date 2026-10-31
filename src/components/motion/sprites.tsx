@@ -203,7 +203,7 @@ export function Uld({ x, y, w = 46, h = 40, color, hero = false, ...rest }: { x:
  * bottom of the main gear; the fuselage is `length` long. The nose cargo door
  * is shown raised, as on a nose-loading freighter.
  */
-export function Aircraft({ x, y, length = 520, ...rest }: { x: number; y: number; length?: number } & G) {
+export function Aircraft({ x, y, length = 520, gear = true, ...rest }: { x: number; y: number; length?: number; gear?: boolean } & G) {
   const L = length;
   const top = -150; // fuselage top
   const bottom = -70; // fuselage bottom
@@ -230,14 +230,14 @@ export function Aircraft({ x, y, length = 520, ...rest }: { x: number; y: number
       <path d={`M${L * 0.44} ${mid + 4} L${L * 0.6} ${mid + 4} L${L * 0.47} ${bottom + 16} L${L * 0.38} ${bottom + 16} Z`} fill={paint.fog} />
       <rect x={L * 0.4} y={bottom + 12} width={L * 0.12} height={28} rx={14} fill={ink.steel} />
       <rect x={L * 0.4} y={bottom + 12} width={L * 0.03} height={28} rx={6} fill={ink.line} />
-      {/* landing gear */}
-      <g fill={ink.deep}>
+      {/* landing gear, left out in flight */}
+      {gear ? <g fill={ink.deep}>
         <rect x={L * 0.47} y={bottom} width={6} height={-bottom - 16} />
         <circle cx={L * 0.47 + 3} cy={-10} r={10} />
         <circle cx={L * 0.47 + 25} cy={-10} r={10} />
         <rect x={L * 0.86} y={bottom} width={5} height={-bottom - 14} />
         <circle cx={L * 0.86 + 2.5} cy={-9} r={9} />
-      </g>
+      </g> : null}
     </g>
   );
 }

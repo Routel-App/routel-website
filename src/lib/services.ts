@@ -11,30 +11,39 @@ import type { Locale } from "./i18n";
  */
 export type ServiceStatus = "live" | "coming";
 
+/** Where a service stands: built, being built, or designed and waiting for a first client. */
+export type ServiceStage = "live" | "development" | "planned";
+
 export type Service = {
   slug: string;
   status: ServiceStatus;
+  stage: ServiceStage;
   icon: LucideIcon;
-  /** Where "Learn more" goes: the module page for a live service. */
-  href?: string;
+  /** The service's own page. */
+  href: string;
+  /** The module page and the user guide, for a live service. */
+  module?: string;
+  doc?: string;
+  /** Services to read next. */
+  related: string[];
   name: string;
   short: string;
   points: string[];
 };
 
-type Base = { slug: string; status: ServiceStatus; icon: LucideIcon; href?: string };
+type Base = Omit<Service, "status" | "href" | "name" | "short" | "points">;
 
 const base: Base[] = [
-  { slug: "sea-freight", status: "live", icon: Ship, href: "/platform/bookings" },
-  { slug: "air-freight", status: "live", icon: Plane, href: "/platform/air-freight" },
-  { slug: "consolidation", status: "live", icon: Boxes, href: "/platform/consolidation" },
-  { slug: "import-release", status: "live", icon: FileCheck2, href: "/platform/arrival-notice" },
-  { slug: "nvocc", status: "coming", icon: Container },
-  { slug: "land-transport", status: "coming", icon: Truck },
-  { slug: "warehousing", status: "coming", icon: Warehouse },
-  { slug: "shipping-agency", status: "coming", icon: Anchor },
-  { slug: "customs-brokerage", status: "coming", icon: Landmark },
-  { slug: "contract-logistics", status: "coming", icon: PackageCheck },
+  { slug: "sea-freight", stage: "live", icon: Ship, module: "/platform/bookings", doc: "/docs/bookings", related: ["air-freight", "consolidation", "import-release"] },
+  { slug: "air-freight", stage: "live", icon: Plane, module: "/platform/air-freight", doc: "/docs/air-freight", related: ["sea-freight", "consolidation", "import-release"] },
+  { slug: "consolidation", stage: "live", icon: Boxes, module: "/platform/consolidation", doc: "/docs/consolidation", related: ["sea-freight", "air-freight", "warehousing"] },
+  { slug: "import-release", stage: "live", icon: FileCheck2, module: "/platform/arrival-notice", doc: "/docs/arrival-notice", related: ["sea-freight", "land-transport", "customs-brokerage"] },
+  { slug: "nvocc", stage: "development", icon: Container, related: ["sea-freight", "shipping-agency", "consolidation"] },
+  { slug: "land-transport", stage: "development", icon: Truck, related: ["warehousing", "import-release", "contract-logistics"] },
+  { slug: "warehousing", stage: "development", icon: Warehouse, related: ["consolidation", "land-transport", "contract-logistics"] },
+  { slug: "shipping-agency", stage: "development", icon: Anchor, related: ["nvocc", "import-release", "customs-brokerage"] },
+  { slug: "customs-brokerage", stage: "development", icon: Landmark, related: ["import-release", "sea-freight", "shipping-agency"] },
+  { slug: "contract-logistics", stage: "planned", icon: PackageCheck, related: ["warehousing", "land-transport", "consolidation"] },
 ];
 
 const text: Record<Locale, Record<string, { name: string; short: string; points: string[] }>> = {
@@ -145,8 +154,15 @@ const text: Record<Locale, Record<string, { name: string; short: string; points:
 };
 
 export function getServices(locale: Locale): Service[] {
-  return base.map((b) => ({ ...b, ...text[locale][b.slug] }));
+  return base.map((b) => ({
+    ...b,
+    status: b.stage === "live" ? "live" : "coming",
+    href: `/solutions/${b.slug}`,
+    ...text[locale][b.slug],
+  }));
 }
+
+export const serviceSlugs = base.map((b) => b.slug);
 
 /** Who Routel is built for, used by the Solutions menu and page. */
 export type Segment = { slug: string; name: string; text: string; services: string[] };

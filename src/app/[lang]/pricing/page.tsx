@@ -11,19 +11,19 @@ const copy = {
   en: {
     metaTitle: "Pricing",
     metaDescription:
-      "Routel plans: Free, Basic ($149/mo), Freight Forwarder ($249/mo), Freight Forwarder Pro ($499/mo) and Enterprise (from $1,499/mo), with 3PL and NVOCC plans coming.",
+      "Routel plans: Basic ($149/mo), Freight Forwarder ($249/mo), Freight Forwarder Growth ($499/mo) and Enterprise (from $1,499/mo), with 3PL and NVOCC plans coming.",
     eyebrow: "Pricing",
     title: "One platform, priced by what your company does",
     description: "No per-shipment fees. Pick the plan that matches your activities, add users as you grow, and open new modules when you need them.",
     faqTitle: "Questions we get asked",
     faqs: [
       {
-        q: "What do I get on the Free plan?",
-        a: "A single admin user, up to 3 bookings in total (a lifetime cap, not monthly) with up to 2 invoices per booking: enough to try Routel on real shipments before you commit.",
+        q: "Can we try it before we pay?",
+        a: "Yes. Request a demo and we'll run your own shipments through ROUTEL with you, before you choose a plan. Plans start at $149 a month.",
       },
       {
         q: "Which plan includes the AI assistant?",
-        a: "Freight Forwarder Pro and Enterprise. On the other plans it helps the admin set the company up for the first 30 days. It works with the same permissions as your users' roles and never saves anything without a person's confirmation.",
+        a: "Freight Forwarder Growth and Enterprise. On the other plans it helps the admin set the company up for the first 30 days. It works with the same permissions as your users' roles and never saves anything without a person's confirmation.",
       },
       {
         q: "What does \"coming soon\" mean for 3PL and NVOCC?",
@@ -50,19 +50,19 @@ const copy = {
   ar: {
     metaTitle: "الأسعار",
     metaDescription:
-      "باقات Routel: المجانية، والأساسية ($149 شهرياً)، ووكيل الشحن ($249)، ووكيل الشحن Pro ($499)، والمؤسسات (من $1,499)، وباقتا 3PL وNVOCC قريباً.",
+      "باقات Routel: الأساسية ($149 شهرياً)، ووكيل الشحن ($249)، ووكيل الشحن Growth ($499)، والمؤسسات (من $1,499)، وباقتا 3PL وNVOCC قريباً.",
     eyebrow: "الأسعار",
     title: "منصة واحدة، بسعر يناسب نشاط شركتك",
     description: "لا رسوم على كل شحنة. اختر الباقة التي تناسب أنشطتك، وأضف المستخدمين مع نموّك، وافتح الوحدات الجديدة حين تحتاجها.",
     faqTitle: "أسئلة تصلنا كثيراً",
     faqs: [
       {
-        q: "ماذا أحصل عليه في الباقة المجانية؟",
-        a: "مستخدم واحد بصلاحية المدير، وحتى 3 حجوزات إجمالاً (حد طوال مدة الاستخدام، وليس شهرياً)، مع حتى فاتورتين لكل حجز. وهذا يكفي لتجربة Routel على شحنات حقيقية قبل أن تلتزم.",
+        q: "هل يمكن التجربة قبل الدفع؟",
+        a: "نعم. اطلب عرضاً تجريبياً ونشغّل معك شحناتك أنت على ROUTEL قبل أن تختار باقتك. تبدأ الباقات من 149 دولاراً شهرياً.",
       },
       {
         q: "أي باقة تشمل المساعد الذكي؟",
-        a: "وكيل الشحن Pro والمؤسسات. وفي الباقات الأخرى يساعد المدير في تجهيز الشركة خلال أول 30 يوماً. يعمل بنفس صلاحيات أدوار مستخدميك، ولا يحفظ أي شيء دون تأكيد شخص.",
+        a: "وكيل الشحن Growth والمؤسسات. وفي الباقات الأخرى يساعد المدير في تجهيز الشركة خلال أول 30 يوماً. يعمل بنفس صلاحيات أدوار مستخدميك، ولا يحفظ أي شيء دون تأكيد شخص.",
       },
       {
         q: "ماذا تعني «قريباً» في باقتي 3PL وNVOCC؟",

@@ -94,26 +94,20 @@ function ServiceCard({ s, t }: { s: Service; t: (typeof copy)["en"] }) {
           </li>
         ))}
       </ul>
-      {live && s.href ? (
-        <span className="mt-auto inline-flex items-center gap-1 pt-5 text-[13.5px] font-semibold text-spark-700">
-          {t.learn}
-          <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 ltr:group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" />
-        </span>
-      ) : null}
+      <span className={cn("mt-auto inline-flex items-center gap-1 pt-5 text-[13.5px] font-semibold", live ? "text-spark-700" : "text-ink-900")}>
+        {t.learn}
+        <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 ltr:group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" />
+      </span>
     </>
   );
   const cls = cn(
     "group flex h-full flex-col rounded-2xl p-6 transition-shadow",
-    live ? "bg-white shadow-card ring-1 ring-fog-200 hover:shadow-float" : "border border-dashed border-fog-300 bg-fog-50",
+    live ? "bg-white shadow-card ring-1 ring-fog-200 hover:shadow-float" : "border border-dashed border-fog-300 bg-fog-50 hover:bg-white",
   );
-  return live && s.href ? (
+  return (
     <Link href={s.href} id={s.slug} className={cls}>
       {body}
     </Link>
-  ) : (
-    <div id={s.slug} className={cls}>
-      {body}
-    </div>
   );
 }
 

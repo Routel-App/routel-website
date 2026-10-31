@@ -81,7 +81,7 @@ export function SolutionsMenu({ inverse }: { inverse: boolean }) {
                     const Icon = s.icon;
                     return (
                       <li key={s.slug}>
-                        <Link href={s.href ?? "/solutions"} onClick={close} className="group flex items-start gap-3 rounded-xl px-2.5 py-2 transition-colors hover:bg-fog-50">
+                        <Link href={s.href} onClick={close} className="group flex items-start gap-3 rounded-xl px-2.5 py-2 transition-colors hover:bg-fog-50">
                           <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-ink-900 text-spark-400">
                             <Icon className="h-4 w-4" strokeWidth={1.75} />
                           </span>
@@ -102,7 +102,7 @@ export function SolutionsMenu({ inverse }: { inverse: boolean }) {
                     const Icon = s.icon;
                     return (
                       <li key={s.slug}>
-                        <Link href={`/solutions#${s.slug}`} onClick={close} className="flex items-center gap-3 rounded-xl px-2.5 py-2 transition-colors hover:bg-fog-50">
+                        <Link href={s.href} onClick={close} className="flex items-center gap-3 rounded-xl px-2.5 py-2 transition-colors hover:bg-fog-50">
                           <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-fog-100 text-fog-500">
                             <Icon className="h-4 w-4" strokeWidth={1.75} />
                           </span>

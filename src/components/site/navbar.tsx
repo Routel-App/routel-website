@@ -168,7 +168,7 @@ export function Navbar() {
                 {services.map((s) => (
                   <Link
                     key={s.slug}
-                    href={s.href ?? `/solutions#${s.slug}`}
+                    href={s.href}
                     className={cn("rounded-xl px-3 py-2 text-[13.5px] font-medium hover:bg-fog-100", s.status === "live" ? "text-ink-900" : "text-fog-500")}
                     onClick={() => setOpen(false)}
                   >

@@ -34,7 +34,7 @@ export async function ServicesStrip() {
             return (
               <RevealItem key={s.slug}>
                 <Link
-                  href={s.href ?? `/solutions#${s.slug}`}
+                  href={s.href}
                   className={cn(
                     "flex h-full items-center gap-3 rounded-xl px-3.5 py-3 transition-colors",
                     live ? "bg-white shadow-card ring-1 ring-fog-200 hover:ring-spark-300" : "border border-dashed border-fog-300 bg-transparent hover:bg-white",
