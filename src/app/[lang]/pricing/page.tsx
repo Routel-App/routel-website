@@ -11,10 +11,10 @@ const copy = {
   en: {
     metaTitle: "Pricing",
     metaDescription:
-      "ROUTEL plans in Saudi riyals: Free, Basic (SAR 699/mo), Growth (SAR 1,799/mo), Carrier & Agencies (SAR 3,299/mo) and Enterprise (from SAR 5,499/mo). Unlimited users, no implementation fees, and a 14-day free trial.",
+      "ROUTEL plans: Free, Basic (USD 199/mo), Growth (USD 499/mo), Carrier & Agencies (USD 899/mo) and Enterprise (from USD 1,499/mo); in Saudi Arabia SAR 699, 1,799, 3,299 and from 5,499. Unlimited users, no implementation fees, and a 14-day free trial.",
     eyebrow: "Pricing",
     title: "One platform, priced by what your company does",
-    description: "No per-shipment fees, no per-user fees and no implementation fees. Pick the plan that matches your activities, and open new modules when you need them. Prices in Saudi riyals.",
+    description: "No per-shipment fees, no per-user fees and no implementation fees. Pick the plan that matches your activities, and open new modules when you need them. Prices in riyals for Saudi Arabia and in dollars for other markets.",
     faqTitle: "Questions we get asked",
     faqs: [
       {
@@ -57,7 +57,7 @@ const copy = {
       "خطط ROUTEL بالريال: المجانية، والأساسية (699 ريال شهرياً)، والنمو والتوسع (1,799)، والناقل والوكالات (3,299)، والمؤسسات (من 5,499). بلا حد للمستخدمين، وبلا رسوم تطبيق، وتجربة مجانية 14 يوماً.",
     eyebrow: "الأسعار",
     title: "منصة واحدة، بسعر يناسب نشاط شركتك",
-    description: "لا رسوم على كل شحنة، ولا على كل مستخدم، ولا رسوم تطبيق. اختر الخطة التي تناسب أنشطتك، وافتح الوحدات الجديدة حين تحتاجها. الأسعار بالريال السعودي.",
+    description: "لا رسوم على كل شحنة، ولا على كل مستخدم، ولا رسوم تطبيق. اختر الخطة التي تناسب أنشطتك، وافتح الوحدات الجديدة حين تحتاجها. الأسعار بالريال للسعودية وبالدولار للأسواق الأخرى.",
     faqTitle: "أسئلة تصلنا كثيراً",
     faqs: [
       {

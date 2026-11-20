@@ -343,7 +343,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
     faqs: [
       { q: "Is NVOCC available today?", a: "It is in development. The design above is approved; register interest and we'll open it to you first." },
       { q: "Will it change how our forwarding works?", a: "No. New modules are off by default and open per company from its business activities; existing work stays as it is." },
-      { q: "Which plan includes it?", a: "Carrier & Agencies, at SAR 3,299 a month." },
+      { q: "Which plan includes it?", a: "Carrier & Agencies, at USD 899 a month (SAR 3,299 in Saudi Arabia)." },
     ],
   },
 
@@ -547,7 +547,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
     faqs: [
       { q: "Is it available today?", a: "It is in development. Register interest and we'll open it to you first." },
       { q: "Which countries?", a: "Saudi Arabia, Malaysia and Indonesia together, with each country's manifest format, port fees, currency and tax as settings." },
-      { q: "Which plan includes it?", a: "Carrier & Agencies, at SAR 3,299 a month." },
+      { q: "Which plan includes it?", a: "Carrier & Agencies, at USD 899 a month (SAR 3,299 in Saudi Arabia)." },
     ],
   },
 
@@ -615,7 +615,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
     faqs: [
       { q: "Is it available today?", a: "It is in development, and the government gateways wait on permits and access. Register interest and we'll open it to you first." },
       { q: "Does the AI file declarations?", a: "No. It suggests; the broker confirms every HS code, and nothing is filed with a code a person didn't confirm." },
-      { q: "Which plan includes it?", a: "Carrier & Agencies, at SAR 3,299 a month." },
+      { q: "Which plan includes it?", a: "Carrier & Agencies, at USD 899 a month (SAR 3,299 in Saudi Arabia)." },
     ],
   },
 

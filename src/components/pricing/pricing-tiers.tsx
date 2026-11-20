@@ -1,15 +1,15 @@
 import { Check, Gift, Infinity as InfinityIcon, Sparkles, Wrench } from "lucide-react";
+import { PricingGrid } from "./pricing-grid";
 import { Button } from "@/components/ui/button";
-import { RevealGroup, RevealItem } from "@/components/motion/reveal";
-import { cn } from "@/lib/utils";
 import type { Locale } from "@/lib/i18n";
 import { getLocale } from "@/lib/locale-server";
 
-type Tier = {
+export type Tier = {
   slug: string;
   name: string;
   who: string;
-  price: string;
+  /** The price in each list: Saudi Arabia in riyals, other markets in dollars. */
+  price: { sar: string; usd: string };
   period: string;
   features: string[];
   cta: string;
@@ -17,8 +17,12 @@ type Tier = {
   highlighted?: boolean;
 };
 
-type Copy = {
+export type Currency = "sar" | "usd";
+
+export type Copy = {
   tiers: Tier[];
+  currency: Record<Currency, string>;
+  currencyNote: string;
   badge: string;
   essentialsTitle: string;
   essentials: string[];
@@ -43,7 +47,7 @@ const copy: Record<Locale, Copy> = {
         slug: "free",
         name: "Free",
         who: "A first look, on real work.",
-        price: "SAR 0",
+        price: { sar: "SAR 0", usd: "USD 0" },
         period: "free version",
         features: [
           "One activity: sea, air or land transport",
@@ -61,7 +65,7 @@ const copy: Record<Locale, Copy> = {
         slug: "basic",
         name: "Basic",
         who: "A company with one activity.",
-        price: "SAR 699",
+        price: { sar: "SAR 699", usd: "USD 199" },
         period: "per month",
         features: [
           "One activity: sea, air, land transport or warehouse",
@@ -76,7 +80,7 @@ const copy: Record<Locale, Copy> = {
         slug: "growth",
         name: "Growth",
         who: "A company with more than one activity.",
-        price: "SAR 1,799",
+        price: { sar: "SAR 1,799", usd: "USD 499" },
         period: "per month",
         features: [
           "Every freight and logistics activity: sea, air, consolidation and LCL, arrival notice and delivery order, land transport, warehouse, and inventory (3PL) when it launches",
@@ -93,7 +97,7 @@ const copy: Record<Locale, Copy> = {
         slug: "carrier",
         name: "Carrier & Agencies",
         who: "NVOCCs, shipping agencies and customs brokers.",
-        price: "SAR 3,299",
+        price: { sar: "SAR 3,299", usd: "USD 899" },
         period: "per month",
         features: [
           "Everything in Growth",
@@ -109,7 +113,7 @@ const copy: Record<Locale, Copy> = {
         slug: "enterprise",
         name: "Enterprise",
         who: "Groups and branches, and anyone who needs a dedicated server.",
-        price: "From SAR 5,499",
+        price: { sar: "From SAR 5,499", usd: "From USD 1,499" },
         period: "per month",
         features: [
           "Every activity",
@@ -123,6 +127,8 @@ const copy: Record<Locale, Copy> = {
         href: "/demo?plan=enterprise",
       },
     ],
+    currency: { sar: "Saudi Arabia · SAR", usd: "Other markets · USD" },
+    currencyNote: "Prices in Saudi riyals for Saudi Arabia, and in US dollars for other markets.",
     badge: "Most chosen",
     essentialsTitle: "The essentials, in every plan",
     essentials: [
@@ -158,7 +164,7 @@ const copy: Record<Locale, Copy> = {
         slug: "free",
         name: "المجانية",
         who: "نظرة أولى، على عمل حقيقي.",
-        price: "0 ريال",
+        price: { sar: "0 ريال", usd: "0 دولار" },
         period: "نسخة مجانية",
         features: [
           "نشاط واحد: بحري أو جوي أو نقل بري",
@@ -176,7 +182,7 @@ const copy: Record<Locale, Copy> = {
         slug: "basic",
         name: "الأساسية",
         who: "شركة بنشاط واحد.",
-        price: "699 ريال",
+        price: { sar: "699 ريال", usd: "199 دولار" },
         period: "شهرياً",
         features: [
           "نشاط واحد: بحري أو جوي أو نقل بري أو مستودع",
@@ -191,7 +197,7 @@ const copy: Record<Locale, Copy> = {
         slug: "growth",
         name: "النمو والتوسع",
         who: "شركة بأكثر من نشاط.",
-        price: "1,799 ريال",
+        price: { sar: "1,799 ريال", usd: "499 دولار" },
         period: "شهرياً",
         features: [
           "كل أنشطة الشحن واللوجستيات: البحري، والجوي، والتجميع LCL، وإشعار الوصول وأمر التسليم، والنقل البري، والمستودع، والمخزون (3PL) عند إطلاقه",
@@ -208,7 +214,7 @@ const copy: Record<Locale, Copy> = {
         slug: "carrier",
         name: "الناقل والوكالات",
         who: "NVOCC والوكالات الملاحية والمخلّصون.",
-        price: "3,299 ريال",
+        price: { sar: "3,299 ريال", usd: "899 دولار" },
         period: "شهرياً",
         features: [
           "كل ما في النمو والتوسع",
@@ -224,7 +230,7 @@ const copy: Record<Locale, Copy> = {
         slug: "enterprise",
         name: "المؤسسات",
         who: "المجموعات والفروع، ومن يحتاج سيرفراً خاصاً.",
-        price: "من 5,499 ريال",
+        price: { sar: "من 5,499 ريال", usd: "من 1,499 دولار" },
         period: "شهرياً",
         features: [
           "كل الأنشطة",
@@ -238,6 +244,8 @@ const copy: Record<Locale, Copy> = {
         href: "/demo?plan=enterprise",
       },
     ],
+    currency: { sar: "السعودية · ريال", usd: "الأسواق الأخرى · دولار" },
+    currencyNote: "الأسعار بالريال السعودي للسعودية، وبالدولار الأمريكي للأسواق الأخرى.",
     badge: "الأكثر اختياراً",
     essentialsTitle: "الأساسيات في كل الخطط",
     essentials: [
@@ -278,44 +286,12 @@ export function planName(slug: string, locale: Locale): string | undefined {
   return copy[locale].tiers.find((t) => t.slug === s)?.name;
 }
 
-function TierCard({ t, badge }: { t: Tier; badge?: string }) {
-  const dark = t.highlighted;
-  return (
-    <div className={cn("relative flex h-full flex-col rounded-2xl border p-6", dark ? "border-ink-900 bg-ink-900 text-white shadow-float" : "border-fog-200 bg-white text-ink-900 shadow-card")}>
-      {badge ? <span className="absolute -top-3 start-6 rounded-full bg-spark-400 px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-ink-950">{badge}</span> : null}
-      <h3 className="font-display text-lg font-bold leading-tight">{t.name}</h3>
-      <p className={cn("mt-1.5 text-[13px] leading-relaxed", dark ? "text-white/65" : "text-fog-600")}>{t.who}</p>
-      <div className="mt-5">
-        <p className="font-display text-3xl font-bold">{t.price}</p>
-        <p className={cn("mt-1 text-xs", dark ? "text-white/55" : "text-fog-500")}>{t.period}</p>
-      </div>
-      <ul className="mt-5 flex-1 space-y-2.5">
-        {t.features.map((f) => (
-          <li key={f} className="flex items-start gap-2.5 text-[13.5px]">
-            <Check className={cn("mt-0.5 h-4 w-4 shrink-0", dark ? "text-spark-300" : "text-spark-600")} strokeWidth={2.5} />
-            <span className={dark ? "text-white/85" : "text-fog-700"}>{f}</span>
-          </li>
-        ))}
-      </ul>
-      <Button href={t.href} variant={dark ? "inverse" : "secondary"} className="mt-7 w-full">
-        {t.cta}
-      </Button>
-    </div>
-  );
-}
-
 export async function PricingTiers() {
   const locale = await getLocale();
   const t = copy[locale];
   return (
     <div>
-      <RevealGroup className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5" stagger={0.06}>
-        {t.tiers.map((tier) => (
-          <RevealItem key={tier.slug} className="h-full">
-            <TierCard t={tier} badge={tier.highlighted ? t.badge : undefined} />
-          </RevealItem>
-        ))}
-      </RevealGroup>
+      <PricingGrid t={t} initial={locale === "ar" ? "sar" : "usd"} />
 
       {/* The three messages: users, fees, one company */}
       <div className="mt-8 grid gap-3 md:grid-cols-3">
