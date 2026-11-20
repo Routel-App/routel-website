@@ -20,7 +20,7 @@ const copy: Record<Locale, Copy> = {
     lead: "Traditional freight and logistics software was built for an era of forms, menus and implementation projects. ROUTEL starts from an AI that does the work, under your control.",
     cols: ["", "Traditional systems", "ROUTEL"],
     rows: [
-      { topic: "Prices", them: "The big systems don't publish prices: you start with a demo and a quote", us: "Published prices, from SAR 699 a month, never per shipment or per user" },
+      { topic: "Prices", them: "The big systems don't publish prices: you start with a demo and a quote", us: "Published prices, from USD 199 a month, never per shipment or per user" },
       { topic: "Getting started", them: "An implementation project, with its fees", us: "Set up by chat with the AI assistant, no implementation fees" },
       { topic: "Data entry", them: "Typed in by hand, or scanned and re-checked", us: "AI reads carrier confirmations, B/Ls, vendor bills and agreements; a person confirms" },
       { topic: "Daily work", them: "Menus and forms to learn screen by screen", us: "Ask in a sentence; the assistant calls the system's own tools" },
