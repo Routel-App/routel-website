@@ -11,27 +11,35 @@ const copy = {
   en: {
     metaTitle: "Pricing",
     metaDescription:
-      "Routel plans: Basic ($149/mo), Freight Forwarder ($249/mo), Freight Forwarder Growth ($499/mo) and Enterprise (from $1,499/mo), with 3PL and NVOCC plans coming.",
+      "ROUTEL plans in Saudi riyals: Free, Basic (SAR 699/mo), Growth (SAR 1,799/mo), Carrier & Agencies (SAR 3,299/mo) and Enterprise (from SAR 5,499/mo). Unlimited users, no implementation fees, and a 14-day free trial.",
     eyebrow: "Pricing",
     title: "One platform, priced by what your company does",
-    description: "No per-shipment fees. Pick the plan that matches your activities, add users as you grow, and open new modules when you need them.",
+    description: "No per-shipment fees, no per-user fees and no implementation fees. Pick the plan that matches your activities, and open new modules when you need them. Prices in Saudi riyals.",
     faqTitle: "Questions we get asked",
     faqs: [
       {
-        q: "Can we try it before we pay?",
-        a: "Yes. Request a demo and we'll run your own shipments through ROUTEL with you, before you choose a plan. Plans start at $149 a month.",
+        q: "How does the free trial work?",
+        a: "Every new account starts with 14 days on Growth, with everything in it, including AI document reading for 30 documents. After the trial, the account moves to the free version: one activity, 5 bookings a month, one user and a preliminary invoice.",
       },
       {
-        q: "Which plan includes the AI assistant?",
-        a: "Freight Forwarder Growth and Enterprise. On the other plans it helps the admin set the company up for the first 30 days. It works with the same permissions as your users' roles and never saves anything without a person's confirmation.",
+        q: "What is a preliminary invoice?",
+        a: "On the free version, ROUTEL issues a preliminary invoice without the title “tax invoice”. The tax invoice is issued from your approved billing system, and you link it to the booking by its number or its file. On the paid plans, the tax invoice is issued inside ROUTEL.",
       },
       {
-        q: "What does \"coming soon\" mean for 3PL and NVOCC?",
-        a: "Those plans cover services Routel is rolling out: warehouse receipts, land transport and inventory for 3PL; Bills of Lading in your own name, demurrage and detention, agents, shipping agency and customs brokerage for NVOCC. Their prices are set. Register interest and we'll open them to you first.",
+        q: "Is there a limit on users?",
+        a: "No. Every paid plan has unlimited users; the admin sets the roles and users from Admin. Plans differ by activities and by what costs us, never by the number of users.",
+      },
+      {
+        q: "Are there implementation fees?",
+        a: "No, on any plan. The assistant sets the company up by chat. Enterprise adds data migration from your old system and tailored training.",
+      },
+      {
+        q: "What does the Enterprise plan include?",
+        a: "Every activity, and with it: several branches or companies with one sign-in and a group dashboard; a dedicated server; data migration from your old system and tailored training; and integrations built for you.",
       },
       {
         q: "Is there a discount for founding customers or yearly billing?",
-        a: "Yes. The first 20 companies get 30% off with their price locked for two years, and paying yearly gives you two months free.",
+        a: "Yes. The first 20 companies get 30% off with their price locked for one year, and paying yearly gives you one month free.",
       },
       {
         q: "Which currencies are supported?",
@@ -39,38 +47,42 @@ const copy = {
       },
       {
         q: "Can we migrate from spreadsheets or another system?",
-        a: "Yes. Talk to us when you request a demo, and our team can bring over your business partners and route rates.",
-      },
-      {
-        q: "Where is Routel hosted?",
-        a: "Each company runs on its own deployment with its own database. Enterprise gets a fully dedicated server. Ask us about regional hosting requirements when you request a demo.",
+        a: "Yes. Talk to us when you request a demo, and our team can bring over your business partners and route rates. On Enterprise, migration from your old system is part of the plan.",
       },
     ],
   },
   ar: {
     metaTitle: "الأسعار",
     metaDescription:
-      "باقات Routel: الأساسية ($149 شهرياً)، ووكيل الشحن ($249)، ووكيل الشحن Growth ($499)، والمؤسسات (من $1,499)، وباقتا 3PL وNVOCC قريباً.",
+      "خطط ROUTEL بالريال: المجانية، والأساسية (699 ريال شهرياً)، والنمو والتوسع (1,799)، والناقل والوكالات (3,299)، والمؤسسات (من 5,499). بلا حد للمستخدمين، وبلا رسوم تطبيق، وتجربة مجانية 14 يوماً.",
     eyebrow: "الأسعار",
     title: "منصة واحدة، بسعر يناسب نشاط شركتك",
-    description: "لا رسوم على كل شحنة. اختر الباقة التي تناسب أنشطتك، وأضف المستخدمين مع نموّك، وافتح الوحدات الجديدة حين تحتاجها.",
+    description: "لا رسوم على كل شحنة، ولا على كل مستخدم، ولا رسوم تطبيق. اختر الخطة التي تناسب أنشطتك، وافتح الوحدات الجديدة حين تحتاجها. الأسعار بالريال السعودي.",
     faqTitle: "أسئلة تصلنا كثيراً",
     faqs: [
       {
-        q: "هل يمكن التجربة قبل الدفع؟",
-        a: "نعم. اطلب عرضاً تجريبياً ونشغّل معك شحناتك أنت على ROUTEL قبل أن تختار باقتك. تبدأ الباقات من 149 دولاراً شهرياً.",
+        q: "كيف تعمل التجربة المجانية؟",
+        a: "كل حساب جديد يبدأ بـ 14 يوماً على خطة النمو والتوسع بكل مميزاتها، ومعها قراءة 30 مستنداً بالذكاء الاصطناعي. بعد التجربة ينتقل الحساب إلى النسخة المجانية: نشاط واحد، و5 حجوزات شهرياً، ومستخدم واحد، وفاتورة مبدئية.",
       },
       {
-        q: "أي باقة تشمل المساعد الذكي؟",
-        a: "وكيل الشحن Growth والمؤسسات. وفي الباقات الأخرى يساعد المدير في تجهيز الشركة خلال أول 30 يوماً. يعمل بنفس صلاحيات أدوار مستخدميك، ولا يحفظ أي شيء دون تأكيد شخص.",
+        q: "ما الفاتورة المبدئية؟",
+        a: "في النسخة المجانية يصدر ROUTEL فاتورة مبدئية بلا عنوان «فاتورة ضريبية». والفاتورة الضريبية تصدرها شركتك من نظام الفوترة المعتمد لديها، وتربطها بالحجز برقمها أو بملفها. وفي الخطط المدفوعة تصدر الفاتورة الضريبية داخل ROUTEL.",
       },
       {
-        q: "ماذا تعني «قريباً» في باقتي 3PL وNVOCC؟",
-        a: "تغطي هاتان الباقتان خدمات يطلقها Routel تباعاً: إيصالات المستودع والنقل البري والمخزون في 3PL، وبوالص الشحن باسم شركتك والأرضيات والتأخير والوكلاء والوكالة الملاحية والتخليص الجمركي في NVOCC. أسعارهما محددة، سجّل اهتمامك وسنفتحهما لك أولاً.",
+        q: "هل هناك حد للمستخدمين؟",
+        a: "لا. كل الخطط المدفوعة بلا حد للمستخدمين، والمدير يحدد الأدوار والمستخدمين من الإدارة. تختلف الخطط بالأنشطة وبما يكلّفنا فعلاً، لا بعدد المستخدمين.",
+      },
+      {
+        q: "هل هناك رسوم تطبيق؟",
+        a: "لا، في أي خطة. المساعد يجهّز الشركة بالمحادثة. وتضيف خطة المؤسسات نقل البيانات من النظام القديم وتدريباً مخصصاً.",
+      },
+      {
+        q: "ماذا تشمل خطة المؤسسات؟",
+        a: "كل الأنشطة، ومعها: فروع أو شركات متعددة بتسجيل دخول واحد ولوحة للمجموعة؛ وسيرفر خاص؛ ونقل البيانات من النظام القديم وتدريب مخصص؛ وتكاملات خاصة بالعميل.",
       },
       {
         q: "هل يوجد خصم للعملاء المؤسسين أو للدفع السنوي؟",
-        a: "نعم. أول 20 شركة تحصل على خصم 30% مع تثبيت السعر لسنتين، والدفع السنوي يمنحك شهرين مجاناً.",
+        a: "نعم. أول 20 شركة تحصل على خصم 30% مع تثبيت السعر سنة واحدة، والدفع السنوي يمنحك شهراً مجاناً.",
       },
       {
         q: "ما العملات المدعومة؟",
@@ -78,11 +90,7 @@ const copy = {
       },
       {
         q: "هل يمكننا الانتقال من جداول البيانات أو من نظام آخر؟",
-        a: "نعم. تحدّث إلينا حين تطلب عرضاً تجريبياً، ويمكن لفريقنا نقل شركاء أعمالك وأسعار مساراتك.",
-      },
-      {
-        q: "أين تتم استضافة Routel؟",
-        a: "تعمل كل شركة على نشر خاص بها بقاعدة بيانات مستقلة، وتحصل باقة المؤسسات على خادم مخصص بالكامل. اسألنا عن متطلبات الاستضافة الإقليمية حين تطلب عرضاً تجريبياً.",
+        a: "نعم. تحدّث إلينا حين تطلب عرضاً تجريبياً، ويمكن لفريقنا نقل شركاء أعمالك وأسعار مساراتك. وفي خطة المؤسسات نقل البيانات من النظام القديم جزء من الخطة.",
       },
     ],
   },

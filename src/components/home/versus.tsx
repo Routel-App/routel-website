@@ -20,7 +20,7 @@ const copy: Record<Locale, Copy> = {
     lead: "Traditional freight and logistics software was built for an era of forms, menus and implementation projects. ROUTEL starts from an AI that does the work, under your control.",
     cols: ["", "Traditional systems", "ROUTEL"],
     rows: [
-      { topic: "Prices", them: "The big systems don't publish prices: you start with a demo and a quote", us: "Published prices, from $149 a month, never per shipment" },
+      { topic: "Prices", them: "The big systems don't publish prices: you start with a demo and a quote", us: "Published prices, from SAR 699 a month, never per shipment or per user" },
       { topic: "Getting started", them: "An implementation project, with its fees", us: "Set up by chat with the AI assistant, no implementation fees" },
       { topic: "Data entry", them: "Typed in by hand, or scanned and re-checked", us: "AI reads carrier confirmations, B/Ls, vendor bills and agreements; a person confirms" },
       { topic: "Daily work", them: "Menus and forms to learn screen by screen", us: "Ask in a sentence; the assistant calls the system's own tools" },
@@ -37,7 +37,7 @@ const copy: Record<Locale, Copy> = {
     lead: "بُنيت أنظمة الشحن والخدمات اللوجستية التقليدية لعصر النماذج والقوائم ومشاريع التطبيق. أما ROUTEL فيبدأ من ذكاء اصطناعي ينجز العمل، تحت سيطرتك.",
     cols: ["", "الأنظمة التقليدية", "ROUTEL"],
     rows: [
-      { topic: "الأسعار", them: "الأنظمة الكبيرة لا تنشر أسعارها: تبدأ بعرض تجريبي وطلب تسعير", us: "أسعار منشورة، تبدأ من 149 دولاراً شهرياً، ولا رسوم على كل شحنة" },
+      { topic: "الأسعار", them: "الأنظمة الكبيرة لا تنشر أسعارها: تبدأ بعرض تجريبي وطلب تسعير", us: "أسعار منشورة، تبدأ من 699 ريالاً شهرياً، ولا رسوم على كل شحنة ولا على كل مستخدم" },
       { topic: "البداية", them: "مشروع تطبيق، برسومه", us: "تجهيز بالمحادثة مع المساعد الذكي، بلا رسوم تطبيق" },
       { topic: "إدخال البيانات", them: "يُكتب يدوياً، أو يُمسح ضوئياً ثم يُراجع", us: "الذكاء الاصطناعي يقرأ تأكيدات الناقل والبوالص وفواتير الموردين والاتفاقيات، ويؤكد شخص" },
       { topic: "العمل اليومي", them: "قوائم ونماذج تُتعلَّم شاشة بشاشة", us: "اطلب بجملة، والمساعد يستدعي أدوات النظام نفسه" },
