@@ -22,6 +22,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/case-studies", changeFrequency: "monthly", priority: 0.6 },
     { path: "/docs", changeFrequency: "weekly", priority: 0.7 },
     { path: "/glossary", changeFrequency: "weekly", priority: 0.6 },
+    { path: "/terms", changeFrequency: "yearly", priority: 0.3 },
+    { path: "/privacy", changeFrequency: "yearly", priority: 0.3 },
   ];
   for (const page of allDocPages()) {
     if (page.href !== "/docs") entries.push({ path: page.href, changeFrequency: "weekly", priority: 0.6 });

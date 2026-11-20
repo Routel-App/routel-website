@@ -1,0 +1,233 @@
+import type { Locale } from "@/lib/i18n";
+import type { LegalCopy } from "./types";
+
+export const ENTITY = "ROUTEL Logistics & Supply Chain Operations Platform";
+export const PRIVACY_EMAIL = "privacy@routel.app";
+export const LEGAL_UPDATED = "2026-11-20";
+
+/**
+ * Terms of use for the ROUTEL service: the website, the free version, the
+ * trial and the paid plans. The free-version billing clause is the one
+ * docs/routel-central.md (section 2) requires: ROUTEL issues a preliminary
+ * invoice only, and the tax invoice is the company's own responsibility.
+ */
+export const terms: Record<Locale, LegalCopy> = {
+  en: {
+    metaTitle: "Terms of use",
+    metaDescription: "The terms on which ROUTEL provides its website, free version, free trial and paid plans.",
+    eyebrow: "Legal",
+    title: "Terms of use",
+    lead: "These terms govern your use of ROUTEL: the website, the free version, the free trial and the paid plans. By creating an account or using the service, you agree to them.",
+    updated: "Last updated",
+    entity: `The service is provided by ${ENTITY} (“ROUTEL”, “we”, “us”).`,
+    sections: [
+      {
+        title: "1. The service",
+        body: [
+          "ROUTEL is a hosted operating system for shipping and logistics companies: bookings, quotations, Bills of Lading, invoices, collections, accounting, documents, an AI assistant and the modules listed on the pricing page. What each plan includes, and its price, is set out on the pricing page and forms part of these terms.",
+          "The service is for business use by companies and their authorised staff. It is not offered to consumers or to anyone under 18.",
+        ],
+      },
+      {
+        title: "2. Your account",
+        body: [
+          "You create an account on behalf of a company and confirm that you are authorised to bind it. You keep your sign-in details confidential, and you are responsible for everything done under your company's accounts. Tell us at once if you suspect unauthorised use.",
+          "One subscription covers one company (one commercial registration). Branches and groups are covered by the Enterprise plan.",
+          "The information you give us about your company must be accurate and kept up to date.",
+        ],
+      },
+      {
+        title: "3. The free trial and the free version",
+        body: [
+          "Every new account starts with a 14-day trial of the Growth plan, including AI document reading for 30 documents. When the trial ends, the account moves to the free version unless you subscribe to a paid plan.",
+          "The free version includes one activity, 5 bookings a month, one user, the company setup assistant, and a preliminary invoice. Printouts from the free version carry the mark “Made with Routel”. Support on the free version is the user guide.",
+          "On the free version, ROUTEL issues a “preliminary invoice” only. It does not carry the title “tax invoice” and is not an official invoice. Issuing the tax invoice from an approved billing system is your company's responsibility; you may link that invoice to the booking by its number or by uploading its file. On the paid plans, the tax invoice is issued inside ROUTEL.",
+          "We may change the limits of the free version. We will show the change in the service or on the pricing page before it takes effect.",
+        ],
+      },
+      {
+        title: "4. Paid plans",
+        body: [
+          "Paid plans are subscriptions, billed monthly or yearly at the prices on the pricing page. Every paid plan has unlimited users and no implementation fees. Fees that we pass through to you, such as government fees for a government link, an electronic Bill of Lading or a customs declaration, are shown separately before you incur them.",
+          "We may change a plan's price with at least 30 days' notice; the new price applies from your next billing period. Founding-customer prices are locked for the period stated in the offer.",
+          "You may cancel at any time from your account or by writing to us. Cancellation takes effect at the end of the current billing period, and fees already paid are not refunded except where the law requires.",
+        ],
+      },
+      {
+        title: "5. Your data",
+        body: [
+          "Everything you enter into ROUTEL, including your business partners, shipments, documents, invoices and books, is yours. We process it only to provide the service, as described in the privacy policy, and we do not sell it.",
+          "You are responsible for the data you enter, including the personal data of your customers, vendors and staff, and for having the right to enter it. Where ROUTEL processes personal data on your behalf, we act as the processor and you as the controller.",
+          "You can export your data while your subscription is active, and for 30 days after it ends. We delete your data within 90 days after that, except for backups that expire on their own schedule and records we must keep by law.",
+        ],
+      },
+      {
+        title: "6. The AI assistant",
+        body: [
+          "The AI assistant reads documents, drafts records and answers questions. Everything it proposes to save waits for a person's confirmation, and every action it carries out is logged.",
+          "The assistant's output can be wrong. HS codes it suggests, figures it reads from a document, and answers it gives are proposals for a person to check; you remain responsible for what your company confirms, issues and files.",
+          "Documents and messages you ask the assistant to read are processed by a third-party AI provider, as described in the privacy policy.",
+        ],
+      },
+      {
+        title: "7. Acceptable use",
+        body: [
+          "You agree not to:",
+          "- use the service for anything unlawful, or to enter data you have no right to enter;\n- try to gain access to another company's data, or to the service's systems beyond your own account;\n- resell the service, or use it to build a competing product;\n- interfere with the service's operation, or load it beyond ordinary business use.",
+          "We may suspend an account that breaks these terms, after telling you, unless the risk to the service or to other customers requires us to act first.",
+        ],
+      },
+      {
+        title: "8. Third-party services",
+        body: [
+          "Sign-in, hosting, file storage, e-mail synchronisation (when you connect a Microsoft 365 or Zoho mailbox) and AI processing are provided through third-party services named in the privacy policy. Your use of a mailbox you connect is also subject to that provider's terms.",
+        ],
+      },
+      {
+        title: "9. Availability and support",
+        body: [
+          "We work to keep the service available, with maintenance announced in advance where we can. Support is as stated for your plan on the pricing page. A service-level agreement is part of the Enterprise plan only.",
+        ],
+      },
+      {
+        title: "10. Intellectual property",
+        body: [
+          "ROUTEL, its software, design, documentation and name belong to us or our licensors. These terms give you the right to use the service for your company's business while your account is active, and nothing more.",
+        ],
+      },
+      {
+        title: "11. Disclaimer and limitation of liability",
+        body: [
+          "The free version and the trial are provided as they are, without warranty. For paid plans, we provide the service with reasonable skill and care, and we do not promise that it will be uninterrupted or free of errors.",
+          "To the extent the law allows, our total liability to you for all claims in any 12-month period is limited to the fees you paid us in that period, and we are not liable for indirect loss, loss of profit, loss of data you have not exported, or regulatory penalties arising from documents your company confirmed, issued or filed.",
+          "Nothing in these terms limits liability that cannot be limited by law.",
+        ],
+      },
+      {
+        title: "12. Changes to these terms",
+        body: [
+          "We may update these terms. When the change matters, we will tell you in the service or by e-mail at least 30 days before it takes effect. Using the service after that date means you accept the updated terms.",
+        ],
+      },
+      {
+        title: "13. Governing law",
+        body: [
+          "These terms are governed by the laws of the Kingdom of Saudi Arabia, and its courts have jurisdiction over any dispute, without prejudice to any rights you have under the mandatory law of the country where your company is registered.",
+        ],
+      },
+      {
+        title: "14. Contact",
+        body: [`Questions about these terms: ${PRIVACY_EMAIL}.`],
+      },
+    ],
+  },
+  ar: {
+    metaTitle: "شروط الاستخدام",
+    metaDescription: "الشروط التي يقدّم ROUTEL بموجبها موقعه ونسخته المجانية وتجربته المجانية وخططه المدفوعة.",
+    eyebrow: "قانوني",
+    title: "شروط الاستخدام",
+    lead: "تحكم هذه الشروط استخدامك لـ ROUTEL: الموقع، والنسخة المجانية، والتجربة المجانية، والخطط المدفوعة. بإنشاء حساب أو استخدام الخدمة فأنت توافق عليها.",
+    updated: "آخر تحديث",
+    entity: `تُقدَّم الخدمة من ${ENTITY} («ROUTEL»، «نحن»).`,
+    sections: [
+      {
+        title: "1. الخدمة",
+        body: [
+          "ROUTEL نظام تشغيل مستضاف لشركات الشحن والخدمات اللوجستية: الحجوزات، وعروض الأسعار، وبوالص الشحن، والفواتير، والتحصيل، والمحاسبة، والمستندات، والمساعد الذكي، والوحدات المذكورة في صفحة الأسعار. وما تشمله كل خطة وسعرها مبيّن في صفحة الأسعار، وهو جزء من هذه الشروط.",
+          "الخدمة للاستخدام التجاري من الشركات وموظفيها المخوّلين، ولا تُقدَّم للمستهلكين ولا لمن هم دون 18 عاماً.",
+        ],
+      },
+      {
+        title: "2. حسابك",
+        body: [
+          "تنشئ الحساب نيابة عن شركة، وتقرّ بأنك مخوّل بإلزامها. وتحافظ على سرية بيانات الدخول، وتتحمل مسؤولية كل ما يُنفَّذ عبر حسابات شركتك. وأبلغنا فوراً إن اشتبهت في استخدام غير مصرّح به.",
+          "الاشتراك الواحد لشركة واحدة (سجل تجاري واحد). والفروع والمجموعات تغطيها خطة المؤسسات.",
+          "المعلومات التي تزوّدنا بها عن شركتك يجب أن تكون صحيحة ومحدّثة.",
+        ],
+      },
+      {
+        title: "3. التجربة المجانية والنسخة المجانية",
+        body: [
+          "كل حساب جديد يبدأ بتجربة 14 يوماً على خطة النمو والتوسع، ومعها قراءة 30 مستنداً بالذكاء الاصطناعي. وعند انتهاء التجربة ينتقل الحساب إلى النسخة المجانية ما لم تشترك في خطة مدفوعة.",
+          "تشمل النسخة المجانية نشاطاً واحداً، و5 حجوزات شهرياً، ومستخدماً واحداً، ومساعد إعداد الشركة، وفاتورة مبدئية. وتحمل المطبوعات من النسخة المجانية عبارة «صُنع بـ Routel». والدعم في النسخة المجانية هو دليل المستخدم.",
+          "في النسخة المجانية يصدر ROUTEL «فاتورة مبدئية» فقط، لا تحمل عنوان «فاتورة ضريبية» ولا تُعد فاتورة رسمية. وإصدار الفاتورة الضريبية من نظام فوترة معتمد مسؤولية شركتك، ويمكنك ربط تلك الفاتورة بالحجز بكتابة رقمها أو رفع ملفها. وفي الخطط المدفوعة تصدر الفاتورة الضريبية داخل ROUTEL.",
+          "يجوز لنا تغيير حدود النسخة المجانية، ونعرض التغيير في الخدمة أو في صفحة الأسعار قبل سريانه.",
+        ],
+      },
+      {
+        title: "4. الخطط المدفوعة",
+        body: [
+          "الخطط المدفوعة اشتراكات تُحتسب شهرياً أو سنوياً بالأسعار المبيّنة في صفحة الأسعار. وكل خطة مدفوعة بلا حد للمستخدمين وبلا رسوم تطبيق. أما الرسوم التي نمرّرها إليك، مثل الرسوم الحكومية للربط الحكومي أو البوليصة الإلكترونية أو البيان الجمركي، فتُعرض منفصلة قبل أن تتحملها.",
+          "يجوز لنا تغيير سعر خطة بإشعار لا يقل عن 30 يوماً، ويسري السعر الجديد من فترة الفوترة التالية. وأسعار العملاء المؤسسين مثبّتة للمدة المذكورة في العرض.",
+          "يمكنك الإلغاء في أي وقت من حسابك أو بالكتابة إلينا. ويسري الإلغاء بنهاية فترة الفوترة الحالية، ولا تُسترد الرسوم المدفوعة إلا حيث يوجب النظام ذلك.",
+        ],
+      },
+      {
+        title: "5. بياناتك",
+        body: [
+          "كل ما تُدخله في ROUTEL، بما فيه شركاء أعمالك وشحناتك ومستنداتك وفواتيرك ودفاترك، ملك لك. ولا نعالجه إلا لتقديم الخدمة كما هو مبيّن في سياسة الخصوصية، ولا نبيعه.",
+          "أنت مسؤول عن البيانات التي تُدخلها، بما فيها البيانات الشخصية لعملائك ومورديك وموظفيك، وعن امتلاكك الحق في إدخالها. وحين يعالج ROUTEL بيانات شخصية نيابة عنك، فنحن جهة المعالجة وأنت جهة التحكم.",
+          "يمكنك تصدير بياناتك ما دام اشتراكك سارياً، ولمدة 30 يوماً بعد انتهائه. ونحذف بياناتك خلال 90 يوماً بعد ذلك، عدا النسخ الاحتياطية التي تنتهي وفق جدولها، والسجلات التي يوجب النظام الاحتفاظ بها.",
+        ],
+      },
+      {
+        title: "6. المساعد الذكي",
+        body: [
+          "يقرأ المساعد الذكي المستندات، ويجهّز السجلات، ويجيب عن الأسئلة. وكل ما يقترح حفظه ينتظر تأكيد شخص، وكل إجراء ينفّذه مسجَّل.",
+          "قد يخطئ المساعد. ورموز HS التي يقترحها، والأرقام التي يقرؤها من مستند، والإجابات التي يقدّمها، اقتراحات يراجعها شخص، وتبقى أنت مسؤولاً عمّا تؤكده شركتك وتصدره وتقدّمه.",
+          "المستندات والرسائل التي تطلب من المساعد قراءتها يعالجها مزوّد ذكاء اصطناعي خارجي، كما هو مبيّن في سياسة الخصوصية.",
+        ],
+      },
+      {
+        title: "7. الاستخدام المقبول",
+        body: [
+          "توافق على ألا:",
+          "- تستخدم الخدمة في أي أمر مخالف للنظام، أو تُدخل بيانات لا تملك الحق في إدخالها؛\n- تحاول الوصول إلى بيانات شركة أخرى، أو إلى أنظمة الخدمة خارج حسابك؛\n- تعيد بيع الخدمة، أو تستخدمها لبناء منتج منافس؛\n- تعطّل عمل الخدمة، أو تحمّلها فوق الاستخدام التجاري المعتاد.",
+          "يجوز لنا إيقاف حساب يخالف هذه الشروط بعد إبلاغك، ما لم يستلزم الخطر على الخدمة أو على العملاء الآخرين التصرف أولاً.",
+        ],
+      },
+      {
+        title: "8. الخدمات الخارجية",
+        body: [
+          "تسجيل الدخول، والاستضافة، وتخزين الملفات، ومزامنة البريد (حين تربط صندوق بريد Microsoft 365 أو Zoho)، ومعالجة الذكاء الاصطناعي، تُقدَّم عبر خدمات خارجية مذكورة في سياسة الخصوصية. واستخدامك لصندوق بريد تربطه يخضع أيضاً لشروط مزوّده.",
+        ],
+      },
+      {
+        title: "9. التوافر والدعم",
+        body: [
+          "نعمل على إبقاء الخدمة متاحة، مع الإعلان عن الصيانة مسبقاً حيث أمكن. والدعم كما هو مبيّن لخطتك في صفحة الأسعار. واتفاقية مستوى الخدمة جزء من خطة المؤسسات وحدها.",
+        ],
+      },
+      {
+        title: "10. الملكية الفكرية",
+        body: [
+          "ROUTEL وبرمجياته وتصميمه ووثائقه واسمه ملك لنا أو لمرخّصينا. وتمنحك هذه الشروط حق استخدام الخدمة لأعمال شركتك ما دام حسابك سارياً، لا أكثر.",
+        ],
+      },
+      {
+        title: "11. إخلاء المسؤولية وحدودها",
+        body: [
+          "تُقدَّم النسخة المجانية والتجربة كما هي، بلا ضمان. وفي الخطط المدفوعة نقدّم الخدمة بمهارة وعناية معقولتين، ولا نعد بأنها لن تنقطع أو تخلو من الأخطاء.",
+          "وبالقدر الذي يسمح به النظام، تقتصر مسؤوليتنا الإجمالية تجاهك عن كل المطالبات في أي 12 شهراً على الرسوم التي دفعتها لنا في تلك المدة، ولا نتحمل الخسائر غير المباشرة، ولا فوات الربح، ولا فقدان بيانات لم تصدّرها، ولا الغرامات النظامية الناشئة عن مستندات أكدتها شركتك أو أصدرتها أو قدّمتها.",
+          "ولا يحدّ شيء في هذه الشروط من مسؤولية لا يجيز النظام الحد منها.",
+        ],
+      },
+      {
+        title: "12. تعديل هذه الشروط",
+        body: [
+          "يجوز لنا تحديث هذه الشروط. وحين يكون التغيير جوهرياً نبلغك به في الخدمة أو بالبريد قبل سريانه بـ 30 يوماً على الأقل. واستخدامك للخدمة بعد ذلك التاريخ يعني قبولك الشروط المحدّثة.",
+        ],
+      },
+      {
+        title: "13. النظام الواجب التطبيق",
+        body: [
+          "تخضع هذه الشروط لأنظمة المملكة العربية السعودية، وتختص محاكمها بأي نزاع، دون إخلال بأي حقوق لك بموجب الأنظمة الآمرة في الدولة التي سُجّلت فيها شركتك.",
+        ],
+      },
+      {
+        title: "14. التواصل",
+        body: [`للأسئلة عن هذه الشروط: ${PRIVACY_EMAIL}.`],
+      },
+    ],
+  },
+};

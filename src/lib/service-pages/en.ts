@@ -343,7 +343,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
     faqs: [
       { q: "Is NVOCC available today?", a: "It is in development. The design above is approved; register interest and we'll open it to you first." },
       { q: "Will it change how our forwarding works?", a: "No. New modules are off by default and open per company from its business activities; existing work stays as it is." },
-      { q: "Which plan includes it?", a: "NVOCC, Customs & Agencies, at $899 a month, coming." },
+      { q: "Which plan includes it?", a: "Carrier & Agencies, at SAR 3,299 a month." },
     ],
   },
 
@@ -411,7 +411,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
     faqs: [
       { q: "Is land transport available today?", a: "It is in development. Register interest and we'll open it to you first." },
       { q: "Does the driver need an account?", a: "No. The link shows only that order and expires when the order ends." },
-      { q: "Which plans include it?", a: "Freight Forwarder Growth when it launches, and the 3PL plan." },
+      { q: "Which plans include it?", a: "Basic, as the company's one activity, or Growth with the other activities." },
     ],
   },
 
@@ -547,7 +547,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
     faqs: [
       { q: "Is it available today?", a: "It is in development. Register interest and we'll open it to you first." },
       { q: "Which countries?", a: "Saudi Arabia, Malaysia and Indonesia together, with each country's manifest format, port fees, currency and tax as settings." },
-      { q: "Which plan includes it?", a: "NVOCC, Customs & Agencies, at $899 a month, coming." },
+      { q: "Which plan includes it?", a: "Carrier & Agencies, at SAR 3,299 a month." },
     ],
   },
 
@@ -615,7 +615,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
     faqs: [
       { q: "Is it available today?", a: "It is in development, and the government gateways wait on permits and access. Register interest and we'll open it to you first." },
       { q: "Does the AI file declarations?", a: "No. It suggests; the broker confirms every HS code, and nothing is filed with a code a person didn't confirm." },
-      { q: "Which plan includes it?", a: "NVOCC, Customs & Agencies, at $899 a month, coming." },
+      { q: "Which plan includes it?", a: "Carrier & Agencies, at SAR 3,299 a month." },
     ],
   },
 
@@ -683,7 +683,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
     faqs: [
       { q: "Is it available today?", a: "It is planned, and will be built with a first client who needs it and tests it. Register interest to be that client." },
       { q: "Can clients see their stock?", a: "Through the client portal, which is planned." },
-      { q: "Which plan includes it?", a: "3PL: Warehousing & Distribution, at $499 a month, coming." },
+      { q: "Which plan includes it?", a: "Growth, when inventory launches." },
     ],
   },
 };
