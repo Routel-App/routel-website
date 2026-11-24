@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, type ReactNode } from "react";
-import { Anchor, ArrowRight, ArrowUp, Check, Container as BoxIcon, DoorOpen, FileText, Landmark, Mail, PackageCheck, Paperclip, RotateCcw, ScanLine, Ship, Sparkles, Truck as TruckIcon, Waves, X, type LucideIcon } from "lucide-react";
+import { Anchor, ArrowRight, ArrowUp, BellRing, BookCheck, Check, Container as BoxIcon, DoorOpen, FileText, Landmark, Mail, PackageCheck, Paperclip, RotateCcw, ScanLine, Ship, Sparkles, Truck as TruckIcon, Waves, X, type LucideIcon } from "lucide-react";
 import Link from "@/components/i18n/link";
 import { useLocale } from "@/components/i18n/locale-provider";
 import type { Locale } from "@/lib/i18n";
@@ -80,10 +80,12 @@ type Item =
   | { at: number; kind: "assistant"; text: string }
   | { at: number; kind: "card"; title: string; tools?: string[]; rows: Array<[string, string]>; big?: string; confirm?: string; confirmedAt?: number }
   | { at: number; kind: "doc"; name: string; meta: string }
+  /** Done on the system's own screens (a card's button, the Alerts page), not by the assistant. */
+  | { at: number; kind: "note"; icon: "bell" | "check"; title: string; meta: string }
   | { at: number; kind: "status"; text: string };
 
 /** A milestone on the stage's event card, shown from `at` until the next one. */
-type Event = { at: number; icon: "call" | "berth" | "crane" | "customs" | "notice" | "gate" | "truck" | "receipt" | "shelf" | "sail"; title: string; meta: string };
+type Event = { at: number; icon: "call" | "berth" | "crane" | "customs" | "notice" | "alert" | "gate" | "truck" | "receipt" | "shelf" | "sail" | "books"; title: string; meta: string };
 
 type Copy = {
   eyebrow: string;
@@ -105,9 +107,14 @@ type Copy = {
  * The transcript, timed to the stage (`at` is the scroll progress). Each
  * desk takes over when the container reaches it: the agency as the ship
  * comes in, the NVOCC and the consolidation at discharge, customs in the
- * yard, the forwarder's arrival notice, invoice and delivery order at the
- * gate, the trucker and tracking on the road, the CFS at the dock, 3PL on
- * the racks, and the agency and the books when the ship leaves.
+ * yard (lines read, codes confirmed by the broker, duties estimated, the
+ * deposit asked for), the forwarder's arrival notice, the free-time alert,
+ * demurrage prepaid, payment and delivery order at the gate, the trucker,
+ * tracking and the trip billed on the road, the CFS at the dock, 3PL on the
+ * racks, and, when the ship leaves, the agency's FDA, the line's D&D
+ * invoice, the AP bill and the booking's profit. Cards with `tools` name
+ * the assistant's real tools; `doc` and `note` items are done on the
+ * system's own screens (a button on a card, the Alerts page).
  */
 const copy: Record<Locale, Copy> = {
   en: {
@@ -125,13 +132,18 @@ const copy: Record<Locale, Copy> = {
     events: [
       { at: 0, icon: "call", title: "Port call · berth 12", meta: "MSC ISABELLA · 412E · PDA sent" },
       { at: 0.2, icon: "crane", title: "Discharged · MSCU 442118-0", meta: "Free time 4 days · until 25 Mar" },
-      { at: 0.29, icon: "customs", title: "Import declaration", meta: "CCNXS27000077 · 8 HS codes confirmed" },
-      { at: 0.42, icon: "notice", title: "Arrival notice sent", meta: "5 consignees · SAR 3,450.00 due" },
-      { at: 0.5, icon: "gate", title: "Delivery order · gate open", meta: "Released and paid · DO-27-0187" },
+      { at: 0.29, icon: "customs", title: "Lines read · CCNXS27000077", meta: "8 HS codes confirmed by the broker" },
+      { at: 0.36, icon: "customs", title: "Duty & VAT estimated", meta: "Deposit request DR-27-0031 · SAR 38,304.50" },
+      { at: 0.42, icon: "notice", title: "Arrival notice sent", meta: "5 consignees · Al Noor SAR 3,450.00" },
+      { at: 0.44, icon: "alert", title: "Free time ends 25 Mar", meta: "Demurrage prepaid to 26 Mar" },
+      { at: 0.5, icon: "gate", title: "Delivery order · gate open", meta: "Paid · valid to 26 Mar · DO-27-0187" },
       { at: 0.56, icon: "truck", title: "On the road · TO-27-0244", meta: "Truck 4721 · live on the tracking page" },
+      { at: 0.655, icon: "truck", title: "Trip billed", meta: "TO-27-0244 → NXS27000412's charges" },
       { at: 0.71, icon: "receipt", title: "Received at the CFS", meta: "WR-27-0519 · 64 / 64 cartons scanned" },
       { at: 0.79, icon: "shelf", title: "On the shelf · B-03-2", meta: "AN-SKU-1042 · 1,280 cartons on hand" },
-      { at: 0.87, icon: "sail", title: "Sailed · port call settled", meta: "FDA sent · books closed" },
+      { at: 0.84, icon: "sail", title: "Sailed · port call settled", meta: "FDA sent to the principal" },
+      { at: 0.895, icon: "receipt", title: "The line's D&D invoice", meta: "MSCU 442118-0 · +SAR 20.00 vs the tariff" },
+      { at: 0.95, icon: "books", title: "Books closed · NXS27000412", meta: "Gross profit SAR 1,220.00 · 29.2%" },
     ],
     items: [
       { at: 0, kind: "module", module: "Shipping agency", href: "/solutions/shipping-agency" },
@@ -142,24 +154,36 @@ const copy: Record<Locale, Copy> = {
       { at: 0.2, kind: "module", module: "NVOCC", href: "/solutions/nvocc" },
       { at: 0.21, kind: "assistant", text: "MSCU 442118-0 is in the yard, on your B/L RTL-JED-27-0102: 5 house bookings, 64 cartons. Free time runs 4 days, until 25 Mar." },
       { at: 0.29, kind: "module", module: "Customs clearance", href: "/solutions/customs-brokerage" },
-      { at: 0.3, kind: "user", text: "Prepare the import declaration.", file: "commercial invoice.pdf" },
-      { at: 0.32, kind: "card", title: "Import declaration · CCNXS27000077", rows: [["Lines", "8"], ["HS codes", "8 suggested, each with its reason"]], confirm: "Broker confirms", confirmedAt: 0.355 },
+      { at: 0.293, kind: "user", text: "Read these for clearance file CCNXS27000077.", file: "commercial invoice.pdf · packing list.pdf" },
+      { at: 0.305, kind: "card", title: "Lines for CCNXS27000077", tools: ["read_customs_documents", "suggest_hs_code"], rows: [["Lines read", "8 · total matches the invoice"], ["HS codes", "8 suggested · 6 from your history"]], confirm: "Save lines", confirmedAt: 0.325 },
+      { at: 0.338, kind: "note", icon: "check", title: "The broker confirmed 8 HS codes", meta: "On the clearance file · the card never confirms a code" },
+      { at: 0.352, kind: "user", text: "Estimate the duties, and ask Al Noor for the deposit." },
+      { at: 0.362, kind: "card", title: "Duties & taxes · CCNXS27000077", tools: ["estimate_customs_duties"], rows: [["Customs value (CIF)", "SAR 184,600.00"], ["Duty, from your tariff", "SAR 9,230.00"], ["Import VAT 15%", "SAR 29,074.50"]] },
+      { at: 0.385, kind: "card", title: "Deposit request · DR-27-0031", tools: ["create_customs_deposit_request"], rows: [["To", "Al Noor Trading"], ["Duty + import VAT", "SAR 38,304.50"]], confirm: "Confirm", confirmedAt: 0.405 },
       { at: 0.42, kind: "module", module: "Arrival notice & delivery order", href: "/solutions/import-release" },
-      { at: 0.425, kind: "doc", name: "Arrival Notice.pdf", meta: "E-mailed to 5 consignees · SAR 3,450.00 due" },
-      { at: 0.455, kind: "card", title: "Payment from the finance mailbox", tools: ["list_payment_suggestions"], rows: [["Amount", "SAR 3,450.00"], ["Matches", "INV-27-0412"]], confirm: "Confirm match", confirmedAt: 0.48 },
-      { at: 0.5, kind: "doc", name: "Delivery Order.pdf", meta: "Released and paid · gate open" },
+      { at: 0.425, kind: "doc", name: "Arrival Notice.pdf", meta: "E-mailed to 5 consignees · Al Noor SAR 3,450.00" },
+      { at: 0.44, kind: "note", icon: "bell", title: "Alerts · Demurrage & detention", meta: "MSCU 442118-0 · free time ends 25 Mar, 2 days left" },
+      { at: 0.453, kind: "note", icon: "check", title: "Prepay demurrage · to 26 Mar", meta: "1 day on the invoice · the delivery order waits until it's paid" },
+      { at: 0.467, kind: "card", title: "Payment from the finance mailbox", tools: ["list_payment_suggestions"], rows: [["Amount", "SAR 3,450.00"], ["Matches", "INV-27-0412"]], confirm: "Confirm match", confirmedAt: 0.487 },
+      { at: 0.5, kind: "doc", name: "Delivery Order.pdf", meta: "Paid · valid to 26 Mar · gate open" },
       { at: 0.56, kind: "module", module: "Land transport", href: "/solutions/land-transport" },
       { at: 0.57, kind: "card", title: "Transport order · TO-27-0244", rows: [["Berth 12 → CFS", "Truck 4721"], ["Tracking", "Al Noor follows it, no login"]] },
-      { at: 0.68, kind: "doc", name: "Proof of delivery", meta: "Signed on the driver's phone · 10:42" },
+      { at: 0.635, kind: "doc", name: "Proof of delivery", meta: "Signed on the driver's phone · 10:42" },
+      { at: 0.655, kind: "note", icon: "check", title: "Add to the booking's charges", meta: "Haulage SAR 850.00 · waiting 1 h SAR 75.00 · one click" },
       { at: 0.71, kind: "module", module: "Warehouse receipts & CFS", href: "/solutions/warehousing" },
       { at: 0.715, kind: "user", text: "Receive the container.", file: "packing list.pdf" },
       { at: 0.735, kind: "card", title: "Warehouse receipt · WR-27-0519", rows: [["Cartons", "64 · 5 consignees"], ["Scanned", "64 / 64"]], confirm: "Confirm", confirmedAt: 0.76 },
       { at: 0.79, kind: "module", module: "Inventory (3PL)", href: "/solutions/contract-logistics" },
       { at: 0.8, kind: "card", title: "AN-SKU-1042 · Al Noor", rows: [["Received", "+12 cartons · B-03-2"], ["On hand", "1,280"]] },
-      { at: 0.87, kind: "module", module: "Shipping agency · Accounting", href: "/solutions/shipping-agency" },
-      { at: 0.875, kind: "user", text: "The ship has sailed. Settle the port call." },
-      { at: 0.895, kind: "card", title: "FDA · Jeddah · 412E", rows: [["PDA advance", "USD 48,000"], ["Actual costs", "USD 46,320"]], big: "Due to the principal USD 1,680", confirm: "Confirm & send", confirmedAt: 0.925 },
-      { at: 0.96, kind: "assistant", text: "One ship, one container, every desk. All on one system, and nobody typed it twice." },
+      { at: 0.84, kind: "module", module: "Shipping agency", href: "/solutions/shipping-agency" },
+      { at: 0.843, kind: "user", text: "The ship has sailed. Settle the port call." },
+      { at: 0.857, kind: "card", title: "FDA · Jeddah · 412E", rows: [["PDA advance", "USD 48,000"], ["Actual costs", "USD 46,320"]], big: "Due to the principal USD 1,680", confirm: "Confirm & send", confirmedAt: 0.88 },
+      { at: 0.895, kind: "module", module: "NVOCC · Accounting", href: "/solutions/nvocc" },
+      { at: 0.898, kind: "doc", name: "MSC D&D invoice.pdf", meta: "Read the line's invoice · +SAR 20.00 vs the tariff" },
+      { at: 0.912, kind: "user", text: "Check the line's bill on NXS27000412 and finalize it." },
+      { at: 0.922, kind: "card", title: "AP invoice · MSC · NXS27000412", tools: ["list_job_ap_invoices", "finalize_ap_invoice"], rows: [["Lines", "4 · on the booking's charges"], ["Total", "SAR 2,180.00 · matches the bill"]], confirm: "Finalize", confirmedAt: 0.942 },
+      { at: 0.952, kind: "card", title: "NXS27000412 · Profit Summary", tools: ["get_job_charges"], rows: [["Revenue", "SAR 4,180.00"], ["Cost", "SAR 2,960.00"]], big: "Gross profit SAR 1,220.00 · 29.2%" },
+      { at: 0.975, kind: "assistant", text: "One ship, one container, every desk. All on one system, and nobody typed it twice." },
     ],
   },
   ar: {
@@ -177,13 +201,18 @@ const copy: Record<Locale, Copy> = {
     events: [
       { at: 0, icon: "call", title: "زيارة السفينة · الرصيف 12", meta: "MSC ISABELLA · 412E · أُرسل PDA" },
       { at: 0.2, icon: "crane", title: "تم التفريغ · MSCU 442118-0", meta: "أيام السماح 4 · حتى 25 مارس" },
-      { at: 0.29, icon: "customs", title: "بيان الاستيراد", meta: "CCNXS27000077 · أُكّدت 8 رموز HS" },
-      { at: 0.42, icon: "notice", title: "أُرسل إشعار الوصول", meta: "5 مرسل إليهم · مستحق SAR 3,450.00" },
-      { at: 0.5, icon: "gate", title: "أمر التسليم · البوابة مفتوحة", meta: "أُفرج عنها وسُددت · DO-27-0187" },
+      { at: 0.29, icon: "customs", title: "قُرئت البنود · CCNXS27000077", meta: "أكّد المخلّص 8 رموز HS" },
+      { at: 0.36, icon: "customs", title: "قُدّرت الرسوم والضريبة", meta: "طلب دفعة مقدمة DR-27-0031 · SAR 38,304.50" },
+      { at: 0.42, icon: "notice", title: "أُرسل إشعار الوصول", meta: "5 مرسل إليهم · النور SAR 3,450.00" },
+      { at: 0.44, icon: "alert", title: "تنتهي أيام السماح 25 مارس", meta: "دُفعت الأرضيات مقدماً حتى 26 مارس" },
+      { at: 0.5, icon: "gate", title: "أمر التسليم · البوابة مفتوحة", meta: "سُدّد · صالح حتى 26 مارس · DO-27-0187" },
       { at: 0.56, icon: "truck", title: "على الطريق · TO-27-0244", meta: "الشاحنة 4721 · ظاهرة في صفحة التتبّع" },
+      { at: 0.655, icon: "truck", title: "فُوترت الرحلة", meta: "TO-27-0244 ← رسوم الحجز NXS27000412" },
       { at: 0.71, icon: "receipt", title: "استُلمت في محطة الحاويات", meta: "WR-27-0519 · مُسح 64 من 64 كرتوناً" },
       { at: 0.79, icon: "shelf", title: "على الرف · B-03-2", meta: "AN-SKU-1042 · الرصيد 1,280 كرتوناً" },
-      { at: 0.87, icon: "sail", title: "أبحرت · سُوّيت الزيارة", meta: "أُرسل FDA · أُغلقت الدفاتر" },
+      { at: 0.84, icon: "sail", title: "أبحرت · سُوّيت الزيارة", meta: "أُرسل FDA إلى الخط الأصيل" },
+      { at: 0.895, icon: "receipt", title: "فاتورة الخط للأرضيات", meta: "MSCU 442118-0 · +SAR 20.00 عن التعرفة" },
+      { at: 0.95, icon: "books", title: "أُغلقت الدفاتر · NXS27000412", meta: "إجمالي الربح SAR 1,220.00 · 29.2%" },
     ],
     items: [
       { at: 0, kind: "module", module: "الوكالة الملاحية", href: "/solutions/shipping-agency" },
@@ -194,24 +223,36 @@ const copy: Record<Locale, Copy> = {
       { at: 0.2, kind: "module", module: "NVOCC", href: "/solutions/nvocc" },
       { at: 0.21, kind: "assistant", text: "MSCU 442118-0 في الساحة، على بوليصتك RTL-JED-27-0102: 5 حجوزات فرعية و64 كرتوناً. أيام السماح 4، حتى 25 مارس." },
       { at: 0.29, kind: "module", module: "التخليص الجمركي", href: "/solutions/customs-brokerage" },
-      { at: 0.3, kind: "user", text: "جهّز بيان الاستيراد.", file: "الفاتورة التجارية.pdf" },
-      { at: 0.32, kind: "card", title: "بيان استيراد · CCNXS27000077", rows: [["البنود", "8"], ["رموز HS", "8 مقترحة، لكلٍّ سببه"]], confirm: "يؤكد المخلّص", confirmedAt: 0.355 },
+      { at: 0.293, kind: "user", text: "اقرأ هذه لملف التخليص CCNXS27000077.", file: "الفاتورة التجارية.pdf · قائمة التعبئة.pdf" },
+      { at: 0.305, kind: "card", title: "بنود CCNXS27000077", tools: ["read_customs_documents", "suggest_hs_code"], rows: [["البنود المقروءة", "8 بنود · الإجمالي يطابق الفاتورة"], ["رموز HS", "8 مقترحة · 6 منها من سجلك"]], confirm: "حفظ البنود", confirmedAt: 0.325 },
+      { at: 0.338, kind: "note", icon: "check", title: "أكّد المخلّص 8 رموز HS", meta: "في ملف التخليص · البطاقة لا تؤكد أي رمز" },
+      { at: 0.352, kind: "user", text: "قدّر الرسوم، واطلب الدفعة المقدمة من النور." },
+      { at: 0.362, kind: "card", title: "الرسوم والضرائب · CCNXS27000077", tools: ["estimate_customs_duties"], rows: [["القيمة الجمركية (CIF)", "SAR 184,600.00"], ["الرسوم، من تعرفتك", "SAR 9,230.00"], ["ضريبة الاستيراد 15%", "SAR 29,074.50"]] },
+      { at: 0.385, kind: "card", title: "طلب دفعة مقدمة · DR-27-0031", tools: ["create_customs_deposit_request"], rows: [["إلى", "النور للتجارة"], ["الرسوم + ضريبة الاستيراد", "SAR 38,304.50"]], confirm: "تأكيد", confirmedAt: 0.405 },
       { at: 0.42, kind: "module", module: "إشعار الوصول وأمر التسليم", href: "/solutions/import-release" },
-      { at: 0.425, kind: "doc", name: "إشعار الوصول.pdf", meta: "أُرسل بالبريد إلى 5 مرسل إليهم · مستحق SAR 3,450.00" },
-      { at: 0.455, kind: "card", title: "دفعة من بريد المالية", tools: ["list_payment_suggestions"], rows: [["المبلغ", "SAR 3,450.00"], ["تطابق", "INV-27-0412"]], confirm: "تأكيد المطابقة", confirmedAt: 0.48 },
-      { at: 0.5, kind: "doc", name: "أمر التسليم.pdf", meta: "أُفرج عنها وسُددت · البوابة مفتوحة" },
+      { at: 0.425, kind: "doc", name: "إشعار الوصول.pdf", meta: "أُرسل بالبريد إلى 5 مرسل إليهم · النور SAR 3,450.00" },
+      { at: 0.44, kind: "note", icon: "bell", title: "التنبيهات · الأرضيات والتأخير", meta: "MSCU 442118-0 · تنتهي أيام السماح 25 مارس، بقي يومان" },
+      { at: 0.453, kind: "note", icon: "check", title: "«الأرضيات مقدماً» · حتى 26 مارس", meta: "يوم واحد في الفاتورة · وأمر التسليم ينتظر السداد" },
+      { at: 0.467, kind: "card", title: "دفعة من بريد المالية", tools: ["list_payment_suggestions"], rows: [["المبلغ", "SAR 3,450.00"], ["تطابق", "INV-27-0412"]], confirm: "تأكيد المطابقة", confirmedAt: 0.487 },
+      { at: 0.5, kind: "doc", name: "أمر التسليم.pdf", meta: "سُدّد · صالح حتى 26 مارس · البوابة مفتوحة" },
       { at: 0.56, kind: "module", module: "النقل البري", href: "/solutions/land-transport" },
       { at: 0.57, kind: "card", title: "أمر نقل · TO-27-0244", rows: [["الرصيف 12 ← محطة الحاويات", "الشاحنة 4721"], ["التتبّع", "النور تتابعها، دون تسجيل دخول"]] },
-      { at: 0.68, kind: "doc", name: "إثبات التسليم", meta: "وُقّع على جوال السائق · 10:42" },
+      { at: 0.635, kind: "doc", name: "إثبات التسليم", meta: "وُقّع على جوال السائق · 10:42" },
+      { at: 0.655, kind: "note", icon: "check", title: "«إضافة إلى رسوم الحجز»", meta: "النقل SAR 850.00 · الانتظار ساعة SAR 75.00 · بضغطة واحدة" },
       { at: 0.71, kind: "module", module: "إيصالات المستودع ومحطة الحاويات", href: "/solutions/warehousing" },
       { at: 0.715, kind: "user", text: "استلم الحاوية.", file: "قائمة التعبئة.pdf" },
       { at: 0.735, kind: "card", title: "إيصال مستودع · WR-27-0519", rows: [["الكراتين", "64 · 5 مرسل إليهم"], ["الممسوح", "64 / 64"]], confirm: "تأكيد", confirmedAt: 0.76 },
       { at: 0.79, kind: "module", module: "المخزون لعملائك 3PL", href: "/solutions/contract-logistics" },
       { at: 0.8, kind: "card", title: "AN-SKU-1042 · النور", rows: [["المستلم", "+12 كرتوناً · B-03-2"], ["الرصيد", "1,280"]] },
-      { at: 0.87, kind: "module", module: "الوكالة الملاحية · المحاسبة", href: "/solutions/shipping-agency" },
-      { at: 0.875, kind: "user", text: "أبحرت السفينة. سوِّ حساب الزيارة." },
-      { at: 0.895, kind: "card", title: "FDA · جدة · 412E", rows: [["دفعة PDA المقدمة", "USD 48,000"], ["المصاريف الفعلية", "USD 46,320"]], big: "مستحق للخط الأصيل USD 1,680", confirm: "تأكيد وإرسال", confirmedAt: 0.925 },
-      { at: 0.96, kind: "assistant", text: "سفينة واحدة، وحاوية واحدة، وكل المكاتب. كلها على نظام واحد، ولم يكتب أحد شيئاً مرتين." },
+      { at: 0.84, kind: "module", module: "الوكالة الملاحية", href: "/solutions/shipping-agency" },
+      { at: 0.843, kind: "user", text: "أبحرت السفينة. سوِّ حساب الزيارة." },
+      { at: 0.857, kind: "card", title: "FDA · جدة · 412E", rows: [["دفعة PDA المقدمة", "USD 48,000"], ["المصاريف الفعلية", "USD 46,320"]], big: "مستحق للخط الأصيل USD 1,680", confirm: "تأكيد وإرسال", confirmedAt: 0.88 },
+      { at: 0.895, kind: "module", module: "NVOCC · المحاسبة", href: "/solutions/nvocc" },
+      { at: 0.898, kind: "doc", name: "فاتورة MSC للأرضيات.pdf", meta: "«قراءة فاتورة الخط» · +SAR 20.00 عن التعرفة" },
+      { at: 0.912, kind: "user", text: "راجع فاتورة الخط على NXS27000412 واعتمدها." },
+      { at: 0.922, kind: "card", title: "فاتورة مورد · MSC · NXS27000412", tools: ["list_job_ap_invoices", "finalize_ap_invoice"], rows: [["البنود", "4 بنود في رسوم الحجز"], ["الإجمالي", "مطابق للفاتورة · SAR 2,180.00"]], confirm: "اعتماد", confirmedAt: 0.942 },
+      { at: 0.952, kind: "card", title: "NXS27000412 · ملخص الربح", tools: ["get_job_charges"], rows: [["الإيرادات", "SAR 4,180.00"], ["التكلفة", "SAR 2,960.00"]], big: "إجمالي الربح SAR 1,220.00 · 29.2%" },
+      { at: 0.975, kind: "assistant", text: "سفينة واحدة، وحاوية واحدة، وكل المكاتب. كلها على نظام واحد، ولم يكتب أحد شيئاً مرتين." },
     ],
   },
 };
@@ -223,7 +264,7 @@ const stageAt = (p: number) => {
   if (p < 0.42) return 2;
   if (p < 0.56) return 3;
   if (p < 0.71) return 4;
-  if (p < 0.87) return 5;
+  if (p < 0.84) return 5;
   return 6;
 };
 
@@ -242,11 +283,13 @@ const eventIcons: Record<Event["icon"], LucideIcon> = {
   crane: BoxIcon,
   customs: Landmark,
   notice: Mail,
+  alert: BellRing,
   gate: DoorOpen,
   truck: TruckIcon,
   receipt: ScanLine,
   shelf: PackageCheck,
   sail: Waves,
+  books: BookCheck,
 };
 
 /** A little before an assistant turn, the typing dots show. */
@@ -380,7 +423,7 @@ export function Odyssey() {
 
         const tl = gsap.timeline({
           defaults: { ease: "none" },
-          scrollTrigger: { trigger: el, start: "top top", end: "+=700%", scrub: 0.6, pin: true, anticipatePin: 1, invalidateOnRefresh: true },
+          scrollTrigger: { trigger: el, start: "top top", end: "+=950%", scrub: 0.6, pin: true, anticipatePin: 1, invalidateOnRefresh: true },
           onUpdate: draw,
         });
         const LIFT = BOOM_Y + TROLLEY_H + 46;
@@ -416,11 +459,11 @@ export function Odyssey() {
         tl.to(s, { heroX: WH_X + 24, heroY: ON_GROUND, duration: 0.02, ease: "power2.inOut" }, 0.725);
         tl.to(s, { heroFade: 0, duration: 0.01 }, 0.745);
         tl.to(s, { unload: 1, duration: 0.025, ease: "none" }, 0.75);
-        tl.to(s, { z: 1.45, fx: RACK_X0 + 3.2 * BAY_W, fy: QUAY_Y - 185, duration: 0.05, ease: "power2.inOut" }, 0.79);
+        tl.to(s, { z: 1.45, fx: RACK_X0 + 3.2 * BAY_W, fy: QUAY_Y - 185, duration: 0.04, ease: "power2.inOut" }, 0.79);
         // 7. Back at the berth: the ship sails, and the port call is settled.
-        tl.to(s, { z: 0.85, fx: 1050, fy: 470, duration: 0.05, ease: "power2.inOut" }, 0.86);
-        tl.to(s, { shipDx: -SEA_RUN * 0.7, duration: 0.11, ease: "power1.in" }, 0.89);
-        tl.to(s, { dusk: 0.3, duration: 0.06 }, 0.94);
+        tl.to(s, { z: 0.85, fx: 1050, fy: 470, duration: 0.04, ease: "power2.inOut" }, 0.835);
+        tl.to(s, { shipDx: -SEA_RUN * 0.7, duration: 0.1, ease: "power1.in" }, 0.86);
+        tl.to(s, { dusk: 0.3, duration: 0.06 }, 0.92);
 
         draw();
         const sea = gsap.to(waves, { x: -120, duration: 7, repeat: -1, ease: "none" });
@@ -756,6 +799,21 @@ function Message({ item, t }: { item: Item; t: Copy }) {
           </div>
         </div>,
       );
+    case "note": {
+      const NoteIcon = item.icon === "bell" ? BellRing : Check;
+      return wrap(
+        "ody-doc flex justify-start",
+        <div className="flex max-w-[92%] items-center gap-2.5 rounded-xl bg-white px-3 py-2.5 shadow-card ring-1 ring-fog-200">
+          <span className={cn("flex h-8 w-8 shrink-0 items-center justify-center rounded-lg", item.icon === "bell" ? "bg-spark-100 text-spark-700" : "bg-ink-900 text-spark-300")}>
+            <NoteIcon className="h-4 w-4" strokeWidth={item.icon === "bell" ? 2 : 2.5} />
+          </span>
+          <div className="min-w-0">
+            <p dir="auto" className="text-[12.5px] font-semibold text-ink-900">{item.title}</p>
+            <p dir="auto" className="text-[11px] leading-snug text-fog-500">{item.meta}</p>
+          </div>
+        </div>,
+      );
+    }
     case "status":
       return wrap(
         "flex justify-center",

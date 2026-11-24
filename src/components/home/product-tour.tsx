@@ -1,11 +1,11 @@
-import { BellRing, FileSearch, MapPin, Receipt, Route, Ship } from "lucide-react";
+import { BellRing, FileSearch, Landmark, MapPin, Receipt, Route, Ship } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Reveal } from "@/components/motion/reveal";
 import { getLocale } from "@/lib/locale-server";
 import type { Locale } from "@/lib/i18n";
-import { ShipmentShot, TaxInvoiceShot, AlertsShot } from "@/components/shots/product-shots";
 import { DocumentReadShot } from "@/components/shots/ai-shots";
-import { RoutesShot, TrackingShot } from "@/components/shots/tour-shots";
+import { TrackingShot } from "@/components/shots/tour-shots";
+import { RealShot } from "@/components/shots/real-shot";
 import { TourTabs, type TourItem } from "./tour-tabs";
 
 type Copy = {
@@ -15,7 +15,7 @@ type Copy = {
   label: string;
   cta: string;
   tabs: Record<
-    "bookings" | "routes" | "invoicing" | "documents" | "control" | "tracking",
+    "bookings" | "routes" | "invoicing" | "customs" | "documents" | "control" | "tracking",
     { title: string; short: string; body: string; bullets: [string, string, string] }
   >;
 };
@@ -45,6 +45,12 @@ const copy: Record<Locale, Copy> = {
         short: "From the booking's sale lines",
         body: "Create Invoice turns the booking's sale charges into drafts. Finalising numbers and locks the invoice; corrections go through credit and debit notes.",
         bullets: ["Base currency and USD on one invoice", "SST, PPN or VAT by country", "Saudi tax invoices with the ZATCA QR code"],
+      },
+      customs: {
+        title: "Customs clearance",
+        short: "One file per declaration",
+        body: "Each declaration is a file: import, export or transit, the importer with its CR and VAT numbers, 12-digit HS codes, the customs value (CIF) worked out for you, the documents it needs and the status it has reached.",
+        bullets: ["The commercial invoice read into lines by AI", "HS codes suggested; the broker confirms each", "Duty and VAT estimated from your own tariff"],
       },
       documents: {
         title: "Documents & AI",
@@ -91,6 +97,12 @@ const copy: Record<Locale, Copy> = {
         body: "زر «إنشاء فاتورة» يحوّل رسوم البيع في الحجز إلى مسودات. الاعتماد يرقّم الفاتورة ويقفلها، والتصحيح يتم بإشعار دائن أو مدين.",
         bullets: ["الريال والدولار في فاتورة واحدة", "ضريبة القيمة المضافة 15%", "فاتورة ضريبية برمز QR وفق متطلبات ZATCA"],
       },
+      customs: {
+        title: "التخليص الجمركي",
+        short: "ملف لكل بيان",
+        body: "كل بيان ملف: استيراد أو تصدير أو ترانزيت، والمستورد بسجله التجاري ورقمه الضريبي، ورموز HS من 12 خانة، والقيمة الجمركية CIF محسوبة لك، والمستندات المطلوبة، والحالة التي بلغها.",
+        bullets: ["الذكاء الاصطناعي يقرأ الفاتورة التجارية إلى بنود", "رموز HS مقترحة، ويؤكد المخلّص كل رمز", "تقدير الرسوم والضريبة من جدول التعرفة الخاص بك"],
+      },
       documents: {
         title: "المستندات والذكاء الاصطناعي",
         short: "المرفقات تُقرأ وتُطابق وتُحفظ",
@@ -117,6 +129,7 @@ const icons = {
   bookings: <Ship />,
   routes: <Route />,
   invoicing: <Receipt />,
+  customs: <Landmark />,
   documents: <FileSearch />,
   control: <BellRing />,
   tracking: <MapPin />,
@@ -126,6 +139,7 @@ const hrefs = {
   bookings: "/platform/bookings",
   routes: "/platform/quotations",
   invoicing: "/platform/invoicing",
+  customs: "/solutions/customs-brokerage",
   documents: "/platform/documents",
   control: "/platform/labeling-center",
   tracking: "/platform/tracking",
@@ -135,12 +149,17 @@ export async function ProductTour() {
   const locale = await getLocale();
   const t = copy[locale];
   const shot = "mx-auto w-full";
+  // Real screens where we have them; the e-mail reading and the public tracking page stay illustrations.
+  const real = (name: "booking" | "quotes" | "invoice" | "customs-file" | "alerts") => (
+    <RealShot name={name} locale={locale} sizes="(min-width: 1024px) 720px, 100vw" />
+  );
   const panels = {
-    bookings: <ShipmentShot locale={locale} className={`${shot} max-w-[640px]`} />,
-    routes: <RoutesShot locale={locale} className={`${shot} max-w-[640px]`} />,
-    invoicing: <TaxInvoiceShot locale={locale} className={`${shot} max-w-[540px]`} />,
+    bookings: real("booking"),
+    routes: real("quotes"),
+    invoicing: real("invoice"),
+    customs: real("customs-file"),
     documents: <DocumentReadShot locale={locale} className={`${shot} max-w-[620px]`} />,
-    control: <AlertsShot locale={locale} className={`${shot} max-w-[680px]`} />,
+    control: real("alerts"),
     tracking: <TrackingShot locale={locale} className={`${shot} max-w-[520px]`} />,
   };
   const items: TourItem[] = (Object.keys(t.tabs) as Array<keyof Copy["tabs"]>).map((id) => ({

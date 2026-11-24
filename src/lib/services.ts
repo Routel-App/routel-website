@@ -7,9 +7,9 @@ import type { Locale } from "./i18n";
  * opens in Settings → Business activities (lib/activities.ts in the system).
  * `live` services have their module built and open to companies; the others
  * are on the roadmap (docs/routel-central.md, section 3) and are shown as
- * coming, never as available. Customs clearance is live for its first phase
- * (the clearance file); its AI reading and duty estimates are in final review,
- * and its page says so.
+ * coming, never as available. Customs clearance covers the clearance file,
+ * the AI reading of the commercial invoice with HS suggestions, and the duty
+ * and VAT estimate with the deposit request (phases 1 to 3).
  */
 export type ServiceStatus = "live" | "coming";
 
@@ -93,7 +93,7 @@ const text: Record<Locale, Record<string, { name: string; short: string; points:
     "customs-brokerage": {
       name: "Customs clearance",
       short: "One clearance file per declaration, with HS-coded lines and the customs value worked out.",
-      points: ["Import, export and transit; sea, air and land", "12-digit HS codes and the customs value (CIF)", "AI invoice reading and duty estimates: in final review"],
+      points: ["Import, export and transit; sea, air and land", "12-digit HS codes and the customs value (CIF)", "Invoice read by AI; duty and VAT estimated"],
     },
     "contract-logistics": {
       name: "Inventory (3PL)",
@@ -145,7 +145,7 @@ const text: Record<Locale, Record<string, { name: string; short: string; points:
     "customs-brokerage": {
       name: "التخليص الجمركي",
       short: "ملف تخليص لكل بيان، ببنود برموز HS وقيمة جمركية محسوبة.",
-      points: ["استيراد وتصدير وترانزيت؛ بحري وجوي وبري", "رموز HS من 12 خانة والقيمة الجمركية (CIF)", "قراءة الفاتورة بالذكاء الاصطناعي وتقدير الرسوم: في المراجعة النهائية"],
+      points: ["استيراد وتصدير وترانزيت؛ بحري وجوي وبري", "رموز HS من 12 خانة والقيمة الجمركية (CIF)", "قراءة الفاتورة بالذكاء الاصطناعي وتقدير الرسوم والضريبة"],
     },
     "contract-logistics": {
       name: "المخزون لعملائك 3PL",

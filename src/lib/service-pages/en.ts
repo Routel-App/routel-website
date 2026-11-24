@@ -583,10 +583,10 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
         mock: { title: "CCNXS27000077", badge: "On hold", rows: [["Reason", "Certificate of origin"], ["Inspection", "Document check"], ["Missing", "1 document"]], foot: "Upload the certificate" },
       },
       {
-        title: "AI reading and duty estimates, in final review",
-        text: "Reading the commercial invoice and the packing list into lines, with an HS code suggested for each line and the broker confirming every one, and estimates of duty and VAT from your own tariff table, are in final review and not live yet.",
-        points: ["Invoice read into lines", "HS codes suggested, broker decides", "Duty and VAT estimates"],
-        mock: { title: "Line 3 · Stainless steel kitchen sinks", badge: "In final review", rows: [["Suggested HS", "7324.10"], ["Reason", "Sinks and wash basins, of stainless steel"], ["Status", "Waiting for the broker"]] },
+        title: "The invoice read by AI, the duties estimated",
+        text: "Read documents turns the seller's commercial invoice and packing list (PDF, scan, photo or Excel) into the declaration's lines, checking the totals and weights so nothing is dropped. Each line gets HS code suggestions, your own confirmed codes first, then the AI's, and the broker picks and confirms every code: a file can't be declared before. The Duties & taxes card then estimates duty and import VAT from your own tariff table, and a deposit request asks the importer for them ahead of release.",
+        points: ["Commercial invoice and packing list read into lines", "HS codes suggested, the broker confirms each", "Duty and VAT estimate, deposit request to the importer"],
+        mock: { title: "Line 3 · Stainless steel kitchen sinks", badge: "Suggested", rows: [["Suggested HS", "7324.10.00.00.00"], ["From", "Your history · same seller"], ["Status", "Waiting for the broker to confirm"]] },
       },
     ],
     flow: [
@@ -613,7 +613,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
       { title: "Operations managers", text: "What each file is waiting for, at a glance." },
     ],
     faqs: [
-      { q: "Is it available today?", a: "Yes, the clearance file. It opens per company from its business activities. Reading the commercial invoice with AI, HS code suggestions and duty and VAT estimates are in final review." },
+      { q: "Is it available today?", a: "Yes: the clearance file, the commercial invoice read with AI, HS code suggestions the broker confirms, and duty and VAT estimates with a deposit request. It opens per company from its business activities." },
       { q: "Is it connected to the customs system?", a: "Not yet. The declaration is made in the customs system and its number typed on the file; links to FASAH, CEISA and uCustoms wait on government permits." },
       { q: "Which plan includes it?", a: "Carrier & Agencies, at USD 899 a month (SAR 3,299 in Saudi Arabia)." },
     ],

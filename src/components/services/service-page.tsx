@@ -8,6 +8,14 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
 import { Cta } from "@/components/home/cta";
 import { ServiceScene } from "./service-scene";
 import { cn } from "@/lib/utils";
+import type { ScreenName } from "@/lib/screens";
+import { ScreensSection } from "@/components/shots/screens-section";
+
+/** Real screenshots for the live solutions that have them. */
+const serviceScreens: Partial<Record<string, ScreenName[]>> = {
+  "customs-brokerage": ["customs", "customs-file"],
+  "sea-freight": ["booking", "bookings"],
+};
 import { site } from "@/lib/site";
 import type { Locale } from "@/lib/i18n";
 import type { Service } from "@/lib/services";
@@ -250,6 +258,8 @@ export function ServicePageTemplate({
           </Reveal>
         </Container>
       ) : null}
+
+      {live ? <ScreensSection names={serviceScreens[service.slug] ?? []} locale={locale} /> : null}
 
       {/* ── What it does: features with their pictures ── */}
       <Section className="pt-16 sm:pt-20">

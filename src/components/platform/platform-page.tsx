@@ -12,6 +12,18 @@ import { AiShowcase } from "./ai-showcase";
 import { AiTrust } from "./ai-trust";
 import { moduleVisual } from "./module-visual";
 import type { Locale } from "@/lib/i18n";
+import type { ScreenName } from "@/lib/screens";
+import { ScreensSection } from "@/components/shots/screens-section";
+
+/** The real screenshots shown on a module's page, under its hero. */
+const moduleScreens: Partial<Record<string, ScreenName[]>> = {
+  bookings: ["booking", "bookings"],
+  quotations: ["quotes"],
+  invoicing: ["invoice"],
+  accounting: ["reports"],
+  "labeling-center": ["alerts"],
+  "ai-assistant": ["assistant"],
+};
 
 const copy = {
   en: {
@@ -114,6 +126,8 @@ export async function PlatformPageTemplate({ module: mod, content }: { module: M
           ) : null}
         </Container>
       </section>
+
+      <ScreensSection names={moduleScreens[mod.slug] ?? []} locale={locale} />
 
       {mod.slug === "ai-assistant" ? <AiShowcase locale={locale} /> : null}
       {mod.slug === "ai-assistant" ? <AiTrust locale={locale} /> : null}

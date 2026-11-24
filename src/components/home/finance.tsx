@@ -5,17 +5,7 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
 import { getLocale } from "@/lib/locale-server";
 import type { Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
-
-const pnlValues: Array<[string, "row" | "sub" | "total"]> = [
-  ["412,860", "row"],
-  ["(268,915)", "row"],
-  ["143,945", "sub"],
-  ["(48,000)", "row"],
-  ["(11,350)", "row"],
-  ["(6,420)", "row"],
-  ["(1,184)", "row"],
-  ["76,991", "total"],
-];
+import { RealShot } from "@/components/shots/real-shot";
 
 const agingValues = [
   { pct: 46, amt: "84,120", cls: "bg-spark-500" },
@@ -30,7 +20,6 @@ type FinanceCopy = {
   description: string;
   reports: string[];
   pnlTitle: string;
-  pnlLabels: string[];
   pnlNote: string;
   agingTitle: string;
   agingLabels: string[];
@@ -61,18 +50,8 @@ const copy = {
     description:
       "Invoices, vendor costs and overheads post to a real General Ledger the moment they're recorded. Every report is computed live from those entries.",
     reports: ["General Ledger", "Trial Balance", "Cash Position", "P&L", "AR Aging", "Overdue invoices", "Customer profitability"],
-    pnlTitle: "Profit & Loss · Jan 2027",
-    pnlLabels: [
-      "Revenue",
-      "Cost of sales",
-      "Gross profit",
-      "Salaries",
-      "Rent & utilities",
-      "Commissions",
-      "Currency exchange",
-      "Net income",
-    ],
-    pnlNote: "Gross profit on bookings, then net income after overheads. Computed from source transactions.",
+    pnlTitle: "Profit & Loss",
+    pnlNote: "Revenue, cost, gross profit and net income for any period, month by month, from the entries themselves.",
     agingTitle: "AR aging",
     agingLabels: ["Current", "1–30 days", "31–60 days", "60+ days"],
     invoiceTitle: "Multi-currency invoice",
@@ -107,18 +86,8 @@ const copy = {
       "الفواتير المتأخرة",
       "ربحية العملاء",
     ],
-    pnlTitle: "الأرباح والخسائر · يناير 2027",
-    pnlLabels: [
-      "الإيرادات",
-      "تكلفة المبيعات",
-      "إجمالي الربح",
-      "الرواتب",
-      "الإيجار والمرافق",
-      "العمولات",
-      "فروق صرف العملات",
-      "صافي الدخل",
-    ],
-    pnlNote: "إجمالي الربح على الحجوزات، ثم صافي الدخل بعد المصاريف العامة. محسوب من المعاملات الأصلية.",
+    pnlTitle: "الأرباح والخسائر",
+    pnlNote: "الإيرادات والتكلفة وإجمالي الربح وصافي الدخل لأي فترة، شهراً بشهر، من القيود نفسها.",
     agingTitle: "أعمار الذمم المدينة",
     agingLabels: ["الحالية", "1–30 يوماً", "31–60 يوماً", "فوق 60 يوماً"],
     invoiceTitle: "فاتورة بعملتين",
@@ -162,7 +131,6 @@ function Card({ title, icon: Icon, className, children, dark = false }: { title:
 export async function Finance() {
   const locale = await getLocale();
   const t = copy[locale];
-  const pnl = pnlValues.map(([v, kind], i) => [t.pnlLabels[i], v, kind] as const);
   const aging = agingValues.map((a, i) => ({ ...a, label: t.agingLabels[i] }));
   return (
     <Section id="finance" tone="teal">
@@ -180,25 +148,7 @@ export async function Finance() {
       <RevealGroup className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
         {/* P&L */}
         <Card title={t.pnlTitle} icon={ChartColumn} className="md:row-span-2 lg:col-span-2 lg:row-span-2">
-          <dl className="font-mono text-[12.5px]">
-            {pnl.map(([k, v, kind]) => (
-              <div
-                key={k}
-                className={cn(
-                  "flex items-baseline justify-between py-1.5",
-                  kind === "sub" && "border-t border-fog-200 font-semibold text-ink-900",
-                  kind === "total" && "mt-1 border-t-2 border-ink-900 py-2.5 font-bold text-ink-900",
-                  kind === "row" && "text-fog-600",
-                )}
-              >
-                <dt className="font-sans">{k}</dt>
-                <dd dir="ltr" className={kind === "total" ? "text-spark-700" : undefined}>
-                  {kind !== "row" ? `${t.currency} ` : ""}
-                  {v}
-                </dd>
-              </div>
-            ))}
-          </dl>
+          <RealShot name="reports" locale={locale} sizes="(min-width: 1024px) 600px, 100vw" />
           <p className="mt-3 text-[11.5px] text-fog-500">{t.pnlNote}</p>
         </Card>
 

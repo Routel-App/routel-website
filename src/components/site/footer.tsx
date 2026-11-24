@@ -25,7 +25,7 @@ const copy = {
     privacy: "Privacy policy",
     blurb: "The Maritime & Logistics Operating System, run by AI. Built from the system that runs a working freight forwarder every day.",
     rights: "All rights reserved.",
-    origin: "Based in Riyadh, Saudi Arabia. Grown inside a working freight forwarder in Malaysia.",
+    origin: "Grown inside a working freight forwarder in Malaysia.",
     contact: "Contact",
   },
   ar: {
@@ -44,7 +44,7 @@ const copy = {
     privacy: "سياسة الخصوصية",
     blurb: "نظام التشغيل البحري واللوجستي بقيادة الذكاء الاصطناعي. مبني من النظام الذي يدير شركة شحن حقيقية كل يوم.",
     rights: "جميع الحقوق محفوظة.",
-    origin: "مقرّنا الرياض، المملكة العربية السعودية. نشأ داخل شركة شحن عاملة في ماليزيا.",
+    origin: "نشأ داخل شركة شحن عاملة في ماليزيا.",
     contact: "تواصل معنا",
   },
 } satisfies Record<Locale, Record<string, string>>;
