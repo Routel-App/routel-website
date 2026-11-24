@@ -50,3 +50,9 @@ export const screenCaption: Record<Locale, string> = {
   en: "Real screen, demo data",
   ar: "لقطة حقيقية من النظام، ببيانات تجريبية",
 };
+
+/** The link on a cropped screenshot that opens the whole screen. */
+export const screenOpen: Record<Locale, string> = {
+  en: "Open full screen",
+  ar: "افتح الشاشة كاملة",
+};

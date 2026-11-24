@@ -36,7 +36,7 @@ const copy = {
       { no: "NXS27000418", customer: "Straits Electronics Sdn Bhd", from: "Port Klang", to: "Shanghai", status: "transit" as Status, label: "In transit" },
       { no: "NXS27000417", customer: "PT Nusantara Foods", from: "Jakarta", to: "Port Klang", status: "arrived" as Status, label: "Arrived" },
       { no: "NXS27000415", customer: "Meridian Furniture Sdn Bhd", from: "Penang", to: "Rotterdam", status: "loading" as Status, label: "Vessel loading" },
-      { no: "NXS27000412", customer: "PT Harbour Textiles", from: "Surabaya", to: "Singapore", status: "customs" as Status, label: "Customs" },
+      { no: "NXS27000411", customer: "PT Harbour Textiles", from: "Surabaya", to: "Singapore", status: "customs" as Status, label: "Customs" },
     ],
   },
   ar: {
@@ -56,7 +56,7 @@ const copy = {
       { no: "NXS27000418", customer: "شركة الرواد للتجارة", from: "جدة", to: "شنغهاي", status: "transit" as Status, label: "قيد النقل" },
       { no: "NXS27000417", customer: "مصنع الخليج للأغذية", from: "جبل علي", to: "الدمام", status: "arrived" as Status, label: "وصلت" },
       { no: "NXS27000415", customer: "مؤسسة الأفق للمعدات", from: "الدمام", to: "روتردام", status: "loading" as Status, label: "قيد التحميل" },
-      { no: "NXS27000412", customer: "شركة النخبة للمنسوجات", from: "نهافا شيفا", to: "جدة", status: "customs" as Status, label: "التخليص الجمركي" },
+      { no: "NXS27000411", customer: "شركة النخبة للمنسوجات", from: "نهافا شيفا", to: "جدة", status: "customs" as Status, label: "التخليص الجمركي" },
     ],
   },
 } satisfies Record<Locale, unknown>;

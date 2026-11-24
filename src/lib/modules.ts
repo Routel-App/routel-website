@@ -13,7 +13,6 @@ import {
   FileMinus,
   FileSignature,
   FolderOpen,
-  Globe,
   Mail,
   MapPin,
   Receipt,
@@ -237,23 +236,13 @@ export const modules: Module[] = [
   {
     slug: "ai-assistant",
     name: "AI Assistant",
-    short: "Built in: calls tools and runs your operations automatically",
+    short: "Built in: reads, drafts and acts after you confirm",
     description:
       "Search bookings, customers and vendors, pull up details, list invoices, generate reports and read documents by chatting, in any language. Propose a new booking, invoice, business partner, expense or route rate (including importing a whole rate sheet from an attachment), or update a booking. Every write stops as a proposal a person has to confirm, then it's created through the exact same code path and role permissions as the manual interface.",
     icon: Bot,
     bullets: ["Calls the system's own tools", "Reads PDFs, images and rate sheets", "You confirm before anything is saved"],
     docs: "/docs/ai-assistant",
     featured: true,
-  },
-  {
-    slug: "visitor-tracking",
-    name: "Website Visitor Tracking",
-    short: "See who visits your branded site",
-    description:
-      "When Routel runs on your own custom domain, visitor activity on that site is tracked automatically, so you can see who is looking without wiring up separate analytics.",
-    icon: Globe,
-    bullets: ["Built into your custom domain", "No separate analytics setup", "Visitor activity at a glance"],
-    docs: "/docs/visitor-tracking",
   },
   {
     slug: "compliance",

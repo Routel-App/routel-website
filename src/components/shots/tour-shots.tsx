@@ -127,7 +127,7 @@ export function RoutesShot({ locale, className }: { locale: Locale; className?: 
 const trackingCopy = {
   en: {
     title: "Track your shipment",
-    q: ["Booking, B/L or container number", "NXS27000412"],
+    q: ["Booking, B/L or container number", "NXS27000418"],
     verify: ["Company name or account ID", "Straits Electronics"],
     go: "Track",
     steps: ["Booking Confirmed", "Gate In", "Vessel Loaded", "Departed", "In Transit", "Arrived", "Shipment Closed"],
@@ -136,7 +136,7 @@ const trackingCopy = {
   },
   ar: {
     title: "تتبّع شحنتك",
-    q: ["رقم الحجز أو البوليصة أو الحاوية", "NXS27000412"],
+    q: ["رقم الحجز أو البوليصة أو الحاوية", "NXS27000418"],
     verify: ["اسم الشركة أو رقم الحساب", "شركة الرواد للتجارة"],
     go: "تتبّع",
     steps: ["تم تأكيد الحجز", "دخول البوابة", "تم التحميل على السفينة", "غادرت", "قيد النقل", "وصلت", "الشحنة مغلقة"],

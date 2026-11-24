@@ -1,12 +1,11 @@
 "use client";
 
-import NextLink from "next/link";
 import Link from "@/components/i18n/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Languages, Menu, Sparkles, X } from "lucide-react";
-import { site, siteCopy } from "@/lib/site";
+import { logoTagline, site, siteCopy } from "@/lib/site";
 import { localeNames, localizeHref, stripLocale, type Locale } from "@/lib/i18n";
 import { useLocale } from "@/components/i18n/locale-provider";
 import { cn } from "@/lib/utils";
@@ -27,14 +26,16 @@ const copy = {
 } satisfies Record<Locale, Record<string, string>>;
 
 /**
- * Links to the current page in the other language. Uses next/link directly:
- * the localized Link would re-prefix the target with the current locale.
+ * Links to the current page in the other language. A plain <a>, not a
+ * client-side link: the other language is another root layout (lang, dir),
+ * so it is a full page load, and it is never prefetched (the RSC prefetch of
+ * an unprefixed English URL from an Arabic page came back 404).
  */
 function LanguageSwitch({ path, inverse, className }: { path: string; inverse: boolean; className?: string }) {
   const locale = useLocale();
   const target: Locale = locale === "ar" ? "en" : "ar";
   return (
-    <NextLink
+    <a
       href={localizeHref(path, target)}
       hrefLang={target}
       lang={target}
@@ -47,7 +48,7 @@ function LanguageSwitch({ path, inverse, className }: { path: string; inverse: b
     >
       <Languages className="h-4 w-4" aria-hidden />
       {localeNames[target]}
-    </NextLink>
+    </a>
   );
 }
 
@@ -90,7 +91,7 @@ export function Navbar() {
     >
       <Container className="flex h-16 items-center justify-between">
         <Link href="/" aria-label={t.home} className="shrink-0">
-          <Logo inverse={inverse} tagline="Maritime & Logistics" taglineClassName="hidden xl:block" />
+          <Logo inverse={inverse} tagline={logoTagline[locale]} taglineClassName="hidden xl:block" />
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">

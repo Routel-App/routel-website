@@ -1,5 +1,5 @@
 import Link from "@/components/i18n/link";
-import { site } from "@/lib/site";
+import { logoTagline, site } from "@/lib/site";
 import { getModules } from "@/lib/modules";
 import type { Locale } from "@/lib/i18n";
 import { getLocale } from "@/lib/locale-server";
@@ -16,7 +16,6 @@ const copy = {
     resources: "Resources",
     introduction: "Introduction",
     glossary: "Glossary",
-    caseStudies: "Case studies",
     company: "Company",
     about: "About Routel",
     pricing: "Pricing",
@@ -35,7 +34,6 @@ const copy = {
     resources: "الموارد",
     introduction: "مقدمة",
     glossary: "المصطلحات",
-    caseStudies: "قصص العملاء",
     company: "الشركة",
     about: "عن Routel",
     pricing: "الأسعار",
@@ -71,7 +69,6 @@ export async function Footer() {
       links: [
         { label: t.introduction, href: "/docs" },
         { label: t.glossary, href: "/glossary" },
-        { label: t.caseStudies, href: "/case-studies" },
       ],
     },
     {
@@ -91,7 +88,7 @@ export async function Footer() {
       <Container className="pb-12">
         <div className="grid gap-10 md:grid-cols-[1.4fr_repeat(3,1fr)]">
           <div className="max-w-xs">
-            <Logo inverse tagline="Maritime & Logistics" />
+            <Logo inverse tagline={logoTagline[locale]} />
             <p className="mt-4 text-sm leading-relaxed text-white/60">
               {t.blurb}
             </p>

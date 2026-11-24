@@ -642,7 +642,7 @@ const baseContent: Record<string, PlatformContent> = {
     stats: [
       { value: "10 min", label: "to set up your company, by chat" },
       { value: "0", label: "records saved without your confirmation" },
-      { value: "49/50", label: "scenarios passed in the Arabic & English exam run before every change" },
+      { value: "49/50", label: "scenarios passed in our Arabic and English exam" },
     ],
     painPoints: [
       "Setting up a new system means a consultant, a spreadsheet of settings and weeks before the first invoice goes out.",
@@ -685,39 +685,6 @@ const baseContent: Record<string, PlatformContent> = {
       { q: "Which plans include it?", a: "Growth, Carrier & Agencies and Enterprise include the full assistant with document reading. Basic has it for company setup and questions, with a small allowance for document reading; the free version keeps the setup assistant only." },
     ],
     related: ["bookings", "invoicing", "roles"],
-  },
-
-  "visitor-tracking": {
-    eyebrow: "Website Visitor Tracking",
-    title: "See who's looking at your branded site",
-    description:
-      "Run Routel on your own custom domain and visitor activity on that site is tracked automatically — no separate analytics tool to wire up.",
-    stats: [
-      { value: "0", label: "separate analytics setup required" },
-      { value: "1", label: "domain — your own, not a shared Routel address" },
-    ],
-    painPoints: [
-      "Running on your own branded domain is pointless if you have no idea whether anyone's actually visiting it.",
-      "Standing up a separate analytics tool just to see visitor numbers is one more login and one more thing to maintain.",
-    ],
-    solutionIntro:
-      "When Routel runs on your own custom domain, visitor activity is tracked as part of the package — visits, pages and timing, without extra setup.",
-    features: [
-      { title: "Built into your custom domain", description: "No separate analytics account or script to install." },
-      { title: "Visitor activity at a glance", description: "How many visitors, which pages, and when." },
-    ],
-    workflow: [
-      { title: "Custom domain set up", description: "Your own address instead of a shared Routel one." },
-      { title: "Tracking starts automatically", description: "No extra configuration needed." },
-    ],
-    personas: [
-      { role: "Admin / Management", detail: "View visitor activity on the branded site." },
-    ],
-    faqs: [
-      { q: "Does this track activity inside the Routel app?", a: "No — it's visits to your public-facing branded site, not in-app activity, which already lives in each booking's activity log." },
-      { q: "Do I need to set up Google Analytics separately?", a: "No — it comes with the custom domain." },
-    ],
-    related: ["ai-assistant", "email-sync"],
   },
 
   compliance: {

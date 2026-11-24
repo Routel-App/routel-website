@@ -9,7 +9,7 @@ const copy = {
     introStrong: "a working freight forwarder in Malaysia",
     introAfter: ", and used on real shipments before it had a name.",
     facts: [
-      "21 modules, one login",
+      "20 modules, one login",
       "MYR and USD books",
       "6 roles, enforced everywhere",
       "Sea freight FCL, end to end",
@@ -24,7 +24,7 @@ const copy = {
     introStrong: "شركة شحن عاملة في ماليزيا",
     introAfter: "، واستُخدم على شحنات حقيقية قبل أن يحمل اسماً.",
     facts: [
-      "21 وحدة بتسجيل دخول واحد",
+      "20 وحدة بتسجيل دخول واحد",
       "دفاتر بالريال والدولار",
       "6 أدوار مطبّقة في كل مكان",
       "شحن بحري FCL من البداية إلى النهاية",

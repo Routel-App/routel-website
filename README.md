@@ -67,7 +67,8 @@ The site is published in English (default, unprefixed URLs like `/pricing`) and 
 
 ## Things to finish before launch
 
-- `src/app/[lang]/demo/actions.ts` logs demo requests to the server console. Wire it to email, a sheet or a CRM.
+- `src/app/[lang]/demo/demo-form.tsx` opens the visitor's e-mail app with a prefilled message to the contact address
+  (there is no mail service behind the site). Wire it to email, a sheet or a CRM if one is set up.
 - `src/components/home/testimonials.tsx` holds placeholder quotes. Replace with real, attributed ones.
 - `src/components/pricing/pricing-tiers.tsx` shows tiers without prices. Add prices when decided.
 - Set `NEXT_PUBLIC_SITE_URL` if the production domain ever differs from the default `https://routel.app` (used for canonical

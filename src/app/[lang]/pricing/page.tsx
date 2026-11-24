@@ -39,15 +39,15 @@ const copy = {
       },
       {
         q: "Is there a discount for founding customers or yearly billing?",
-        a: "Yes. The first 20 companies get 30% off with their price locked for one year, and paying yearly gives you one month free.",
+        a: "Yes. The first 20 companies get 30% off for the first year, and paying yearly gives you one month free.",
       },
       {
         q: "Which currencies are supported?",
-        a: "Two per company: your base currency (SAR, MYR or IDR) and USD. Every invoice and document is issued in one of the two, and the books keep both.",
+        a: "Two per company: your base currency (SAR, MYR or IDR today; other currencies on request) and USD. Every invoice and document is issued in one of the two, and the books keep both. In Saudi Arabia, tax invoices carry VAT at 15%.",
       },
       {
         q: "Can we migrate from spreadsheets or another system?",
-        a: "Yes. Talk to us when you request a demo, and our team can bring over your business partners and route rates. On Enterprise, migration from your old system is part of the plan.",
+        a: "Yes. Talk to us when you request a demo, and we can bring over your business partners and route rates. On Enterprise, migration from your old system is part of the plan.",
       },
     ],
   },
@@ -82,15 +82,15 @@ const copy = {
       },
       {
         q: "هل يوجد خصم للعملاء المؤسسين أو للدفع السنوي؟",
-        a: "نعم. أول 20 شركة تحصل على خصم 30% مع تثبيت السعر سنة واحدة، والدفع السنوي يمنحك شهراً مجاناً.",
+        a: "نعم. أول 20 شركة تحصل على خصم 30% للسنة الأولى، والدفع السنوي يمنحك شهراً مجاناً.",
       },
       {
         q: "ما العملات المدعومة؟",
-        a: "عملتان: الريال السعودي والدولار الأمريكي. تصدر كل فاتورة ومستند بإحداهما، وتحتفظ الدفاتر المحاسبية بالعملتين معاً، مع ضريبة القيمة المضافة 15% على الفواتير الضريبية.",
+        a: "عملتان لكل شركة: عملتها الأساسية (الريال السعودي أو الرينغيت الماليزي أو الروبية الإندونيسية اليوم، وعملات أخرى عند الطلب) والدولار الأمريكي. تصدر كل فاتورة ومستند بإحداهما، وتحتفظ الدفاتر المحاسبية بالعملتين معاً. وفي السعودية تحمل الفواتير الضريبية ضريبة القيمة المضافة 15%.",
       },
       {
         q: "هل يمكننا الانتقال من جداول البيانات أو من نظام آخر؟",
-        a: "نعم. تحدّث إلينا حين تطلب عرضاً تجريبياً، ويمكن لفريقنا نقل شركاء أعمالك وأسعار مساراتك. وفي خطة المؤسسات نقل البيانات من النظام القديم جزء من الخطة.",
+        a: "نعم. تحدّث إلينا حين تطلب عرضاً تجريبياً، ويمكننا نقل شركاء أعمالك وأسعار مساراتك. وفي خطة المؤسسات نقل البيانات من النظام القديم جزء من الخطة.",
       },
     ],
   },

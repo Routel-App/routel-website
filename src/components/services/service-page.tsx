@@ -53,7 +53,7 @@ const copy = {
   },
   ar: {
     solutions: "الحلول",
-    stage: { live: "متاحة الآن", development: "قيد التطوير", planned: "مخطط" },
+    stage: { live: "متاح الآن", development: "قيد التطوير", planned: "مخطط" },
     demo: "اطلب عرضاً تجريبياً",
     interest: "سجّل اهتمامك",
     module: "شاهد الوحدة",
@@ -348,10 +348,12 @@ export function ServicePageTemplate({
                       <p className="rounded-2xl rounded-es-md bg-fog-50 px-3.5 py-2.5 text-[13.5px] leading-relaxed text-ink-900 ring-1 ring-fog-100" dir="auto">
                         {content.ai.reply}
                       </p>
-                      <p className="mt-2 inline-flex items-center gap-1.5 text-[11.5px] font-semibold text-spark-700">
-                        <Check className="h-3.5 w-3.5" strokeWidth={3} />
-                        {t.confirm}
-                      </p>
+                      {content.ai.confirm ? (
+                        <p className="mt-2 inline-flex items-center gap-1.5 text-[11.5px] font-semibold text-spark-700">
+                          <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                          {t.confirm}
+                        </p>
+                      ) : null}
                     </div>
                   </div>
                 </div>

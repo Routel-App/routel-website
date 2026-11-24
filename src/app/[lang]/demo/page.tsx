@@ -97,7 +97,7 @@ export default async function DemoPage(props: PageProps<"/[lang]/demo">) {
               {t.interested} {planLabel}
             </p>
           ) : null}
-          <DemoForm plan={plan} />
+          <DemoForm plan={planLabel} />
         </Reveal>
       </Container>
     </section>

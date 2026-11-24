@@ -172,12 +172,12 @@ export function ReadsPdfCard({ className }: { className?: string }) {
     en: {
       title: "The AI reads the carrier's confirmation",
       text: "Drop in the PDF or a linked e-mail; you tick what goes on the booking.",
-      fields: [["Vessel / voyage", "MSC ISABELLA 412E"], ["Port of loading", "Port Klang"], ["Containers", "2 × 40HC"], ["Carrier booking no.", "MSCUKL4471"]],
+      fields: [["Vessel / voyage", "MSC AURORA 503E"], ["Port of loading", "Port Klang"], ["Containers", "2 × 40HC"], ["Carrier booking no.", "MSCUKL4471"]],
     },
     ar: {
       title: "الذكاء الاصطناعي يقرأ تأكيد الناقل",
       text: "ارفع ملف PDF أو رسالة مربوطة، واختر ما يُحفظ في الحجز.",
-      fields: [["السفينة / الرحلة", "MSC ISABELLA 412E"], ["ميناء الشحن", "جدة"], ["الحاويات", "2 × 40HC"], ["رقم حجز الناقل", "MSCJED4471"]],
+      fields: [["السفينة / الرحلة", "MSC AURORA 503E"], ["ميناء الشحن", "جدة"], ["الحاويات", "2 × 40HC"], ["رقم حجز الناقل", "MSCJED4471"]],
     },
   });
   const ref = useLoop((el) => {
@@ -259,7 +259,7 @@ export function RevisionsCard({ className }: { className?: string }) {
             </div>
             {n === 2 ? (
               <div className="mt-2.5 space-y-1.5">
-                <p dir="ltr" className="font-mono text-[11.5px] text-fog-500 rtl:text-end">NXS27000412 · MSC ISABELLA 412E</p>
+                <p dir="ltr" className="font-mono text-[11.5px] text-fog-500 rtl:text-end">NXS27000418 · MSC AURORA 503E</p>
                 <p data-flag="" className="inline-flex rounded-md bg-spark-100 px-2 py-0.5 text-[11.5px] font-semibold text-spark-600">{t.change}</p>
               </div>
             ) : null}
@@ -424,14 +424,14 @@ export function BillOfLadingCard({ className }: { className?: string }) {
       text: "Generate Bill of Lading lays out the booking's own data the way a carrier's B/L looks, with its container annexure.",
       doc: "BILL OF LADING",
       annex: "Container annexure",
-      fields: [["Shipper", "Straits Electronics Sdn Bhd"], ["Consignee", "Shanghai Huatai Trading Co."], ["Vessel / voyage", "MSC ISABELLA 412E"], ["Port of loading → discharge", "Port Klang → Shanghai"], ["Containers", "MSCU 482113 7 · 40HC"]],
+      fields: [["Shipper", "Straits Electronics Sdn Bhd"], ["Consignee", "Shanghai Huatai Trading Co."], ["Vessel / voyage", "MSC AURORA 503E"], ["Port of loading → discharge", "Port Klang → Shanghai"], ["Containers", "MSCU 482113 7 · 40HC"]],
     },
     ar: {
       title: "بوليصة شحن فرعية من الحجز بنقرة",
       text: "زر «إنشاء بوليصة الشحن» يرتّب بيانات الحجز نفسه بشكل بوليصة الناقل، مع ملحق الحاويات.",
       doc: "BILL OF LADING",
       annex: "ملحق الحاويات",
-      fields: [["الشاحن", "شركة الرواد للتجارة"], ["المرسل إليه", "Shanghai Huatai Trading Co."], ["السفينة / الرحلة", "MSC ISABELLA 412E"], ["ميناء الشحن ← التفريغ", "جدة ← شنغهاي"], ["الحاويات", "MSCU 482113 7 · 40HC"]],
+      fields: [["الشاحن", "شركة الرواد للتجارة"], ["المرسل إليه", "Shanghai Huatai Trading Co."], ["السفينة / الرحلة", "MSC AURORA 503E"], ["ميناء الشحن ← التفريغ", "جدة ← شنغهاي"], ["الحاويات", "MSCU 482113 7 · 40HC"]],
     },
   });
   const ref = useLoop((el) => {
@@ -455,7 +455,7 @@ export function BillOfLadingCard({ className }: { className?: string }) {
         <div className="relative rounded-xl bg-white p-3.5 shadow-card ring-1 ring-fog-200">
           <div className="flex items-center justify-between border-b border-fog-200 pb-2">
             <p className="font-mono text-[12px] font-bold tracking-wider">{t.doc}</p>
-            <p dir="ltr" className="font-mono text-[10.5px] text-fog-500">HBL NXS-HBL-0412</p>
+            <p dir="ltr" className="font-mono text-[10.5px] text-fog-500">HBL NXS-HBL-0418</p>
           </div>
           <dl className="mt-2 grid grid-cols-2 gap-x-3 gap-y-2">
             {t.fields.map(([k, v], i) => (

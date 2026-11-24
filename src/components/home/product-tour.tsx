@@ -5,7 +5,7 @@ import { getLocale } from "@/lib/locale-server";
 import type { Locale } from "@/lib/i18n";
 import { DocumentReadShot } from "@/components/shots/ai-shots";
 import { TrackingShot } from "@/components/shots/tour-shots";
-import { RealShot } from "@/components/shots/real-shot";
+import { RealShot, type Crop } from "@/components/shots/real-shot";
 import { TourTabs, type TourItem } from "./tour-tabs";
 
 type Copy = {
@@ -95,12 +95,12 @@ const copy: Record<Locale, Copy> = {
         title: "الفواتير والضريبة",
         short: "من بنود البيع في الحجز",
         body: "زر «إنشاء فاتورة» يحوّل رسوم البيع في الحجز إلى مسودات. الاعتماد يرقّم الفاتورة ويقفلها، والتصحيح يتم بإشعار دائن أو مدين.",
-        bullets: ["الريال والدولار في فاتورة واحدة", "ضريبة القيمة المضافة 15%", "فاتورة ضريبية برمز QR وفق متطلبات ZATCA"],
+        bullets: ["الريال والدولار في فاتورة واحدة", "ضريبة القيمة المضافة 15%", "فاتورة ضريبية برمز QR وفق متطلبات هيئة الزكاة والضريبة والجمارك"],
       },
       customs: {
         title: "التخليص الجمركي",
         short: "ملف لكل بيان",
-        body: "كل بيان ملف: استيراد أو تصدير أو ترانزيت، والمستورد بسجله التجاري ورقمه الضريبي، ورموز HS من 12 خانة، والقيمة الجمركية CIF محسوبة لك، والمستندات المطلوبة، والحالة التي بلغها.",
+        body: "كل بيان ملف: استيراد أو تصدير أو عبور (ترانزيت)، والمستورد بسجله التجاري ورقمه الضريبي، ورموز HS من 12 خانة، والقيمة الجمركية CIF محسوبة لك، والمستندات المطلوبة، والحالة التي بلغها.",
         bullets: ["الذكاء الاصطناعي يقرأ الفاتورة التجارية إلى بنود", "رموز HS مقترحة، ويؤكد المخلّص كل رمز", "تقدير الرسوم والضريبة من جدول التعرفة الخاص بك"],
       },
       documents: {
@@ -150,9 +150,15 @@ export async function ProductTour() {
   const t = copy[locale];
   const shot = "mx-auto w-full";
   // Real screens where we have them; the e-mail reading and the public tracking page stay illustrations.
-  const real = (name: "booking" | "quotes" | "invoice" | "customs-file" | "alerts") => (
-    <RealShot name={name} locale={locale} sizes="(min-width: 1024px) 720px, 100vw" />
-  );
+  // Each shows the part of the screen that matters at a readable size (no sidebar), and opens the whole screen on click.
+  const crops: Record<"booking" | "quotes" | "invoice" | "customs-file" | "alerts", { crop: Crop; mobile: Crop }> = {
+    booking: { crop: { x: 262, y: 62, w: 880, h: 560 }, mobile: { x: 270, y: 62, w: 450, h: 450 } },
+    quotes: { crop: { x: 266, y: 62, w: 1000, h: 640 }, mobile: { x: 270, y: 190, w: 480, h: 480 } },
+    invoice: { crop: { x: 262, y: 62, w: 880, h: 560 }, mobile: { x: 270, y: 62, w: 450, h: 450 } },
+    "customs-file": { crop: { x: 262, y: 62, w: 880, h: 560 }, mobile: { x: 270, y: 62, w: 450, h: 450 } },
+    alerts: { crop: { x: 266, y: 62, w: 1000, h: 640 }, mobile: { x: 480, y: 140, w: 480, h: 480 } },
+  };
+  const real = (name: keyof typeof crops) => <RealShot name={name} locale={locale} crop={crops[name].crop} cropMobile={crops[name].mobile} />;
   const panels = {
     bookings: real("booking"),
     routes: real("quotes"),

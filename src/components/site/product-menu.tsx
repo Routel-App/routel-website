@@ -32,24 +32,22 @@ const copy = {
   en: {
     product: "Platform",
     aiTitle: "AI Assistant",
-    aiBody: "Built into Routel: it calls tools and runs your operations automatically, in any language, with your confirmation before anything is saved.",
+    aiBody: "Built into Routel: it reads, drafts and acts after you confirm, in any language. Nothing is saved without a person.",
     aiLink: "See it work",
     docs: "Documentation",
     glossary: "Glossary",
-    caseStudies: "Case studies",
   },
   ar: {
     product: "المنصة",
     aiTitle: "المساعد الذكي",
-    aiBody: "مدمج داخل Routel: يستدعي الأدوات وينفّذ عملياتك تلقائيًا، بأي لغة، وبتأكيدك قبل حفظ أي شيء.",
+    aiBody: "مدمج داخل Routel: يقرأ ويجهّز وينفّذ بعد تأكيدك، بأي لغة. ولا يُحفظ شيء دون موافقة شخص.",
     aiLink: "شاهده يعمل",
     docs: "التوثيق",
     glossary: "المصطلحات",
-    caseStudies: "قصص العملاء",
   },
 } satisfies Record<
   Locale,
-  { product: string; aiTitle: string; aiBody: string; aiLink: string; docs: string; glossary: string; caseStudies: string }
+  { product: string; aiTitle: string; aiBody: string; aiLink: string; docs: string; glossary: string }
 >;
 
 /**
@@ -179,14 +177,6 @@ export function ProductMenu({ inverse, onNavigate }: { inverse: boolean; onNavig
                   className="flex items-center justify-between rounded-xl border border-fog-200 px-4 py-2.5 text-[13px] font-medium text-ink-900 transition-colors hover:bg-fog-50"
                 >
                   {t.glossary}
-                  <ArrowRight className="h-4 w-4 text-fog-400" />
-                </Link>
-                <Link
-                  href="/case-studies"
-                  onClick={close}
-                  className="flex items-center justify-between rounded-xl border border-fog-200 px-4 py-2.5 text-[13px] font-medium text-ink-900 transition-colors hover:bg-fog-50"
-                >
-                  {t.caseStudies}
                   <ArrowRight className="h-4 w-4 text-fog-400" />
                 </Link>
               </div>

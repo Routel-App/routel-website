@@ -18,13 +18,13 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
         title: "Route rates and quotations",
         text: "Buying prices per route, by shipping line and container type, with the dates they're valid for, entered once or imported from an Excel rate sheet. Compare the lines on a route side by side, quote from the one you choose, and convert the accepted quotation to a booking with nothing typed twice.",
         points: ["Lines on a route, side by side", "Validity dates on every rate", "Convert to Booking in one action"],
-        mock: { title: "Quotation · Q-27-0412", badge: "Accepted", rows: [["Route", "Jeddah → Shanghai"], ["Ocean freight 2 × 40HC", "USD 4,200"], ["Local charges", "SAR 2,500"]], foot: "Convert to Booking" },
+        mock: { title: "Quotation · Q-27-0431", badge: "Accepted", rows: [["Route", "Jeddah → Shanghai"], ["Ocean freight 2 × 40HC", "USD 4,200"], ["Local charges", "SAR 2,500"]], foot: "Convert to Booking" },
       },
       {
         title: "The carrier booking, read by AI",
         text: "Read Carrier Confirmation has AI read the line's PDF or a linked e-mail: vessel and voyage, cut-offs and the carrier's booking number. You tick what to save, and the Booking Confirmation goes to your customer with numbered revisions.",
         points: ["Reads the PDF or the e-mail", "You tick what to save", "Revised confirmations are numbered"],
-        mock: { title: "Read from MSC confirmation.pdf", badge: "AI", rows: [["Vessel", "MSC ISABELLA · 412E"], ["Cargo cut-off", "14 Mar, 12:00"], ["Carrier ref.", "MSCJED4471"]], foot: "Save the ticked fields" },
+        mock: { title: "Read from MSC confirmation.pdf", badge: "AI", rows: [["Vessel", "MSC AURORA · 503E"], ["Cargo cut-off", "14 Mar, 12:00"], ["Carrier ref.", "MSCJED4471"]], foot: "Save the ticked fields" },
       },
       {
         title: "A House B/L from the booking",
@@ -36,7 +36,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
         title: "Invoices, payments and the books",
         text: "Create Invoice turns the booking's sale lines into tax invoices; receipts and vendor payments post to the general ledger as they happen, and each booking shows its own profit.",
         points: ["Tax invoices from the charges", "Payments matched from the finance mailbox", "Profit per booking: AP, AR and net"],
-        mock: { title: "Tax invoice · INV-27-0412", badge: "Issued", rows: [["Ocean freight 40HC", "USD 4,200"], ["Local charges", "SAR 2,500"], ["Total", "SAR 18,250.00"]], foot: "Profit 23.2%" },
+        mock: { title: "Tax invoice · INV-27-0431", badge: "Issued", rows: [["Ocean freight 2 × 40HC · VAT 0%", "USD 4,200"], ["Local charges · VAT 15%", "SAR 2,500 + 375"], ["Total", "SAR 18,625.00"]], foot: "Profit 23.2%" },
       },
     ],
     flow: [
@@ -51,7 +51,8 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
       title: "Ask in a sentence. Confirm in one click.",
       text: "The assistant searches route rates, drafts the quotation and the booking, reads the carrier's files, and issues the House B/L and the invoice. Each write waits for a person's confirmation and is logged.",
       prompt: "Quote Jeddah to Shanghai, 2 × 40HC, for Al Noor.",
-      reply: "Quotation Q-27-0412 is ready from the route rate: USD 4,200 ocean freight plus SAR 2,500 local charges. Confirm to send it?",
+      reply: "Quotation Q-27-0431 is ready from the route rate: USD 4,200 ocean freight plus SAR 2,500 local charges. Confirm to send it?",
+      confirm: true,
       tools: ["search_route_rates", "create_quotation", "create_job", "create_bill_of_lading", "create_invoice_from_charges"],
     },
     versus: [
@@ -164,13 +165,13 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
         title: "Suggested bookings",
         text: "Bookings on the same mode and route, departing within 14 days and not already in another consolidation, nearest first. Bookings with no master number take the consolidation's, and a later change reaches them.",
         points: ["Same mode and route", "Nearest departure first", "Master number carried down"],
-        mock: { title: "Suggested for CON-27-0031", rows: [["NXS27000418", "6.2 CBM · 15 Mar"], ["NXS27000421", "11.0 CBM · 16 Mar"], ["NXS27000425", "4.8 CBM · 18 Mar"]], foot: "Add 3 bookings" },
+        mock: { title: "Suggested for CON-27-0031", rows: [["NXS27000438", "6.2 CBM · 15 Mar"], ["NXS27000441", "11.0 CBM · 16 Mar"], ["NXS27000445", "4.8 CBM · 18 Mar"]], foot: "Add 3 bookings" },
       },
       {
         title: "Costs shared to the cent",
         text: "Enter the master's costs once. ROUTEL shares them by CBM or W/M for sea, by chargeable weight for air, or by a manual share, and each share lands as a cost line on its booking. A share already finalised or paid is locked.",
         points: ["CBM, W/M or chargeable weight", "Shares become cost lines", "Finalised shares are locked"],
-        mock: { title: "Share ocean freight · USD 3,100.00 · 30 CBM", rows: [["NXS27000418 · 6.2 CBM", "USD 640.67"], ["NXS27000421 · 11.0 CBM", "USD 1,136.67"], ["… 3 more", "USD 1,322.66"]], foot: "Adds up to USD 3,100.00" },
+        mock: { title: "Share ocean freight · USD 3,100.00 · 30 CBM", rows: [["NXS27000438 · 6.2 CBM", "USD 640.67"], ["NXS27000441 · 11.0 CBM", "USD 1,136.67"], ["… 3 more", "USD 1,322.66"]], foot: "Adds up to USD 3,100.00" },
       },
       {
         title: "Manifest and profit",
@@ -189,7 +190,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
     ai: {
       title: "The assistant knows every booking's share",
       text: "Each house booking is still a full booking, with its own invoices and House B/L, so the assistant reads and works on it as on any booking: its charges, its profit, its status.",
-      prompt: "What's the profit on NXS27000421 after the consolidation costs?",
+      prompt: "What's the profit on NXS27000441 after the consolidation costs?",
       reply: "USD 412.33: revenue USD 1,549.00, cost USD 1,136.67 from its 11.0 CBM share of the ocean freight.",
       tools: ["get_job_charges"],
     },
@@ -302,7 +303,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
         title: "Demurrage and detention, both sides",
         text: "Each container on the booking keeps its dates, import and export. Two tariffs, your customer's and the line's, with free days and daily tiers per port, container type and partner; ROUTEL works out what you bill and what the line will bill you, shows the margin, and adds the charge to the booking once. The line's D&D invoice is read from its PDF, container by container.",
         points: ["Your tariff and the line's", "Per container, AR and AP", "Expected D&D and Alerts"],
-        mock: { title: "D&D · MSCU 442118-0", rows: [["Free days", "4 · ended 19 Mar"], ["To bill (AR)", "6 days · USD 150"], ["Line's charge (AP)", "6 days · USD 120"]], foot: "Margin USD 30" },
+        mock: { title: "D&D · MSCU 551903-4", rows: [["Free days", "4 · ended 19 Mar"], ["To bill (AR)", "6 days · USD 150"], ["Line's charge (AP)", "6 days · USD 120"]], foot: "Margin USD 30" },
       },
       {
         title: "Agents and profit share",
@@ -328,7 +329,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
       title: "The line's D&D invoice, checked container by container",
       text: "AI reads the line's demurrage and detention invoice from its PDF or photo, container by container, next to what your tariff says it should be; you review before anything is saved.",
       prompt: "Which containers run out of free time this week?",
-      reply: "Three, all at Jeddah: MSCU 442118-0 on Tuesday, and two of Gulf Horizon's on Thursday. Show the expected D&D for each?",
+      reply: "Three, all at Jeddah: MSCU 551903-4 on Tuesday, and two of Gulf Horizon's on Thursday. Show the expected D&D for each?",
     },
     versus: [
       { topic: "Own-name B/L", them: "Templates in a word processor", us: "Numbered, signed by an authorised user, tracked" },
@@ -364,7 +365,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
         title: "Transport orders",
         text: "Made from the booking (one order per container) or on their own for an AR partner. Each order takes its stops from the movement and the booking, a lane that sets the price, the planned date and the day the container's free time ends. Assign the driver, the prime mover and the trailer, and the order goes from Assigned to On the road to Completed.",
         points: ["From the booking or on its own", "Stops from the movement", "Lanes that set the price"],
-        mock: { title: "Transport order · TO-27-0244", badge: "Assigned", rows: [["Movement", "Import · port to consignee"], ["Container", "MSCU 442118-0"], ["Free time ends", "27 Mar"]], foot: "Truck 4721 · driver" },
+        mock: { title: "Transport order · TO-27-0251", badge: "Assigned", rows: [["Movement", "Import · port to consignee"], ["Container", "CMAU 330918-2"], ["Free time ends", "27 Mar"]], foot: "Truck 4730 · driver" },
       },
       {
         title: "The driver's phone link",
@@ -376,13 +377,13 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
         title: "Trip expenses and fuel checks",
         text: "The driver sends a receipt photo and AI reads the total, the litres, the station and the day; the office can add one too. Each expense waits for approval with what it failed: more than the tank, over the truck's fuel standard, the odometer going back, entered twice, or no trip that day.",
         points: ["Receipts read by AI", "Five checks before it counts", "Truck profit by month"],
-        mock: { title: "Fuel · Truck 4721", badge: "To approve", rows: [["Litres", "412 L"], ["Check", "Over the standard"], ["Since last refuel", "1,180 km"]], foot: "Approve or reject" },
+        mock: { title: "Fuel · Truck 4730", badge: "To approve", rows: [["Litres", "412 L"], ["Check", "Over the standard"], ["Since last refuel", "1,180 km"]], foot: "Approve or reject" },
       },
       {
         title: "Billing a trip",
         text: "A completed trip goes into its booking's charges in one click: the haulage at the trip's price, waiting at the consignee beyond the free hours from the driver's own times, and a rented truck's hire as the AP cost. Alerts show containers whose free time is about to end, and fleet papers about to expire.",
         points: ["Haulage, waiting and truck hire", "Through the booking's charges", "Free time and papers in Alerts"],
-        mock: { title: "Billing · TO-27-0244", rows: [["Haulage", "SAR 950.00"], ["Waiting · 3 h", "SAR 150.00"], ["Billed", "Once, on the booking"]], foot: "Add to the booking's charges" },
+        mock: { title: "Billing · TO-27-0251", rows: [["Haulage", "SAR 950.00"], ["Waiting · 3 h", "SAR 150.00"], ["Billed", "Once, on the booking"]], foot: "Add to the booking's charges" },
       },
     ],
     flow: [
@@ -396,7 +397,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
       title: "The fuel receipt, read from a photo",
       text: "AI reads the driver's receipt photo into the expense; an amount or odometer the driver types wins over what it read, and nothing counts until the office approves it.",
       prompt: "Which containers on the road run out of free time this week?",
-      reply: "Two: MSCU 442118-0 on TO-27-0244 ends on 27 Mar, and TGHU 801224-7 has already passed it. Open the orders?",
+      reply: "Two: CMAU 330918-2 on TO-27-0251 ends on 27 Mar, and TGHU 801224-7 has already passed it. Open the orders?",
     },
     versus: [
       { topic: "Driver tools", them: "An app to install and log into", us: "A link on WhatsApp, no account" },
@@ -432,7 +433,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
         title: "Warehouse receipts",
         text: "Numbered, with the depositor as an AR partner, the warehouse, who delivered it and when, and the package lines with count, packing, dimensions, weight and marks. At the door the storekeeper counts each line on the phone, notes where it was put and any damage, and takes photos. Receiving measures the booking from its receipts.",
         points: ["Package lines with dimensions", "Photos and damage notes", "Short or over shown at once"],
-        mock: { title: "Warehouse receipt · WR-27-0519", badge: "Received", rows: [["Depositor", "Al Noor Trading"], ["Packages", "12 cartons · 1.84 CBM"], ["Damage", "None noted"]], foot: "3 photos" },
+        mock: { title: "Warehouse receipt · WR-27-0533", badge: "Received", rows: [["Depositor", "Al Noor Trading"], ["Packages", "12 cartons · 1.84 CBM"], ["Damage", "None noted"]], foot: "3 photos" },
       },
       {
         title: "Expected cargo, filled by AI",
@@ -444,13 +445,13 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
         title: "Labels, scanned at loading",
         text: "A QR label is printed for every package. When a consolidation is loaded, the phone camera reads each label: a package of another booking or consolidation gets a loud STOP, and the count shows a missing package before the container is closed.",
         points: ["One label per package", "Scanned with the phone", "Missing or wrong caught before closing"],
-        mock: { title: "Loading CON-27-0031", badge: "11 / 12", rows: [["Scanned", "11 packages"], ["Missing", "WR-27-0519 · carton 7"], ["Container", "MSCU 442118-0"]], foot: "Hold before closing" },
+        mock: { title: "Loading CON-27-0031", badge: "11 / 12", rows: [["Scanned", "11 packages"], ["Missing", "WR-27-0533 · carton 7"], ["Container", "TGHU 662041-9"]], foot: "Hold before closing" },
       },
       {
         title: "Release and storage charges",
         text: "Cargo collected from the warehouse is released on the delivery order's terms: the booking's charges paid or the partner's credit in force, otherwise only finance can release it, with a reason. Storage is billed by the tariff you set: by W/M, CBM or package, per day, week or month, after free days, with a minimum and handling in and out.",
         points: ["Loaded into a consolidation", "Release with payment checks", "Your own storage tariff"],
-        mock: { title: "Storage · WR-27-0519", rows: [["Free days", "5"], ["Billed", "9 days × 1.84 CBM"], ["Handling in/out", "SAR 120.00"]], foot: "Added to the booking's charges" },
+        mock: { title: "Storage · WR-27-0533", rows: [["Free days", "5"], ["Billed", "9 days × 1.84 CBM"], ["Handling in/out", "SAR 120.00"]], foot: "Added to the booking's charges" },
       },
     ],
     flow: [
@@ -464,7 +465,8 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
       title: "The packing list fills the receipt",
       text: "AI reads the partner's packing list into package lines; you check them before saving, and the storekeeper counts what actually arrived. Nothing is saved until a person confirms it.",
       prompt: "Al Noor's cargo arrived. Here's the packing list.",
-      reply: "12 cartons, 60 × 40 × 64 cm, 18 kg each: 1.84 CBM, 216 kg. Expected under NXS27000418. Confirm the receipt?",
+      reply: "12 cartons, 60 × 40 × 64 cm, 18 kg each: 1.84 CBM, 216 kg. Expected under NXS27000447. Confirm the receipt?",
+      confirm: true,
     },
     versus: [
       { topic: "Receiving", them: "Package lines typed from the packing list", us: "Read by AI, counted on the phone" },
@@ -568,7 +570,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
         title: "A file per declaration",
         text: "Import, export or transit; by sea, air or land; the customs office of entry or exit, and the importer or exporter with their registration. Pick a booking and it brings the B/L, the vessel and the arrival, and its consignee as the importer. The declaration and release order numbers are typed on the file.",
         points: ["Import, export, transit", "Customs office and importer", "Linked to the booking, or on its own"],
-        mock: { title: "Clearance · CCNXS27000077", badge: "Documents complete", rows: [["Type", "Import · sea"], ["Lines", "8"], ["Linked booking", "NXS27000402"]], foot: "Mark declaration submitted" },
+        mock: { title: "Clearance · CCNXS27000077", badge: "Documents complete", rows: [["Type", "Import · sea"], ["Lines", "8"], ["Linked booking", "NXS27000412"]], foot: "Mark declaration submitted" },
       },
       {
         title: "Lines and the customs value",
@@ -580,7 +582,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
         title: "Status, inspection and release",
         text: "Draft, documents complete, declaration submitted, then under inspection, on hold or amendment requested, duties paid (or the guarantee lodged for transit), released with the release order, and delivered. Every change keeps who, when and why, and the file lists the documents still missing.",
         points: ["Inspection, hold and amendment", "Release order recorded", "Missing documents and history"],
-        mock: { title: "CCNXS27000077", badge: "On hold", rows: [["Reason", "Certificate of origin"], ["Inspection", "Document check"], ["Missing", "1 document"]], foot: "Upload the certificate" },
+        mock: { title: "CCNXS27000079", badge: "On hold", rows: [["Reason", "Certificate of origin"], ["Inspection", "Document check"], ["Missing", "1 document"]], foot: "Upload the certificate" },
       },
       {
         title: "The invoice read by AI, the duties estimated",
@@ -600,7 +602,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
       title: "The assistant knows every open file",
       text: "Ask where a file stands, what it is waiting for, or which files are on hold; the assistant reads the clearance files and answers from them.",
       prompt: "Which clearance files are on hold?",
-      reply: "Two: CCNXS27000077 is waiting for the certificate of origin, and CCNXS27000081 has an amendment requested. Open them?",
+      reply: "Two: CCNXS27000079 is waiting for the certificate of origin, and CCNXS27000081 has an amendment requested. Open them?",
     },
     versus: [
       { topic: "Customs value", them: "Worked out in a spreadsheet", us: "CIF per line, at the customs exchange rate" },

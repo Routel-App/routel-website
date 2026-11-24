@@ -178,7 +178,7 @@ const docCopy = {
     file: "MSC booking confirmation.pdf",
     reading: "Read by the assistant",
     fields: [
-      ["Vessel / voyage", "MSC ISABELLA · 412E"],
+      ["Vessel / voyage", "MSC AURORA · 503E"],
       ["Port of loading", "Port Klang (MYPKG)"],
       ["Port of discharge", "Jebel Ali (AEJEA)"],
       ["Containers", "2 × 40HC"],
@@ -191,7 +191,7 @@ const docCopy = {
     file: "تأكيد حجز MSC.pdf",
     reading: "قرأه المساعد",
     fields: [
-      ["السفينة / الرحلة", "MSC ISABELLA · 412E"],
+      ["السفينة / الرحلة", "MSC AURORA · 503E"],
       ["ميناء الشحن", "جدة (SAJED)"],
       ["ميناء التفريغ", "شنغهاي (CNSHA)"],
       ["الحاويات", "2 × 40HC"],
