@@ -211,7 +211,7 @@ export function ChaosToOrder() {
             <div className="flex items-center justify-between gap-3">
               <div>
                 <p className="text-[11px] text-white/50">{t.card}</p>
-                <p dir="ltr" className="font-mono text-[14px] font-semibold rtl:text-end">NXS26000412</p>
+                <p dir="ltr" className="font-mono text-[14px] font-semibold rtl:text-end">NXS27000412</p>
               </div>
               <span className="rounded-full bg-spark-400/15 px-2.5 py-1 text-[11px] font-semibold text-spark-300 ring-1 ring-spark-400/30">Routel</span>
             </div>

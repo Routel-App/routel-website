@@ -23,10 +23,10 @@ const chatCopy = {
   en: {
     header: "Routel Assistant",
     sub: "Calls tools · acts on your confirmation",
-    user: "Invoice NXS-24118 for the customer and add the customs charges from the attached vendor bill.",
+    user: "Invoice NXS27000419 for the customer and add the customs charges from the attached vendor bill.",
     file: "vendor-bill-KLX-0931.pdf",
     tools: [
-      { icon: Search, label: "Opened booking NXS-24118", detail: "Port Klang → Shanghai · 2 × 40HC" },
+      { icon: Search, label: "Opened booking NXS27000419", detail: "Port Klang → Shanghai · 2 × 40HC" },
       { icon: FileSearch, label: "Read vendor bill", detail: "3 lines · MYR 4,850.00" },
       { icon: Receipt, label: "Added vendor cost to the booking", detail: "Customs clearance · MYR 4,850.00" },
       { icon: FileText, label: "Prepared invoice draft", detail: "Straits Electronics Sdn Bhd" },
@@ -45,10 +45,10 @@ const chatCopy = {
   ar: {
     header: "مساعد Routel",
     sub: "يستدعي الأدوات · وينفّذ بعد تأكيدك",
-    user: "جهّز فاتورة للعميل على الحجز NXS-24118 وأضف رسوم التخليص من فاتورة المورد المرفقة.",
+    user: "جهّز فاتورة للعميل على الحجز NXS27000419 وأضف رسوم التخليص من فاتورة المورد المرفقة.",
     file: "فاتورة-المورد-JD-0931.pdf",
     tools: [
-      { icon: Search, label: "فتح الحجز NXS-24118", detail: "جدة ← شنغهاي · 2 × 40HC" },
+      { icon: Search, label: "فتح الحجز NXS27000419", detail: "جدة ← شنغهاي · 2 × 40HC" },
       { icon: FileSearch, label: "قراءة فاتورة المورد", detail: "3 بنود · SAR 4,850.00" },
       { icon: Receipt, label: "إضافة تكلفة المورد للحجز", detail: "تخليص جمركي · SAR 4,850.00" },
       { icon: FileText, label: "تجهيز مسودة الفاتورة", detail: "شركة الرواد للتجارة" },
@@ -182,10 +182,10 @@ const docCopy = {
       ["Port of loading", "Port Klang (MYPKG)"],
       ["Port of discharge", "Jebel Ali (AEJEA)"],
       ["Containers", "2 × 40HC"],
-      ["Cut-off", "17 Oct 2026, 12:00"],
+      ["Cut-off", "17 Feb 2027, 12:00"],
       ["Carrier booking no.", "MSCUKL4471"],
     ],
-    action: "Fill booking NXS-24118",
+    action: "Fill booking NXS27000418",
   },
   ar: {
     file: "تأكيد حجز MSC.pdf",
@@ -195,10 +195,10 @@ const docCopy = {
       ["ميناء الشحن", "جدة (SAJED)"],
       ["ميناء التفريغ", "شنغهاي (CNSHA)"],
       ["الحاويات", "2 × 40HC"],
-      ["موعد الإغلاق", "17 أكتوبر 2026، 12:00"],
+      ["موعد الإغلاق", "17 فبراير 2027، 12:00"],
       ["رقم حجز الخط الملاحي", "MSCJED4471"],
     ],
-    action: "تعبئة الحجز NXS-24118",
+    action: "تعبئة الحجز NXS27000418",
   },
 } as const;
 
@@ -256,7 +256,7 @@ const briefCopy = {
     items: [
       { tone: "red", label: "2 delivered shipments never invoiced", value: "MYR 18,400" },
       { tone: "amber", label: "3 follow-ups due today", value: "" },
-      { tone: "amber", label: "Booking past SI with no master B/L", value: "NXS-24109" },
+      { tone: "amber", label: "Booking past SI with no master B/L", value: "NXS27000409" },
       { tone: "teal", label: "5 arrivals this week", value: "" },
       { tone: "slate", label: "Quotation expiring tomorrow", value: "PT Nusantara Foods" },
     ],
@@ -268,7 +268,7 @@ const briefCopy = {
     items: [
       { tone: "red", label: "شحنتان سُلّمتا ولم تُصدر فواتيرهما", value: "SAR 18,400" },
       { tone: "amber", label: "3 متابعات مستحقة اليوم", value: "" },
-      { tone: "amber", label: "حجز تجاوز تعليمات الشحن بلا بوليصة رئيسية", value: "NXS-24109" },
+      { tone: "amber", label: "حجز تجاوز تعليمات الشحن بلا بوليصة رئيسية", value: "NXS27000409" },
       { tone: "teal", label: "5 شحنات تصل هذا الأسبوع", value: "" },
       { tone: "slate", label: "عرض سعر ينتهي غداً", value: "مصنع الخليج للأغذية" },
     ],

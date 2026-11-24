@@ -5,9 +5,11 @@ import type { Locale } from "./i18n";
 /**
  * The lines of business Routel runs, as the business activities a company
  * opens in Settings → Business activities (lib/activities.ts in the system).
- * `live` services have their module built; the others are on the roadmap
- * (docs/routel-central.md, section 3) and are shown as coming, never as
- * available.
+ * `live` services have their module built and open to companies; the others
+ * are on the roadmap (docs/routel-central.md, section 3) and are shown as
+ * coming, never as available. Customs clearance is live for its first phase
+ * (the clearance file); its AI reading and duty estimates are in final review,
+ * and its page says so.
  */
 export type ServiceStatus = "live" | "coming";
 
@@ -38,11 +40,11 @@ const base: Base[] = [
   { slug: "air-freight", stage: "live", icon: Plane, module: "/platform/air-freight", doc: "/docs/air-freight", related: ["sea-freight", "consolidation", "import-release"] },
   { slug: "consolidation", stage: "live", icon: Boxes, module: "/platform/consolidation", doc: "/docs/consolidation", related: ["sea-freight", "air-freight", "warehousing"] },
   { slug: "import-release", stage: "live", icon: FileCheck2, module: "/platform/arrival-notice", doc: "/docs/arrival-notice", related: ["sea-freight", "land-transport", "customs-brokerage"] },
-  { slug: "nvocc", stage: "development", icon: Container, related: ["sea-freight", "shipping-agency", "consolidation"] },
-  { slug: "land-transport", stage: "development", icon: Truck, related: ["warehousing", "import-release", "contract-logistics"] },
-  { slug: "warehousing", stage: "development", icon: Warehouse, related: ["consolidation", "land-transport", "contract-logistics"] },
+  { slug: "nvocc", stage: "live", icon: Container, related: ["sea-freight", "shipping-agency", "consolidation"] },
+  { slug: "land-transport", stage: "live", icon: Truck, related: ["warehousing", "import-release", "contract-logistics"] },
+  { slug: "warehousing", stage: "live", icon: Warehouse, related: ["consolidation", "land-transport", "contract-logistics"] },
   { slug: "shipping-agency", stage: "development", icon: Anchor, related: ["nvocc", "import-release", "customs-brokerage"] },
-  { slug: "customs-brokerage", stage: "development", icon: Landmark, related: ["import-release", "sea-freight", "shipping-agency"] },
+  { slug: "customs-brokerage", stage: "live", icon: Landmark, related: ["import-release", "sea-freight", "shipping-agency"] },
   { slug: "contract-logistics", stage: "planned", icon: PackageCheck, related: ["warehousing", "land-transport", "consolidation"] },
 ];
 
@@ -71,17 +73,17 @@ const text: Record<Locale, Record<string, { name: string; short: string; points:
     nvocc: {
       name: "NVOCC",
       short: "Bills of Lading in your own name, demurrage and detention, agents and profit share.",
-      points: ["Own-name Bills of Lading", "Demurrage and detention", "Agents and profit share"],
+      points: ["Own-name Bills of Lading and Sea Waybills", "Demurrage and detention, both sides", "Agents, profit share and statements"],
     },
     "land-transport": {
       name: "Land transport",
-      short: "Trucking jobs with proof of delivery, on the same booking.",
-      points: ["Trucking orders", "Proof of delivery"],
+      short: "Container trucking on the same booking, reported from the driver's phone.",
+      points: ["Transport orders, fleet and drivers", "Driver's phone link, no app", "Trip expenses, fuel checks and billing"],
     },
     warehousing: {
       name: "Warehouse receipts and CFS",
       short: "Receive cargo into the warehouse or the container freight station, with a receipt.",
-      points: ["Warehouse receipts", "Container freight station (CFS)"],
+      points: ["Warehouse receipts, received on the phone", "Labels and loading by scan", "Your own storage tariff"],
     },
     "shipping-agency": {
       name: "Shipping agency",
@@ -89,9 +91,9 @@ const text: Record<Locale, Record<string, { name: string; short: string; points:
       points: ["Line agency operations", "Saudi Arabia, Malaysia and Indonesia"],
     },
     "customs-brokerage": {
-      name: "Customs brokerage",
-      short: "Customs declarations with HS codes suggested by AI.",
-      points: ["Declarations", "AI-suggested HS codes", "Links to FASAH, CEISA and uCustoms, awaiting government approval"],
+      name: "Customs clearance",
+      short: "One clearance file per declaration, with HS-coded lines and the customs value worked out.",
+      points: ["Import, export and transit; sea, air and land", "12-digit HS codes and the customs value (CIF)", "AI invoice reading and duty estimates: in final review"],
     },
     "contract-logistics": {
       name: "Inventory (3PL)",
@@ -123,17 +125,17 @@ const text: Record<Locale, Record<string, { name: string; short: string; points:
     nvocc: {
       name: "الناقل غير المالك للسفن NVOCC",
       short: "بوالص شحن باسم شركتك، والأرضيات والتأخير، والوكلاء وتقاسم الربح.",
-      points: ["بوالص شحن باسم شركتك", "الأرضيات والتأخير", "الوكلاء وتقاسم الربح"],
+      points: ["بوالص شحن باسم شركتك و Sea Waybill", "الأرضيات والتأخير على الطرفين", "الوكلاء وتقاسم الربح والكشوف"],
     },
     "land-transport": {
       name: "النقل البري",
-      short: "أوامر النقل بالشاحنات مع إثبات التسليم، على الحجز نفسه.",
-      points: ["أوامر النقل", "إثبات التسليم"],
+      short: "نقل الحاويات بالشاحنات على الحجز نفسه، والسائق يبلّغ من جواله.",
+      points: ["أوامر النقل والأسطول والسائقون", "رابط جوال السائق، بلا تطبيق", "مصروفات الرحلة وفحوص الوقود والفوترة"],
     },
     warehousing: {
       name: "إيصالات المستودع ومحطة الحاويات",
       short: "استلام البضاعة في المستودع أو محطة تجميع الحاويات CFS، بإيصال.",
-      points: ["إيصالات المستودع", "محطة تجميع الحاويات CFS"],
+      points: ["إيصالات المستودع، تُستلم من الجوال", "الملصقات والتحميل بالمسح", "تعرفة التخزين الخاصة بك"],
     },
     "shipping-agency": {
       name: "الوكالة الملاحية",
@@ -142,8 +144,8 @@ const text: Record<Locale, Record<string, { name: string; short: string; points:
     },
     "customs-brokerage": {
       name: "التخليص الجمركي",
-      short: "البيانات الجمركية برموز HS يقترحها الذكاء الاصطناعي.",
-      points: ["البيانات الجمركية", "رموز HS يقترحها الذكاء الاصطناعي", "الربط مع فسح وCEISA وuCustoms بانتظار الموافقات الحكومية"],
+      short: "ملف تخليص لكل بيان، ببنود برموز HS وقيمة جمركية محسوبة.",
+      points: ["استيراد وتصدير وترانزيت؛ بحري وجوي وبري", "رموز HS من 12 خانة والقيمة الجمركية (CIF)", "قراءة الفاتورة بالذكاء الاصطناعي وتقدير الرسوم: في المراجعة النهائية"],
     },
     "contract-logistics": {
       name: "المخزون لعملائك 3PL",

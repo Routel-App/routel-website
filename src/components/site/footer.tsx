@@ -25,7 +25,8 @@ const copy = {
     privacy: "Privacy policy",
     blurb: "The Maritime & Logistics Operating System, run by AI. Built from the system that runs a working freight forwarder every day.",
     rights: "All rights reserved.",
-    origin: "Built and run from Malaysia.",
+    origin: "Based in Riyadh, Saudi Arabia. Grown inside a working freight forwarder in Malaysia.",
+    contact: "Contact",
   },
   ar: {
     platform: "المنصة",
@@ -43,7 +44,8 @@ const copy = {
     privacy: "سياسة الخصوصية",
     blurb: "نظام التشغيل البحري واللوجستي بقيادة الذكاء الاصطناعي. مبني من النظام الذي يدير شركة شحن حقيقية كل يوم.",
     rights: "جميع الحقوق محفوظة.",
-    origin: "طُوّر ويُدار من ماليزيا.",
+    origin: "مقرّنا الرياض، المملكة العربية السعودية. نشأ داخل شركة شحن عاملة في ماليزيا.",
+    contact: "تواصل معنا",
   },
 } satisfies Record<Locale, Record<string, string>>;
 
@@ -92,6 +94,12 @@ export async function Footer() {
             <Logo inverse tagline="Maritime & Logistics" />
             <p className="mt-4 text-sm leading-relaxed text-white/60">
               {t.blurb}
+            </p>
+            <p className="mt-4 text-sm text-white/60">
+              {t.contact}:{" "}
+              <a href={`mailto:${site.email}`} dir="ltr" className="font-medium text-white/80 transition-colors hover:text-white">
+                {site.email}
+              </a>
             </p>
           </div>
           {columns.map((col) => (

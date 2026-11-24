@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { AlertTriangle, Anchor, Bell, Check, Clock, FileWarning, Ship, UserX } from "lucide-react";
 import type { Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
@@ -7,7 +8,7 @@ import { Ltr, ShotFrame, arrowFor } from "./frame";
 
 const shipmentCopy = {
   en: {
-    no: "NXS-24118",
+    no: "NXS27000418",
     status: "In transit",
     customer: "Straits Electronics Sdn Bhd",
     from: "Port Klang",
@@ -26,7 +27,7 @@ const shipmentCopy = {
     margin: ["Margin", "MYR 2,968.50", "23.1%"],
   },
   ar: {
-    no: "NXS-24118",
+    no: "NXS27000418",
     status: "قيد النقل",
     customer: "شركة الرواد للتجارة",
     from: "جدة",
@@ -97,8 +98,8 @@ export function ShipmentShot({ locale, className }: { locale: Locale; className?
           </div>
           {t.lines.map(([label, sell, cost]) => (
             <div key={label} className="grid grid-cols-[1.3fr_1fr_1fr] border-t border-fog-100 px-3 py-1.5 text-[10.5px]">
-              <span className="font-medium">{label}</span>
-              <Ltr className="text-end font-mono">{sell}</Ltr>
+              <span className="font-medium">{label}</span>{" "}
+              <Ltr className="text-end font-mono">{sell}</Ltr>{" "}
               <Ltr className="text-end font-mono text-fog-500">{cost}</Ltr>
             </div>
           ))}
@@ -122,15 +123,15 @@ const invoiceCopy = {
     seller: "Nexus Freight Sdn Bhd",
     sellerMeta: "SST No. W10-1808-32000123",
     buyer: "Straits Electronics Sdn Bhd",
-    no: ["Invoice No.", "INV-NXS-26-0418"],
-    date: ["Date", "14 Oct 2026"],
+    no: ["Invoice No.", "INV-27-0418"],
+    date: ["Date", "14 Feb 2027"],
     head: ["Description", "Qty", "Amount", "SST"],
     lines: [
       ["Ocean freight (USD 2,400 @ 4.47)", "1", "10,728.00", "0%"],
-      ["Terminal handling", "2", "1,300.00", "8%"],
-      ["Customs clearance", "1", "850.00", "8%"],
+      ["Terminal handling", "2", "1,300.00", "6%"],
+      ["Customs clearance", "1", "850.00", "6%"],
     ],
-    totals: [["Subtotal", "MYR 12,878.00"], ["SST 8%", "MYR 172.00"], ["Total", "MYR 13,050.00"]],
+    totals: [["Subtotal", "MYR 12,878.00"], ["SST 6%", "MYR 129.00"], ["Total", "MYR 13,007.00"]],
     note: "Printed with your logo · two print styles",
   },
   ar: {
@@ -138,11 +139,11 @@ const invoiceCopy = {
     seller: "شركة نكسس لحلول الشحن",
     sellerMeta: "الرقم الضريبي 310123456700003",
     buyer: "شركة الرواد للتجارة · 300984512700003",
-    no: ["رقم الفاتورة", "INV-NXS-26-0418"],
-    date: ["تاريخ الإصدار", "14/10/2026 10:24"],
+    no: ["رقم الفاتورة", "INV-27-0418"],
+    date: ["تاريخ الإصدار", "14/02/2027 10:24"],
     head: ["الوصف", "الكمية", "المبلغ", "الضريبة"],
     lines: [
-      ["شحن بحري (USD 2,400 × 3.75)", "1", "9,000.00", "0%"],
+      ["شحن بحري (⁦USD 2,400 × 3.75⁩)", "1", "9,000.00", "0%"],
       ["مناولة المحطة", "2", "1,100.00", "15%"],
       ["تخليص جمركي", "1", "750.00", "15%"],
     ],
@@ -193,16 +194,19 @@ export function TaxInvoiceShot({ locale, className }: { locale: Locale; classNam
             </div>
           </div>
           <div className="mt-3 overflow-hidden rounded border border-fog-200 text-[9.5px]">
-            <div className="grid grid-cols-[1fr_auto_auto_auto] gap-3 bg-ink-900 px-2 py-1 text-white">
+            <div className="grid grid-cols-[1fr_auto_auto_auto] gap-x-5 bg-ink-900 px-2 py-1 text-white">
               {t.head.map((h) => (
-                <span key={h} className="text-end first:text-start">{h}</span>
+                <Fragment key={h}>
+                  <span className="text-end first:text-start">{h}</span>{" "}
+                </Fragment>
               ))}
             </div>
             {t.lines.map(([d, q, a, v]) => (
-              <div key={d} className="grid grid-cols-[1fr_auto_auto_auto] gap-3 border-t border-fog-100 px-2 py-1">
-                <span>{d}</span>
-                <span className="text-end">{q}</span>
-                <Ltr className="text-end font-mono">{a}</Ltr>
+              <div key={d} className="grid grid-cols-[1fr_auto_auto_auto] gap-x-5 border-t border-fog-100 px-2 py-1">
+                {/* The spaces between cells keep copied or extracted text readable ("1 10,728.00", not "110,728.00"); a grid ignores them. */}
+                <span>{d}</span>{" "}
+                <span className="text-end">{q}</span>{" "}
+                <Ltr className="text-end font-mono">{a}</Ltr>{" "}
                 <Ltr className="text-end font-mono">{v}</Ltr>
               </div>
             ))}
@@ -212,7 +216,7 @@ export function TaxInvoiceShot({ locale, className }: { locale: Locale; classNam
             <div className="min-w-[60%] space-y-0.5 text-[9.5px]">
               {t.totals.map(([k, v], i) => (
                 <p key={k} className={cn("flex justify-between gap-3", i === t.totals.length - 1 && "border-t border-ink-900 pt-1 font-bold")}>
-                  <span>{k}</span>
+                  <span>{k}</span>{" "}
                   <Ltr className="font-mono">{v}</Ltr>
                 </p>
               ))}
@@ -238,10 +242,10 @@ const alertsCopy = {
       { icon: Bell, label: "Follow-ups due", n: 6 },
     ],
     rows: [
-      ["NXS-24121", "PT Harbour Textiles", "Jakarta → Port Klang", "Tomorrow"],
-      ["NXS-24118", "Straits Electronics Sdn Bhd", "Port Klang → Shanghai", "16 Oct"],
-      ["NXS-24116", "Meridian Furniture Sdn Bhd", "Rotterdam → Penang", "17 Oct"],
-      ["NXS-24113", "PT Nusantara Foods", "Singapore → Surabaya", "18 Oct"],
+      ["NXS27000421", "PT Harbour Textiles", "Jakarta → Port Klang", "Tomorrow"],
+      ["NXS27000418", "Straits Electronics Sdn Bhd", "Port Klang → Shanghai", "16 Feb"],
+      ["NXS27000416", "Meridian Furniture Sdn Bhd", "Rotterdam → Penang", "17 Feb"],
+      ["NXS27000413", "PT Nusantara Foods", "Singapore → Surabaya", "18 Feb"],
     ],
     head: ["Booking", "Customer", "Route", "ETA"],
   },
@@ -255,10 +259,10 @@ const alertsCopy = {
       { icon: Bell, label: "متابعات مستحقة", n: 5 },
     ],
     rows: [
-      ["NXS-24121", "مصنع الخليج للأغذية", "جبل علي ← الدمام", "غداً"],
-      ["NXS-24118", "شركة الرواد للتجارة", "شنغهاي ← جدة", "16 أكتوبر"],
-      ["NXS-24116", "مؤسسة الأفق للمعدات", "روتردام ← الدمام", "17 أكتوبر"],
-      ["NXS-24113", "شركة النخبة للمنسوجات", "نهافا شيفا ← جدة", "18 أكتوبر"],
+      ["NXS27000421", "مصنع الخليج للأغذية", "جبل علي ← الدمام", "غداً"],
+      ["NXS27000418", "شركة الرواد للتجارة", "شنغهاي ← جدة", "16 فبراير"],
+      ["NXS27000416", "مؤسسة الأفق للمعدات", "روتردام ← الدمام", "17 فبراير"],
+      ["NXS27000413", "شركة النخبة للمنسوجات", "نهافا شيفا ← جدة", "18 فبراير"],
     ],
     head: ["الحجز", "العميل", "المسار", "الوصول"],
   },

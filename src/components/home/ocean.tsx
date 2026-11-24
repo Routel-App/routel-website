@@ -78,7 +78,7 @@ export function Ocean() {
           {/* The booking riding along with the scene */}
           <div className="absolute end-3 top-3 max-w-[calc(100%-1.5rem)] rounded-2xl bg-white/95 p-3 text-ink-900 shadow-float backdrop-blur sm:end-5 sm:top-5 sm:p-4">
             <div className="flex items-center gap-3">
-              <p dir="ltr" className="font-mono text-[12px] font-semibold sm:text-[13px]">NXS26000412</p>
+              <p dir="ltr" className="font-mono text-[12px] font-semibold sm:text-[13px]">NXS27000412</p>
               <span key={stage} className="journey-pill rounded-full bg-spark-50 px-2 py-0.5 text-[11px] font-semibold text-spark-700 ring-1 ring-spark-200">
                 {t.stages[stage]}
               </span>

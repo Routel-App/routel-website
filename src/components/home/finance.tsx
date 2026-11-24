@@ -61,7 +61,7 @@ const copy = {
     description:
       "Invoices, vendor costs and overheads post to a real General Ledger the moment they're recorded. Every report is computed live from those entries.",
     reports: ["General Ledger", "Trial Balance", "Cash Position", "P&L", "AR Aging", "Overdue invoices", "Customer profitability"],
-    pnlTitle: "Profit & Loss · Aug 2026",
+    pnlTitle: "Profit & Loss · Jan 2027",
     pnlLabels: [
       "Revenue",
       "Cost of sales",
@@ -78,7 +78,7 @@ const copy = {
     invoiceTitle: "Multi-currency invoice",
     invoiceNote: "Presented and paid in USD. The ledger keeps both.",
     statementTitle: "Statement of account",
-    statementMeta: "01–31 Aug 2026 · 7 invoices · 2 payments",
+    statementMeta: "01–31 Jan 2027 · 7 invoices · 2 payments",
     statementBalance: "Balance",
     download: "Download PDF",
     cashTitle: "Cash position",
@@ -107,7 +107,7 @@ const copy = {
       "الفواتير المتأخرة",
       "ربحية العملاء",
     ],
-    pnlTitle: "الأرباح والخسائر · أغسطس 2026",
+    pnlTitle: "الأرباح والخسائر · يناير 2027",
     pnlLabels: [
       "الإيرادات",
       "تكلفة المبيعات",
@@ -124,7 +124,7 @@ const copy = {
     invoiceTitle: "فاتورة بعملتين",
     invoiceNote: "تُصدر وتُسدَّد بالدولار الأمريكي، ودفتر الأستاذ يحتفظ بالريال والدولار معاً.",
     statementTitle: "كشف حساب",
-    statementMeta: "01–31 أغسطس 2026 · 7 فواتير · 2 دفعات",
+    statementMeta: "01–31 يناير 2027 · 7 فواتير · 2 دفعات",
     statementBalance: "الرصيد",
     download: "تنزيل PDF",
     cashTitle: "الوضع النقدي",
@@ -220,7 +220,7 @@ export async function Finance() {
         {/* Multi-currency */}
         <Card title={t.invoiceTitle} icon={Banknote}>
           <p dir="ltr" className="font-mono text-[11px] text-fog-500 rtl:text-end">
-            INV-2026-0918 · Al Noor Trading
+            INV-27-0918 · Al Noor Trading
           </p>
           <p dir="ltr" className="font-display mt-2 text-2xl font-bold text-ink-900 rtl:text-end">
             USD 4,200.00

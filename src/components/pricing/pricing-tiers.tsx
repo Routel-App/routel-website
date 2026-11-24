@@ -102,7 +102,7 @@ const copy: Record<Locale, Copy> = {
         features: [
           "Everything in Growth",
           "NVOCC: Bills of Lading in your name, demurrage and detention, agents and profit share",
-          "Shipping agency and customs brokerage when they launch",
+          "Customs clearance, and shipping agency when it launches",
           "Government links (FASAH, CEISA, uCustoms) and the electronic B/L when available",
           "Support: priority",
         ],
@@ -219,7 +219,7 @@ const copy: Record<Locale, Copy> = {
         features: [
           "كل ما في النمو والتوسع",
           "NVOCC: البوليصة باسم الشركة، والأرضيات والتأخير، والوكلاء وتقاسم الربح",
-          "الوكالات الملاحية والتخليص عند إطلاقهما",
+          "التخليص الجمركي، والوكالات الملاحية عند إطلاقها",
           "الربط الحكومي (فسح، CEISA، uCustoms) والبوليصة الإلكترونية عند توفرها",
           "الدعم: أولوية",
         ],

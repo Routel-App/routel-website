@@ -21,10 +21,10 @@ const routesCopy = {
     head: ["Route", "Shipping line", "Container", "Valid until", "Buying"],
     status: { active: "Active", expiring: "Expiring", expired: "Expired" },
     rows: [
-      ["Port Klang", "Shanghai", "MSC", "40HC", "30 Nov", "USD 1,850", "active"],
-      ["Penang", "Rotterdam", "Maersk", "40HC", "21 Oct", "USD 2,940", "expiring"],
-      ["Jakarta", "Port Klang", "CMA CGM", "20GP", "15 Dec", "USD 420", "active"],
-      ["Surabaya", "Singapore", "COSCO", "20GP", "02 Oct", "USD 380", "expired"],
+      ["Port Klang", "Shanghai", "MSC", "40HC", "30 Mar", "USD 1,850", "active"],
+      ["Penang", "Rotterdam", "Maersk", "40HC", "21 Feb", "USD 2,940", "expiring"],
+      ["Jakarta", "Port Klang", "CMA CGM", "20GP", "15 Apr", "USD 420", "active"],
+      ["Surabaya", "Singapore", "COSCO", "20GP", "02 Feb", "USD 380", "expired"],
     ] as const,
     topTitle: "Top routes by volume",
     top: [["Port Klang → Shanghai", 92], ["Jakarta → Port Klang", 71], ["Penang → Rotterdam", 48]] as const,
@@ -38,10 +38,10 @@ const routesCopy = {
     head: ["المسار", "الخط الملاحي", "الحاوية", "صالح حتى", "سعر الشراء"],
     status: { active: "سارٍ", expiring: "قارب الانتهاء", expired: "منتهٍ" },
     rows: [
-      ["جدة", "شنغهاي", "MSC", "40HC", "30 نوفمبر", "USD 1,850", "active"],
-      ["الدمام", "روتردام", "Maersk", "40HC", "21 أكتوبر", "USD 2,940", "expiring"],
-      ["جدة", "جبل علي", "CMA CGM", "20GP", "15 ديسمبر", "USD 420", "active"],
-      ["الدمام", "نهافا شيفا", "COSCO", "20GP", "02 أكتوبر", "USD 610", "expired"],
+      ["جدة", "شنغهاي", "MSC", "40HC", "30 مارس", "USD 1,850", "active"],
+      ["الدمام", "روتردام", "Maersk", "40HC", "21 فبراير", "USD 2,940", "expiring"],
+      ["جدة", "جبل علي", "CMA CGM", "20GP", "15 أبريل", "USD 420", "active"],
+      ["الدمام", "نهافا شيفا", "COSCO", "20GP", "02 فبراير", "USD 610", "expired"],
     ] as const,
     topTitle: "أكثر المسارات حجماً",
     top: [["جدة ← شنغهاي", 92], ["جدة ← جبل علي", 71], ["الدمام ← روتردام", 48]] as const,
@@ -127,7 +127,7 @@ export function RoutesShot({ locale, className }: { locale: Locale; className?: 
 const trackingCopy = {
   en: {
     title: "Track your shipment",
-    q: ["Booking, B/L or container number", "NXS26000412"],
+    q: ["Booking, B/L or container number", "NXS27000412"],
     verify: ["Company name or account ID", "Straits Electronics"],
     go: "Track",
     steps: ["Booking Confirmed", "Gate In", "Vessel Loaded", "Departed", "In Transit", "Arrived", "Shipment Closed"],
@@ -136,7 +136,7 @@ const trackingCopy = {
   },
   ar: {
     title: "تتبّع شحنتك",
-    q: ["رقم الحجز أو البوليصة أو الحاوية", "NXS26000412"],
+    q: ["رقم الحجز أو البوليصة أو الحاوية", "NXS27000412"],
     verify: ["اسم الشركة أو رقم الحساب", "شركة الرواد للتجارة"],
     go: "تتبّع",
     steps: ["تم تأكيد الحجز", "دخول البوابة", "تم التحميل على السفينة", "غادرت", "قيد النقل", "وصلت", "الشحنة مغلقة"],

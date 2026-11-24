@@ -23,7 +23,7 @@ const sides = {
     rows: [
       ["Shipping line", "MSC"],
       ["Containers", "2 × 40HC"],
-      ["ETD", "18 Oct 2026"],
+      ["ETD", "18 Feb 2027"],
     ],
     total: ["Invoice total", "SAR 18,250.00"],
     vat: "incl. VAT 15%",
@@ -39,7 +39,7 @@ const sides = {
     rows: [
       ["الخط الملاحي", "MSC"],
       ["الحاويات", "2 × 40HC"],
-      ["تاريخ المغادرة المتوقع", "18 أكتوبر 2026"],
+      ["تاريخ المغادرة المتوقع", "18 فبراير 2027"],
     ],
     total: ["إجمالي الفاتورة", "SAR 18,250.00"],
     vat: "شاملة ضريبة القيمة المضافة 15%",
@@ -104,7 +104,7 @@ export function LanguageFlip({ start = "ar", hint }: { start?: Side; hint: strin
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <p className="text-[11px] font-medium text-fog-500">{t.booking}</p>
-            <p dir="ltr" className="font-mono text-[14px] font-semibold [unicode-bidi:plaintext]">NXS26000412</p>
+            <p dir="ltr" className="font-mono text-[14px] font-semibold [unicode-bidi:plaintext]">NXS27000412</p>
             <p className="mt-0.5 truncate text-[13px] text-fog-600">{t.customer}</p>
           </div>
           <span className="shrink-0 rounded-full bg-spark-50 px-2.5 py-1 text-[11.5px] font-semibold text-spark-700 ring-1 ring-spark-200">{t.status}</span>

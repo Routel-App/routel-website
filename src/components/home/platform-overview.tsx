@@ -20,7 +20,7 @@ const copy = {
     },
     pillars: [
       { title: "One record per shipment", text: "Quotation, booking, carrier booking, B/L, charges, invoices and documents under one booking number. One place to check, one status everyone sees." },
-      { title: "Modules by activity", text: "Sea, air, LCL and import release today; NVOCC, land transport, warehousing, agency, customs and 3PL next. Each opens from Business activities and stays off until you need it." },
+      { title: "Modules by activity", text: "Sea, air, LCL, import release, NVOCC, land transport, warehouse receipts and customs clearance today; shipping agency and 3PL next. Each opens from Business activities and stays off until you need it." },
       { title: "An AI that does the work", text: "It reads the carrier's confirmation, the vendor's bill and the line's notice, and prepares the booking, the B/L and the invoice. Nothing is saved until a person confirms." },
       { title: "Books kept as you go", text: "Every invoice, payment and cost posts to the general ledger when it's recorded, with the country's tax and its report. Month end stops being a project." },
     ],
@@ -43,7 +43,7 @@ const copy = {
     },
     pillars: [
       { title: "سجل واحد لكل شحنة", text: "عرض السعر والحجز وحجز الناقل والبوليصة والرسوم والفواتير والمستندات تحت رقم حجز واحد. مكان واحد للمراجعة، وحالة واحدة يراها الجميع." },
-      { title: "وحدات حسب النشاط", text: "البحري والجوي والتجميع وإشعار الوصول اليوم، ثم NVOCC والنقل البري والمستودعات والوكالات والتخليص و3PL. كل وحدة تُفتح من الأنشطة التجارية، وتبقى مقفلة حتى تحتاجها." },
+      { title: "وحدات حسب النشاط", text: "البحري والجوي والتجميع وإشعار الوصول وNVOCC والنقل البري وإيصالات المستودع والتخليص الجمركي اليوم، ثم الوكالات الملاحية و3PL. كل وحدة تُفتح من الأنشطة التجارية، وتبقى مقفلة حتى تحتاجها." },
       { title: "ذكاء اصطناعي ينجز العمل", text: "يقرأ تأكيد الناقل وفاتورة المورد وإشعار الخط، ويجهّز الحجز والبوليصة والفاتورة. ولا يُحفظ شيء قبل أن يؤكده شخص." },
       { title: "دفاتر تُكتب وأنت تعمل", text: "كل فاتورة ودفعة وتكلفة تُرحَّل إلى دفتر الأستاذ لحظة تسجيلها، بضريبة الدولة وتقريرها. ونهاية الشهر لم تعد مشروعاً." },
     ],

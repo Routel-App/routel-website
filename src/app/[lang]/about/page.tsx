@@ -49,6 +49,12 @@ const copy = {
     nowTitle: "Running on real shipments, offered as a hosted service",
     nowDescription: `${site.name} is a hosted service, run by the same team that built it for its own operations first. See what that looks like on real customer data in our case studies.`,
     caseStudies: "Read our case studies",
+    companyEyebrow: "The company",
+    companyTitle: "Based in Riyadh, grown inside a forwarder in Malaysia",
+    companyDescription: `${site.name} is based in Riyadh, Saudi Arabia. It runs today for freight companies in Malaysia and Indonesia, and its Arabic version is ready for Saudi Arabia, launching after the ZATCA e-invoicing link.`,
+    founderName: "Mohd Musheer",
+    founderRole: "Founder",
+    contactLabel: "Contact",
     forEyebrow: "Who it's built for",
     forTitle: "For the forwarding office, from the owner to the accounts desk",
     forItems: [
@@ -94,6 +100,12 @@ const copy = {
     nowTitle: "يعمل على شحنات حقيقية، ومتاح كخدمة مستضافة",
     nowDescription: `${site.name} خدمة مستضافة يديرها الفريق نفسه الذي بناها لعملياته الخاصة أولاً. اطّلع على شكل ذلك مع بيانات عملاء حقيقيين في دراسات الحالة لدينا.`,
     caseStudies: "اقرأ دراسات الحالة",
+    companyEyebrow: "الشركة",
+    companyTitle: "مقرّنا الرياض، ونشأنا داخل شركة شحن في ماليزيا",
+    companyDescription: `مقرّ ${site.name} في الرياض، المملكة العربية السعودية. ويعمل اليوم لدى شركات شحن في ماليزيا وإندونيسيا، ونسخته العربية جاهزة للسعودية، وتُطلق بعد الربط مع الفوترة الإلكترونية لهيئة الزكاة والضريبة والجمارك.`,
+    founderName: "Mohd Musheer",
+    founderRole: "المؤسس",
+    contactLabel: "تواصل معنا",
     forEyebrow: "لمن صُمّم",
     forTitle: "لمكتب الشحن كله، من المالك حتى المحاسبة",
     forItems: [
@@ -123,6 +135,12 @@ const copy = {
     nowTitle: string;
     nowDescription: string;
     caseStudies: string;
+    companyEyebrow: string;
+    companyTitle: string;
+    companyDescription: string;
+    founderName: string;
+    founderRole: string;
+    contactLabel: string;
     forEyebrow: string;
     forTitle: string;
     forItems: Principle[];
@@ -194,6 +212,20 @@ export default async function AboutPage() {
         <SectionHeading eyebrow={t.nowEyebrow} title={t.nowTitle} description={t.nowDescription} />
         <Reveal className="mx-auto mt-6 max-w-2xl text-center">
           <Button href="/case-studies" variant="secondary">{t.caseStudies}</Button>
+        </Reveal>
+      </Section>
+
+      <Section tone="muted" className="py-16 sm:py-20">
+        <SectionHeading eyebrow={t.companyEyebrow} title={t.companyTitle} description={t.companyDescription} />
+        <Reveal className="mx-auto mt-10 max-w-md rounded-2xl border border-fog-200 bg-white p-6 text-center shadow-card">
+          <h3 className="font-display text-[18px] font-semibold text-ink-900" dir="ltr">{t.founderName}</h3>
+          <p className="mt-1 text-sm text-fog-600">{t.founderRole}</p>
+          <p className="mt-4 text-sm text-fog-600">
+            {t.contactLabel}:{" "}
+            <a href={`mailto:${site.email}`} dir="ltr" className="font-semibold text-spark-700 hover:text-spark-800">
+              {site.email}
+            </a>
+          </p>
         </Reveal>
       </Section>
 

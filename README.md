@@ -32,7 +32,7 @@ src/components/home/    Landing page sections
 src/components/docs/    Docs sidebar, MDX components, page shell
 src/components/ui/      Button, Container, Section primitives
 src/components/motion/  Reveal / RevealGroup scroll animations
-src/lib/site.ts         Site name, nav, contact details
+src/lib/site.ts         Site name, nav, contact email
 src/lib/modules.ts      The product modules shown on the home page and footer
 src/lib/docs.ts         Docs navigation and MDX loader
 ```
@@ -72,4 +72,3 @@ The site is published in English (default, unprefixed URLs like `/pricing`) and 
 - `src/components/pricing/pricing-tiers.tsx` shows tiers without prices. Add prices when decided.
 - Set `NEXT_PUBLIC_SITE_URL` if the production domain ever differs from the default `https://routel.app` (used for canonical
   URLs, sitemap and Open Graph).
-- There is no public contact email yet; the demo form is the only way to reach us. Add one to `src/lib/site.ts` when it exists.

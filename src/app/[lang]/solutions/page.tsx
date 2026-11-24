@@ -15,7 +15,7 @@ const copy = {
   en: {
     metaTitle: "Solutions",
     metaDescription:
-      "Routel, the Maritime & Logistics Operating System: sea and air freight forwarding, consolidation and LCL, arrival notices and delivery orders today; NVOCC, land transport, warehousing, shipping agency, customs brokerage and 3PL inventory next.",
+      "Routel, the Maritime & Logistics Operating System: sea and air freight forwarding, consolidation and LCL, arrival notices and delivery orders, NVOCC, land transport, warehouse receipts and CFS, and customs clearance today; shipping agency and 3PL inventory next.",
     eyebrow: "Solutions",
     title: "Every line of the trade, on one AI operating system",
     lead: "Routel automates the daily work of maritime and logistics companies end to end: one booking at the centre, every document generated from it, and an AI assistant that runs the operation with you. Open the services your company offers; each one switches on as a module.",
@@ -38,7 +38,7 @@ const copy = {
   ar: {
     metaTitle: "الحلول",
     metaDescription:
-      "Routel، نظام التشغيل البحري واللوجستي: الشحن البحري والجوي والتجميع وLCL وإشعارات الوصول وأوامر التسليم اليوم، والناقل غير المالك للسفن والنقل البري والمستودعات والوكالة الملاحية والتخليص الجمركي ومخزون 3PL قريباً.",
+      "Routel، نظام التشغيل البحري واللوجستي: الشحن البحري والجوي والتجميع وLCL وإشعارات الوصول وأوامر التسليم، والناقل غير المالك للسفن، والنقل البري، وإيصالات المستودع ومحطة الحاويات، والتخليص الجمركي اليوم، والوكالة الملاحية ومخزون 3PL قريباً.",
     eyebrow: "الحلول",
     title: "كل خطوط التجارة، على نظام تشغيل واحد يقوده الذكاء الاصطناعي",
     lead: "يؤتمت Routel العمل اليومي لشركات الشحن البحري والخدمات اللوجستية من البداية إلى النهاية: حجز واحد في المركز، وكل مستند يُنشأ منه، ومساعد ذكي يدير العملية معك. افتح الخدمات التي تقدمها شركتك، وكل خدمة تعمل كوحدة.",
