@@ -12,6 +12,18 @@ import { AiShowcase } from "./ai-showcase";
 import { AiTrust } from "./ai-trust";
 import { moduleVisual } from "./module-visual";
 import type { Locale } from "@/lib/i18n";
+import type { ScreenName } from "@/lib/screens";
+import { ScreensSection } from "@/components/shots/screens-section";
+
+/** The real screenshots shown on a module's page, under its hero. */
+const moduleScreens: Partial<Record<string, ScreenName[]>> = {
+  bookings: ["booking", "bookings"],
+  quotations: ["quotes"],
+  invoicing: ["invoice"],
+  accounting: ["reports"],
+  "labeling-center": ["alerts"],
+  "ai-assistant": ["assistant"],
+};
 
 const copy = {
   en: {
@@ -29,7 +41,7 @@ const copy = {
     relatedEyebrow: "Keep going",
     relatedTitle: (name: string) => `Connect ${name} with the rest of Routel`,
     ctaTitle: (name: string) => `See ${name} running on a real booking`,
-    ctaBody: "A 30-minute walkthrough on your own routes and workflow, not a generic slide deck.",
+    ctaBody: "A 20-minute walkthrough on your own routes and workflow, not a generic slide deck.",
   },
   ar: {
     demo: "اطلب عرضاً تجريبياً",
@@ -46,7 +58,7 @@ const copy = {
     relatedEyebrow: "تابع الاستكشاف",
     relatedTitle: (name: string) => `اربط ${name} ببقية Routel`,
     ctaTitle: (name: string) => `شاهد ${name} يعمل على حجز حقيقي`,
-    ctaBody: "جولة مدتها 30 دقيقة على مساراتك وطريقة عملك الفعلية، لا عرض شرائح عام.",
+    ctaBody: "جولة مدتها 20 دقيقة على مساراتك وطريقة عملك الفعلية، لا عرض شرائح عام.",
   },
 } satisfies Record<
   Locale,
@@ -114,6 +126,8 @@ export async function PlatformPageTemplate({ module: mod, content }: { module: M
           ) : null}
         </Container>
       </section>
+
+      <ScreensSection names={moduleScreens[mod.slug] ?? []} locale={locale} />
 
       {mod.slug === "ai-assistant" ? <AiShowcase locale={locale} /> : null}
       {mod.slug === "ai-assistant" ? <AiTrust locale={locale} /> : null}

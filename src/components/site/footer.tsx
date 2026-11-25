@@ -1,12 +1,12 @@
 import Link from "@/components/i18n/link";
-import { site } from "@/lib/site";
+import { logoTagline, site } from "@/lib/site";
 import { getModules } from "@/lib/modules";
 import type { Locale } from "@/lib/i18n";
 import { getLocale } from "@/lib/locale-server";
 import { Container } from "@/components/ui/container";
 import { Logo } from "./logo";
 
-const platformSlugs = ["bookings", "business-partners", "quotations", "invoicing", "accounting", "bill-of-lading", "ai-assistant"];
+const platformSlugs = ["bookings", "business-partners", "crm", "quotations", "invoicing", "accounting", "bill-of-lading", "ai-assistant"];
 
 const copy = {
   en: {
@@ -16,7 +16,6 @@ const copy = {
     resources: "Resources",
     introduction: "Introduction",
     glossary: "Glossary",
-    caseStudies: "Case studies",
     company: "Company",
     about: "About Routel",
     pricing: "Pricing",
@@ -25,7 +24,8 @@ const copy = {
     privacy: "Privacy policy",
     blurb: "The Maritime & Logistics Operating System, run by AI. Built from the system that runs a working freight forwarder every day.",
     rights: "All rights reserved.",
-    origin: "Built and run from Malaysia.",
+    origin: "Grown inside a working freight forwarder in Malaysia.",
+    contact: "Contact",
   },
   ar: {
     platform: "المنصة",
@@ -34,7 +34,6 @@ const copy = {
     resources: "الموارد",
     introduction: "مقدمة",
     glossary: "المصطلحات",
-    caseStudies: "قصص العملاء",
     company: "الشركة",
     about: "عن Routel",
     pricing: "الأسعار",
@@ -43,7 +42,8 @@ const copy = {
     privacy: "سياسة الخصوصية",
     blurb: "نظام التشغيل البحري واللوجستي بقيادة الذكاء الاصطناعي. مبني من النظام الذي يدير شركة شحن حقيقية كل يوم.",
     rights: "جميع الحقوق محفوظة.",
-    origin: "طُوّر ويُدار من ماليزيا.",
+    origin: "نشأ داخل شركة شحن عاملة في ماليزيا.",
+    contact: "تواصل معنا",
   },
 } satisfies Record<Locale, Record<string, string>>;
 
@@ -69,7 +69,6 @@ export async function Footer() {
       links: [
         { label: t.introduction, href: "/docs" },
         { label: t.glossary, href: "/glossary" },
-        { label: t.caseStudies, href: "/case-studies" },
       ],
     },
     {
@@ -89,9 +88,15 @@ export async function Footer() {
       <Container className="pb-12">
         <div className="grid gap-10 md:grid-cols-[1.4fr_repeat(3,1fr)]">
           <div className="max-w-xs">
-            <Logo inverse tagline="Maritime & Logistics" />
+            <Logo inverse tagline={logoTagline[locale]} />
             <p className="mt-4 text-sm leading-relaxed text-white/60">
               {t.blurb}
+            </p>
+            <p className="mt-4 text-sm text-white/60">
+              {t.contact}:{" "}
+              <a href={`mailto:${site.email}`} dir="ltr" className="font-medium text-white/80 transition-colors hover:text-white">
+                {site.email}
+              </a>
             </p>
           </div>
           {columns.map((col) => (

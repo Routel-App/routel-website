@@ -149,7 +149,7 @@ export function CurrencyCard({ className }: { className?: string }) {
           <p className="text-[11.5px] text-fog-500">{t.label}</p>
           <p dir="ltr" data-num="" className="mt-1 font-mono text-2xl font-semibold tabular-nums rtl:text-end">USD 4,200.00</p>
           <p dir="ltr" data-conv="" className="mt-1 font-mono text-[12.5px] text-spark-700 rtl:text-end">
-            ≈ {t.base} {(usd * t.rate).toLocaleString("en-US", { minimumFractionDigits: 2 })} @ {t.rate.toFixed(4)}
+            ≈ {t.base} {(usd * t.rate).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} @ {t.rate.toFixed(4)}
           </p>
         </div>
         <div dir="ltr" className="mt-3 flex gap-2">
@@ -172,12 +172,12 @@ export function ReadsPdfCard({ className }: { className?: string }) {
     en: {
       title: "The AI reads the carrier's confirmation",
       text: "Drop in the PDF or a linked e-mail; you tick what goes on the booking.",
-      fields: [["Vessel / voyage", "MSC ISABELLA 412E"], ["Port of loading", "Port Klang"], ["Containers", "2 × 40HC"], ["Carrier booking no.", "MSCUKL4471"]],
+      fields: [["Vessel / voyage", "MSC AURORA 503E"], ["Port of loading", "Port Klang"], ["Containers", "2 × 40HC"], ["Carrier booking no.", "MSCUKL4471"]],
     },
     ar: {
       title: "الذكاء الاصطناعي يقرأ تأكيد الناقل",
       text: "ارفع ملف PDF أو رسالة مربوطة، واختر ما يُحفظ في الحجز.",
-      fields: [["السفينة / الرحلة", "MSC ISABELLA 412E"], ["ميناء الشحن", "جدة"], ["الحاويات", "2 × 40HC"], ["رقم حجز الناقل", "MSCJED4471"]],
+      fields: [["السفينة / الرحلة", "MSC AURORA 503E"], ["ميناء الشحن", "جدة"], ["الحاويات", "2 × 40HC"], ["رقم حجز الناقل", "MSCJED4471"]],
     },
   });
   const ref = useLoop((el) => {
@@ -229,8 +229,8 @@ export function ReadsPdfCard({ className }: { className?: string }) {
 export function RevisionsCard({ className }: { className?: string }) {
   const locale = useLocale();
   const t = L(locale, {
-    en: { title: "Booking Confirmation, with revisions", text: "Change a detail after it's issued and the next one is a numbered revision, logged.", doc: "Booking Confirmation", orig: "Original", rev: "Revision", change: "ETD 18 Oct → 20 Oct" },
-    ar: { title: "تأكيد الحجز بمراجعات مرقّمة", text: "أي تعديل بعد الإصدار يجعل التأكيد التالي مراجعة مرقّمة ومسجّلة.", doc: "تأكيد الحجز", orig: "الأصل", rev: "مراجعة", change: "المغادرة 18 ← 20 أكتوبر" },
+    en: { title: "Booking Confirmation, with revisions", text: "Change a detail after it's issued and the next one is a numbered revision, logged.", doc: "Booking Confirmation", orig: "Original", rev: "Revision", change: "ETD 18 Feb → 20 Feb" },
+    ar: { title: "تأكيد الحجز بمراجعات مرقّمة", text: "أي تعديل بعد الإصدار يجعل التأكيد التالي مراجعة مرقّمة ومسجّلة.", doc: "تأكيد الحجز", orig: "الأصل", rev: "مراجعة", change: "المغادرة 18 ← 20 فبراير" },
   });
   const ref = useLoop((el) => {
     const docs = gsap.utils.toArray<HTMLElement>("[data-doc]", el);
@@ -259,7 +259,7 @@ export function RevisionsCard({ className }: { className?: string }) {
             </div>
             {n === 2 ? (
               <div className="mt-2.5 space-y-1.5">
-                <p dir="ltr" className="font-mono text-[11.5px] text-fog-500 rtl:text-end">NXS26000412 · MSC ISABELLA 412E</p>
+                <p dir="ltr" className="font-mono text-[11.5px] text-fog-500 rtl:text-end">NXS27000418 · MSC AURORA 503E</p>
                 <p data-flag="" className="inline-flex rounded-md bg-spark-100 px-2 py-0.5 text-[11.5px] font-semibold text-spark-600">{t.change}</p>
               </div>
             ) : null}
@@ -275,8 +275,8 @@ export function RevisionsCard({ className }: { className?: string }) {
 export function ApprovalsCard({ className }: { className?: string }) {
   const locale = useLocale();
   const t = L(locale, {
-    en: { title: "Suggested by AI, approved by a person", text: "Incoming documents are matched to bookings; nothing is saved until someone approves.", pending: "Pending", ok: "Approved", rows: ["B/L → NXS26000412", "Vendor invoice → NXS26000398", "Booking confirmation → NXS26000415"] },
-    ar: { title: "يقترح الذكاء الاصطناعي ويعتمد شخص", text: "المستندات الواردة تُطابق مع الحجوزات، ولا شيء يُحفظ قبل الاعتماد.", pending: "بانتظار الاعتماد", ok: "معتمد", rows: ["بوليصة ← NXS26000412", "فاتورة مورد ← NXS26000398", "تأكيد حجز ← NXS26000415"] },
+    en: { title: "Suggested by AI, approved by a person", text: "Incoming documents are matched to bookings; nothing is saved until someone approves.", pending: "Pending", ok: "Approved", rows: ["B/L → NXS27000412", "Vendor invoice → NXS27000398", "Booking confirmation → NXS27000415"] },
+    ar: { title: "يقترح الذكاء الاصطناعي ويعتمد شخص", text: "المستندات الواردة تُطابق مع الحجوزات، ولا شيء يُحفظ قبل الاعتماد.", pending: "بانتظار الاعتماد", ok: "معتمد", rows: ["بوليصة ← NXS27000412", "فاتورة مورد ← NXS27000398", "تأكيد حجز ← NXS27000415"] },
   });
   const ref = useLoop((el) => {
     const rows = gsap.utils.toArray<HTMLElement>("[data-ap]", el);
@@ -320,8 +320,8 @@ export function ApprovalsCard({ className }: { className?: string }) {
 export function PaymentMatchCard({ className }: { className?: string }) {
   const locale = useLocale();
   const t = L(locale, {
-    en: { title: "Payments matched from the finance mailbox", text: "Routel proposes the invoice a payment belongs to. A person confirms.", mail: "Payment advice · Straits Electronics", inv: "INV-26-0418", amt: "MYR 13,050.00", match: "Suggested match", confirm: "Confirm" },
-    ar: { title: "مطابقة الدفعات من بريد المالية", text: "يقترح Routel الفاتورة التي تخص الدفعة، ويؤكدها شخص.", mail: "إشعار دفع · شركة الرواد للتجارة", inv: "INV-26-0418", amt: "SAR 18,250.00", match: "مطابقة مقترحة", confirm: "تأكيد" },
+    en: { title: "Payments matched from the finance mailbox", text: "Routel proposes the invoice a payment belongs to. A person confirms.", mail: "Payment advice · Straits Electronics", inv: "INV-27-0418", amt: "MYR 13,007.00", match: "Suggested match", confirm: "Confirm" },
+    ar: { title: "مطابقة الدفعات من بريد المالية", text: "يقترح Routel الفاتورة التي تخص الدفعة، ويؤكدها شخص.", mail: "إشعار دفع · شركة الرواد للتجارة", inv: "INV-27-0418", amt: "SAR 11,127.50", match: "مطابقة مقترحة", confirm: "تأكيد" },
   });
   const ref = useLoop((el) => {
     const line = el.querySelector<SVGPathElement>("[data-link]");
@@ -364,8 +364,8 @@ export function PaymentMatchCard({ className }: { className?: string }) {
 export function LedgerCard({ className }: { className?: string }) {
   const locale = useLocale();
   const t = L(locale, {
-    en: { title: "Books that keep themselves", text: "Every invoice, cost and expense posts as it happens: P&L, GL and aging are always current.", cur: "MYR", rows: [["Revenue", 412860], ["Cost of sales", -268915], ["Gross profit", 143945]], months: ["May", "Jun", "Jul", "Aug", "Sep", "Oct"] },
-    ar: { title: "دفاتر تكتب نفسها", text: "كل فاتورة وتكلفة ومصروف يُرحَّل لحظة تسجيله: الأرباح والخسائر ودفتر الأستاذ وأعمار الذمم محدّثة دائماً.", cur: "SAR", rows: [["الإيرادات", 412860], ["تكلفة المبيعات", -268915], ["إجمالي الربح", 143945]], months: ["مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر"] },
+    en: { title: "Books that keep themselves", text: "Every invoice, cost and expense posts as it happens: P&L, GL and aging are always current.", cur: "MYR", rows: [["Revenue", 412860], ["Cost of sales", -268915], ["Gross profit", 143945]], months: ["Sep", "Oct", "Nov", "Dec", "Jan", "Feb"] },
+    ar: { title: "دفاتر تكتب نفسها", text: "كل فاتورة وتكلفة ومصروف يُرحَّل لحظة تسجيله: الأرباح والخسائر ودفتر الأستاذ وأعمار الذمم محدّثة دائماً.", cur: "SAR", rows: [["الإيرادات", 412860], ["تكلفة المبيعات", -268915], ["إجمالي الربح", 143945]], months: ["سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر", "يناير", "فبراير"] },
   });
   const heights = [44, 52, 49, 61, 70, 82];
   const ref = useLoop((el) => {
@@ -424,14 +424,14 @@ export function BillOfLadingCard({ className }: { className?: string }) {
       text: "Generate Bill of Lading lays out the booking's own data the way a carrier's B/L looks, with its container annexure.",
       doc: "BILL OF LADING",
       annex: "Container annexure",
-      fields: [["Shipper", "Straits Electronics Sdn Bhd"], ["Consignee", "Shanghai Huatai Trading Co."], ["Vessel / voyage", "MSC ISABELLA 412E"], ["Port of loading → discharge", "Port Klang → Shanghai"], ["Containers", "MSCU 482113 7 · 40HC"]],
+      fields: [["Shipper", "Straits Electronics Sdn Bhd"], ["Consignee", "Shanghai Huatai Trading Co."], ["Vessel / voyage", "MSC AURORA 503E"], ["Port of loading → discharge", "Port Klang → Shanghai"], ["Containers", "MSCU 482113 7 · 40HC"]],
     },
     ar: {
       title: "بوليصة شحن فرعية من الحجز بنقرة",
       text: "زر «إنشاء بوليصة الشحن» يرتّب بيانات الحجز نفسه بشكل بوليصة الناقل، مع ملحق الحاويات.",
       doc: "BILL OF LADING",
       annex: "ملحق الحاويات",
-      fields: [["الشاحن", "شركة الرواد للتجارة"], ["المرسل إليه", "Shanghai Huatai Trading Co."], ["السفينة / الرحلة", "MSC ISABELLA 412E"], ["ميناء الشحن ← التفريغ", "جدة ← شنغهاي"], ["الحاويات", "MSCU 482113 7 · 40HC"]],
+      fields: [["الشاحن", "شركة الرواد للتجارة"], ["المرسل إليه", "Shanghai Huatai Trading Co."], ["السفينة / الرحلة", "MSC AURORA 503E"], ["ميناء الشحن ← التفريغ", "جدة ← شنغهاي"], ["الحاويات", "MSCU 482113 7 · 40HC"]],
     },
   });
   const ref = useLoop((el) => {
@@ -455,7 +455,7 @@ export function BillOfLadingCard({ className }: { className?: string }) {
         <div className="relative rounded-xl bg-white p-3.5 shadow-card ring-1 ring-fog-200">
           <div className="flex items-center justify-between border-b border-fog-200 pb-2">
             <p className="font-mono text-[12px] font-bold tracking-wider">{t.doc}</p>
-            <p dir="ltr" className="font-mono text-[10.5px] text-fog-500">HBL NXS-HBL-0412</p>
+            <p dir="ltr" className="font-mono text-[10.5px] text-fog-500">HBL NXS-HBL-0418</p>
           </div>
           <dl className="mt-2 grid grid-cols-2 gap-x-3 gap-y-2">
             {t.fields.map(([k, v], i) => (

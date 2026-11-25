@@ -47,10 +47,15 @@ const copy = {
     ],
     nowEyebrow: "Where we are now",
     nowTitle: "Running on real shipments, offered as a hosted service",
-    nowDescription: `${site.name} is a hosted service, run by the same team that built it for its own operations first. See what that looks like on real customer data in our case studies.`,
-    caseStudies: "Read our case studies",
+    nowDescription: `${site.name} is a hosted service, built and supported by its founder, with MIA, a freight forwarder that runs it in Malaysia and Indonesia, as development partner. Built for the GCC — Qatar and Saudi Arabia — and Southeast Asia, where it already runs in Malaysia and Indonesia. Ask for a demo and we will walk you through it on a real shipment.`,
+    companyEyebrow: "The company",
+    companyTitle: "Grown inside a working freight forwarder",
+    companyDescription: `${site.name} runs today for freight companies in Saudi Arabia, Malaysia and Indonesia, in English and Arabic.`,
+    founderName: "Mohd Musheer",
+    founderRole: "Founder",
+    contactLabel: "Contact",
     forEyebrow: "Who it's built for",
-    forTitle: "For the forwarding office, from the owner to the accounts desk",
+    forTitle: "Built for large operations, groups with branches and several companies, and simple enough for a single office",
     forItems: [
       { title: "Owners and managers", text: "Every booking's margin, the month's P&L, cash and who owes what, live, without waiting for the accountant." },
       { title: "Operations", text: "Bookings, carrier confirmations, cut-offs, containers and B/Ls on one record, with alerts for what's slipping." },
@@ -92,10 +97,15 @@ const copy = {
     ],
     nowEyebrow: "أين نحن اليوم",
     nowTitle: "يعمل على شحنات حقيقية، ومتاح كخدمة مستضافة",
-    nowDescription: `${site.name} خدمة مستضافة يديرها الفريق نفسه الذي بناها لعملياته الخاصة أولاً. اطّلع على شكل ذلك مع بيانات عملاء حقيقيين في دراسات الحالة لدينا.`,
-    caseStudies: "اقرأ دراسات الحالة",
+    nowDescription: `${site.name} خدمة مستضافة يبنيها مؤسسها ويتولى دعمها، وشريكه في التطوير MIA، شركة شحن تعمل به في ماليزيا وإندونيسيا. ومصمم لدول الخليج — قطر والسعودية — ولجنوب شرق آسيا، حيث يعمل اليوم في ماليزيا وإندونيسيا. اطلب عرضاً تجريبياً لنريك إياه على شحنة حقيقية.`,
+    companyEyebrow: "الشركة",
+    companyTitle: "نشأ داخل شركة شحن عاملة",
+    companyDescription: `يعمل ${site.name} اليوم لدى شركات شحن في السعودية وماليزيا وإندونيسيا، بالعربية والإنجليزية.`,
+    founderName: "محمد المشير",
+    founderRole: "المؤسس",
+    contactLabel: "تواصل معنا",
     forEyebrow: "لمن صُمّم",
-    forTitle: "لمكتب الشحن كله، من المالك حتى المحاسبة",
+    forTitle: "مصمم للعمليات الكبيرة — المجموعات بفروعها وشركاتها — وبسيط بما يكفي لمكتب واحد",
     forItems: [
       { title: "الملاك والمديرون", text: "هامش كل حجز، وأرباح الشهر، والنقد، ومن يدين لكم بماذا، مباشرة ودون انتظار المحاسب." },
       { title: "العمليات", text: "الحجوزات وتأكيدات الناقلين ومواعيد الإغلاق والحاويات والبوالص في سجل واحد، مع تنبيهات لما يتأخر." },
@@ -122,7 +132,12 @@ const copy = {
     nowEyebrow: string;
     nowTitle: string;
     nowDescription: string;
-    caseStudies: string;
+    companyEyebrow: string;
+    companyTitle: string;
+    companyDescription: string;
+    founderName: string;
+    founderRole: string;
+    contactLabel: string;
     forEyebrow: string;
     forTitle: string;
     forItems: Principle[];
@@ -193,7 +208,21 @@ export default async function AboutPage() {
       <Section className="py-16 sm:py-20">
         <SectionHeading eyebrow={t.nowEyebrow} title={t.nowTitle} description={t.nowDescription} />
         <Reveal className="mx-auto mt-6 max-w-2xl text-center">
-          <Button href="/case-studies" variant="secondary">{t.caseStudies}</Button>
+          <Button href="/demo" variant="secondary">{t.demo}</Button>
+        </Reveal>
+      </Section>
+
+      <Section tone="muted" className="py-16 sm:py-20">
+        <SectionHeading eyebrow={t.companyEyebrow} title={t.companyTitle} description={t.companyDescription} />
+        <Reveal className="mx-auto mt-10 max-w-md rounded-2xl border border-fog-200 bg-white p-6 text-center shadow-card">
+          <h3 className="font-display text-[18px] font-semibold text-ink-900" dir="auto">{t.founderName}</h3>
+          <p className="mt-1 text-sm text-fog-600">{t.founderRole}</p>
+          <p className="mt-4 text-sm text-fog-600">
+            {t.contactLabel}:{" "}
+            <a href={`mailto:${site.email}`} dir="ltr" className="font-semibold text-spark-700 hover:text-spark-800">
+              {site.email}
+            </a>
+          </p>
         </Reveal>
       </Section>
 

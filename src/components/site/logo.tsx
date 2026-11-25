@@ -75,7 +75,16 @@ export function Logo({ className, inverse = false, tagline, taglineClassName }: 
     <span className={cn("inline-flex flex-col items-start", className)} style={{ color: inverse ? LOGO_WHITE : LOGO_BLACK }}>
       <Wordmark className="h-[22px]" />
       {tagline ? (
-        <span dir="ltr" className={cn("mt-1 whitespace-nowrap text-[9.5px] font-semibold uppercase leading-none tracking-[0.16em]", inverse ? "text-white/60" : "text-fog-500", taglineClassName)}>
+        <span
+          dir="auto"
+          className={cn(
+            "mt-1 whitespace-nowrap font-semibold leading-none",
+            // Arabic letters must not be spaced out (it breaks their joins).
+            /[\u0600-\u06FF]/.test(tagline) ? "text-[10.5px]" : "text-[9.5px] uppercase tracking-[0.16em]",
+            inverse ? "text-white/60" : "text-fog-500",
+            taglineClassName,
+          )}
+        >
           {tagline}
         </span>
       ) : null}

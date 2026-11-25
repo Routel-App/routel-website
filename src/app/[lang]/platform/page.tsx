@@ -16,8 +16,8 @@ const copy = {
   en: {
     metaTitle: "Platform",
     metaDescription:
-      "Every Routel module, from the first quotation to the last payment — one platform, eighteen modules that already talk to each other.",
-    title: "One platform, eighteen modules that already talk to each other",
+      "Every Routel module, from the first quotation to the last payment — one platform, twenty-one modules that already talk to each other.",
+    title: "One platform, twenty-one modules that already talk to each other",
     intro:
       "Every module below is built and working in Routel today. A quotation becomes a booking, the booking produces a B/L and an invoice, and the invoice lands in your ledger — nothing re-keyed between them.",
     demo: "Request a demo",
@@ -26,7 +26,7 @@ const copy = {
       {
         title: "Operations",
         description: "The booking, from quote to shipment closed.",
-        slugs: ["bookings", "quotations", "bill-of-lading", "documents", "tracking"],
+        slugs: ["bookings", "air-freight", "consolidation", "arrival-notice", "quotations", "bill-of-lading", "documents", "tracking"],
       },
       {
         title: "Finance & accounting",
@@ -34,22 +34,22 @@ const copy = {
         slugs: ["invoicing", "finance-receivables", "credit-notes", "credit-applications", "expenses", "accounting"],
       },
       {
-        title: "Sales & partners",
-        description: "One record for every company you work with, and anything that needs a flag.",
-        slugs: ["business-partners", "labeling-center"],
+        title: "CRM & partners",
+        description: "One record for every company you work with, the people you deal with there, and anything that needs a flag.",
+        slugs: ["crm", "business-partners", "labeling-center"],
       },
       {
         title: "Trust, access & AI",
         description: "Who can do what, how correspondence stays attached, and a chat assistant that respects it all.",
-        slugs: ["roles", "email-sync", "visitor-tracking", "compliance", "ai-assistant"],
+        slugs: ["roles", "email-sync", "compliance", "ai-assistant"],
       },
     ],
   },
   ar: {
     metaTitle: "المنصة",
     metaDescription:
-      "كل وحدات Routel، من أول عرض سعر إلى آخر دفعة — منصة واحدة وثماني عشرة وحدة مترابطة فيما بينها أصلاً.",
-    title: "منصة واحدة، وثماني عشرة وحدة مترابطة فيما بينها أصلاً",
+      "كل وحدات Routel، من أول عرض سعر إلى آخر دفعة — منصة واحدة وإحدى وعشرون وحدة مترابطة فيما بينها أصلاً.",
+    title: "منصة واحدة، وإحدى وعشرون وحدة مترابطة فيما بينها أصلاً",
     intro:
       "كل وحدة أدناه مبنية وتعمل في Routel اليوم. عرض السعر يتحول إلى حجز، والحجز يُنتج بوليصة الشحن (B/L) والفاتورة، والفاتورة تصل إلى دفتر الأستاذ — دون إعادة إدخال أي بيانات بينها.",
     demo: "اطلب عرضاً تجريبياً",
@@ -58,7 +58,7 @@ const copy = {
       {
         title: "العمليات",
         description: "الحجز، من عرض السعر حتى إغلاق الشحنة.",
-        slugs: ["bookings", "quotations", "bill-of-lading", "documents", "tracking"],
+        slugs: ["bookings", "air-freight", "consolidation", "arrival-notice", "quotations", "bill-of-lading", "documents", "tracking"],
       },
       {
         title: "المالية والمحاسبة",
@@ -66,14 +66,14 @@ const copy = {
         slugs: ["invoicing", "finance-receivables", "credit-notes", "credit-applications", "expenses", "accounting"],
       },
       {
-        title: "المبيعات والشركاء",
-        description: "سجل واحد لكل شركة تتعامل معها، ولكل ما يحتاج إلى تمييز.",
-        slugs: ["business-partners", "labeling-center"],
+        title: "جهات الاتصال والشركاء",
+        description: "سجل واحد لكل شركة تتعامل معها، والأشخاص الذين تتعامل معهم فيها، وكل ما يحتاج إلى تمييز.",
+        slugs: ["crm", "business-partners", "labeling-center"],
       },
       {
         title: "الثقة والصلاحيات والذكاء الاصطناعي",
         description: "من يحق له فعل ماذا، وكيف تبقى المراسلات مرتبطة بحجوزاتها، ومساعد محادثة يلتزم بكل ذلك.",
-        slugs: ["roles", "email-sync", "visitor-tracking", "compliance", "ai-assistant"],
+        slugs: ["roles", "email-sync", "compliance", "ai-assistant"],
       },
     ],
   },

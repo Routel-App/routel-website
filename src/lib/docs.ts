@@ -42,7 +42,7 @@ const groups: Array<{ title: Record<Locale, string>; slugs: string[] }> = [
   },
   { title: { en: "Files", ar: "الملفات" }, slugs: ["documents", "email-sync"] },
   { title: { en: "Reports & Group", ar: "التقارير والمجموعة" }, slugs: ["accounting", "group"] },
-  { title: { en: "Admin", ar: "الإدارة" }, slugs: ["admin", "visitor-tracking"] },
+  { title: { en: "Admin", ar: "الإدارة" }, slugs: ["admin"] },
   { title: { en: "Top bar", ar: "الشريط العلوي" }, slugs: ["alerts", "labeling-center"] },
   { title: { en: "For your customers", ar: "لعملائك" }, slugs: ["tracking"] },
 ];

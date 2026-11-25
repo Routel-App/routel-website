@@ -1,4 +1,4 @@
-import { Coins, Languages, QrCode, Receipt } from "lucide-react";
+import { Coins, FileText, Languages, Receipt } from "lucide-react";
 import { Container } from "@/components/ui/container";
 import { Eyebrow } from "@/components/ui/section";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
@@ -14,42 +14,43 @@ type Copy = {
   lead: string;
   hint: string;
   cards: [Card, Card, Card, Card];
-  countries?: Array<{ name: string; tax: string; money: string }>;
+  countries?: Array<{ name: string; tax?: string; money: string }>;
 };
 
 const copy: Record<Locale, Copy> = {
   en: {
     eyebrow: "Built for your market",
     title: "Your currency, your tax rules, your language",
-    lead: "Each Routel deployment runs in its country's base currency with that country's tax, and the whole interface works in English or Arabic, right to left.",
+    lead: "Built for the GCC — Qatar and Saudi Arabia — and Southeast Asia, where it already runs in Malaysia and Indonesia. Each deployment runs in its country's base currency with that country's tax, and the whole interface works in English or Arabic, right to left.",
     hint: "The same booking, both ways",
     cards: [
       { title: "Two currencies, no spreadsheets", text: "Documents use your base currency and USD. Vendor costs in USD convert at the booking's own rate, so profit is right." },
-      { title: "Tax by country", text: "SST in Malaysia, PPN in Indonesia, VAT in Saudi Arabia, each with its own rates and its own tax report." },
-      { title: "Saudi tax invoices", text: "A bilingual Tax Invoice (or Simplified Tax Invoice) with the ZATCA QR code once it's issued." },
+      { title: "Tax by country", text: "VAT in Saudi Arabia, SST in Malaysia, PPN in Indonesia, each with its own rates and its own tax report." },
+      { title: "Bilingual tax invoices", text: "A Tax Invoice (or Simplified Tax Invoice) in Arabic and English. ZATCA-compliant e-invoicing for Saudi Arabia (Fatoora), with the QR code." },
       { title: "Arabic, right to left", text: "Every screen works in Arabic as well as English, mirrored right to left, and the AI assistant answers in any language." },
     ],
     countries: [
+      { name: "Qatar", money: "QAR + USD" },
+      { name: "Saudi Arabia", money: "SAR + USD", tax: "VAT 15%" },
       { name: "Malaysia", money: "MYR + USD", tax: "SST 6%" },
       { name: "Indonesia", money: "IDR + USD", tax: "PPN 11%" },
-      { name: "Saudi Arabia", money: "SAR + USD", tax: "VAT 15%" },
     ],
   },
   ar: {
-    eyebrow: "مصمَّم للسوق السعودي",
-    title: "بالريال، وبضريبتك، وبلغتك",
-    lead: "يعمل Routel بالريال السعودي والدولار الأمريكي، وبضريبة القيمة المضافة 15%، وبواجهة عربية كاملة من اليمين إلى اليسار، مع الإنجليزية متى احتجتها.",
+    eyebrow: "مصمَّم لسوقك",
+    title: "بعملتك، وبضريبتك، وبلغتك",
+    lead: "مصمم لدول الخليج — قطر والسعودية — ولجنوب شرق آسيا، حيث يعمل اليوم في ماليزيا وإندونيسيا. ويعمل بعملة بلدك مع الدولار الأمريكي، وبضريبة بلدك، وبواجهة عربية كاملة من اليمين إلى اليسار، مع الإنجليزية متى احتجتها.",
     hint: "الحجز نفسه باللغتين",
     cards: [
-      { title: "الريال والدولار", text: "المستندات بالريال والدولار فقط، وتكاليف الموردين بالدولار تُحوَّل بسعر الحجز نفسه، فيبقى الربح صحيحاً." },
-      { title: "ضريبة القيمة المضافة 15%", text: "نسبتا 15% و0% على البنود، مع تقرير ضريبة القيمة المضافة جاهز من الفواتير نفسها." },
-      { title: "فاتورة ضريبية برمز QR", text: "«فاتورة ضريبية» أو «فاتورة ضريبية مبسطة» باللغتين، مع رمز QR وفق متطلبات هيئة الزكاة والضريبة والجمارك (ZATCA) بعد إصدارها." },
+      { title: "عملتك والدولار", text: "المستندات بعملة بلدك والدولار فقط، وتكاليف الموردين بالدولار تُحوَّل بسعر الحجز نفسه، فيبقى الربح صحيحاً." },
+      { title: "ضريبة القيمة المضافة", text: "في السعودية نسبتا 15% و0% على البنود، مع تقرير ضريبة القيمة المضافة جاهز من الفواتير نفسها." },
+      { title: "فاتورة ضريبية باللغتين", text: "«فاتورة ضريبية» أو «فاتورة ضريبية مبسطة» بالعربية والإنجليزية. وفي السعودية فوترة إلكترونية متوافقة مع متطلبات هيئة الزكاة والضريبة والجمارك (فاتورة)، برمز QR." },
       { title: "عربي من اليمين إلى اليسار", text: "كل الشاشات تعمل بالعربية كما تعمل بالإنجليزية، باتجاه من اليمين إلى اليسار، والمساعد الذكي يجيب بأي لغة." },
     ],
   },
 };
 
-const icons = [Coins, Receipt, QrCode, Languages];
+const icons = [Coins, Receipt, FileText, Languages];
 
 export async function Region() {
   const locale = await getLocale();
@@ -85,7 +86,7 @@ export async function Region() {
                 <span key={c.name} className="inline-flex items-center gap-2 rounded-full bg-white/[0.05] px-3.5 py-1.5 text-[13px] ring-1 ring-white/10">
                   <span className="font-semibold">{c.name}</span>
                   <span className="text-white/50">{c.money}</span>
-                  <span className="text-spark-300">{c.tax}</span>
+                  {c.tax ? <span className="text-spark-300">{c.tax}</span> : null}
                 </span>
               ))}
             </Reveal>

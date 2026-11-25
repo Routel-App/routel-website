@@ -1,20 +1,19 @@
 "use client";
 
-import NextLink from "next/link";
 import Link from "@/components/i18n/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { Languages, Menu, Sparkles, X } from "lucide-react";
-import { site, siteCopy } from "@/lib/site";
+import { logoTagline, site, siteCopy } from "@/lib/site";
 import { localeNames, localizeHref, stripLocale, type Locale } from "@/lib/i18n";
 import { useLocale } from "@/components/i18n/locale-provider";
 import { cn } from "@/lib/utils";
 import { Logo } from "./logo";
 import { ProductMenu } from "./product-menu";
 import { SolutionsMenu } from "./solutions-menu";
-import { getServices } from "@/lib/services";
-import { getModules } from "@/lib/modules";
+import { getSolutionMenu } from "@/lib/services";
+import { getModules, moduleAreas } from "@/lib/modules";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 
@@ -27,14 +26,16 @@ const copy = {
 } satisfies Record<Locale, Record<string, string>>;
 
 /**
- * Links to the current page in the other language. Uses next/link directly:
- * the localized Link would re-prefix the target with the current locale.
+ * Links to the current page in the other language. A plain <a>, not a
+ * client-side link: the other language is another root layout (lang, dir),
+ * so it is a full page load, and it is never prefetched (the RSC prefetch of
+ * an unprefixed English URL from an Arabic page came back 404).
  */
 function LanguageSwitch({ path, inverse, className }: { path: string; inverse: boolean; className?: string }) {
   const locale = useLocale();
   const target: Locale = locale === "ar" ? "en" : "ar";
   return (
-    <NextLink
+    <a
       href={localizeHref(path, target)}
       hrefLang={target}
       lang={target}
@@ -47,7 +48,7 @@ function LanguageSwitch({ path, inverse, className }: { path: string; inverse: b
     >
       <Languages className="h-4 w-4" aria-hidden />
       {localeNames[target]}
-    </NextLink>
+    </a>
   );
 }
 
@@ -59,7 +60,7 @@ export function Navbar() {
   const nav = siteCopy[locale].nav;
   const ctaLabel = siteCopy[locale].ctaLabel;
   const modules = getModules(locale);
-  const services = getServices(locale);
+  const solutionGroups = getSolutionMenu(locale);
   // The browser URL carries the locale prefix on Arabic pages; compare against the bare path.
   const pathname = stripLocale(usePathname());
   const reduce = useReducedMotion();
@@ -90,7 +91,7 @@ export function Navbar() {
     >
       <Container className="flex h-16 items-center justify-between">
         <Link href="/" aria-label={t.home} className="shrink-0">
-          <Logo inverse={inverse} tagline="Maritime & Logistics" taglineClassName="hidden xl:block" />
+          <Logo inverse={inverse} tagline={logoTagline[locale]} taglineClassName="hidden xl:block" />
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">
@@ -164,33 +165,44 @@ export function Navbar() {
           >
             <Container className="flex max-h-[calc(100svh-4rem)] flex-col gap-1 overflow-y-auto py-4">
               <p className="px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-fog-500">{t.solutions}</p>
-              <div className="grid grid-cols-2 gap-1">
-                {services.map((s) => (
-                  <Link
-                    key={s.slug}
-                    href={s.href}
-                    className={cn("rounded-xl px-3 py-2 text-[13.5px] font-medium hover:bg-fog-100", s.status === "live" ? "text-ink-900" : "text-fog-500")}
-                    onClick={() => setOpen(false)}
-                  >
-                    {s.name}
-                  </Link>
-                ))}
-              </div>
-              <p className="px-3 pb-1 pt-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-fog-500">{t.product}</p>
-              <div className="grid grid-cols-2 gap-1">
-                {modules
-                  .filter((m) => m.slug !== "ai-assistant")
-                  .map((m) => (
-                    <Link
-                      key={m.slug}
-                      href={`/platform/${m.slug}`}
-                      className="rounded-xl px-3 py-2 text-[13.5px] font-medium text-ink-900 hover:bg-fog-100"
-                      onClick={() => setOpen(false)}
-                    >
-                      {m.name}
-                    </Link>
-                  ))}
-              </div>
+              {solutionGroups.map((g) => (
+                <div key={g.slug} className="px-3 pt-1">
+                  <p className="pt-1 text-[12px] font-semibold text-spark-700">{g.name}</p>
+                  <div className="grid grid-cols-2 gap-1">
+                    {g.items.map((s) => (
+                      <Link
+                        key={s.slug}
+                        href={s.href}
+                        className="-mx-3 rounded-xl px-3 py-2 text-[13.5px] font-medium text-ink-900 hover:bg-fog-100"
+                        onClick={() => setOpen(false)}
+                      >
+                        {s.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
+              <p className="px-3 pb-1 pt-4 text-[11px] font-semibold uppercase tracking-[0.12em] text-fog-500">{t.product}</p>
+              {moduleAreas.map((area) => (
+                <div key={area.id} className="px-3 pt-1">
+                  <p className="pt-1 text-[12px] font-semibold text-spark-700">{area.label[locale]}</p>
+                  <div className="grid grid-cols-2 gap-1">
+                    {area.slugs.map((slug) => {
+                      const m = modules.find((x) => x.slug === slug);
+                      return m ? (
+                        <Link
+                          key={m.slug}
+                          href={`/platform/${m.slug}`}
+                          className="-mx-3 rounded-xl px-3 py-2 text-[13.5px] font-medium text-ink-900 hover:bg-fog-100"
+                          onClick={() => setOpen(false)}
+                        >
+                          {m.name}
+                        </Link>
+                      ) : null;
+                    })}
+                  </div>
+                </div>
+              ))}
               <p className="px-3 pb-1 pt-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-fog-500">{t.more}</p>
               {nav.map((item) => (
                 <Link

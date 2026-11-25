@@ -9,11 +9,11 @@ import {
   Banknote,
   Bot,
   ChartColumn,
+  Contact,
   FileCheck,
   FileMinus,
   FileSignature,
   FolderOpen,
-  Globe,
   Mail,
   MapPin,
   Receipt,
@@ -205,6 +205,15 @@ export const modules: Module[] = [
     docs: "/docs/email-sync",
   },
   {
+    slug: "crm",
+    name: "CRM & Contacts",
+    short: "The people at every partner, from your e-mail and business cards",
+    description:
+      "Everyone your team e-mails (the sender, To, Cc and Reply-To) is filed under the business partner they work for, matched by their exact address first and then by their domain. Companies in your e-mail that aren't partners yet can be added as prospects. Scan business cards with your phone, several at once: AI reads each card and you check it field by field. Every contact has a page with its message history; every partner has a relationship panel (the last contact, who talks most on each side, messages per month); partners you used to work with who have gone quiet are listed; and follow-ups on a contact show under My follow-ups on the dashboard. Only the e-mail headers are kept, never the text, and what isn't used is deleted after a retention period.",
+    icon: Contact,
+    bullets: ["Contacts filed from your e-mail, by address then domain", "Business cards scanned and read by AI", "Relationship panel, gone-quiet partners and follow-ups"],
+  },
+  {
     slug: "tracking",
     name: "Public Shipment Tracking",
     short: "A no-login status page for your customers",
@@ -237,23 +246,13 @@ export const modules: Module[] = [
   {
     slug: "ai-assistant",
     name: "AI Assistant",
-    short: "Built in: calls tools and runs your operations automatically",
+    short: "Built in: reads, drafts and acts after you confirm",
     description:
       "Search bookings, customers and vendors, pull up details, list invoices, generate reports and read documents by chatting, in any language. Propose a new booking, invoice, business partner, expense or route rate (including importing a whole rate sheet from an attachment), or update a booking. Every write stops as a proposal a person has to confirm, then it's created through the exact same code path and role permissions as the manual interface.",
     icon: Bot,
     bullets: ["Calls the system's own tools", "Reads PDFs, images and rate sheets", "You confirm before anything is saved"],
     docs: "/docs/ai-assistant",
     featured: true,
-  },
-  {
-    slug: "visitor-tracking",
-    name: "Website Visitor Tracking",
-    short: "See who visits your branded site",
-    description:
-      "When Routel runs on your own custom domain, visitor activity on that site is tracked automatically, so you can see who is looking without wiring up separate analytics.",
-    icon: Globe,
-    bullets: ["Built into your custom domain", "No separate analytics setup", "Visitor activity at a glance"],
-    docs: "/docs/visitor-tracking",
   },
   {
     slug: "compliance",
@@ -263,6 +262,33 @@ export const modules: Module[] = [
       "Each booking carries an activity log of who changed which field and when, and of every confirmation issued, and generated documents are kept with the booking they belong to.",
     icon: FileCheck,
     bullets: ["Per-booking activity log", "Generated documents on file", "Role-scoped visibility"],
+  },
+];
+
+/**
+ * The modules by area, as the Platform menu and the mobile menu show them.
+ * The AI assistant has its own place in both, so it is in no area here.
+ */
+export const moduleAreas: Array<{ id: string; label: Record<Locale, string>; slugs: string[] }> = [
+  {
+    id: "operations",
+    label: { en: "Operations", ar: "العمليات" },
+    slugs: ["bookings", "quotations", "air-freight", "consolidation", "arrival-notice", "bill-of-lading", "documents", "tracking"],
+  },
+  {
+    id: "finance",
+    label: { en: "Finance", ar: "المالية" },
+    slugs: ["invoicing", "accounting", "finance-receivables", "credit-notes", "credit-applications", "expenses"],
+  },
+  {
+    id: "crm",
+    label: { en: "CRM & contacts", ar: "جهات الاتصال والشركاء" },
+    slugs: ["crm", "business-partners", "email-sync", "labeling-center"],
+  },
+  {
+    id: "control",
+    label: { en: "Control", ar: "الرقابة" },
+    slugs: ["roles", "compliance"],
   },
 ];
 

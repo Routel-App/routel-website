@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "@/components/i18n/link";
-import { ArrowRight, ArrowUpRight, Bot, CheckCircle2, Clock } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Bot, CheckCircle2 } from "lucide-react";
 import { Section, SectionHeading, Eyebrow } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
@@ -9,24 +9,21 @@ import { getServices, getSegments, type Service } from "@/lib/services";
 import { getLocale } from "@/lib/locale-server";
 import type { Locale } from "@/lib/i18n";
 import { Cta } from "@/components/home/cta";
-import { cn } from "@/lib/utils";
 
 const copy = {
   en: {
     metaTitle: "Solutions",
     metaDescription:
-      "Routel, the Maritime & Logistics Operating System: sea and air freight forwarding, consolidation and LCL, arrival notices and delivery orders today; NVOCC, land transport, warehousing, shipping agency, customs brokerage and 3PL inventory next.",
+      "Routel, the Maritime & Logistics Operating System: sea and air freight forwarding, consolidation and LCL, arrival notices and delivery orders, NVOCC, land transport, warehouse receipts and CFS, and shipping agency, customs clearance and inventory for your clients (3PL).",
     eyebrow: "Solutions",
     title: "Every line of the trade, on one AI operating system",
     lead: "Routel automates the daily work of maritime and logistics companies end to end: one booking at the centre, every document generated from it, and an AI assistant that runs the operation with you. Open the services your company offers; each one switches on as a module.",
     live: "Available now",
     liveTitle: "Running on Routel today",
     liveLead: "Built, working and open to every company today.",
-    coming: "Rolling out",
-    comingTitle: "The next modules on the platform",
-    comingLead: "On the roadmap. Each switches on as a module of the same platform, without changing how your team already works.",
+    services: "services, every one live",
+    types: "types of business, one platform",
     learn: "Learn more",
-    soon: "Coming soon",
     who: "Who it's for",
     whoTitle: "Built for the companies that move the world's cargo",
     aiTitle: "One AI assistant across every service",
@@ -38,18 +35,16 @@ const copy = {
   ar: {
     metaTitle: "الحلول",
     metaDescription:
-      "Routel، نظام التشغيل البحري واللوجستي: الشحن البحري والجوي والتجميع وLCL وإشعارات الوصول وأوامر التسليم اليوم، والناقل غير المالك للسفن والنقل البري والمستودعات والوكالة الملاحية والتخليص الجمركي ومخزون 3PL قريباً.",
+      "Routel، نظام التشغيل البحري واللوجستي: الشحن البحري والجوي والتجميع وLCL وإشعارات الوصول وأوامر التسليم، والناقل غير المالك للسفن، والنقل البري، وإيصالات المستودع ومحطة الحاويات، والوكالة الملاحية، والتخليص الجمركي، ومخزون العملاء 3PL.",
     eyebrow: "الحلول",
     title: "كل خطوط التجارة، على نظام تشغيل واحد يقوده الذكاء الاصطناعي",
     lead: "يؤتمت Routel العمل اليومي لشركات الشحن البحري والخدمات اللوجستية من البداية إلى النهاية: حجز واحد في المركز، وكل مستند يُنشأ منه، ومساعد ذكي يدير العملية معك. افتح الخدمات التي تقدمها شركتك، وكل خدمة تعمل كوحدة.",
     live: "متاحة الآن",
     liveTitle: "تعمل على Routel اليوم",
     liveLead: "مبنية وتعمل ومتاحة لكل شركة اليوم.",
-    coming: "قيد الإطلاق",
-    comingTitle: "الوحدات التالية على المنصة",
-    comingLead: "على خارطة الطريق. كل خدمة تعمل كوحدة في المنصة نفسها، دون أن تغيّر طريقة عمل فريقك الحالية.",
+    services: "خدمات، كلها متاحة",
+    types: "أنواع من الشركات، على منصة واحدة",
     learn: "اعرف المزيد",
-    soon: "قريباً",
     who: "لمن صُمّم",
     whoTitle: "مبني للشركات التي تنقل بضائع العالم",
     aiTitle: "مساعد ذكي واحد في كل الخدمات",
@@ -67,21 +62,15 @@ export async function generateMetadata(): Promise<Metadata> {
 
 function ServiceCard({ s, t }: { s: Service; t: (typeof copy)["en"] }) {
   const Icon = s.icon;
-  const live = s.status === "live";
   const body = (
     <>
       <div className="flex items-start justify-between gap-3">
-        <span className={cn("flex h-11 w-11 items-center justify-center rounded-xl", live ? "bg-ink-900 text-spark-400" : "bg-fog-100 text-fog-500")}>
+        <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-ink-900 text-spark-400">
           <Icon className="h-5 w-5" strokeWidth={1.75} />
         </span>
-        <span
-          className={cn(
-            "inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-[11px] font-semibold",
-            live ? "bg-spark-50 text-spark-700 ring-1 ring-spark-200" : "bg-fog-100 text-fog-600",
-          )}
-        >
-          {live ? <CheckCircle2 className="h-3 w-3" /> : <Clock className="h-3 w-3" />}
-          {live ? t.live : t.soon}
+        <span className="inline-flex items-center gap-1 rounded-full bg-spark-50 px-2.5 py-1 text-[11px] font-semibold text-spark-700 ring-1 ring-spark-200">
+          <CheckCircle2 className="h-3 w-3" />
+          {t.live}
         </span>
       </div>
       <h3 className="font-display mt-5 text-xl font-bold text-ink-900">{s.name}</h3>
@@ -89,21 +78,18 @@ function ServiceCard({ s, t }: { s: Service; t: (typeof copy)["en"] }) {
       <ul className="mt-4 space-y-1.5">
         {s.points.map((p) => (
           <li key={p} className="flex items-start gap-2 text-[13px] text-fog-700">
-            <span className={cn("mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full", live ? "bg-spark-500" : "bg-fog-300")} />
+            <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-spark-500" />
             {p}
           </li>
         ))}
       </ul>
-      <span className={cn("mt-auto inline-flex items-center gap-1 pt-5 text-[13.5px] font-semibold", live ? "text-spark-700" : "text-ink-900")}>
+      <span className="mt-auto inline-flex items-center gap-1 pt-5 text-[13.5px] font-semibold text-spark-700">
         {t.learn}
         <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 ltr:group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" />
       </span>
     </>
   );
-  const cls = cn(
-    "group flex h-full flex-col rounded-2xl p-6 transition-shadow",
-    live ? "bg-white shadow-card ring-1 ring-fog-200 hover:shadow-float" : "border border-dashed border-fog-300 bg-fog-50 hover:bg-white",
-  );
+  const cls = "group flex h-full flex-col rounded-2xl bg-white p-6 shadow-card ring-1 ring-fog-200 transition-shadow hover:shadow-float";
   return (
     <Link href={s.href} id={s.slug} className={cls}>
       {body}
@@ -115,8 +101,6 @@ export default async function SolutionsPage() {
   const locale = await getLocale();
   const t = copy[locale];
   const services = getServices(locale);
-  const live = services.filter((s) => s.status === "live");
-  const coming = services.filter((s) => s.status === "coming");
   const segments = getSegments(locale);
   const byslug = Object.fromEntries(services.map((s) => [s.slug, s]));
 
@@ -141,8 +125,8 @@ export default async function SolutionsPage() {
           </Reveal>
           <Reveal delay={0.1} className="grid grid-cols-2 gap-3">
             {[
-              { v: String(live.length), l: t.live },
-              { v: String(coming.length), l: t.coming },
+              { v: String(services.length), l: t.services },
+              { v: String(segments.length), l: t.types },
             ].map((x) => (
               <div key={x.l} className="rounded-2xl bg-ink-900 p-5 text-white">
                 <p className="font-display text-5xl font-extrabold text-spark-400">{x.v}</p>
@@ -156,7 +140,7 @@ export default async function SolutionsPage() {
       <Section>
         <SectionHeading align="left" eyebrow={t.live} title={t.liveTitle} description={t.liveLead} className="max-w-3xl" />
         <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
-          {live.map((s) => (
+          {services.map((s) => (
             <RevealItem key={s.slug} className="h-full">
               <ServiceCard s={s} t={t} />
             </RevealItem>
@@ -180,20 +164,10 @@ export default async function SolutionsPage() {
         </Reveal>
       </Section>
 
-      <Section tone="muted">
-        <SectionHeading align="left" eyebrow={t.coming} title={t.comingTitle} description={t.comingLead} className="max-w-3xl" />
-        <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
-          {coming.map((s) => (
-            <RevealItem key={s.slug} className="h-full">
-              <ServiceCard s={s} t={t} />
-            </RevealItem>
-          ))}
-        </RevealGroup>
-      </Section>
 
       <Section>
         <SectionHeading eyebrow={t.who} title={t.whoTitle} />
-        <RevealGroup className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-5" stagger={0.05}>
+        <RevealGroup className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
           {segments.map((g) => (
             <RevealItem key={g.slug} className="h-full">
               <div id={`for-${g.slug}`} className="flex h-full flex-col rounded-2xl bg-white p-5 shadow-card ring-1 ring-fog-200">
@@ -203,7 +177,7 @@ export default async function SolutionsPage() {
                   {g.services.map((sl) => {
                     const s = byslug[sl];
                     return (
-                      <li key={sl} className={cn("rounded-full px-2.5 py-1 text-[11.5px] font-medium", s.status === "live" ? "bg-spark-50 text-spark-800" : "bg-fog-100 text-fog-600")}>
+                      <li key={sl} className="rounded-full bg-spark-50 px-2.5 py-1 text-[11.5px] font-medium text-spark-800">
                         {s.name}
                       </li>
                     );

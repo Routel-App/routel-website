@@ -11,40 +11,44 @@ type Copy = { eyebrow: string; title: string; lead: string; cols: [string, strin
  * Routel against the traditional freight and logistics systems, as a
  * category. Built from the approved pitch points in the Routel system
  * repository (docs/business-context.md): no vendor named, no unconfirmed
- * competitor prices, no implementation durations.
+ * competitor prices, no implementation durations (they onboard in days too).
+ * The pain points are the founder's: implementation fees, high and often
+ * per-user prices, and software that is complicated to use.
  */
 const copy: Record<Locale, Copy> = {
   en: {
     eyebrow: "ROUTEL vs traditional systems",
     title: "Built for how logistics companies work now",
-    lead: "Traditional freight and logistics software was built for an era of forms, menus and implementation projects. ROUTEL starts from an AI that does the work, under your control.",
+    lead: "Traditional freight and logistics software charges implementation fees, is priced high (often per user) and is complicated to use. ROUTEL has no implementation fees, unlimited users, and is simple: set it up by chat, and the AI does the typing, under your control. Built for large operations, groups with branches and several companies, and simple enough for a single office.",
     cols: ["", "Traditional systems", "ROUTEL"],
     rows: [
-      { topic: "Prices", them: "The big systems don't publish prices: you start with a demo and a quote", us: "Published prices, from USD 199 a month, never per shipment or per user" },
-      { topic: "Getting started", them: "An implementation project, with its fees", us: "Set up by chat with the AI assistant, no implementation fees" },
+      { topic: "Prices", them: "High prices, rarely published: you start with a demo and a quote", us: "Published prices, from USD 199 a month, never per shipment" },
+      { topic: "Users", them: "Often priced per user, so every new hire adds to the bill", us: "Unlimited users on every paid plan" },
+      { topic: "Getting started", them: "Implementation fees before you start", us: "No implementation fees: set up by chat with the AI assistant" },
       { topic: "Data entry", them: "Typed in by hand, or scanned and re-checked", us: "AI reads carrier confirmations, B/Ls, vendor bills and agreements; a person confirms" },
-      { topic: "Daily work", them: "Menus and forms to learn screen by screen", us: "Ask in a sentence; the assistant calls the system's own tools" },
+      { topic: "Daily work", them: "Complicated: menus and forms to learn screen by screen", us: "Simple: ask in a sentence, and the AI does the typing with the system's own tools" },
       { topic: "How it's sold", them: "Each line of business as a separate product", us: "One system; each service opens as a module of your activities" },
       { topic: "The books", them: "Finance reconciled against operations after the fact", us: "Every invoice, payment and cost posts to the ledger as it happens" },
       { topic: "Control over automation", them: "Rules and integrations running in the background", us: "Every AI write waits for a person's confirmation, and is logged" },
-      { topic: "Arabic and local tax", them: "Varies by vendor", us: "Full Arabic, right to left; Saudi VAT invoices with the ZATCA QR code" },
+      { topic: "Arabic and local tax", them: "Varies by vendor", us: "Full Arabic, right to left; bilingual tax invoices. ZATCA-compliant e-invoicing for Saudi Arabia (Fatoora), with the QR code" },
     ],
     note: "Compared with traditional systems as a category, not with any one vendor.",
   },
   ar: {
     eyebrow: "ROUTEL مقابل الأنظمة التقليدية",
     title: "مبني لطريقة عمل شركات الشحن اليوم",
-    lead: "بُنيت أنظمة الشحن والخدمات اللوجستية التقليدية لعصر النماذج والقوائم ومشاريع التطبيق. أما ROUTEL فيبدأ من ذكاء اصطناعي ينجز العمل، تحت سيطرتك.",
+    lead: "أنظمة الشحن والخدمات اللوجستية التقليدية تتقاضى رسوم تطبيق، وأسعارها مرتفعة (وكثيراً ما تكون لكل مستخدم)، واستخدامها معقد. أما ROUTEL فبلا رسوم تطبيق، وبلا حد للمستخدمين، وبسيط: تجهّزه بالمحادثة، والذكاء الاصطناعي يتولى الكتابة، تحت سيطرتك. مصمم للعمليات الكبيرة — المجموعات بفروعها وشركاتها — وبسيط بما يكفي لمكتب واحد.",
     cols: ["", "الأنظمة التقليدية", "ROUTEL"],
     rows: [
-      { topic: "الأسعار", them: "الأنظمة الكبيرة لا تنشر أسعارها: تبدأ بعرض تجريبي وطلب تسعير", us: "أسعار منشورة، تبدأ من 699 ريالاً شهرياً، ولا رسوم على كل شحنة ولا على كل مستخدم" },
-      { topic: "البداية", them: "مشروع تطبيق، برسومه", us: "تجهيز بالمحادثة مع المساعد الذكي، بلا رسوم تطبيق" },
+      { topic: "الأسعار", them: "أسعار مرتفعة ونادراً ما تُنشر: تبدأ بعرض تجريبي وطلب تسعير", us: "أسعار منشورة، تبدأ من 199 دولاراً شهرياً (699 ريالاً سعودياً)، ولا رسوم على كل شحنة" },
+      { topic: "المستخدمون", them: "كثيراً ما تُسعَّر لكل مستخدم، فكل موظف جديد يزيد الفاتورة", us: "بلا حد للمستخدمين في كل الخطط المدفوعة" },
+      { topic: "البداية", them: "رسوم تطبيق قبل أن تبدأ", us: "بلا رسوم تطبيق: تجهيز بالمحادثة مع المساعد الذكي" },
       { topic: "إدخال البيانات", them: "يُكتب يدوياً، أو يُمسح ضوئياً ثم يُراجع", us: "الذكاء الاصطناعي يقرأ تأكيدات الناقل والبوالص وفواتير الموردين والاتفاقيات، ويؤكد شخص" },
-      { topic: "العمل اليومي", them: "قوائم ونماذج تُتعلَّم شاشة بشاشة", us: "اطلب بجملة، والمساعد يستدعي أدوات النظام نفسه" },
+      { topic: "العمل اليومي", them: "معقد: قوائم ونماذج تُتعلَّم شاشة بشاشة", us: "بسيط: اطلب بجملة، والذكاء الاصطناعي يتولى الكتابة بأدوات النظام نفسه" },
       { topic: "طريقة البيع", them: "كل نشاط منتج منفصل", us: "نظام واحد، وكل خدمة تُفتح وحدةً حسب أنشطتك" },
       { topic: "الدفاتر", them: "المالية تُطابَق مع العمليات بعد وقوعها", us: "كل فاتورة ودفعة وتكلفة تُرحَّل إلى دفتر الأستاذ لحظة تسجيلها" },
       { topic: "السيطرة على الأتمتة", them: "قواعد وتكاملات تعمل في الخلفية", us: "كل عملية كتابة بالذكاء الاصطناعي تنتظر تأكيد شخص، وتُسجَّل" },
-      { topic: "العربية والضرائب المحلية", them: "تختلف من مزوّد لآخر", us: "عربية كاملة من اليمين لليسار، وفواتير ضريبة القيمة المضافة السعودية برمز ZATCA" },
+      { topic: "العربية والضرائب المحلية", them: "تختلف من مزوّد لآخر", us: "عربية كاملة من اليمين لليسار، وفواتير ضريبية باللغتين. وفي السعودية فوترة إلكترونية متوافقة مع متطلبات هيئة الزكاة والضريبة والجمارك (فاتورة)، برمز QR" },
     ],
     note: "المقارنة مع الأنظمة التقليدية كفئة، لا مع مزوّد بعينه.",
   },

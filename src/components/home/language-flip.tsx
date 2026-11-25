@@ -8,7 +8,9 @@ import { cn } from "@/lib/utils";
  * The same booking card in English and in Arabic, flipping between the two
  * every few seconds while on screen (a toggle lets the visitor choose; no
  * auto-flip with prefers-reduced-motion). Shows that the whole interface
- * mirrors, not just the words.
+ * mirrors, not just the words. An export from Jeddah: the ocean freight is
+ * zero-rated, only the local charges carry VAT at 15%
+ * (13,600.00 + 2,450.00 + 367.50 = 16,417.50).
  */
 
 const sides = {
@@ -23,10 +25,15 @@ const sides = {
     rows: [
       ["Shipping line", "MSC"],
       ["Containers", "2 × 40HC"],
-      ["ETD", "18 Oct 2026"],
+      ["ETD", "18 Feb 2027"],
     ],
-    total: ["Invoice total", "SAR 18,250.00"],
-    vat: "incl. VAT 15%",
+    lines: [
+      ["Ocean freight · VAT 0%", "SAR 13,600.00"],
+      ["Local charges · VAT 15%", "SAR 2,450.00"],
+      ["VAT 15% on local charges", "SAR 367.50"],
+    ],
+    total: ["Invoice total", "SAR 16,417.50"],
+    vat: "International freight is zero-rated",
   },
   ar: {
     dir: "rtl" as const,
@@ -39,10 +46,15 @@ const sides = {
     rows: [
       ["الخط الملاحي", "MSC"],
       ["الحاويات", "2 × 40HC"],
-      ["تاريخ المغادرة المتوقع", "18 أكتوبر 2026"],
+      ["تاريخ المغادرة المتوقع", "18 فبراير 2027"],
     ],
-    total: ["إجمالي الفاتورة", "SAR 18,250.00"],
-    vat: "شاملة ضريبة القيمة المضافة 15%",
+    lines: [
+      ["الشحن البحري · ضريبة 0%", "SAR 13,600.00"],
+      ["الرسوم المحلية · ضريبة 15%", "SAR 2,450.00"],
+      ["ضريبة 15% على الرسوم المحلية", "SAR 367.50"],
+    ],
+    total: ["إجمالي الفاتورة", "SAR 16,417.50"],
+    vat: "الشحن الدولي خاضع لنسبة الصفر",
   },
 };
 
@@ -104,7 +116,7 @@ export function LanguageFlip({ start = "ar", hint }: { start?: Side; hint: strin
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <p className="text-[11px] font-medium text-fog-500">{t.booking}</p>
-            <p dir="ltr" className="font-mono text-[14px] font-semibold [unicode-bidi:plaintext]">NXS26000412</p>
+            <p dir="ltr" className="font-mono text-[14px] font-semibold [unicode-bidi:plaintext]">NXS27000436</p>
             <p className="mt-0.5 truncate text-[13px] text-fog-600">{t.customer}</p>
           </div>
           <span className="shrink-0 rounded-full bg-spark-50 px-2.5 py-1 text-[11.5px] font-semibold text-spark-700 ring-1 ring-spark-200">{t.status}</span>
@@ -121,7 +133,15 @@ export function LanguageFlip({ start = "ar", hint }: { start?: Side; hint: strin
             </div>
           ))}
         </dl>
-        <div className="mt-4 flex items-end justify-between gap-3 rounded-xl bg-fog-50 px-3.5 py-2.5">
+        <ul className="mt-4 space-y-1 px-1">
+          {t.lines.map(([k, v]) => (
+            <li key={k} className="flex justify-between gap-3 text-[12px]">
+              <span className="text-fog-500">{k}</span>
+              <span dir="ltr" className="font-mono text-ink-900">{v}</span>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-2 flex items-end justify-between gap-3 rounded-xl bg-fog-50 px-3.5 py-2.5">
           <div>
             <p className="text-[11px] text-fog-500">{t.total[0]}</p>
             <p className="text-[10.5px] text-fog-400">{t.vat}</p>

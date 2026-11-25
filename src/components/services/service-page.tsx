@@ -1,4 +1,4 @@
-import { ArrowRight, ArrowUpRight, BookOpen, Bot, Check, ChevronRight, Clock, Minus, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowUpRight, BookOpen, Bot, Check, ChevronRight, Minus, Sparkles } from "lucide-react";
 import Link from "@/components/i18n/link";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
@@ -8,6 +8,14 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
 import { Cta } from "@/components/home/cta";
 import { ServiceScene } from "./service-scene";
 import { cn } from "@/lib/utils";
+import type { ScreenName } from "@/lib/screens";
+import { ScreensSection } from "@/components/shots/screens-section";
+
+/** Real screenshots for the solutions that have them. */
+const serviceScreens: Partial<Record<string, ScreenName[]>> = {
+  "customs-brokerage": ["customs", "customs-file"],
+  "sea-freight": ["booking", "bookings"],
+};
 import { site } from "@/lib/site";
 import type { Locale } from "@/lib/i18n";
 import type { Service } from "@/lib/services";
@@ -16,17 +24,10 @@ import type { Mock, ServicePageCopy } from "@/lib/service-pages/types";
 const copy = {
   en: {
     solutions: "Solutions",
-    stage: { live: "Available now", development: "In development", planned: "Planned" },
+    live: "Available now",
     demo: "Request a demo",
-    interest: "Register interest",
     module: "See the module",
     guide: "Read the guide",
-    comingTitle: { development: "This service is in development", planned: "This service is planned" },
-    comingText: {
-      development: "What follows is its approved design. Details may change before launch; register interest and we'll open it to you first.",
-      planned: "What follows is its approved design. It will be built with a first client who needs it; register interest to be that client.",
-    },
-    preview: "Design preview",
     featuresEyebrow: "What it does",
     featuresTitle: "Everything the work needs, on one record",
     flowEyebrow: "How it flows",
@@ -45,17 +46,10 @@ const copy = {
   },
   ar: {
     solutions: "الحلول",
-    stage: { live: "متاحة الآن", development: "قيد التطوير", planned: "مخطط" },
+    live: "متاح الآن",
     demo: "اطلب عرضاً تجريبياً",
-    interest: "سجّل اهتمامك",
     module: "شاهد الوحدة",
     guide: "اقرأ الدليل",
-    comingTitle: { development: "هذه الخدمة قيد التطوير", planned: "هذه الخدمة مخططة" },
-    comingText: {
-      development: "ما يلي تصميمها المعتمد، وقد تتغير التفاصيل قبل الإطلاق. سجّل اهتمامك وسنفتحها لك أولاً.",
-      planned: "ما يلي تصميمها المعتمد، وتُبنى مع أول عميل يحتاجها. سجّل اهتمامك لتكون ذلك العميل.",
-    },
-    preview: "معاينة التصميم",
     featuresEyebrow: "ماذا تفعل",
     featuresTitle: "كل ما يحتاجه العمل، على سجل واحد",
     flowEyebrow: "كيف يسير العمل",
@@ -128,10 +122,8 @@ export function ServicePageTemplate({
   related: Service[];
 }) {
   const t = copy[locale];
-  const live = service.stage === "live";
-  const stage = service.stage;
   const Icon = service.icon;
-  const primary = live ? { href: `/demo?service=${service.slug}`, label: t.demo } : { href: `/demo?service=${service.slug}&interest=1`, label: t.interest };
+  const primary = { href: `/demo?service=${service.slug}`, label: t.demo };
   const url = `${site.url}${locale === "ar" ? "/ar" : ""}/solutions/${service.slug}`;
   const jsonLd = {
     "@context": "https://schema.org",
@@ -170,14 +162,9 @@ export function ServicePageTemplate({
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-ink-900 text-spark-400">
                   <Icon className="h-5 w-5" strokeWidth={1.75} />
                 </span>
-                <span
-                  className={cn(
-                    "inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[12.5px] font-semibold",
-                    live ? "bg-spark-50 text-spark-700 ring-1 ring-spark-200" : "bg-fog-100 text-fog-700",
-                  )}
-                >
-                  {live ? <Sparkles className="h-3.5 w-3.5" /> : <Clock className="h-3.5 w-3.5" />}
-                  {t.stage[stage]}
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-spark-50 px-3 py-1 text-[12.5px] font-semibold text-spark-700 ring-1 ring-spark-200">
+                  <Sparkles className="h-3.5 w-3.5" />
+                  {t.live}
                 </span>
               </div>
             </Reveal>
@@ -237,19 +224,8 @@ export function ServicePageTemplate({
         </Container>
       </section>
 
-      {!live ? (
-        <Container className="pt-14">
-          <Reveal className="flex items-start gap-4 rounded-2xl border border-dashed border-fog-300 bg-white p-5 sm:p-6">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-fog-100 text-fog-600">
-              <Clock className="h-5 w-5" />
-            </span>
-            <div>
-              <p className="font-display text-[16px] font-bold text-ink-900">{t.comingTitle[stage as "development" | "planned"]}</p>
-              <p className="mt-1 text-[14px] leading-relaxed text-fog-600">{t.comingText[stage as "development" | "planned"]}</p>
-            </div>
-          </Reveal>
-        </Container>
-      ) : null}
+
+      <ScreensSection names={serviceScreens[service.slug] ?? []} locale={locale} />
 
       {/* ── What it does: features with their pictures ── */}
       <Section className="pt-16 sm:pt-20">
@@ -275,7 +251,7 @@ export function ServicePageTemplate({
                 </ul>
               </Reveal>
               <Reveal delay={0.08} className={cn(i % 2 === 1 && "lg:order-1")}>
-                <MockCard mock={f.mock} preview={live ? undefined : t.preview} />
+                <MockCard mock={f.mock} />
               </Reveal>
             </div>
           ))}
@@ -338,10 +314,12 @@ export function ServicePageTemplate({
                       <p className="rounded-2xl rounded-es-md bg-fog-50 px-3.5 py-2.5 text-[13.5px] leading-relaxed text-ink-900 ring-1 ring-fog-100" dir="auto">
                         {content.ai.reply}
                       </p>
-                      <p className="mt-2 inline-flex items-center gap-1.5 text-[11.5px] font-semibold text-spark-700">
-                        <Check className="h-3.5 w-3.5" strokeWidth={3} />
-                        {t.confirm}
-                      </p>
+                      {content.ai.confirm ? (
+                        <p className="mt-2 inline-flex items-center gap-1.5 text-[11.5px] font-semibold text-spark-700">
+                          <Check className="h-3.5 w-3.5" strokeWidth={3} />
+                          {t.confirm}
+                        </p>
+                      ) : null}
                     </div>
                   </div>
                 </div>
@@ -418,7 +396,6 @@ export function ServicePageTemplate({
                 <span className="min-w-0 flex-1">
                   <span className="flex items-center gap-2">
                     <span className="font-display text-[15.5px] font-bold text-ink-900">{r.name}</span>
-                    {r.stage !== "live" ? <span className="rounded-full bg-fog-100 px-2 py-0.5 text-[10.5px] font-semibold text-fog-500">{t.stage[r.stage]}</span> : null}
                   </span>
                   <span className="mt-1 block text-[13px] leading-relaxed text-fog-600">{r.short}</span>
                 </span>

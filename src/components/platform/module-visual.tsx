@@ -61,7 +61,6 @@ export function moduleVisual(slug: string, locale: Locale): ReactNode {
       return lottie("/lottie/containers-stack.json");
     case "labeling-center":
       return lottie("/lottie/containers-stack.json");
-    case "visitor-tracking":
     case "compliance":
       return lottie("/lottie/ship-wave.json");
     case "expenses":

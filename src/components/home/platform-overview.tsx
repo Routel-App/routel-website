@@ -1,11 +1,10 @@
-import { Bot, Check, Clock, Landmark, Layers, Lock, Repeat2, Ship } from "lucide-react";
+import { Bot, Check, Landmark, Layers, Lock, Repeat2, Ship } from "lucide-react";
 import Link from "@/components/i18n/link";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
 import { getServices } from "@/lib/services";
 import { getLocale } from "@/lib/locale-server";
 import type { Locale } from "@/lib/i18n";
-import { cn } from "@/lib/utils";
 
 const copy = {
   en: {
@@ -14,13 +13,13 @@ const copy = {
     lead: "ROUTEL runs a shipping and logistics company on one system. One core carries every shipment from the quotation to the ledger; each service opens as a module for what your company does; an AI assistant does the daily work; and the books are written as the work happens.",
     layers: {
       ai: { label: "AI assistant", text: "Calls the system's own actions: reads, drafts, and writes after you confirm" },
-      modules: { label: "Services, opened by activity", live: "Live", soon: "Next" },
+      modules: { label: "Services, opened by activity" },
       core: { label: "The core", steps: ["Quotation", "Booking", "B/L", "Invoice", "Payment", "Ledger"] },
       base: { label: "Partners · documents · e-mail · roles and permissions · tax · two currencies" },
     },
     pillars: [
       { title: "One record per shipment", text: "Quotation, booking, carrier booking, B/L, charges, invoices and documents under one booking number. One place to check, one status everyone sees." },
-      { title: "Modules by activity", text: "Sea, air, LCL and import release today; NVOCC, land transport, warehousing, agency, customs and 3PL next. Each opens from Business activities and stays off until you need it." },
+      { title: "Modules by activity", text: "Sea, air, LCL, import release, NVOCC, land transport, warehouse receipts and customs clearance today; shipping agency and 3PL next. Each opens from Business activities and stays off until you need it." },
       { title: "An AI that does the work", text: "It reads the carrier's confirmation, the vendor's bill and the line's notice, and prepares the booking, the B/L and the invoice. Nothing is saved until a person confirms." },
       { title: "Books kept as you go", text: "Every invoice, payment and cost posts to the general ledger when it's recorded, with the country's tax and its report. Month end stops being a project." },
     ],
@@ -37,19 +36,19 @@ const copy = {
     lead: "يشغّل ROUTEL شركة الشحن والخدمات اللوجستية على نظام واحد. نواة واحدة تحمل كل شحنة من عرض السعر حتى دفتر الأستاذ، وكل خدمة تُفتح وحدةً حسب نشاط شركتك، ومساعد ذكي ينجز العمل اليومي، والدفاتر تُكتب لحظة وقوع العمل.",
     layers: {
       ai: { label: "المساعد الذكي", text: "يستدعي إجراءات النظام نفسه: يقرأ ويجهّز، ويكتب بعد تأكيدك" },
-      modules: { label: "الخدمات، تُفتح حسب النشاط", live: "متاحة", soon: "القادمة" },
+      modules: { label: "الخدمات، تُفتح حسب النشاط" },
       core: { label: "النواة", steps: ["عرض السعر", "الحجز", "البوليصة", "الفاتورة", "الدفعة", "الدفاتر"] },
       base: { label: "الشركاء · المستندات · البريد · الأدوار والصلاحيات · الضريبة · عملتان" },
     },
     pillars: [
       { title: "سجل واحد لكل شحنة", text: "عرض السعر والحجز وحجز الناقل والبوليصة والرسوم والفواتير والمستندات تحت رقم حجز واحد. مكان واحد للمراجعة، وحالة واحدة يراها الجميع." },
-      { title: "وحدات حسب النشاط", text: "البحري والجوي والتجميع وإشعار الوصول اليوم، ثم NVOCC والنقل البري والمستودعات والوكالات والتخليص و3PL. كل وحدة تُفتح من الأنشطة التجارية، وتبقى مقفلة حتى تحتاجها." },
+      { title: "وحدات حسب النشاط", text: "البحري والجوي والتجميع وإشعار الوصول وNVOCC والنقل البري وإيصالات المستودع والتخليص الجمركي اليوم، ثم الوكالات الملاحية و3PL. كل وحدة تُفتح من الأنشطة التجارية، وتبقى مقفلة حتى تحتاجها." },
       { title: "ذكاء اصطناعي ينجز العمل", text: "يقرأ تأكيد الناقل وفاتورة المورد وإشعار الخط، ويجهّز الحجز والبوليصة والفاتورة. ولا يُحفظ شيء قبل أن يؤكده شخص." },
       { title: "دفاتر تُكتب وأنت تعمل", text: "كل فاتورة ودفعة وتكلفة تُرحَّل إلى دفتر الأستاذ لحظة تسجيلها، بضريبة الدولة وتقريرها. ونهاية الشهر لم تعد مشروعاً." },
     ],
     outcomes: [
       { title: "بلا إعادة كتابة", text: "المستندات يقرؤها الذكاء الاصطناعي إلى السجل." },
-      { title: "نسخة واحدة من الحقيقة", text: "العمليات والمالية على الحجز نفسه." },
+      { title: "مصدر واحد موثوق للبيانات", text: "العمليات والمالية على الحجز نفسه." },
       { title: "السيطرة", text: "كل كتابة بالذكاء الاصطناعي يؤكدها شخص وتُسجَّل." },
       { title: "توسّع حسب النشاط", text: "افتح وحدة حين تضيف خدمة." },
     ],
@@ -92,17 +91,13 @@ export async function PlatformOverview() {
               <ul className="mt-3 flex flex-wrap gap-2">
                 {services.map((s) => {
                   const Icon = s.icon;
-                  const live = s.status === "live";
                   return (
                     <li key={s.slug}>
                       <Link
                         href={s.href}
-                        className={cn(
-                          "inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12.5px] font-medium transition-colors",
-                          live ? "bg-spark-50 text-ink-900 ring-1 ring-spark-200 hover:bg-spark-100" : "border border-dashed border-fog-300 bg-fog-50 text-fog-600 hover:bg-fog-100",
-                        )}
+                        className="inline-flex items-center gap-1.5 rounded-full bg-spark-50 px-3 py-1.5 text-[12.5px] font-medium text-ink-900 ring-1 ring-spark-200 transition-colors hover:bg-spark-100"
                       >
-                        {live ? <Icon className="h-3.5 w-3.5 text-spark-600" /> : <Clock className="h-3.5 w-3.5 text-fog-400" />}
+                        <Icon className="h-3.5 w-3.5 text-spark-600" />
                         {s.name}
                       </Link>
                     </li>

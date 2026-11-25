@@ -5,19 +5,12 @@ import type { Locale } from "./i18n";
 /**
  * The lines of business Routel runs, as the business activities a company
  * opens in Settings → Business activities (lib/activities.ts in the system).
- * `live` services have their module built; the others are on the roadmap
- * (docs/routel-central.md, section 3) and are shown as coming, never as
- * available.
+ * Every one of them is built and open to companies. Customs clearance covers
+ * the clearance file, the AI reading of the commercial invoice with HS
+ * suggestions, and the duty and VAT estimate with the deposit request.
  */
-export type ServiceStatus = "live" | "coming";
-
-/** Where a service stands: built, being built, or designed and waiting for a first client. */
-export type ServiceStage = "live" | "development" | "planned";
-
 export type Service = {
   slug: string;
-  status: ServiceStatus;
-  stage: ServiceStage;
   icon: LucideIcon;
   /** The service's own page. */
   href: string;
@@ -31,19 +24,19 @@ export type Service = {
   points: string[];
 };
 
-type Base = Omit<Service, "status" | "href" | "name" | "short" | "points">;
+type Base = Omit<Service, "href" | "name" | "short" | "points">;
 
 const base: Base[] = [
-  { slug: "sea-freight", stage: "live", icon: Ship, module: "/platform/bookings", doc: "/docs/bookings", related: ["air-freight", "consolidation", "import-release"] },
-  { slug: "air-freight", stage: "live", icon: Plane, module: "/platform/air-freight", doc: "/docs/air-freight", related: ["sea-freight", "consolidation", "import-release"] },
-  { slug: "consolidation", stage: "live", icon: Boxes, module: "/platform/consolidation", doc: "/docs/consolidation", related: ["sea-freight", "air-freight", "warehousing"] },
-  { slug: "import-release", stage: "live", icon: FileCheck2, module: "/platform/arrival-notice", doc: "/docs/arrival-notice", related: ["sea-freight", "land-transport", "customs-brokerage"] },
-  { slug: "nvocc", stage: "development", icon: Container, related: ["sea-freight", "shipping-agency", "consolidation"] },
-  { slug: "land-transport", stage: "development", icon: Truck, related: ["warehousing", "import-release", "contract-logistics"] },
-  { slug: "warehousing", stage: "development", icon: Warehouse, related: ["consolidation", "land-transport", "contract-logistics"] },
-  { slug: "shipping-agency", stage: "development", icon: Anchor, related: ["nvocc", "import-release", "customs-brokerage"] },
-  { slug: "customs-brokerage", stage: "development", icon: Landmark, related: ["import-release", "sea-freight", "shipping-agency"] },
-  { slug: "contract-logistics", stage: "planned", icon: PackageCheck, related: ["warehousing", "land-transport", "consolidation"] },
+  { slug: "sea-freight", icon: Ship, module: "/platform/bookings", doc: "/docs/bookings", related: ["air-freight", "consolidation", "import-release"] },
+  { slug: "air-freight", icon: Plane, module: "/platform/air-freight", doc: "/docs/air-freight", related: ["sea-freight", "consolidation", "import-release"] },
+  { slug: "consolidation", icon: Boxes, module: "/platform/consolidation", doc: "/docs/consolidation", related: ["sea-freight", "air-freight", "warehousing"] },
+  { slug: "import-release", icon: FileCheck2, module: "/platform/arrival-notice", doc: "/docs/arrival-notice", related: ["sea-freight", "land-transport", "customs-brokerage"] },
+  { slug: "nvocc", icon: Container, related: ["sea-freight", "shipping-agency", "consolidation"] },
+  { slug: "land-transport", icon: Truck, related: ["warehousing", "import-release", "contract-logistics"] },
+  { slug: "warehousing", icon: Warehouse, related: ["consolidation", "land-transport", "contract-logistics"] },
+  { slug: "shipping-agency", icon: Anchor, related: ["nvocc", "import-release", "customs-brokerage"] },
+  { slug: "customs-brokerage", icon: Landmark, related: ["import-release", "sea-freight", "shipping-agency"] },
+  { slug: "contract-logistics", icon: PackageCheck, related: ["warehousing", "land-transport", "consolidation"] },
 ];
 
 const text: Record<Locale, Record<string, { name: string; short: string; points: string[] }>> = {
@@ -71,17 +64,17 @@ const text: Record<Locale, Record<string, { name: string; short: string; points:
     nvocc: {
       name: "NVOCC",
       short: "Bills of Lading in your own name, demurrage and detention, agents and profit share.",
-      points: ["Own-name Bills of Lading", "Demurrage and detention", "Agents and profit share"],
+      points: ["Own-name Bills of Lading and Sea Waybills", "Demurrage and detention, both sides", "Agents, profit share and statements"],
     },
     "land-transport": {
       name: "Land transport",
-      short: "Trucking jobs with proof of delivery, on the same booking.",
-      points: ["Trucking orders", "Proof of delivery"],
+      short: "Container trucking on the same booking, reported from the driver's phone.",
+      points: ["Transport orders, fleet and drivers", "Driver's phone link, no app", "Trip expenses, fuel checks and billing"],
     },
     warehousing: {
       name: "Warehouse receipts and CFS",
       short: "Receive cargo into the warehouse or the container freight station, with a receipt.",
-      points: ["Warehouse receipts", "Container freight station (CFS)"],
+      points: ["Warehouse receipts, received on the phone", "Labels and loading by scan", "Your own storage tariff"],
     },
     "shipping-agency": {
       name: "Shipping agency",
@@ -89,9 +82,9 @@ const text: Record<Locale, Record<string, { name: string; short: string; points:
       points: ["Line agency operations", "Saudi Arabia, Malaysia and Indonesia"],
     },
     "customs-brokerage": {
-      name: "Customs brokerage",
-      short: "Customs declarations with HS codes suggested by AI.",
-      points: ["Declarations", "AI-suggested HS codes", "Links to FASAH, CEISA and uCustoms, awaiting government approval"],
+      name: "Customs clearance",
+      short: "One clearance file per declaration, with HS-coded lines and the customs value worked out.",
+      points: ["Import, export and transit; sea, air and land", "12-digit HS codes and the customs value (CIF)", "Invoice read by AI; duty and VAT estimated"],
     },
     "contract-logistics": {
       name: "Inventory (3PL)",
@@ -123,17 +116,17 @@ const text: Record<Locale, Record<string, { name: string; short: string; points:
     nvocc: {
       name: "الناقل غير المالك للسفن NVOCC",
       short: "بوالص شحن باسم شركتك، والأرضيات والتأخير، والوكلاء وتقاسم الربح.",
-      points: ["بوالص شحن باسم شركتك", "الأرضيات والتأخير", "الوكلاء وتقاسم الربح"],
+      points: ["بوالص شحن باسم شركتك و Sea Waybill", "الأرضيات والتأخير على الطرفين", "الوكلاء وتقاسم الربح والكشوف"],
     },
     "land-transport": {
       name: "النقل البري",
-      short: "أوامر النقل بالشاحنات مع إثبات التسليم، على الحجز نفسه.",
-      points: ["أوامر النقل", "إثبات التسليم"],
+      short: "نقل الحاويات بالشاحنات على الحجز نفسه، والسائق يبلّغ من جواله.",
+      points: ["أوامر النقل والأسطول والسائقون", "رابط جوال السائق، بلا تطبيق", "مصروفات الرحلة وفحوص الوقود والفوترة"],
     },
     warehousing: {
       name: "إيصالات المستودع ومحطة الحاويات",
       short: "استلام البضاعة في المستودع أو محطة تجميع الحاويات CFS، بإيصال.",
-      points: ["إيصالات المستودع", "محطة تجميع الحاويات CFS"],
+      points: ["إيصالات المستودع، تُستلم من الجوال", "الملصقات والتحميل بالمسح", "تعرفة التخزين الخاصة بك"],
     },
     "shipping-agency": {
       name: "الوكالة الملاحية",
@@ -142,8 +135,8 @@ const text: Record<Locale, Record<string, { name: string; short: string; points:
     },
     "customs-brokerage": {
       name: "التخليص الجمركي",
-      short: "البيانات الجمركية برموز HS يقترحها الذكاء الاصطناعي.",
-      points: ["البيانات الجمركية", "رموز HS يقترحها الذكاء الاصطناعي", "الربط مع فسح وCEISA وuCustoms بانتظار الموافقات الحكومية"],
+      short: "ملف تخليص لكل بيان، ببنود برموز HS وقيمة جمركية محسوبة.",
+      points: ["استيراد وتصدير وعبور (ترانزيت)؛ بحري وجوي وبري", "رموز HS من 12 خانة والقيمة الجمركية (CIF)", "قراءة الفاتورة بالذكاء الاصطناعي وتقدير الرسوم والضريبة"],
     },
     "contract-logistics": {
       name: "المخزون لعملائك 3PL",
@@ -156,7 +149,6 @@ const text: Record<Locale, Record<string, { name: string; short: string; points:
 export function getServices(locale: Locale): Service[] {
   return base.map((b) => ({
     ...b,
-    status: b.stage === "live" ? "live" : "coming",
     href: `/solutions/${b.slug}`,
     ...text[locale][b.slug],
   }));
@@ -169,21 +161,40 @@ export type Segment = { slug: string; name: string; text: string; services: stri
 
 const segments: Record<Locale, Segment[]> = {
   en: [
-    { slug: "forwarders", name: "Freight forwarders", text: "Sea, air and LCL on one booking, with the books kept as you work.", services: ["sea-freight", "air-freight", "consolidation", "import-release"] },
+    { slug: "forwarders", name: "Freight forwarders", text: "Sea, air and LCL on one booking, the arrival notice and the delivery order, with the books kept as you work.", services: ["sea-freight", "air-freight", "consolidation", "import-release"] },
     { slug: "nvocc", name: "NVOCCs and carriers' agents", text: "Your own Bills of Lading, equipment and agent network.", services: ["nvocc", "sea-freight"] },
-    { slug: "agencies", name: "Shipping agencies", text: "Line agency operations, document flows and finance in one system.", services: ["shipping-agency", "import-release"] },
     { slug: "customs", name: "Customs brokers", text: "Declarations prepared with AI, next to the shipment they belong to.", services: ["customs-brokerage", "import-release"] },
-    { slug: "3pl", name: "3PL and warehousing", text: "Receipts, trucking and client inventory on the same platform.", services: ["warehousing", "land-transport", "contract-logistics"] },
+    { slug: "agencies", name: "Shipping agencies", text: "Line agency operations, document flows and finance in one system.", services: ["shipping-agency", "import-release"] },
+    { slug: "transport", name: "Land transport", text: "Transport orders, fleet and drivers, on the same booking as the shipment.", services: ["land-transport"] },
+    { slug: "3pl", name: "Warehouse, CFS and 3PL", text: "Warehouse receipts, the CFS and your clients' inventory on the same platform.", services: ["warehousing", "contract-logistics", "land-transport"] },
   ],
   ar: [
-    { slug: "forwarders", name: "شركات الشحن والوساطة", text: "البحري والجوي والتجميع على حجز واحد، والدفاتر تُكتب وأنت تعمل.", services: ["sea-freight", "air-freight", "consolidation", "import-release"] },
+    { slug: "forwarders", name: "شركات الشحن والوساطة", text: "البحري والجوي والتجميع على حجز واحد، مع إشعار الوصول وأمر التسليم، والدفاتر تُكتب وأنت تعمل.", services: ["sea-freight", "air-freight", "consolidation", "import-release"] },
     { slug: "nvocc", name: "الناقلون غير المالكين للسفن ووكلاء الخطوط", text: "بوالصك الخاصة، ومعداتك، وشبكة وكلائك.", services: ["nvocc", "sea-freight"] },
-    { slug: "agencies", name: "الوكالات الملاحية", text: "عمليات وكالة الخطوط ومستنداتها وماليتها في نظام واحد.", services: ["shipping-agency", "import-release"] },
     { slug: "customs", name: "المخلّصون الجمركيون", text: "بيانات جمركية يجهّزها الذكاء الاصطناعي، بجانب الشحنة التي تخصها.", services: ["customs-brokerage", "import-release"] },
-    { slug: "3pl", name: "المستودعات والخدمات اللوجستية 3PL", text: "الإيصالات والنقل البري ومخزون العملاء على المنصة نفسها.", services: ["warehousing", "land-transport", "contract-logistics"] },
+    { slug: "agencies", name: "الوكالات الملاحية", text: "عمليات وكالة الخطوط ومستنداتها وماليتها في نظام واحد.", services: ["shipping-agency", "import-release"] },
+    { slug: "transport", name: "النقل البري", text: "أوامر النقل والأسطول والسائقون، على حجز الشحنة نفسه.", services: ["land-transport"] },
+    { slug: "3pl", name: "المستودعات ومحطة الحاويات و3PL", text: "إيصالات المستودع ومحطة الحاويات CFS ومخزون عملائك على المنصة نفسها.", services: ["warehousing", "contract-logistics", "land-transport"] },
   ],
 };
 
 export function getSegments(locale: Locale): Segment[] {
   return segments[locale];
+}
+
+/**
+ * The Solutions menu (desktop and mobile): each type of business with its
+ * services, each service listed once, under the first business it serves.
+ */
+export function getSolutionMenu(locale: Locale): Array<Segment & { items: Service[] }> {
+  const services = getServices(locale);
+  const shown = new Set<string>();
+  return getSegments(locale).map((g) => {
+    const items = g.services
+      .filter((slug) => !shown.has(slug))
+      .map((slug) => services.find((s) => s.slug === slug))
+      .filter((s): s is Service => Boolean(s));
+    items.forEach((s) => shown.add(s.slug));
+    return { ...g, items };
+  });
 }
