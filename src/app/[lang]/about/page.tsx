@@ -51,8 +51,6 @@ const copy = {
     companyEyebrow: "The company",
     companyTitle: "Grown inside a working freight forwarder",
     companyDescription: `${site.name} runs today for freight companies in Saudi Arabia, Malaysia and Indonesia, in English and Arabic.`,
-    founderName: "Mohd Musheer",
-    founderRole: "Founder",
     contactLabel: "Contact",
     forEyebrow: "Who it's built for",
     forTitle: "Built for large operations, groups with branches and several companies, and simple enough for a single office",
@@ -101,8 +99,6 @@ const copy = {
     companyEyebrow: "الشركة",
     companyTitle: "نشأ داخل شركة شحن عاملة",
     companyDescription: `يعمل ${site.name} اليوم لدى شركات شحن في السعودية وماليزيا وإندونيسيا، بالعربية والإنجليزية.`,
-    founderName: "محمد المشير",
-    founderRole: "المؤسس",
     contactLabel: "تواصل معنا",
     forEyebrow: "لمن صُمّم",
     forTitle: "مصمم للعمليات الكبيرة — المجموعات بفروعها وشركاتها — وبسيط بما يكفي لمكتب واحد",
@@ -135,8 +131,6 @@ const copy = {
     companyEyebrow: string;
     companyTitle: string;
     companyDescription: string;
-    founderName: string;
-    founderRole: string;
     contactLabel: string;
     forEyebrow: string;
     forTitle: string;
@@ -215,9 +209,7 @@ export default async function AboutPage() {
       <Section tone="muted" className="py-16 sm:py-20">
         <SectionHeading eyebrow={t.companyEyebrow} title={t.companyTitle} description={t.companyDescription} />
         <Reveal className="mx-auto mt-10 max-w-md rounded-2xl border border-fog-200 bg-white p-6 text-center shadow-card">
-          <h3 className="font-display text-[18px] font-semibold text-ink-900" dir="auto">{t.founderName}</h3>
-          <p className="mt-1 text-sm text-fog-600">{t.founderRole}</p>
-          <p className="mt-4 text-sm text-fog-600">
+          <p className="text-sm text-fog-600">
             {t.contactLabel}:{" "}
             <a href={`mailto:${site.email}`} dir="ltr" className="font-semibold text-spark-700 hover:text-spark-800">
               {site.email}
