@@ -292,7 +292,7 @@ export async function PricingTiers() {
   const t = copy[locale];
   return (
     <div>
-      <PricingGrid t={t} initial={locale === "ar" ? "sar" : "usd"} />
+      <PricingGrid t={t} initial="usd" />
 
       {/* The three messages: users, fees, one company */}
       <div className="mt-8 grid gap-3 md:grid-cols-3">
