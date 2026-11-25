@@ -21,12 +21,12 @@ const copy: Record<Locale, Copy> = {
   en: {
     eyebrow: "Built for your market",
     title: "Your currency, your tax rules, your language",
-    lead: "ROUTEL launches from Qatar, then Saudi Arabia and the wider GCC, then other markets. Each deployment runs in its country's base currency with that country's tax, and the whole interface works in English or Arabic, right to left.",
+    lead: "Built for the GCC — Qatar and Saudi Arabia — and Southeast Asia, where it already runs in Malaysia and Indonesia. Each deployment runs in its country's base currency with that country's tax, and the whole interface works in English or Arabic, right to left.",
     hint: "The same booking, both ways",
     cards: [
       { title: "Two currencies, no spreadsheets", text: "Documents use your base currency and USD. Vendor costs in USD convert at the booking's own rate, so profit is right." },
       { title: "Tax by country", text: "VAT in Saudi Arabia, SST in Malaysia, PPN in Indonesia, each with its own rates and its own tax report." },
-      { title: "Bilingual tax invoices", text: "A Tax Invoice (or Simplified Tax Invoice) in Arabic and English. ZATCA e-invoicing and local tax registration are set up when ROUTEL's local company is incorporated." },
+      { title: "Bilingual tax invoices", text: "A Tax Invoice (or Simplified Tax Invoice) in Arabic and English. ZATCA-compliant e-invoicing for Saudi Arabia (Fatoora), with the QR code." },
       { title: "Arabic, right to left", text: "Every screen works in Arabic as well as English, mirrored right to left, and the AI assistant answers in any language." },
     ],
     countries: [
@@ -39,12 +39,12 @@ const copy: Record<Locale, Copy> = {
   ar: {
     eyebrow: "مصمَّم لسوقك",
     title: "بعملتك، وبضريبتك، وبلغتك",
-    lead: "ينطلق ROUTEL من قطر، ثم السعودية ودول الخليج، ثم الأسواق الأخرى. ويعمل بعملة بلدك مع الدولار الأمريكي، وبضريبة بلدك، وبواجهة عربية كاملة من اليمين إلى اليسار، مع الإنجليزية متى احتجتها.",
+    lead: "مصمم لدول الخليج — قطر والسعودية — ولجنوب شرق آسيا، حيث يعمل اليوم في ماليزيا وإندونيسيا. ويعمل بعملة بلدك مع الدولار الأمريكي، وبضريبة بلدك، وبواجهة عربية كاملة من اليمين إلى اليسار، مع الإنجليزية متى احتجتها.",
     hint: "الحجز نفسه باللغتين",
     cards: [
       { title: "عملتك والدولار", text: "المستندات بعملة بلدك والدولار فقط، وتكاليف الموردين بالدولار تُحوَّل بسعر الحجز نفسه، فيبقى الربح صحيحاً." },
       { title: "ضريبة القيمة المضافة", text: "في السعودية نسبتا 15% و0% على البنود، مع تقرير ضريبة القيمة المضافة جاهز من الفواتير نفسها." },
-      { title: "فاتورة ضريبية باللغتين", text: "«فاتورة ضريبية» أو «فاتورة ضريبية مبسطة» بالعربية والإنجليزية. ويُجهَّز الربط مع الفوترة الإلكترونية لهيئة الزكاة والضريبة والجمارك والتسجيل الضريبي المحلي عند تأسيس شركة ROUTEL المحلية." },
+      { title: "فاتورة ضريبية باللغتين", text: "«فاتورة ضريبية» أو «فاتورة ضريبية مبسطة» بالعربية والإنجليزية. وفي السعودية فوترة إلكترونية متوافقة مع متطلبات هيئة الزكاة والضريبة والجمارك (فاتورة)، برمز QR." },
       { title: "عربي من اليمين إلى اليسار", text: "كل الشاشات تعمل بالعربية كما تعمل بالإنجليزية، باتجاه من اليمين إلى اليسار، والمساعد الذكي يجيب بأي لغة." },
     ],
   },

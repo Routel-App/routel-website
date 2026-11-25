@@ -69,7 +69,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
     faqs: [
       { q: "Can our customers track the shipment?", a: "Yes, on a public page with no login. They enter the booking, B/L or container number with their company name or account ID, and see the status timeline only." },
       { q: "Can we bring our rate sheets?", a: "Yes. Route rates import from Excel in one go, and the assistant can search them when it drafts a quotation." },
-      { q: "Which taxes does it handle?", a: "The tax of the company's country: VAT in Saudi Arabia, SST in Malaysia and PPN in Indonesia, each with its report. Invoices print as bilingual tax invoices; ZATCA e-invoicing and local tax registration are set up when ROUTEL's local company is incorporated." },
+      { q: "Which taxes does it handle?", a: "The tax of the company's country: VAT in Saudi Arabia, SST in Malaysia and PPN in Indonesia, each with its report. Invoices print as bilingual tax invoices; ZATCA-compliant e-invoicing for Saudi Arabia (Fatoora), with the QR code." },
     ],
   },
 

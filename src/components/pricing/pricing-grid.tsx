@@ -34,8 +34,8 @@ function TierCard({ t, currency, badge }: { t: Tier; currency: Currency; badge?:
 }
 
 /**
- * The plan cards with the price list switch: US dollars (Qatar and other
- * markets), Saudi riyals for Saudi Arabia. Arabic opens on riyals, English on
+ * The plan cards with the price list switch: US dollars for every market,
+ * Saudi riyals for Saudi Arabia. Arabic opens on riyals, English on
  * dollars; either
  * list is one click away.
  */
