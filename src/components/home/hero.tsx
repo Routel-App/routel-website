@@ -10,7 +10,7 @@ import { ShipSide } from "@/components/motion/sprites";
 const copy = {
   en: {
     badge: "New",
-    eyebrow: "NVOCC, land transport, warehouse receipts and customs clearance are live",
+    eyebrow: "NVOCC, customs clearance, shipping agency, land transport, warehouse and 3PL are live",
     title: "The Maritime & Logistics Operating System, run by AI.",
     lead: "ROUTEL brings every line of a shipping and logistics business onto one platform, from the first quotation to the general ledger. Its AI assistant automates the daily work of your company: it reads the carrier's documents, prepares bookings, waybills and invoices, and acts only when a person confirms.",
     demo: "Request a demo",
@@ -26,7 +26,7 @@ const copy = {
   },
   ar: {
     badge: "جديد",
-    eyebrow: "NVOCC والنقل البري وإيصالات المستودع والتخليص الجمركي متاحة الآن",
+    eyebrow: "NVOCC والتخليص الجمركي والوكالة الملاحية والنقل البري والمستودع و3PL متاحة الآن",
     title: "نظام التشغيل البحري واللوجستي، يقوده الذكاء الاصطناعي.",
     lead: "يجمع ROUTEL كل خطوط أعمال شركات الشحن والخدمات اللوجستية على منصة واحدة، من أول عرض سعر حتى دفتر الأستاذ. ومساعده الذكي يؤتمت العمل اليومي لشركتك: يقرأ مستندات الناقل، ويجهّز الحجوزات والبوالص والفواتير، ولا ينفّذ إلا بعد تأكيد شخص.",
     demo: "اطلب عرضاً تجريبياً",

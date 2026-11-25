@@ -9,10 +9,8 @@ export type Mock = {
 };
 
 /**
- * One service's own page under /solutions/[slug]. Live services describe what
- * the module does today, from the system's code; services still being built
- * describe the approved design (docs/roadmap/expansion-plan.md in the system
- * repository), and the page says so.
+ * One service's own page under /solutions/[slug]: what the module does, from
+ * the system's code.
  */
 export type ServicePageCopy = {
   metaTitle: string;

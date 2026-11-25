@@ -18,9 +18,7 @@ import { BOX, ContainerBox, Crane, ShipSide, Truck, boxColor, ink, paint, wavePa
  * go to the racks. On the stage the ship comes alongside, the crane
  * discharges the container to the yard, the gate opens, a truck takes it to
  * the CFS, its cartons land on the racks, and the ship sails. Beside it, the
- * ROUTEL Assistant's chat shows each desk's work in turn. Desks that are not
- * built yet (shipping agency, 3PL inventory) carry an "In development" chip
- * on their divider and their cards; tools are named only where the
+ * ROUTEL Assistant's chat shows each desk's work in turn. Tools are named only where the
  * assistant really has them.
  *
  * The money adds up: Al Noor is billed the arrival notice's SAR 3,450.00,
@@ -82,10 +80,10 @@ const LEVEL_H = 86;
 const cartonHome = (c: (typeof CARTONS)[number]) => ({ x: RACK_X0 + c.bay * BAY_W + 26, y: QUAY_Y - 8 - c.level * LEVEL_H - 34 });
 
 type Item =
-  | { at: number; kind: "module"; module: string; href: string; /** Not built yet: shown with an "In development" chip. */ dev?: boolean }
+  | { at: number; kind: "module"; module: string; href: string }
   | { at: number; kind: "user"; text: string; file?: string }
   | { at: number; kind: "assistant"; text: string }
-  | { at: number; kind: "card"; title: string; tools?: string[]; rows: Array<[string, string]>; big?: string; confirm?: string; confirmedAt?: number; dev?: boolean }
+  | { at: number; kind: "card"; title: string; tools?: string[]; rows: Array<[string, string]>; big?: string; confirm?: string; confirmedAt?: number }
   | { at: number; kind: "doc"; name: string; meta: string }
   /** Done on the system's own screens (a card's button, the Alerts page), not by the assistant. */
   | { at: number; kind: "note"; icon: "bell" | "check"; title: string; meta: string }
@@ -98,7 +96,6 @@ type Copy = {
   eyebrow: string;
   title: string;
   lead: string;
-  devNote: string;
   scroll: string;
   container: string;
   stages: string[];
@@ -107,7 +104,6 @@ type Copy = {
   input: string;
   more: string;
   confirmed: string;
-  dev: string;
   events: Event[];
   items: Item[];
 };
@@ -128,7 +124,6 @@ const copy: Record<Locale, Copy> = {
     eyebrow: "One vessel, every desk",
     title: "From the berth to the shelf",
     lead: "A ship calls at Jeddah with one FCL container for Al Noor Trading. The agency, the NVOCC, the customs broker, the forwarder, the trucker and the CFS each do their part, in one system and one chat.",
-    devNote: "Steps marked “In development” are being built.",
     scroll: "Scroll",
     container: "Container",
     stages: ["Port call", "Discharged", "Customs", "Released", "On the road", "On the shelf", "Settled"],
@@ -137,7 +132,6 @@ const copy: Record<Locale, Copy> = {
     input: "Ask in any language…",
     more: "See the solution",
     confirmed: "Confirmed",
-    dev: "In development",
     events: [
       { at: 0, icon: "call", title: "Port call · berth 12", meta: "MSC ISABELLA · 412E · PDA sent" },
       { at: 0.13, icon: "notice", title: "Arrival notice sent · Al Noor", meta: "ETA 21 Mar · FCL 1 × 40HC · SAR 3,450.00" },
@@ -156,11 +150,11 @@ const copy: Record<Locale, Copy> = {
       { at: 0.95, icon: "books", title: "Books closed · NXS27000412", meta: "Gross profit SAR 1,715.00 · 36.7%" },
     ],
     items: [
-      { at: 0, kind: "module", module: "Shipping agency", href: "/solutions/shipping-agency", dev: true },
+      { at: 0, kind: "module", module: "Shipping agency", href: "/solutions/shipping-agency" },
       { at: 0.01, kind: "user", text: "Open the port call for MSC ISABELLA 412E at Jeddah, and send the PDA." },
-      { at: 0.03, kind: "card", dev: true, title: "Port call · Jeddah · 412E", rows: [["ETA", "21 Mar, 06:00 · berth 12"], ["PDA to the principal", "USD 48,000"]], confirm: "Confirm & send", confirmedAt: 0.05 },
+      { at: 0.03, kind: "card", title: "Port call · Jeddah · 412E", rows: [["ETA", "21 Mar, 06:00 · berth 12"], ["PDA to the principal", "USD 48,000"]], confirm: "Confirm & send", confirmedAt: 0.05 },
       { at: 0.075, kind: "user", text: "Read the import manifest.", file: "manifest.pdf" },
-      { at: 0.09, kind: "card", dev: true, title: "Import manifest · 412E", rows: [["B/Ls", "148"], ["Containers", "312"]], confirm: "Confirm", confirmedAt: 0.11 },
+      { at: 0.09, kind: "card", title: "Import manifest · 412E", rows: [["B/Ls", "148"], ["Containers", "312"]], confirm: "Confirm", confirmedAt: 0.11 },
       { at: 0.125, kind: "module", module: "Arrival notice & delivery order", href: "/solutions/import-release" },
       { at: 0.13, kind: "doc", name: "Arrival Notice.pdf", meta: "E-mailed to Al Noor Trading · ETA 21 Mar · SAR 3,450.00 before the delivery order" },
       { at: 0.2, kind: "module", module: "NVOCC", href: "/solutions/nvocc" },
@@ -184,11 +178,11 @@ const copy: Record<Locale, Copy> = {
       { at: 0.71, kind: "module", module: "Warehouse receipts & CFS", href: "/solutions/warehousing" },
       { at: 0.715, kind: "user", text: "Devan MSCU 442118-0 and receive Al Noor's cartons.", file: "packing list.pdf" },
       { at: 0.735, kind: "card", title: "Warehouse receipt · WR-27-0519", rows: [["Cartons", "64 · Al Noor Trading"], ["Scanned", "64 / 64"]], confirm: "Confirm", confirmedAt: 0.76 },
-      { at: 0.79, kind: "module", module: "Inventory (3PL)", href: "/solutions/contract-logistics", dev: true },
-      { at: 0.8, kind: "card", dev: true, title: "AN-SKU-1042 · Al Noor", rows: [["Received", "64 cartons · B-03-2"], ["On hand", "1,344 cartons"]] },
-      { at: 0.84, kind: "module", module: "Shipping agency", href: "/solutions/shipping-agency", dev: true },
+      { at: 0.79, kind: "module", module: "Inventory (3PL)", href: "/solutions/contract-logistics" },
+      { at: 0.8, kind: "card", title: "AN-SKU-1042 · Al Noor", rows: [["Received", "64 cartons · B-03-2"], ["On hand", "1,344 cartons"]] },
+      { at: 0.84, kind: "module", module: "Shipping agency", href: "/solutions/shipping-agency" },
       { at: 0.843, kind: "user", text: "The ship has sailed. Settle the port call." },
-      { at: 0.857, kind: "card", dev: true, title: "FDA · Jeddah · 412E", rows: [["PDA advance", "USD 48,000"], ["Actual costs", "USD 46,320"]], big: "Due to the principal USD 1,680", confirm: "Confirm & send", confirmedAt: 0.875 },
+      { at: 0.857, kind: "card", title: "FDA · Jeddah · 412E", rows: [["PDA advance", "USD 48,000"], ["Actual costs", "USD 46,320"]], big: "Due to the principal USD 1,680", confirm: "Confirm & send", confirmedAt: 0.875 },
       { at: 0.89, kind: "module", module: "NVOCC · Accounting", href: "/solutions/nvocc" },
       { at: 0.893, kind: "doc", name: "MSC invoice.pdf", meta: "Read the line's invoice · D&D SAR 20.00 above the tariff" },
       { at: 0.907, kind: "user", text: "Check the line's bill on NXS27000412 and finalize it." },
@@ -201,7 +195,6 @@ const copy: Record<Locale, Copy> = {
     eyebrow: "سفينة واحدة، كل المكاتب",
     title: "من الرصيف إلى الرف",
     lead: "سفينة ترسو في جدة وعليها حاوية كاملة (FCL) لشركة النور للتجارة. الوكالة والـ NVOCC والمخلّص الجمركي ووكيل الشحن والناقل البري ومحطة الحاويات، كلٌّ يؤدي دوره، في نظام واحد ومحادثة واحدة.",
-    devNote: "الخطوات المعلّمة «قيد التطوير» ما زالت تُبنى.",
     scroll: "مرّر",
     container: "الحاوية",
     stages: ["زيارة السفينة", "تم التفريغ", "الجمارك", "أُفرج عنها", "على الطريق", "على الرف", "تمت التسوية"],
@@ -210,7 +203,6 @@ const copy: Record<Locale, Copy> = {
     input: "اطلب بأي لغة…",
     more: "اعرف الحل",
     confirmed: "تم التأكيد",
-    dev: "قيد التطوير",
     events: [
       { at: 0, icon: "call", title: "زيارة السفينة · الرصيف 12", meta: "MSC ISABELLA · 412E · أُرسل PDA" },
       { at: 0.13, icon: "notice", title: "أُرسل إشعار الوصول · النور", meta: "الوصول 21 مارس · FCL 1 × 40HC · SAR 3,450.00" },
@@ -229,11 +221,11 @@ const copy: Record<Locale, Copy> = {
       { at: 0.95, icon: "books", title: "أُغلقت الدفاتر · NXS27000412", meta: "إجمالي الربح SAR 1,715.00 · 36.7%" },
     ],
     items: [
-      { at: 0, kind: "module", module: "الوكالة الملاحية", href: "/solutions/shipping-agency", dev: true },
+      { at: 0, kind: "module", module: "الوكالة الملاحية", href: "/solutions/shipping-agency" },
       { at: 0.01, kind: "user", text: "افتح زيارة السفينة MSC ISABELLA 412E في جدة، وأرسل PDA." },
-      { at: 0.03, kind: "card", dev: true, title: "زيارة سفينة · جدة · 412E", rows: [["الوصول المتوقع", "21 مارس، 06:00 · الرصيف 12"], ["PDA للخط الأصيل", "USD 48,000"]], confirm: "تأكيد وإرسال", confirmedAt: 0.05 },
+      { at: 0.03, kind: "card", title: "زيارة سفينة · جدة · 412E", rows: [["الوصول المتوقع", "21 مارس، 06:00 · الرصيف 12"], ["PDA للخط الأصيل", "USD 48,000"]], confirm: "تأكيد وإرسال", confirmedAt: 0.05 },
       { at: 0.075, kind: "user", text: "اقرأ مانيفست الاستيراد.", file: "manifest.pdf" },
-      { at: 0.09, kind: "card", dev: true, title: "مانيفست استيراد · 412E", rows: [["البوالص", "148"], ["الحاويات", "312"]], confirm: "تأكيد", confirmedAt: 0.11 },
+      { at: 0.09, kind: "card", title: "مانيفست استيراد · 412E", rows: [["البوالص", "148"], ["الحاويات", "312"]], confirm: "تأكيد", confirmedAt: 0.11 },
       { at: 0.125, kind: "module", module: "إشعار الوصول وأمر التسليم", href: "/solutions/import-release" },
       { at: 0.13, kind: "doc", name: "إشعار الوصول.pdf", meta: "أُرسل بالبريد إلى النور للتجارة · الوصول 21 مارس · SAR 3,450.00 قبل أمر التسليم" },
       { at: 0.2, kind: "module", module: "NVOCC", href: "/solutions/nvocc" },
@@ -257,11 +249,11 @@ const copy: Record<Locale, Copy> = {
       { at: 0.71, kind: "module", module: "إيصالات المستودع ومحطة الحاويات", href: "/solutions/warehousing" },
       { at: 0.715, kind: "user", text: "فرّغ MSCU 442118-0 واستلم كراتين النور.", file: "قائمة التعبئة.pdf" },
       { at: 0.735, kind: "card", title: "إيصال مستودع · WR-27-0519", rows: [["الكراتين", "64 · النور للتجارة"], ["الممسوح", "64 / 64"]], confirm: "تأكيد", confirmedAt: 0.76 },
-      { at: 0.79, kind: "module", module: "المخزون لعملائك 3PL", href: "/solutions/contract-logistics", dev: true },
-      { at: 0.8, kind: "card", dev: true, title: "AN-SKU-1042 · النور", rows: [["المستلم", "64 كرتوناً · B-03-2"], ["الرصيد", "1,344 كرتوناً"]] },
-      { at: 0.84, kind: "module", module: "الوكالة الملاحية", href: "/solutions/shipping-agency", dev: true },
+      { at: 0.79, kind: "module", module: "المخزون لعملائك 3PL", href: "/solutions/contract-logistics" },
+      { at: 0.8, kind: "card", title: "AN-SKU-1042 · النور", rows: [["المستلم", "64 كرتوناً · B-03-2"], ["الرصيد", "1,344 كرتوناً"]] },
+      { at: 0.84, kind: "module", module: "الوكالة الملاحية", href: "/solutions/shipping-agency" },
       { at: 0.843, kind: "user", text: "أبحرت السفينة. سوِّ حساب الزيارة." },
-      { at: 0.857, kind: "card", dev: true, title: "FDA · جدة · 412E", rows: [["دفعة PDA المقدمة", "USD 48,000"], ["المصاريف الفعلية", "USD 46,320"]], big: "مستحق للخط الأصيل USD 1,680", confirm: "تأكيد وإرسال", confirmedAt: 0.875 },
+      { at: 0.857, kind: "card", title: "FDA · جدة · 412E", rows: [["دفعة PDA المقدمة", "USD 48,000"], ["المصاريف الفعلية", "USD 46,320"]], big: "مستحق للخط الأصيل USD 1,680", confirm: "تأكيد وإرسال", confirmedAt: 0.875 },
       { at: 0.89, kind: "module", module: "NVOCC · المحاسبة", href: "/solutions/nvocc" },
       { at: 0.893, kind: "doc", name: "فاتورة MSC.pdf", meta: "«قراءة فاتورة الخط» · الأرضيات أعلى من التعرفة بـ SAR 20.00" },
       { at: 0.907, kind: "user", text: "راجع فاتورة الخط على NXS27000412 واعتمدها." },
@@ -619,7 +611,7 @@ export function Odyssey() {
           <p className="text-[12px] font-semibold uppercase tracking-[0.14em] text-spark-300 sm:text-[12.5px]">{t.eyebrow}</p>
           <h2 className="font-display mt-2 text-balance text-2xl font-bold leading-[1.1] text-white sm:text-3xl lg:text-[2.4rem]">{t.title}</h2>
           <p className="odyssey-lead mt-3 max-w-sm text-pretty text-[14px] leading-relaxed text-white/65 sm:text-[15px]">
-            {bidi(t.lead)} <span className="text-white/45">{t.devNote}</span>
+            {bidi(t.lead)}
           </p>
         </div>
 
@@ -732,7 +724,6 @@ function Message({ item, t }: { item: Item; t: Copy }) {
           <span className="h-px flex-1 bg-fog-200" />
           <Link href={item.href} className="group inline-flex items-center gap-1.5 rounded-full bg-spark-50 px-2.5 py-1 text-[11px] font-semibold text-spark-600 ring-1 ring-spark-200 hover:bg-spark-100" title={t.more}>
             {bidi(item.module)}
-            {item.dev ? <DevChip label={t.dev} /> : null}
             <ArrowRight className="h-3 w-3 transition-transform ltr:group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" />
             <span className="sr-only">{t.more}</span>
           </Link>
@@ -767,7 +758,6 @@ function Message({ item, t }: { item: Item; t: Copy }) {
           <p className="flex flex-wrap items-center gap-1.5 text-[13px] font-semibold">
             <Sparkles className={cn("h-3.5 w-3.5", item.confirm ? "text-spark-500" : "text-spark-600")} />
             <span>{bidi(item.title)}</span>
-            {item.dev ? <DevChip label={t.dev} /> : null}
           </p>
           {item.tools?.length ? (
           <p className="mt-2 flex flex-wrap gap-1.5" aria-label="tools">
@@ -844,7 +834,3 @@ function Message({ item, t }: { item: Item; t: Copy }) {
   }
 }
 
-/** Marks a desk, or its card, that is still being built. */
-function DevChip({ label }: { label: string }) {
-  return <span className="rounded-full bg-fog-100 px-1.5 py-px text-[9.5px] font-semibold uppercase tracking-wide text-fog-600 ring-1 ring-fog-200 rtl:normal-case rtl:tracking-normal">{label}</span>;
-}

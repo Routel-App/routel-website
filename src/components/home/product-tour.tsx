@@ -44,7 +44,7 @@ const copy: Record<Locale, Copy> = {
         title: "Invoicing & tax",
         short: "From the booking's sale lines",
         body: "Create Invoice turns the booking's sale charges into drafts. Finalising numbers and locks the invoice; corrections go through credit and debit notes.",
-        bullets: ["Base currency and USD on one invoice", "SST, PPN or VAT by country", "Saudi tax invoices with the ZATCA QR code"],
+        bullets: ["Base currency and USD on one invoice", "SST, PPN or VAT by country", "Bilingual tax invoices, Arabic and English"],
       },
       customs: {
         title: "Customs clearance",
@@ -95,7 +95,7 @@ const copy: Record<Locale, Copy> = {
         title: "الفواتير والضريبة",
         short: "من بنود البيع في الحجز",
         body: "زر «إنشاء فاتورة» يحوّل رسوم البيع في الحجز إلى مسودات. الاعتماد يرقّم الفاتورة ويقفلها، والتصحيح يتم بإشعار دائن أو مدين.",
-        bullets: ["الريال والدولار في فاتورة واحدة", "ضريبة القيمة المضافة 15%", "فاتورة ضريبية برمز QR وفق متطلبات هيئة الزكاة والضريبة والجمارك"],
+        bullets: ["الريال والدولار في فاتورة واحدة", "ضريبة القيمة المضافة 15%", "فاتورة ضريبية باللغتين العربية والإنجليزية"],
       },
       customs: {
         title: "التخليص الجمركي",

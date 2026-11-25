@@ -115,7 +115,7 @@ export function ShipmentShot({ locale, className }: { locale: Locale; className?
   );
 }
 
-/* ─── Tax invoice: ZATCA (KSA) on the Arabic site, SST (Malaysia) on the English one ─── */
+/* ─── Tax invoice: Saudi VAT on the Arabic site, SST (Malaysia) on the English one ─── */
 
 const invoiceCopy = {
   en: {
@@ -148,7 +148,7 @@ const invoiceCopy = {
       ["تخليص جمركي", "1", "750.00", "15%"],
     ],
     totals: [["الإجمالي غير شامل الضريبة", "SAR 10,850.00"], ["ضريبة القيمة المضافة 15%", "SAR 277.50"], ["الإجمالي شامل الضريبة", "SAR 11,127.50"]],
-    note: "رمز QR وفق متطلبات هيئة الزكاة والضريبة والجمارك (ZATCA)",
+    note: "تُطبع بشعارك · بتصميمين للطباعة",
   },
 } as const;
 

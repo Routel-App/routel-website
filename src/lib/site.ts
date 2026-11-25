@@ -5,7 +5,7 @@ export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://routel.app",
   cta: { href: "/demo" },
   /** The public contact address, shown in the footer and on the About page. */
-  email: "musheer@routel.app",
+  email: "info@routel.app",
 } as const;
 
 type SiteCopy = {

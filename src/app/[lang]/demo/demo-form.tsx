@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 /**
  * The demo request. There is no mail service behind the site, so the form
  * doesn't pretend to send anything: it checks the fields, then opens the
- * visitor's own e-mail app with a message to the founder already written
+ * visitor's own e-mail app with a message to ROUTEL already written
  * from them. The address is shown too, for anyone without a mail app.
  */
 
@@ -31,7 +31,7 @@ const copy = {
     company: "Company",
     companyPh: "Your forwarding company",
     country: "Country",
-    countryPh: "Malaysia",
+    countryPh: "Qatar",
     teamSize: "Team size",
     teamSizePh: "How many people will use Routel?",
     sizes: ["1 to 5", "6 to 20", "21 to 50", "More than 50"],
@@ -50,7 +50,7 @@ const copy = {
     errMessage: "Keep the message under 2000 characters.",
     fix: "A few fields need attention.",
     subject: "Demo request: {company}",
-    bodyIntro: "Hello Musheer,\n\nI'd like a demo of Routel.",
+    bodyIntro: "Hello,\n\nI'd like a demo of Routel.",
     bodyName: "Name",
     bodyEmail: "Work email",
     bodyCompany: "Company",
@@ -67,7 +67,7 @@ const copy = {
     company: "الشركة",
     companyPh: "اسم شركة الشحن الخاصة بك",
     country: "الدولة",
-    countryPh: "ماليزيا",
+    countryPh: "قطر",
     teamSize: "حجم الفريق",
     teamSizePh: "كم شخصاً سيستخدم Routel؟",
     sizes: ["من 1 إلى 5", "من 6 إلى 20", "من 21 إلى 50", "أكثر من 50"],
@@ -86,7 +86,7 @@ const copy = {
     errMessage: "يجب ألا تتجاوز الرسالة 2000 حرف.",
     fix: "بعض الحقول تحتاج إلى مراجعة.",
     subject: "طلب عرض تجريبي: {company}",
-    bodyIntro: "مرحباً مشير،\n\nأود مشاهدة عرض تجريبي لـ Routel.",
+    bodyIntro: "مرحباً،\n\nأود مشاهدة عرض تجريبي لـ Routel.",
     bodyName: "الاسم",
     bodyEmail: "بريد العمل",
     bodyCompany: "الشركة",

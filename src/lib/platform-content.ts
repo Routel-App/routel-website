@@ -517,6 +517,56 @@ const baseContent: Record<string, PlatformContent> = {
     related: ["documents", "bookings", "finance-receivables"],
   },
 
+  crm: {
+    eyebrow: "CRM & Contacts",
+    title: "Know the people at every partner, without typing them in",
+    description:
+      "Routel files everyone your team e-mails under the business partner they work for, reads business cards from a photo, and shows each relationship from the e-mail itself: the last contact, who talks to whom, and which partners have gone quiet.",
+    stats: [
+      { value: "4", label: "addresses read on every e-mail: From, To, Cc and Reply-To" },
+      { value: "20", label: "business cards scanned in one go, one per photo" },
+      { value: "0", label: "e-mail texts stored; only the headers are kept" },
+    ],
+    painPoints: [
+      "The only list of who you deal with at each customer and agent is in each person's own inbox and phone.",
+      "Business cards from a trade fair sit in a drawer until someone types them in, which is usually never.",
+      "A good customer stops writing, and nobody notices until the bookings have gone elsewhere.",
+    ],
+    solutionIntro:
+      "Connect the mailbox you already sync, and the people in it are found under their partner: by their exact address first, then by their domain. Cards are read by AI and checked by a person. Each partner's page then shows the relationship as it really is, counted from the e-mail headers.",
+    features: [
+      { title: "People found in your e-mail", description: "The sender, To, Cc and Reply-To of every e-mail are matched to a partner: an address that is already a contact's first, then the partner's domain. A free e-mail address (Gmail, Outlook and the like) is matched only by the exact address, and your own colleagues and no-reply addresses are never contacts." },
+      { title: "Review first, or add automatically", description: "Under People in your e-mails, Add makes a person a contact, Merge adds the address to a contact you have, and Ignore stops the suggestion. Or let people at a known partner, seen in enough e-mails, become contacts on their own." },
+      { title: "New companies in your e-mail", description: "People whose domain belongs to no partner are grouped by domain. Create the partner (marked Prospect until it has an AR or AP document), link the domain to a partner you have, or ignore it." },
+      { title: "Business cards, read by AI", description: "Take a photo of a card, front and back, or Scan several cards, up to 20 with one card per photo. AI fills in the name, position, company, e-mails and phones; you check every field. The partner is found by the card's domain, then its name, and a contact with the same e-mail or mobile is offered for merging." },
+      { title: "The contact's page", description: "Its details and where they came from (typed, from e-mail, a business card), the card's photos, the last contact, and every e-mail it was in, with the booking it is linked to." },
+      { title: "The relationship panel", description: "On each partner's overview: the last contact and its subject, the three people on your side with the most e-mails with them, their most active people in the last 90 days, and messages per month. Counted from the stored headers only, nothing guessed." },
+      { title: "Gone quiet", description: "Partners you did business with in the last year (a booking, an AR invoice or an AP bill) and haven't exchanged an e-mail with for three months, quietest first, with their last business and their sales person. The number of months is a setting." },
+      { title: "Follow-ups on a contact", description: "Add a follow-up with a due date and the person it's assigned to. It shows on the Labels page, in the alerts and the daily brief when due, and on the dashboard under My follow-ups." },
+      { title: "Ask the assistant", description: "\"Who did we last talk to at …?\", \"Show me …'s contacts\", \"Which partners have gone quiet?\": the assistant answers from the same records, under the same mailbox rules." },
+      { title: "Personal data kept small", description: "Only the address, name, role, date and mailbox of an e-mail are kept, never its text; a signature is read for the position and phones and dropped. People never added are deleted after a retention period (24 months by default), and deleting a contact deletes its card photos too." },
+    ],
+    workflow: [
+      { title: "Mail is read", description: "The mailboxes you already sync with Zoho or Microsoft 365 are read for their headers, a batch at a time, then each new e-mail as it arrives." },
+      { title: "People are found", description: "Each address is matched to its partner, or grouped as a new company by its domain." },
+      { title: "You decide", description: "Add, merge or ignore people; create, link or ignore new companies; scan the cards from your last meeting." },
+      { title: "Relationships stay visible", description: "The relationship panel, Gone quiet and My follow-ups keep each partner in view." },
+    ],
+    personas: [
+      { role: "Sales", detail: "Sees who they last spoke to at each partner, scans cards after a meeting and follows up on the partners that have gone quiet." },
+      { role: "Management", detail: "Sees which relationships are active and which have gone quiet, across the company." },
+      { role: "Operations", detail: "Finds the right person at a carrier or agent from the partner's page, with their latest e-mails." },
+      { role: "Admin", detail: "Chooses review-first or automatic adding, and how long the e-mails of people never added are kept." },
+    ],
+    faqs: [
+      { q: "Is the text of our e-mails stored?", a: "No. Only the headers are kept: the address, the name, the role (From, To, Cc), the date and the mailbox. A signature is read for the position and phone numbers, then dropped." },
+      { q: "Which mail providers work?", a: "Microsoft 365 and Zoho Mail, the same mailboxes as Email Sync. Google Workspace (Gmail) is not connected yet." },
+      { q: "Will our own colleagues show up as contacts?", a: "No. Your company's domains and every user's own address are never contacts, and nor are no-reply, newsletter and mailing-list addresses." },
+      { q: "Who can see the finance mailbox's people?", a: "Only the roles that read finance mail. Other roles see no person, count or subject that comes only from it, on the pages and in the assistant's answers alike." },
+    ],
+    related: ["business-partners", "email-sync", "ai-assistant"],
+  },
+
   tracking: {
     eyebrow: "Public Shipment Tracking",
     title: "Answer 'where is my shipment' without a login",
@@ -645,7 +695,7 @@ const baseContent: Record<string, PlatformContent> = {
       { value: "49/50", label: "scenarios passed in our Arabic and English exam" },
     ],
     painPoints: [
-      "Setting up a new system means a consultant, a spreadsheet of settings and weeks before the first invoice goes out.",
+      "Setting up a new system means implementation fees, a consultant and a spreadsheet of settings before the first invoice goes out.",
       "Simple requests — \"who owes us most?\", \"invoice this shipment\" — mean clicking through several screens to do what one sentence could.",
       "An AI tool bolted onto a product often has looser rules than the product itself, or answers from guesses instead of your data.",
     ],

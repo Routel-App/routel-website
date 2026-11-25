@@ -12,8 +12,8 @@ import { cn } from "@/lib/utils";
 import { Logo } from "./logo";
 import { ProductMenu } from "./product-menu";
 import { SolutionsMenu } from "./solutions-menu";
-import { getServices } from "@/lib/services";
-import { getModules } from "@/lib/modules";
+import { getSolutionMenu } from "@/lib/services";
+import { getModules, moduleAreas } from "@/lib/modules";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 
@@ -60,7 +60,7 @@ export function Navbar() {
   const nav = siteCopy[locale].nav;
   const ctaLabel = siteCopy[locale].ctaLabel;
   const modules = getModules(locale);
-  const services = getServices(locale);
+  const solutionGroups = getSolutionMenu(locale);
   // The browser URL carries the locale prefix on Arabic pages; compare against the bare path.
   const pathname = stripLocale(usePathname());
   const reduce = useReducedMotion();
@@ -165,33 +165,44 @@ export function Navbar() {
           >
             <Container className="flex max-h-[calc(100svh-4rem)] flex-col gap-1 overflow-y-auto py-4">
               <p className="px-3 pb-1 pt-2 text-[11px] font-semibold uppercase tracking-[0.12em] text-fog-500">{t.solutions}</p>
-              <div className="grid grid-cols-2 gap-1">
-                {services.map((s) => (
-                  <Link
-                    key={s.slug}
-                    href={s.href}
-                    className={cn("rounded-xl px-3 py-2 text-[13.5px] font-medium hover:bg-fog-100", s.status === "live" ? "text-ink-900" : "text-fog-500")}
-                    onClick={() => setOpen(false)}
-                  >
-                    {s.name}
-                  </Link>
-                ))}
-              </div>
-              <p className="px-3 pb-1 pt-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-fog-500">{t.product}</p>
-              <div className="grid grid-cols-2 gap-1">
-                {modules
-                  .filter((m) => m.slug !== "ai-assistant")
-                  .map((m) => (
-                    <Link
-                      key={m.slug}
-                      href={`/platform/${m.slug}`}
-                      className="rounded-xl px-3 py-2 text-[13.5px] font-medium text-ink-900 hover:bg-fog-100"
-                      onClick={() => setOpen(false)}
-                    >
-                      {m.name}
-                    </Link>
-                  ))}
-              </div>
+              {solutionGroups.map((g) => (
+                <div key={g.slug} className="px-3 pt-1">
+                  <p className="pt-1 text-[12px] font-semibold text-spark-700">{g.name}</p>
+                  <div className="grid grid-cols-2 gap-1">
+                    {g.items.map((s) => (
+                      <Link
+                        key={s.slug}
+                        href={s.href}
+                        className="-mx-3 rounded-xl px-3 py-2 text-[13.5px] font-medium text-ink-900 hover:bg-fog-100"
+                        onClick={() => setOpen(false)}
+                      >
+                        {s.name}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              ))}
+              <p className="px-3 pb-1 pt-4 text-[11px] font-semibold uppercase tracking-[0.12em] text-fog-500">{t.product}</p>
+              {moduleAreas.map((area) => (
+                <div key={area.id} className="px-3 pt-1">
+                  <p className="pt-1 text-[12px] font-semibold text-spark-700">{area.label[locale]}</p>
+                  <div className="grid grid-cols-2 gap-1">
+                    {area.slugs.map((slug) => {
+                      const m = modules.find((x) => x.slug === slug);
+                      return m ? (
+                        <Link
+                          key={m.slug}
+                          href={`/platform/${m.slug}`}
+                          className="-mx-3 rounded-xl px-3 py-2 text-[13.5px] font-medium text-ink-900 hover:bg-fog-100"
+                          onClick={() => setOpen(false)}
+                        >
+                          {m.name}
+                        </Link>
+                      ) : null;
+                    })}
+                  </div>
+                </div>
+              ))}
               <p className="px-3 pb-1 pt-3 text-[11px] font-semibold uppercase tracking-[0.12em] text-fog-500">{t.more}</p>
               {nav.map((item) => (
                 <Link

@@ -11,10 +11,10 @@ const copy = {
   en: {
     metaTitle: "Pricing",
     metaDescription:
-      "ROUTEL plans: Free, Basic (USD 199/mo), Growth (USD 499/mo), Carrier & Agencies (USD 899/mo) and Enterprise (from USD 1,499/mo); in Saudi Arabia SAR 699, 1,799, 3,299 and from 5,499. Unlimited users, no implementation fees, and a 14-day free trial.",
+      "ROUTEL plans: Free, Basic (USD 199/mo), Growth (USD 499/mo), Carrier & Agencies (USD 899/mo) and Enterprise (from USD 1,499/mo); in Saudi Arabia SAR 699, 1,799, 3,299 and from 5,499; in Qatar billed in QAR at the USD price. Unlimited users, no implementation fees, and a 14-day free trial.",
     eyebrow: "Pricing",
     title: "One platform, priced by what your company does",
-    description: "No per-shipment fees, no per-user fees and no implementation fees. Pick the plan that matches your activities, and open new modules when you need them. Prices in riyals for Saudi Arabia and in dollars for other markets.",
+    description: "No per-shipment fees, no per-user fees and no implementation fees. Pick the plan that matches your activities, and open new modules when you need them. Prices in dollars, in Saudi riyals for Saudi Arabia, and billed in Qatari riyals (QAR) in Qatar.",
     faqTitle: "Questions we get asked",
     faqs: [
       {
@@ -43,7 +43,7 @@ const copy = {
       },
       {
         q: "Which currencies are supported?",
-        a: "Two per company: your base currency (SAR, MYR or IDR today; other currencies on request) and USD. Every invoice and document is issued in one of the two, and the books keep both. In Saudi Arabia, tax invoices carry VAT at 15%.",
+        a: "Two per company: your base currency (SAR, MYR or IDR today, and QAR for companies in Qatar; other currencies on request) and USD. Every invoice and document is issued in one of the two, and the books keep both. In Saudi Arabia, tax invoices carry VAT at 15%.",
       },
       {
         q: "Can we migrate from spreadsheets or another system?",
@@ -54,10 +54,10 @@ const copy = {
   ar: {
     metaTitle: "الأسعار",
     metaDescription:
-      "خطط ROUTEL بالريال: المجانية، والأساسية (699 ريال شهرياً)، والنمو والتوسع (1,799)، والناقل والوكالات (3,299)، والمؤسسات (من 5,499). بلا حد للمستخدمين، وبلا رسوم تطبيق، وتجربة مجانية 14 يوماً.",
+      "خطط ROUTEL: المجانية، والأساسية (199 دولاراً شهرياً)، والنمو والتوسع (499)، والناقل والوكالات (899)، والمؤسسات (من 1,499)؛ وفي السعودية 699 و1,799 و3,299 ومن 5,499 ريالاً سعودياً؛ وفي قطر بالريال القطري بما يعادل سعر الدولار. بلا حد للمستخدمين، وبلا رسوم تطبيق، وتجربة مجانية 14 يوماً.",
     eyebrow: "الأسعار",
     title: "منصة واحدة، بسعر يناسب نشاط شركتك",
-    description: "لا رسوم على كل شحنة، ولا على كل مستخدم، ولا رسوم تطبيق. اختر الخطة التي تناسب أنشطتك، وافتح الوحدات الجديدة حين تحتاجها. الأسعار بالريال للسعودية وبالدولار للأسواق الأخرى.",
+    description: "لا رسوم على كل شحنة، ولا على كل مستخدم، ولا رسوم تطبيق. اختر الخطة التي تناسب أنشطتك، وافتح الوحدات الجديدة حين تحتاجها. الأسعار بالدولار، وبالريال السعودي للسعودية، وتُفوتر بالريال القطري (QAR) في قطر.",
     faqTitle: "أسئلة تصلنا كثيراً",
     faqs: [
       {
@@ -86,7 +86,7 @@ const copy = {
       },
       {
         q: "ما العملات المدعومة؟",
-        a: "عملتان لكل شركة: عملتها الأساسية (الريال السعودي أو الرينغيت الماليزي أو الروبية الإندونيسية اليوم، وعملات أخرى عند الطلب) والدولار الأمريكي. تصدر كل فاتورة ومستند بإحداهما، وتحتفظ الدفاتر المحاسبية بالعملتين معاً. وفي السعودية تحمل الفواتير الضريبية ضريبة القيمة المضافة 15%.",
+        a: "عملتان لكل شركة: عملتها الأساسية (الريال السعودي أو الرينغيت الماليزي أو الروبية الإندونيسية اليوم، والريال القطري للشركات في قطر، وعملات أخرى عند الطلب) والدولار الأمريكي. تصدر كل فاتورة ومستند بإحداهما، وتحتفظ الدفاتر المحاسبية بالعملتين معاً. وفي السعودية تحمل الفواتير الضريبية ضريبة القيمة المضافة 15%.",
       },
       {
         q: "هل يمكننا الانتقال من جداول البيانات أو من نظام آخر؟",

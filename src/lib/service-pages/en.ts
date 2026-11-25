@@ -69,7 +69,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
     faqs: [
       { q: "Can our customers track the shipment?", a: "Yes, on a public page with no login. They enter the booking, B/L or container number with their company name or account ID, and see the status timeline only." },
       { q: "Can we bring our rate sheets?", a: "Yes. Route rates import from Excel in one go, and the assistant can search them when it drafts a quotation." },
-      { q: "Which taxes does it handle?", a: "The tax of the company's country: VAT in Saudi Arabia, SST in Malaysia and PPN in Indonesia, each with its report. Saudi tax invoices carry the ZATCA QR code." },
+      { q: "Which taxes does it handle?", a: "The tax of the company's country: VAT in Saudi Arabia, SST in Malaysia and PPN in Indonesia, each with its report. Invoices print as bilingual tax invoices; ZATCA e-invoicing and local tax registration are set up when ROUTEL's local company is incorporated." },
     ],
   },
 
@@ -488,7 +488,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
   "shipping-agency": {
     metaTitle: "Shipping agency software",
     metaDescription:
-      "Shipping agency on ROUTEL (in development): port calls, import and export manifests, delivery orders and D&D on behalf of the line, and PDA/FDA, for Saudi Arabia, Malaysia and Indonesia.",
+      "Shipping agency on ROUTEL: port calls, import and export manifests, delivery orders and D&D on behalf of the line, and PDA/FDA, for Saudi Arabia, Malaysia and Indonesia.",
     headline: "Line agency, from the port call to the final disbursement account",
     lead: "Agency work turns on the vessel's port call, not on a booking. ROUTEL gives it its own backbone: the call and its manifests, delivery orders and demurrage on behalf of the line, and the port disbursement accounts, settled with the principal on the same finance core.",
     stat: { value: "3", label: "countries from day one: Saudi Arabia, Malaysia and Indonesia" },
@@ -547,7 +547,6 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
       { title: "Groups across the region", text: "Saudi Arabia, Malaysia and Indonesia on one core." },
     ],
     faqs: [
-      { q: "Is it available today?", a: "It is in development. Register interest and we'll open it to you first." },
       { q: "Which countries?", a: "Saudi Arabia, Malaysia and Indonesia together, with each country's manifest format, port fees, currency and tax as settings." },
       { q: "Which plan includes it?", a: "Carrier & Agencies, at USD 899 a month (SAR 3,299 in Saudi Arabia)." },
     ],
@@ -624,7 +623,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
   "contract-logistics": {
     metaTitle: "3PL inventory software",
     metaDescription:
-      "Inventory for your clients on ROUTEL (planned): items per client, locations down to the bin, an inventory ledger that's never edited, picking by FIFO or FEFO, and monthly storage billing.",
+      "Inventory for your clients on ROUTEL: items per client, locations down to the bin, an inventory ledger that's never edited, picking by FIFO or FEFO, and monthly storage billing.",
     headline: "Your clients' stock, kept like a ledger",
     lead: "For warehousing and distribution companies that hold stock for traders, distributors and online shops and ship it on their orders. The record is the client's item, not the booking; every movement is a line in a ledger, and billing runs from storage and handling each month.",
     stat: { value: "4", label: "levels of location: warehouse, zone, rack and bin" },
@@ -683,9 +682,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
       { title: "E-commerce fulfilment", text: "Items, batches and expiry dates." },
     ],
     faqs: [
-      { q: "Is it available today?", a: "It is planned, and will be built with a first client who needs it and tests it. Register interest to be that client." },
-      { q: "Can clients see their stock?", a: "Through the client portal, which is planned." },
-      { q: "Which plan includes it?", a: "Growth, when inventory launches." },
+      { q: "Which plan includes it?", a: "Growth, at USD 499 a month (SAR 1,799 in Saudi Arabia)." },
     ],
   },
 };

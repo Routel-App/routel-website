@@ -4,29 +4,16 @@ import Link from "@/components/i18n/link";
 import { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, Bot, ChevronDown } from "lucide-react";
-import { getModules } from "@/lib/modules";
+import { getModules, moduleAreas } from "@/lib/modules";
 import { Eyebrow } from "@/components/ui/section";
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/components/i18n/locale-provider";
 import type { Locale } from "@/lib/i18n";
 
-const groups: Array<{ label: Record<Locale, string>; tone: "teal" | "ink"; slugs: string[] }> = [
-  {
-    label: { en: "Operations", ar: "العمليات" },
-    tone: "teal",
-    slugs: ["bookings", "air-freight", "consolidation", "arrival-notice", "quotations", "bill-of-lading", "documents", "tracking"],
-  },
-  {
-    label: { en: "Finance & accounting", ar: "المالية والمحاسبة" },
-    tone: "ink",
-    slugs: ["invoicing", "finance-receivables", "credit-notes", "credit-applications", "expenses", "accounting"],
-  },
-  {
-    label: { en: "Sales, partners & access", ar: "المبيعات والشركاء والصلاحيات" },
-    tone: "teal",
-    slugs: ["business-partners", "labeling-center", "roles", "email-sync", "compliance"],
-  },
-];
+/** Three columns: operations, finance, then CRM and control together. */
+const columns = [["operations"], ["finance"], ["crm", "control"]].map((ids) =>
+  ids.map((id) => moduleAreas.find((a) => a.id === id)!),
+);
 
 const copy = {
   en: {
@@ -112,35 +99,39 @@ export function ProductMenu({ inverse, onNavigate }: { inverse: boolean; onNavig
             className="fixed left-1/2 top-[52px] z-50 w-[min(92vw,1040px)] -translate-x-1/2 pt-3"
           >
             <div className="grid grid-cols-[1fr_1fr_1fr_0.85fr] gap-6 rounded-2xl border border-fog-200 bg-white p-6 text-start shadow-float">
-              {groups.map((g) => (
-                <div key={g.label.en}>
-                  <Eyebrow tone={g.tone} className="mb-3">
-                    {g.label[locale]}
-                  </Eyebrow>
-                  <ul className="space-y-0.5">
-                    {g.slugs.map((slug) => {
-                      const m = modules.find((x) => x.slug === slug);
-                      if (!m) return null;
-                      const Icon = m.icon;
-                      return (
-                        <li key={slug}>
-                          <Link
-                            href={`/platform/${m.slug}`}
-                            onClick={close}
-                            className="group flex items-start gap-3 rounded-xl px-2.5 py-2 transition-colors hover:bg-fog-50"
-                          >
-                            <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-spark-50 text-spark-700 ring-1 ring-inset ring-spark-100 transition-colors group-hover:bg-spark-100">
-                              <Icon className="h-4 w-4" strokeWidth={1.75} />
-                            </span>
-                            <span>
-                              <span className="block text-[13.5px] font-semibold text-ink-900">{m.name}</span>
-                              <span className="block text-[12px] leading-snug text-fog-500">{m.short}</span>
-                            </span>
-                          </Link>
-                        </li>
-                      );
-                    })}
-                  </ul>
+              {columns.map((areas) => (
+                <div key={areas[0].id} className="space-y-5">
+                  {areas.map((g) => (
+                    <div key={g.id}>
+                      <Eyebrow tone={g.id === "finance" || g.id === "control" ? "ink" : "teal"} className="mb-3">
+                        {g.label[locale]}
+                      </Eyebrow>
+                      <ul className="space-y-0.5">
+                        {g.slugs.map((slug) => {
+                          const m = modules.find((x) => x.slug === slug);
+                          if (!m) return null;
+                          const Icon = m.icon;
+                          return (
+                            <li key={slug}>
+                              <Link
+                                href={`/platform/${m.slug}`}
+                                onClick={close}
+                                className="group flex items-start gap-3 rounded-xl px-2.5 py-1.5 transition-colors hover:bg-fog-50"
+                              >
+                                <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-spark-50 text-spark-700 ring-1 ring-inset ring-spark-100 transition-colors group-hover:bg-spark-100">
+                                  <Icon className="h-4 w-4" strokeWidth={1.75} />
+                                </span>
+                                <span>
+                                  <span className="block text-[13.5px] font-semibold text-ink-900">{m.name}</span>
+                                  <span className="block text-[12px] leading-snug text-fog-500">{m.short}</span>
+                                </span>
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  ))}
                 </div>
               ))}
 

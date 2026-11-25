@@ -34,8 +34,9 @@ function TierCard({ t, currency, badge }: { t: Tier; currency: Currency; badge?:
 }
 
 /**
- * The plan cards with the price list switch: Saudi Arabia in riyals, other
- * markets in dollars. Arabic opens on riyals, English on dollars; either
+ * The plan cards with the price list switch: US dollars (Qatar and other
+ * markets), Saudi riyals for Saudi Arabia. Arabic opens on riyals, English on
+ * dollars; either
  * list is one click away.
  */
 export function PricingGrid({ t, initial }: { t: Copy; initial: Currency }) {
@@ -44,7 +45,7 @@ export function PricingGrid({ t, initial }: { t: Copy; initial: Currency }) {
     <div>
       <div className="mb-8 flex flex-col items-center gap-2">
         <div role="radiogroup" aria-label={t.currencyNote} className="inline-flex rounded-full bg-fog-100 p-1 ring-1 ring-fog-200">
-          {(["sar", "usd"] as const).map((c) => (
+          {(["usd", "sar"] as const).map((c) => (
             <button
               key={c}
               type="button"

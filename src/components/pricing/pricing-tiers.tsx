@@ -8,7 +8,7 @@ export type Tier = {
   slug: string;
   name: string;
   who: string;
-  /** The price in each list: Saudi Arabia in riyals, other markets in dollars. */
+  /** The price in each list: US dollars, and Saudi riyals for Saudi Arabia. */
   price: { sar: string; usd: string };
   period: string;
   features: string[];
@@ -36,7 +36,8 @@ export type Copy = {
  * The approved plans (docs/routel-central.md, section 2, in the Routel
  * system repository: structure approved by the founder on 2026-11-18). That
  * file is the source of truth: when it changes, change this one to match,
- * in both languages. Prices are in Saudi riyals, as that file gives them.
+ * in both languages. Prices are in Saudi riyals, as that file gives them, and
+ * in US dollars; Qatar is billed in Qatari riyals at the USD price.
  * Plans differ by activities and by what costs us (AI, a dedicated server,
  * government links), never by the number of users.
  */
@@ -83,7 +84,7 @@ const copy: Record<Locale, Copy> = {
         price: { sar: "SAR 1,799", usd: "USD 499" },
         period: "per month",
         features: [
-          "Every freight and logistics activity: sea, air, consolidation and LCL, arrival notice and delivery order, land transport, warehouse, and inventory (3PL) when it launches",
+          "Every freight and logistics activity: sea, air, consolidation and LCL, arrival notice and delivery order, land transport, warehouse, and inventory (3PL)",
           "Document reading and checking by AI",
           "E-mail sync",
           "HR and payroll",
@@ -102,7 +103,7 @@ const copy: Record<Locale, Copy> = {
         features: [
           "Everything in Growth",
           "NVOCC: Bills of Lading in your name, demurrage and detention, agents and profit share",
-          "Customs clearance, and shipping agency when it launches",
+          "Customs clearance and shipping agency",
           "Government links (FASAH, CEISA, uCustoms) and the electronic B/L when available",
           "Support: priority",
         ],
@@ -127,14 +128,14 @@ const copy: Record<Locale, Copy> = {
         href: "/demo?plan=enterprise",
       },
     ],
-    currency: { sar: "Saudi Arabia · SAR", usd: "Other markets · USD" },
-    currencyNote: "Prices in Saudi riyals for Saudi Arabia, and in US dollars for other markets.",
+    currency: { sar: "Saudi Arabia · SAR", usd: "Qatar & other markets · USD" },
+    currencyNote: "Prices in US dollars, and in Saudi riyals for Saudi Arabia. In Qatar, plans are billed in Qatari riyals (QAR) at the equivalent of the USD price.",
     badge: "Recommended",
     essentialsTitle: "The essentials, in every paid plan",
     essentials: [
       "Bookings and Bills of Lading",
       "Quotations",
-      "Bilingual tax invoice with the ZATCA QR code; Fatoora (Phase 2) link coming",
+      "Bilingual tax invoice; ZATCA e-invoicing is set up when ROUTEL's local company is incorporated",
       "Collections and payments",
       "Accounting and reports",
       "Business partners",
@@ -200,7 +201,7 @@ const copy: Record<Locale, Copy> = {
         price: { sar: "1,799 ريال", usd: "499 دولار" },
         period: "شهرياً",
         features: [
-          "كل أنشطة الشحن واللوجستيات: البحري، والجوي، والتجميع LCL، وإشعار الوصول وأمر التسليم، والنقل البري، والمستودع، والمخزون (3PL) عند إطلاقه",
+          "كل أنشطة الشحن واللوجستيات: البحري، والجوي، والتجميع LCL، وإشعار الوصول وأمر التسليم، والنقل البري، والمستودع، والمخزون (3PL)",
           "قراءة المستندات والتحقق منها بالذكاء الاصطناعي",
           "مزامنة البريد",
           "الموارد البشرية والرواتب",
@@ -219,7 +220,7 @@ const copy: Record<Locale, Copy> = {
         features: [
           "كل ما في النمو والتوسع",
           "NVOCC: البوليصة باسم الشركة، والأرضيات والتأخير، والوكلاء وتقاسم الربح",
-          "التخليص الجمركي، والوكالات الملاحية عند إطلاقها",
+          "التخليص الجمركي والوكالات الملاحية",
           "الربط الحكومي (فسح، CEISA، uCustoms) والبوليصة الإلكترونية عند توفرها",
           "الدعم: أولوية",
         ],
@@ -244,14 +245,14 @@ const copy: Record<Locale, Copy> = {
         href: "/demo?plan=enterprise",
       },
     ],
-    currency: { sar: "السعودية · ريال", usd: "الأسواق الأخرى · دولار" },
-    currencyNote: "الأسعار بالريال السعودي للسعودية، وبالدولار الأمريكي للأسواق الأخرى.",
+    currency: { sar: "السعودية · ريال سعودي", usd: "قطر والأسواق الأخرى · دولار" },
+    currencyNote: "الأسعار بالدولار الأمريكي، وبالريال السعودي للسعودية. وفي قطر تُفوتر الخطط بالريال القطري (QAR) بما يعادل سعرها بالدولار.",
     badge: "الموصى بها",
     essentialsTitle: "الأساسيات في كل الخطط المدفوعة",
     essentials: [
       "الحجوزات والبوالص",
       "عروض الأسعار",
-      "فاتورة ضريبية ثنائية اللغة برمز QR وفق متطلبات هيئة الزكاة والضريبة والجمارك، والربط مع منصة فاتورة قريباً",
+      "فاتورة ضريبية ثنائية اللغة، والربط مع الفوترة الإلكترونية لهيئة الزكاة يُجهَّز عند تأسيس شركة ROUTEL المحلية",
       "التحصيل والسداد",
       "المحاسبة والتقارير",
       "شركاء الأعمال",

@@ -1,11 +1,10 @@
-import { Bot, Check, Clock, Landmark, Layers, Lock, Repeat2, Ship } from "lucide-react";
+import { Bot, Check, Landmark, Layers, Lock, Repeat2, Ship } from "lucide-react";
 import Link from "@/components/i18n/link";
 import { Section, SectionHeading } from "@/components/ui/section";
 import { Reveal, RevealGroup, RevealItem } from "@/components/motion/reveal";
 import { getServices } from "@/lib/services";
 import { getLocale } from "@/lib/locale-server";
 import type { Locale } from "@/lib/i18n";
-import { cn } from "@/lib/utils";
 
 const copy = {
   en: {
@@ -14,7 +13,7 @@ const copy = {
     lead: "ROUTEL runs a shipping and logistics company on one system. One core carries every shipment from the quotation to the ledger; each service opens as a module for what your company does; an AI assistant does the daily work; and the books are written as the work happens.",
     layers: {
       ai: { label: "AI assistant", text: "Calls the system's own actions: reads, drafts, and writes after you confirm" },
-      modules: { label: "Services, opened by activity", live: "Live", soon: "Next" },
+      modules: { label: "Services, opened by activity" },
       core: { label: "The core", steps: ["Quotation", "Booking", "B/L", "Invoice", "Payment", "Ledger"] },
       base: { label: "Partners · documents · e-mail · roles and permissions · tax · two currencies" },
     },
@@ -37,7 +36,7 @@ const copy = {
     lead: "يشغّل ROUTEL شركة الشحن والخدمات اللوجستية على نظام واحد. نواة واحدة تحمل كل شحنة من عرض السعر حتى دفتر الأستاذ، وكل خدمة تُفتح وحدةً حسب نشاط شركتك، ومساعد ذكي ينجز العمل اليومي، والدفاتر تُكتب لحظة وقوع العمل.",
     layers: {
       ai: { label: "المساعد الذكي", text: "يستدعي إجراءات النظام نفسه: يقرأ ويجهّز، ويكتب بعد تأكيدك" },
-      modules: { label: "الخدمات، تُفتح حسب النشاط", live: "متاحة", soon: "القادمة" },
+      modules: { label: "الخدمات، تُفتح حسب النشاط" },
       core: { label: "النواة", steps: ["عرض السعر", "الحجز", "البوليصة", "الفاتورة", "الدفعة", "الدفاتر"] },
       base: { label: "الشركاء · المستندات · البريد · الأدوار والصلاحيات · الضريبة · عملتان" },
     },
@@ -92,17 +91,13 @@ export async function PlatformOverview() {
               <ul className="mt-3 flex flex-wrap gap-2">
                 {services.map((s) => {
                   const Icon = s.icon;
-                  const live = s.status === "live";
                   return (
                     <li key={s.slug}>
                       <Link
                         href={s.href}
-                        className={cn(
-                          "inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[12.5px] font-medium transition-colors",
-                          live ? "bg-spark-50 text-ink-900 ring-1 ring-spark-200 hover:bg-spark-100" : "border border-dashed border-fog-300 bg-fog-50 text-fog-600 hover:bg-fog-100",
-                        )}
+                        className="inline-flex items-center gap-1.5 rounded-full bg-spark-50 px-3 py-1.5 text-[12.5px] font-medium text-ink-900 ring-1 ring-spark-200 transition-colors hover:bg-spark-100"
                       >
-                        {live ? <Icon className="h-3.5 w-3.5 text-spark-600" /> : <Clock className="h-3.5 w-3.5 text-fog-400" />}
+                        <Icon className="h-3.5 w-3.5 text-spark-600" />
                         {s.name}
                       </Link>
                     </li>

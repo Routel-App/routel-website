@@ -43,6 +43,7 @@ const areaOf: Record<string, keyof (typeof copy)["en"]["areas"]> = {
   "ai-assistant": "ai",
   documents: "ai",
   "email-sync": "ai",
+  crm: "control",
   tracking: "control",
   roles: "control",
   compliance: "control",

@@ -9,6 +9,7 @@ import {
   Banknote,
   Bot,
   ChartColumn,
+  Contact,
   FileCheck,
   FileMinus,
   FileSignature,
@@ -204,6 +205,15 @@ export const modules: Module[] = [
     docs: "/docs/email-sync",
   },
   {
+    slug: "crm",
+    name: "CRM & Contacts",
+    short: "The people at every partner, from your e-mail and business cards",
+    description:
+      "Everyone your team e-mails (the sender, To, Cc and Reply-To) is filed under the business partner they work for, matched by their exact address first and then by their domain. Companies in your e-mail that aren't partners yet can be added as prospects. Scan business cards with your phone, several at once: AI reads each card and you check it field by field. Every contact has a page with its message history; every partner has a relationship panel (the last contact, who talks most on each side, messages per month); partners you used to work with who have gone quiet are listed; and follow-ups on a contact show under My follow-ups on the dashboard. Only the e-mail headers are kept, never the text, and what isn't used is deleted after a retention period.",
+    icon: Contact,
+    bullets: ["Contacts filed from your e-mail, by address then domain", "Business cards scanned and read by AI", "Relationship panel, gone-quiet partners and follow-ups"],
+  },
+  {
     slug: "tracking",
     name: "Public Shipment Tracking",
     short: "A no-login status page for your customers",
@@ -252,6 +262,33 @@ export const modules: Module[] = [
       "Each booking carries an activity log of who changed which field and when, and of every confirmation issued, and generated documents are kept with the booking they belong to.",
     icon: FileCheck,
     bullets: ["Per-booking activity log", "Generated documents on file", "Role-scoped visibility"],
+  },
+];
+
+/**
+ * The modules by area, as the Platform menu and the mobile menu show them.
+ * The AI assistant has its own place in both, so it is in no area here.
+ */
+export const moduleAreas: Array<{ id: string; label: Record<Locale, string>; slugs: string[] }> = [
+  {
+    id: "operations",
+    label: { en: "Operations", ar: "العمليات" },
+    slugs: ["bookings", "quotations", "air-freight", "consolidation", "arrival-notice", "bill-of-lading", "documents", "tracking"],
+  },
+  {
+    id: "finance",
+    label: { en: "Finance", ar: "المالية" },
+    slugs: ["invoicing", "accounting", "finance-receivables", "credit-notes", "credit-applications", "expenses"],
+  },
+  {
+    id: "crm",
+    label: { en: "CRM & contacts", ar: "جهات الاتصال والشركاء" },
+    slugs: ["crm", "business-partners", "email-sync", "labeling-center"],
+  },
+  {
+    id: "control",
+    label: { en: "Control", ar: "الرقابة" },
+    slugs: ["roles", "compliance"],
   },
 ];
 
