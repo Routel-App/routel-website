@@ -85,7 +85,8 @@ export async function TradeRules() {
                   ) : null}
                 </div>
                 <h3 className="font-display mt-4 text-[15.5px] font-semibold text-ink-900">{r.title}</h3>
-                <p className="mt-1.5 text-pretty text-[13.5px] leading-relaxed text-fog-600">{fmt(r.text)}</p>
+                {/* "calt" off: Inter otherwise draws "2 x 20GP" as "2 × 20GP"; the app's format uses a letter x. */}
+                <p className="mt-1.5 text-pretty text-[13.5px] leading-relaxed text-fog-600" style={{ fontFeatureSettings: '"cv11", "ss01", "ss03", "calt" 0' }}>{fmt(r.text)}</p>
               </div>
             </RevealItem>
           );
