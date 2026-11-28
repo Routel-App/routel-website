@@ -15,3 +15,17 @@ export type LegalCopy = {
   entity: string;
   sections: LegalSection[];
 };
+
+/** The legal pages also published in Malay and Indonesian (/privacy/ms, /terms/id …). */
+export const legalTranslations = ["ms", "id"] as const;
+export type LegalTranslation = (typeof legalTranslations)[number];
+
+export function isLegalTranslation(value: string): value is LegalTranslation {
+  return (legalTranslations as readonly string[]).includes(value);
+}
+
+/** A translation of a legal page: the page's copy plus which version prevails. */
+export type LegalTranslationCopy = LegalCopy & {
+  /** States that the English version prevails unless the law requires this one to. */
+  prevails: string;
+};

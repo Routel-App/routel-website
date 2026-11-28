@@ -2,6 +2,13 @@ import type { Locale } from "./i18n";
 
 export const site = {
   name: "ROUTEL",
+  /**
+   * The platform's one legal name (founder's decision, 2026-11-28): used
+   * wherever the site names the legal party — the terms, the privacy
+   * policy, the footer's copyright line and the organization data. Kept in
+   * Latin script on the Arabic pages too. "ROUTEL" stays the short brand.
+   */
+  legalName: "ROUTEL – Logistics & Supply Chain Platform",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://routel.app",
   cta: { href: "/demo" },
   /** The public contact address, shown in the footer and on the About page. */

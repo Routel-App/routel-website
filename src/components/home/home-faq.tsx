@@ -52,6 +52,7 @@ export async function HomeFaq() {
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web",
         inLanguage: ["en", "ar"],
+        publisher: { "@type": "Organization", name: site.name, legalName: site.legalName, url: site.url, email: site.email },
       },
     ],
   };

@@ -5,6 +5,7 @@ import { glossaryNav } from "@/lib/glossary";
 import { platformContent } from "@/lib/platform-content";
 import { serviceSlugs } from "@/lib/services";
 import { localizeHref, locales } from "@/lib/i18n";
+import { legalTranslations } from "@/lib/legal/types";
 
 type Entry = { path: string; changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"]; priority: number };
 
@@ -42,7 +43,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     return href === "/" ? site.url : `${site.url}${href}`;
   };
 
-  return entries.flatMap((e) =>
+  const localized = entries.flatMap((e) =>
     locales.map((locale) => ({
       url: url(e.path, locale),
       lastModified: now,
@@ -51,4 +52,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
       alternates: { languages: Object.fromEntries(locales.map((l) => [l, url(e.path, l)])) },
     })),
   );
+
+  // The privacy policy and terms also have Malay and Indonesian versions (/privacy/ms …), outside the en/ar locales.
+  const legal = (["/privacy", "/terms"] as const).flatMap((path) => {
+    const languages = {
+      ...Object.fromEntries(locales.map((l) => [l, url(path, l)])),
+      ...Object.fromEntries(legalTranslations.map((tl) => [tl, `${site.url}${path}/${tl}`])),
+    };
+    return legalTranslations.map((tl) => ({
+      url: `${site.url}${path}/${tl}`,
+      lastModified: now,
+      changeFrequency: "yearly" as const,
+      priority: 0.3,
+      alternates: { languages },
+    }));
+  });
+
+  return [...localized, ...legal];
 }

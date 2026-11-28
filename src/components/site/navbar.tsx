@@ -31,12 +31,17 @@ const copy = {
  * so it is a full page load, and it is never prefetched (the RSC prefetch of
  * an unprefixed English URL from an Arabic page came back 404).
  */
+/** The Malay and Indonesian legal pages (/privacy/ms …) have no Arabic twin: switch to the Arabic page itself. */
+function arabicCounterpart(path: string): string {
+  return path.replace(/^\/(privacy|terms)\/(ms|id)$/, "/$1");
+}
+
 function LanguageSwitch({ path, inverse, className }: { path: string; inverse: boolean; className?: string }) {
   const locale = useLocale();
   const target: Locale = locale === "ar" ? "en" : "ar";
   return (
     <a
-      href={localizeHref(path, target)}
+      href={localizeHref(arabicCounterpart(path), target)}
       hrefLang={target}
       lang={target}
       aria-label={copy[locale].switchTo}
