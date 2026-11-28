@@ -89,7 +89,7 @@ export const privacy: Record<Locale, LegalCopy> = {
       {
         title: "8. Where your data is kept, and transfers across borders",
         body: [
-          "The service and its database run on a Hostinger virtual private server located in Kuala Lumpur, Malaysia. The files you upload and the nightly backups are kept in Cloudflare R2 object storage. Each customer's data is kept in its own database and its own storage, separate from every other customer. A customer on the Enterprise plan can have its own dedicated server, in a location agreed with it.",
+          "The service and its database run on a Hostinger virtual private server located in Kuala Lumpur, Malaysia. The files you upload and the backups are kept in Cloudflare R2 object storage. Each customer's data is kept in its own database and its own storage, separate from every other customer. A customer on the Enterprise plan can have its own dedicated server, in a location agreed with it.",
           "So the personal data of people in Qatar, Saudi Arabia or Indonesia is transferred to Malaysia, and some providers (section 7) process data in other countries. We make such transfers only to provide the service, with appropriate safeguards such as standard contractual clauses that protect the data to a level no lower than the applicable law requires, after a transfer risk assessment where the law requires one, and within the conditions that each law sets for transfers outside the country, including the Qatari law, the Saudi PDPL and its transfer regulations, the Malaysian PDPA and the Indonesian UU PDP.",
         ],
       },
@@ -205,7 +205,7 @@ export const privacy: Record<Locale, LegalCopy> = {
       {
         title: "8. أين تُحفظ بياناتك، ونقلها عبر الحدود",
         body: [
-          "تعمل الخدمة وقاعدة بياناتها على خادم افتراضي خاص لدى Hostinger في كوالالمبور، ماليزيا. وتُحفظ الملفات التي ترفعها والنسخ الاحتياطية الليلية في تخزين Cloudflare R2. وتُحفظ بيانات كل عميل في قاعدة بيانات خاصة به وتخزين خاص به، منفصلة عن كل عميل آخر. ويمكن لعميل خطة المؤسسات أن يكون له خادم خاص به، في موقع يُتفق عليه معه.",
+          "تعمل الخدمة وقاعدة بياناتها على خادم افتراضي خاص لدى Hostinger في كوالالمبور، ماليزيا. وتُحفظ الملفات التي ترفعها والنسخ الاحتياطية في تخزين Cloudflare R2. وتُحفظ بيانات كل عميل في قاعدة بيانات خاصة به وتخزين خاص به، منفصلة عن كل عميل آخر. ويمكن لعميل خطة المؤسسات أن يكون له خادم خاص به، في موقع يُتفق عليه معه.",
           "ولذلك تُنقل البيانات الشخصية للأشخاص في قطر أو السعودية أو إندونيسيا إلى ماليزيا، ويعالج بعض المزوّدين (القسم 7) البيانات في دول أخرى. ولا نجري هذا النقل إلا لتقديم الخدمة، مع ضمانات مناسبة مثل البنود التعاقدية القياسية التي تحمي البيانات بمستوى لا يقل عمّا توجبه الأنظمة والقوانين المنطبقة، وبعد تقييم مخاطر النقل حيث يوجبه القانون، وضمن الشروط التي يضعها كل نظام أو قانون للنقل خارج الدولة، ومنها القانون القطري، ونظام حماية البيانات الشخصية السعودي ولائحة نقل البيانات خارج المملكة، وقانون PDPA الماليزي، وقانون UU PDP الإندونيسي.",
         ],
       },
