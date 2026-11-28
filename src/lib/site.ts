@@ -32,7 +32,7 @@ export const siteCopy: Record<Locale, SiteCopy> = {
   en: {
     tagline: "Maritime & Logistics Operating System",
     description:
-      "ROUTEL is the Maritime & Logistics Operating System, run by AI: sea and air freight forwarding, consolidation and LCL, documents, finance and accounting on one platform, with an AI assistant that reads, drafts and acts after you confirm.",
+      "ROUTEL is the Maritime & Logistics Operating System, with the rules of the trade built in: sea and air freight, consolidation and LCL, customs, documents, finance and accounting on one platform, and an AI assistant that acts after you confirm.",
     nav: [
       { label: "AI Assistant", href: "/platform/ai-assistant", hint: "Built into Routel: reads, drafts and acts after you confirm" },
       { label: "Pricing", href: "/pricing" },
@@ -44,9 +44,9 @@ export const siteCopy: Record<Locale, SiteCopy> = {
   ar: {
     tagline: "نظام التشغيل البحري واللوجستي",
     description:
-      "ROUTEL نظام التشغيل البحري واللوجستي بقيادة الذكاء الاصطناعي: الشحن البحري والجوي، والتجميع وLCL، والمستندات، والمالية والمحاسبة على منصة واحدة، مع مساعد ذكي يقرأ ويجهّز وينفّذ بعد تأكيدك.",
+      "ROUTEL نظام التشغيل البحري واللوجستي، وقواعد المهنة مدمجة فيه: الشحن البحري والجوي، والتجميع وLCL، والتخليص الجمركي، والمستندات، والمالية والمحاسبة على منصة واحدة، ومساعد ذكي ينفّذ بعد تأكيدك.",
     nav: [
-      { label: "المساعد الذكي", href: "/platform/ai-assistant", hint: "مدمج داخل Routel: يقرأ ويجهّز وينفّذ بعد تأكيدك" },
+      { label: "المساعد الذكي", href: "/platform/ai-assistant", hint: "مدمج في Routel: يقرأ ويجهّز وينفّذ بعد تأكيدك" },
       { label: "الأسعار", href: "/pricing" },
       { label: "الشركة", href: "/about" },
     ],

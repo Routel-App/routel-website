@@ -22,7 +22,7 @@ const DARK_HERO_ROUTES = new Set<string>([]);
 
 const copy = {
   en: { home: "Routel home", docs: "Documentation", product: "Platform", solutions: "Solutions", more: "More", open: "Open menu", close: "Close menu", switchTo: "Switch to Arabic" },
-  ar: { home: "الصفحة الرئيسية لـ Routel", docs: "التوثيق", product: "المنصة", solutions: "الحلول", more: "المزيد", open: "فتح القائمة", close: "إغلاق القائمة", switchTo: "التبديل إلى الإنجليزية" },
+  ar: { home: "الصفحة الرئيسية لـ Routel", docs: "دليل الاستخدام", product: "المنصة", solutions: "الحلول", more: "المزيد", open: "فتح القائمة", close: "إغلاق القائمة", switchTo: "التبديل إلى الإنجليزية" },
 } satisfies Record<Locale, Record<string, string>>;
 
 /**

@@ -93,7 +93,7 @@ const copy = {
     invoiceTitle: "فاتورة بعملتين",
     invoiceNote: "تُصدر وتُسدَّد بالدولار الأمريكي، ودفتر الأستاذ يحتفظ بالريال والدولار معاً.",
     statementTitle: "كشف حساب",
-    statementMeta: "01–31 يناير 2027 · 7 فواتير · 2 دفعات",
+    statementMeta: "01–31 يناير 2027 · 7 فواتير · دفعتان",
     statementBalance: "الرصيد",
     download: "تنزيل PDF",
     cashTitle: "الوضع النقدي",

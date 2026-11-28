@@ -6,7 +6,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
     metaDescription:
       "Run FCL sea freight on one booking: route rates and quotations, the carrier booking read by AI, the House B/L, tax invoices, collections and the general ledger.",
     headline: "Sea freight forwarding, from the first quote to the closed file",
-    lead: "Every FCL shipment runs on one record in ROUTEL: the route rate and the quotation, the carrier booking, the House B/L, the tax invoice, the payment and the general ledger. The AI assistant does the typing and your team confirms.",
+    lead: "Every FCL shipment runs on one record in ROUTEL: the route rate and the quotation, the carrier booking, the House B/L, the tax invoice, the payment and the books, with every container number checked against its ISO 6346 check digit. The AI assistant does the typing and your team confirms.",
     stat: { value: "11", label: "statuses on one booking, from Booking Pending to Shipment Closed" },
     figures: [
       { value: "1", label: "booking number that every document hangs off" },

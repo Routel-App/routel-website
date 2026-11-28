@@ -155,9 +155,9 @@ export const modules: Module[] = [
   {
     slug: "accounting",
     name: "Accounting Reports",
-    short: "Live books, no journal entries",
+    short: "Live books, no manual journal entries",
     description:
-      "General Ledger, Trial Balance, Cash Position, P&L with gross profit and net income, AR and AP aging, the country's tax report (SST, PPN or VAT) and customer profitability — all computed live from source transactions, not journal entries.",
+      "General Ledger, Trial Balance, Cash Position, P&L with gross profit and net income, AR and AP aging, the country's tax report (SST, PPN or VAT) and customer profitability — all computed live from source transactions, not from manual journal entries.",
     icon: ChartColumn,
     bullets: ["GL, Trial Balance, Cash Position", "AR and AP aging", "Tax report (SST, PPN or VAT, per country)"],
     docs: "/docs/accounting",

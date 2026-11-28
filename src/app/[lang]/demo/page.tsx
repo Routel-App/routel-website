@@ -12,7 +12,7 @@ import { Lottie } from "@/components/motion/lottie";
 const copy = {
   en: {
     metaTitle: "Request a demo",
-    metaDescription: "See Routel run a real freight booking from quotation to ledger, on your routes and rates.",
+    metaDescription: "See Routel run a real freight booking from quotation to the books, on your routes and rates.",
     eyebrow: "Request a demo",
     title: "Twenty minutes, one real shipment, your numbers.",
     lead: "We don’t do slide decks. Bring a route you ship often and we’ll run it through Routel end to end, live.",
@@ -27,17 +27,17 @@ const copy = {
   },
   ar: {
     metaTitle: "اطلب عرضاً تجريبياً",
-    metaDescription: "شاهد Routel يدير حجزاً حقيقياً من عرض السعر حتى دفتر الأستاذ، على خطوطك وأسعارك.",
+    metaDescription: "شاهد Routel يدير حجزاً حقيقياً من عرض السعر حتى الدفاتر، على مساراتك وأسعارك.",
     eyebrow: "اطلب عرضاً تجريبياً",
     title: "عشرون دقيقة، شحنة حقيقية واحدة، وأرقامك أنت.",
-    lead: "لا نعرض شرائح تقديمية. أحضر خط شحن تتعامل معه كثيراً، وسنمرّره عبر Routel من البداية إلى النهاية، مباشرةً.",
+    lead: "لا نعرض شرائح تقديمية. أحضر مساراً تشحن عليه كثيراً، وسنمرّره عبر Routel من البداية إلى النهاية، مباشرةً.",
     interested: "الباقة التي تهمك:",
     agenda: [
       "عرض سعر على مسارك ونوع الحاوية الخاص بك، يتحول إلى حجز",
       "تأكيد الحجز وبوليصة الشحن الفرعية (House B/L) والفاتورة، تُنشأ كلها من الحجز نفسه",
-      "المساعد الذكي يقترح فاتورة ويقرأ فاتورة مورّد",
-      "الربح والخسارة (P&L) وأعمار الذمم والوضع النقدي مباشرةً بعد ترحيل الفاتورة",
-      "الأدوار: ما يراه كل من فريق العمليات والمبيعات والمحاسبة",
+      "يقترح المساعد الذكي فاتورة ويقرأ فاتورة مورّد",
+      "الأرباح والخسائر (P&L) وأعمار الذمم والوضع النقدي مباشرةً بعد ترحيل الفاتورة",
+      "الأدوار: ما يراه كلٌّ من فرق العمليات والمبيعات والمحاسبة",
     ],
   },
 } satisfies Record<

@@ -11,16 +11,16 @@ const copy = {
     eyebrow: "Everything in one system",
     title: "A full platform's worth of modules that already talk to each other",
     description:
-      "Each one is built and working today. A quotation becomes a booking, the booking produces a B/L and an invoice, and the invoice lands in your ledger. Nothing is re-keyed.",
+      "Each one is built and working today. A quotation becomes a booking, the booking produces a B/L and an invoice, and the invoice lands in your books. Nothing is re-keyed.",
     cta: "View the full platform",
     all: "All modules",
     areas: { operations: "Operations", finance: "Finance & accounting", ai: "AI & automation", control: "Customers & control" },
   },
   ar: {
     eyebrow: "كل شيء في نظام واحد",
-    title: "وحدات بحجم منصة كاملة، مترابطة فيما بينها بالفعل",
+    title: "وحدات منصة متكاملة، تتبادل البيانات فيما بينها",
     description:
-      "كل وحدة منها مبنية وتعمل اليوم. عرض السعر يتحول إلى حجز، والحجز يُصدر بوليصة الشحن (B/L) والفاتورة، والفاتورة تصل إلى دفتر الأستاذ. لا شيء يُعاد إدخاله.",
+      "كل وحدة منها مبنية وتعمل اليوم. يتحول عرض السعر إلى حجز، ويُصدر الحجز بوليصة الشحن (B/L) والفاتورة، وتصل الفاتورة إلى دفاترك. ولا يُعاد إدخال شيء.",
     cta: "استعرض المنصة كاملة",
     all: "كل الوحدات",
     areas: { operations: "العمليات", finance: "المالية والمحاسبة", ai: "الذكاء الاصطناعي والأتمتة", control: "العملاء والرقابة" },

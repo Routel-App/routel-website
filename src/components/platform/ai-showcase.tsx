@@ -8,7 +8,7 @@ const copy = {
     eyebrow: "See it work",
     title: "From setup on day one to the work of every day",
     description:
-      "It sets your company up in a ten-minute chat, then does the daily work with your team: ask for the outcome and it proposes every change on a card for you to confirm.",
+      "It sets your company up in a ten-minute chat, then prepares the daily work with your team: ask for the outcome and it proposes every change on a card for you to confirm.",
     captions: [
       ["Sets your company up by chat", "An ordered checklist with a progress bar; it explains each item, asks, and fills in what it reads from a pasted document."],
       ["Calls tools in sequence", "Each step it takes is listed as it runs; the proposal at the end is what gets saved."],
@@ -20,7 +20,7 @@ const copy = {
     eyebrow: "شاهده يعمل",
     title: "من تجهيز الشركة في يومها الأول إلى عمل كل يوم",
     description:
-      "يجهّز شركتك في محادثة مدتها عشر دقائق، ثم ينجز العمل اليومي مع فريقك: اطلب النتيجة، ويعرض كل تغيير في بطاقة لتؤكده.",
+      "يجهّز شركتك في محادثة مدتها عشر دقائق، ثم يجهّز العمل اليومي مع فريقك: اطلب النتيجة، فيعرض كل تغيير في بطاقة لتؤكده.",
     captions: [
       ["يجهّز شركتك بالمحادثة", "قائمة مرتبة وشريط تقدّم؛ يشرح كل بند ويسأل، ويعبّئ ما يقرؤه من أي مستند تلصقه."],
       ["يستدعي الأدوات بالتسلسل", "تظهر كل خطوة ينفذها أولاً بأول، والمقترح في النهاية هو ما يُحفظ."],

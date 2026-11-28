@@ -45,7 +45,7 @@ const copy = {
   },
   ar: {
     demo: "اطلب عرضاً تجريبياً",
-    docs: "اقرأ التوثيق",
+    docs: "اقرأ دليل الاستخدام",
     problemEyebrow: "من دونها",
     problemTitle: "كيف يبدو الوضع عادةً",
     featuresEyebrow: "ما تتضمنه",
@@ -58,7 +58,7 @@ const copy = {
     relatedEyebrow: "تابع الاستكشاف",
     relatedTitle: (name: string) => `اربط ${name} ببقية Routel`,
     ctaTitle: (name: string) => `شاهد ${name} يعمل على حجز حقيقي`,
-    ctaBody: "جولة مدتها 20 دقيقة على مساراتك وطريقة عملك الفعلية، لا عرض شرائح عام.",
+    ctaBody: "جولة مدتها 20 دقيقة على مساراتك وطريقة عملك الفعلية، لا عرض شرائح عاماً.",
   },
 } satisfies Record<
   Locale,

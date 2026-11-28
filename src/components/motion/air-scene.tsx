@@ -4,7 +4,7 @@ import { Aircraft, Uld, ink, paint } from "./sprites";
 
 const copy: Record<Locale, { weight: string; weightValue: string; weightNote: string; mawb: string; mawbNote: string }> = {
   en: { weight: "Chargeable weight", weightValue: "412.5 kg", weightNote: "Volumetric wins over 380 kg gross", mawb: "MAWB 065-12345675", mawbNote: "Saudia · check digit valid" },
-  ar: { weight: "الوزن المحتسب", weightValue: "412.5 kg", weightNote: "الوزن الحجمي أعلى من القائم 380 kg", mawb: "MAWB 065-12345675", mawbNote: "الخطوط السعودية · رقم التحقق صحيح" },
+  ar: { weight: "الوزن المحتسب", weightValue: "412.5 kg", weightNote: "الوزن الحجمي أعلى من القائم 380 kg", mawb: "MAWB 065-12345675", mawbNote: "الخطوط السعودية · خانة التحقق صحيحة" },
 };
 
 /**

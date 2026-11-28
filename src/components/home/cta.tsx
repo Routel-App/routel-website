@@ -8,16 +8,16 @@ import type { Locale } from "@/lib/i18n";
 
 const copy = {
   en: {
-    title: "See a real booking go from quote to ledger, on your numbers.",
+    title: "See a real booking go from quote to the books, on your numbers.",
     points: ["Your routes and rates", "A real booking, end to end", "A 20-minute demo"],
     demo: "Request a demo",
     docs: "Browse the docs",
   },
   ar: {
-    title: "شاهد حجزاً حقيقياً ينتقل من عرض السعر إلى دفتر الأستاذ، بأرقامك أنت.",
+    title: "شاهد حجزاً حقيقياً ينتقل من عرض السعر إلى الدفاتر، بأرقامك أنت.",
     points: ["مساراتك وأسعارك", "حجز حقيقي من البداية إلى النهاية", "عرض في عشرين دقيقة"],
     demo: "اطلب عرضاً تجريبياً",
-    docs: "تصفّح التوثيق",
+    docs: "تصفّح دليل الاستخدام",
   },
 } satisfies Record<Locale, { title: string; points: string[]; demo: string; docs: string }>;
 
