@@ -1,7 +1,6 @@
-import { ArrowRight, Bot, Check, Sparkles } from "lucide-react";
+import { ArrowRight, Bot, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import Link from "@/components/i18n/link";
 import { Reveal } from "@/components/motion/reveal";
 import { getLocale } from "@/lib/locale-server";
 import type { Locale } from "@/lib/i18n";
@@ -9,8 +8,6 @@ import { ShipSide } from "@/components/motion/sprites";
 
 const copy = {
   en: {
-    badge: "New",
-    eyebrow: "NVOCC, customs clearance, shipping agency, land transport, warehouse and 3PL are live",
     title: "The Maritime & Logistics Operating System, run by AI.",
     lead: "ROUTEL brings every line of a shipping and logistics business onto one platform, from the first quotation to the general ledger. Its AI assistant automates the daily work of your company: it reads the carrier's documents, prepares bookings, waybills and invoices, and acts only when a person confirms.",
     demo: "Request a demo",
@@ -25,8 +22,6 @@ const copy = {
     chatReply: "Booking proposed · confirm to save",
   },
   ar: {
-    badge: "جديد",
-    eyebrow: "NVOCC والتخليص الجمركي والوكالة الملاحية والنقل البري والمستودع و3PL متاحة الآن",
     title: "نظام التشغيل البحري واللوجستي، يقوده الذكاء الاصطناعي.",
     lead: "يجمع ROUTEL كل خطوط أعمال شركات الشحن والخدمات اللوجستية على منصة واحدة، من أول عرض سعر حتى دفتر الأستاذ. ومساعده الذكي يؤتمت العمل اليومي لشركتك: يقرأ مستندات الناقل، ويجهّز الحجوزات والبوالص والفواتير، ولا ينفّذ إلا بعد تأكيد شخص.",
     demo: "اطلب عرضاً تجريبياً",
@@ -103,20 +98,7 @@ export async function Hero() {
       <Container className="relative grid items-center gap-12 pb-16 pt-12 sm:pb-24 sm:pt-16 lg:grid-cols-[1.05fr_1fr] lg:gap-8 lg:pt-20">
         <div>
           <Reveal>
-            <Link
-              href="/solutions"
-              className="group inline-flex items-center gap-2 rounded-full bg-fog-50 py-1.5 pe-4 ps-1.5 text-[13px] font-medium text-ink-900 ring-1 ring-inset ring-fog-200 transition-colors hover:bg-fog-100"
-            >
-              <span className="inline-flex items-center gap-1 rounded-full bg-spark-400 px-2.5 py-0.5 text-[11.5px] font-semibold text-ink-950">
-                <Sparkles className="h-3 w-3" />
-                {t.badge}
-              </span>
-              {t.eyebrow}
-              <ArrowRight className="h-3.5 w-3.5 text-spark-600 transition-transform ltr:group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" />
-            </Link>
-          </Reveal>
-          <Reveal delay={0.06}>
-            <h1 className="font-display mt-6 max-w-2xl text-balance text-[2.6rem] font-extrabold leading-[1.03] text-ink-900 sm:text-[3.4rem] lg:text-[4rem]">
+            <h1 className="font-display max-w-2xl text-balance text-[2.6rem] font-extrabold leading-[1.03] text-ink-900 sm:text-[3.4rem] lg:text-[4rem]">
               {t.title}
             </h1>
           </Reveal>

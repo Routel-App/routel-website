@@ -24,7 +24,6 @@ import type { Mock, ServicePageCopy } from "@/lib/service-pages/types";
 const copy = {
   en: {
     solutions: "Solutions",
-    live: "Available now",
     demo: "Request a demo",
     module: "See the module",
     guide: "Read the guide",
@@ -46,7 +45,6 @@ const copy = {
   },
   ar: {
     solutions: "الحلول",
-    live: "متاح الآن",
     demo: "اطلب عرضاً تجريبياً",
     module: "شاهد الوحدة",
     guide: "اقرأ الدليل",
@@ -161,10 +159,6 @@ export function ServicePageTemplate({
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-ink-900 text-spark-400">
                   <Icon className="h-5 w-5" strokeWidth={1.75} />
-                </span>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-spark-50 px-3 py-1 text-[12.5px] font-semibold text-spark-700 ring-1 ring-spark-200">
-                  <Sparkles className="h-3.5 w-3.5" />
-                  {t.live}
                 </span>
               </div>
             </Reveal>

@@ -1,15 +1,19 @@
 import type { Locale } from "@/lib/i18n";
 import type { LegalCopy } from "./types";
+import { site } from "@/lib/site";
 
-export const ENTITY = "ROUTEL Logistics & Supply Chain Operations Platform";
+export const ENTITY = site.legalName;
 export const PRIVACY_EMAIL = "privacy@routel.app";
-export const LEGAL_UPDATED = "2026-11-20";
+export const LEGAL_UPDATED = "2026-11-28";
+export const CONTACT_EMAIL = site.email;
 
 /**
  * Terms of use for the ROUTEL service: the website, the free version, the
  * trial and the paid plans. The free-version billing clause is the one
  * docs/routel-central.md (section 2) requires: ROUTEL issues a preliminary
- * invoice only, and the tax invoice is the company's own responsibility.
+ * invoice only (during the trial too), and the tax invoice is the company's
+ * own responsibility. The governing-law clause (section 13) is the founder's
+ * to change; the rest is country-neutral.
  */
 export const terms: Record<Locale, LegalCopy> = {
   en: {
@@ -41,14 +45,16 @@ export const terms: Record<Locale, LegalCopy> = {
         body: [
           "Every new account starts with a 14-day trial of the Growth plan, including AI document reading for 30 documents. When the trial ends, the account moves to the free version unless you subscribe to a paid plan.",
           "The free version includes one activity, 5 bookings a month, one user, the company setup assistant, and a preliminary invoice. Printouts from the free version carry the mark “Made with Routel”. Support on the free version is the user guide.",
-          "On the free version, ROUTEL issues a “preliminary invoice” only. It does not carry the title “tax invoice” and is not an official invoice. Issuing the tax invoice from an approved billing system is your company's responsibility; you may link that invoice to the booking by its number or by uploading its file. On the paid plans, the tax invoice is issued inside ROUTEL.",
+          "On the free version, and during the trial from its first day, ROUTEL issues a “preliminary invoice” only. It does not carry the title “tax invoice” and is not an official invoice. Issuing the tax invoice from an approved billing system is your company's responsibility; you may link that invoice to the booking by its number or by uploading its file. An invoice keeps the type it was issued with: a preliminary invoice stays preliminary after you subscribe.",
           "We may change the limits of the free version. We will show the change in the service or on the pricing page before it takes effect.",
         ],
       },
       {
         title: "4. Paid plans",
         body: [
-          "Paid plans are subscriptions, billed monthly or yearly at the prices on the pricing page. Every paid plan has unlimited users and no implementation fees. Fees that we pass through to you, such as government fees for a government link, an electronic Bill of Lading or a customs declaration, are shown separately before you incur them.",
+          "Paid plans are subscriptions, billed monthly or yearly at the prices on the pricing page. Every paid plan has unlimited users and no implementation fees.",
+          "On the paid plans, the tax invoice is issued inside ROUTEL. For companies in Saudi Arabia, it is e-invoicing compliant with the Zakat, Tax and Customs Authority (ZATCA). You remain responsible for the tax details your company enters and for the invoices it issues.",
+          "Fees that we pass through to you, such as government fees for a government link, an electronic Bill of Lading or a customs declaration, are shown separately before you incur them.",
           "We may change a plan's price with at least 30 days' notice; the new price applies from your next billing period. Founding-customer prices are locked for the period stated in the offer.",
           "You may cancel at any time from your account or by writing to us. Cancellation takes effect at the end of the current billing period, and fees already paid are not refunded except where the law requires.",
         ],
@@ -117,7 +123,7 @@ export const terms: Record<Locale, LegalCopy> = {
       },
       {
         title: "14. Contact",
-        body: [`Questions about these terms: ${PRIVACY_EMAIL}.`],
+        body: [`Questions about these terms: ${CONTACT_EMAIL}. Anything about personal data: ${PRIVACY_EMAIL}.`],
       },
     ],
   },
@@ -128,7 +134,7 @@ export const terms: Record<Locale, LegalCopy> = {
     title: "شروط الاستخدام",
     lead: "تحكم هذه الشروط استخدامك لـ ROUTEL: الموقع، والنسخة المجانية، والتجربة المجانية، والخطط المدفوعة. بإنشاء حساب أو استخدام الخدمة فأنت توافق عليها.",
     updated: "آخر تحديث",
-    entity: `تُقدَّم الخدمة من ${ENTITY} («ROUTEL»، «نحن»).`,
+    entity: `تُقدَّم الخدمة من \u2066${ENTITY}\u2069 («ROUTEL»، «نحن»).`,
     sections: [
       {
         title: "1. الخدمة",
@@ -150,14 +156,16 @@ export const terms: Record<Locale, LegalCopy> = {
         body: [
           "كل حساب جديد يبدأ بتجربة 14 يوماً على خطة النمو والتوسع، ومعها قراءة 30 مستنداً بالذكاء الاصطناعي. وعند انتهاء التجربة ينتقل الحساب إلى النسخة المجانية ما لم تشترك في خطة مدفوعة.",
           "تشمل النسخة المجانية نشاطاً واحداً، و5 حجوزات شهرياً، ومستخدماً واحداً، ومساعد إعداد الشركة، وفاتورة مبدئية. وتحمل المطبوعات من النسخة المجانية عبارة «صُنع بـ Routel». والدعم في النسخة المجانية هو دليل المستخدم.",
-          "في النسخة المجانية يصدر ROUTEL «فاتورة مبدئية» فقط، لا تحمل عنوان «فاتورة ضريبية» ولا تُعد فاتورة رسمية. وإصدار الفاتورة الضريبية من نظام فوترة معتمد مسؤولية شركتك، ويمكنك ربط تلك الفاتورة بالحجز بكتابة رقمها أو رفع ملفها. وفي الخطط المدفوعة تصدر الفاتورة الضريبية داخل ROUTEL.",
+          "في النسخة المجانية، وفي التجربة من يومها الأول، يصدر ROUTEL «فاتورة مبدئية» فقط، لا تحمل عنوان «فاتورة ضريبية» ولا تُعد فاتورة رسمية. وإصدار الفاتورة الضريبية من نظام فوترة معتمد مسؤولية شركتك، ويمكنك ربط تلك الفاتورة بالحجز بكتابة رقمها أو رفع ملفها. وتحتفظ الفاتورة بالنوع الذي صدرت به: فالفاتورة المبدئية تبقى مبدئية بعد الاشتراك.",
           "يجوز لنا تغيير حدود النسخة المجانية، ونعرض التغيير في الخدمة أو في صفحة الأسعار قبل سريانه.",
         ],
       },
       {
         title: "4. الخطط المدفوعة",
         body: [
-          "الخطط المدفوعة اشتراكات تُحتسب شهرياً أو سنوياً بالأسعار المبيّنة في صفحة الأسعار. وكل خطة مدفوعة بلا حد للمستخدمين وبلا رسوم تطبيق. أما الرسوم التي نمرّرها إليك، مثل الرسوم الحكومية للربط الحكومي أو البوليصة الإلكترونية أو البيان الجمركي، فتُعرض منفصلة قبل أن تتحملها.",
+          "الخطط المدفوعة اشتراكات تُحتسب شهرياً أو سنوياً بالأسعار المبيّنة في صفحة الأسعار. وكل خطة مدفوعة بلا حد للمستخدمين وبلا رسوم تطبيق.",
+          "وفي الخطط المدفوعة تصدر الفاتورة الضريبية داخل ROUTEL، وهي للشركات في المملكة العربية السعودية فوترة إلكترونية متوافقة مع هيئة الزكاة والضريبة والجمارك. وتبقى شركتك مسؤولة عن البيانات الضريبية التي تُدخلها وعن الفواتير التي تصدرها.",
+          "أما الرسوم التي نمرّرها إليك، مثل الرسوم الحكومية للربط الحكومي أو البوليصة الإلكترونية أو البيان الجمركي، فتُعرض منفصلة قبل أن تتحملها.",
           "يجوز لنا تغيير سعر خطة بإشعار لا يقل عن 30 يوماً، ويسري السعر الجديد من فترة الفوترة التالية. وأسعار العملاء المؤسسين مثبّتة للمدة المذكورة في العرض.",
           "يمكنك الإلغاء في أي وقت من حسابك أو بالكتابة إلينا. ويسري الإلغاء بنهاية فترة الفوترة الحالية، ولا تُسترد الرسوم المدفوعة إلا حيث يوجب النظام ذلك.",
         ],
@@ -226,7 +234,7 @@ export const terms: Record<Locale, LegalCopy> = {
       },
       {
         title: "14. التواصل",
-        body: [`للأسئلة عن هذه الشروط: ${PRIVACY_EMAIL}.`],
+        body: [`للأسئلة عن هذه الشروط: ${CONTACT_EMAIL}. ولأي أمر يخص البيانات الشخصية: ${PRIVACY_EMAIL}.`],
       },
     ],
   },

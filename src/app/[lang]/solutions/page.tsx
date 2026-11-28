@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "@/components/i18n/link";
-import { ArrowRight, ArrowUpRight, Bot, CheckCircle2 } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Bot } from "lucide-react";
 import { Section, SectionHeading, Eyebrow } from "@/components/ui/section";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
@@ -18,10 +18,10 @@ const copy = {
     eyebrow: "Solutions",
     title: "Every line of the trade, on one AI operating system",
     lead: "Routel automates the daily work of maritime and logistics companies end to end: one booking at the centre, every document generated from it, and an AI assistant that runs the operation with you. Open the services your company offers; each one switches on as a module.",
-    live: "Available now",
-    liveTitle: "Running on Routel today",
-    liveLead: "Built, working and open to every company today.",
-    services: "services, every one live",
+    servicesEyebrow: "Services",
+    liveTitle: "Running on Routel",
+    liveLead: "Each service works on the same booking, the same documents and the same books.",
+    services: "services, one platform",
     types: "types of business, one platform",
     learn: "Learn more",
     who: "Who it's for",
@@ -39,10 +39,10 @@ const copy = {
     eyebrow: "الحلول",
     title: "كل خطوط التجارة، على نظام تشغيل واحد يقوده الذكاء الاصطناعي",
     lead: "يؤتمت Routel العمل اليومي لشركات الشحن البحري والخدمات اللوجستية من البداية إلى النهاية: حجز واحد في المركز، وكل مستند يُنشأ منه، ومساعد ذكي يدير العملية معك. افتح الخدمات التي تقدمها شركتك، وكل خدمة تعمل كوحدة.",
-    live: "متاحة الآن",
-    liveTitle: "تعمل على Routel اليوم",
-    liveLead: "مبنية وتعمل ومتاحة لكل شركة اليوم.",
-    services: "خدمات، كلها متاحة",
+    servicesEyebrow: "الخدمات",
+    liveTitle: "تعمل على Routel",
+    liveLead: "كل خدمة تعمل على الحجز نفسه والمستندات نفسها والدفاتر نفسها.",
+    services: "خدمات، على منصة واحدة",
     types: "أنواع من الشركات، على منصة واحدة",
     learn: "اعرف المزيد",
     who: "لمن صُمّم",
@@ -67,10 +67,6 @@ function ServiceCard({ s, t }: { s: Service; t: (typeof copy)["en"] }) {
       <div className="flex items-start justify-between gap-3">
         <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-ink-900 text-spark-400">
           <Icon className="h-5 w-5" strokeWidth={1.75} />
-        </span>
-        <span className="inline-flex items-center gap-1 rounded-full bg-spark-50 px-2.5 py-1 text-[11px] font-semibold text-spark-700 ring-1 ring-spark-200">
-          <CheckCircle2 className="h-3 w-3" />
-          {t.live}
         </span>
       </div>
       <h3 className="font-display mt-5 text-xl font-bold text-ink-900">{s.name}</h3>
@@ -138,7 +134,7 @@ export default async function SolutionsPage() {
       </section>
 
       <Section>
-        <SectionHeading align="left" eyebrow={t.live} title={t.liveTitle} description={t.liveLead} className="max-w-3xl" />
+        <SectionHeading align="left" eyebrow={t.servicesEyebrow} title={t.liveTitle} description={t.liveLead} className="max-w-3xl" />
         <RevealGroup className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.06}>
           {services.map((s) => (
             <RevealItem key={s.slug} className="h-full">

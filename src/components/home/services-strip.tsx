@@ -7,8 +7,8 @@ import { getLocale } from "@/lib/locale-server";
 import type { Locale } from "@/lib/i18n";
 
 const copy = {
-  en: { title: "One operating system for every line of the trade", live: "Live", all: "All solutions" },
-  ar: { title: "نظام تشغيل واحد لكل خطوط التجارة", live: "متاحة", all: "كل الحلول" },
+  en: { title: "One operating system for every line of the trade", all: "All solutions" },
+  ar: { title: "نظام تشغيل واحد لكل خطوط التجارة", all: "كل الحلول" },
 } satisfies Record<Locale, Record<string, string>>;
 
 /** Under the hero: the services Routel runs, each one a link. */
@@ -38,13 +38,7 @@ export async function ServicesStrip() {
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-ink-900 text-spark-400">
                     <Icon className="h-[18px] w-[18px]" strokeWidth={1.75} />
                   </span>
-                  <span className="min-w-0">
-                    <span className="block text-[13px] font-semibold leading-snug text-ink-900">{s.name}</span>
-                    <span className="mt-0.5 inline-flex items-center gap-1 text-[11px] font-medium text-spark-700">
-                      <span className="h-1.5 w-1.5 rounded-full bg-spark-500" />
-                      {t.live}
-                    </span>
-                  </span>
+                  <span className="min-w-0 text-[13px] font-semibold leading-snug text-ink-900">{s.name}</span>
                 </Link>
               </RevealItem>
             );
