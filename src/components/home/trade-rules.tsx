@@ -10,6 +10,11 @@ import {
   Scale,
   ScanBarcode,
   TriangleAlert,
+  Ruler,
+  Snowflake,
+  Lock,
+  Landmark,
+  PlaneTakeoff,
   type LucideIcon,
 } from "lucide-react";
 import { Section, SectionHeading } from "@/components/ui/section";
@@ -35,7 +40,12 @@ const copy: Record<Locale, { eyebrow: string; title: string; sub: string; rules:
       { icon: Hourglass, code: "D&D", title: "Demurrage & detention", text: "Free days, daily tiers and port holidays; the shipping line's invoice checked against the tariff." },
       { icon: Scale, code: "SOLAS VGM", title: "Verified gross mass", text: "Each packed container's verified gross mass, with its method (1 or 2) and signatory, recorded and checked against the carrier's VGM cut-off." },
       { icon: TriangleAlert, code: "IMDG", title: "Dangerous goods", text: "Dangerous goods declared by UN number, proper shipping name, class and packing group, and flagged on the booking and its documents." },
-      { icon: Coins, code: "FX · TAX", title: "Currencies & tax", text: "Every document in its currency at its recorded rate; each country's tax (VAT 15% in Saudi Arabia, SST, PPN), with a 0% rate for charges that carry no tax, such as zero-rated international transport in Saudi Arabia." },
+      { icon: Ruler, code: "ISO 668", title: "Container capacity", text: "Each type's maximum payload and internal volume are known, so cargo that won't fit by weight or volume is flagged, with the type that would fit." },
+      { icon: Snowflake, code: "RF · OOG", title: "Reefer & out of gauge", text: "Set temperature, ventilation and humidity for reefers; over-height and over-width for flat racks and open tops, printed on the B/L." },
+      { icon: Lock, code: "ISO 17712", title: "Container seals", text: "Every container's seals, with their security class, on the B/L and every document; duplicate seal numbers are flagged." },
+      { icon: Landmark, code: "UCP 600", title: "Letters of credit", text: "The B/L is checked against the letter of credit's terms (shipment date, ports, consignee, clean on board), and the presentation deadline is tracked." },
+      { icon: PlaneTakeoff, code: "IATA DGR", title: "Dangerous goods by air", text: "UN number, class, packing group and packing instruction on air shipments, with Cargo Aircraft Only flagged on the air waybill." },
+      { icon: Coins, code: "FX · TAX", title: "Currencies & tax", text: "Every document in its currency at its recorded rate; each country's tax (VAT 15% in Saudi Arabia, SST, PPN), with a 0% rate for charges that carry no tax, such as zero-rated international transport in Saudi Arabia; partners' VAT and tax numbers are checked against each country's format." },
       { icon: CalendarCheck, title: "Operating rules", text: "No arrival dated before departure; no House B/L issued until every container is numbered, typed and weighed." },
     ],
   },
@@ -53,7 +63,12 @@ const copy: Record<Locale, { eyebrow: string; title: string; sub: string; rules:
       { icon: Hourglass, code: "D&D", title: "الأرضيات والتأخير", text: "أيام السماح والشرائح اليومية وعطل الميناء، وتُطابَق فاتورة الخط الملاحي مع التعرفة." },
       { icon: Scale, code: "SOLAS VGM", title: "الوزن الإجمالي المعتمد", text: "يُسجَّل الوزن الإجمالي المعتمد لكل حاوية معبّأة، بطريقته (1 أو 2) واسم المعتمِد، ويُدقَّق قبل موعد إقفال VGM لدى الخط الملاحي." },
       { icon: TriangleAlert, code: "IMDG", title: "البضائع الخطرة", text: "تُصرَّح برقم UN والاسم الرسمي للشحن ورتبة الخطر ومجموعة التعبئة، ويُنبَّه إليها في الحجز ومستنداته." },
-      { icon: Coins, code: "FX · TAX", title: "العملات والضرائب", text: "كل مستند بعملته وبسعر الصرف المسجّل له، وبضريبة بلده (القيمة المضافة 15% في السعودية، وSST، وPPN)، مع نسبة 0% للبنود غير الخاضعة للضريبة، كالنقل الدولي الخاضع لنسبة الصفر في السعودية." },
+      { icon: Ruler, code: "ISO 668", title: "سعة الحاويات", text: "تُعرف الحمولة القصوى والحجم الداخلي لكل نوع حاوية، فيُنبَّه إلى البضاعة التي لا تتسع لها وزناً أو حجماً، مع النوع الذي يتسع لها." },
+      { icon: Snowflake, code: "RF · OOG", title: "الحاويات المبردة والبضائع خارج المقاس", text: "درجة الحرارة والتهوية والرطوبة للحاويات المبردة، والتجاوز في الارتفاع والعرض للحاويات المسطحة والمكشوفة، مطبوعةً على البوليصة." },
+      { icon: Lock, code: "ISO 17712", title: "أختام الحاويات", text: "أختام كل حاوية بدرجة أمانها، على البوليصة وكل مستند، ويُنبَّه إلى أرقام الأختام المكررة." },
+      { icon: Landmark, code: "UCP 600", title: "الاعتمادات المستندية", text: "تُراجَع البوليصة مقابل شروط الاعتماد المستندي (تاريخ الشحن، والموانئ، والمرسل إليه، والشحن النظيف على متن السفينة)، ويُتابَع موعد تقديم المستندات للبنك." },
+      { icon: PlaneTakeoff, code: "IATA DGR", title: "البضائع الخطرة جواً", text: "رقم UN ورتبة الخطر ومجموعة التعبئة وتعليمات التعبئة للشحنات الجوية، ويُنبَّه إلى «طائرات الشحن فقط» على بوليصة الشحن الجوي." },
+      { icon: Coins, code: "FX · TAX", title: "العملات والضرائب", text: "كل مستند بعملته وبسعر الصرف المسجّل له، وبضريبة بلده (القيمة المضافة 15% في السعودية، وSST، وPPN)، مع نسبة 0% للبنود غير الخاضعة للضريبة، كالنقل الدولي الخاضع لنسبة الصفر في السعودية، ويُتحقق من الأرقام الضريبية للشركاء وفق صيغة كل دولة." },
       { icon: CalendarCheck, title: "قواعد التشغيل", text: "لا وصول قبل المغادرة، ولا تصدر البوليصة الفرعية قبل أن يكون لكل حاوية رقمها ونوعها ووزنها." },
     ],
   },
@@ -72,7 +87,7 @@ export async function TradeRules() {
           const Icon = r.icon;
           const last = i === t.rules.length - 1;
           return (
-            <RevealItem key={r.title} className={last ? "h-full sm:col-span-2" : "h-full"}>
+            <RevealItem key={r.title} className={last ? "h-full lg:col-span-3 xl:col-span-1" : "h-full"}>
               <div className="flex h-full flex-col rounded-2xl border border-fog-200 bg-white p-5 shadow-card">
                 <div className="flex items-center justify-between gap-3">
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-ink-900 text-spark-400">
