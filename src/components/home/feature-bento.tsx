@@ -19,12 +19,12 @@ const copy: Record<Locale, { eyebrow: string; title: string; lead: string }> = {
   en: {
     eyebrow: "Watch it work",
     title: "The work your team does every day, done in one place",
-    lead: "Each card is a piece of Routel doing its job: containers moving, documents read, payments matched and books kept, without a spreadsheet in sight.",
+    lead: "Each card is a piece of ROUTEL doing its job: containers moving, documents read, payments matched and books kept, without a spreadsheet in sight.",
   },
   ar: {
     eyebrow: "شاهده يعمل",
     title: "العمل الذي يقوم به فريقك كل يوم، في مكان واحد",
-    lead: "كل بطاقة جزء من Routel يؤدي عمله: حاويات تتحرك، ومستندات تُقرأ، ودفعات تُطابق، ودفاتر تُحدَّث، دون أي جدول بيانات.",
+    lead: "كل بطاقة جزء من ROUTEL يؤدي عمله: حاويات تتحرك، ومستندات تُقرأ، ودفعات تُطابق، ودفاتر تُحدَّث، دون أي جدول بيانات.",
   },
 };
 

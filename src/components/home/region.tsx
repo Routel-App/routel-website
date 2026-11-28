@@ -21,7 +21,7 @@ const copy: Record<Locale, Copy> = {
   en: {
     eyebrow: "Built for your market",
     title: "Your currency, your tax rules, your language",
-    lead: "Built for the GCC — Qatar and Saudi Arabia — and Southeast Asia, where it already runs in Malaysia and Indonesia. Each deployment runs in its country's base currency with that country's tax, and the whole interface works in English or Arabic, right to left.",
+    lead: "Built for the GCC — Qatar and Saudi Arabia — and Southeast Asia; it already runs in Saudi Arabia, Malaysia and Indonesia. Each deployment runs in its country's base currency with that country's tax, and the whole interface works in English or Arabic, right to left.",
     hint: "The same booking, both ways",
     cards: [
       { title: "Two currencies, no spreadsheets", text: "Documents use your base currency and USD. Vendor costs in USD convert at the booking's own rate, so profit is right." },
@@ -39,11 +39,11 @@ const copy: Record<Locale, Copy> = {
   ar: {
     eyebrow: "مصمَّم لسوقك",
     title: "بعملتك، وبضريبتك، وبلغتك",
-    lead: "مصمم لدول الخليج — قطر والسعودية — ولجنوب شرق آسيا، حيث يعمل اليوم في ماليزيا وإندونيسيا. ويعمل بعملة بلدك مع الدولار الأمريكي، وبضريبة بلدك، وبواجهة عربية كاملة من اليمين إلى اليسار، مع الإنجليزية متى احتجتها.",
+    lead: "مصمم لدول الخليج — قطر والسعودية — ولجنوب شرق آسيا، ويعمل اليوم في السعودية وماليزيا وإندونيسيا. ويعمل بعملة بلدك مع الدولار الأمريكي، وبضريبة بلدك، وبواجهة عربية كاملة من اليمين إلى اليسار، مع الإنجليزية متى احتجتها.",
     hint: "الحجز نفسه باللغتين",
     cards: [
       { title: "عملتك والدولار", text: "المستندات بعملة بلدك والدولار فقط، وتكاليف الموردين بالدولار تُحوَّل بسعر الحجز نفسه، فيبقى الربح صحيحاً." },
-      { title: "ضريبة القيمة المضافة", text: "في السعودية نسبتا 15% و0% على البنود، مع تقرير ضريبة القيمة المضافة جاهز من الفواتير نفسها." },
+      { title: "الضريبة حسب البلد", text: "ضريبة القيمة المضافة في السعودية، وSST في ماليزيا، وPPN في إندونيسيا، ولكلٍّ منها نسبها وتقريرها الضريبي من الفواتير نفسها." },
       { title: "فاتورة ضريبية باللغتين", text: "«فاتورة ضريبية» أو «فاتورة ضريبية مبسطة» بالعربية والإنجليزية. وفي السعودية فوترة إلكترونية متوافقة مع متطلبات هيئة الزكاة والضريبة والجمارك (فاتورة)، برمز QR." },
       { title: "عربي من اليمين إلى اليسار", text: "كل الشاشات تعمل بالعربية كما تعمل بالإنجليزية، باتجاه من اليمين إلى اليسار، والمساعد الذكي يجيب بأي لغة." },
     ],

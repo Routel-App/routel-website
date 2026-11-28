@@ -8,10 +8,10 @@ import type { Locale } from "@/lib/i18n";
 
 const copy = {
   en: { title: "One operating system for every line of the trade", all: "All solutions" },
-  ar: { title: "نظام تشغيل واحد لكل خطوط التجارة", all: "كل الحلول" },
+  ar: { title: "نظام تشغيل واحد لكل أنشطة الشحن", all: "كل الحلول" },
 } satisfies Record<Locale, Record<string, string>>;
 
-/** Under the hero: the services Routel runs, each one a link. */
+/** Under the hero: the services ROUTEL runs, each one a link. */
 export async function ServicesStrip() {
   const locale = await getLocale();
   const t = copy[locale];

@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
  * "The spreadsheet was never built for this": an infographic. On the left,
  * the cells of a spreadsheet fly into the booking's container (Lottie). On
  * the right, four things a shared sheet can't do, each crossing a spine
- * into what Routel does instead; the connectors draw and the answers light
+ * into what ROUTEL does instead; the connectors draw and the answers light
  * up as the section scrolls in.
  */
 
@@ -27,7 +27,7 @@ const copy: Record<Locale, Copy> = {
     title: "The spreadsheet was never built for this",
     lead: "A shared sheet is where a forwarder's rates, bookings and invoices usually start. It can't tell you which copy is current, who changed a cell, or what the month looks like before the accountant is done.",
     left: "A shared spreadsheet",
-    right: "In Routel",
+    right: "In ROUTEL",
     rows: [
       { pain: "Which file is current?", painNote: "rates_2026_FINAL_v3 (1).xlsx", answer: "One buying rate per lane, with a validity date", module: "Routes" },
       { pain: "The same booking typed into three tabs", painNote: "Tracker · Invoicing · Accounts", answer: "One record that every module reads", module: "Bookings" },
@@ -41,7 +41,7 @@ const copy: Record<Locale, Copy> = {
     title: "جدول البيانات لم يُصمَّم لهذا",
     lead: "الجدول المشترك هو ما تبدأ به معظم شركات الشحن: الأسعار والحجوزات والفواتير فيه. لكنه لا يعرف أي نسخة هي الصحيحة، ولا من غيّر الخلية، ولا كيف يبدو الشهر قبل أن ينتهي المحاسب.",
     left: "جدول بيانات مشترك",
-    right: "في Routel",
+    right: "في ROUTEL",
     rows: [
       { pain: "أي ملف هو الحالي؟", painNote: "rates_2026_FINAL_v3 (1).xlsx", answer: "سعر شراء واحد لكل مسار، بتاريخ صلاحية", module: "المسارات" },
       { pain: "الحجز نفسه يُكتب في ثلاث صفحات", painNote: "متابعة · فواتير · حسابات", answer: "سجل واحد تقرؤه كل الوحدات", module: "الحجوزات" },

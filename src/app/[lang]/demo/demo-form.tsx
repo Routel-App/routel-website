@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 /**
  * The demo request. There is no mail service behind the site, so the form
  * doesn't pretend to send anything: it checks the fields, then opens the
- * visitor's own e-mail app with a message to ROUTEL already written
+ * visitor's own email app with a message to ROUTEL already written
  * from them. The address is shown too, for anyone without a mail app.
  */
 
@@ -33,13 +33,13 @@ const copy = {
     country: "Country",
     countryPh: "Qatar",
     teamSize: "Team size",
-    teamSizePh: "How many people will use Routel?",
+    teamSizePh: "How many people will use ROUTEL?",
     sizes: ["1 to 5", "6 to 20", "21 to 50", "More than 50"],
     message: "What would you like to see?",
     messagePh: "Tell us about your routes, volumes, or the part of your process that hurts the most.",
-    submit: "Write the e-mail",
-    how: "This opens your e-mail app with the message ready to send to {email}. Nothing is sent until you press send there.",
-    opened: "Your e-mail app should now show the message",
+    submit: "Write the email",
+    how: "This opens your email app with the message ready to send to {email}. Nothing is sent until you press send there.",
+    opened: "Your email app should now show the message",
     openedBody: "Check it and press send. If nothing opened, write to us directly at {email}.",
     again: "Open it again",
     edit: "Change the details",
@@ -50,7 +50,7 @@ const copy = {
     errMessage: "Keep the message under 2000 characters.",
     fix: "A few fields need attention.",
     subject: "Demo request: {company}",
-    bodyIntro: "Hello,\n\nI'd like a demo of Routel.",
+    bodyIntro: "Hello,\n\nI'd like a demo of ROUTEL.",
     bodyName: "Name",
     bodyEmail: "Work email",
     bodyCompany: "Company",
@@ -69,10 +69,10 @@ const copy = {
     country: "الدولة",
     countryPh: "قطر",
     teamSize: "حجم الفريق",
-    teamSizePh: "كم شخصاً سيستخدم Routel؟",
+    teamSizePh: "كم شخصاً سيستخدم ROUTEL؟",
     sizes: ["من 1 إلى 5", "من 6 إلى 20", "من 21 إلى 50", "أكثر من 50"],
     message: "ما الذي تود أن تراه؟",
-    messagePh: "أخبرنا عن خطوط الشحن لديك، أو أحجام شحناتك، أو الجزء الأكثر إرهاقاً في عملياتك.",
+    messagePh: "أخبرنا عن مسارات الشحن لديك، أو أحجام شحناتك، أو الجزء الأكثر إرهاقاً في عملياتك.",
     submit: "اكتب الرسالة",
     how: "يفتح هذا تطبيق البريد لديك ورسالتك جاهزة للإرسال إلى {email}. لا يُرسل شيء حتى تضغط «إرسال» هناك.",
     opened: "يُفترض أن تظهر الرسالة الآن في تطبيق البريد",
@@ -86,7 +86,7 @@ const copy = {
     errMessage: "يجب ألا تتجاوز الرسالة 2000 حرف.",
     fix: "بعض الحقول تحتاج إلى مراجعة.",
     subject: "طلب عرض تجريبي: {company}",
-    bodyIntro: "مرحباً،\n\nأود مشاهدة عرض تجريبي لـ Routel.",
+    bodyIntro: "مرحباً،\n\nأود مشاهدة عرض تجريبي لـ ROUTEL.",
     bodyName: "الاسم",
     bodyEmail: "بريد العمل",
     bodyCompany: "الشركة",

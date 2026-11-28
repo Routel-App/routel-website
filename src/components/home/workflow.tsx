@@ -16,7 +16,7 @@ type Copy = {
 const copy = {
   en: {
     eyebrow: "One thread from enquiry to cash",
-    title: "A shipment moves through Routel the way it moves through your office",
+    title: "A shipment moves through ROUTEL the way it moves through your office",
     description:
       "Every step reuses the data from the one before it. Operations, sales and accounting look at the same booking, not three versions of it.",
     steps: [
@@ -30,7 +30,7 @@ const copy = {
   },
   ar: {
     eyebrow: "مسار واحد من الاستفسار إلى التحصيل",
-    title: "تنتقل الشحنة في Routel بالطريقة نفسها التي تنتقل بها في مكتبك",
+    title: "تنتقل الشحنة في ROUTEL بالطريقة نفسها التي تنتقل بها في مكتبك",
     description:
       "كل خطوة تعيد استخدام بيانات الخطوة التي قبلها. فرق العمليات والمبيعات والمحاسبة تعمل على الحجز نفسه، لا على ثلاث نسخ منه.",
     steps: [

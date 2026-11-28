@@ -15,7 +15,7 @@ const copy = {
   ar: { label: "الحلول", all: "كل الحلول", allText: "كل الخدمات على نظام تشغيل بحري ولوجستي واحد." },
 } satisfies Record<Locale, Record<string, string>>;
 
-/** "Solutions" mega menu: the services Routel runs, by type of business. */
+/** "Solutions" mega menu: the services ROUTEL runs, by type of business. */
 export function SolutionsMenu({ inverse }: { inverse: boolean }) {
   const locale = useLocale();
   const t = copy[locale];

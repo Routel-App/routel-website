@@ -1,5 +1,6 @@
 import { Hero } from "@/components/home/hero";
 import { ServicesStrip } from "@/components/home/services-strip";
+import { TradeRules } from "@/components/home/trade-rules";
 import { ProductTour } from "@/components/home/product-tour";
 import { Odyssey } from "@/components/home/odyssey";
 import { ChaosToOrder } from "@/components/home/chaos-to-order";
@@ -15,12 +16,13 @@ import { Cta } from "@/components/home/cta";
 import { PlatformOverview } from "@/components/home/platform-overview";
 import { WaysToWork } from "@/components/home/ways-to-work";
 
-/* Light hero and the services, then what ROUTEL is, the scroll story and the assistant; the comparison comes once the system is explained. */
+/* Light hero and the services, then the trade's rules built into the system, what ROUTEL is, the scroll story and the assistant; the comparison comes once the system is explained. */
 export default function HomePage() {
   return (
     <>
       <Hero />
       <ServicesStrip />
+      <TradeRules />
       <PlatformOverview />
       <Odyssey />
       <AiSpotlight />

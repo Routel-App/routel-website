@@ -16,10 +16,10 @@ const copy = {
   en: {
     metaTitle: "Platform",
     metaDescription:
-      "Every Routel module, from the first quotation to the last payment — one platform, twenty-one modules that already talk to each other.",
+      "Every ROUTEL module, from the first quotation to the last payment — one platform, twenty-one modules that already talk to each other.",
     title: "One platform, twenty-one modules that already talk to each other",
     intro:
-      "Every module below is built and working in Routel today. A quotation becomes a booking, the booking produces a B/L and an invoice, and the invoice lands in your ledger — nothing re-keyed between them.",
+      "Every module below is built and working in ROUTEL today. A quotation becomes a booking, the booking produces a B/L and an invoice, and the invoice lands in your books — nothing re-keyed between them.",
     demo: "Request a demo",
     docs: "Read the docs",
     groups: [
@@ -48,12 +48,12 @@ const copy = {
   ar: {
     metaTitle: "المنصة",
     metaDescription:
-      "كل وحدات Routel، من أول عرض سعر إلى آخر دفعة — منصة واحدة وإحدى وعشرون وحدة مترابطة فيما بينها أصلاً.",
-    title: "منصة واحدة، وإحدى وعشرون وحدة مترابطة فيما بينها أصلاً",
+      "كل وحدات ROUTEL، من أول عرض سعر إلى آخر دفعة: منصة واحدة، وإحدى وعشرون وحدة تتبادل البيانات فيما بينها.",
+    title: "منصة واحدة، وإحدى وعشرون وحدة تتبادل البيانات فيما بينها",
     intro:
-      "كل وحدة أدناه مبنية وتعمل في Routel اليوم. عرض السعر يتحول إلى حجز، والحجز يُنتج بوليصة الشحن (B/L) والفاتورة، والفاتورة تصل إلى دفتر الأستاذ — دون إعادة إدخال أي بيانات بينها.",
+      "كل وحدة أدناه مبنية وتعمل في ROUTEL اليوم. يتحول عرض السعر إلى حجز، ويُنتج الحجز بوليصة الشحن (B/L) والفاتورة، وتصل الفاتورة إلى دفاترك، دون إعادة إدخال أي بيانات بينها.",
     demo: "اطلب عرضاً تجريبياً",
-    docs: "اقرأ التوثيق",
+    docs: "اقرأ دليل الاستخدام",
     groups: [
       {
         title: "العمليات",

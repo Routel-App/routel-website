@@ -11,8 +11,8 @@ import { gsap, useGSAP, MOTION_OK } from "@/components/motion/gsap";
 
 /**
  * "Seven places for one shipment": the files a forwarder juggles (rate
- * sheet, shared tracker, carrier PDF, an e-mail chain, a chat, a Word
- * invoice, a sticky note) fly into one Routel booking, and each lands as
+ * sheet, shared tracker, carrier PDF, an email chain, a chat, a Word
+ * invoice, a sticky note) fly into one ROUTEL booking, and each lands as
  * the line of the booking that replaces it.
  *
  * The section is pinned and scrubbed by scroll on every screen. On phones
@@ -31,7 +31,7 @@ const copy: Record<Locale, Copy> = {
   en: {
     eyebrow: "Less chaos",
     title: "Seven places for one shipment. Or one booking.",
-    lead: "Rates in one spreadsheet, status in another, the carrier's PDF in someone's inbox, the invoice in Word and the reminder on a sticky note. Routel puts all of it on the booking, so nobody re-types, hunts or asks twice.",
+    lead: "Rates in one spreadsheet, status in another, the carrier's PDF in someone's inbox, the invoice in Word and the reminder on a sticky note. ROUTEL puts all of it on the booking, so nobody re-types, hunts or asks twice.",
     before: "places to look",
     after: "record",
     card: "Booking",
@@ -39,7 +39,7 @@ const copy: Record<Locale, Copy> = {
       { file: "rates_2026_FINAL_v3.xlsx", app: "Excel", becomes: "Route rates, with validity" },
       { file: "Bookings tracker (shared)", app: "Google Sheets", becomes: "Status: 11 stages on the booking" },
       { file: "MSC_confirmation.pdf", app: "PDF", becomes: "Carrier booking, read by the AI" },
-      { file: "RE: RE: FW: container no.?", app: "E-mail", becomes: "E-mails linked to the booking" },
+      { file: "RE: RE: FW: container no.?", app: "Email", becomes: "Emails linked to the booking" },
       { file: "Gate in done? ETD?", app: "Chat", becomes: "Shipping timeline, gate-in to ATA" },
       { file: "Invoice_template_new.docx", app: "Word", becomes: "Invoice from the sale lines" },
       { file: "Call carrier re: ETD!!", app: "Note", becomes: "Follow-up with an owner and a date" },
@@ -49,7 +49,7 @@ const copy: Record<Locale, Copy> = {
   ar: {
     eyebrow: "فوضى أقل",
     title: "سبعة أماكن لشحنة واحدة. أو حجز واحد.",
-    lead: "الأسعار في ملف Excel، والحالة في جدول آخر، وملف الناقل في بريد أحد الموظفين، والفاتورة في Word، والتذكير على ورقة لاصقة. Routel يجمع كل ذلك في الحجز، فلا أحد يعيد الكتابة أو يبحث أو يسأل مرتين.",
+    lead: "الأسعار في ملف Excel، والحالة في جدول آخر، وملف الناقل في بريد أحد الموظفين، والفاتورة في Word، والتذكير على ورقة لاصقة. ويجمع ROUTEL ذلك كله في الحجز، فلا يعيد أحد الكتابة، ولا يبحث، ولا يسأل مرتين.",
     before: "أماكن للبحث",
     after: "سجل",
     card: "الحجز",
@@ -213,7 +213,7 @@ export function ChaosToOrder() {
                 <p className="text-[11px] text-white/50">{t.card}</p>
                 <p dir="ltr" className="font-mono text-[14px] font-semibold rtl:text-end">NXS27000427</p>
               </div>
-              <span className="rounded-full bg-spark-400/15 px-2.5 py-1 text-[11px] font-semibold text-spark-300 ring-1 ring-spark-400/30">Routel</span>
+              <span className="rounded-full bg-spark-400/15 px-2.5 py-1 text-[11px] font-semibold text-spark-300 ring-1 ring-spark-400/30">ROUTEL</span>
             </div>
             <ul className="mt-3 space-y-1.5">
               {t.items.map((it) => (

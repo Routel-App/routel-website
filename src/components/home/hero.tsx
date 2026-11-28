@@ -1,4 +1,5 @@
-import { ArrowRight, Bot, Check } from "lucide-react";
+import { ArrowRight, Bot, Check, ShieldCheck } from "lucide-react";
+import { bidi } from "@/components/i18n/bidi";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/motion/reveal";
@@ -8,8 +9,8 @@ import { ShipSide } from "@/components/motion/sprites";
 
 const copy = {
   en: {
-    title: "The Maritime & Logistics Operating System, run by AI.",
-    lead: "ROUTEL brings every line of a shipping and logistics business onto one platform, from the first quotation to the general ledger. Its AI assistant automates the daily work of your company: it reads the carrier's documents, prepares bookings, waybills and invoices, and acts only when a person confirms.",
+    title: "The operating system that knows shipping the way its experts do.",
+    lead: "ROUTEL runs the whole shipment, from quotation and booking to the B/L, customs clearance, the invoice and the books, and checks the work the way an experienced operator would. Its AI assistant reads the documents and prepares the work; your team confirms.",
     demo: "Request a demo",
     solutions: "Explore solutions",
     trust: "Live with freight companies in Saudi Arabia, Malaysia and Indonesia",
@@ -18,12 +19,13 @@ const copy = {
     statLabel: "of the system's own actions",
     statRead: "74 read",
     statWrite: "55 write, after you confirm",
-    chat: "Book 2 × 40HC Jeddah → Shanghai for Al Noor",
+    chat: "Book 2 × 40HC Jeddah → Shanghai, ETD next Sunday",
     chatReply: "Booking proposed · confirm to save",
+    standardsLabel: "Built-in standards",
   },
   ar: {
-    title: "نظام التشغيل البحري واللوجستي، يقوده الذكاء الاصطناعي.",
-    lead: "يجمع ROUTEL كل خطوط أعمال شركات الشحن والخدمات اللوجستية على منصة واحدة، من أول عرض سعر حتى دفتر الأستاذ. ومساعده الذكي يؤتمت العمل اليومي لشركتك: يقرأ مستندات الناقل، ويجهّز الحجوزات والبوالص والفواتير، ولا ينفّذ إلا بعد تأكيد شخص.",
+    title: "نظام تشغيل يعرف الشحن كما يعرفه خبراؤه.",
+    lead: "يدير ROUTEL الشحنة كاملة، من عرض السعر والحجز إلى البوليصة والتخليص الجمركي والفاتورة والدفاتر، ويراجع العمل كما يراجعه خبير عمليات متمرّس. ومساعده الذكي يقرأ المستندات ويجهّز العمل، والقرار لفريقك.",
     demo: "اطلب عرضاً تجريبياً",
     solutions: "استكشف الحلول",
     trust: "يعمل لدى شركات شحن في السعودية وماليزيا وإندونيسيا",
@@ -32,10 +34,17 @@ const copy = {
     statLabel: "إجراءً من إجراءات النظام نفسه",
     statRead: "74 للقراءة",
     statWrite: "55 للكتابة، بعد تأكيدك",
-    chat: "احجز 2 × 40HC من جدة إلى شنغهاي للنور",
+    chat: "احجز 2 × 40HC من جدة إلى شنغهاي، المغادرة الأحد القادم",
     chatReply: "حجز مقترح · أكّد للحفظ",
+    standardsLabel: "معايير مدمجة",
   },
 } satisfies Record<Locale, Record<string, string>>;
+
+/** The trade's standards the system checks against, shown under the hero's buttons. */
+const standards: Record<Locale, string[]> = {
+  en: ["ISO 6346", "UN/LOCODE", "Incoterms", "IATA AWB", "HS codes", "SOLAS VGM", "IMDG"],
+  ar: ["ISO 6346", "UN/LOCODE", "شروط التسليم Incoterms", "بوليصة IATA الجوية", "البنود الجمركية HS", "الوزن المعتمد VGM", "البضائع الخطرة IMDG"],
+};
 
 /** Greys for the other containers, so the booking's orange one is the only colour in the scene. */
 const greys = ["#d9d9d6", "#bdbdb8", "#9d9d98", "#e9e9e6", "#6f6f6a", "#c9c9c5"];
@@ -114,8 +123,23 @@ export async function Hero() {
               {t.solutions}
             </Button>
           </Reveal>
+          <Reveal delay={0.22}>
+            <div className="mt-8 max-w-xl rounded-2xl bg-white/90 p-3.5 ring-1 ring-fog-200 sm:p-4">
+              <p className="flex items-center gap-1.5 text-[12px] font-semibold text-ink-900">
+                <ShieldCheck className="h-4 w-4 text-spark-600" strokeWidth={2} />
+                {t.standardsLabel}
+              </p>
+              <ul className="mt-2.5 flex flex-wrap gap-1.5">
+                {standards[locale].map((s) => (
+                  <li key={s} className="rounded-md bg-fog-50 px-2 py-1 text-[12px] font-medium text-fog-700 ring-1 ring-inset ring-fog-200">
+                    {locale === "ar" ? bidi(s) : s}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
           <Reveal delay={0.24}>
-            <p className="mt-10 text-[11.5px] font-semibold uppercase tracking-[0.14em] text-fog-500">{t.trust}</p>
+            <p className="mt-8 text-[11.5px] font-semibold uppercase tracking-[0.14em] text-fog-500">{t.trust}</p>
           </Reveal>
         </div>
 
@@ -123,7 +147,7 @@ export async function Hero() {
           <div className="relative aspect-[900/620] w-full overflow-hidden rounded-[28px] bg-white ring-1 ring-fog-200">
             <HeroScene />
           </div>
-          {/* The figure card, Kpler-style, floating over the scene's corner */}
+          {/* The figure card, floating over the scene's corner */}
           <div className="absolute -bottom-6 start-4 w-[230px] rounded-2xl bg-white/95 p-4 shadow-float ring-1 ring-fog-200 backdrop-blur sm:start-8 sm:w-[260px] sm:p-5">
             <p className="text-[12.5px] font-medium text-fog-600">{t.statLead}</p>
             <p className="font-display mt-1 text-5xl font-extrabold leading-none text-ink-900">{t.statValue}</p>

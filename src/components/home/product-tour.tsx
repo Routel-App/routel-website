@@ -25,7 +25,7 @@ const copy: Record<Locale, Copy> = {
     eyebrow: "Product tour",
     title: "One system for every desk in your forwarding office",
     lead: "Sales, operations and accounts work on the same records, so a rate becomes a booking, a booking becomes an invoice, and the invoice is already in the books.",
-    label: "Routel product tour",
+    label: "ROUTEL product tour",
     cta: "See how it works",
     tabs: {
       bookings: {
@@ -55,7 +55,7 @@ const copy: Record<Locale, Copy> = {
       documents: {
         title: "Documents & AI",
         short: "Attachments read, matched, filed",
-        body: "Incoming e-mail attachments are classified (B/L, booking confirmation, vendor invoice) and matched to the right booking by number, B/L or container. A person approves each one.",
+        body: "Incoming email attachments are classified (B/L, booking confirmation, vendor invoice) and matched to the right booking by number, B/L or container. A person approves each one.",
         bullets: ["Reads PDFs and scans", "Suggests the booking it belongs to", "Nothing is saved without approval"],
       },
       control: {
@@ -75,8 +75,8 @@ const copy: Record<Locale, Copy> = {
   ar: {
     eyebrow: "جولة في النظام",
     title: "نظام واحد لكل مكتب في شركة الشحن",
-    lead: "المبيعات والعمليات والحسابات يعملون على السجلات نفسها: السعر يصير حجزاً، والحجز يصير فاتورة، والفاتورة تكون في الدفاتر مباشرة.",
-    label: "جولة في نظام Routel",
+    lead: "تعمل المبيعات والعمليات والحسابات على السجلات نفسها: يصير السعر حجزاً، ويصير الحجز فاتورة، وتدخل الفاتورة الدفاتر مباشرة.",
+    label: "جولة في نظام ROUTEL",
     cta: "اعرف كيف يعمل",
     tabs: {
       bookings: {
@@ -88,7 +88,7 @@ const copy: Record<Locale, Copy> = {
       routes: {
         title: "عروض الأسعار والمسارات",
         short: "أسعار الشراء تدخل، وعروض الأسعار تخرج",
-        body: "احفظ أسعار شراء الموردين لكل مسار وحاوية مع مدة صلاحيتها، وابنِ عرض السعر على سعر ساري، ثم حوّل العرض المقبول إلى حجز مباشرة.",
+        body: "احفظ أسعار شراء الموردين لكل مسار وحاوية مع مدة صلاحيتها، وابنِ عرض السعر على سعر سارٍ، ثم حوّل العرض المقبول إلى حجز مباشرة.",
         bullets: ["تنبيه قبل انتهاء السعر بـ14 يوماً", "استيراد قائمة أسعار كاملة من Excel", "تحليلات المسارات: الحجم والإيراد والهامش"],
       },
       invoicing: {
@@ -100,19 +100,19 @@ const copy: Record<Locale, Copy> = {
       customs: {
         title: "التخليص الجمركي",
         short: "ملف لكل بيان",
-        body: "كل بيان ملف: استيراد أو تصدير أو عبور (ترانزيت)، والمستورد بسجله التجاري ورقمه الضريبي، ورموز HS من 12 خانة، والقيمة الجمركية CIF محسوبة لك، والمستندات المطلوبة، والحالة التي بلغها.",
-        bullets: ["الذكاء الاصطناعي يقرأ الفاتورة التجارية إلى بنود", "رموز HS مقترحة، ويؤكد المخلّص كل رمز", "تقدير الرسوم والضريبة من جدول التعرفة الخاص بك"],
+        body: "لكل بيان ملف: استيراد أو تصدير أو عبور (ترانزيت)، والمستورد بسجله التجاري ورقمه الضريبي، ورموز HS من 12 خانة، والقيمة الجمركية CIF محسوبة لك، والمستندات المطلوبة، والحالة التي بلغها.",
+        bullets: ["يقرأ الذكاء الاصطناعي الفاتورة التجارية ويحوّلها إلى بنود", "رموز HS مقترحة، ويؤكد المخلّص كل رمز", "تقدير الرسوم والضريبة من جدول التعرفة الخاص بك"],
       },
       documents: {
         title: "المستندات والذكاء الاصطناعي",
         short: "المرفقات تُقرأ وتُطابق وتُحفظ",
-        body: "مرفقات البريد الواردة تُصنَّف (بوليصة، تأكيد حجز، فاتورة مورد) وتُطابق مع الحجز الصحيح برقم الحجز أو البوليصة أو الحاوية، ويعتمد شخص كل واحدة منها.",
+        body: "تُصنَّف مرفقات البريد الوارد (بوليصة، تأكيد حجز، فاتورة مورد) وتُطابَق مع حجزها برقم الحجز أو البوليصة أو الحاوية، ويعتمد شخصٌ كلاً منها.",
         bullets: ["يقرأ ملفات PDF والصور الممسوحة", "يقترح الحجز الذي يتبع له المستند", "لا شيء يُحفظ دون اعتماد"],
       },
       control: {
         title: "المتابعة اليومية",
         short: "ما يحتاج انتباهك اليوم",
-        body: "صفحة تنبيهات واحدة بخمس قوائم تتحدث طوال اليوم: الشحنات التي تصل خلال 7 أيام، والدفعات المتأخرة، والحجوزات بلا موظف، والحجوزات التي تجاوزت تعليمات الشحن بلا بوليصة، والمتابعات المستحقة. فيبدأ الفريق يومه بقائمة بدل البحث.",
+        body: "صفحة تنبيهات واحدة بخمس قوائم تتحدث طوال اليوم: الشحنات التي تصل خلال 7 أيام، والدفعات المتأخرة، والحجوزات بلا موظف، والحجوزات التي تجاوزت مرحلة تعليمات الشحن (SI) دون بوليصة، والمتابعات المستحقة. فيبدأ الفريق يومه بقائمة بدل البحث.",
         bullets: ["خمس قوائم تنبيهات تتحدث طوال اليوم", "تصنيفات بتاريخ متابعة ومسؤول", "ملخص صباحي من المساعد الذكي"],
       },
       tracking: {
@@ -149,7 +149,7 @@ export async function ProductTour() {
   const locale = await getLocale();
   const t = copy[locale];
   const shot = "mx-auto w-full";
-  // Real screens where we have them; the e-mail reading and the public tracking page stay illustrations.
+  // Real screens where we have them; the email reading and the public tracking page stay illustrations.
   // Each shows the part of the screen that matters at a readable size (no sidebar), and opens the whole screen on click.
   const crops: Record<"booking" | "quotes" | "invoice" | "customs-file" | "alerts", { crop: Crop; mobile: Crop }> = {
     booking: { crop: { x: 262, y: 62, w: 880, h: 560 }, mobile: { x: 270, y: 62, w: 450, h: 450 } },

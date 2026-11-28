@@ -17,7 +17,7 @@ export type ServicePageCopy = {
   metaDescription: string;
   headline: string;
   lead: string;
-  /** The one big figure, Kpler-style, beside the picture. */
+  /** The one big figure, beside the picture. */
   stat: { value: string; label: string };
   figures: Array<{ value: string; label: string }>;
   features: Array<{ title: string; text: string; points: string[]; mock: Mock }>;

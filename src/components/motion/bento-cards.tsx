@@ -10,7 +10,7 @@ import { ContainerBox, Doc, paint } from "./sprites";
 
 /**
  * Small animated product vignettes ("bento" cards), each showing one real
- * Routel behaviour. Every card is a still, readable frame in the HTML; with
+ * ROUTEL behaviour. Every card is a still, readable frame in the HTML; with
  * motion allowed, a GSAP loop plays while the card is on screen.
  *
  * Used on the home page (FeatureBento) and on the platform pages (via
@@ -171,7 +171,7 @@ export function ReadsPdfCard({ className }: { className?: string }) {
   const t = L(locale, {
     en: {
       title: "The AI reads the carrier's confirmation",
-      text: "Drop in the PDF or a linked e-mail; you tick what goes on the booking.",
+      text: "Drop in the PDF or a linked email; you tick what goes on the booking.",
       fields: [["Vessel / voyage", "MSC AURORA 503E"], ["Port of loading", "Port Klang"], ["Containers", "2 × 40HC"], ["Carrier booking no.", "MSCUKL4471"]],
     },
     ar: {
@@ -315,13 +315,13 @@ export function ApprovalsCard({ className }: { className?: string }) {
   );
 }
 
-/* ─── 6. A payment e-mail matched to its invoice ─── */
+/* ─── 6. A payment email matched to its invoice ─── */
 
 export function PaymentMatchCard({ className }: { className?: string }) {
   const locale = useLocale();
   const t = L(locale, {
-    en: { title: "Payments matched from the finance mailbox", text: "Routel proposes the invoice a payment belongs to. A person confirms.", mail: "Payment advice · Straits Electronics", inv: "INV-27-0418", amt: "MYR 13,007.00", match: "Suggested match", confirm: "Confirm" },
-    ar: { title: "مطابقة الدفعات من بريد المالية", text: "يقترح Routel الفاتورة التي تخص الدفعة، ويؤكدها شخص.", mail: "إشعار دفع · شركة الرواد للتجارة", inv: "INV-27-0418", amt: "SAR 11,127.50", match: "مطابقة مقترحة", confirm: "تأكيد" },
+    en: { title: "Payments matched from the finance mailbox", text: "ROUTEL proposes the invoice a payment belongs to. A person confirms.", mail: "Payment advice · Straits Electronics", inv: "INV-27-0418", amt: "MYR 13,007.00", match: "Suggested match", confirm: "Confirm" },
+    ar: { title: "مطابقة الدفعات من بريد المالية", text: "يقترح ROUTEL الفاتورة التي تخص الدفعة، ويؤكدها شخص.", mail: "إشعار دفع · شركة الرواد للتجارة", inv: "INV-27-0418", amt: "SAR 11,127.50", match: "مطابقة مقترحة", confirm: "تأكيد" },
   });
   const ref = useLoop((el) => {
     const line = el.querySelector<SVGPathElement>("[data-link]");
@@ -539,7 +539,7 @@ export function StatusRingCard({ className }: { className?: string }) {
 export function DocumentOrbitCard({ className }: { className?: string }) {
   const locale = useLocale();
   const t = L(locale, {
-    en: { title: "Everything lands on the booking", text: "E-mails, carrier PDFs, vendor invoices and B/Ls are read, classified and filed on the right booking, after a person approves.", items: ["E-mail", "Carrier PDF", "Vendor invoice", "B/L"], center: "Booking" },
+    en: { title: "Everything lands on the booking", text: "Emails, carrier PDFs, vendor invoices and B/Ls are read, classified and filed on the right booking, after a person approves.", items: ["Email", "Carrier PDF", "Vendor invoice", "B/L"], center: "Booking" },
     ar: { title: "كل شيء يصل إلى الحجز", text: "رسائل البريد وملفات الناقل وفواتير الموردين والبوالص تُقرأ وتُصنَّف وتُحفظ في الحجز الصحيح، بعد اعتماد شخص.", items: ["بريد", "PDF الناقل", "فاتورة مورد", "بوليصة"], center: "الحجز" },
   });
   const ref = useLoop((el) => {

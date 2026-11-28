@@ -12,7 +12,7 @@ export const LOGO_WHITE = "#E7E8E9";
  * serves as the black logo and the white logo; the square at the top of
  * the L is always brand orange.
  */
-export function Wordmark({ className, title = "Routel" }: { className?: string; title?: string }) {
+export function Wordmark({ className, title = "ROUTEL" }: { className?: string; title?: string }) {
   return (
     <svg viewBox="0 0 1666 273" role="img" aria-label={title} className={cn("h-6 w-auto", className)}>
       <g fill="currentColor">

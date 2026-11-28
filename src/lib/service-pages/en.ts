@@ -6,7 +6,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
     metaDescription:
       "Run FCL sea freight on one booking: route rates and quotations, the carrier booking read by AI, the House B/L, tax invoices, collections and the general ledger.",
     headline: "Sea freight forwarding, from the first quote to the closed file",
-    lead: "Every FCL shipment runs on one record in ROUTEL: the route rate and the quotation, the carrier booking, the House B/L, the tax invoice, the payment and the general ledger. The AI assistant does the typing and your team confirms.",
+    lead: "Every FCL shipment runs on one record in ROUTEL: the route rate and the quotation, the carrier booking, the House B/L, the tax invoice, the payment and the books, with every container number checked against its ISO 6346 check digit. The AI assistant does the typing and your team confirms.",
     stat: { value: "11", label: "statuses on one booking, from Booking Pending to Shipment Closed" },
     figures: [
       { value: "1", label: "booking number that every document hangs off" },
@@ -22,8 +22,8 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
       },
       {
         title: "The carrier booking, read by AI",
-        text: "Read Carrier Confirmation has AI read the line's PDF or a linked e-mail: vessel and voyage, cut-offs and the carrier's booking number. You tick what to save, and the Booking Confirmation goes to your customer with numbered revisions.",
-        points: ["Reads the PDF or the e-mail", "You tick what to save", "Revised confirmations are numbered"],
+        text: "Read Carrier Confirmation has AI read the line's PDF or a linked email: vessel and voyage, cut-offs and the carrier's booking number. You tick what to save, and the Booking Confirmation goes to your customer with numbered revisions.",
+        points: ["Reads the PDF or the email", "You tick what to save", "Revised confirmations are numbered"],
         mock: { title: "Read from MSC confirmation.pdf", badge: "AI", rows: [["Vessel", "MSC AURORA · 503E"], ["Cargo cut-off", "14 Mar, 12:00"], ["Carrier ref.", "MSCJED4471"]], foot: "Save the ticked fields" },
       },
       {
@@ -56,7 +56,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
       tools: ["search_route_rates", "create_quotation", "create_job", "create_bill_of_lading", "create_invoice_from_charges"],
     },
     versus: [
-      { topic: "Carrier confirmation", them: "Retyped from the line's e-mail", us: "Read by AI; a person ticks what to save" },
+      { topic: "Carrier confirmation", them: "Retyped from the line's email", us: "Read by AI; a person ticks what to save" },
       { topic: "Booking confirmation", them: "Re-sent as attachments, nobody sure which is current", us: "One original, then numbered revisions" },
       { topic: "House B/L", them: "Built in a word processor", us: "Generated from the booking's own data" },
       { topic: "Profit", them: "Worked out in a spreadsheet after month end", us: "Per booking, as the charges are entered" },
@@ -214,12 +214,12 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
   "import-release": {
     metaTitle: "Arrival notice and delivery order software",
     metaDescription:
-      "Import release on rails: the arrival notice due on time and e-mailed as PDF, the line's release recorded, and a delivery order only once the cargo is released and paid.",
+      "Import release on rails: the arrival notice due on time and emailed as PDF, the line's release recorded, and a delivery order only once the cargo is released and paid.",
     headline: "Tell the consignee on time. Release the cargo only when it's paid.",
     lead: "For import bookings, ROUTEL tells you when the arrival notice is due, sends it as a PDF with the charges, records how the line released the cargo, and issues the delivery order only when the cargo is released and paid, or the partner is within an active credit limit.",
     stat: { value: "0", label: "delivery orders released unpaid without a reason on record" },
     figures: [
-      { value: "2", label: "documents, both e-mailed as PDF from the system" },
+      { value: "2", label: "documents, both emailed as PDF from the system" },
       { value: "3", label: "ways the line releases: original B/L, telex or sea waybill" },
       { value: "1", label: "delivery order in force at a time" },
     ],
@@ -244,14 +244,14 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
       },
       {
         title: "AI reads the line's ETA change",
-        text: "The line's arrival or delay notice is read by AI from the e-mail's attachment, and the new ETA is proposed in Documents for a person to approve.",
+        text: "The line's arrival or delay notice is read by AI from the email's attachment, and the new ETA is proposed in Documents for a person to approve.",
         points: ["Read from the line's notice", "Proposed, not applied", "A person approves"],
         mock: { title: "Read from the line's notice", badge: "AI", rows: [["Booking", "NXS27000402"], ["ETA was", "23 Mar"], ["New ETA", "25 Mar"]], foot: "Approve in Documents" },
       },
     ],
     flow: [
       { title: "Due", text: "The notice falls due before the ETA and shows in Alerts." },
-      { title: "Notify", text: "Send the arrival notice by e-mail with the PDF." },
+      { title: "Notify", text: "Send the arrival notice by email with the PDF." },
       { title: "Release", text: "Record how the line released the cargo." },
       { title: "Get paid", text: "Invoice and collect; the DO checks it." },
       { title: "Deliver", text: "Issue the delivery order and send it." },
@@ -266,7 +266,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
     versus: [
       { topic: "Arrival notice", them: "Sent when someone remembers", us: "Due before the ETA, in Alerts" },
       { topic: "Release", them: "A DO goes out before the invoice is paid", us: "Released and paid, or a reason on record" },
-      { topic: "ETA changes", them: "Buried in an e-mail nobody reads", us: "Read by AI and proposed for approval" },
+      { topic: "ETA changes", them: "Buried in an email nobody reads", us: "Read by AI and proposed for approval" },
     ],
     audience: [
       { title: "Import operations", text: "Notices, releases and delivery orders." },
@@ -555,7 +555,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
   "customs-brokerage": {
     metaTitle: "Customs clearance software",
     metaDescription:
-      "Customs clearance on ROUTEL: one file per declaration — import, export or transit, by sea, air or land — with 12-digit HS codes, the customs value (CIF) at the customs exchange rate, a status path through inspection and release, and the documents still missing.",
+      "Customs clearance on ROUTEL: one file per declaration — import, export or transit, by sea, air or land — with HS codes to the full 12-digit Saudi tariff line, the customs value (CIF) at the customs exchange rate, a status path through inspection and release, and the documents still missing.",
     headline: "One clearance file per declaration, with the customs value worked out",
     lead: "Each declaration gets its own file: whose goods, where they clear, the lines with their tariff items and customs value, the documents customs need, and where the file stands. Link it to the booking when the shipment is yours, or keep it on its own.",
     stat: { value: "12", label: "digits in every line's HS code, with its origin and unit" },
@@ -573,8 +573,8 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
       },
       {
         title: "Lines and the customs value",
-        text: "Each line carries a 12-digit HS code, the country of origin, a standard unit, the weights and the value. The customs value (CIF) is worked out per line at the customs exchange rate on the declaration date, with the freight and insurance shared over the lines by value or weight, and not added twice when the Incoterm already includes them.",
-        points: ["12-digit HS codes", "CIF at the customs rate", "Freight and insurance shared"],
+        text: "Each line carries an HS code to the full 12-digit Saudi tariff line, the country of origin, a standard unit, the weights and the value. The customs value (CIF) is worked out per line at the customs exchange rate on the declaration date, with the freight and insurance shared over the lines by value or weight, and not added twice when the Incoterm already includes them.",
+        points: ["12-digit Saudi tariff lines", "CIF at the customs rate", "Freight and insurance shared"],
         mock: { title: "Customs value", rows: [["Invoice · USD 48,200", "@ 3.7500"], ["Freight and insurance", "Shared by value"], ["Customs value (CIF)", "SAR 184,600.00"]], foot: "Worked out per line" },
       },
       {
@@ -647,7 +647,7 @@ export const servicePagesEn: Record<string, ServicePageCopy> = {
       },
       {
         title: "In and out",
-        text: "In: an advance shipping notice from the client or its e-mail, read by AI, then receiving and put-away. Out: a release order, the quantity reserved oldest first or nearest expiry first, a pick list, packing and shipping by transport order or booking.",
+        text: "In: an advance shipping notice from the client or its email, read by AI, then receiving and put-away. Out: a release order, the quantity reserved oldest first or nearest expiry first, a pick list, packing and shipping by transport order or booking.",
         points: ["ASN read by AI", "FIFO or FEFO", "Pick, pack, ship"],
         mock: { title: "Release order · RO-2231", badge: "Picking", rows: [["Lines", "3 items · 240 cartons"], ["Rule", "Nearest expiry first"], ["Ship by", "Transport order"]], foot: "Print pick list" },
       },

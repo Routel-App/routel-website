@@ -28,7 +28,7 @@ const copy = {
   },
 } satisfies Record<Locale, Record<string, string>>;
 
-/** "Routel — the freight forwarding ERP…" → "The freight forwarding ERP…" for the page heading. */
+/** "ROUTEL — the freight forwarding ERP…" → "The freight forwarding ERP…" for the page heading. */
 function headline(title: string) {
   const rest = title.split(" — ").slice(1).join(" — ") || title;
   return rest.charAt(0).toUpperCase() + rest.slice(1);

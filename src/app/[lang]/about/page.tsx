@@ -24,7 +24,7 @@ const copy = {
     originTitle: "A system that had to work before it could be sold",
     originDescription: `Most software gets built for a market first and a real customer second. ${site.name} ran the other way: a working freight forwarder built it to run its own operations, used it on real shipments, and only then opened it up to other forwarders.`,
     originBody:
-      "That order matters. A feature only made it into the product because a real shipment needed it — not because it would look good on a comparison chart. The result is a platform shaped by how a forwarding office actually works: one booking, many hands, and a ledger that has to be right at the end of the month.",
+      "That order matters. A feature only made it into the product because a real shipment needed it — not because it would look good on a comparison chart. The result is a platform shaped by how a forwarding office actually works: one booking, many hands, and a ledger that has to be right at the end of the month. It is also why the checks an experienced operator makes, from a container's check digit to the Incoterm in the customs value, are made by the system itself.",
     principlesEyebrow: "What we build around",
     principlesTitle: "A few things we don't compromise on",
     principles: [
@@ -34,7 +34,7 @@ const copy = {
       },
       {
         title: "One record, not a patchwork",
-        text: "A spreadsheet of rates, a template for quotations, a separate accounting package and a shared drive of PDFs is how a number gets re-typed or a document gets lost. Routel keeps one booking record that every department works from.",
+        text: "A spreadsheet of rates, a template for quotations, a separate accounting package and a shared drive of PDFs is how a number gets re-typed or a document gets lost. ROUTEL keeps one booking record that every department works from.",
       },
       {
         title: "AI that proposes, a person who decides",
@@ -47,7 +47,7 @@ const copy = {
     ],
     nowEyebrow: "Where we are now",
     nowTitle: "Running on real shipments, offered as a hosted service",
-    nowDescription: `${site.name} is a hosted service, built and supported by its founder, with a freight forwarder that runs it in Malaysia and Indonesia as its development partner. Built for the GCC — Qatar and Saudi Arabia — and Southeast Asia, where it already runs in Malaysia and Indonesia. Ask for a demo and we will walk you through it on a real shipment.`,
+    nowDescription: `${site.name} is a hosted service, built and supported by its founder, with a working freight forwarder as its development partner. Built for the GCC — Qatar and Saudi Arabia — and Southeast Asia; it already runs in Saudi Arabia, Malaysia and Indonesia. Ask for a demo and we will walk you through it on a real shipment.`,
     companyEyebrow: "The company",
     companyTitle: "Grown inside a working freight forwarder",
     companyDescription: `${site.name} runs today for freight companies in Saudi Arabia, Malaysia and Indonesia, in English and Arabic.`,
@@ -63,16 +63,16 @@ const copy = {
   },
   ar: {
     metaTitle: "من نحن",
-    metaDescription: `بدأ ${site.name} نظاماً داخلياً لشركة شحن عاملة تدير به عملياتها، قبل أن يُقدَّم لشركات الشحن الأخرى كخدمة مستضافة.`,
+    metaDescription: `بدأ ${site.name} نظاماً داخلياً لشركة شحن عاملة تدير به عملياتها، قبل أن يُقدَّم لشركات الشحن الأخرى خدمةً مستضافة.`,
     heroTitle: "بُني داخل شركة شحن عاملة، لا في مختبر منتجات",
-    heroLead: `نشأ ${site.name} من النظام الداخلي الذي بنته شركة شحن عاملة في ماليزيا لإدارة شحناتها اليومية. كان يعمل على حجوزات حقيقية قبل أن يحمل اسماً — وهو اليوم متاح لشركات الشحن الأخرى كخدمة مستضافة.`,
+    heroLead: `نشأ ${site.name} من النظام الداخلي الذي بنته شركة شحن عاملة في ماليزيا لإدارة شحناتها اليومية. كان يعمل على حجوزات حقيقية قبل أن يحمل اسماً — وهو اليوم متاح لشركات الشحن الأخرى خدمةً مستضافة.`,
     demo: "اطلب عرضاً تجريبياً",
     platform: "تعرّف على المنصة",
     originEyebrow: "من أين جاء",
     originTitle: "نظام كان عليه أن يعمل قبل أن يُباع",
     originDescription: `تُبنى معظم البرمجيات للسوق أولاً ثم لعميل حقيقي لاحقاً. أما ${site.name} فسار في الاتجاه المعاكس: بنته شركة شحن عاملة لإدارة عملياتها، واستخدمته على شحنات حقيقية، ثم فتحته بعد ذلك فقط لشركات الشحن الأخرى.`,
     originBody:
-      "هذا الترتيب مهم. لم تدخل أي ميزة إلى المنتج إلا لأن شحنة حقيقية احتاجت إليها — لا لأنها ستبدو جيدة في جدول مقارنة. والنتيجة منصة تشكّلت وفق طريقة عمل مكتب الشحن فعلاً: حجز واحد، وأيادٍ كثيرة، ودفتر أستاذ يجب أن يكون صحيحاً في نهاية الشهر.",
+      "هذا الترتيب مهم. لم تدخل أي ميزة إلى المنتج إلا لأن شحنة حقيقية احتاجت إليها — لا لأنها ستبدو جيدة في جدول مقارنة. والنتيجة منصة تشكّلت وفق طريقة عمل مكتب الشحن فعلاً: حجز واحد، وأيادٍ كثيرة، ودفتر أستاذ يجب أن يكون صحيحاً في نهاية الشهر. ولهذا أيضاً يقوم النظام نفسه بالتدقيق الذي يقوم به خبير العمليات، من خانة التحقق في رقم الحاوية إلى شرط التسليم في القيمة الجمركية.",
     principlesEyebrow: "ما نبني حوله",
     principlesTitle: "أمور لا نتهاون فيها",
     principles: [
@@ -82,11 +82,11 @@ const copy = {
       },
       {
         title: "سجل واحد، لا خليط من الأدوات",
-        text: "جدول بيانات للأسعار، وقالب لعروض الأسعار، وبرنامج محاسبة منفصل، ومجلد مشترك مليء بملفات PDF — هكذا يُعاد إدخال رقم يدوياً أو يضيع مستند. أما Routel فيحتفظ بسجل حجز واحد تعمل منه كل الأقسام.",
+        text: "جدول بيانات للأسعار، وقالب لعروض الأسعار، وبرنامج محاسبة منفصل، ومجلد مشترك مليء بملفات PDF — هكذا يُعاد إدخال رقم يدوياً أو يضيع مستند. أما ROUTEL فيحتفظ بسجل حجز واحد تعمل منه كل الأقسام.",
       },
       {
         title: "ذكاء اصطناعي يقترح، وإنسان يقرر",
-        text: "يستطيع المساعد الذكي القراءة وإعداد التقارير بحرية، لكن كل عملية كتابة — حجز أو فاتورة أو مصروف — تتوقف كاقتراح حتى يؤكدها شخص ما. لا يُنشأ أي شيء بسبب جملة أُسيء فهمها.",
+        text: "يستطيع المساعد الذكي القراءة وإعداد التقارير بحرية، لكن كل عملية كتابة — حجز أو فاتورة أو مصروف — تبقى اقتراحاً حتى يؤكدها شخص. لا يُنشأ أي شيء بسبب جملة أُسيء فهمها.",
       },
       {
         title: "العربية ليست فكرة لاحقة",
@@ -94,8 +94,8 @@ const copy = {
       },
     ],
     nowEyebrow: "أين نحن اليوم",
-    nowTitle: "يعمل على شحنات حقيقية، ومتاح كخدمة مستضافة",
-    nowDescription: `${site.name} خدمة مستضافة يبنيها مؤسسها ويتولى دعمها، وشريكه في التطوير شركة شحن تعمل به في ماليزيا وإندونيسيا. ومصمم لدول الخليج — قطر والسعودية — ولجنوب شرق آسيا، حيث يعمل اليوم في ماليزيا وإندونيسيا. اطلب عرضاً تجريبياً لنريك إياه على شحنة حقيقية.`,
+    nowTitle: "يعمل على شحنات حقيقية، ومتاح خدمةً مستضافة",
+    nowDescription: `${site.name} خدمة مستضافة يبنيها مؤسسها ويتولى دعمها، وشريكه في التطوير شركة شحن عاملة. ومصمم لدول الخليج — قطر والسعودية — ولجنوب شرق آسيا، ويعمل اليوم في السعودية وماليزيا وإندونيسيا. اطلب عرضاً تجريبياً لنريك إياه على شحنة حقيقية.`,
     companyEyebrow: "الشركة",
     companyTitle: "نشأ داخل شركة شحن عاملة",
     companyDescription: `يعمل ${site.name} اليوم لدى شركات شحن في السعودية وماليزيا وإندونيسيا، بالعربية والإنجليزية.`,

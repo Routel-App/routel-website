@@ -10,17 +10,17 @@ const copy = {
   en: {
     eyebrow: "What ROUTEL is",
     title: "One operating system for the whole shipment",
-    lead: "ROUTEL runs a shipping and logistics company on one system. One core carries every shipment from the quotation to the ledger; each service opens as a module for what your company does; an AI assistant does the daily work; and the books are written as the work happens.",
+    lead: "ROUTEL runs a shipping and logistics company on one system. One core carries every shipment from the quotation to the books and checks it against the rules of the trade; each service opens as a module for what your company does; an AI assistant prepares the daily work; and the books are written as the work happens.",
     layers: {
       ai: { label: "AI assistant", text: "Calls the system's own actions: reads, drafts, and writes after you confirm" },
       modules: { label: "Services, opened by activity" },
-      core: { label: "The core", steps: ["Quotation", "Booking", "B/L", "Invoice", "Payment", "Ledger"] },
-      base: { label: "Partners · documents · e-mail · roles and permissions · tax · two currencies" },
+      core: { label: "The core", steps: ["Quotation", "Booking", "B/L", "Invoice", "Payment", "Books"] },
+      base: { label: "Partners · documents · email · roles and permissions · tax · two currencies" },
     },
     pillars: [
       { title: "One record per shipment", text: "Quotation, booking, carrier booking, B/L, charges, invoices and documents under one booking number. One place to check, one status everyone sees." },
-      { title: "Modules by activity", text: "Sea, air, LCL, import release, NVOCC, land transport, warehouse receipts and customs clearance today; shipping agency and 3PL next. Each opens from Business activities and stays off until you need it." },
-      { title: "An AI that does the work", text: "It reads the carrier's confirmation, the vendor's bill and the line's notice, and prepares the booking, the B/L and the invoice. Nothing is saved until a person confirms." },
+      { title: "Modules by activity", text: "Sea, air, LCL, import release, NVOCC, land transport, warehouse receipts, customs clearance, shipping agency and 3PL, all available. Each opens from Business activities and stays off until you need it." },
+      { title: "An assistant that prepares the work", text: "It reads the carrier's confirmation, the vendor's bill and the line's notice, and prepares the booking, the B/L and the invoice. Nothing is saved until a person confirms." },
       { title: "Books kept as you go", text: "Every invoice, payment and cost posts to the general ledger when it's recorded, with the country's tax and its report. Month end stops being a project." },
     ],
     outcomes: [
@@ -33,7 +33,7 @@ const copy = {
   ar: {
     eyebrow: "ما هو ROUTEL",
     title: "نظام تشغيل واحد للشحنة كلها",
-    lead: "يشغّل ROUTEL شركة الشحن والخدمات اللوجستية على نظام واحد. نواة واحدة تحمل كل شحنة من عرض السعر حتى دفتر الأستاذ، وكل خدمة تُفتح وحدةً حسب نشاط شركتك، ومساعد ذكي ينجز العمل اليومي، والدفاتر تُكتب لحظة وقوع العمل.",
+    lead: "يدير ROUTEL شركة الشحن والخدمات اللوجستية على نظام واحد. نواة واحدة تحمل كل شحنة من عرض السعر حتى الدفاتر وتراجعها وفق قواعد المهنة، وكل خدمة تُفتح وحدةً حسب نشاط شركتك، ومساعد ذكي يجهّز العمل اليومي، والقيود تُسجَّل في الدفاتر مع كل عملية.",
     layers: {
       ai: { label: "المساعد الذكي", text: "يستدعي إجراءات النظام نفسه: يقرأ ويجهّز، ويكتب بعد تأكيدك" },
       modules: { label: "الخدمات، تُفتح حسب النشاط" },
@@ -42,14 +42,14 @@ const copy = {
     },
     pillars: [
       { title: "سجل واحد لكل شحنة", text: "عرض السعر والحجز وحجز الناقل والبوليصة والرسوم والفواتير والمستندات تحت رقم حجز واحد. مكان واحد للمراجعة، وحالة واحدة يراها الجميع." },
-      { title: "وحدات حسب النشاط", text: "البحري والجوي والتجميع وإشعار الوصول وNVOCC والنقل البري وإيصالات المستودع والتخليص الجمركي اليوم، ثم الوكالات الملاحية و3PL. كل وحدة تُفتح من الأنشطة التجارية، وتبقى مقفلة حتى تحتاجها." },
-      { title: "ذكاء اصطناعي ينجز العمل", text: "يقرأ تأكيد الناقل وفاتورة المورد وإشعار الخط، ويجهّز الحجز والبوليصة والفاتورة. ولا يُحفظ شيء قبل أن يؤكده شخص." },
-      { title: "دفاتر تُكتب وأنت تعمل", text: "كل فاتورة ودفعة وتكلفة تُرحَّل إلى دفتر الأستاذ لحظة تسجيلها، بضريبة الدولة وتقريرها. ونهاية الشهر لم تعد مشروعاً." },
+      { title: "وحدات حسب النشاط", text: "الشحن البحري والجوي والتجميع وإشعار الوصول وNVOCC والنقل البري وإيصالات المستودع والتخليص الجمركي والوكالة الملاحية و3PL، كلها متاحة. تُفتح كل وحدة من «ملف النشاط»، وتبقى مغلقة حتى تحتاجها." },
+      { title: "مساعد يجهّز العمل", text: "يقرأ تأكيد الناقل وفاتورة المورد وإشعار الخط، ويجهّز الحجز والبوليصة والفاتورة. ولا يُحفظ شيء قبل أن يؤكده أحد من فريقك." },
+      { title: "دفاتر تُكتب وأنت تعمل", text: "كل فاتورة ودفعة وتكلفة تُرحَّل إلى دفتر الأستاذ العام لحظة تسجيلها، بضريبة البلد وإقرارها. فلا يعود إقفال الشهر مشروعاً قائماً بذاته." },
     ],
     outcomes: [
-      { title: "بلا إعادة كتابة", text: "المستندات يقرؤها الذكاء الاصطناعي إلى السجل." },
+      { title: "بلا إعادة إدخال", text: "يقرأ الذكاء الاصطناعي المستندات وينقلها إلى السجل." },
       { title: "مصدر واحد موثوق للبيانات", text: "العمليات والمالية على الحجز نفسه." },
-      { title: "السيطرة", text: "كل كتابة بالذكاء الاصطناعي يؤكدها شخص وتُسجَّل." },
+      { title: "تحكّم كامل", text: "كل ما يكتبه المساعد يؤكده شخص، ويبقى أثره في السجل." },
       { title: "توسّع حسب النشاط", text: "افتح وحدة حين تضيف خدمة." },
     ],
   },

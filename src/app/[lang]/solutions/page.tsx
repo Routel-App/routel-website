@@ -14,12 +14,12 @@ const copy = {
   en: {
     metaTitle: "Solutions",
     metaDescription:
-      "Routel, the Maritime & Logistics Operating System: sea and air freight forwarding, consolidation and LCL, arrival notices and delivery orders, NVOCC, land transport, warehouse receipts and CFS, and shipping agency, customs clearance and inventory for your clients (3PL).",
+      "ROUTEL, the Maritime & Logistics Operating System: sea and air freight forwarding, consolidation and LCL, arrival notices and delivery orders, NVOCC, land transport, warehouse receipts and CFS, and shipping agency, customs clearance and inventory for your clients (3PL).",
     eyebrow: "Solutions",
-    title: "Every line of the trade, on one AI operating system",
-    lead: "Routel automates the daily work of maritime and logistics companies end to end: one booking at the centre, every document generated from it, and an AI assistant that runs the operation with you. Open the services your company offers; each one switches on as a module.",
+    title: "Every line of the trade, on one operating system that knows it",
+    lead: "ROUTEL runs the daily work of maritime and logistics companies end to end: one booking at the centre, every document generated from it and checked against the rules of the trade, and an AI assistant that prepares the work with you. Open the services your company offers; each one switches on as a module.",
     servicesEyebrow: "Services",
-    liveTitle: "Running on Routel",
+    liveTitle: "Running on ROUTEL",
     liveLead: "Each service works on the same booking, the same documents and the same books.",
     services: "services, one platform",
     types: "types of business, one platform",
@@ -35,12 +35,12 @@ const copy = {
   ar: {
     metaTitle: "الحلول",
     metaDescription:
-      "Routel، نظام التشغيل البحري واللوجستي: الشحن البحري والجوي والتجميع وLCL وإشعارات الوصول وأوامر التسليم، والناقل غير المالك للسفن، والنقل البري، وإيصالات المستودع ومحطة الحاويات، والوكالة الملاحية، والتخليص الجمركي، ومخزون العملاء 3PL.",
+      "ROUTEL، نظام التشغيل البحري واللوجستي: الشحن البحري والجوي والتجميع وLCL وإشعارات الوصول وأذونات التسليم، والناقل غير المالك للسفن، والنقل البري، وإيصالات المستودع ومحطة التعبئة والتفريغ (CFS)، والوكالة الملاحية، والتخليص الجمركي، ومخزون العملاء 3PL.",
     eyebrow: "الحلول",
-    title: "كل خطوط التجارة، على نظام تشغيل واحد يقوده الذكاء الاصطناعي",
-    lead: "يؤتمت Routel العمل اليومي لشركات الشحن البحري والخدمات اللوجستية من البداية إلى النهاية: حجز واحد في المركز، وكل مستند يُنشأ منه، ومساعد ذكي يدير العملية معك. افتح الخدمات التي تقدمها شركتك، وكل خدمة تعمل كوحدة.",
+    title: "كل أنشطة الشحن، على نظام تشغيل واحد يعرف أصولها",
+    lead: "يدير ROUTEL العمل اليومي لشركات الشحن البحري والخدمات اللوجستية من أوله إلى آخره: حجز واحد في المركز، وكل مستند يُنشأ منه ويُراجَع وفق قواعد المهنة، ومساعد ذكي يجهّز العمل معك. افتح الخدمات التي تقدمها شركتك، فتعمل كل خدمة وحدةً مستقلة.",
     servicesEyebrow: "الخدمات",
-    liveTitle: "تعمل على Routel",
+    liveTitle: "تعمل على ROUTEL",
     liveLead: "كل خدمة تعمل على الحجز نفسه والمستندات نفسها والدفاتر نفسها.",
     services: "خدمات، على منصة واحدة",
     types: "أنواع من الشركات، على منصة واحدة",
@@ -48,10 +48,10 @@ const copy = {
     who: "لمن صُمّم",
     whoTitle: "مبني للشركات التي تنقل بضائع العالم",
     aiTitle: "مساعد ذكي واحد في كل الخدمات",
-    aiText: "أياً كان نمط الشحن، يقرأ المساعد مستندات الناقل، ويجهّز الحجز أو البوليصة الجوية أو الفاتورة، وينتظر تأكيدك قبل حفظ أي شيء.",
+    aiText: "أياً كانت طريقة الشحن، يقرأ المساعد مستندات الناقل، ويجهّز الحجز أو البوليصة الجوية أو الفاتورة، وينتظر تأكيدك قبل حفظ أي شيء.",
     aiLink: "تعرّف على المساعد الذكي",
     demo: "اطلب عرضاً تجريبياً",
-    pricing: "اطلع على الأسعار",
+    pricing: "اطّلع على الأسعار",
   },
 } satisfies Record<Locale, Record<string, string>>;
 

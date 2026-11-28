@@ -41,7 +41,7 @@ It does two kinds of work:
     {"area": "House B/L", "reads": "Open a booking's House B/L", "writes": "Draft the House B/L from the booking's data", "ask": "\"Issue the House B/L for booking NXS26000412.\""},
     {"area": "Reports", "reads": "Overdue invoices, AR and AP aging, customer profitability, cash position, expense summary, AP outstanding, P&L, trial balance, tax summary, business overview", "ask": "\"Who owes us the most?\" \"What's our cash position?\""},
     {"area": "Statements and downloads", "reads": "Statement of account (customer or vendor) as PDF, invoice exports as CSV or PDF, a booking's documents", "ask": "\"Download Al Noor's statement for September.\""},
-    {"area": "Mailbox and queues", "reads": "E-mails, documents waiting for review, partner registrations, credit applications, leads", "writes": "Link an e-mail to a booking; reject a document; decide a registration; review a credit application; update a lead", "ask": "\"Which e-mails haven't been filed to a booking?\""},
+    {"area": "Mailbox and queues", "reads": "Emails, documents waiting for review, partner registrations, credit applications, leads", "writes": "Link an email to a booking; reject a document; decide a registration; review a credit application; update a lead", "ask": "\"Which emails haven't been filed to a booking?\""},
     {"area": "Your day", "reads": "The alerts and your daily brief", "ask": "\"What needs me today?\""},
     {"area": "Company setup (admins)", "reads": "Setup progress, company settings, numbering", "writes": "Update company details, numbering and logo; add users and change their roles; add charge types", "ask": "\"Add Sara as an accountant.\""},
     {"area": "Search and help", "reads": "Search across everything; answers from the user guide with a link to the right page", "ask": "\"Where do I change the invoice footer?\""},
@@ -95,7 +95,7 @@ A few details that matter on real data:
 
 ## Undo
 
-For ten minutes after confirming, a note, a task, a follow-up, an e-mail filed to a booking or a draft quotation can be undone, by the person who confirmed it or by an admin. Anything that moved money or received a document number is reversed the proper way, with its own document, such as a credit note.
+For ten minutes after confirming, a note, a task, a follow-up, an email filed to a booking or a draft quotation can be undone, by the person who confirmed it or by an admin. Anything that moved money or received a document number is reversed the proper way, with its own document, such as a credit note.
 
 ## Your daily brief
 
@@ -110,7 +110,7 @@ The assistant is multilingual. Write in the language you work in and it replies 
 ## Memory and history
 
 - **Preferences it keeps.** Tell it "remember that our usual trucker is Swift Haulage" or "always show amounts in USD", and it keeps the note across conversations. Ask it to list what it remembers, or to forget one note or all of them. Notes are private to you: up to 50, of 300 characters each.
-- **What it refuses to remember.** Anything that looks like a password, a key, a PIN or a card number. It also won't save a note after reading outside material in the same conversation, such as an uploaded file or an e-mail.
+- **What it refuses to remember.** Anything that looks like a password, a key, a PIN or a card number. It also won't save a note after reading outside material in the same conversation, such as an uploaded file or an email.
 - **Conversation history.** The panel reopens your last conversation. **Conversation history** lists your last 30, and **New chat** starts a fresh one.
 
 ## Who can do what
@@ -146,7 +146,7 @@ Whether the assistant is fully on depends on your plan. On plans without it, it 
 
 ## What it does not do
 
-- It does not send e-mails or messages to customers or vendors.
+- It does not send emails or messages to customers or vendors.
 - It does not delete bookings, invoices, partners or users. The only removal is the ten-minute undo above.
 - It does not act on its own. It only does something when someone asks.
 - It does not approve documents from the review queue; that is done on the Documents page.

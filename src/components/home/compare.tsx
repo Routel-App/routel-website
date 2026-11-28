@@ -12,11 +12,11 @@ const copy: Record<Locale, Copy> = {
   en: {
     eyebrow: "Before and after",
     title: "What changes when the office runs on one system",
-    lead: "Most forwarders start with spreadsheets, e-mail and a separate accounting package. Here's the same work in Routel.",
-    cols: ["The job", "Spreadsheets, e-mail, separate accounts", "With Routel"],
+    lead: "Most forwarders start with spreadsheets, email and a separate accounting package. Here's the same work in ROUTEL.",
+    cols: ["The job", "Spreadsheets, email, separate accounts", "With ROUTEL"],
     rows: [
       { task: "Quoting", before: "Hunt the latest rate in a file, check whether it's still valid", after: "Current rates per lane, flagged 14 days before they expire" },
-      { task: "Booking", before: "Details spread over e-mails and a sheet", after: "One booking record from quotation to closed" },
+      { task: "Booking", before: "Details spread over emails and a sheet", after: "One booking record from quotation to closed" },
       { task: "Carrier confirmation", before: "Re-type the PDF into your system", after: "The AI reads it; you tick what to save" },
       { task: "Bill of Lading", before: "Fill a template by hand", after: "House B/L generated from the booking" },
       { task: "Invoicing", before: "Copy charges into an invoice file", after: "Drafts from the booking's sale lines, locked when final" },
@@ -28,8 +28,8 @@ const copy: Record<Locale, Copy> = {
   ar: {
     eyebrow: "قبل وبعد",
     title: "ما الذي يتغير حين يعمل المكتب على نظام واحد",
-    lead: "تبدأ معظم شركات الشحن بجداول Excel والبريد الإلكتروني وبرنامج محاسبة منفصل. هذا العمل نفسه في Routel.",
-    cols: ["المهمة", "جداول وبريد ومحاسبة منفصلة", "مع Routel"],
+    lead: "تبدأ معظم شركات الشحن بجداول Excel والبريد الإلكتروني وبرنامج محاسبة منفصل. هذا العمل نفسه في ROUTEL.",
+    cols: ["المهمة", "جداول وبريد ومحاسبة منفصلة", "مع ROUTEL"],
     rows: [
       { task: "عروض الأسعار", before: "البحث عن آخر سعر في ملف، والتأكد هل ما زال سارياً", after: "أسعار سارية لكل مسار، مع تنبيه قبل انتهائها بـ14 يوماً" },
       { task: "الحجز", before: "التفاصيل موزعة بين الرسائل وجدول بيانات", after: "سجل حجز واحد من عرض السعر حتى الإغلاق" },

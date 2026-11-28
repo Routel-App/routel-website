@@ -33,7 +33,7 @@ export type Copy = {
 };
 
 /**
- * The approved plans (docs/routel-central.md, section 2, in the Routel
+ * The approved plans (docs/routel-central.md, section 2, in the ROUTEL
  * system repository: structure approved by the founder on 2026-11-18). That
  * file is the source of truth: when it changes, change this one to match,
  * in both languages. Prices are in Saudi riyals, as that file gives them, and
@@ -56,7 +56,7 @@ const copy: Record<Locale, Copy> = {
           "One user",
           "A preliminary invoice (the tax invoice comes from your approved billing system)",
           "The company setup assistant only",
-          "Printouts carry “Made with Routel”",
+          "Printouts carry “Made with ROUTEL”",
           "Support: the user guide",
         ],
         cta: "Start free",
@@ -72,7 +72,7 @@ const copy: Record<Locale, Copy> = {
           "One activity: sea, air, land transport or warehouse",
           "The essentials, complete",
           "The AI assistant for company setup and questions, with a small allowance for document reading",
-          "Support: the guide, the assistant and e-mail",
+          "Support: the guide, the assistant and email",
         ],
         cta: "Request a demo",
         href: "/demo?plan=basic",
@@ -86,9 +86,9 @@ const copy: Record<Locale, Copy> = {
         features: [
           "Every freight and logistics activity: sea, air, consolidation and LCL, arrival notice and delivery order, land transport, warehouse, and inventory (3PL)",
           "Document reading and checking by AI",
-          "E-mail sync",
+          "Email sync",
           "HR and payroll",
-          "Support: with WhatsApp in working hours",
+          "Support: email, plus WhatsApp in working hours",
         ],
         cta: "Request a demo",
         href: "/demo?plan=growth",
@@ -152,7 +152,7 @@ const copy: Record<Locale, Copy> = {
       eyebrow: "Start free",
       title: "14 days on Growth, with everything in it",
       text: "Every new account starts with a 14-day trial of Growth, including AI document reading for 30 documents. A counter runs from 30 down.",
-      points: ["Every activity open", "AI reads 30 documents", "E-mail sync"],
+      points: ["Every activity open", "AI reads 30 documents", "Email sync"],
       after: "After the trial, your account moves to the free version: one activity, 5 bookings a month, one user and a preliminary invoice.",
       cta: "Start free",
     },
@@ -173,7 +173,7 @@ const copy: Record<Locale, Copy> = {
           "مستخدم واحد",
           "فاتورة مبدئية (الفاتورة الضريبية من نظام الفوترة المعتمد لديك)",
           "مساعد إعداد الشركة فقط",
-          "المطبوعات عليها «صُنع بـ Routel»",
+          "المطبوعات عليها «صُنع بـ ROUTEL»",
           "الدعم: الدليل",
         ],
         cta: "ابدأ مجاناً",
@@ -201,11 +201,11 @@ const copy: Record<Locale, Copy> = {
         price: { sar: "1,799 ريال", usd: "499 دولار" },
         period: "شهرياً",
         features: [
-          "كل أنشطة الشحن واللوجستيات: البحري، والجوي، والتجميع LCL، وإشعار الوصول وأمر التسليم، والنقل البري، والمستودع، والمخزون (3PL)",
+          "كل أنشطة الشحن واللوجستيات: البحري، والجوي، والتجميع LCL، وإشعار الوصول وإذن التسليم، والنقل البري، والمستودع، والمخزون (3PL)",
           "قراءة المستندات والتحقق منها بالذكاء الاصطناعي",
           "مزامنة البريد",
           "الموارد البشرية والرواتب",
-          "الدعم: ومعه واتساب في ساعات العمل",
+          "الدعم: البريد، ومعه واتساب في ساعات العمل",
         ],
         cta: "اطلب عرضاً تجريبياً",
         href: "/demo?plan=growth",
@@ -230,13 +230,13 @@ const copy: Record<Locale, Copy> = {
       {
         slug: "enterprise",
         name: "المؤسسات",
-        who: "المجموعات والفروع، ومن يحتاج سيرفراً خاصاً.",
+        who: "المجموعات والفروع، ومن يحتاج خادماً خاصاً.",
         price: { sar: "من 5,499 ريال", usd: "من 1,499 دولار" },
         period: "شهرياً",
         features: [
           "كل الأنشطة",
           "فروع أو شركات متعددة بتسجيل دخول واحد، ولوحة للمجموعة",
-          "سيرفر خاص",
+          "خادم خاص",
           "نقل البيانات من النظام القديم، وتدريب مخصص",
           "تكاملات خاصة بالعميل",
           "الدعم: مدير حساب واتفاقية مستوى خدمة",
@@ -261,19 +261,19 @@ const copy: Record<Locale, Copy> = {
       "العربية والإنجليزية",
     ],
     messages: [
-      { title: "بلا حد للمستخدمين", text: "في كل الخطط المدفوعة. المدير يحدد الأدوار والمستخدمين من الإدارة." },
+      { title: "بلا حد للمستخدمين", text: "في كل الخطط المدفوعة. ويحدد المدير الأدوار والمستخدمين من صفحة الإدارة." },
       { title: "بلا رسوم تطبيق", text: "في كل الخطط. التجهيز بالمحادثة مع المساعد." },
       { title: "اشتراك لشركة واحدة", text: "سجل تجاري واحد. الفروع والمجموعات في خطة المؤسسات." },
     ],
     trial: {
       eyebrow: "ابدأ مجاناً",
       title: "14 يوماً على النمو والتوسع، بكل مميزاتها",
-      text: "كل حساب جديد يبدأ بتجربة 14 يوماً على خطة النمو والتوسع، ومعها قراءة 30 مستنداً بالذكاء الاصطناعي. يظهر لك عدّاد يبدأ من 30 حتى ينتهي.",
-      points: ["كل الأنشطة مفتوحة", "الذكاء الاصطناعي يقرأ 30 مستنداً", "مزامنة البريد"],
+      text: "يبدأ كل حساب جديد بتجربة 14 يوماً على خطة النمو والتوسع، ومعها قراءة 30 مستنداً بالذكاء الاصطناعي، ويعرض لك عدّادٌ ما تبقى منها.",
+      points: ["كل الأنشطة مفتوحة", "قراءة 30 مستنداً بالذكاء الاصطناعي", "مزامنة البريد"],
       after: "بعد التجربة ينتقل حسابك إلى النسخة المجانية: نشاط واحد، و5 حجوزات شهرياً، ومستخدم واحد، وفاتورة مبدئية.",
       cta: "ابدأ مجاناً",
     },
-    founding: { title: "العملاء المؤسسون", text: "أول 20 شركة تحصل على خصم 30% للسنة الأولى." },
+    founding: { title: "العملاء المؤسسون", text: "تحصل أول 20 شركة على خصم 30% في السنة الأولى." },
     yearly: { title: "الدفع السنوي", text: "شهر مجاناً." },
   },
 };

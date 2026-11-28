@@ -52,7 +52,7 @@ const copy = {
     featuresTitle: "كل ما يحتاجه العمل، على سجل واحد",
     flowEyebrow: "كيف يسير العمل",
     flowTitle: "من أول خطوة حتى آخرها",
-    aiEyebrow: "الذكاء الاصطناعي يعمل",
+    aiEyebrow: "الذكاء الاصطناعي أثناء العمل",
     assistant: "مساعد ROUTEL",
     you: "أنت",
     confirm: "ينتظر تأكيدك",
@@ -60,7 +60,7 @@ const copy = {
     versusTitle: "أين يظهر الفرق",
     cols: ["", "الأنظمة التقليدية", "ROUTEL"],
     audienceEyebrow: "لمن صُمّمت",
-    audienceTitle: "مبنية لمن ينجز العمل",
+    audienceTitle: "مبنية لمن يؤدي العمل",
     faqTitle: "أسئلة",
     relatedTitle: "حلول ذات صلة",
   },
@@ -202,7 +202,7 @@ export function ServicePageTemplate({
         </Container>
       </section>
 
-      {/* ── The figures, Kpler-style ── */}
+      {/* ── The figures ── */}
       <section className="border-y border-fog-200 bg-fog-50">
         <Container>
           <RevealGroup className="grid sm:grid-cols-3" stagger={0.06}>
