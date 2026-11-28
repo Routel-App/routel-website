@@ -128,7 +128,7 @@ export const terms: Record<Locale, LegalCopy> = {
         title: "14. Governing law and disputes",
         body: [
           "Each subscription is for one company in one country, the country of its ROUTEL deployment. These terms are governed by the laws of the country where your company is registered.",
-          "Any dispute arising out of or in connection with these terms that cannot be settled amicably will be finally resolved by arbitration seated in that country, under the rules of its main arbitration centre: in Saudi Arabia, the Saudi Center for Commercial Arbitration (SCCA); in Qatar, the Qatar International Center for Conciliation and Arbitration (QICCA); in Malaysia, the Asian International Arbitration Centre (AIAC); in Indonesia, the Indonesian National Board of Arbitration (BANI). The arbitration will be conducted in English or Arabic, as the parties agree. Either party may seek urgent interim relief from the competent courts.",
+          "Any dispute arising out of or in connection with these terms that cannot be settled amicably will be finally resolved by arbitration seated in that country, under the rules of its main arbitration centre: in Saudi Arabia, the Saudi Center for Commercial Arbitration (SCCA); in Qatar, the Qatar International Center for Conciliation and Arbitration (QICCA); in Malaysia, the Asian International Arbitration Centre (AIAC); in Indonesia, the Indonesian National Board of Arbitration (BANI). The arbitration will be conducted in English or Arabic, as the parties agree, or in the official language of the seat where the law requires it (for example, Indonesian in Indonesia). Either party may seek urgent interim relief from the competent courts.",
         ],
       },
       {
@@ -249,7 +249,7 @@ export const terms: Record<Locale, LegalCopy> = {
         title: "14. النظام الواجب التطبيق وتسوية النزاعات",
         body: [
           "كل اشتراك لشركة واحدة في دولة واحدة، هي دولة نسخة ROUTEL الخاصة بها. وتخضع هذه الشروط لأنظمة الدولة التي سُجّلت فيها شركتك وتُفسَّر وفقاً لها.",
-          "وأي نزاع ينشأ عن هذه الشروط أو يتصل بها ويتعذر حله ودياً، يُحال إلى التحكيم للفصل فيه نهائياً، ويكون مقر التحكيم في تلك الدولة، وفق قواعد مركز التحكيم الرئيس فيها: في المملكة العربية السعودية، المركز السعودي للتحكيم التجاري (SCCA)؛ وفي قطر، مركز قطر الدولي للتوفيق والتحكيم (QICCA)؛ وفي ماليزيا، المركز الآسيوي الدولي للتحكيم (AIAC)؛ وفي إندونيسيا، الهيئة الوطنية الإندونيسية للتحكيم (BANI). وتكون لغة التحكيم العربية أو الإنجليزية بحسب اتفاق الطرفين. ولأي من الطرفين أن يلجأ إلى المحاكم المختصة لطلب الإجراءات الوقتية أو المستعجلة.",
+          "وأي نزاع ينشأ عن هذه الشروط أو يتصل بها ويتعذر حله ودياً، يُحال إلى التحكيم للفصل فيه نهائياً، ويكون مقر التحكيم في تلك الدولة، وفق قواعد مركز التحكيم الرئيس فيها: في المملكة العربية السعودية، المركز السعودي للتحكيم التجاري (SCCA)؛ وفي قطر، مركز قطر الدولي للتوفيق والتحكيم (QICCA)؛ وفي ماليزيا، المركز الآسيوي الدولي للتحكيم (AIAC)؛ وفي إندونيسيا، الهيئة الوطنية الإندونيسية للتحكيم (BANI). ويجري التحكيم بالإنجليزية أو العربية بحسب اتفاق الطرفين، أو باللغة الرسمية لبلد مقر التحكيم حين يوجب القانون ذلك (كالإندونيسية في إندونيسيا). ولأي من الطرفين أن يلجأ إلى المحاكم المختصة لطلب الإجراءات الوقتية أو المستعجلة.",
         ],
       },
       {
