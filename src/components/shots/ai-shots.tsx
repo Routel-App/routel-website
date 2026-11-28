@@ -21,7 +21,7 @@ import { Ltr, ShotFrame, arrowFor } from "./frame";
 
 const chatCopy = {
   en: {
-    header: "Routel Assistant",
+    header: "ROUTEL Assistant",
     sub: "Calls tools · acts on your confirmation",
     user: "Invoice NXS27000419 for the customer and add the customs charges from the attached vendor bill.",
     file: "vendor-bill-KLX-0931.pdf",
@@ -43,7 +43,7 @@ const chatCopy = {
     input: "Ask in any language…",
   },
   ar: {
-    header: "مساعد Routel",
+    header: "مساعد ROUTEL",
     sub: "يستدعي الأدوات · وينفّذ بعد تأكيدك",
     user: "جهّز فاتورة للعميل على الحجز NXS27000419 وأضف رسوم التخليص من فاتورة المورد المرفقة.",
     file: "فاتورة-المورد-JD-0931.pdf",

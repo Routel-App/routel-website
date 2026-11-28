@@ -29,7 +29,7 @@ const copy = {
     eyebrow: "Why forwarders switch",
     title: "Less chasing, fewer spreadsheets, a margin you can see",
     description:
-      "Routel is built around the way a forwarding office actually works: one booking, many hands, and a ledger that has to be right.",
+      "ROUTEL is built around the way a forwarding office actually works: one booking, many hands, and a ledger that has to be right.",
     outcomes: [
       {
         title: "One record, zero re-keying",
@@ -69,10 +69,10 @@ const copy = {
     },
   },
   ar: {
-    eyebrow: "لماذا تنتقل شركات الشحن إلى Routel",
+    eyebrow: "لماذا تنتقل شركات الشحن إلى ROUTEL",
     title: "متابعة أقل، جداول بيانات أقل، وهامش ربح واضح أمامك",
     description:
-      "صُمّم Routel على طريقة عمل مكتب الشحن الفعلية: حجز واحد، وأيدٍ كثيرة، ودفتر أستاذ يجب أن يكون صحيحاً.",
+      "صُمّم ROUTEL على طريقة عمل مكتب الشحن الفعلية: حجز واحد، وأيدٍ كثيرة، ودفتر أستاذ يجب أن يكون صحيحاً.",
     outcomes: [
       {
         title: "سجل واحد، دون إعادة إدخال",

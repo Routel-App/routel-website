@@ -25,7 +25,7 @@ const copy: Record<Locale, Copy> = {
     eyebrow: "Product tour",
     title: "One system for every desk in your forwarding office",
     lead: "Sales, operations and accounts work on the same records, so a rate becomes a booking, a booking becomes an invoice, and the invoice is already in the books.",
-    label: "Routel product tour",
+    label: "ROUTEL product tour",
     cta: "See how it works",
     tabs: {
       bookings: {
@@ -55,7 +55,7 @@ const copy: Record<Locale, Copy> = {
       documents: {
         title: "Documents & AI",
         short: "Attachments read, matched, filed",
-        body: "Incoming e-mail attachments are classified (B/L, booking confirmation, vendor invoice) and matched to the right booking by number, B/L or container. A person approves each one.",
+        body: "Incoming email attachments are classified (B/L, booking confirmation, vendor invoice) and matched to the right booking by number, B/L or container. A person approves each one.",
         bullets: ["Reads PDFs and scans", "Suggests the booking it belongs to", "Nothing is saved without approval"],
       },
       control: {
@@ -76,7 +76,7 @@ const copy: Record<Locale, Copy> = {
     eyebrow: "جولة في النظام",
     title: "نظام واحد لكل مكتب في شركة الشحن",
     lead: "تعمل المبيعات والعمليات والحسابات على السجلات نفسها: يصير السعر حجزاً، ويصير الحجز فاتورة، وتدخل الفاتورة الدفاتر مباشرة.",
-    label: "جولة في نظام Routel",
+    label: "جولة في نظام ROUTEL",
     cta: "اعرف كيف يعمل",
     tabs: {
       bookings: {
@@ -149,7 +149,7 @@ export async function ProductTour() {
   const locale = await getLocale();
   const t = copy[locale];
   const shot = "mx-auto w-full";
-  // Real screens where we have them; the e-mail reading and the public tracking page stay illustrations.
+  // Real screens where we have them; the email reading and the public tracking page stay illustrations.
   // Each shows the part of the screen that matters at a readable size (no sidebar), and opens the whole screen on click.
   const crops: Record<"booking" | "quotes" | "invoice" | "customs-file" | "alerts", { crop: Crop; mobile: Crop }> = {
     booking: { crop: { x: 262, y: 62, w: 880, h: 560 }, mobile: { x: 270, y: 62, w: 450, h: 450 } },

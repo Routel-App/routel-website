@@ -12,10 +12,10 @@ import { Lottie } from "@/components/motion/lottie";
 const copy = {
   en: {
     metaTitle: "Request a demo",
-    metaDescription: "See Routel run a real freight booking from quotation to the books, on your routes and rates.",
+    metaDescription: "See ROUTEL run a real freight booking from quotation to the books, on your routes and rates.",
     eyebrow: "Request a demo",
     title: "Twenty minutes, one real shipment, your numbers.",
-    lead: "We don’t do slide decks. Bring a route you ship often and we’ll run it through Routel end to end, live.",
+    lead: "We don’t do slide decks. Bring a route you ship often and we’ll run it through ROUTEL end to end, live.",
     interested: "Interested in:",
     agenda: [
       "A quotation on your own route and container type, converted into a booking",
@@ -27,10 +27,10 @@ const copy = {
   },
   ar: {
     metaTitle: "اطلب عرضاً تجريبياً",
-    metaDescription: "شاهد Routel يدير حجزاً حقيقياً من عرض السعر حتى الدفاتر، على مساراتك وأسعارك.",
+    metaDescription: "شاهد ROUTEL يدير حجزاً حقيقياً من عرض السعر حتى الدفاتر، على مساراتك وأسعارك.",
     eyebrow: "اطلب عرضاً تجريبياً",
     title: "عشرون دقيقة، شحنة حقيقية واحدة، وأرقامك أنت.",
-    lead: "لا نعرض شرائح تقديمية. أحضر مساراً تشحن عليه كثيراً، وسنمرّره عبر Routel من البداية إلى النهاية، مباشرةً.",
+    lead: "لا نعرض شرائح تقديمية. أحضر مساراً تشحن عليه كثيراً، وسنمرّره عبر ROUTEL من البداية إلى النهاية، مباشرةً.",
     interested: "الباقة التي تهمك:",
     agenda: [
       "عرض سعر على مسارك ونوع الحاوية الخاص بك، يتحول إلى حجز",

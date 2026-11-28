@@ -10,7 +10,7 @@ const copy: Record<Locale, { weight: string; weightValue: string; weightNote: st
 /**
  * The air freight module's picture: a freighter on the apron, a loader
  * lifting the booking's orange ULD to the cargo door, the trade lane above,
- * and two cards for what Routel does with it (chargeable weight, a checked
+ * and two cards for what ROUTEL does with it (chargeable weight, a checked
  * MAWB). The lift is a CSS loop that stops under reduced motion.
  */
 export function AirScene({ locale, className }: { locale: Locale; className?: string }) {
@@ -63,7 +63,7 @@ export function AirScene({ locale, className }: { locale: Locale; className?: st
         <rect x="368" y="420" width="148" height="6" rx="2" fill={ink.steel} />
       </svg>
 
-      {/* what Routel does with it */}
+      {/* what ROUTEL does with it */}
       <div className="absolute end-4 top-4 hidden w-[200px] rounded-2xl bg-white/95 p-3.5 shadow-float ring-1 ring-fog-200 backdrop-blur min-[420px]:block sm:end-5 sm:top-5">
         <p className="flex items-center gap-1.5 text-[11.5px] font-medium text-fog-600">
           <Scale className="h-3.5 w-3.5 text-spark-600" />

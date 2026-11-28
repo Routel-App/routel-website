@@ -8,12 +8,12 @@ const copy = {
   en: {
     eyebrow: "Ways to work",
     title: "The same records, wherever the work happens",
-    lead: "Your team, your customers and your mailbox all meet the same booking: in the web app, in a chat with the assistant, in the e-mail, or on a page your customer opens without a login.",
+    lead: "Your team, your customers and your mailbox all meet the same booking: in the web app, in a chat with the assistant, in the email, or on a page your customer opens without a login.",
     items: [
       { title: "The web app", text: "Every page in Arabic and English, right to left when it's Arabic, in the browser on desktop or phone." },
       { title: "A chat with the assistant", text: "Ask in a sentence, in any language; it answers from the system and acts after you confirm." },
-      { title: "Your mailbox", text: "Microsoft 365 or Zoho, synced: e-mails link to their booking, and AI reads the attachments." },
-      { title: "Documents from the system", text: "Booking confirmations, B/Ls and invoices as PDF, kept under the booking; arrival notices and delivery orders go out by e-mail from ROUTEL." },
+      { title: "Your mailbox", text: "Microsoft 365 or Zoho, synced: emails link to their booking, and AI reads the attachments." },
+      { title: "Documents from the system", text: "Booking confirmations, B/Ls and invoices as PDF, kept under the booking; arrival notices and delivery orders go out by email from ROUTEL." },
       { title: "Tracking for your customers", text: "A public page: booking, B/L or container number plus the company name, and the status timeline. No login." },
       { title: "Self-service forms", text: "Public links for a credit application and for partner registration, waiting for your approval." },
     ],
@@ -35,7 +35,7 @@ const copy = {
 
 const icons = [MonitorSmartphone, Bot, Mail, FileText, Globe2, UserPlus];
 
-/** How people reach ROUTEL's records, after Kpler's "data delivery to fit your operations". */
+/** How people reach ROUTEL's records. */
 export async function WaysToWork() {
   const t = copy[await getLocale()];
   return (

@@ -3,7 +3,7 @@ import { Anchor, Boxes, Container, FileCheck2, Landmark, PackageCheck, Plane, Sh
 import type { Locale } from "./i18n";
 
 /**
- * The lines of business Routel runs, as the business activities a company
+ * The lines of business ROUTEL runs, as the business activities a company
  * opens in Settings → Business activities (lib/activities.ts in the system).
  * Every one of them is built and open to companies. Customs clearance covers
  * the clearance file, the AI reading of the commercial invoice with HS
@@ -59,7 +59,7 @@ const text: Record<Locale, Record<string, { name: string; short: string; points:
     "import-release": {
       name: "Arrival notice and delivery order",
       short: "Tell the consignee the cargo has landed and release it, with the documents sent from the system.",
-      points: ["Arrival notice, due on time", "Delivery order once released and paid", "Sent by e-mail with the PDF attached", "New ETA read by AI from the line's notice"],
+      points: ["Arrival notice, due on time", "Delivery order once released and paid", "Sent by email with the PDF attached", "New ETA read by AI from the line's notice"],
     },
     nvocc: {
       name: "NVOCC",
@@ -84,7 +84,7 @@ const text: Record<Locale, Record<string, { name: string; short: string; points:
     "customs-brokerage": {
       name: "Customs clearance",
       short: "One clearance file per declaration, with HS-coded lines and the customs value worked out.",
-      points: ["Import, export and transit; sea, air and land", "12-digit HS codes and the customs value (CIF)", "Invoice read by AI; duty and VAT estimated"],
+      points: ["Import, export and transit; sea, air and land", "HS codes to the full 12-digit Saudi tariff line, and the customs value (CIF)", "Invoice read by AI; duty and VAT estimated"],
     },
     "contract-logistics": {
       name: "Inventory (3PL)",
@@ -124,8 +124,8 @@ const text: Record<Locale, Record<string, { name: string; short: string; points:
       points: ["أوامر النقل والأسطول والسائقون", "رابط جوال السائق، بلا تطبيق", "مصروفات الرحلة وفحوص الوقود والفوترة"],
     },
     warehousing: {
-      name: "إيصالات المستودع ومحطة الحاويات",
-      short: "استلام البضاعة في المستودع أو في محطة الحاويات CFS، بإيصال استلام.",
+      name: "إيصالات المستودع ومحطة التعبئة والتفريغ (CFS)",
+      short: "استلام البضاعة في المستودع أو في محطة التعبئة والتفريغ (CFS)، بإيصال استلام.",
       points: ["إيصالات المستودع، تُستلم من الجوال", "الملصقات والتحميل بالمسح", "تعرفة تخزين خاصة بك"],
     },
     "shipping-agency": {
@@ -136,7 +136,7 @@ const text: Record<Locale, Record<string, { name: string; short: string; points:
     "customs-brokerage": {
       name: "التخليص الجمركي",
       short: "ملف تخليص لكل بيان، ببنود برموز HS وقيمة جمركية محسوبة.",
-      points: ["استيراد وتصدير وعبور (ترانزيت)؛ بحري وجوي وبري", "رموز HS من 12 خانة والقيمة الجمركية (CIF)", "قراءة الفاتورة بالذكاء الاصطناعي وتقدير الرسوم والضريبة"],
+      points: ["استيراد وتصدير وعبور (ترانزيت)؛ بحري وجوي وبري", "رموز HS حتى البند الكامل من 12 خانة في التعرفة السعودية، والقيمة الجمركية (CIF)", "قراءة الفاتورة بالذكاء الاصطناعي وتقدير الرسوم والضريبة"],
     },
     "contract-logistics": {
       name: "مخزون العملاء (3PL)",
@@ -156,7 +156,7 @@ export function getServices(locale: Locale): Service[] {
 
 export const serviceSlugs = base.map((b) => b.slug);
 
-/** Who Routel is built for, used by the Solutions menu and page. */
+/** Who ROUTEL is built for, used by the Solutions menu and page. */
 export type Segment = { slug: string; name: string; text: string; services: string[] };
 
 const segments: Record<Locale, Segment[]> = {
@@ -174,7 +174,7 @@ const segments: Record<Locale, Segment[]> = {
     { slug: "customs", name: "المخلّصون الجمركيون", text: "ملفات تخليص ببنود مرمّزة برموز HS وقيمة جمركية محسوبة، بجانب الشحنة التي تخصها.", services: ["customs-brokerage", "import-release"] },
     { slug: "agencies", name: "الوكالات الملاحية", text: "عمليات وكالة الخطوط ومستنداتها وماليتها في نظام واحد.", services: ["shipping-agency", "import-release"] },
     { slug: "transport", name: "النقل البري", text: "أوامر النقل والأسطول والسائقون، على حجز الشحنة نفسه.", services: ["land-transport"] },
-    { slug: "3pl", name: "المستودعات ومحطات الحاويات و3PL", text: "إيصالات المستودع ومحطة الحاويات CFS ومخزون عملائك على المنصة نفسها.", services: ["warehousing", "contract-logistics", "land-transport"] },
+    { slug: "3pl", name: "المستودعات ومحطات التعبئة والتفريغ و3PL", text: "إيصالات المستودع ومحطة التعبئة والتفريغ (CFS) ومخزون عملائك على المنصة نفسها.", services: ["warehousing", "contract-logistics", "land-transport"] },
   ],
 };
 

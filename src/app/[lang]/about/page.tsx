@@ -34,7 +34,7 @@ const copy = {
       },
       {
         title: "One record, not a patchwork",
-        text: "A spreadsheet of rates, a template for quotations, a separate accounting package and a shared drive of PDFs is how a number gets re-typed or a document gets lost. Routel keeps one booking record that every department works from.",
+        text: "A spreadsheet of rates, a template for quotations, a separate accounting package and a shared drive of PDFs is how a number gets re-typed or a document gets lost. ROUTEL keeps one booking record that every department works from.",
       },
       {
         title: "AI that proposes, a person who decides",
@@ -47,7 +47,7 @@ const copy = {
     ],
     nowEyebrow: "Where we are now",
     nowTitle: "Running on real shipments, offered as a hosted service",
-    nowDescription: `${site.name} is a hosted service, built and supported by its founder, with a working freight forwarder as its development partner. Built for the GCC — Qatar and Saudi Arabia — and Southeast Asia, where it already runs in Malaysia and Indonesia. Ask for a demo and we will walk you through it on a real shipment.`,
+    nowDescription: `${site.name} is a hosted service, built and supported by its founder, with a working freight forwarder as its development partner. Built for the GCC — Qatar and Saudi Arabia — and Southeast Asia; it already runs in Saudi Arabia, Malaysia and Indonesia. Ask for a demo and we will walk you through it on a real shipment.`,
     companyEyebrow: "The company",
     companyTitle: "Grown inside a working freight forwarder",
     companyDescription: `${site.name} runs today for freight companies in Saudi Arabia, Malaysia and Indonesia, in English and Arabic.`,
@@ -82,7 +82,7 @@ const copy = {
       },
       {
         title: "سجل واحد، لا خليط من الأدوات",
-        text: "جدول بيانات للأسعار، وقالب لعروض الأسعار، وبرنامج محاسبة منفصل، ومجلد مشترك مليء بملفات PDF — هكذا يُعاد إدخال رقم يدوياً أو يضيع مستند. أما Routel فيحتفظ بسجل حجز واحد تعمل منه كل الأقسام.",
+        text: "جدول بيانات للأسعار، وقالب لعروض الأسعار، وبرنامج محاسبة منفصل، ومجلد مشترك مليء بملفات PDF — هكذا يُعاد إدخال رقم يدوياً أو يضيع مستند. أما ROUTEL فيحتفظ بسجل حجز واحد تعمل منه كل الأقسام.",
       },
       {
         title: "ذكاء اصطناعي يقترح، وإنسان يقرر",
@@ -95,7 +95,7 @@ const copy = {
     ],
     nowEyebrow: "أين نحن اليوم",
     nowTitle: "يعمل على شحنات حقيقية، ومتاح خدمةً مستضافة",
-    nowDescription: `${site.name} خدمة مستضافة يبنيها مؤسسها ويتولى دعمها، وشريكه في التطوير شركة شحن عاملة. ومصمم لدول الخليج — قطر والسعودية — ولجنوب شرق آسيا، حيث يعمل اليوم في ماليزيا وإندونيسيا. اطلب عرضاً تجريبياً لنريك إياه على شحنة حقيقية.`,
+    nowDescription: `${site.name} خدمة مستضافة يبنيها مؤسسها ويتولى دعمها، وشريكه في التطوير شركة شحن عاملة. ومصمم لدول الخليج — قطر والسعودية — ولجنوب شرق آسيا، ويعمل اليوم في السعودية وماليزيا وإندونيسيا. اطلب عرضاً تجريبياً لنريك إياه على شحنة حقيقية.`,
     companyEyebrow: "الشركة",
     companyTitle: "نشأ داخل شركة شحن عاملة",
     companyDescription: `يعمل ${site.name} اليوم لدى شركات شحن في السعودية وماليزيا وإندونيسيا، بالعربية والإنجليزية.`,

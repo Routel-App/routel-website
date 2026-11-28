@@ -5,8 +5,8 @@ import type { ScreenName } from "@/lib/screens";
 import { RealShot } from "./real-shot";
 
 const copy = {
-  en: { eyebrow: "In the app", title: "The real screens", lead: "Taken from Routel itself, in a demo company with demo data." },
-  ar: { eyebrow: "داخل النظام", title: "الشاشات الحقيقية", lead: "لقطات من Routel نفسه، في شركة تجريبية ببيانات تجريبية." },
+  en: { eyebrow: "In the app", title: "The real screens", lead: "Taken from ROUTEL itself, in a demo company with demo data." },
+  ar: { eyebrow: "داخل النظام", title: "الشاشات الحقيقية", lead: "لقطات من ROUTEL نفسه، في شركة تجريبية ببيانات تجريبية." },
 } satisfies Record<Locale, Record<string, string>>;
 
 /** One or two real screenshots of a module or solution, under a short heading. */

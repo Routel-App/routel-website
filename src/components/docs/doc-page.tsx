@@ -11,7 +11,7 @@ const copy = {
   en: {
     stubTitle: "This page is a stub",
     stubBody:
-      "The module is built and working in Routel; the detailed guide is still being written. The summary below is accurate, just short.",
+      "The module is built and working in ROUTEL; the detailed guide is still being written. The summary below is accurate, just short.",
     previous: "Previous",
     next: "Next",
     pagination: "Pagination",
@@ -20,7 +20,7 @@ const copy = {
   },
   ar: {
     stubTitle: "هذه الصفحة مختصرة",
-    stubBody: "الوحدة مبنية وتعمل في Routel، والدليل المفصّل قيد الكتابة. الملخص أدناه دقيق، لكنه قصير.",
+    stubBody: "الوحدة مبنية وتعمل في ROUTEL، والدليل المفصّل قيد الكتابة. الملخص أدناه دقيق، لكنه قصير.",
     previous: "السابق",
     next: "التالي",
     pagination: "التنقل بين الصفحات",

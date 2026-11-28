@@ -8,8 +8,8 @@ type Row = { topic: string; them: string; us: string };
 type Copy = { eyebrow: string; title: string; lead: string; cols: [string, string, string]; rows: Row[]; note: string };
 
 /**
- * Routel against the traditional freight and logistics systems, as a
- * category. Built from the approved pitch points in the Routel system
+ * ROUTEL against the traditional freight and logistics systems, as a
+ * category. Built from the approved pitch points in the ROUTEL system
  * repository (docs/business-context.md): no vendor named, no unconfirmed
  * competitor prices, no implementation durations (they onboard in days too).
  * The pain points are the founder's: implementation fees, high and often
@@ -19,7 +19,7 @@ const copy: Record<Locale, Copy> = {
   en: {
     eyebrow: "ROUTEL vs traditional systems",
     title: "Built for how logistics companies work now",
-    lead: "Traditional freight and logistics software charges implementation fees, is priced high (often per user) and is complicated to use. ROUTEL has no implementation fees, unlimited users, and is simple: set it up by chat, with the rules of the trade built in and the AI doing the typing under your control. Built for large operations, groups with branches and several companies, and simple enough for a single office.",
+    lead: "Traditional freight and logistics software charges implementation fees, is priced high (often per user) and is complicated to use. ROUTEL has no implementation fees and no user limit, and it is simple: you set it up by chat, the rules of the trade are built in, and the AI does the typing under your control. Built for large operations, groups with branches and several companies, and simple enough for a single office.",
     cols: ["", "Traditional systems", "ROUTEL"],
     rows: [
       { topic: "Prices", them: "High prices, rarely published: you start with a demo and a quote", us: "Published prices, from USD 199 a month, never per shipment" },

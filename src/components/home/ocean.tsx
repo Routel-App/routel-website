@@ -25,7 +25,7 @@ const copy: Record<Locale, Copy> = {
   en: {
     eyebrow: "Ocean freight and containers",
     title: "Built for the way containers actually move",
-    lead: "Vessels and voyages, containers and their types, cut-offs, B/Ls and seven shipping dates: Routel is made for an ocean freight desk, so the booking already knows what your team tracks.",
+    lead: "Vessels and voyages, containers and their types, cut-offs, B/Ls and seven shipping dates: ROUTEL is made for an ocean freight desk, so the booking already knows what your team tracks.",
     scene: "Animated container terminal: a gantry crane loads containers onto a ship, which then sails.",
     vessel: "MSC AURORA · 503E",
     stages: { confirmed: "Booking Confirmed", gateIn: "Gate In", loaded: "Vessel Loaded", departed: "Departed" },
@@ -40,7 +40,7 @@ const copy: Record<Locale, Copy> = {
   ar: {
     eyebrow: "الشحن البحري والحاويات",
     title: "مصمَّم لحركة الحاويات كما تحدث فعلاً",
-    lead: "السفن والرحلات، والحاويات وأنواعها، ومواعيد الإغلاق، والبوالص، وسبعة تواريخ للشحنة: صُمم Routel لمكتب الشحن البحري، فالحجز يعرف مسبقاً ما يتابعه فريقك.",
+    lead: "السفن والرحلات، والحاويات وأنواعها، ومواعيد الإغلاق، والبوالص، وسبعة تواريخ للشحنة: صُمم ROUTEL لمكتب الشحن البحري، فالحجز يعرف مسبقاً ما يتابعه فريقك.",
     scene: "محطة حاويات متحركة: رافعة ترفع الحاويات إلى السفينة ثم تبحر.",
     vessel: "MSC AURORA · 503E",
     stages: { confirmed: "تم تأكيد الحجز", gateIn: "دخول البوابة", loaded: "تم التحميل على السفينة", departed: "غادرت" },

@@ -34,7 +34,7 @@ const baseContent: Record<string, PlatformContent> = {
     eyebrow: "Bookings",
     title: "One booking, from quotation to shipment closed",
     description:
-      "The booking is Routel's core record: shipment details, the shipping timeline, the carrier booking, charges and profit, invoices, the Bill of Lading, documents and every change made along the way — all under one booking number, moving through one 11-status lifecycle.",
+      "The booking is ROUTEL's core record: shipment details, the shipping timeline, the carrier booking, charges and profit, invoices, the Bill of Lading, documents and every change made along the way — all under one booking number, moving through one 11-status lifecycle.",
     stats: [
       { value: "11", label: "statuses, booking pending to shipment closed" },
       { value: "1", label: "record every other module hangs off" },
@@ -46,11 +46,11 @@ const baseContent: Record<string, PlatformContent> = {
       "A customer's 'where's my container' email means re-checking three places before you can answer.",
     ],
     solutionIntro:
-      "Routel gives every shipment one home: the booking. Shipment details, the carrier booking, charges, invoices, the B/L and the documents all live on the same record, with AI reading the carrier's paperwork so nobody types it twice — one place to check, one status everyone sees.",
+      "ROUTEL gives every shipment one home: the booking. Shipment details, the carrier booking, charges, invoices, the B/L and the documents all live on the same record, with AI reading the carrier's paperwork so nobody types it twice — one place to check, one status everyone sees.",
     features: [
       { title: "Shipment details", description: "POL/POD, shipper and consignee, vessel/voyage, containers and container type, incoterms, weight, chargeable weight, volume, cargo description, HBL and MBL numbers, operations staff and sales person. Upload a B/L and AI reads it in." },
       { title: "Shipping timeline", description: "Gate-in cut-off, SI cut-off, ETD, SOB, ATD, ETA and ATA, kept on the booking instead of buried in an inbox." },
-      { title: "Carrier booking, read for you", description: "Shipping line, Carrier Booking No., containers, notify party and booking notes. \"Read Carrier Confirmation\" has AI read the carrier's PDF or a linked e-mail, and you tick what to save." },
+      { title: "Carrier booking, read for you", description: "Shipping line, Carrier Booking No., containers, notify party and booking notes. \"Read Carrier Confirmation\" has AI read the carrier's PDF or a linked email, and you tick what to save." },
       { title: "Booking Confirmation with revisions", description: "The first one you issue is the original; any change afterwards makes the next one a \"Revised Booking Confirmation — Revision N\", so everyone knows which version is current." },
       { title: "Charges and profit", description: "Cost (AP) and sale (AR) lines in Booking Charges — AI can read a vendor invoice into cost lines — with a Profit Summary (AP · AR · Net) shown to finance roles only." },
       { title: "Invoice and B/L from the header", description: "Create Invoice turns the booking's sale (AR) lines into draft invoices; Generate Bill of Lading builds the House B/L from the booking's own data." },
@@ -82,7 +82,7 @@ const baseContent: Record<string, PlatformContent> = {
     eyebrow: "Business Partners",
     title: "One record, whichever side of the deal they're on",
     description:
-      "Customers and vendors aren't two different record types in Routel — they're the same thing. Which side a partner plays is decided per transaction, with one combined ledger and one statement of account either way.",
+      "Customers and vendors aren't two different record types in ROUTEL — they're the same thing. Which side a partner plays is decided per transaction, with one combined ledger and one statement of account either way.",
     stats: [
       { value: "1", label: "record type for customers and vendors alike" },
       { value: "AR+AP", label: "netted into one ledger per partner" },
@@ -205,7 +205,7 @@ const baseContent: Record<string, PlatformContent> = {
     eyebrow: "Finance (Receivables & Payables)",
     title: "A mailbox that proposes matches, not one that decides for you",
     description:
-      "A dedicated finance mailbox, separate from day-to-day correspondence, is scanned automatically for incoming payments. Routel proposes a match; a person confirms or rejects it.",
+      "A dedicated finance mailbox, separate from day-to-day correspondence, is scanned automatically for incoming payments. ROUTEL proposes a match; a person confirms or rejects it.",
     stats: [
       { value: "2", label: "mailboxes — ops and finance, kept separate" },
       { value: "100%", label: "of matches need a human confirmation" },
@@ -234,7 +234,7 @@ const baseContent: Record<string, PlatformContent> = {
       { role: "Management", detail: "Sees the combined receivables and payables position." },
     ],
     faqs: [
-      { q: "Does this move money?", a: "No — it matches and records payments. Routel doesn't initiate bank transfers or payment runs." },
+      { q: "Does this move money?", a: "No — it matches and records payments. ROUTEL doesn't initiate bank transfers or payment runs." },
       { q: "Is this the same mailbox as Email Sync?", a: "No — it's a separate, dedicated finance mailbox, kept apart from day-to-day booking correspondence." },
       { q: "What if a suggested match is wrong?", a: "Reject it. Nothing is settled unless a person confirms the match is correct." },
     ],
@@ -378,7 +378,7 @@ const baseContent: Record<string, PlatformContent> = {
       { title: "Generated from booking data", description: "Shipper, consignee, notify party, vessel/voyage, ports, cargo description, weight, incoterms and freight terms, all pulled from the booking." },
       { title: "Container annexure included", description: "One row per container — number, type, seal, package count — referencing the B/L number." },
       { title: "Carrier-style layout", description: "Boxes, numbering and terms where a consignee, bank or customs officer expects to find them." },
-      { title: "Numbered properly", description: "The House B/L number is assigned by Routel; the carrier's Master B/L number is entered once issued." },
+      { title: "Numbered properly", description: "The House B/L number is assigned by ROUTEL; the carrier's Master B/L number is entered once issued." },
     ],
     workflow: [
       { title: "Booking data checked", description: "Parties, route, vessel and containers confirmed accurate." },
@@ -391,7 +391,7 @@ const baseContent: Record<string, PlatformContent> = {
     ],
     faqs: [
       { q: "What happens if I edit a container after generating?", a: "Regenerate the document — the PDF is a snapshot, not a live view." },
-      { q: "Who assigns the House B/L number?", a: "Routel, from your prefix and sequence, the first time it's generated." },
+      { q: "Who assigns the House B/L number?", a: "ROUTEL, from your prefix and sequence, the first time it's generated." },
       { q: "Can the assistant generate it for me?", a: "Yes — ask it to generate the House B/L for a booking, subject to the same role check." },
     ],
     related: ["bookings", "documents", "invoicing"],
@@ -430,7 +430,7 @@ const baseContent: Record<string, PlatformContent> = {
       { role: "Management", detail: "Sees the totals land in the P&L." },
     ],
     faqs: [
-      { q: "Is this a full payroll system?", a: "No — it's a cost record, not a payroll engine. Routel doesn't compute statutory deductions or produce payslips." },
+      { q: "Is this a full payroll system?", a: "No — it's a cost record, not a payroll engine. ROUTEL doesn't compute statutory deductions or produce payslips." },
       { q: "Can an expense be left unpaid?", a: "Yes — it posts to Accounts Payable until it's paid." },
       { q: "Who can add a new expense category?", a: "Admin and Management, so the chart of accounts stays consistent no matter who records the cost." },
     ],
@@ -455,7 +455,7 @@ const baseContent: Record<string, PlatformContent> = {
       "Documents live with the booking, not in someone's inbox — uploaded manually or picked up automatically from linked email, with every file type verified and every AI suggestion reviewed by a person.",
     features: [
       { title: "Content-verified file types", description: "What a file actually is gets checked from its content, not just trusted from the filename." },
-      { title: "Uploaded and generated, together", description: "Manual uploads sit alongside the quotation PDF, B/L, invoices and notes Routel generates automatically." },
+      { title: "Uploaded and generated, together", description: "Manual uploads sit alongside the quotation PDF, B/L, invoices and notes ROUTEL generates automatically." },
       { title: "AI-classified attachments", description: "Incoming email attachments are classified — B/L, booking confirmation, booking request, vendor invoice or other — with a suggested booking match by booking number, then B/L, then container." },
       { title: "One-click actions, human-approved", description: "Approve & Create Booking, Approve & Update Booking, Approve & Create Invoice, or Link to Booking — a person approves every one." },
       { title: "Versioned, never overwritten", description: "A corrected upload keeps the old version; the activity log shows who replaced what." },
@@ -494,7 +494,7 @@ const baseContent: Record<string, PlatformContent> = {
     solutionIntro:
       "Connect the mailbox once, and correspondence that mentions a booking number attaches to that booking automatically — travelling with the shipment instead of sitting in someone's inbox.",
     features: [
-      { title: "Zoho or Microsoft 365", description: "Connect through the provider's own standard authorization screen — Routel never stores the password directly." },
+      { title: "Zoho or Microsoft 365", description: "Connect through the provider's own standard authorization screen — ROUTEL never stores the password directly." },
       { title: "Automatic linking", description: "Mail links to a booking when its booking number appears in it, or when it follows on in a thread that's already linked. Anything else can be linked manually." },
       { title: "Attachments feed document review", description: "Linked attachments flow into the AI-classified document queue instead of staying stuck in email." },
       { title: "Separate from the finance mailbox", description: "A distinct, dedicated inbox handles payment matching — see Finance (Receivables & Payables)." },
@@ -511,7 +511,7 @@ const baseContent: Record<string, PlatformContent> = {
     ],
     faqs: [
       { q: "Is Gmail or Google Workspace supported?", a: "Not yet — Zoho and Microsoft 365 are the supported providers." },
-      { q: "Does Routel see my password?", a: "No — authorization happens through the provider's own standard screen." },
+      { q: "Does ROUTEL see my password?", a: "No — authorization happens through the provider's own standard screen." },
       { q: "Is this the same inbox used for payment matching?", a: "No — that's a separate, dedicated finance mailbox. See Finance (Receivables & Payables)." },
     ],
     related: ["documents", "bookings", "finance-receivables"],
@@ -521,11 +521,11 @@ const baseContent: Record<string, PlatformContent> = {
     eyebrow: "CRM & Contacts",
     title: "Know the people at every partner, without typing them in",
     description:
-      "Routel files everyone your team e-mails under the business partner they work for, reads business cards from a photo, and shows each relationship from the e-mail itself: the last contact, who talks to whom, and which partners have gone quiet.",
+      "ROUTEL files everyone your team emails under the business partner they work for, reads business cards from a photo, and shows each relationship from the email itself: the last contact, who talks to whom, and which partners have gone quiet.",
     stats: [
-      { value: "4", label: "addresses read on every e-mail: From, To, Cc and Reply-To" },
+      { value: "4", label: "addresses read on every email: From, To, Cc and Reply-To" },
       { value: "20", label: "business cards scanned in one go, one per photo" },
-      { value: "0", label: "e-mail texts stored; only the headers are kept" },
+      { value: "0", label: "email texts stored; only the headers are kept" },
     ],
     painPoints: [
       "The only list of who you deal with at each customer and agent is in each person's own inbox and phone.",
@@ -533,21 +533,21 @@ const baseContent: Record<string, PlatformContent> = {
       "A good customer stops writing, and nobody notices until the bookings have gone elsewhere.",
     ],
     solutionIntro:
-      "Connect the mailbox you already sync, and the people in it are found under their partner: by their exact address first, then by their domain. Cards are read by AI and checked by a person. Each partner's page then shows the relationship as it really is, counted from the e-mail headers.",
+      "Connect the mailbox you already sync, and the people in it are found under their partner: by their exact address first, then by their domain. Cards are read by AI and checked by a person. Each partner's page then shows the relationship as it really is, counted from the email headers.",
     features: [
-      { title: "People found in your e-mail", description: "The sender, To, Cc and Reply-To of every e-mail are matched to a partner: an address that is already a contact's first, then the partner's domain. A free e-mail address (Gmail, Outlook and the like) is matched only by the exact address, and your own colleagues and no-reply addresses are never contacts." },
-      { title: "Review first, or add automatically", description: "Under People in your e-mails, Add makes a person a contact, Merge adds the address to a contact you have, and Ignore stops the suggestion. Or let people at a known partner, seen in enough e-mails, become contacts on their own." },
-      { title: "New companies in your e-mail", description: "People whose domain belongs to no partner are grouped by domain. Create the partner (marked Prospect until it has an AR or AP document), link the domain to a partner you have, or ignore it." },
-      { title: "Business cards, read by AI", description: "Take a photo of a card, front and back, or Scan several cards, up to 20 with one card per photo. AI fills in the name, position, company, e-mails and phones; you check every field. The partner is found by the card's domain, then its name, and a contact with the same e-mail or mobile is offered for merging." },
-      { title: "The contact's page", description: "Its details and where they came from (typed, from e-mail, a business card), the card's photos, the last contact, and every e-mail it was in, with the booking it is linked to." },
-      { title: "The relationship panel", description: "On each partner's overview: the last contact and its subject, the three people on your side with the most e-mails with them, their most active people in the last 90 days, and messages per month. Counted from the stored headers only, nothing guessed." },
-      { title: "Gone quiet", description: "Partners you did business with in the last year (a booking, an AR invoice or an AP bill) and haven't exchanged an e-mail with for three months, quietest first, with their last business and their sales person. The number of months is a setting." },
+      { title: "People found in your email", description: "The sender, To, Cc and Reply-To of every email are matched to a partner: an address that is already a contact's first, then the partner's domain. A free email address (Gmail, Outlook and the like) is matched only by the exact address, and your own colleagues and no-reply addresses are never contacts." },
+      { title: "Review first, or add automatically", description: "Under People in your emails, Add makes a person a contact, Merge adds the address to a contact you have, and Ignore stops the suggestion. Or let people at a known partner, seen in enough emails, become contacts on their own." },
+      { title: "New companies in your email", description: "People whose domain belongs to no partner are grouped by domain. Create the partner (marked Prospect until it has an AR or AP document), link the domain to a partner you have, or ignore it." },
+      { title: "Business cards, read by AI", description: "Take a photo of a card, front and back, or Scan several cards, up to 20 with one card per photo. AI fills in the name, position, company, emails and phones; you check every field. The partner is found by the card's domain, then its name, and a contact with the same email or mobile is offered for merging." },
+      { title: "The contact's page", description: "Its details and where they came from (typed, from email, a business card), the card's photos, the last contact, and every email it was in, with the booking it is linked to." },
+      { title: "The relationship panel", description: "On each partner's overview: the last contact and its subject, the three people on your side with the most emails with them, their most active people in the last 90 days, and messages per month. Counted from the stored headers only, nothing guessed." },
+      { title: "Gone quiet", description: "Partners you did business with in the last year (a booking, an AR invoice or an AP bill) and haven't exchanged an email with for three months, quietest first, with their last business and their sales person. The number of months is a setting." },
       { title: "Follow-ups on a contact", description: "Add a follow-up with a due date and the person it's assigned to. It shows on the Labels page, in the alerts and the daily brief when due, and on the dashboard under My follow-ups." },
       { title: "Ask the assistant", description: "\"Who did we last talk to at …?\", \"Show me …'s contacts\", \"Which partners have gone quiet?\": the assistant answers from the same records, under the same mailbox rules." },
-      { title: "Personal data kept small", description: "Only the address, name, role, date and mailbox of an e-mail are kept, never its text; a signature is read for the position and phones and dropped. People never added are deleted after a retention period (24 months by default), and deleting a contact deletes its card photos too." },
+      { title: "Personal data kept small", description: "Only the address, name, role, date and mailbox of an email are kept, never its text; a signature is read for the position and phones and dropped. People never added are deleted after a retention period (24 months by default), and deleting a contact deletes its card photos too." },
     ],
     workflow: [
-      { title: "Mail is read", description: "The mailboxes you already sync with Zoho or Microsoft 365 are read for their headers, a batch at a time, then each new e-mail as it arrives." },
+      { title: "Mail is read", description: "The mailboxes you already sync with Zoho or Microsoft 365 are read for their headers, a batch at a time, then each new email as it arrives." },
       { title: "People are found", description: "Each address is matched to its partner, or grouped as a new company by its domain." },
       { title: "You decide", description: "Add, merge or ignore people; create, link or ignore new companies; scan the cards from your last meeting." },
       { title: "Relationships stay visible", description: "The relationship panel, Gone quiet and My follow-ups keep each partner in view." },
@@ -555,11 +555,11 @@ const baseContent: Record<string, PlatformContent> = {
     personas: [
       { role: "Sales", detail: "Sees who they last spoke to at each partner, scans cards after a meeting and follows up on the partners that have gone quiet." },
       { role: "Management", detail: "Sees which relationships are active and which have gone quiet, across the company." },
-      { role: "Operations", detail: "Finds the right person at a carrier or agent from the partner's page, with their latest e-mails." },
-      { role: "Admin", detail: "Chooses review-first or automatic adding, and how long the e-mails of people never added are kept." },
+      { role: "Operations", detail: "Finds the right person at a carrier or agent from the partner's page, with their latest emails." },
+      { role: "Admin", detail: "Chooses review-first or automatic adding, and how long the emails of people never added are kept." },
     ],
     faqs: [
-      { q: "Is the text of our e-mails stored?", a: "No. Only the headers are kept: the address, the name, the role (From, To, Cc), the date and the mailbox. A signature is read for the position and phone numbers, then dropped." },
+      { q: "Is the text of our emails stored?", a: "No. Only the headers are kept: the address, the name, the role (From, To, Cc), the date and the mailbox. A signature is read for the position and phone numbers, then dropped." },
       { q: "Which mail providers work?", a: "Microsoft 365 and Zoho Mail, the same mailboxes as Email Sync. Google Workspace (Gmail) is not connected yet." },
       { q: "Will our own colleagues show up as contacts?", a: "No. Your company's domains and every user's own address are never contacts, and nor are no-reply, newsletter and mailing-list addresses." },
       { q: "Who can see the finance mailbox's people?", a: "Only the roles that read finance mail. Other roles see no person, count or subject that comes only from it, on the pages and in the assistant's answers alike." },
@@ -674,7 +674,7 @@ const baseContent: Record<string, PlatformContent> = {
     personas: [
       { role: "Admin", detail: "Every module, plus user management and system configuration." },
       { role: "Management", detail: "Every module Admin sees, except system configuration." },
-      { role: "Accounting / Operations / Sales / Pricing", detail: "Each gated to their specific sensitive modules, open elsewhere." },
+      { role: "Accounting / Operations / Sales / Pricing", detail: "Each is limited to its own sensitive modules; everything else is open." },
     ],
     faqs: [
       { q: "Can the assistant do something a user couldn't do manually?", a: "No — it acts as the signed-in user and is checked against the exact same role rules." },
@@ -688,7 +688,7 @@ const baseContent: Record<string, PlatformContent> = {
     eyebrow: "AI Assistant",
     title: "Meet your AI operations co-worker",
     description:
-      "Routel's assistant sets up your company in a ten-minute chat, then works alongside your team: it creates quotations, bookings and invoices, records payments and answers \"who owes us most?\" from live data, in any language. It proposes every change on a card and you confirm it before anything is saved.",
+      "ROUTEL's assistant sets up your company in a ten-minute chat, then works alongside your team: it creates quotations, bookings and invoices, records payments and answers \"who owes us most?\" from live data, in any language. It proposes every change on a card and you confirm it before anything is saved.",
     stats: [
       { value: "10 min", label: "to set up your company, by chat" },
       { value: "0", label: "records saved without your confirmation" },
@@ -700,18 +700,18 @@ const baseContent: Record<string, PlatformContent> = {
       "An AI tool bolted onto a product often has looser rules than the product itself, or answers from guesses instead of your data.",
     ],
     solutionIntro:
-      "Routel's assistant is built into the system: it calls the same business functions as the screens, with the same validation, role permissions, credit limits and numbering, and answers from your live data. It proposes; you confirm.",
+      "ROUTEL's assistant is built into the system: it calls the same business functions as the screens, with the same validation, role permissions, credit limits and numbering, and answers from your live data. It proposes; you confirm.",
     features: [
       { title: "Guided company setup", description: "A new company is welcomed with an ordered checklist and a progress bar: name in English and Arabic, registration number, document numbering, logo, address, tax number, bank details, team and roles, charge types. It leads one step at a time and fills in what it can read from a pasted registration certificate or letterhead." },
       { title: "Reminders for missing details", description: "Anything still empty after setup — logo, bank details, tax number — stays visible until it's filled in, with a \"Fill them in now\" button and one gentle reminder per conversation." },
-      { title: "Does the work, with confirmation", description: "Quotations, bookings, invoices from booking charges, receipts, AP payments, credit notes, House B/Ls, notes and tasks, business partners, users, charge types, route rates, linking e-mails to bookings, approving registrations and credit applications. Each one shows a card with the exact fields and amounts." },
+      { title: "Does the work, with confirmation", description: "Quotations, bookings, invoices from booking charges, receipts, AP payments, credit notes, House B/Ls, notes and tasks, business partners, users, charge types, route rates, linking emails to bookings, approving registrations and credit applications. Each one shows a card with the exact fields and amounts." },
       { title: "Same rules as the screens", description: "It calls the same business functions as the manual pages: validation, role permissions, credit limits, currency checks and numbering. A sales user can't do what the sales role can't do." },
-      { title: "Knows the whole system", description: "Answers from live data: search across bookings, containers, invoices, partners and ports; AR/AP aging, P&L, cash, tax summary and lane margins; e-mails per booking; documents waiting for review; website leads." },
+      { title: "Knows the whole system", description: "Answers from live data: search across bookings, containers, invoices, partners and ports; AR/AP aging, P&L, cash, tax summary and lane margins; emails per booking; documents waiting for review; website leads." },
       { title: "Daily brief", description: "A Today card for your role: overdue invoices, bills due, delivered-but-not-invoiced bookings, stale drafts, expiring quotes, follow-ups, arrivals and tasks. Built straight from the database." },
       { title: "Reads documents", description: "Upload a PDF or photo — a booking confirmation, an invoice, a certificate — and it extracts the fields." },
       { title: "Memory and context", description: "It remembers preferences (\"always answer in Arabic\") across conversations, which you can list or forget, and knows the page you're on and the partner or booking you just discussed." },
-      { title: "User guide built in", description: "\"How do I finalize an invoice?\" is answered from Routel's own user guide, not guessed." },
-      { title: "Undo and audit log", description: "Every confirmed action is logged: who did what, and the outcome. Notes, tasks, follow-ups, filed e-mails and draft quotations can be undone for 10 minutes; anything that moved money or got a document number is reversed by its own document, as accounting requires." },
+      { title: "User guide built in", description: "\"How do I finalize an invoice?\" is answered from ROUTEL's own user guide, not guessed." },
+      { title: "Undo and audit log", description: "Every confirmed action is logged: who did what, and the outcome. Notes, tasks, follow-ups, filed emails and draft quotations can be undone for 10 minutes; anything that moved money or got a document number is reversed by its own document, as accounting requires." },
       { title: "Cost control", description: "Admins see messages and model usage per day, and set a daily message limit per person." },
       { title: "Multilingual", description: "Ask in any language, or mix languages in one sentence, and it replies in the language you wrote in, including Gulf and Malaysian phrasing." },
     ],
@@ -723,7 +723,7 @@ const baseContent: Record<string, PlatformContent> = {
     ],
     personas: [
       { role: "Admin", detail: "Sets the company up by chat in ten minutes, then keeps an eye on usage and daily limits." },
-      { role: "Operations", detail: "Creates bookings and House B/Ls, files e-mails to bookings and keeps tasks and follow-ups moving." },
+      { role: "Operations", detail: "Creates bookings and House B/Ls, files emails to bookings and keeps tasks and follow-ups moving." },
       { role: "Accounting", detail: "Invoices from booking charges, records receipts and AP payments, issues credit notes." },
       { role: "Sales & Management", detail: "Builds quotations, and asks \"who owes us most?\" or for lane margins and gets the answer from live data." },
     ],
@@ -731,7 +731,7 @@ const baseContent: Record<string, PlatformContent> = {
       { q: "Can it save something without my confirmation?", a: "No. The model never writes on its own — only the Confirm button saves." },
       { q: "Does it have more access than I do?", a: "No. It has exactly the permissions of the signed-in user, and calls the same functions as the screens." },
       { q: "Is my data stored by the AI provider?", a: "No. Requests are sent with storage turned off, so nothing is kept at the AI provider." },
-      { q: "What if I confirm something by mistake?", a: "Notes, tasks, follow-ups, filed e-mails and draft quotations can be undone for 10 minutes. Anything that moved money or got a document number is reversed by its own document, such as a credit note." },
+      { q: "What if I confirm something by mistake?", a: "Notes, tasks, follow-ups, filed emails and draft quotations can be undone for 10 minutes. Anything that moved money or got a document number is reversed by its own document, such as a credit note." },
       { q: "Which plans include it?", a: "Growth, Carrier & Agencies and Enterprise include the full assistant with document reading. Basic has it for company setup and questions, with a small allowance for document reading; the free version keeps the setup assistant only." },
     ],
     related: ["bookings", "invoicing", "roles"],

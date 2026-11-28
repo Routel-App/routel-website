@@ -11,7 +11,7 @@ const copy = {
   ar: { title: "نظام تشغيل واحد لكل أنشطة الشحن", all: "كل الحلول" },
 } satisfies Record<Locale, Record<string, string>>;
 
-/** Under the hero: the services Routel runs, each one a link. */
+/** Under the hero: the services ROUTEL runs, each one a link. */
 export async function ServicesStrip() {
   const locale = await getLocale();
   const t = copy[locale];

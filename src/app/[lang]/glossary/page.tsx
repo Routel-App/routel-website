@@ -13,7 +13,7 @@ const copy = {
     eyebrow: "Glossary",
     title: "Freight terms, in plain English",
     description:
-      "The shorthand every forwarder, carrier and customs broker uses — explained once, linked everywhere it matters in Routel.",
+      "The shorthand every forwarder, carrier and customs broker uses — explained once, linked everywhere it matters in ROUTEL.",
   },
   ar: {
     metaTitle: "مصطلحات الشحن",
@@ -21,7 +21,7 @@ const copy = {
     eyebrow: "المصطلحات",
     title: "مصطلحات الشحن، بلغة واضحة",
     description:
-      "الاختصارات التي يستخدمها كل وكيل شحن وناقل ومخلّص جمركي — مشروحة مرة واحدة، ومرتبطة بكل موضع تهمّ فيه داخل Routel.",
+      "الاختصارات التي يستخدمها كل وكيل شحن وناقل ومخلّص جمركي — مشروحة مرة واحدة، ومرتبطة بكل موضع تهمّ فيه داخل ROUTEL.",
   },
 } satisfies Record<Locale, { metaTitle: string; metaDescription: string; eyebrow: string; title: string; description: string }>;
 

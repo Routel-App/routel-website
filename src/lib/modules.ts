@@ -74,7 +74,7 @@ export const modules: Module[] = [
     name: "Consolidation & LCL",
     short: "Many bookings, one master, costs shared to the cent",
     description:
-      "A consolidation is one master shipment carrying several house bookings: an LCL container under your own MBL, an air consolidation under your own MAWB, or space bought from a co-loader. Routel suggests bookings on the same route, prints the cargo manifest, and shares the master's costs across the bookings by CBM, W/M or chargeable weight, exact to the cent, so every booking's profit stays right.",
+      "A consolidation is one master shipment carrying several house bookings: an LCL container under your own MBL, an air consolidation under your own MAWB, or space bought from a co-loader. ROUTEL suggests bookings on the same route, prints the cargo manifest, and shares the master's costs across the bookings by CBM, W/M or chargeable weight, exact to the cent, so every booking's profit stays right.",
     icon: Boxes,
     bullets: ["Sea LCL or air, own master or co-loader", "Cargo manifest", "Costs shared by CBM, W/M or chargeable weight"],
     docs: "/docs/consolidation",
@@ -85,7 +85,7 @@ export const modules: Module[] = [
     name: "Arrival Notice & Delivery Order",
     short: "Notify the consignee on time, release only when paid",
     description:
-      "For import bookings, Routel tells you when the arrival notice is due, prints it or e-mails it as a PDF with the charges due, and records how the line released the cargo. A numbered delivery order is issued only once the cargo is released and paid, or the partner is within an active credit limit; a finance user can override with a recorded reason. The AI reads the line's own arrival or delay notice and proposes the new ETA.",
+      "For import bookings, ROUTEL tells you when the arrival notice is due, prints it or emails it as a PDF with the charges due, and records how the line released the cargo. A numbered delivery order is issued only once the cargo is released and paid, or the partner is within an active credit limit; a finance user can override with a recorded reason. The AI reads the line's own arrival or delay notice and proposes the new ETA.",
     icon: FileCheck2,
     bullets: ["Arrival notice, due on time", "Delivery order only when released and paid", "AI reads the line's ETA change"],
     docs: "/docs/arrival-notice",
@@ -127,7 +127,7 @@ export const modules: Module[] = [
     name: "Finance (Receivables & Payables)",
     short: "A mailbox that watches for payments",
     description:
-      "A dedicated finance mailbox — separate from your day-to-day inbox — is scanned automatically for incoming payments. Routel proposes matching suggestions between an email and an outstanding invoice or vendor bill; a person reviews and confirms or rejects every one, so nothing is settled without a human saying so.",
+      "A dedicated finance mailbox — separate from your day-to-day inbox — is scanned automatically for incoming payments. ROUTEL proposes matching suggestions between an email and an outstanding invoice or vendor bill; a person reviews and confirms or rejects every one, so nothing is settled without a human saying so.",
     icon: Banknote,
     bullets: ["Dedicated, auto-scanned finance mailbox", "AI-proposed payment matches", "Human confirms every match"],
     docs: "/docs/finance-receivables",
@@ -199,7 +199,7 @@ export const modules: Module[] = [
     name: "Email Sync",
     short: "Connect your inbox, auto-link to bookings",
     description:
-      "Connect a Zoho or Microsoft 365 mailbox and Routel links incoming and outgoing mail to the booking it belongs to — automatically when the booking number appears in it or the message continues a linked thread, or manually — so correspondence lives next to the shipment instead of buried in an inbox.",
+      "Connect a Zoho or Microsoft 365 mailbox and ROUTEL links incoming and outgoing mail to the booking it belongs to — automatically when the booking number appears in it or the message continues a linked thread, or manually — so correspondence lives next to the shipment instead of buried in an inbox.",
     icon: Mail,
     bullets: ["Zoho or Microsoft 365", "Auto-links mail by booking number and thread", "Correspondence stays on the booking"],
     docs: "/docs/email-sync",
@@ -207,11 +207,11 @@ export const modules: Module[] = [
   {
     slug: "crm",
     name: "CRM & Contacts",
-    short: "The people at every partner, from your e-mail and business cards",
+    short: "The people at every partner, from your email and business cards",
     description:
-      "Everyone your team e-mails (the sender, To, Cc and Reply-To) is filed under the business partner they work for, matched by their exact address first and then by their domain. Companies in your e-mail that aren't partners yet can be added as prospects. Scan business cards with your phone, several at once: AI reads each card and you check it field by field. Every contact has a page with its message history; every partner has a relationship panel (the last contact, who talks most on each side, messages per month); partners you used to work with who have gone quiet are listed; and follow-ups on a contact show under My follow-ups on the dashboard. Only the e-mail headers are kept, never the text, and what isn't used is deleted after a retention period.",
+      "Everyone your team emails (the sender, To, Cc and Reply-To) is filed under the business partner they work for, matched by their exact address first and then by their domain. Companies in your email that aren't partners yet can be added as prospects. Scan business cards with your phone, several at once: AI reads each card and you check it field by field. Every contact has a page with its message history; every partner has a relationship panel (the last contact, who talks most on each side, messages per month); partners you used to work with who have gone quiet are listed; and follow-ups on a contact show under My follow-ups on the dashboard. Only the email headers are kept, never the text, and what isn't used is deleted after a retention period.",
     icon: Contact,
-    bullets: ["Contacts filed from your e-mail, by address then domain", "Business cards scanned and read by AI", "Relationship panel, gone-quiet partners and follow-ups"],
+    bullets: ["Contacts filed from your email, by address then domain", "Business cards scanned and read by AI", "Relationship panel, gone-quiet partners and follow-ups"],
   },
   {
     slug: "tracking",

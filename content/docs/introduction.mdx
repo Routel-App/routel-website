@@ -26,8 +26,8 @@ The assistant is a layer over the same actions the screens use, not a separate s
 - **The same actions, the same rules.** Each tool is one of Routel's own operations: create a booking, finalise an invoice, record a payment, run the P&L. On confirmation the server validates the values and checks the user's role again, exactly as it does for a form.
 - **A proposal, never a silent write.** Anything that writes stops as a card showing every field, line and amount. The user confirms, edits or cancels; there is no setting that skips this.
 - **Safe to retry.** Each proposal has its own identity. A second click returns the first result instead of writing twice, and a confirmation sent while the first is still running is refused.
-- **Accountable.** Every confirmed action is logged with the person who confirmed it, their role, the action, its values and the outcome. Notes, tasks, follow-ups, filed e-mails and draft quotations can be undone for ten minutes; anything that moved money is reversed with its own document.
-- **Hard to steer from outside.** It won't store passwords, keys or card numbers in its memory, and it stops saving memory once a conversation has read outside material such as an uploaded file, an e-mail or a public form.
+- **Accountable.** Every confirmed action is logged with the person who confirmed it, their role, the action, its values and the outcome. Notes, tasks, follow-ups, filed emails and draft quotations can be undone for ten minutes; anything that moved money is reversed with its own document.
+- **Hard to steer from outside.** It won't store passwords, keys or card numbers in its memory, and it stops saving memory once a conversation has read outside material such as an uploaded file, an email or a public form.
 - **Private by design.** Requests to the AI model are sent with storage turned off at the provider. Conversation history stays in Routel, private to each user.
 
 The full guide, with everything it reads and prepares: [AI Assistant](/docs/ai-assistant).
@@ -83,7 +83,7 @@ These open when an admin turns on their business activity in Settings → Busine
 
 | Screen | What it does | Guide |
 | --- | --- | --- |
-| Documents | Each booking's documents, plus the AI review queue for incoming e-mail attachments | [Read](/docs/documents) |
+| Documents | Each booking's documents, plus the AI review queue for incoming email attachments | [Read](/docs/documents) |
 | Email Archive | Zoho or Microsoft 365 mail linked to its booking automatically | [Read](/docs/email-sync) |
 
 ### Reports and Group

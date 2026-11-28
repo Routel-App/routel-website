@@ -11,9 +11,9 @@ const guaranteeIcons = [ShieldCheck, Lock, CloudOff, ListChecks];
 
 const copy = {
   en: {
-    eyebrow: "AI Assistant · built into Routel",
+    eyebrow: "AI Assistant · built into ROUTEL",
     title: "Meet your AI operations co-worker.",
-    lead: "Routel's assistant sets up your company in a ten-minute chat, then works alongside your team: it creates quotations, bookings and invoices, records payments and answers “who owes us most?” from live data, in any language. It proposes every change on a card and you confirm it before anything is saved.",
+    lead: "ROUTEL's assistant sets up your company in a ten-minute chat, then works alongside your team: it creates quotations, bookings and invoices, records payments and answers “who owes us most?” from live data, in any language. It proposes every change on a card and you confirm it before anything is saved.",
     cta: "See the assistant at work",
     capabilities: [
       "Sets your company up in a ten-minute chat",
@@ -45,9 +45,9 @@ const copy = {
     ],
   },
   ar: {
-    eyebrow: "المساعد الذكي · مدمج في Routel",
+    eyebrow: "المساعد الذكي · مدمج في ROUTEL",
     title: "مساعدك الذكي في العمليات.",
-    lead: "يجهّز مساعد Routel شركتك في محادثة مدتها عشر دقائق، ثم يعمل مع فريقك: ينشئ عروض الأسعار والحجوزات والفواتير، ويسجّل الدفعات، ويجيب عن «من أكثر عميل مدين لنا؟» من بياناتك الحية، وبأي لغة. ويعرض عليك كل تغيير في بطاقة، فلا يُحفظ شيء قبل تأكيدك.",
+    lead: "يجهّز مساعد ROUTEL شركتك في محادثة مدتها عشر دقائق، ثم يعمل مع فريقك: ينشئ عروض الأسعار والحجوزات والفواتير، ويسجّل الدفعات، ويجيب عن «أيّ عملائنا أكثرهم ديناً لنا؟» من بياناتك الحية، وبأي لغة. ويعرض عليك كل تغيير في بطاقة، فلا يُحفظ شيء قبل تأكيدك.",
     cta: "شاهد المساعد وهو يعمل",
     capabilities: [
       "يجهّز شركتك في محادثة مدتها عشر دقائق",

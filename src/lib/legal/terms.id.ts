@@ -64,7 +64,7 @@ export const termsId: LegalTranslationCopy = {
       title: "6. Pemrosesan data",
       body: [
         "Apabila ROUTEL memproses data pribadi atas nama Anda, komitmen berikut berlaku:",
-        "- kami memprosesnya hanya berdasarkan instruksi Anda yang terdokumentasi, yaitu layanan sebagaimana Anda konfigurasi dan gunakan;\n- staf dan kontraktor kami yang dapat mengaksesnya terikat kewajiban kerahasiaan;\n- kami menggunakan subprosesor yang tercantum dalam kebijakan privasi, dan kami memberikan pemberitahuan paling lambat 30 hari sebelumnya tentang subprosesor baru di situs web atau melalui e-mail, agar Anda dapat mengajukan keberatan;\n- kami membantu Anda menanggapi permintaan dari pemilik data;\n- kami memberi tahu Anda tentang kegagalan pelindungan data pribadi yang memengaruhi data Anda tanpa penundaan yang tidak semestinya, dan dalam hal apa pun paling lambat 48 jam setelah memastikannya;\n- ketika akun Anda ditutup, kami mengembalikan data Anda atas permintaan lalu menghapusnya, sebagaimana diatur di bagian 5;\n- atas permintaan, kami memberikan informasi yang secara wajar diperlukan untuk menunjukkan bahwa kami memenuhi komitmen ini.",
+        "- kami memprosesnya hanya berdasarkan instruksi Anda yang terdokumentasi, yaitu layanan sebagaimana Anda konfigurasi dan gunakan;\n- staf dan kontraktor kami yang dapat mengaksesnya terikat kewajiban kerahasiaan;\n- kami menggunakan subprosesor yang tercantum dalam kebijakan privasi, dan kami memberikan pemberitahuan paling lambat 30 hari sebelumnya tentang subprosesor baru di situs web atau melalui email, agar Anda dapat mengajukan keberatan;\n- kami membantu Anda menanggapi permintaan dari pemilik data;\n- kami memberi tahu Anda tentang kegagalan pelindungan data pribadi yang memengaruhi data Anda tanpa penundaan yang tidak semestinya, dan dalam hal apa pun paling lambat 48 jam setelah memastikannya;\n- ketika akun Anda ditutup, kami mengembalikan data Anda atas permintaan lalu menghapusnya, sebagaimana diatur di bagian 5;\n- atas permintaan, kami memberikan informasi yang secara wajar diperlukan untuk menunjukkan bahwa kami memenuhi komitmen ini.",
       ],
     },
     {
@@ -86,14 +86,14 @@ export const termsId: LegalTranslationCopy = {
     {
       title: "9. Layanan pihak ketiga",
       body: [
-        "Proses masuk (sign-in), hosting, penyimpanan berkas, sinkronisasi e-mail (ketika Anda menghubungkan kotak surat Microsoft 365 atau Zoho), dan pemrosesan AI disediakan melalui layanan pihak ketiga yang disebutkan dalam kebijakan privasi. Penggunaan kotak surat yang Anda hubungkan juga tunduk pada ketentuan penyedia tersebut.",
+        "Proses masuk (sign-in), hosting, penyimpanan berkas, sinkronisasi email (ketika Anda menghubungkan kotak surat Microsoft 365 atau Zoho), dan pemrosesan AI disediakan melalui layanan pihak ketiga yang disebutkan dalam kebijakan privasi. Penggunaan kotak surat yang Anda hubungkan juga tunduk pada ketentuan penyedia tersebut.",
       ],
     },
     {
       title: "10. Ketersediaan dan dukungan",
       body: [
         "Kami berupaya menjaga ketersediaan layanan, dengan pemeliharaan diumumkan terlebih dahulu bila memungkinkan. Dukungan sesuai dengan yang tercantum untuk paket Anda di halaman harga. Perjanjian tingkat layanan (SLA) hanya merupakan bagian dari paket Enterprise.",
-        "Apabila kami menghentikan layanan ini, kami akan memberi tahu Anda terlebih dahulu, melalui e-mail dan di dalam layanan, dan Anda dapat mengekspor data Anda sebelum layanan berakhir.",
+        "Apabila kami menghentikan layanan ini, kami akan memberi tahu Anda terlebih dahulu, melalui email dan di dalam layanan, dan Anda dapat mengekspor data Anda sebelum layanan berakhir.",
       ],
     },
     {
@@ -113,7 +113,7 @@ export const termsId: LegalTranslationCopy = {
     {
       title: "13. Perubahan ketentuan ini",
       body: [
-        "Kami dapat memperbarui ketentuan ini. Apabila perubahannya penting, kami akan memberi tahu Anda di dalam layanan atau melalui e-mail paling lambat 30 hari sebelum berlaku. Penggunaan layanan setelah tanggal tersebut berarti Anda menerima ketentuan yang diperbarui.",
+        "Kami dapat memperbarui ketentuan ini. Apabila perubahannya penting, kami akan memberi tahu Anda di dalam layanan atau melalui email paling lambat 30 hari sebelum berlaku. Penggunaan layanan setelah tanggal tersebut berarti Anda menerima ketentuan yang diperbarui.",
       ],
     },
     {

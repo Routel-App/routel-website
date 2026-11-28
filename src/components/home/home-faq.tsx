@@ -11,7 +11,7 @@ const copy: Record<Locale, Copy> = {
     eyebrow: "Questions",
     title: "What forwarders ask before they switch",
     items: [
-      { q: "Does Routel work in Arabic?", a: "Yes. The whole interface works in Arabic and English and mirrors right to left, and the AI assistant is multilingual: it answers in whatever language you write in." },
+      { q: "Does ROUTEL work in Arabic?", a: "Yes. The whole interface works in Arabic and English and mirrors right to left, and the AI assistant is multilingual: it answers in whatever language you write in." },
       { q: "Which currencies and taxes does it handle?", a: "Each deployment uses its country's base currency plus USD, with that country's tax: VAT in Saudi Arabia, SST in Malaysia and PPN in Indonesia, each with its own tax report. Qatari riyals (QAR) are available for companies in Qatar, and other currencies on request. Invoices print as bilingual tax invoices; ZATCA-compliant e-invoicing for Saudi Arabia (Fatoora), with the QR code." },
       { q: "Can we try it before we pay?", a: "Yes. Every new account starts with a 14-day free trial of Growth, with AI document reading for 30 documents, and then moves to the free version. Or request a demo and we'll run your own shipments through ROUTEL with you." },
       { q: "Will the AI change our data on its own?", a: "No. The assistant proposes and you confirm: nothing is saved until a person approves it, it works within the user's own permissions, and every action it carries out is logged." },
@@ -23,7 +23,7 @@ const copy: Record<Locale, Copy> = {
     eyebrow: "أسئلة",
     title: "ما تسأله شركات الشحن قبل الانتقال",
     items: [
-      { q: "هل يعمل Routel بالعربية؟", a: "نعم. الواجهة كاملة بالعربية من اليمين إلى اليسار وبالإنجليزية، والمساعد الذكي متعدد اللغات: يجيبك باللغة التي تكتب بها." },
+      { q: "هل يعمل ROUTEL بالعربية؟", a: "نعم. الواجهة كاملة بالعربية من اليمين إلى اليسار وبالإنجليزية، والمساعد الذكي متعدد اللغات: يجيبك باللغة التي تكتب بها." },
       { q: "ما العملات والضرائب التي يدعمها؟", a: "كل نسخة تعمل بالعملة الأساسية لبلدها مع الدولار الأمريكي، وبضريبة ذلك البلد: ضريبة المبيعات والخدمات (SST) في ماليزيا، وضريبة القيمة المضافة (PPN) في إندونيسيا، وضريبة القيمة المضافة 15% في السعودية، ولكل منها تقريرها. والريال القطري (QAR) متاح للشركات في قطر، وعملات أخرى عند الطلب. وتُطبع الفواتير «فاتورة ضريبية» باللغتين؛ وفي السعودية فوترة إلكترونية متوافقة مع متطلبات هيئة الزكاة والضريبة والجمارك (فاتورة)، برمز QR." },
       { q: "هل يمكن التجربة قبل الدفع؟", a: "نعم. كل حساب جديد يبدأ بتجربة مجانية 14 يوماً على خطة النمو والتوسع، ومعها قراءة 30 مستنداً بالذكاء الاصطناعي، ثم ينتقل إلى النسخة المجانية. أو اطلب عرضاً تجريبياً ونشغّل معك شحناتك أنت على ROUTEL." },
       { q: "هل يغيّر المساعد الذكي بياناتنا من تلقاء نفسه؟", a: "لا. المساعد يقترح وأنت تؤكد: لا شيء يُحفظ قبل موافقة شخص، ويعمل ضمن صلاحيات المستخدم نفسه، وكل عملية ينفذها مسجّلة." },
@@ -47,7 +47,7 @@ export async function HomeFaq() {
       },
       {
         "@type": "SoftwareApplication",
-        name: "Routel",
+        name: "ROUTEL",
         url: locale === "ar" ? `${site.url}/ar` : site.url,
         applicationCategory: "BusinessApplication",
         operatingSystem: "Web",

@@ -15,11 +15,11 @@ const copy = {
       ai: { label: "AI assistant", text: "Calls the system's own actions: reads, drafts, and writes after you confirm" },
       modules: { label: "Services, opened by activity" },
       core: { label: "The core", steps: ["Quotation", "Booking", "B/L", "Invoice", "Payment", "Books"] },
-      base: { label: "Partners · documents · e-mail · roles and permissions · tax · two currencies" },
+      base: { label: "Partners · documents · email · roles and permissions · tax · two currencies" },
     },
     pillars: [
       { title: "One record per shipment", text: "Quotation, booking, carrier booking, B/L, charges, invoices and documents under one booking number. One place to check, one status everyone sees." },
-      { title: "Modules by activity", text: "Sea, air, LCL, import release, NVOCC, land transport, warehouse receipts and customs clearance today; shipping agency and 3PL next. Each opens from Business activities and stays off until you need it." },
+      { title: "Modules by activity", text: "Sea, air, LCL, import release, NVOCC, land transport, warehouse receipts, customs clearance, shipping agency and 3PL, all available. Each opens from Business activities and stays off until you need it." },
       { title: "An assistant that prepares the work", text: "It reads the carrier's confirmation, the vendor's bill and the line's notice, and prepares the booking, the B/L and the invoice. Nothing is saved until a person confirms." },
       { title: "Books kept as you go", text: "Every invoice, payment and cost posts to the general ledger when it's recorded, with the country's tax and its report. Month end stops being a project." },
     ],
@@ -42,7 +42,7 @@ const copy = {
     },
     pillars: [
       { title: "سجل واحد لكل شحنة", text: "عرض السعر والحجز وحجز الناقل والبوليصة والرسوم والفواتير والمستندات تحت رقم حجز واحد. مكان واحد للمراجعة، وحالة واحدة يراها الجميع." },
-      { title: "وحدات حسب النشاط", text: "الشحن البحري والجوي والتجميع وإشعار الوصول وNVOCC والنقل البري وإيصالات المستودع والتخليص الجمركي متاحة اليوم، وتليها الوكالة الملاحية و3PL. تُفتح كل وحدة من «ملف النشاط»، وتبقى مغلقة حتى تحتاجها." },
+      { title: "وحدات حسب النشاط", text: "الشحن البحري والجوي والتجميع وإشعار الوصول وNVOCC والنقل البري وإيصالات المستودع والتخليص الجمركي والوكالة الملاحية و3PL، كلها متاحة. تُفتح كل وحدة من «ملف النشاط»، وتبقى مغلقة حتى تحتاجها." },
       { title: "مساعد يجهّز العمل", text: "يقرأ تأكيد الناقل وفاتورة المورد وإشعار الخط، ويجهّز الحجز والبوليصة والفاتورة. ولا يُحفظ شيء قبل أن يؤكده أحد من فريقك." },
       { title: "دفاتر تُكتب وأنت تعمل", text: "كل فاتورة ودفعة وتكلفة تُرحَّل إلى دفتر الأستاذ العام لحظة تسجيلها، بضريبة البلد وإقرارها. فلا يعود إقفال الشهر مشروعاً قائماً بذاته." },
     ],

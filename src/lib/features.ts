@@ -6,7 +6,7 @@ import { slugify } from "@/components/docs/mdx-components";
 
 /**
  * The /features page renders content/features/<locale>.mdx. Those files are the
- * product's own feature write-up (supplied from the Routel system itself) —
+ * product's own feature write-up (supplied from the ROUTEL system itself) —
  * update them when the product changes, keeping English and Arabic in step.
  */
 export type FeaturesFrontmatter = { title: string; lead: string; tagline: string };

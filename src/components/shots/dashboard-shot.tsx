@@ -5,7 +5,7 @@ import { Wordmark } from "@/components/site/logo";
 import { ShotFrame } from "./frame";
 
 /**
- * A stylised "screenshot" of the Routel dashboard for marketing. Not a real
+ * A stylised "screenshot" of the ROUTEL dashboard for marketing. Not a real
  * capture: simplified on purpose, with illustrative figures — Saudi data on
  * the Arabic site, Malaysian / Indonesian data on the English one.
  */

@@ -19,7 +19,7 @@ const copy = {
   en: {
     product: "Platform",
     aiTitle: "AI Assistant",
-    aiBody: "Built into Routel: it reads, drafts and acts after you confirm, in any language. Nothing is saved without a person.",
+    aiBody: "Built into ROUTEL: it reads, drafts and acts after you confirm, in any language. Nothing is saved without a person.",
     aiLink: "See it work",
     docs: "Documentation",
     glossary: "Glossary",
@@ -27,7 +27,7 @@ const copy = {
   ar: {
     product: "المنصة",
     aiTitle: "المساعد الذكي",
-    aiBody: "مدمج في Routel: يقرأ ويجهّز وينفّذ بعد تأكيدك، بأي لغة. ولا يُحفظ شيء دون موافقة أحد من فريقك.",
+    aiBody: "مدمج في ROUTEL: يقرأ ويجهّز وينفّذ بعد تأكيدك، بأي لغة. ولا يُحفظ شيء دون موافقة أحد من فريقك.",
     aiLink: "شاهده يعمل",
     docs: "دليل الاستخدام",
     glossary: "المصطلحات",

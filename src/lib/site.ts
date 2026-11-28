@@ -34,23 +34,23 @@ export const siteCopy: Record<Locale, SiteCopy> = {
     description:
       "ROUTEL is the Maritime & Logistics Operating System, with the rules of the trade built in: sea and air freight, consolidation and LCL, customs, documents, finance and accounting on one platform, and an AI assistant that acts after you confirm.",
     nav: [
-      { label: "AI Assistant", href: "/platform/ai-assistant", hint: "Built into Routel: reads, drafts and acts after you confirm" },
+      { label: "AI Assistant", href: "/platform/ai-assistant", hint: "Built into ROUTEL: reads, drafts and acts after you confirm" },
       { label: "Pricing", href: "/pricing" },
       { label: "Company", href: "/about" },
     ],
     ctaLabel: "Request a demo",
-    aiTagline: "Routel's built-in AI assistant reads, drafts and acts after you confirm",
+    aiTagline: "ROUTEL's built-in AI assistant reads, drafts and acts after you confirm",
   },
   ar: {
     tagline: "نظام التشغيل البحري واللوجستي",
     description:
       "ROUTEL نظام التشغيل البحري واللوجستي، وقواعد المهنة مدمجة فيه: الشحن البحري والجوي، والتجميع وLCL، والتخليص الجمركي، والمستندات، والمالية والمحاسبة على منصة واحدة، ومساعد ذكي ينفّذ بعد تأكيدك.",
     nav: [
-      { label: "المساعد الذكي", href: "/platform/ai-assistant", hint: "مدمج في Routel: يقرأ ويجهّز وينفّذ بعد تأكيدك" },
+      { label: "المساعد الذكي", href: "/platform/ai-assistant", hint: "مدمج في ROUTEL: يقرأ ويجهّز وينفّذ بعد تأكيدك" },
       { label: "الأسعار", href: "/pricing" },
       { label: "الشركة", href: "/about" },
     ],
     ctaLabel: "اطلب عرضاً تجريبياً",
-    aiTagline: "مساعد ذكي مدمج في Routel يقرأ ويجهّز وينفّذ بعد تأكيدك",
+    aiTagline: "مساعد ذكي مدمج في ROUTEL يقرأ ويجهّز وينفّذ بعد تأكيدك",
   },
 };

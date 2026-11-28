@@ -202,7 +202,7 @@ export function ServicePageTemplate({
         </Container>
       </section>
 
-      {/* ── The figures, Kpler-style ── */}
+      {/* ── The figures ── */}
       <section className="border-y border-fog-200 bg-fog-50">
         <Container>
           <RevealGroup className="grid sm:grid-cols-3" stagger={0.06}>
