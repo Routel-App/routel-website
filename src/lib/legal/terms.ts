@@ -53,10 +53,11 @@ export const terms: Record<Locale, LegalCopy> = {
         title: "4. Paid plans",
         body: [
           "Paid plans are subscriptions, billed monthly or yearly at the prices on the pricing page. Every paid plan has unlimited users and no implementation fees.",
-          "On the paid plans, the tax invoice is issued inside ROUTEL. For companies in Saudi Arabia, it is e-invoicing compliant with the Zakat, Tax and Customs Authority (ZATCA). You remain responsible for the tax details your company enters and for the invoices it issues.",
+          "On the paid plans, where your country has VAT or sales tax, the tax invoice is issued inside ROUTEL. For companies in Saudi Arabia, it is e-invoicing compliant with the Zakat, Tax and Customs Authority (ZATCA). You remain responsible for the tax details your company enters and for the invoices it issues.",
           "Fees that we pass through to you, such as government fees for a government link, an electronic Bill of Lading or a customs declaration, are shown separately before you incur them.",
           "We may change a plan's price with at least 30 days' notice; the new price applies from your next billing period. Founding-customer prices are locked for the period stated in the offer.",
-          "You may cancel at any time from your account or by writing to us. Cancellation takes effect at the end of the current billing period, and fees already paid are not refunded except where the law requires.",
+          "You may cancel at any time from your account or by writing to us. Cancellation takes effect at the end of the current billing period, and fees already paid are not refunded except where the law requires. When a paid plan ends or is not renewed, the account moves to the free version; nothing is deleted.",
+          "If a payment is overdue, we may suspend access to the paid features after telling you and giving you time to pay. Your data is kept, not deleted, while access is suspended.",
         ],
       },
       {
@@ -64,11 +65,18 @@ export const terms: Record<Locale, LegalCopy> = {
         body: [
           "Everything you enter into ROUTEL, including your business partners, shipments, documents, invoices and books, is yours. We process it only to provide the service, as described in the privacy policy, and we do not sell it.",
           "You are responsible for the data you enter, including the personal data of your customers, vendors and staff, and for having the right to enter it. Where ROUTEL processes personal data on your behalf, we act as the processor and you as the controller.",
-          "You can export your data while your subscription is active, and for 30 days after it ends. We delete your data within 90 days after that, except for backups that expire on their own schedule and records we must keep by law.",
+          "You can export your data at any time while your account exists. Moving to the free version is not closing the account. When you close your account, we export your data on request for 30 days, and then delete it from the live service within 90 days, except records we must keep by law. Backups are taken every 24 hours and are not deleted on a schedule: data deleted from the service remains in earlier backups until those backups are removed, and on a verified request we remove it from them or put it beyond use, as the applicable law requires.",
         ],
       },
       {
-        title: "6. The AI assistant",
+        title: "6. Data processing",
+        body: [
+          "Where ROUTEL processes personal data on your behalf, these commitments apply:",
+          "- we process it only on your documented instructions, which are the service as you configure and use it;\n- our staff and contractors who can access it are bound to confidentiality;\n- we use the sub-processors listed in the privacy policy, and we give at least 30 days' notice of a new one on the website or by e-mail, so that you can object;\n- we help you answer requests from the people whose data it is;\n- we inform you of a personal-data breach affecting your data without undue delay, and in any case within 48 hours of confirming it;\n- when your account is closed, we return your data on request and then delete it, as set out in section 5;\n- on request, we give you the information reasonably needed to show that we meet these commitments.",
+        ],
+      },
+      {
+        title: "7. The AI assistant",
         body: [
           "The AI assistant reads documents, drafts records and answers questions. Everything it proposes to save waits for a person's confirmation, and every action it carries out is logged.",
           "The assistant's output can be wrong. HS codes it suggests, figures it reads from a document, and answers it gives are proposals for a person to check; you remain responsible for what your company confirms, issues and files.",
@@ -76,7 +84,7 @@ export const terms: Record<Locale, LegalCopy> = {
         ],
       },
       {
-        title: "7. Acceptable use",
+        title: "8. Acceptable use",
         body: [
           "You agree not to:",
           "- use the service for anything unlawful, or to enter data you have no right to enter;\n- try to gain access to another company's data, or to the service's systems beyond your own account;\n- resell the service, or use it to build a competing product;\n- interfere with the service's operation, or load it beyond ordinary business use.",
@@ -84,45 +92,46 @@ export const terms: Record<Locale, LegalCopy> = {
         ],
       },
       {
-        title: "8. Third-party services",
+        title: "9. Third-party services",
         body: [
           "Sign-in, hosting, file storage, e-mail synchronisation (when you connect a Microsoft 365 or Zoho mailbox) and AI processing are provided through third-party services named in the privacy policy. Your use of a mailbox you connect is also subject to that provider's terms.",
         ],
       },
       {
-        title: "9. Availability and support",
+        title: "10. Availability and support",
         body: [
           "We work to keep the service available, with maintenance announced in advance where we can. Support is as stated for your plan on the pricing page. A service-level agreement is part of the Enterprise plan only.",
+          "If we ever discontinue the service, we will tell you in advance, by e-mail and in the service, and you will be able to export your data before it ends.",
         ],
       },
       {
-        title: "10. Intellectual property",
+        title: "11. Intellectual property",
         body: [
           "ROUTEL, its software, design, documentation and name belong to us or our licensors. These terms give you the right to use the service for your company's business while your account is active, and nothing more.",
         ],
       },
       {
-        title: "11. Disclaimer and limitation of liability",
+        title: "12. Disclaimer and limitation of liability",
         body: [
           "The free version and the trial are provided as they are, without warranty. For paid plans, we provide the service with reasonable skill and care, and we do not promise that it will be uninterrupted or free of errors.",
-          "To the extent the law allows, our total liability to you for all claims in any 12-month period is limited to the fees you paid us in that period, and we are not liable for indirect loss, loss of profit, loss of data you have not exported, or regulatory penalties arising from documents your company confirmed, issued or filed.",
-          "Nothing in these terms limits liability that cannot be limited by law.",
+          "To the extent the law allows, our total liability to you for all claims is limited to the greater of the fees you paid us in the 12 months before the claim and USD 100. We are not liable for indirect loss or loss of profit, for loss of data that results from your failure to keep or export a copy where you could reasonably have done so, or for regulatory penalties arising from documents your company confirmed, issued or filed.",
+          "These limits do not apply to liability for fraud, wilful misconduct or gross negligence, or for breach of our confidentiality or data-protection obligations, and nothing in these terms limits liability that cannot be limited by law.",
         ],
       },
       {
-        title: "12. Changes to these terms",
+        title: "13. Changes to these terms",
         body: [
           "We may update these terms. When the change matters, we will tell you in the service or by e-mail at least 30 days before it takes effect. Using the service after that date means you accept the updated terms.",
         ],
       },
       {
-        title: "13. Governing law",
+        title: "14. Governing law",
         body: [
           "These terms are governed by the laws of the Kingdom of Saudi Arabia, and its courts have jurisdiction over any dispute, without prejudice to any rights you have under the mandatory law of the country where your company is registered.",
         ],
       },
       {
-        title: "14. Contact",
+        title: "15. Contact",
         body: [`Questions about these terms: ${CONTACT_EMAIL}. Anything about personal data: ${PRIVACY_EMAIL}.`],
       },
     ],
@@ -164,10 +173,11 @@ export const terms: Record<Locale, LegalCopy> = {
         title: "4. الخطط المدفوعة",
         body: [
           "الخطط المدفوعة اشتراكات تُحتسب شهرياً أو سنوياً بالأسعار المبيّنة في صفحة الأسعار. وكل خطة مدفوعة بلا حد للمستخدمين وبلا رسوم تطبيق.",
-          "وفي الخطط المدفوعة تصدر الفاتورة الضريبية داخل ROUTEL، وهي للشركات في المملكة العربية السعودية فوترة إلكترونية متوافقة مع هيئة الزكاة والضريبة والجمارك. وتبقى شركتك مسؤولة عن البيانات الضريبية التي تُدخلها وعن الفواتير التي تصدرها.",
+          "وفي الخطط المدفوعة، حيث يكون في دولتك ضريبة قيمة مضافة أو ضريبة مبيعات، تصدر الفاتورة الضريبية داخل ROUTEL، وهي للشركات في المملكة العربية السعودية فوترة إلكترونية متوافقة مع هيئة الزكاة والضريبة والجمارك. وتبقى شركتك مسؤولة عن البيانات الضريبية التي تُدخلها وعن الفواتير التي تصدرها.",
           "أما الرسوم التي نمرّرها إليك، مثل الرسوم الحكومية للربط الحكومي أو البوليصة الإلكترونية أو البيان الجمركي، فتُعرض منفصلة قبل أن تتحملها.",
           "يجوز لنا تغيير سعر خطة بإشعار لا يقل عن 30 يوماً، ويسري السعر الجديد من فترة الفوترة التالية. وأسعار العملاء المؤسسين مثبّتة للمدة المذكورة في العرض.",
-          "يمكنك الإلغاء في أي وقت من حسابك أو بالكتابة إلينا. ويسري الإلغاء بنهاية فترة الفوترة الحالية، ولا تُسترد الرسوم المدفوعة إلا حيث يوجب النظام ذلك.",
+          "يمكنك الإلغاء في أي وقت من حسابك أو بالكتابة إلينا. ويسري الإلغاء بنهاية فترة الفوترة الحالية، ولا تُسترد الرسوم المدفوعة إلا حيث يوجب النظام ذلك. وحين تنتهي خطة مدفوعة أو لا تُجدَّد ينتقل الحساب إلى النسخة المجانية، ولا يُحذف شيء.",
+          "إن تأخر سداد دفعة، يجوز لنا إيقاف الوصول إلى مزايا الخطة المدفوعة بعد إبلاغك ومنحك مهلة للسداد. وتبقى بياناتك محفوظة ولا تُحذف خلال مدة الإيقاف.",
         ],
       },
       {
@@ -175,11 +185,18 @@ export const terms: Record<Locale, LegalCopy> = {
         body: [
           "كل ما تُدخله في ROUTEL، بما فيه شركاء أعمالك وشحناتك ومستنداتك وفواتيرك ودفاترك، ملك لك. ولا نعالجه إلا لتقديم الخدمة كما هو مبيّن في سياسة الخصوصية، ولا نبيعه.",
           "أنت مسؤول عن البيانات التي تُدخلها، بما فيها البيانات الشخصية لعملائك ومورديك وموظفيك، وعن امتلاكك الحق في إدخالها. وحين يعالج ROUTEL بيانات شخصية نيابة عنك، فنحن جهة المعالجة وأنت جهة التحكم.",
-          "يمكنك تصدير بياناتك ما دام اشتراكك سارياً، ولمدة 30 يوماً بعد انتهائه. ونحذف بياناتك خلال 90 يوماً بعد ذلك، عدا النسخ الاحتياطية التي تنتهي وفق جدولها، والسجلات التي يوجب النظام الاحتفاظ بها.",
+          "يمكنك تصدير بياناتك في أي وقت ما دام حسابك قائماً. والانتقال إلى النسخة المجانية ليس إغلاقاً للحساب. وحين تغلق حسابك، نصدّر بياناتك عند الطلب خلال 30 يوماً، ثم نحذفها من الخدمة العاملة خلال 90 يوماً، عدا السجلات التي يوجب النظام الاحتفاظ بها. وتُؤخذ النسخ الاحتياطية كل 24 ساعة ولا تُحذف وفق جدول، فتبقى البيانات المحذوفة من الخدمة في النسخ السابقة حتى تُزال تلك النسخ، وعند طلب موثَّق نزيلها منها أو نجعلها غير قابلة للاستخدام، كما توجب الأنظمة والقوانين المنطبقة.",
         ],
       },
       {
-        title: "6. المساعد الذكي",
+        title: "6. معالجة البيانات",
+        body: [
+          "حين يعالج ROUTEL بيانات شخصية نيابة عنك، تنطبق الالتزامات التالية:",
+          "- لا نعالجها إلا وفق تعليماتك الموثّقة، وهي الخدمة كما تضبطها وتستخدمها؛\n- موظفونا ومتعاقدونا الذين يستطيعون الوصول إليها ملتزمون بالسرية؛\n- نستعين بالمعالجين من الباطن المذكورين في سياسة الخصوصية، ونعلن عن أي معالج جديد في الموقع أو بالبريد قبل 30 يوماً على الأقل، ليتسنى لك الاعتراض؛\n- نساعدك في الرد على طلبات أصحاب البيانات؛\n- نبلغك بأي تسرّب لبيانات شخصية يمس بياناتك دون تأخير لا مبرر له، وفي كل الأحوال خلال 48 ساعة من التأكد منه؛\n- عند إغلاق حسابك نعيد إليك بياناتك عند الطلب ثم نحذفها، كما في القسم 5؛\n- نقدّم لك عند الطلب المعلومات اللازمة بشكل معقول لإثبات وفائنا بهذه الالتزامات.",
+        ],
+      },
+      {
+        title: "7. المساعد الذكي",
         body: [
           "يقرأ المساعد الذكي المستندات، ويجهّز السجلات، ويجيب عن الأسئلة. وكل ما يقترح حفظه ينتظر تأكيد شخص، وكل إجراء ينفّذه مسجَّل.",
           "قد يخطئ المساعد. ورموز HS التي يقترحها، والأرقام التي يقرؤها من مستند، والإجابات التي يقدّمها، اقتراحات يراجعها شخص، وتبقى أنت مسؤولاً عمّا تؤكده شركتك وتصدره وتقدّمه.",
@@ -187,7 +204,7 @@ export const terms: Record<Locale, LegalCopy> = {
         ],
       },
       {
-        title: "7. الاستخدام المقبول",
+        title: "8. الاستخدام المقبول",
         body: [
           "توافق على ألا:",
           "- تستخدم الخدمة في أي أمر مخالف للنظام، أو تُدخل بيانات لا تملك الحق في إدخالها؛\n- تحاول الوصول إلى بيانات شركة أخرى، أو إلى أنظمة الخدمة خارج حسابك؛\n- تعيد بيع الخدمة، أو تستخدمها لبناء منتج منافس؛\n- تعطّل عمل الخدمة، أو تحمّلها فوق الاستخدام التجاري المعتاد.",
@@ -195,45 +212,46 @@ export const terms: Record<Locale, LegalCopy> = {
         ],
       },
       {
-        title: "8. الخدمات الخارجية",
+        title: "9. الخدمات الخارجية",
         body: [
           "تسجيل الدخول، والاستضافة، وتخزين الملفات، ومزامنة البريد (حين تربط صندوق بريد Microsoft 365 أو Zoho)، ومعالجة الذكاء الاصطناعي، تُقدَّم عبر خدمات خارجية مذكورة في سياسة الخصوصية. واستخدامك لصندوق بريد تربطه يخضع أيضاً لشروط مزوّده.",
         ],
       },
       {
-        title: "9. التوافر والدعم",
+        title: "10. التوافر والدعم",
         body: [
           "نعمل على إبقاء الخدمة متاحة، مع الإعلان عن الصيانة مسبقاً حيث أمكن. والدعم كما هو مبيّن لخطتك في صفحة الأسعار. واتفاقية مستوى الخدمة جزء من خطة المؤسسات وحدها.",
+          "وإن أوقفنا الخدمة نهائياً يوماً ما، فسنبلغك مسبقاً بالبريد وفي الخدمة، وستتمكن من تصدير بياناتك قبل توقفها.",
         ],
       },
       {
-        title: "10. الملكية الفكرية",
+        title: "11. الملكية الفكرية",
         body: [
           "ROUTEL وبرمجياته وتصميمه ووثائقه واسمه ملك لنا أو لمرخّصينا. وتمنحك هذه الشروط حق استخدام الخدمة لأعمال شركتك ما دام حسابك سارياً، لا أكثر.",
         ],
       },
       {
-        title: "11. إخلاء المسؤولية وحدودها",
+        title: "12. إخلاء المسؤولية وحدودها",
         body: [
           "تُقدَّم النسخة المجانية والتجربة كما هي، بلا ضمان. وفي الخطط المدفوعة نقدّم الخدمة بمهارة وعناية معقولتين، ولا نعد بأنها لن تنقطع أو تخلو من الأخطاء.",
-          "وبالقدر الذي يسمح به النظام، تقتصر مسؤوليتنا الإجمالية تجاهك عن كل المطالبات في أي 12 شهراً على الرسوم التي دفعتها لنا في تلك المدة، ولا نتحمل الخسائر غير المباشرة، ولا فوات الربح، ولا فقدان بيانات لم تصدّرها، ولا الغرامات النظامية الناشئة عن مستندات أكدتها شركتك أو أصدرتها أو قدّمتها.",
-          "ولا يحدّ شيء في هذه الشروط من مسؤولية لا يجيز النظام الحد منها.",
+          "وبالقدر الذي يسمح به النظام، تقتصر مسؤوليتنا الإجمالية تجاهك عن كل المطالبات على الأعلى من: الرسوم التي دفعتها لنا في الأشهر الـ 12 السابقة للمطالبة، أو 100 دولار أمريكي. ولا نتحمل الخسائر غير المباشرة، ولا فوات الربح، ولا فقدان البيانات الناتج عن عدم احتفاظك بنسخة منها أو تصديرها حيث كان ذلك ممكناً لك بشكل معقول، ولا الغرامات النظامية الناشئة عن مستندات أكدتها شركتك أو أصدرتها أو قدّمتها.",
+          "ولا تنطبق هذه الحدود على المسؤولية عن الاحتيال أو سوء السلوك المتعمد أو الإهمال الجسيم، ولا عن الإخلال بالتزاماتنا بالسرية وحماية البيانات، ولا يحدّ شيء في هذه الشروط من مسؤولية لا يجيز النظام الحد منها.",
         ],
       },
       {
-        title: "12. تعديل هذه الشروط",
+        title: "13. تعديل هذه الشروط",
         body: [
           "يجوز لنا تحديث هذه الشروط. وحين يكون التغيير جوهرياً نبلغك به في الخدمة أو بالبريد قبل سريانه بـ 30 يوماً على الأقل. واستخدامك للخدمة بعد ذلك التاريخ يعني قبولك الشروط المحدّثة.",
         ],
       },
       {
-        title: "13. النظام الواجب التطبيق",
+        title: "14. النظام الواجب التطبيق",
         body: [
           "تخضع هذه الشروط لأنظمة المملكة العربية السعودية، وتختص محاكمها بأي نزاع، دون إخلال بأي حقوق لك بموجب الأنظمة الآمرة في الدولة التي سُجّلت فيها شركتك.",
         ],
       },
       {
-        title: "14. التواصل",
+        title: "15. التواصل",
         body: [`للأسئلة عن هذه الشروط: ${CONTACT_EMAIL}. ولأي أمر يخص البيانات الشخصية: ${PRIVACY_EMAIL}.`],
       },
     ],
