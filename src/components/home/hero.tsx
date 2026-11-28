@@ -42,8 +42,8 @@ const copy = {
 
 /** The trade's standards the system checks against, shown under the hero's buttons. */
 const standards: Record<Locale, string[]> = {
-  en: ["ISO 6346", "UN/LOCODE", "Incoterms", "IATA AWB", "HS codes", "SOLAS VGM", "IMDG"],
-  ar: ["ISO 6346", "UN/LOCODE", "شروط التسليم Incoterms", "بوليصة IATA الجوية", "البنود الجمركية HS", "الوزن المعتمد VGM", "البضائع الخطرة IMDG"],
+  en: ["ISO 6346", "ISO 668", "ISO 17712", "UN/LOCODE", "Incoterms", "UCP 600", "IATA AWB", "IATA DGR", "HS codes", "SOLAS VGM", "IMDG"],
+  ar: ["ISO 6346", "ISO 668", "أختام ISO 17712", "UN/LOCODE", "شروط التسليم Incoterms", "الاعتمادات UCP 600", "بوليصة IATA الجوية", "IATA DGR", "البنود الجمركية HS", "الوزن المعتمد VGM", "البضائع الخطرة IMDG"],
 };
 
 /** Greys for the other containers, so the booking's orange one is the only colour in the scene. */
